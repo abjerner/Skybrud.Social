@@ -139,8 +139,11 @@
     <Compile Include="Twitter\Attributes\TwitterMethodAttribute.cs" />
     <Compile Include="Twitter\TwitterRestApi.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\Raw\VimeoChannelsRawEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoChannel.cs" />
     <Compile Include="Vimeo\Advanced\Objects\VimeoThumbnail.cs" />
     <Compile Include="Vimeo\Advanced\Objects\VimeoVideoOwner.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoChannelsResponse.cs" />
     <Compile Include="Vimeo\Advanced\VimeoUtils.cs" />
     <Compile Include="Vimeo\Advanced\Responses\VimeoVideosResponse.cs" />
     <Compile Include="Vimeo\Advanced\Endpoints\VimeoChannelsEndpoint.cs" />

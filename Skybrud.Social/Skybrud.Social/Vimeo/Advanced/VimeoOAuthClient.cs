@@ -1,10 +1,16 @@
 ﻿using System.Collections.Specialized;
 using Skybrud.Social.OAuth;
+using Skybrud.Social.Vimeo.Advanced.Endpoints.Raw;
 using Skybrud.Social.Vimeo.Advanced.Responses;
 
 namespace Skybrud.Social.Vimeo.Advanced {
     
     public class VimeoOAuthClient : OAuthClient {
+
+        /// <summary>
+        /// Class for handling the raw communication with the channels endpoint.
+        /// </summary>
+        public VimeoChannelsRawEndpoint Channels { get; private set; }
         
         public VimeoOAuthClient()
             : this(null, null, null, null, null) {
@@ -34,6 +40,9 @@ namespace Skybrud.Social.Vimeo.Advanced {
             RequestTokenUrl = "https://vimeo.com/oauth/request_token";
             AuthorizeUrl = "https://vimeo.com/oauth/authorize";
             AccessTokenUrl = "https://vimeo.com/oauth/access_token";
+
+            // Initialize endpoints for raw data
+            Channels = new VimeoChannelsRawEndpoint(this);
         
         }
 
