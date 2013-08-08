@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Skybrud Social")]
-[assembly: AssemblyDescription(".NET library for integration with various social services")]
+[assembly: AssemblyTitle("Skybrud.Social")]
+[assembly: AssemblyDescription(".NET library for integration with various social services such as Facebook, Twitter, Instagram and others")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skybrud.dk a/s")]
-[assembly: AssemblyProduct("Skybrud Social")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("Skybrud.Social")]
+[assembly: AssemblyCopyright("Copyright © 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
