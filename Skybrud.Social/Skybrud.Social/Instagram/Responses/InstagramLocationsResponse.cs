@@ -3,7 +3,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramLocationResponse : InstagramResponse {
+    public class InstagramLocationsResponse : InstagramResponse {
 
         /// <summary>
         /// Gets an array of all locations in the response.
@@ -17,11 +17,11 @@ namespace Skybrud.Social.Instagram.Responses {
             get { return Data; }
         }
 
-        public static InstagramLocationResponse ParseJson(string json) {
+        public static InstagramLocationsResponse ParseJson(string json) {
             return JsonConverter.ParseObject(json, Parse);
         }
 
-        public static InstagramLocationResponse Parse(JsonObject obj) {
+        public static InstagramLocationsResponse Parse(JsonObject obj) {
 
             // Check if null
             if (obj == null) return null;
@@ -30,7 +30,7 @@ namespace Skybrud.Social.Instagram.Responses {
             ValidateResponse(obj);
 
             // Parse the response
-            return new InstagramLocationResponse {
+            return new InstagramLocationsResponse {
                 Data = obj.GetArray("data", InstagramLocation.Parse)
             };
 

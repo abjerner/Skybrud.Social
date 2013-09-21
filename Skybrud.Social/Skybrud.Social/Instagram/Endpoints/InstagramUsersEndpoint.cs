@@ -17,7 +17,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Search for a user by name.
         /// </summary>
         /// <param name="query">The name of the user.</param>
-        public InstagramUserResponse Search(string query) {
+        public InstagramUsersResponse Search(string query) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {
@@ -26,7 +26,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
             };
 
             // Perform the call to the API
-            return InstagramUserResponse.Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject("https://api.instagram.com/v1/users/search", qs));
+            return InstagramUsersResponse.Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject("https://api.instagram.com/v1/users/search", qs));
 
         }
 
@@ -69,7 +69,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <summary>
         /// The the most recent media of the current user.
         /// </summary>
-        public InstagramMediaResponse GetMedia() {
+        public InstagramRecentMediaResponse GetMedia() {
             return GetMedia(Service.CurrentUser.Id);
         }
 
@@ -77,7 +77,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Gets the most recent media of the user with the specified ID.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public InstagramMediaResponse GetMedia(long userId) {
+        public InstagramRecentMediaResponse GetMedia(long userId) {
             return GetMedia(userId, 0);
         }
 
@@ -86,8 +86,8 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="count">Count of media to return.</param>
-        public InstagramMediaResponse GetMedia(long userId, int count) {
-            return InstagramMediaResponse.ParseJson(GetMediaAsRawJson(userId, count));
+        public InstagramRecentMediaResponse GetMedia(long userId, int count) {
+            return InstagramRecentMediaResponse.ParseJson(GetMediaAsRawJson(userId, count));
         }
 
         #endregion

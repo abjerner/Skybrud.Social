@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using Skybrud.Social.Instagram.Exceptions;
+﻿using System.Linq;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramMediaResponse : InstagramResponse {
+    public class InstagramRecentMediaResponse : InstagramResponse {
 
         /// <summary>
         /// Gets an array of all media in the response.
@@ -37,15 +35,15 @@ namespace Skybrud.Social.Instagram.Responses {
         public string NextUrl { get; private set; }
         public string NextMaxId { get; private set; }
 
-        public InstagramMediaResponse GetNextPage() {
+        public InstagramRecentMediaResponse GetNextPage() {
             return NextUrl == null ? null : Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject(NextUrl));
         }
 
-        public static InstagramMediaResponse ParseJson(string json) {
+        public static InstagramRecentMediaResponse ParseJson(string json) {
             return JsonConverter.ParseObject(json, Parse);
         }
 
-        public static InstagramMediaResponse Parse(JsonObject obj) {
+        public static InstagramRecentMediaResponse Parse(JsonObject obj) {
 
             // Check if null
             if (obj == null) return null;
@@ -57,7 +55,7 @@ namespace Skybrud.Social.Instagram.Responses {
             JsonObject pagination = obj.GetObject("pagination");
 
             // Parse the response
-            return new InstagramMediaResponse {
+            return new InstagramRecentMediaResponse {
                 NextUrl = pagination == null ? null : pagination.GetString("next_url"),
                 NextMaxId = pagination == null ? null : pagination.GetString("next_max_id"),
                 Data = InstagramMedia.ParseMultiple(obj.GetArray("data"))

@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Json;
+﻿using System;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
 

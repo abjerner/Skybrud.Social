@@ -37,7 +37,7 @@ namespace Skybrud.Social.Twitter.OAuth {
             TokenSecret = tokenSecret;
             Callback = callback;
 
-            // Specific to Vimeo
+            // Specific to Twitter
             RequestTokenUrl = "https://api.twitter.com/oauth/request_token";
             AuthorizeUrl = "https://api.twitter.com/oauth/authorize";
             AccessTokenUrl = "https://api.twitter.com/oauth/access_token";

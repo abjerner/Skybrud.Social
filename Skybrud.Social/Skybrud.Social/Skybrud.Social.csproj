@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitBucket\Endpoints\BitBucketUserEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketUserRawEndpoint.cs" />
+    <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
+    <Compile Include="BitBucket\BitBucketService.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookApplication.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
@@ -56,8 +62,13 @@
     <Compile Include="Facebook\Objects\FacebookPaging.cs" />
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />
+    <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />
+    <Compile Include="GitHub\GitHubOAuthClient.cs" />
+    <Compile Include="GitHub\GitHubScope.cs" />
+    <Compile Include="GitHub\GitHubService.cs" />
     <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramTagsEndpoint.cs" />
     <Compile Include="Instagram\InstagramMediaSearchOptions.cs" />
     <Compile Include="Instagram\Exceptions\InstagramNotFoundException.cs" />
     <Compile Include="Instagram\InstagramApplication.cs" />
@@ -72,13 +83,15 @@
     <Compile Include="Instagram\Endpoints\InstagramUsersEndpoint.cs" />
     <Compile Include="Instagram\Objects\InstagramLocation.cs" />
     <Compile Include="Instagram\Objects\InstagramMedia.cs" />
+    <Compile Include="Instagram\Objects\InstagramTag.cs" />
     <Compile Include="Instagram\Objects\InstagramUserSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramUser.cs" />
     <Compile Include="Instagram\Objects\InstagramVideo.cs" />
-    <Compile Include="Instagram\Responses\InstagramLocationResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramMediaResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
     <Compile Include="Json\IJsonObject.cs" />
     <Compile Include="Json\JsonArray.cs" />

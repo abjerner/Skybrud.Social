@@ -9,11 +9,12 @@ using System.Text;
 using System.Web;
 
 namespace Skybrud.Social.OAuth {
-    
+
     /// <summary>
-    /// Client for handling communcation with OAuth server. This client will
-    /// automically handle the technical part with signatures, authorization
-    /// headers and similar. The client can also be used for 3-legged logins.
+    /// OAuth client following the OAuth 1.0a protocol. The client will handle
+    /// the necessary communication with the OAuth server (Service Provider).
+    /// This includes the technical part with signatures, authorization headers
+    /// and similar. The client can also be used for 3-legged logins.
     /// </summary>
     public class OAuthClient {
 

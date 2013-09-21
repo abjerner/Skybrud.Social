@@ -16,6 +16,9 @@ namespace Skybrud.Social.Twitter.Objects {
 
         public static TwitterBoundingBox Parse(JsonObject obj) {
 
+            // Check whether "obj" is NULL
+            if (obj == null) return null;
+
             // Get the array
             JsonArray coordinates = obj.GetArray("coordinates");
 

@@ -95,6 +95,10 @@ namespace Skybrud.Social.Json {
             return GetValue<DateTime>(name);
         }
 
+        public DateTime GetDateTimeFromUnixTimestamp(string name) {
+            return SocialUtils.GetDateTimeFromUnixTime(GetValue<int>(name));
+        }
+
         public DateTimeOffset GetDateTimeOffset(string name) {
             return GetValue<DateTimeOffset>(name);
         }

@@ -180,19 +180,19 @@ namespace Skybrud.Social {
         }
 
         public static DateTime GetDateTimeFromUnixTime(int timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(timestamp);
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         public static DateTime GetDateTimeFromUnixTime(double timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(timestamp);
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         public static DateTime GetDateTimeFromUnixTime(long timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(timestamp);
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         public static DateTime GetDateTimeFromUnixTime(string timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Int64.Parse(timestamp));
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Int64.Parse(timestamp));
         }
 
         #endregion
