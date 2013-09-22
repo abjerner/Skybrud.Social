@@ -1,0 +1,126 @@
+﻿using System;
+using System.Collections.Specialized;
+using Skybrud.Social.Google.Analytics.Objects;
+using Skybrud.Social.Google.OAuth;
+
+namespace Skybrud.Social.Google.Analytics {
+
+    public class AnalyticsRawEndpoint {
+
+        public GoogleOAuthClient Client { get; private set; }
+
+        internal AnalyticsRawEndpoint(GoogleOAuthClient client) {
+            Client = client;
+        }
+
+        #region Accounts
+
+        public string GetAccounts() {
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/management/accounts", new NameValueCollection {
+                {"access_token", Client.AccessToken}
+            });
+        }
+
+        #endregion
+
+        #region Web properties
+
+        public string GetWebProperties(int maxResults = 0, int startIndex = 0) {
+            return GetWebProperties("~all", maxResults, startIndex);
+        }
+
+        public string GetWebProperties(AnalyticsAccount account, int maxResults = 0, int startIndex = 0) {
+            return GetWebProperties(account.Id, maxResults, startIndex);
+        }
+
+        public string GetWebProperties(string accountId, int maxResults = 0, int startIndex = 0) {
+
+            NameValueCollection query = new NameValueCollection();
+            if (maxResults > 0) query.Add("max-results", maxResults + "");
+            if (startIndex > 0) query.Add("start-index", startIndex + "");
+            query.Add("access_token", Client.AccessToken);
+
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/management/accounts/" + accountId + "/webproperties", query);
+
+        }
+
+        #endregion
+
+        #region Profiles
+
+        /// <summary>
+        /// Gets a list of all profiles the user has access to.
+        /// </summary>
+        /// <param name="maxResults">The maximum number of views (profiles) to include in this response.</param>
+        /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
+        public string GetProfiles(int maxResults = 0, int startIndex = 0) {
+            return GetProfiles("~all", "~all", maxResults, startIndex);
+        }
+
+        /// <summary>
+        /// Gets a list of all profiles for the specified account. The result will profiles of all web properties of the account.
+        /// </summary>
+        /// <param name="account">The parent account.</param>
+        /// <param name="maxResults">The maximum number of views (profiles) to include in this response.</param>
+        /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
+        public string GetProfiles(AnalyticsAccount account, int maxResults = 0, int startIndex = 0) {
+            return GetProfiles(account.Id, "~all", maxResults, startIndex);
+        }
+
+        /// <summary>
+        /// Gets a list of profiles for the specified web property.
+        /// </summary>
+        /// <param name="property">The parent web propaerty.</param>
+        /// <param name="maxResults">The maximum number of views (profiles) to include in this response.</param>
+        /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
+        public string GetProfiles(AnalyticsWebProperty property, int maxResults = 0, int startIndex = 0) {
+            return GetProfiles(property.AccountId, property.Id, maxResults, startIndex);
+        }
+
+        /// <summary>
+        /// Gets a list of profiles for the specified account and web property.
+        /// </summary>
+        /// <param name="accountId">Account ID for the view (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.</param>
+        /// <param name="webPropertyId">Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.</param>
+        /// <param name="maxResults">The maximum number of views (profiles) to include in this response.</param>
+        /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
+        public string GetProfiles(string accountId, string webPropertyId, int maxResults = 0, int startIndex = 0) {
+
+            NameValueCollection query = new NameValueCollection();
+            if (maxResults > 0) query.Add("max-results", maxResults + "");
+            if (startIndex > 0) query.Add("start-index", startIndex + "");
+            query.Add("access_token", Client.AccessToken);
+
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/management/accounts/" + accountId + "/webproperties/" + webPropertyId + "/profiles", query);
+
+        }
+
+        #endregion
+
+        #region Data
+
+        public string GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
+            return GetData(profile.Id, startDate, endDate, metrics, dimensions);
+        }
+
+        public string GetData(string profileId, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
+
+            // Initialize the query string
+            NameValueCollection query = new NameValueCollection();
+            query.Add("ids", "ga:" + profileId);
+            query.Add("start-date", startDate.ToString("yyyy-MM-dd"));
+            query.Add("end-date", endDate.ToString("yyyy-MM-dd"));
+            query.Add("metrics", String.Join(",", metrics));
+            query.Add("dimensions", String.Join(",", dimensions));
+            query.Add("access_token", Client.AccessToken);
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/data/ga", query);
+
+        }
+
+        #endregion
+
+    }
+
+}
