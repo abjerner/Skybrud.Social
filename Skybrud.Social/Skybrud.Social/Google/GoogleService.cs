@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.OAuth;
 
@@ -75,6 +76,10 @@ namespace Skybrud.Social.Google {
                 Client = client
             };
 
+        }
+
+        public GoogleUserInfo GetUserInfo() {
+            return GoogleUserInfo.ParseJson(Client.GetUserInfo());
         }
     
     }

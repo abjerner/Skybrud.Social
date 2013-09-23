@@ -108,6 +108,18 @@ namespace Skybrud.Social.Google.OAuth {
 
         }
 
+        public string GetUserInfo() {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection {
+                {"access_token", AccessToken},
+            };
+
+            // Make a call to the server
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/oauth2/v3/userinfo", query);
+
+        }
+
     }
 
 }
