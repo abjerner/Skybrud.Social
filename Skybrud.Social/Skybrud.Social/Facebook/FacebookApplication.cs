@@ -46,8 +46,9 @@ namespace Skybrud.Social.Facebook {
         /// <summary>
         /// Gets the login URL for the application.
         /// </summary>
+        [Obsolete("Use method GetAuthorizationUrl() instead")]
         public string GetUserLoginUrl() {
-            return GetUserLoginUrl(Guid.NewGuid().ToString(), new string[0]);
+            return GetAuthorizationUrl(Guid.NewGuid().ToString(), new string[0]);
         }
 
         /// <summary>
@@ -56,7 +57,38 @@ namespace Skybrud.Social.Facebook {
         /// <param name="state">The state of identifying the current user.</param>
         /// <param name="scope">The scrope AKA the privileges the user should accept.</param>
         /// <see cref="https://developers.facebook.com/docs/facebook-login/login-flow-for-web-no-jssdk/#login" />
+        [Obsolete("Use method GetAuthorizationUrl() instead")]
         public string GetUserLoginUrl(string state, params string[] scope) {
+            return GetAuthorizationUrl(state, scope);
+        }
+
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <see cref="https://developers.facebook.com/docs/facebook-login/login-flow-for-web-no-jssdk/#login" />
+        public string GetAuthorizationUrl(string state, FacebookScope scope) {
+            return GetAuthorizationUrl(state, scope.Name);
+        }
+
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <see cref="https://developers.facebook.com/docs/facebook-login/login-flow-for-web-no-jssdk/#login" />
+        public string GetAuthorizationUrl(string state, FacebookScopeCollection scope) {
+            return GetAuthorizationUrl(state, scope.ToString());
+        }
+
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <see cref="https://developers.facebook.com/docs/facebook-login/login-flow-for-web-no-jssdk/#login" />
+        public string GetAuthorizationUrl(string state, params string[] scope) {
             return String.Format(
                 "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
                 AppId,

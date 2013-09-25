@@ -52,6 +52,8 @@
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookApplication.cs" />
+    <Compile Include="Facebook\FacebookScope.cs" />
+    <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
     <Compile Include="Facebook\Objects\FacebookPostProperties.cs" />
     <Compile Include="Facebook\Objects\FacebookPostSummary.cs" />
