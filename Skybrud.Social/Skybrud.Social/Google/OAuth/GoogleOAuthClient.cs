@@ -47,10 +47,10 @@ namespace Skybrud.Social.Google.OAuth {
         /// <summary>
         /// Gets the authorization URL at accounts.google.com for your application.
         /// </summary>
-        /// <param name="scope">The scope of the application.</param>
         /// <param name="state">The state of the application.</param>
+        /// <param name="scope">The scope of the application.</param>
         /// <param name="offline">Whether the application should be enabled for offline access. Default is false.</param>
-        public string GetAuthorizationUrl(string scope, string state, bool offline = false) {
+        public string GetAuthorizationUrl(string state, string scope, bool offline = false) {
             return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
                 {"response_type", "code"},
                 {"client_id", ClientId + ".apps.googleusercontent.com"},
