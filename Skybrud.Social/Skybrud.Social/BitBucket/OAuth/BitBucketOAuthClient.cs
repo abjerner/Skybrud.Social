@@ -4,7 +4,7 @@ using Skybrud.Social.OAuth;
 namespace Skybrud.Social.BitBucket.OAuth {
     
     /// <summary>
-    /// Class for handling the communication with the BitBucket API. The class ha
+    /// Class for handling the communication with the BitBucket API. The class has
     /// methods for handling OAuth logins using a three-legged approach as well
     /// as logic for calling the methods decribed in the BitBucket API (not all
     /// has been implemented yet).
@@ -12,6 +12,7 @@ namespace Skybrud.Social.BitBucket.OAuth {
     public class BitBucketOAuthClient : OAuthClient {
 
         public BitBucketUserRawEndpoint User { get; private set; }
+        public BitBucketRepositoriesRawEndpoint Repositories { get; private set; }
         
         public BitBucketOAuthClient() : this(null, null, null, null, null) {
             // Call overloaded constructor
@@ -41,6 +42,7 @@ namespace Skybrud.Social.BitBucket.OAuth {
 
             // Endpoints
             User = new BitBucketUserRawEndpoint(this);
+            Repositories = new BitBucketRepositoriesRawEndpoint(this);
 
         }
 

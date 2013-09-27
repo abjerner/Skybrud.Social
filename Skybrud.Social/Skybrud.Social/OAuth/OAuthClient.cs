@@ -333,7 +333,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="postData">The POST data.</param>
-        public virtual string DoHttpRequestAsString(string method, string url, NameValueCollection queryString, NameValueCollection postData) {
+        public virtual string DoHttpRequestAsString(string method, string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
             using (HttpWebResponse response = DoHttpRequest(method, url, queryString, postData)) {
                 StreamReader reader = new StreamReader(response.GetResponseStream());
                 return reader.ReadToEnd();

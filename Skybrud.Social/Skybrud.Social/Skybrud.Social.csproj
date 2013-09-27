@@ -44,11 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitBucket\Endpoints\BitBucketRepositoriesEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\BitBucketUserEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketRepositoriesRawEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketUserRawEndpoint.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketChangeset.cs" />
     <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
     <Compile Include="BitBucket\BitBucketService.cs" />
     <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookApplication.cs" />

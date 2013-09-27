@@ -13,9 +13,11 @@ namespace Skybrud.Social.BitBucket {
         public BitBucketOAuthClient Client { get; private set; }
 
         public BitBucketUserEndpoint User { get; private set; }
+        public BitBucketRepositoriesEndpoint Repositories { get; private set; }
 
         private BitBucketService() {
             User = new BitBucketUserEndpoint(this);
+            Repositories = new BitBucketRepositoriesEndpoint(this);
         }
 
         /// <summary>
