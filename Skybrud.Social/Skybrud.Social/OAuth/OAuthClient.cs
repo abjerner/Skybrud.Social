@@ -317,6 +317,9 @@ namespace Skybrud.Social.OAuth {
                 }
             }
 
+            // Make sure we reset the client (timestamp and nonce)
+            if (AutoReset) Reset();
+
             // Get the response
             try {
                 return (HttpWebResponse) request.GetResponse();
