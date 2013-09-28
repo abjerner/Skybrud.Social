@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Net;
 using Skybrud.Social.BitBucket.OAuth;
 
 namespace Skybrud.Social.BitBucket.Endpoints.Raw {
@@ -34,6 +35,19 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
 
             // Make the call to the API
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/repositories/" + accountName + "/" + repoSlug + "/changesets", query);
+
+        }
+
+        /// <summary>
+        /// Gets the commit information associated with a repository. By default, this call returns all the commits
+        /// across all branches, bookmarks, and tags. The newest commit is first.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        public string GetCommits(string accountName, string repoSlug) {
+
+            // Make the call to the API
+            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commits");
 
         }
 

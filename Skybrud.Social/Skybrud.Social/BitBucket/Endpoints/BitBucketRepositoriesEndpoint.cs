@@ -1,5 +1,4 @@
-﻿using System;
-using Skybrud.Social.BitBucket.Endpoints.Raw;
+﻿using Skybrud.Social.BitBucket.Endpoints.Raw;
 using Skybrud.Social.BitBucket.Responses;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
