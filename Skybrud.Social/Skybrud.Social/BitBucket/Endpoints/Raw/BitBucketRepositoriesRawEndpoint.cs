@@ -51,6 +51,21 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
 
         }
 
+        /// <summary>
+        /// Gets the information associated with an individual commit.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        /// <param name="revision">A SHA value for the commit. You can also specify a branch name, a bookmark, or tag.
+        /// If you do Bitbucket responds with the commit that the revision points. For example, if you supply a branch
+        /// name this returns the branch tip (or head).</param>
+        public string GetCommit(string accountName, string repoSlug, string revision) {
+            
+            // Make the call to the API
+            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commit/" + revision);
+
+        }
+
     }
 
 }
