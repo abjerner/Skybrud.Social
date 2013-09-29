@@ -57,6 +57,7 @@ namespace Skybrud.Social.BitBucket.Objects {
         #region Methods
 
         public static BitBucketUser Parse(JsonObject obj) {
+            if (obj == null) return null;
             return new BitBucketUser {
                 Username = obj.GetString("username"),
                 FirstName = obj.GetString("first_name"),
