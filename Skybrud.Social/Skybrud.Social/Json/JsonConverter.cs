@@ -28,7 +28,7 @@ namespace Skybrud.Social.Json {
         }
 
         public override IEnumerable<Type> SupportedTypes {
-            get { return new ReadOnlyCollection<Type>(new List<Type>(new Type[] { typeof(object) })); }
+            get { return new ReadOnlyCollection<Type>(new List<Type>(new [] { typeof(object) })); }
         }
 
         /// <summary>
@@ -85,6 +85,56 @@ namespace Skybrud.Social.Json {
         public static T[] ParseArray<T>(string json, Func<JsonArray, T[]> parse) {
             var array = ParseArray(json);
             return array == null ? null : parse(array);
+        }
+
+        public static string ToJson(IJsonObject obj) {
+
+            object value = null;
+
+            if (obj is JsonArray) {
+                value = ToJsonInternal((JsonArray) obj);
+            } else if (obj is JsonObject) {
+                value = ToJsonInternal((JsonObject) obj);
+            }
+
+            return new JavaScriptSerializer().Serialize(value);
+
+        }
+
+        private static object ToJsonInternal(JsonObject obj) {
+
+            Dictionary<string, object> temp = new Dictionary<string, object>();
+
+            foreach (string key in obj.Dictionary.Keys) {
+                if (obj.IsObject(key)) {
+                    temp.Add(key, ToJsonInternal(obj.GetObject(key)));
+                } else if (obj.IsArray(key)) {
+                    temp.Add(key, ToJsonInternal(obj.GetArray(key)));
+                } else {
+                    temp.Add(key, obj.Dictionary[key]);
+                }
+            }
+
+            return temp;
+
+        }
+
+        public static object ToJsonInternal(JsonArray array) {
+
+            object[] temp = new object[array.Length];
+
+            for (int i = 0; i < array.Length; i++) {
+                if (array.IsObject(i)) {
+                    temp[i] = ToJsonInternal(array.GetObject(i));
+                } else if (array.IsArray(i)) {
+                    temp[i] = ToJsonInternal(array.GetArray(i));
+                } else {
+                    temp[i] = array.InternalArray[i];
+                }
+            }
+
+            return temp;
+
         }
     
     }

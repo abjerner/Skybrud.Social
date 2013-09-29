@@ -2,13 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web.Script.Serialization;
 
 namespace Skybrud.Social.Json {
     
     public class JsonArray : IJsonObject {
 
         private object[] _array;
+
+        public object[] InternalArray {
+            get { return _array; }
+        }
 
         public int Length {
             get { return _array.Length; }
@@ -43,15 +47,10 @@ namespace Skybrud.Social.Json {
         }
 
         public JsonArray GetArray(int index) {
-            if (this[index] is object[]) return new JsonArray(this[index] as object[]);
-            if (this[index] is ArrayList) return new JsonArray(this[index] as ArrayList);
+            if (_array[index] is object[]) return new JsonArray(_array[index] as object[]);
+            if (_array[index] is ArrayList) return new JsonArray(_array[index] as ArrayList);
             return null;
         }
-
-        //public T[] GetArray<T>(int index, Func<JsonArray, T[]> func) {
-        //    JsonArray array = GetArray(index);
-        //    return array == null ? null : func(array);
-        //}
 
         public T[] GetArray<T>(int index, Func<JsonObject, T> func) {
             JsonArray array = GetArray(index);
@@ -93,6 +92,10 @@ namespace Skybrud.Social.Json {
 
         public T[] Cast<T>() {
             return _array.Cast<T>().ToArray();
+        }
+
+        public string ToJson() {
+            return JsonConverter.ToJson(this);
         }
 
     }

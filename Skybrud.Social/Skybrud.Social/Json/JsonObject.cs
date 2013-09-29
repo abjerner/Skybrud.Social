@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using Skybrud.Social.Facebook.Objects;
+using System.Web.Script.Serialization;
 
 namespace Skybrud.Social.Json {
 
@@ -40,11 +38,6 @@ namespace Skybrud.Social.Json {
             JsonArray array = Dictionary.TryGetValue(name, out value) && value is ArrayList ? new JsonArray((ArrayList) value) : null;
             return array == null ? null : array.Cast<T>();
         }
-
-        //public T[] GetArray<T>(string name, Func<JsonArray, T[]> func) {
-        //    JsonArray array = GetArray(name);
-        //    return array == null ? null : func(array);
-        //}
 
         public T[] GetArray<T>(string name, Func<JsonObject, T> func) {
             JsonArray array = GetArray(name);
@@ -109,6 +102,10 @@ namespace Skybrud.Social.Json {
 
         public bool IsArray(string name) {
             return HasValue(name) && Dictionary[name] is ArrayList;
+        }
+
+        public string ToJson() {
+            return JsonConverter.ToJson(this);
         }
     
     }
