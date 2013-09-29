@@ -1,4 +1,7 @@
-﻿using Skybrud.Social.BitBucket.Endpoints.Raw;
+﻿using System.Net;
+using Skybrud.Social.BitBucket.Endpoints.Raw;
+using Skybrud.Social.BitBucket.Exceptions;
+using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.BitBucket.Responses;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
@@ -33,6 +36,55 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// <b>Commit</b> tab. The default <code>start</code> value is the tip.</param>
         public BitBucketChangesetsResponse GetChangesets(string accountName, string repoSlug, int limit = 0, string start = null) {
             return BitBucketChangesetsResponse.ParseJson(Raw.GetChangesets(accountName, repoSlug, limit, start));
+        }
+
+        /// <summary>
+        /// Gets the commit information associated with a repository. By default, this call returns all the commits
+        /// across all branches, bookmarks, and tags. The newest commit is first.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        /// <param name="page">The page.</param>
+        public BitBucketCommitsResponse GetCommits(string accountName, string repoSlug, int page = 0) {
+
+            HttpStatusCode status;
+
+            // Get the raw data from the API
+            string contents = Raw.GetCommits(accountName, repoSlug, page, out status);
+
+            // Validate the response
+            if (status != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(status);
+            }
+
+            // Parse the JSON
+            return BitBucketCommitsResponse.ParseJson(contents);
+
+        }
+
+        /// <summary>
+        /// Gets the information associated with an individual commit.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        /// <param name="revision">A SHA value for the commit. You can also specify a branch name, a bookmark, or tag.
+        /// If you do Bitbucket responds with the commit that the revision points. For example, if you supply a branch
+        /// name this returns the branch tip (or head).</param>
+        public BitBucketCommit GetCommit(string accountName, string repoSlug, string revision) {
+
+            HttpStatusCode status;
+
+            // Get the raw data from the API
+            string contents = Raw.GetCommit(accountName, repoSlug, revision, out status);
+
+            // Validate the response
+            if (status != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(status);
+            }
+
+            // Parse the JSON
+            return BitBucketCommit.ParseJson(contents);
+
         }
 
     }
