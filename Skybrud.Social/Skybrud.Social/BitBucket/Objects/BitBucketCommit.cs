@@ -5,6 +5,8 @@ namespace Skybrud.Social.BitBucket.Objects {
     
     public class BitBucketCommit {
 
+        private JsonObject _json;
+
         #region Properties
 
         /// <summary>
@@ -47,6 +49,14 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #endregion
 
+        #region Member methods
+
+        public string ToJson() {
+            return _json == null ? null : _json.ToJson();
+        }
+
+        #endregion
+
         #region Static methods
 
         public static BitBucketCommit ParseJson(string json) {
@@ -60,6 +70,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
             // Initialize the object
             return new BitBucketCommit {
+                _json = obj,
                 Hash = obj.GetString("hash"),
                 Date = DateTime.Parse(obj.GetString("date")),
                 Message = obj.GetString("message"),
