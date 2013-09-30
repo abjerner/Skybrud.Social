@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Json;
+﻿using System.IO;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
 
@@ -6,6 +7,8 @@ namespace Skybrud.Social.BitBucket.Objects {
     /// Class describing a BitBucket user.
     /// </summary>
     public class BitBucketUser {
+
+        private JsonObject _json;
 
         #region Properties
 
@@ -54,11 +57,52 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
+        /// <summary>
+        /// Gets a JSON string representing the user.
+        /// </summary>
+        public string ToJson() {
+            return _json == null ? null : _json.ToJson();
+        }
+
+        /// <summary>
+        /// Save the user to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void Save(string path) {
+            File.WriteAllText(path, ToJson());
+        }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Load a user from the JSON file at thr specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static BitBucketUser Load(string path) {
+            return ParseJson(File.ReadAllText(path));
+        }
+
+        /// <summary>
+        /// Gets a user from the specified JSON string.
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static BitBucketUser ParseJson(string json) {
+            return Parse(JsonConverter.ParseObject(json));
+        }
+
+        /// <summary>
+        /// Gets a user from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The object to parse.</param>
         public static BitBucketUser Parse(JsonObject obj) {
             if (obj == null) return null;
             return new BitBucketUser {
+                _json = obj,
                 Username = obj.GetString("username"),
                 FirstName = obj.GetString("first_name"),
                 LastName = obj.GetString("last_name"),

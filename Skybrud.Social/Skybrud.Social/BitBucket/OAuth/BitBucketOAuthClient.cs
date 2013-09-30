@@ -12,6 +12,7 @@ namespace Skybrud.Social.BitBucket.OAuth {
     public class BitBucketOAuthClient : OAuthClient {
 
         public BitBucketUserRawEndpoint User { get; private set; }
+        public BitBucketUsersRawEndpoint Users { get; private set; }
         public BitBucketRepositoriesRawEndpoint Repositories { get; private set; }
         
         public BitBucketOAuthClient() : this(null, null, null, null, null) {
@@ -42,6 +43,7 @@ namespace Skybrud.Social.BitBucket.OAuth {
 
             // Endpoints
             User = new BitBucketUserRawEndpoint(this);
+            Users = new BitBucketUsersRawEndpoint(this);
             Repositories = new BitBucketRepositoriesRawEndpoint(this);
 
         }

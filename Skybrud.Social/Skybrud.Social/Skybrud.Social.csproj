@@ -46,8 +46,10 @@
   <ItemGroup>
     <Compile Include="BitBucket\Endpoints\BitBucketRepositoriesEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\BitBucketUserEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\BitBucketUsersEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketRepositoriesRawEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketUserRawEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketUsersRawEndpoint.cs" />
     <Compile Include="BitBucket\Exceptions\BitBucketHttpException.cs" />
     <Compile Include="BitBucket\Objects\BitBucketAuthor.cs" />
     <Compile Include="BitBucket\Objects\BitBucketAuthorUser.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookApplication.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />

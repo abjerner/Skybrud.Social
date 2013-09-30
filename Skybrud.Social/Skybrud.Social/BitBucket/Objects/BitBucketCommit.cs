@@ -64,11 +64,7 @@ namespace Skybrud.Social.BitBucket.Objects {
         }
 
         public static BitBucketCommit Parse(JsonObject obj) {
-
-            // Check if NULL
             if (obj == null) return null;
-
-            // Initialize the object
             return new BitBucketCommit {
                 _json = obj,
                 Hash = obj.GetString("hash"),
@@ -78,7 +74,6 @@ namespace Skybrud.Social.BitBucket.Objects {
                 Author = obj.GetObject("author", BitBucketAuthor.Parse),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)
             };
-
         }
 
         #endregion
