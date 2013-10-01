@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -13,6 +15,22 @@ using Skybrud.Social.Json;
 namespace Skybrud.Social {
     
     public static class SocialUtils {
+
+        /// <summary>
+        /// Gets the assembly version as a string.
+        /// </summary>
+        public static string GetVersion() {
+            return typeof (SocialUtils).Assembly.GetName().Version.ToString();
+        }
+
+        /// <summary>
+        /// Gets the file version as a string.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetFileVersion() {
+            Assembly assembly = typeof(SocialUtils).Assembly;
+            return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+        }
 
         #region HTTP helpers
 

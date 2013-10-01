@@ -134,6 +134,7 @@
     <Compile Include="OAuth\OAuthAccessToken.cs" />
     <Compile Include="OAuth\OAuthException.cs" />
     <Compile Include="OAuth\OAuthUtils.cs" />
+    <Compile Include="Properties\AssemblyInfoGenerated.cs" />
     <Compile Include="Pushover\PushoverException.cs" />
     <Compile Include="Pushover\PushoverMessage.cs" />
     <Compile Include="Pushover\PushoverPriority.cs" />
