@@ -1,13 +1,17 @@
 ﻿using System;
+using System.IO;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
-    
+
     public class BitBucketCommit {
 
-        private JsonObject _json;
-
         #region Properties
+
+        /// <summary>
+        /// Gets the internal JsonObject the object was created from.
+        /// </summary>
+        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The SHA hash identifying the commit.
@@ -52,12 +56,24 @@ namespace Skybrud.Social.BitBucket.Objects {
         #region Member methods
 
         public string ToJson() {
-            return _json == null ? null : _json.ToJson();
+            return JsonObject == null ? null : JsonObject.ToJson();
+        }
+
+        /// <summary>
+        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            File.WriteAllText(path, ToJson());
         }
 
         #endregion
 
         #region Static methods
+
+        public static BitBucketCommit Load(string path) {
+            return ParseJson(File.ReadAllText(path));
+        }
 
         public static BitBucketCommit ParseJson(string json) {
             return JsonConverter.ParseObject(json, Parse);
@@ -66,7 +82,7 @@ namespace Skybrud.Social.BitBucket.Objects {
         public static BitBucketCommit Parse(JsonObject obj) {
             if (obj == null) return null;
             return new BitBucketCommit {
-                _json = obj,
+                JsonObject = obj,
                 Hash = obj.GetString("hash"),
                 Date = DateTime.Parse(obj.GetString("date")),
                 Message = obj.GetString("message"),
