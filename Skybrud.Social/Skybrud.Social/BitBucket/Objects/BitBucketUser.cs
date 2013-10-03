@@ -82,18 +82,17 @@ namespace Skybrud.Social.BitBucket.Objects {
         #region Static methods
 
         /// <summary>
-        /// Load a user from the JSON file at thr specified <var>path</var>.
+        /// Load a user from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
-        public static BitBucketUser Load(string path) {
+        public static BitBucketUser LoadJson(string path) {
             return ParseJson(File.ReadAllText(path));
         }
 
         /// <summary>
         /// Gets a user from the specified JSON string.
         /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
+        /// <param name="json">The JSON string representation of the object.</param>
         public static BitBucketUser ParseJson(string json) {
             return Parse(JsonConverter.ParseObject(json));
         }
