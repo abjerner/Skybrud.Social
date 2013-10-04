@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Web.Script.Serialization;
+using System.IO;
 
 namespace Skybrud.Social.Json {
 
@@ -104,8 +104,53 @@ namespace Skybrud.Social.Json {
             return HasValue(name) && Dictionary[name] is ArrayList;
         }
 
+        /// <summary>
+        /// Gets a JSON string representing the object.
+        /// </summary>
         public string ToJson() {
             return JsonConverter.ToJson(this);
+        }
+
+        /// <summary>
+        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            File.WriteAllText(path, ToJson());
+        }
+
+        /// <summary>
+        /// Load an instance of <var>JsonObject</var> from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static JsonObject LoadJson(string path) {
+            return JsonConverter.ParseObject(File.ReadAllText(path));
+        }
+
+        /// <summary>
+        /// Load an instance of <var>T</var> from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        /// <param name="func">The function used to parse the object.</param>
+        public static T LoadJson<T>(string path, Func<JsonObject, T> func) {
+            return JsonConverter.ParseObject(File.ReadAllText(path), func);
+        }
+
+        /// <summary>
+        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public static JsonObject ParseJson(string json) {
+            return JsonConverter.ParseObject(json);
+        }
+
+        /// <summary>
+        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        /// <param name="func">The function used to parse the object.</param>
+        public static T ParseJson<T>(string json, Func<JsonObject, T> func) {
+            return JsonConverter.ParseObject(json, func);
         }
     
     }

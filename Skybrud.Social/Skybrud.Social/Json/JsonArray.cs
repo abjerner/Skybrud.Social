@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Script.Serialization;
 
@@ -94,8 +95,53 @@ namespace Skybrud.Social.Json {
             return _array.Cast<T>().ToArray();
         }
 
+        /// <summary>
+        /// Gets a JSON string representing the array.
+        /// </summary>
         public string ToJson() {
             return JsonConverter.ToJson(this);
+        }
+
+        /// <summary>
+        /// Save the array to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            File.WriteAllText(path, ToJson());
+        }
+
+        /// <summary>
+        /// Load an instance of <var>JsonObject</var> from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static JsonArray LoadJson(string path) {
+            return JsonConverter.ParseArray(File.ReadAllText(path));
+        }
+
+        /// <summary>
+        /// Load an array of <var>T</var> from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        /// <param name="func">The function used to parse the array.</param>
+        public static T[] LoadJson<T>(string path, Func<JsonArray, T[]> func) {
+            return JsonConverter.ParseArray(File.ReadAllText(path), func);
+        }
+
+        /// <summary>
+        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the array.</param>
+        public static JsonArray ParseJson(string json) {
+            return JsonConverter.ParseArray(json);
+        }
+
+        /// <summary>
+        /// Gets an array of <var>T</var> from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the array.</param>
+        /// <param name="func">The function used to parse the array.</param>
+        public static T[] ParseJson<T>(string json, Func<JsonArray, T[]> func) {
+            return JsonConverter.ParseArray(json, func);
         }
 
     }

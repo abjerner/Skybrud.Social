@@ -45,7 +45,7 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
-            File.WriteAllText(path, ToJson());
+            JsonObject.SaveJson(path);
         }
 
         /// <summary>

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Xml.Linq;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
@@ -72,7 +70,19 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the internal JsonObject the object was created from.
+        /// </summary>
+        public JsonObject JsonObject { get; private set; }
+
+        /// <summary>
+        /// The ID of the media.
+        /// </summary>
         public string Id { get; internal set; }
+
+        /// <summary>
+        /// The type of the media.
+        /// </summary>
         public string Type { get; internal set; }
         public string[] Tags { get; internal set; }
         public string Filter { get; internal set; }
@@ -121,7 +131,6 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-
         #region Constructor(s)
 
         internal InstagramMedia() {
@@ -132,12 +141,51 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Member methods
 
+        [Obsolete(
+            "This method will must likely be removed in the future since the server responses " +
+            "are retrieved as JSON rather than XML."
+        )]
         public abstract XElement ToXElement();
+
+        /// <summary>
+        /// Gets a JSON string representing the object.
+        /// </summary>
+        public string ToJson() {
+            return JsonObject == null ? null : JsonObject.ToJson();
+        }
+
+        /// <summary>
+        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            File.WriteAllText(path, ToJson());
+        }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Load a media from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static InstagramMedia LoadJson(string path) {
+            return ParseJson(File.ReadAllText(path));
+        }
+
+        /// <summary>
+        /// Gets a media from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public static InstagramMedia ParseJson(string json) {
+            return Parse(JsonConverter.ParseObject(json));
+        }
+
+        /// <summary>
+        /// Gets a media from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramMedia Parse(JsonObject obj) {
 
             JsonObject comments = obj.GetObject("comments");
@@ -156,6 +204,7 @@ namespace Skybrud.Social.Instagram.Objects {
             }
 
             if (media != null) {
+                media.JsonObject = obj;
                 media.Id = obj.GetString("id");
                 media.Type = type;
                 media.Tags = obj.GetArray("tags").Cast<string>();
