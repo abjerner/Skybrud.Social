@@ -1,72 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Xml.Linq;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
-
+    
     public abstract class InstagramMedia : ISocialTimelineEntry {
-        
-        #region Nested classes
-
-        public class MediaSummary {
-
-            public string Url { get; private set; }
-            public int Width { get; private set; }
-            public int Height { get; private set; }
-
-            public XElement ToXElement(string name) {
-                return new XElement(
-                    name,
-                    new XAttribute("Url", Url),
-                    new XAttribute("Width", Width),
-                    new XAttribute("Height", Height)
-                );
-            }
-
-            public static MediaSummary Parse(JsonObject obj) {
-                if (obj == null) return new MediaSummary();
-                return new MediaSummary {
-                    Url = obj.GetString("url"),
-                    Width = obj.GetInt("width"),
-                    Height = obj.GetInt("height")
-                };
-            }
-
-        }
-
-        public class ImageSummary {
-
-            public MediaSummary LowResolution { get; private set; }
-            public MediaSummary Thumbnail { get; private set; }
-            public MediaSummary StandardResolution { get; private set; }
-
-            public XElement ToXElement() {
-                return new XElement(
-                    "Images",
-                    LowResolution.ToXElement("Low"),
-                    Thumbnail.ToXElement("Thumbnail"),
-                    StandardResolution.ToXElement("Standard")
-                );
-            }
-
-            public static ImageSummary Parse(JsonObject obj) {
-                if (obj == null) return new ImageSummary {
-                    LowResolution = new MediaSummary(),
-                    Thumbnail = new MediaSummary(),
-                    StandardResolution = new MediaSummary()
-                };
-                return new ImageSummary {
-                    LowResolution = obj.GetObject("low_resolution", MediaSummary.Parse),
-                    Thumbnail = obj.GetObject("thumbnail", MediaSummary.Parse),
-                    StandardResolution = obj.GetObject("standard_resolution", MediaSummary.Parse)
-                };
-            }
-
-        }
-
-        #endregion
 
         #region Properties
 
@@ -84,7 +22,15 @@ namespace Skybrud.Social.Instagram.Objects {
         /// The type of the media.
         /// </summary>
         public string Type { get; internal set; }
+
+        /// <summary>
+        /// Array of tags used with this media.
+        /// </summary>
         public string[] Tags { get; internal set; }
+
+        /// <summary>
+        /// The filter used for this media.
+        /// </summary>
         public string Filter { get; internal set; }
 
         /// <summary>
@@ -97,7 +43,7 @@ namespace Skybrud.Social.Instagram.Objects {
         public int CommentCount { get; internal set; }
         public InstagramComment[] Comments { get; internal set; }
 
-        public ImageSummary Images { get; private set; }
+        public InstagramImageSummary Images { get; private set; }
         
         public string Thumbnail {
             get { return Images.Thumbnail.Url; }
@@ -134,19 +80,13 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         internal InstagramMedia() {
-            // make default constructor internal
+            // Make default constructor internal
         }
 
         #endregion
 
         #region Member methods
-
-        [Obsolete(
-            "This method will must likely be removed in the future since the server responses " +
-            "are retrieved as JSON rather than XML."
-        )]
-        public abstract XElement ToXElement();
-
+        
         /// <summary>
         /// Gets a JSON string representing the object.
         /// </summary>
@@ -155,11 +95,11 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// Saves the object to a JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
-            File.WriteAllText(path, ToJson());
+            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -167,11 +107,11 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Load a media from the JSON file at the specified <var>path</var>.
+        /// Loads a media from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramMedia LoadJson(string path) {
-            return ParseJson(File.ReadAllText(path));
+            return JsonObject.LoadJson(path, Parse);
         }
 
         /// <summary>
@@ -179,7 +119,7 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
         public static InstagramMedia ParseJson(string json) {
-            return Parse(JsonConverter.ParseObject(json));
+            return JsonObject.ParseJson(json, Parse);
         }
 
         /// <summary>
@@ -199,7 +139,7 @@ namespace Skybrud.Social.Instagram.Objects {
                 media = new InstagramImage();
             } else if (type == "video") {
                 media = new InstagramVideo {
-                    Videos = obj.GetObject("videos", InstagramVideo.VideoSummary.Parse)
+                    Videos = obj.GetObject("videos", InstagramVideoSummary.Parse)
                 };
             }
 
@@ -214,7 +154,7 @@ namespace Skybrud.Social.Instagram.Objects {
                 media.CommentCount = comments.GetInt("count");
                 media.Comments = comments.GetArray("data", InstagramComment.Parse);
                 media.LikeCount = likes.GetInt("count");
-                media.Images = obj.GetObject("images", ImageSummary.Parse);
+                media.Images = obj.GetObject("images", InstagramImageSummary.Parse);
                 media.Caption = obj.GetObject("caption", InstagramComment.Parse);
                 media.User = obj.GetObject("user", InstagramUser.Parse);
                 media.Location = obj.GetObject("location", InstagramLocation.Parse);
@@ -224,6 +164,10 @@ namespace Skybrud.Social.Instagram.Objects {
 
         }
 
+        /// <summary>
+        /// Gets an array of media from the specified instance of <var>JsonArray</var>.
+        /// </summary>
+        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
         public static InstagramMedia[] ParseMultiple(JsonArray array) {
             return array == null ? new InstagramMedia[0] : array.ParseMultiple(Parse);
         }

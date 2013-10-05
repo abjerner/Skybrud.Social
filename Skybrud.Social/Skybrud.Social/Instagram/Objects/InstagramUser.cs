@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Xml.Linq;
 using Skybrud.Social.Json;
 
@@ -14,11 +13,34 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         public JsonObject JsonObject { get; private set; }
 
+        /// <summary>
+        /// The ID of the user.
+        /// </summary>
         public long Id { get; private set; }
+
+        /// <summary>
+        /// The username of the user.
+        /// </summary>
         public string Username { get; private set; }
+
+        /// <summary>
+        /// The full name of the user. A user may not have specified a full name.
+        /// </summary>
         public string FullName { get; private set; }
+
+        /// <summary>
+        /// The profile picture of the user.
+        /// </summary>
         public string ProfilePicture { get; private set; }
+
+        /// <summary>
+        /// The website of the user. A user may not have specified a website.
+        /// </summary>
         public string Website { get; private set; }
+
+        /// <summary>
+        /// The bio of the user. A user may not have specified a bio.
+        /// </summary>
         public string Bio { get; private set; }
 
         #endregion
@@ -41,26 +63,11 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// Saves the object to a JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
-            JsonObject.SaveJson(path);
-        }
-
-        /// <summary>
-        /// Gets an XML string representing the object.
-        /// </summary>
-        public XElement ToXElement() {
-            return new XElement(
-                "User",
-                new XAttribute("Id", Id),
-                new XElement("Username", Username),
-                new XElement("FullName", FullName),
-                new XElement("ProfilePicture", ProfilePicture),
-                new XElement("Website", Website),
-                new XElement("Bio", Bio)
-            );
+            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -68,11 +75,11 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Load a user from the JSON file at the specified <var>path</var>.
+        /// Loads a user from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramUser LoadJson(string path) {
-            return ParseJson(File.ReadAllText(path));
+            return JsonObject.LoadJson(path, Parse);
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
         public static InstagramUser ParseJson(string json) {
-            return Parse(JsonConverter.ParseObject(json));
+            return JsonObject.ParseJson(json, Parse);
         }
         
         /// <summary>

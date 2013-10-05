@@ -1,44 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Skybrud.Social.Json;
+﻿using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
-
+    
     public class InstagramVideo : InstagramMedia {
-
-        #region Nested classes
-
-        public class VideoSummary {
-
-            public MediaSummary LowResolution { get; private set; }
-            public MediaSummary StandardResolution { get; private set; }
-
-            public XElement ToXElement() {
-                return new XElement(
-                    "Videos",
-                    LowResolution.ToXElement("Low"),
-                    StandardResolution.ToXElement("Standard")
-                );
-            }
-
-            public static VideoSummary Parse(JsonObject obj) {
-                if (obj == null) return null;
-                return new VideoSummary {
-                    LowResolution = obj.GetObject("low_resolution", MediaSummary.Parse),
-                    StandardResolution = obj.GetObject("standard_resolution", MediaSummary.Parse)
-                };
-            }
         
-        }
-
-        #endregion
-
         #region Properties
 
-        public VideoSummary Videos { get; internal set; }
+        public InstagramVideoSummary Videos { get; internal set; }
 
         #endregion
 
@@ -50,40 +18,36 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-        #region Member methods
+        #region Static methods
 
-        public override XElement ToXElement() {
-            XElement xTags = new XElement("Tags");
-            foreach (string tag in Tags) {
-                xTags.Add(new XElement("Tag", tag));
-            }
-            return new XElement(
-                "Video",
-                new XAttribute("Id", Id),
-                new XElement("Created", Created.ToString("r")),
-                new XElement("Link", Link),
-                User.ToXElement(),
-                xTags,
-                Caption == null ? new XElement("Caption") : new XElement("Caption", Caption.ToXElement()),
-                new XElement("Comments", Comments.Select(c => c.ToXElement())),
-                new XElement(
-                    "Images",
-                    new XElement("Thumbnail", Thumbnail),
-                    new XElement("LowRes", LowRes),
-                    new XElement("Standard", Standard)
-                ),
-                Videos.ToXElement()
-            );
+        /// <summary>
+        /// Loads a video from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public new static InstagramVideo LoadJson(string path) {
+            return JsonObject.LoadJson(path, Parse);
         }
 
-        #endregion
+        /// <summary>
+        /// Gets a video from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public new static InstagramVideo ParseJson(string json) {
+            return JsonObject.ParseJson(json, Parse);
+        }
 
-        #region Static methods
-        
+        /// <summary>
+        /// Gets a video from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public new static InstagramVideo Parse(JsonObject obj) {
             return InstagramMedia.Parse(obj) as InstagramVideo;
         }
 
+        /// <summary>
+        /// Gets an array of videos from the specified <var>JsonArray</var>.
+        /// </summary>
+        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
         public new static InstagramVideo[] ParseMultiple(JsonArray array) {
             return array == null ? new InstagramVideo[0] : array.ParseMultiple(Parse);
         }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Xml.Linq;
-using Skybrud.Social.Interfaces;
-using Skybrud.Social.Json;
+﻿using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
@@ -17,39 +12,36 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-        #region Member methods
+        #region Static methods
 
-        public override XElement ToXElement() {
-            XElement xTags = new XElement("Tags");
-            foreach (string tag in Tags) {
-                xTags.Add(new XElement("Tag", tag));
-            }
-            return new XElement(
-                "Image",
-                new XAttribute("Id", Id),
-                new XElement("Created", Created.ToString("r")),
-                new XElement("Link", Link),
-                User.ToXElement(),
-                xTags,
-                Caption == null ? new XElement("Caption") : new XElement("Caption", Caption.ToXElement()),
-                new XElement("Comments", Comments.Select(c => c.ToXElement())),
-                new XElement(
-                    "Images",
-                    new XElement("Thumbnail", Thumbnail),
-                    new XElement("LowRes", LowRes),
-                    new XElement("Standard", Standard)
-                )
-            );
+        /// <summary>
+        /// Loads an image from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public new static InstagramMedia LoadJson(string path) {
+            return JsonObject.LoadJson(path, Parse);
         }
 
-        #endregion
+        /// <summary>
+        /// Gets an image from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public new static InstagramMedia ParseJson(string json) {
+            return JsonObject.ParseJson(json, Parse);
+        }
 
-        #region Static methods
-        
+        /// <summary>
+        /// Gets an image from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public new static InstagramImage Parse(JsonObject obj) {
             return InstagramMedia.Parse(obj) as InstagramImage;
         }
 
+        /// <summary>
+        /// Gets an array of images from the specified <var>JsonArray</var>.
+        /// </summary>
+        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
         public new static InstagramImage[] ParseMultiple(JsonArray array) {
             return array == null ? new InstagramImage[0] : array.ParseMultiple(Parse);
         }

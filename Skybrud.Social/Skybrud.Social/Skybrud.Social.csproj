@@ -106,6 +106,7 @@
     <Compile Include="Instagram\InstagramApplication.cs" />
     <Compile Include="Instagram\Exceptions\InstagramOAuthAccessTokenException.cs" />
     <Compile Include="Instagram\InstagramScope.cs" />
+    <Compile Include="Instagram\Objects\InstagramImageSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramComment.cs" />
     <Compile Include="Instagram\Endpoints\InstagramEndpoints.cs" />
     <Compile Include="Instagram\Exceptions\InstagramException.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Instagram\Objects\InstagramUserSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramUser.cs" />
     <Compile Include="Instagram\Objects\InstagramVideo.cs" />
+    <Compile Include="Instagram\Objects\InstagramVideoSummary.cs" />
+    <Compile Include="Instagram\Objects\InstagramMediaSummary.cs" />
     <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
