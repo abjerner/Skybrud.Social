@@ -8,11 +8,23 @@ namespace Skybrud.Social.Json {
 
     public class JsonObject : IJsonObject {
 
-        public IDictionary<string, object> Dictionary { get; set; }
+        #region Properties
+        
+        public IDictionary<string, object> Dictionary { get; private set; }
+
+        #endregion
+
+        #region Constructor(s)
 
         public JsonObject(IDictionary<string, object> dictionary) {
             Dictionary = dictionary;
         }
+
+        public JsonObject() {
+            Dictionary = new Dictionary<string, object>();
+        }
+
+        #endregion
 
         public bool HasValue(string name) {
             return Dictionary.ContainsKey(name) && Dictionary[name] != null;
@@ -102,6 +114,38 @@ namespace Skybrud.Social.Json {
 
         public bool IsArray(string name) {
             return HasValue(name) && Dictionary[name] is ArrayList;
+        }
+
+        public void GetLong(string name, long value) {
+            Dictionary[name] = value;
+        }
+
+        public void GetDouble(string name, double value) {
+            Dictionary[name] = value;
+        }
+
+        public void GetBoolean(string name, bool value) {
+            Dictionary[name] = value;
+        }
+
+        public void SetInt(string name, int value) {
+            Dictionary[name] = value;
+        }
+
+        public void SetString(string name, string value) {
+            Dictionary[name] = value;
+        }
+
+        public void SetObject(string name, JsonObject value) {
+            Dictionary[name] = (value == null ? null : value.Dictionary);
+        }
+
+        public void SetArray(string name, JsonArray value) {
+            Dictionary[name] = (value == null ? null : value.InternalArray);
+        }
+
+        public void SetNull(string name) {
+            Dictionary[name] = null;
         }
 
         /// <summary>
