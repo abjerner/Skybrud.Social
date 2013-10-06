@@ -80,7 +80,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         internal InstagramMedia() {
-            // Make default constructor internal
+            // Hide default constructor
         }
 
         #endregion
@@ -127,6 +127,8 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramMedia Parse(JsonObject obj) {
+
+            if (obj == null) return null;
 
             JsonObject comments = obj.GetObject("comments");
             JsonObject likes = obj.GetObject("likes");

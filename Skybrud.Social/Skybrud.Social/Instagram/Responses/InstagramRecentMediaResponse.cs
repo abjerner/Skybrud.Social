@@ -1,11 +1,12 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramRecentMediaResponse : InstagramResponse {
+
+        #region Properties
 
         /// <summary>
         /// Gets the internal JsonObject the object was created from.
@@ -18,7 +19,7 @@ namespace Skybrud.Social.Instagram.Responses {
         public InstagramMedia[] Data { get; private set; }
 
         /// <summary>
-        /// Gets an array of all media in the response.
+        /// Gets an array of all media in the response (same as Data).
         /// </summary>
         public InstagramMedia[] Media {
             get { return Data; }
@@ -41,21 +42,31 @@ namespace Skybrud.Social.Instagram.Responses {
         public string NextUrl { get; private set; }
         public string NextMaxId { get; private set; }
 
+        #endregion
+
+        #region Constructor(s)
+
+        internal InstagramRecentMediaResponse() {
+            // Hide default constructor
+        }
+
+        #endregion
+
         #region Member methods
 
         /// <summary>
-        /// Gets a JSON string representing the user.
+        /// Gets a JSON string representing the object.
         /// </summary>
         public string ToJson() {
             return JsonObject == null ? null : JsonObject.ToJson();
         }
 
         /// <summary>
-        /// Save the response to a JSON file at the specified <var>path</var>.
+        /// Saves the object to a JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
-            File.WriteAllText(path, ToJson());
+            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         public InstagramRecentMediaResponse GetNextPage() {
@@ -67,17 +78,28 @@ namespace Skybrud.Social.Instagram.Responses {
         #region Static methods
 
         /// <summary>
-        /// Load a response from the JSON file at the specified <var>path</var>.
+        /// Loads an instance of <var>InstagramRecentMediaResponse</var> from
+        /// the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramRecentMediaResponse LoadJson(string path) {
-            return ParseJson(File.ReadAllText(path));
+            return JsonObject.LoadJson(path, Parse);
         }
-        
+
+        /// <summary>
+        /// Gets an instance of <var>InstagramRecentMediaResponse</var> from
+        /// the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
         public static InstagramRecentMediaResponse ParseJson(string json) {
             return JsonConverter.ParseObject(json, Parse);
         }
 
+        /// <summary>
+        /// Gets an instance of <var>InstagramRecentMediaResponse</var> from
+        /// the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramRecentMediaResponse Parse(JsonObject obj) {
 
             // Check if null

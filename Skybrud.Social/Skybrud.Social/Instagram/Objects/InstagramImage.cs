@@ -7,7 +7,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         internal InstagramImage() {
-            // make default constructor internal
+            // Hide default constructor
         }
 
         #endregion

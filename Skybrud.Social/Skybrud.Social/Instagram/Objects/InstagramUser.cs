@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -48,7 +47,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         private InstagramUser() {
-            // make constructor private
+            // Hide default constructor
         }
 
         #endregion
@@ -89,33 +88,13 @@ namespace Skybrud.Social.Instagram.Objects {
         public static InstagramUser ParseJson(string json) {
             return JsonObject.ParseJson(json, Parse);
         }
-        
-        /// <summary>
-        /// Gets a user from the specified <var>XElement</var>.
-        /// </summary>
-        /// <param name="xUser">The instance of <var>XElement</var> to parse.</param>
-        [Obsolete(
-            "This method will must likely be removed in the future since the server responses " +
-            "are retrieved as JSON rather than XML."
-        )]
-        public static InstagramUser Parse(XElement xUser) {
-            string website = SocialUtils.GetElementValueOrDefault<string>(xUser, "Website");
-            string bio = SocialUtils.GetElementValueOrDefault<string>(xUser, "Bio");
-            return new InstagramUser {
-                Id = SocialUtils.GetAttributeValue<long>(xUser, "Id"),
-                Username = SocialUtils.GetElementValue<string>(xUser, "Username"),
-                FullName = SocialUtils.GetElementValue<string>(xUser, "FullName"),
-                ProfilePicture = SocialUtils.GetElementValue<string>(xUser, "ProfilePicture"),
-                Website = String.IsNullOrEmpty(website) ? null : website,
-                Bio = String.IsNullOrEmpty(bio) ? null : bio
-            };
-        }
 
         /// <summary>
         /// Gets a user from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramUser Parse(JsonObject obj) {
+            if (obj == null) return null;
             string fullname = obj.GetString("full_name");
             string picture = obj.GetString("profile_picture");
             string website = obj.GetString("website");

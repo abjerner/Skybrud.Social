@@ -41,7 +41,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         private InstagramLocation() {
-            // Make constructor private
+            // Hide default constructor
         }
 
         #endregion

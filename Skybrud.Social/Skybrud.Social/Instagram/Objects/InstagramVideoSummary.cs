@@ -14,7 +14,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         private InstagramVideoSummary() {
-            // Make constructor private
+            // Hide default constructor
         }
 
         #endregion

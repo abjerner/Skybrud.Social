@@ -34,6 +34,14 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
+        #region Constructor(s)
+
+        internal InstagramComment() {
+            // Hide default constructor
+        }
+
+        #endregion
+
         #region Member methods
 
         /// <summary>

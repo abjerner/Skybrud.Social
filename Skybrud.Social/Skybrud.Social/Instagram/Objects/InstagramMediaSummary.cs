@@ -15,7 +15,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Constructor(s)
 
         internal InstagramMediaSummary() {
-            // Make constructor internal
+            // Hide default constructor
         }
 
         #endregion
