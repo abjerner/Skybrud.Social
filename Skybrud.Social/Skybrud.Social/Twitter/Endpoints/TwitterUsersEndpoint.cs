@@ -11,19 +11,19 @@ namespace Skybrud.Social.Twitter.Endpoints {
         }
 
         public TwitterUser Show(long userId) {
-            return TwitterUser.ParseJson(Service.RestApi.GetUserAsRawJson(userId, false));
+            return TwitterUser.ParseJson(Service.Client.Users.GetUser(userId, false));
         }
 
         public TwitterUser Show(long userId, bool includeEntities) {
-            return TwitterUser.ParseJson(Service.RestApi.GetUserAsRawJson(userId, includeEntities));
+            return TwitterUser.ParseJson(Service.Client.Users.GetUser(userId, includeEntities));
         }
 
         public TwitterUser Show(string screenName) {
-            return TwitterUser.ParseJson(Service.RestApi.GetUserAsRawJson(screenName, false));
+            return TwitterUser.ParseJson(Service.Client.Users.GetUser(screenName, false));
         }
 
         public TwitterUser Show(string screenName, bool includeEntities) {
-            return TwitterUser.ParseJson(Service.RestApi.GetUserAsRawJson(screenName, includeEntities));
+            return TwitterUser.ParseJson(Service.Client.Users.GetUser(screenName, includeEntities));
         }
 
     }

@@ -55,7 +55,7 @@ namespace Skybrud.Social.Twitter {
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUserAsRawJson(long id) {
-            return Service.Client.GetUser(id);
+            return Service.Client.Users.GetUser(id);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Skybrud.Social.Twitter {
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUserAsRawJson(long id, bool includeEntities) {
-            return Service.Client.GetUser(id, includeEntities);
+            return Service.Client.Users.GetUser(id, includeEntities);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Skybrud.Social.Twitter {
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUserAsRawJson(string screenName) {
-            return Service.Client.GetUser(screenName);
+            return Service.Client.Users.GetUser(screenName);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Skybrud.Social.Twitter {
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUserAsRawJson(string screenName, bool includeEntities) {
-            return Service.Client.GetUser(screenName, includeEntities);
+            return Service.Client.Users.GetUser(screenName, includeEntities);
         }
 
         #endregion
