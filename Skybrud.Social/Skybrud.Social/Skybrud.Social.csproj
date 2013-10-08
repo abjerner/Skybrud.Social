@@ -159,8 +159,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialExtensions.cs" />
     <Compile Include="SocialUtils.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterAccountRawEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterGeoRawEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterStatusesRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterUsersRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterAccountEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\TwitterGeoEndpoint.cs" />
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Endpoints\TwitterStatusesEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterUsersEndpoint.cs" />
@@ -187,8 +191,8 @@
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
     <Compile Include="Twitter\TwitterException.cs" />
     <Compile Include="Twitter\Attributes\TwitterMethodAttribute.cs" />
-    <Compile Include="Twitter\TwitterRestApi.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
+    <Compile Include="Twitter\TwitterUtils.cs" />
     <Compile Include="Vimeo\Advanced\Endpoints\Raw\VimeoChannelsRawEndpoint.cs" />
     <Compile Include="Vimeo\Advanced\Objects\VimeoChannel.cs" />
     <Compile Include="Vimeo\Advanced\Objects\VimeoThumbnail.cs" />

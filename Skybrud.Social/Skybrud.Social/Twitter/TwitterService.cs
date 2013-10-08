@@ -10,9 +10,8 @@ namespace Skybrud.Social.Twitter {
 
         internal TwitterAccessInformation Info { get; private set; }
 
-        [Obsolete("Don't use this")]
-        public TwitterRestApi RestApi { get; private set; }
         public TwitterAccountEndpoint Account { get; private set; }
+        public TwitterGeoEndpoint Geo { get; private set; }
         public TwitterStatusesEndpoint Statuses { get; private set; }
         public TwitterUsersEndpoint Users { get; private set; }
 
@@ -37,8 +36,8 @@ namespace Skybrud.Social.Twitter {
             };
 
             // Set the endpoints etc.
-            service.RestApi = new TwitterRestApi(service);
             service.Account = new TwitterAccountEndpoint(service);
+            service.Geo = new TwitterGeoEndpoint(service);
             service.Statuses = new TwitterStatusesEndpoint(service);
             service.Users = new TwitterUsersEndpoint(service);
 

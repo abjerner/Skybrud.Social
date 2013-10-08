@@ -88,7 +88,7 @@ namespace Skybrud.Social.Twitter.Objects {
             };
 
             // Twitter has some strange date formats
-            msg.CreatedAt = TwitterRestApi.ParseDateTimeUtc(obj.GetString("created_at"));
+            msg.CreatedAt = TwitterUtils.ParseDateTimeUtc(obj.GetString("created_at"));
 
             // Parse the reply information
             if (obj.HasValue("in_reply_to_status_id")) {

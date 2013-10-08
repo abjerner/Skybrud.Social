@@ -19,7 +19,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUser(long id) {
             return GetUser(id, false);
@@ -31,7 +30,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUser(long id, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "user_id", id.ToString(CultureInfo.InvariantCulture) } };
@@ -44,7 +42,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUser(string screenName) {
             return GetUser(screenName, false);
@@ -56,7 +53,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetUser(string screenName, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "screen_name", screenName } };
@@ -69,9 +65,8 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="qs">The <var>NameValueCollection</var> describing the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        /// <returns></returns>
         private string GetUser(NameValueCollection qs) {
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/show.json", qs, null);
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/show.json", qs);
         }
     
     }

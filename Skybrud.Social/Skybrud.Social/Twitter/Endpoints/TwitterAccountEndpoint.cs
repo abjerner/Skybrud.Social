@@ -1,11 +1,22 @@
 ﻿using System.Net;
+using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Endpoints {
-    
+
     public class TwitterAccountEndpoint {
 
-        protected TwitterService Service;
+        /// <summary>
+        /// A reference to the Twitter service.
+        /// </summary>
+        public TwitterService Service { get; private set; }
+
+        /// <summary>
+        /// A reference to the raw endpoint.
+        /// </summary>
+        public TwitterAccountRawEndpoint Raw {
+            get { return Service.Client.Account; }
+        }
 
         internal TwitterAccountEndpoint(TwitterService service) {
             Service = service;
@@ -18,7 +29,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
             // Make a call to the API
             HttpStatusCode status;
-            string response = Service.Client.VerifyCredentials(out status);
+            string response = Raw.VerifyCredentials(out status);
 
             // Check for errors
             if (status != HttpStatusCode.OK) {

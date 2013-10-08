@@ -282,7 +282,7 @@ namespace Skybrud.Social.Twitter.Objects {
             user.FollowersCount = obj.GetInt("followers_count");
             user.FriendsCount = obj.GetInt("friends_count");
             user.ListedCount = obj.GetInt("listed_count");
-            user.CreatedAt = TwitterRestApi.ParseDateTime(obj.GetString("created_at"));
+            user.CreatedAt = TwitterUtils.ParseDateTime(obj.GetString("created_at"));
             user.FavouritesCount = obj.GetInt("favourites_count");
             if (obj.HasValue("utc_offset")) user.UtcOffset = obj.GetInt("utc_offset");
             user.TimeZone = obj.GetString("time_zone");
