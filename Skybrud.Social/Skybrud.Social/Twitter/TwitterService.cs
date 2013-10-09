@@ -8,8 +8,6 @@ namespace Skybrud.Social.Twitter {
 
         public TwitterOAuthClient Client { get; private set; }
 
-        internal TwitterAccessInformation Info { get; private set; }
-
         public TwitterAccountEndpoint Account { get; private set; }
         public TwitterGeoEndpoint Geo { get; private set; }
         public TwitterStatusesEndpoint Statuses { get; private set; }
@@ -19,20 +17,33 @@ namespace Skybrud.Social.Twitter {
             // make constructor private
         }
 
+        [Obsolete("Made obsolete to have consistent naming across framework. Use CreateFromAccessInformation or CreateFromOAuthClient instead.")]
         public static TwitterService GetFromAccessInformation(TwitterAccessInformation info) {
+            return CreateFromOAuthClient(new TwitterOAuthClient {
+                ConsumerKey = info.ConsumerKey,
+                ConsumerSecret = info.ConsumerSecret,
+                Token = info.AccessToken,
+                TokenSecret = info.AccessTokenSecret
+            });
+        }
+        
+        public static TwitterService CreateFromAccessInformation(TwitterAccessInformation info) {
+            return CreateFromOAuthClient(new TwitterOAuthClient {
+                ConsumerKey = info.ConsumerKey,
+                ConsumerSecret = info.ConsumerSecret,
+                Token = info.AccessToken,
+                TokenSecret = info.AccessTokenSecret
+            });
+        }
+
+        public static TwitterService CreateFromOAuthClient(TwitterOAuthClient client) {
 
             // This should never be null
-            if (info == null) throw new ArgumentNullException("info");
+            if (client == null) throw new ArgumentNullException("client");
 
             // Initialize the service
             TwitterService service = new TwitterService {
-                Info = info,
-                Client = new TwitterOAuthClient {
-                    ConsumerKey = info.ConsumerKey,
-                    ConsumerSecret = info.ConsumerSecret,
-                    Token = info.AccessToken,
-                    TokenSecret = info.AccessTokenSecret
-                }
+                Client = client
             };
 
             // Set the endpoints etc.
