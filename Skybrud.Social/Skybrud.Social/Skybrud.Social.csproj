@@ -180,13 +180,13 @@
     <Compile Include="Twitter\Objects\TwitterCoordinates.cs" />
     <Compile Include="Twitter\Objects\TwitterPlace.cs" />
     <Compile Include="Twitter\Objects\TwitterReplyTo.cs" />
-    <Compile Include="Twitter\Objects\TwitterReverseGeocodeResponse.cs" />
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterUserTimeline.cs" />
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUserTimelineOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterReverseGeocodeResponse.cs" />
     <Compile Include="Twitter\TwitterAccessInformation.cs" />
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
     <Compile Include="Twitter\TwitterException.cs" />
