@@ -1,4 +1,6 @@
-﻿using Skybrud.Social.Json;
+﻿using System;
+using Skybrud.Social.Json;
+using Skybrud.Social.Json.Exceptions;
 using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.Objects;
 
@@ -74,12 +76,16 @@ namespace Skybrud.Social.Twitter.Responses {
 
             JsonObject query = obj.GetObject("query");
             JsonObject result = obj.GetObject("result");
-            JsonObject parameters = obj.GetObject("params");
+            if (query == null) throw new JsonParseException("Object \"query\" not found.");
+            if (result == null) throw new JsonParseException("Object \"result\" not found.");
+
+            JsonObject parameters = query.GetObject("params");
+            if (parameters == null) throw new JsonParseException("Object \"params\" not found.");
 
             return new TwitterReverseGeocodeResponse {
                 JsonObject = obj,
-                //Granularity = TwitterUtils.ParseGranularity(parameters.GetString("granularity")),
-                //Coordinates = parameters.GetObject("coordinates", TwitterCoordinates.Parse),
+                Granularity = TwitterUtils.ParseGranularity(parameters.GetString("granularity")),
+                Coordinates = parameters.GetObject("coordinates", TwitterCoordinates.Parse),
                 Url = query.GetString("url"),
                 Type = query.GetString("type"),
                 Places = result.GetArray("places", TwitterPlace.Parse)

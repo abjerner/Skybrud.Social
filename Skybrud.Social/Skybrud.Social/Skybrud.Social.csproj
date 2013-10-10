@@ -132,6 +132,7 @@
     <Compile Include="Json\JsonArray.cs" />
     <Compile Include="Json\JsonConverter.cs" />
     <Compile Include="Json\JsonObject.cs" />
+    <Compile Include="Json\Exceptions\JsonParseException.cs" />
     <Compile Include="OAuth\OAuthClient.cs" />
     <Compile Include="OAuth\OAuthRequestToken.cs" />
     <Compile Include="OAuth\OAuthAccessToken.cs" />
