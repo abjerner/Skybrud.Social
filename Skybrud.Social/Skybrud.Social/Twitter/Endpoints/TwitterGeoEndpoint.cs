@@ -2,6 +2,7 @@
 using System.Globalization;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Enums;
+using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
 using Skybrud.Social.Twitter.Responses;
 
@@ -23,6 +24,15 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
         internal TwitterGeoEndpoint(TwitterService service) {
             Service = service;
+        }
+        
+        /// <summary>
+        /// Gets information about a place with with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the place.</param>
+        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/id/:place_id"/>
+        public TwitterPlace GetPlace(string id) {
+            return TwitterPlace.ParseJson(Raw.GetPlace(id));
         }
 
         /// <summary>
