@@ -6,6 +6,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
     public class TwitterStatusesEndpoint {
 
+        #region Properties
+
         /// <summary>
         /// A reference to the Twitter service.
         /// </summary>
@@ -18,12 +20,34 @@ namespace Skybrud.Social.Twitter.Endpoints {
             get { return Service.Client.Statuses; }
         }
 
+        #endregion
+
+        #region Constructor(s)
+
         internal TwitterStatusesEndpoint(TwitterService service) {
             Service = service;
         }
 
-        public TwitterStatusMessage Show(long statusId, TwitterStatusMessageOptions options = null) {
-            return TwitterStatusMessage.ParseJson(Raw.GetTweet(statusId, options));
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Alias of GetStatusMessage(). Gets information about a status message (tweet) with the specified ID.
+        /// </summary>
+        /// <param name="statusId">The ID of the status message.</param>
+        /// <param name="options">Options affecting the response from the Twitter API.</param>
+        public TwitterStatusMessage GetTweet(long statusId, TwitterStatusMessageOptions options = null) {
+            return GetStatusMessage(statusId, options);
+        }
+
+        /// <summary>
+        /// Gets information about a status message (tweet) with the specified ID.
+        /// </summary>
+        /// <param name="statusId">The ID of the status message.</param>
+        /// <param name="options">Options affecting the response from the Twitter API.</param>
+        public TwitterStatusMessage GetStatusMessage(long statusId, TwitterStatusMessageOptions options = null) {
+            return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options));
         }
 
         public TwitterUserTimeline UserTimeline(long userId, int count) {
@@ -41,6 +65,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterUserTimeline UserTimeline(string screenName, TwitterUserTimelineOptions options = null) {
             return TwitterUserTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
         }
+
+        #endregion
 
     }
 

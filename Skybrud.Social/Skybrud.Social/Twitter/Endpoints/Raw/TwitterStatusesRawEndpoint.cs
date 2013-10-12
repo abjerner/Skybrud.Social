@@ -18,25 +18,44 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         #region Get information about a single tweet
 
         /// <summary>
-        /// Gets the raw API response for a tweet with the specified ID.
+        /// Alias of GetStatusMessage(). Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the tweet.</param>
+        /// <param name="id">The ID of the status message.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetTweet(long id) {
-            return GetTweet(id, null);
+            return GetStatusMessage(id, null);
         }
 
         /// <summary>
-        /// Gets the raw API response for a tweet with the specified ID.
+        /// Alias of GetStatusMessage(). Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the tweet.</param>
+        /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public string GetTweet(long id, TwitterStatusMessageOptions options) {
+            return GetStatusMessage(id, options);
+        }
+
+        /// <summary>
+        /// Gets the raw API response for a status message (tweet) with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the status message.</param>
+        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
+        public string GetStatusMessage(long id) {
+            return GetStatusMessage(id, null);
+        }
+
+        /// <summary>
+        /// Gets the raw API response for a status message (tweet) with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the status message.</param>
+        /// <param name="options">The options used when making the call to the API.</param>
+        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
+        public string GetStatusMessage(long id, TwitterStatusMessageOptions options) {
 
             // Define the query string
             NameValueCollection qs = new NameValueCollection { { "id", id.ToString(CultureInfo.InvariantCulture) } };

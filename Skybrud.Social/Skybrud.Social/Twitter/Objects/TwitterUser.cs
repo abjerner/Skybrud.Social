@@ -9,6 +9,11 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Properties
 
         /// <summary>
+        /// Gets the internal JsonObject the object was created from.
+        /// </summary>
+        public JsonObject JsonObject { get; private set; }
+
+        /// <summary>
         /// The integer representation of the unique identifier for this User. This number is greater
         /// than 53 bits and some programming languages may have difficulty/silent defects in
         /// interpreting it. Using a signed 64 bit integer for storing this identifier is safe.
@@ -258,10 +263,55 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #endregion
 
-        public static TwitterUser ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
+        #region Constructor(s)
+
+        private TwitterUser() {
+            // Hide default constructor
         }
 
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets a JSON string representing the object.
+        /// </summary>
+        public string ToJson() {
+            return JsonObject == null ? null : JsonObject.ToJson();
+        }
+
+        /// <summary>
+        /// Saves the object to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            if (JsonObject != null) JsonObject.SaveJson(path);
+        }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Loads a user from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static TwitterUser LoadJson(string path) {
+            return JsonObject.LoadJson(path, Parse);
+        }
+
+        /// <summary>
+        /// Gets a user from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public static TwitterUser ParseJson(string json) {
+            return JsonObject.ParseJson(json, Parse);
+        }
+
+        /// <summary>
+        /// Gets a user from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static TwitterUser Parse(JsonObject obj) {
             
             // Error checking
@@ -271,6 +321,8 @@ namespace Skybrud.Social.Twitter.Objects {
             TwitterUser user = new TwitterUser();
 
             #region Basic properties
+            
+            user.JsonObject = obj;
             user.Id = obj.GetLong("id");
             user.IdStr = obj.GetString("id_str");
             user.Name = obj.GetString("name");
@@ -296,9 +348,11 @@ namespace Skybrud.Social.Twitter.Objects {
             user.FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent");
             user.Notifications = obj.HasValue("notifications") && obj.GetBoolean("notifications");
             user.Status = obj.GetObject("status", TwitterStatusMessage.Parse);
+           
             #endregion
 
             #region Profile properties
+            
             user.HasDefaultProfile = obj.GetBoolean("default_profile");
             user.HasDefaultProfileImage = obj.GetBoolean("default_profile_image");
             user.ProfileBackgroundColor = obj.GetString("profile_background_color");
@@ -313,11 +367,14 @@ namespace Skybrud.Social.Twitter.Objects {
             user.ProfileSidebarFillColor = obj.GetString("profile_sidebar_fill_color");
             user.ProfileTextColor = obj.GetString("profile_text_color");
             user.ProfileUseBackgroundImage = obj.GetBoolean("profile_use_background_image");
+            
             #endregion
 
             return user;
 
         }
+
+        #endregion
 
     }
 

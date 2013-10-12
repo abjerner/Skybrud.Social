@@ -11,6 +11,11 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Properties
 
         /// <summary>
+        /// Gets the internal JsonObject the object was created from.
+        /// </summary>
+        public JsonObject JsonObject { get; private set; }
+
+        /// <summary>
         /// The ID of the tweet.
         /// </summary>
         public long Id { get; private set; }
@@ -67,12 +72,55 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #endregion
 
-        #region Static methods
+        #region Constructor(s)
 
-        public static TwitterStatusMessage ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
+        private TwitterStatusMessage() {
+            // Hide default constructor
         }
 
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets a JSON string representing the object.
+        /// </summary>
+        public string ToJson() {
+            return JsonObject == null ? null : JsonObject.ToJson();
+        }
+
+        /// <summary>
+        /// Saves the object to a JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to save the file.</param>
+        public void SaveJson(string path) {
+            if (JsonObject != null) JsonObject.SaveJson(path);
+        }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Loads a status message (tweet) from the JSON file at the specified <var>path</var>.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        public static TwitterStatusMessage LoadJson(string path) {
+            return JsonObject.LoadJson(path, Parse);
+        }
+
+        /// <summary>
+        /// Gets a status message (tweet) from the specified JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string representation of the object.</param>
+        public static TwitterStatusMessage ParseJson(string json) {
+            return JsonObject.ParseJson(json, Parse);
+        }
+
+        /// <summary>
+        /// Gets a status message (tweet) from the specified <var>JsonObject</var>.
+        /// </summary>
+        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static TwitterStatusMessage Parse(JsonObject obj) {
 
             // Error checking
@@ -80,6 +128,7 @@ namespace Skybrud.Social.Twitter.Objects {
             if (obj.HasValue("error")) throw TwitterException.Parse(obj.GetArray("error"));
 
             TwitterStatusMessage msg = new TwitterStatusMessage {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 IdStr = obj.GetString("id_str"),
                 Text = obj.GetString("text"),
@@ -124,10 +173,10 @@ namespace Skybrud.Social.Twitter.Objects {
                     });
                 }
                 msg.Contributors = contributors.ToArray();
-            }
+            }*/
 
-            msg.User = TwitterUser.Parse(tweet.GetObject("user"));
-            msg.Place = TwitterPlace.Parse(tweet.GetObject("place"));*/
+            msg.User = obj.GetObject("user", TwitterUser.Parse);
+            msg.Place = obj.GetObject("place", TwitterPlace.Parse);
 
             return msg;
 
