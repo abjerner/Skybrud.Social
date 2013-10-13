@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
     
     public class TwitterUserTimeline {
 
+        #region Properties
+
         /// <summary>
-        /// Gets the raw JSON response from the Twitter API.
+        /// Gets the internal JsonArray the object was created from.
         /// </summary>
-        public string Raw { get; private set; }
+        public JsonArray JsonArray { get; private set; }
 
         /// <summary>
         /// Gets the status messages of the timeline.
@@ -32,6 +32,8 @@ namespace Skybrud.Social.Twitter.Objects {
             get { return StatusMessages.Length; }
         }
 
+        #endregion
+
         public static TwitterUserTimeline ParseJson(string contents) {
 
             // Deserialize the JSON
@@ -47,12 +49,13 @@ namespace Skybrud.Social.Twitter.Objects {
                 );
             }
 
-            // Parse the tweets
-            IEnumerable<TwitterStatusMessage> tweets = TwitterStatusMessage.ParseMultiple(json as JsonArray);
+            // Cast to an array
+            JsonArray array = (JsonArray) json;
 
             // Return the instance
             return new TwitterUserTimeline {
-                Raw = contents, StatusMessages = tweets.ToArray()
+                JsonArray = array,
+                StatusMessages = TwitterStatusMessage.ParseMultiple(array)
             };
 
         }
