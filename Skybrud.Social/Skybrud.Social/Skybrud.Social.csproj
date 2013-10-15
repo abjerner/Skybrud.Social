@@ -65,11 +65,13 @@
     <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
+    <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookApplication.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
     <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
+    <Compile Include="Facebook\OAuth\FacebookOAuthClient.cs" />
     <Compile Include="Facebook\Objects\FacebookPostProperties.cs" />
     <Compile Include="Facebook\Objects\FacebookPostSummary.cs" />
     <Compile Include="Facebook\Objects\FacebookLikes.cs" />

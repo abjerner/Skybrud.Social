@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Skybrud.Social.Facebook.Objects;
+using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook {
 
     public class FacebookService {
 
-        public string AccessToken { get; private set; }
+        public FacebookOAuthClient Client { get; private set; }
+
+        public string AccessToken {
+            get { return Client == null ? null : Client.AccessToken; }
+        }
 
         private FacebookService() {
             // make constructor private
         }
 
+        public static FacebookService CreateFromOAuthClient(FacebookOAuthClient client) {
+            return new FacebookService {
+                Client = client
+            };
+        }
+
         public static FacebookService CreateFromAccessToken(string accessToken) {
             return new FacebookService {
-                AccessToken = accessToken
+                Client = new FacebookOAuthClient(accessToken)
             };
         }
 
@@ -76,15 +86,16 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.Me() instead.")]
         public string GetMeAsRawJson() {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me?access_token=" + AccessToken);
+            return Client.Methods.Me();
         }
         
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         public FacebookMeResponse Me() {
-            return FacebookMeResponse.ParseJson(GetMeAsRawJson());
+            return FacebookMeResponse.ParseJson(Client.Methods.Me());
         }
 
         #endregion
