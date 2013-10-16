@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using Skybrud.Social.Facebook.Endpoints;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Responses;
 
@@ -7,27 +8,68 @@ namespace Skybrud.Social.Facebook {
 
     public class FacebookService {
 
+        #region Properties
+
+        /// <summary>
+        /// The internal OAuth client for communication with the Facebook API.
+        /// </summary>
         public FacebookOAuthClient Client { get; private set; }
 
+        public FacebookMethodsEndpoint Methods { get; private set; }
+
+        [Obsolete("Use Client.AccessToken instead.")]
         public string AccessToken {
             get { return Client == null ? null : Client.AccessToken; }
         }
+
+        #endregion
+
+        #region Constructor(s)
 
         private FacebookService() {
             // make constructor private
         }
 
-        public static FacebookService CreateFromOAuthClient(FacebookOAuthClient client) {
-            return new FacebookService {
-                Client = client
-            };
-        }
+        #endregion
 
+        #region Static methods
+
+        /// <summary>
+        /// Initialize a new service instance from the specified access token. Internally a new OAuth client will be
+        /// initialized from the access token.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
         public static FacebookService CreateFromAccessToken(string accessToken) {
             return new FacebookService {
                 Client = new FacebookOAuthClient(accessToken)
             };
         }
+
+        /// <summary>
+        /// Initialize a new service instance from the specified OAuth client.
+        /// </summary>
+        /// <param name="client">The OAuth client.</param>
+        public static FacebookService CreateFromOAuthClient(FacebookOAuthClient client) {
+
+            // This should never be null
+            if (client == null) throw new ArgumentNullException("client");
+
+            // Initialize the service
+            FacebookService service =  new FacebookService {
+                Client = client
+            };
+
+            // Set the endpoints etc.
+            service.Methods = new FacebookMethodsEndpoint(service);
+
+            // Return the service
+            return service;
+        
+        }
+
+        #endregion
+
+        #region Obsolete
 
         #region Accounts
 
@@ -35,15 +77,17 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.GetAccounts() or Methods.Raw.GetAccounts() instead")]
         public string GetAccountsAsRawJson() {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me/accounts?access_token=" + AccessToken);
+            return Methods.Raw.Accounts();
         }
 
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
+        [Obsolete("Use Methods.Accounts() instead")]
         public FacebookAccountsResponse Accounts() {
-            return FacebookAccountsResponse.ParseJson(GetAccountsAsRawJson());
+            return Methods.Accounts();
         }
 
         #endregion
@@ -54,28 +98,26 @@ namespace Skybrud.Social.Facebook {
         /// Gets debug information about the specified access token.
         /// </summary>
         /// <param name="accessToken">The access token to debug.</param>
-        /// <returns></returns>
+        [Obsolete("Use Client.Methods.DebugToken() or Methods.Raw.DebugToken() instead")]
         public string DebugTokenAsRawJson(string accessToken) {
-            NameValueCollection query = new NameValueCollection {
-                { "input_token", accessToken },
-                { "access_token", AccessToken }
-            };
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/debug_token", query);
+            return Methods.Raw.DebugToken(accessToken);
         }
 
         /// <summary>
         /// Gets debug information about the access token used for accessing the Graph API.
         /// </summary>
+        [Obsolete("Use Methods.DebugToken() instead")]
         public FacebookDebugTokenResponse DebugToken() {
-            return DebugToken(AccessToken);
+            return Methods.DebugToken();
         }
 
         /// <summary>
         /// Gets debug information about the specified access token.
         /// </summary>
         /// <param name="accessToken">The access token to debug.</param>
+        [Obsolete("Use Methods.DebugToken() instead")]
         public FacebookDebugTokenResponse DebugToken(string accessToken) {
-            return FacebookDebugTokenResponse.ParseJson(DebugTokenAsRawJson(accessToken));
+            return Methods.DebugToken(accessToken);
         }
 
         #endregion
@@ -86,22 +128,25 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
-        [Obsolete("Use Client.Methods.Me() instead.")]
+        [Obsolete("Use Client.Methods.Me() or Methods.Raw.Me() instead.")]
         public string GetMeAsRawJson() {
-            return Client.Methods.Me();
+            return Methods.Raw.Me();
         }
         
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
+        [Obsolete("Use Methods.Me() instead")]
         public FacebookMeResponse Me() {
-            return FacebookMeResponse.ParseJson(Client.Methods.Me());
+            return Methods.Me();
         }
 
         #endregion
-        
+
+        #endregion
+
         #region App
-        
+
         /// <summary>
         /// Gets information about the specified app.
         /// </summary>
