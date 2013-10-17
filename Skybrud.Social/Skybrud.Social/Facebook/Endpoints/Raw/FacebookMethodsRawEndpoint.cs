@@ -20,6 +20,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
 
         /// <summary>
+        /// Gets information about the specified app.
+        /// </summary>
+        /// <param name="identifier">The identifier of the app. Can either be "app" or the ID of the app.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string App(string identifier = "app") {
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "?access_token=" + Client.AccessToken);
+        }
+
+        /// <summary>
         /// Gets debug information about the specified access token.
         /// </summary>
         /// <param name="accessToken">The access token to debug.</param>

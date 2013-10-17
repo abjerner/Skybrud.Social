@@ -29,6 +29,21 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
+        /// Gets information about the specified app.
+        /// </summary>
+        /// <param name="id">The ID of the app.</param>
+        public FacebookAppResponse App(long id) {
+            return FacebookAppResponse.ParseJson(Raw.App(id + ""));
+        }
+
+        /// <summary>
+        /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
+        /// </summary>
+        public FacebookAppResponse App() {
+            return FacebookAppResponse.ParseJson(Raw.App("app"));
+        }
+
+        /// <summary>
         /// Gets debug information about the access token used for accessing the Graph API.
         /// </summary>
         public FacebookDebugTokenResponse DebugToken() {

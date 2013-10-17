@@ -55,7 +55,7 @@ namespace Skybrud.Social.Facebook {
             if (client == null) throw new ArgumentNullException("client");
 
             // Initialize the service
-            FacebookService service =  new FacebookService {
+            FacebookService service = new FacebookService {
                 Client = client
             };
 
@@ -143,8 +143,6 @@ namespace Skybrud.Social.Facebook {
 
         #endregion
 
-        #endregion
-
         #region App
 
         /// <summary>
@@ -152,7 +150,7 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
         public string GetAppAsRawJson(string identifier = "app") {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "?access_token=" + AccessToken);
+            return Methods.Raw.App(identifier);
         }
 
         /// <summary>
@@ -160,15 +158,18 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="id">The ID of the application.</param>
         public FacebookAppResponse GetApp(long id) {
-            return FacebookAppResponse.ParseJson(GetAppAsRawJson(id + ""));
+            return Methods.App(id);
         }
-        
+
         /// <summary>
-        /// Gets information about the specified app by calling the <var>/app</var> method.
+        /// Gets information about the current app by calling the
+        /// <var>/app</var> method. This requires an app access token.
         /// </summary>
         public FacebookAppResponse GetApp() {
-            return FacebookAppResponse.ParseJson(GetAppAsRawJson("app"));
+            return Methods.App();
         }
+
+        #endregion
 
         #endregion
 
