@@ -59,6 +59,24 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
+        /// Gets the events of the specified user or page.
+        /// </summary>
+        /// <param name="id">The ID of the user/page.</param>
+        /// <param name="limit">The maximum amount of events to return.</param>
+        public FacebookEventsResponse Events(long id, int limit = 0) {
+            return Events(id + "", limit);
+        }
+
+        /// <summary>
+        /// Gets the events of the specified user or page.
+        /// </summary>
+        /// <param name="name">The name of the user/page.</param>
+        /// <param name="limit">The maximum amount of events to return.</param>
+        public FacebookEventsResponse Events(string name, int limit = 0) {
+            return FacebookEventsResponse.ParseJson(Raw.Events(name, limit));
+        }
+
+        /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         public FacebookMeResponse Me() {

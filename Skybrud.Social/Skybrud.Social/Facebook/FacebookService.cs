@@ -149,6 +149,7 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about the specified app.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.App() or Methods.Raw.App() instead.")]
         public string GetAppAsRawJson(string identifier = "app") {
             return Methods.Raw.App(identifier);
         }
@@ -157,6 +158,7 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about an application with the specified ID.
         /// </summary>
         /// <param name="id">The ID of the application.</param>
+        [Obsolete("Use Methods.App() instead")]
         public FacebookAppResponse GetApp(long id) {
             return Methods.App(id);
         }
@@ -165,11 +167,10 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about the current app by calling the
         /// <var>/app</var> method. This requires an app access token.
         /// </summary>
+        [Obsolete("Use Methods.App() instead")]
         public FacebookAppResponse GetApp() {
             return Methods.App();
         }
-
-        #endregion
 
         #endregion
 
@@ -181,10 +182,9 @@ namespace Skybrud.Social.Facebook {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.Events() or Methods.Raw.Events() instead.")]
         public string GetEventsAsRawJson(string identifier, int limit = 0) {
-            NameValueCollection query = new NameValueCollection { { "access_token", AccessToken } };
-            if (limit > 0) query.Add("limit", limit + "");
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/events", query);
+            return Methods.Raw.Events(identifier, limit);
         }
 
         /// <summary>
@@ -204,6 +204,8 @@ namespace Skybrud.Social.Facebook {
         public FacebookEventsResponse GetEvents(string name, int limit = 0) {
             return FacebookEventsResponse.ParseJson(GetEventsAsRawJson(name, limit));
         }
+
+        #endregion
 
         #endregion
 

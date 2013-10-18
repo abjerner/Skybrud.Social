@@ -40,6 +40,18 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             };
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/debug_token", query);
         }
+
+        /// <summary>
+        /// Gets the events of the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
+        /// <param name="limit">The maximum amount of events to return.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string Events(string identifier, int limit = 0) {
+            NameValueCollection query = new NameValueCollection { { "access_token", Client.AccessToken } };
+            if (limit > 0) query.Add("limit", limit + "");
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/events", query);
+        }
         
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
