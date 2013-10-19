@@ -77,7 +77,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         internal InstagramMedia() {
             // Hide default constructor

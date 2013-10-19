@@ -21,7 +21,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal InstagramTag() {
             // Hide default constructor

@@ -1,52 +1,55 @@
-﻿using System;
-using System.Collections.Specialized;
-using Skybrud.Social.Instagram.Objects;
+﻿using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
     
     public class InstagramTagsEndpoint {
 
-        protected InstagramService Service;
+        #region Properties
+
+        public InstagramService Service { get; private set; }
+
+        /// <summary>
+        /// A reference to the raw endpoint.
+        /// </summary>
+        public InstagramTagsRawEndpoint Raw {
+            get { return Service.Client.Tags; }
+        }
+
+        #endregion
+
+        #region Constructors
 
         internal InstagramTagsEndpoint(InstagramService service) {
             Service = service;
         }
 
-        public string GetTagInfoAsRawJson(string tag) {
+        #endregion
 
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                { "access_token", Service.AccessToken },
-            };
+        #region Methods
 
-            // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag, qs);
-
+        /// <summary>
+        /// Gets information about the specified <code>tag</code>.
+        /// </summary>
+        /// <param name="tag">The name of the tag.</param>
+        public InstagramTagResponse GetTagInfo(string tag) {
+            return InstagramTagResponse.ParseJson(Raw.GetTagInfo(tag));
         }
 
-        public InstagramTagResponse GetTagInfo(string name) {
-            return InstagramTagResponse.ParseJson(GetTagInfoAsRawJson(name));
+        /// <summary>
+        /// Gets a list of media from the specified <code>tag</code>.
+        /// </summary>
+        /// <param name="tag">The name of the tag.</param>
+        /// <param name="minId"></param>
+        /// <param name="maxId"></param>
+        public InstagramRecentMediaResponse GetRecentMedia(string tag, string minId = null, string maxId = null) {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, minId, maxId));
         }
 
-        public string GetRecentMediaAsRawJson(string tag, string minId = null, string maxId = null) {
+        // TODO: Implement Search() method
 
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                { "access_token", Service.AccessToken },
-            };
-            if (!String.IsNullOrWhiteSpace(minId)) qs.Add("min_id", minId);
-            if (!String.IsNullOrWhiteSpace(maxId)) qs.Add("max_id", maxId);
+        #endregion
 
-            // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
-
-        }
-
-        public InstagramRecentMediaResponse GetRecentMedia(string name, string minId = null, string maxId = null) {
-            return InstagramRecentMediaResponse.ParseJson(GetRecentMediaAsRawJson(name, minId, maxId));
-        }
-    
     }
 
 }

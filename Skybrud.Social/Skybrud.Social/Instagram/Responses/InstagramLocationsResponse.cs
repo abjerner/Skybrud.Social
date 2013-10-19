@@ -26,7 +26,7 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         internal InstagramLocationsResponse() {
             // Hide default constructor

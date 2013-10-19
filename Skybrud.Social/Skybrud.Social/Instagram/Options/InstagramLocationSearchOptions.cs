@@ -1,6 +1,6 @@
-﻿namespace Skybrud.Social.Instagram {
+﻿namespace Skybrud.Social.Instagram.Options {
     
-    public class InstagramMediaSearchOptions {
+    public class InstagramLocationSearchOptions {
         
         /// <summary>
         /// Latitude of the center search coordinate. If used, <var>Longitude</var> is required.
