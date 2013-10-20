@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using Skybrud.Social.Instagram.OAuth;
+using Skybrud.Social.Instagram.Options;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     
@@ -35,25 +36,24 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string GetUser(long id) {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + id + "/?access_token=" + Client.AccessToken);
         }
-        
+
         /// <summary>
         /// Get the most recent media published by the authenticated user.
         /// </summary>
-        /// <param name="count">Count of media to return.</param>
         /// <returns>Returns the raw JSON response from the API.</returns>
-        public string GetSelfRecentMedia(int count = 0) {
-
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection { { "access_token", Client.AccessToken } };
-            if (count > 0) qs.Add("count", count + "");
-
-            // TODO: Implement other parameters
-
-            // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/self/media/recent/", qs);
-
+        public string GetRecentMedia() {
+            return GetRecentMedia("self", null);
         }
-        
+
+        /// <summary>
+        /// Get the most recent media published by the authenticated user.
+        /// </summary>
+        /// <param name="options">The search options with any optional parameters.</param>
+        /// <returns>Returns the raw JSON response from the API.</returns>
+        public string GetRecentMedia(InstagramMediaSearchOptions options) {
+            return GetRecentMedia("self", options);
+        }
+
         /// <summary>
         /// Get the most recent media published by a user.
         /// </summary>
@@ -61,15 +61,41 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="count">Count of media to return.</param>
         /// <returns>Returns the raw JSON response from the API.</returns>
         public string GetRecentMedia(long userId, int count = 0) {
+            return GetRecentMedia(userId + "", new InstagramMediaSearchOptions {
+                Count = count
+            });
+        }
+
+        /// <summary>
+        /// Get the most recent media published by a user.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <param name="options">The search options with any optional parameters.</param>
+        /// <returns>Returns the raw JSON response from the API.</returns>
+        public string GetRecentMedia(long userId, InstagramMediaSearchOptions options) {
+            return GetRecentMedia(userId + "", options);
+        }
+
+        /// <summary>
+        /// Get the most recent media published by a user.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user.</param>
+        /// <param name="options">The search options with any optional parameters.</param>
+        /// <returns>Returns the raw JSON response from the API.</returns>
+        public string GetRecentMedia(string identifier, InstagramMediaSearchOptions options) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection { { "access_token", Client.AccessToken } };
-            if (count > 0) qs.Add("count", count + "");
+            
+            // Add any optional parameters
+            if (options != null) {
+                if (options.Count > 0) qs.Add("count", options.Count + "");
+            }
 
             // TODO: Implement other parameters
 
             // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + userId + "/media/recent/", qs);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + identifier + "/media/recent/", qs);
 
         }
 

@@ -1,4 +1,6 @@
-﻿using Skybrud.Social.Instagram.Endpoints.Raw;
+﻿using System;
+using Skybrud.Social.Instagram.Endpoints.Raw;
+using Skybrud.Social.Instagram.Options;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
@@ -47,18 +49,18 @@ namespace Skybrud.Social.Instagram.Endpoints {
         }
 
         /// <summary>
-        /// The the most recent media of the current user.
+        /// The the most recent media of the authenticated user.
         /// </summary>
-        public InstagramRecentMediaResponse GetSelfRecentMedia() {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetSelfRecentMedia());
+        public InstagramRecentMediaResponse GetRecentMedia() {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia());
         }
-        
+
         /// <summary>
-        /// The the most recent media of the current user.
+        /// The the most recent media of the authenticated user.
         /// </summary>
-        /// <param name="count">Count of media to return.</param>
-        public InstagramRecentMediaResponse GetSelfRecentMedia(int count) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetSelfRecentMedia(count));
+        /// <param name="options">The search options with any optional parameters.</param>
+        public InstagramRecentMediaResponse GetRecentMedia(InstagramMediaSearchOptions options) {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(options));
         }
 
         /// <summary>
@@ -77,6 +79,43 @@ namespace Skybrud.Social.Instagram.Endpoints {
         public InstagramRecentMediaResponse GetRecentMedia(long userId, int count) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId, count));
         }
+
+        /// <summary>
+        /// Gets the most recent media of the user with the specified ID.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <param name="options">The search options with any optional parameters.</param>
+        public InstagramRecentMediaResponse GetRecentMedia(long userId, InstagramMediaSearchOptions options) {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId, options));
+        }
+
+        #region Obsolete
+
+        [Obsolete("Use GetSelfRecentMedia() instead")]
+        public InstagramRecentMediaResponse GetMedia() {
+            return GetRecentMedia();
+        }
+
+        /// <summary>
+        /// Gets the most recent media of the user with the specified ID.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        [Obsolete("Use GetRecentMedia() instead")]
+        public InstagramRecentMediaResponse GetMedia(long userId) {
+            return GetRecentMedia(userId, 0);
+        }
+
+        /// <summary>
+        /// Gets the most recent media of the user with the specified ID.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <param name="count">Count of media to return.</param>
+        [Obsolete("Use GetRecentMedia() instead")]
+        public InstagramRecentMediaResponse GetMedia(long userId, int count) {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId, count));
+        }
+
+        #endregion
 
         /// <summary>
         /// Search for a user by name.
