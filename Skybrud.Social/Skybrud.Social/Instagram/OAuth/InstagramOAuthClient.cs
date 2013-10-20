@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 using Skybrud.Social.Instagram.Endpoints.Raw;
+using Skybrud.Social.Instagram.Responses;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.OAuth {
 
@@ -164,10 +167,29 @@ namespace Skybrud.Social.Instagram.OAuth {
             return String.Format(
                 "https://api.instagram.com/oauth/authorize/?client_id={0}&redirect_uri={1}&response_type=code&state={2}&scope={3}",
                 HttpUtility.UrlEncode(ClientId),
-                HttpUtility.UrlEncode(ClientSecret),
+                HttpUtility.UrlEncode(ReturnUri),
                 HttpUtility.UrlEncode(state),
                 HttpUtility.UrlEncode(scope.ToString().Replace(", ", "+").ToLower())
             );
+        }
+
+        public InstagramAccessTokenResponse GetAccessTokenFromAuthCode(string authCode) {
+        
+            // Initialize collection with POST data
+            NameValueCollection parameters = new NameValueCollection {
+                {"client_id", ClientId},
+                {"client_secret", ClientSecret},
+                {"grant_type", "authorization_code"},
+                {"redirect_uri", ReturnUri},
+                {"code", authCode }
+            };
+
+            // Make the call to the API
+            string contents = SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://api.instagram.com/oauth/access_token", null, parameters);
+
+            // Parse the response
+            return InstagramAccessTokenResponse.ParseJson(contents);
+
         }
 
         #endregion

@@ -109,6 +109,7 @@
     <Compile Include="Instagram\Endpoints\Raw\InstagramUsersRawEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\Raw\InstagramLocationsRawEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\Raw\InstagramTagsRawEndpoint.cs" />
+    <Compile Include="Instagram\Exceptions\InstagramOAuthException.cs" />
     <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
     <Compile Include="Instagram\Exceptions\InstagramNotFoundException.cs" />
     <Compile Include="Instagram\Exceptions\InstagramOAuthAccessTokenException.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Instagram\Objects\InstagramVideo.cs" />
     <Compile Include="Instagram\Objects\InstagramVideoSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramMediaSummary.cs" />
+    <Compile Include="Instagram\Responses\InstagramAccessTokenResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUserSummariesResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
