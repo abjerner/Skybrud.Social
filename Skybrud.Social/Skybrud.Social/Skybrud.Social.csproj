@@ -101,6 +101,7 @@
     <Compile Include="Google\GoogleUserInfo.cs" />
     <Compile Include="Google\OAuth\GoogleAccessTokenResponse.cs" />
     <Compile Include="Google\OAuth\GoogleOAuthClient.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramEndpoints.cs" />
     <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramTagsEndpoint.cs" />
