@@ -27,6 +27,7 @@ namespace Skybrud.Social.Instagram {
         #region Constructors
 
         private InstagramService() {
+            Endpoints = new InstagramEndpoints(this);
             Locations = new InstagramLocationsEndpoint(this);
             Media = new InstagramMediaEndpoint(this);
             Relationships = new InstagramRelationshipsEndpoint(this);
