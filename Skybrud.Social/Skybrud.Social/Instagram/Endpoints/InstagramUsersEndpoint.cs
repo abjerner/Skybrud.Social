@@ -34,8 +34,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <param name="id">The ID of the user.</param>
-        public InstagramUserResponse GetSelf(long id) {
+        public InstagramUserResponse GetSelf() {
             return InstagramUserResponse.ParseJson(Raw.GetSelf());
         }
 
@@ -77,6 +76,14 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="count">Count of media to return.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId, int count) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId, count));
+        }
+
+        /// <summary>
+        /// Search for a user by name.
+        /// </summary>
+        /// <param name="query">A query string.</param>
+        public InstagramUsersResponse Search(string query) {
+            return InstagramUsersResponse.ParseJson(Raw.Search(query, 0));
         }
 
         /// <summary>
