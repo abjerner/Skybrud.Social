@@ -1,4 +1,7 @@
-﻿using Skybrud.Social.Facebook.Endpoints.Raw;
+﻿using System;
+using System.Collections.Specialized;
+using System.Web;
+using Skybrud.Social.Facebook.Endpoints.Raw;
 
 namespace Skybrud.Social.Facebook.OAuth {
 
@@ -39,6 +42,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         }
 
         #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Initializes an OAuth client with empty information.
@@ -99,6 +104,87 @@ namespace Skybrud.Social.Facebook.OAuth {
             AppSecret = appSecret;
             ReturnUri = returnUri;
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        public string GetAuthorizationUrl(string state, FacebookScopeCollection scope) {
+            return GetAuthorizationUrl(state, scope.ToString());
+        }
+
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        public string GetAuthorizationUrl(string state, params string[] scope) {
+            return String.Format(
+                "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
+                AppId,
+                ReturnUri,
+                state,
+                String.Join(",", scope)
+            );
+        }
+
+        /// <summary>
+        /// Exchanges the specified authorization code for an´user access token.
+        /// </summary>
+        /// <param name="authCode">The authorization code received from the Facebook OAuth dialog.</param>
+        public string GetAccessTokenFromAuthCode(string authCode) {
+
+            // Initialize the query string
+            NameValueCollection query = new NameValueCollection {
+                {"client_id", AppId},
+                {"redirect_uri", ReturnUri},
+                {"client_secret", "authorization_code"},
+                {"redirect_uri", AppSecret},
+                {"code", authCode }
+            };
+
+            // Make the call to the API
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+
+            // Parse the contents
+            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+
+            // Get the access token
+            return response["access_token"];
+
+        }
+
+        /// <summary>
+        /// Attempts to renew the specified user access token. The current access token must be valid.
+        /// </summary>
+        /// <param name="currentToken">The current access token.</param>
+        public string RenewAccessToken(string currentToken) {
+
+            // Initialize the query string
+            NameValueCollection query = new NameValueCollection {
+                {"grant_type", "fb_exchange_token"},
+                {"client_id", AppId},
+                {"client_secret", AppSecret},
+                {"fb_exchange_token", currentToken }
+            };
+
+            // Make the call to the API
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+
+            // Parse the contents
+            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+
+            // Get the access token
+            return response["access_token"];
+
+        }
+
+        #endregion
 
     }
 
