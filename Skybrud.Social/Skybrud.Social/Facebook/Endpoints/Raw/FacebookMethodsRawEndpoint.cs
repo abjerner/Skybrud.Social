@@ -58,7 +58,23 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
         public string Me() {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me?access_token=" + Client.AccessToken);
+            return GetObject("me");
+        }
+
+        /// <summary>
+        /// Gets an object (user, post, photo or similar) with the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the object.</param>
+        public string GetObject(long identifier) {
+            return GetObject(identifier + "");
+        }
+
+        /// <summary>
+        /// Gets an object (user, post, photo or similar) with the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the object.</param>
+        public string GetObject(string identifier) {
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "?access_token=" + Client.AccessToken);
         }
 
     }

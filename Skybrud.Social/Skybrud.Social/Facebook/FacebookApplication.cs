@@ -9,7 +9,6 @@ using System.Web;
 using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Json;
-using Skybrud.Social.OAuth;
 
 namespace Skybrud.Social.Facebook {
 

@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook {
         #region Constructor(s)
 
         private FacebookService() {
-            // make constructor private
+            Methods = new FacebookMethodsEndpoint(this);
         }
 
         #endregion

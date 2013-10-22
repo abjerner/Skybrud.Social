@@ -1,4 +1,5 @@
 ﻿using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook.Endpoints {
@@ -80,7 +81,23 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         public FacebookMeResponse Me() {
-            return FacebookMeResponse.ParseJson(Raw.Me());
+            return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
+        }
+
+        /// <summary>
+        /// Gets information about a user with the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The ID or username of the user.</param>
+        public FacebookUser GetUser(long identifier) {
+            return GetUser(identifier + "");
+        }
+
+        /// <summary>
+        /// Gets information about a user with the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The ID or username of the user.</param>
+        public FacebookUser GetUser(string identifier) {
+            return FacebookUser.ParseJson(Raw.GetObject(identifier));
         }
     
     }

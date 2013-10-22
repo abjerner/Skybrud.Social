@@ -80,6 +80,7 @@
     <Compile Include="Facebook\Objects\FacebookImage.cs" />
     <Compile Include="Facebook\Objects\FacebookPhoto.cs" />
     <Compile Include="Facebook\Objects\FacebookPaging.cs" />
+    <Compile Include="Facebook\Objects\FacebookUser.cs" />
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />
