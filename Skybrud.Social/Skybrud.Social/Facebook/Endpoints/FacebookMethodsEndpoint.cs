@@ -77,7 +77,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
         public FacebookEventsResponse GetEvents(string identifier, int limit = 0) {
-            return FacebookEventsResponse.ParseJson(Raw.GetFeed(identifier, limit));
+            return FacebookEventsResponse.ParseJson(Raw.GetEvents(identifier, limit));
         }
 
         /// <summary>
