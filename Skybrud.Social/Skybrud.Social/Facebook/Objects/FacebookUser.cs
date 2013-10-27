@@ -29,6 +29,14 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
+        #region Constructors
+
+        private FacebookUser() {
+            // Hide default constructor
+        }
+
+        #endregion
+
         #region Member methods
 
         /// <summary>
