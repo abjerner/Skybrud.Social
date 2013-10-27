@@ -6,7 +6,7 @@ namespace Skybrud.Social.Facebook.Objects {
     public class FacebookCommentSummary {
 
         public string Id { get; private set; }
-        public FacebookIdName From { get; private set; }
+        public FacebookObject From { get; private set; }
         public string Message { get; private set; }
         public FacebookMessageTag[] MessageTags { get; private set; }
         public DateTime CreatedTime { get; private set; }
@@ -15,7 +15,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookCommentSummary Parse(JsonObject obj) {
             return new FacebookCommentSummary {
                 Id = obj.GetString("id"),
-                From = obj.GetObject("from", FacebookIdName.Parse),
+                From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),
                 MessageTags = obj.GetArray("message_tags", FacebookMessageTag.Parse),
                 CreatedTime = obj.GetDateTime("created_time"),

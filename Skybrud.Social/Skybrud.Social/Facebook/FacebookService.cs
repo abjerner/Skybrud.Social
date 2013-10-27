@@ -184,7 +184,7 @@ namespace Skybrud.Social.Facebook {
         /// <returns>The raw JSON response from the API.</returns>
         [Obsolete("Use Client.Methods.Events() or Methods.Raw.Events() instead.")]
         public string GetEventsAsRawJson(string identifier, int limit = 0) {
-            return Methods.Raw.Events(identifier, limit);
+            return Methods.Raw.GetEvents(identifier, limit);
         }
 
         /// <summary>

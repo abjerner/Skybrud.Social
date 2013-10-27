@@ -1,5 +1,6 @@
 ﻿using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
+using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook.Endpoints {
@@ -64,25 +65,67 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookEventsResponse Events(long id, int limit = 0) {
-            return Events(id + "", limit);
+        public FacebookEventsResponse GetEvents(long id, int limit = 0) {
+            return GetEvents(id + "", limit);
         }
+
+        #region Get feed
 
         /// <summary>
         /// Gets the events of the specified user or page.
         /// </summary>
-        /// <param name="name">The name of the user/page.</param>
+        /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookEventsResponse Events(string name, int limit = 0) {
-            return FacebookEventsResponse.ParseJson(Raw.Events(name, limit));
+        public FacebookEventsResponse GetEvents(string identifier, int limit = 0) {
+            return FacebookEventsResponse.ParseJson(Raw.GetFeed(identifier, limit));
         }
 
         /// <summary>
-        /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
+        /// Gets the feed of the specified user or page.
         /// </summary>
-        public FacebookMeResponse Me() {
-            return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
+        /// <param name="identifier">The ID of the user/page.</param>
+        /// <param name="limit">The maximum amount of entries to return.</param>
+        public FacebookFeedResponse GetFeed(long identifier, int limit = 0) {
+            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier + "", limit));
         }
+
+        /// <summary>
+        /// Gets the feed of the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
+        /// <param name="limit">The maximum amount of entries to return.</param>
+        public FacebookFeedResponse GetFeed(string identifier, int limit = 0) {
+            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, limit));
+        }
+
+        /// <summary>
+        /// Gets the feed of the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID of the user/page.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookFeedResponse GetFeed(long identifier, FacebookFeedOptions options) {
+            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier + "", options));
+        }
+
+        /// <summary>
+        /// Gets the feed of the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
+            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, options));
+        }
+
+        /// <summary>
+        /// Gets the feed of the specified URL. This method can be used for paging purposes. 
+        /// </summary>
+        /// <param name="url">The raw URL to call.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public FacebookFeedResponse GetFeedFromUrl(string url) {
+            return FacebookFeedResponse.ParseJson(Raw.GetFeedFromUrl(url));
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets information about a user with the specified <var>identifier</var>.
@@ -98,6 +141,13 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The ID or username of the user.</param>
         public FacebookUser GetUser(string identifier) {
             return FacebookUser.ParseJson(Raw.GetObject(identifier));
+        }
+
+        /// <summary>
+        /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
+        /// </summary>
+        public FacebookMeResponse Me() {
+            return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
         }
     
     }

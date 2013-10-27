@@ -10,7 +10,7 @@ namespace Skybrud.Social.Facebook.Objects {
         #region Properties
 
         public string Id { get; private set; }
-        public FacebookIdName From { get; private set; }
+        public FacebookObject From { get; private set; }
         public string Message { get; private set; }
         public string Description { get; private set; }
         public string Story { get; private set; }
@@ -21,7 +21,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public string Icon { get; private set; }
         public string Type { get; private set; }
         public string StatusType { get; private set; }
-        public FacebookIdName Application { get; private set; }
+        public FacebookObject Application { get; private set; }
         public DateTime CreatedTime { get; private set; }
         public DateTime UpdatedTime { get; private set; }
         public FacebookLikes Likes { get; private set; }
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookFeedEntry Parse(JsonObject obj) {
             return new FacebookFeedEntry {
                 Id = obj.GetString("id"),
-                From = obj.GetObject("from", FacebookIdName.Parse),
+                From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),
                 Description = obj.GetString("description"),
                 Story = obj.GetString("story"),
@@ -48,7 +48,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Icon = obj.GetString("icon"),
                 Type = obj.GetString("type"),
                 StatusType = obj.GetString("status_type"),
-                Application = obj.GetObject("application", FacebookIdName.Parse),
+                Application = obj.GetObject("application", FacebookObject.Parse),
                 CreatedTime = obj.GetDateTime("created_time"),
                 UpdatedTime = obj.GetDateTime("updated_time"),
                 Comments = obj.GetObject("comments", FacebookComments.Parse),

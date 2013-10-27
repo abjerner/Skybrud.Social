@@ -21,7 +21,7 @@ namespace Skybrud.Social.Instagram {
         Relationships = 2,
 
         /// <summary>
-        /// To like and unlike items on a user’s behalf
+        /// To like and unlike items on a user’s behalf.
         /// </summary>
         Likes = 4
     

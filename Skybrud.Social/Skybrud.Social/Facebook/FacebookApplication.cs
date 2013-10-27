@@ -33,7 +33,7 @@ namespace Skybrud.Social.Facebook {
         }
 
         public FacebookApplication() {
-            // default constructor
+            Client = new FacebookOAuthClient();
         }
 
         public FacebookApplication(long appId, string appSecret) {
