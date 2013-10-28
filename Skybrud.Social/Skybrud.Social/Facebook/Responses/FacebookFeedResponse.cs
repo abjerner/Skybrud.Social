@@ -73,8 +73,7 @@ namespace Skybrud.Social.Facebook.Responses {
         }
 
         /// <summary>
-        ///  /// Gets an instance of <var>FacebookFeedResponse</var> from
-        /// the specified <var>JsonObject</var>.
+        /// Gets an instance of <var>FacebookFeedResponse</var> from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookFeedResponse Parse(JsonObject obj) {

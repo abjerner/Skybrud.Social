@@ -56,6 +56,8 @@ namespace Skybrud.Social.Facebook.Responses {
 
         #endregion
 
+        #region Static methods
+
         /// <summary>
         /// Loads an instance of <var>FacebookEventsResponse</var> from the
         /// JSON file at the specified <var>path</var>.
@@ -75,8 +77,7 @@ namespace Skybrud.Social.Facebook.Responses {
         }
 
         /// <summary>
-        ///  /// Gets an instance of <var>FacebookEventsResponse</var> from
-        /// the specified <var>JsonObject</var>.
+        /// Gets an instance of <var>FacebookEventsResponse</var> from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookEventsResponse Parse(JsonObject obj) {
@@ -87,6 +88,8 @@ namespace Skybrud.Social.Facebook.Responses {
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };
         }
+
+        #endregion
 
     }
 

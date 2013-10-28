@@ -12,37 +12,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         internal FacebookMethodsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
         }
-        
-        /// <summary>
-        /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
-        /// </summary>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string Accounts() {
-            
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-            
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me/accounts?access_token", query);
-        
-        }
-
-        /// <summary>
-        /// Gets information about the specified app.
-        /// </summary>
-        /// <param name="identifier">The identifier of the app. Can either be "app" or the ID of the app.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string App(string identifier = "app") {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier, query);
-        
-        }
 
         /// <summary>
         /// Gets debug information about the specified access token.
@@ -60,6 +29,37 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             // Make the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/debug_token", query);
         
+        }
+
+        /// <summary>
+        /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
+        /// </summary>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string GetAccounts() {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me/accounts?access_token", query);
+
+        }
+
+        /// <summary>
+        /// Gets information about the specified app.
+        /// </summary>
+        /// <param name="identifier">The identifier of the app. Can either be "app" or the ID of the app.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string GetApp(string identifier = "app") {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier, query);
+
         }
 
         /// <summary>
@@ -142,9 +142,50 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <param name="identifier">The identifier of the object.</param>
         public string GetObject(string identifier) {
+
+            // Declare the query string
             NameValueCollection query = new NameValueCollection();
             if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+
+            // Make the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier, query);
+        
+        }
+        
+        /// <summary>
+        /// Gets the photos of the specified album, page or user.
+        /// </summary>
+        /// <param name="identifier">The ID or name.</param>
+        /// <param name="limit">The maximum amount of photos to return.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string GetPhotos(string identifier, int limit = 0) {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+            if (limit > 0) query.Add("limit", limit + "");
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/photos", query);
+
+        }
+        
+        /// <summary>
+        /// Gets the posts by the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
+        /// <param name="limit">The maximum amount of posts to return.</param>
+        /// <returns>The raw JSON response from the API.</returns>
+        public string GetPosts(string identifier, int limit = 0) {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+            if (limit > 0) query.Add("limit", limit + "");
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/posts", query);
+        
         }
 
     }

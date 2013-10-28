@@ -24,32 +24,32 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
+        /// Gets debug information about the access token used for accessing the Graph API.
+        /// </summary>
+        public FacebookDebugTokenResponse DebugToken() {
+            return DebugToken(Service.Client.AccessToken);
+        }
+
+        /// <summary>
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
-        public FacebookAccountsResponse Accounts() {
-            return FacebookAccountsResponse.ParseJson(Raw.Accounts());
+        public FacebookAccountsResponse GetAccounts() {
+            return FacebookAccountsResponse.ParseJson(Raw.GetAccounts());
         }
 
         /// <summary>
         /// Gets information about the specified app.
         /// </summary>
         /// <param name="id">The ID of the app.</param>
-        public FacebookAppResponse App(long id) {
-            return FacebookAppResponse.ParseJson(Raw.App(id + ""));
+        public FacebookAppResponse GetApp(long id) {
+            return FacebookAppResponse.ParseJson(Raw.GetApp(id + ""));
         }
 
         /// <summary>
         /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
         /// </summary>
-        public FacebookAppResponse App() {
-            return FacebookAppResponse.ParseJson(Raw.App("app"));
-        }
-
-        /// <summary>
-        /// Gets debug information about the access token used for accessing the Graph API.
-        /// </summary>
-        public FacebookDebugTokenResponse DebugToken() {
-            return DebugToken(Service.Client.AccessToken);
+        public FacebookAppResponse GetApp() {
+            return FacebookAppResponse.ParseJson(Raw.GetApp());
         }
 
         /// <summary>
@@ -141,6 +141,42 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The ID or username of the user.</param>
         public FacebookUser GetUser(string identifier) {
             return FacebookUser.ParseJson(Raw.GetObject(identifier));
+        }
+
+        /// <summary>
+        /// Gets the photos of the specified album, page or user.
+        /// </summary>
+        /// <param name="id">The ID.</param>
+        /// <param name="limit">The maximum amount of photos to return.</param>
+        public FacebookPhotosResponse GetPhotos(long id, int limit = 0) {
+            return GetPhotos(id + "", limit);
+        }
+        
+        /// <summary>
+        /// Gets the photos of the specified album, page or user.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the album, page or user.</param>
+        /// <param name="limit">The maximum amount of photos to return.</param>
+        public FacebookPhotosResponse GetPhotos(string identifier, int limit = 0) {
+            return FacebookPhotosResponse.ParseJson(Raw.GetPhotos(identifier, limit));
+        }
+
+        /// <summary>
+        /// Gets the posts by the specified user or page.
+        /// </summary>
+        /// <param name="id">The ID of the user/page.</param>
+        /// <param name="limit">The maximum amount of posts to return.</param>
+        public FacebookPostsResponse GetPosts(long id, int limit = 0) {
+            return FacebookPostsResponse.ParseJson(Raw.GetPhotos(id + "", limit));
+        }
+
+        /// <summary>
+        /// Gets the posts by the specified user or page.
+        /// </summary>
+        /// <param name="name">The name of the user/page.</param>
+        /// <param name="limit">The maximum amount of posts to return.</param>
+        public FacebookPostsResponse GetPosts(string name, int limit = 0) {
+            return FacebookPostsResponse.ParseJson(Raw.GetPhotos(name, limit));
         }
 
         /// <summary>

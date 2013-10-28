@@ -4,9 +4,9 @@ namespace Skybrud.Social.Facebook.Objects {
     
     public class FacebookImage {
 
-        public int Width;
-        public int Height;
-        public string Source;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public string Source { get; private set; }
 
         public static FacebookImage Parse(JsonObject obj) {
             if (obj == null) return null;

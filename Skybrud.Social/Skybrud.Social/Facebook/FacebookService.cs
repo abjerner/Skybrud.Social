@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Social.Facebook.Endpoints;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Responses;
@@ -79,15 +78,15 @@ namespace Skybrud.Social.Facebook {
         /// <returns>The raw JSON response from the API.</returns>
         [Obsolete("Use Client.Methods.GetAccounts() or Methods.Raw.GetAccounts() instead")]
         public string GetAccountsAsRawJson() {
-            return Methods.Raw.Accounts();
+            return Methods.Raw.GetAccounts();
         }
 
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
-        [Obsolete("Use Methods.Accounts() instead")]
+        [Obsolete("Use Methods.GetAccounts() instead")]
         public FacebookAccountsResponse Accounts() {
-            return Methods.Accounts();
+            return Methods.GetAccounts();
         }
 
         #endregion
@@ -149,27 +148,27 @@ namespace Skybrud.Social.Facebook {
         /// Gets information about the specified app.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
-        [Obsolete("Use Client.Methods.App() or Methods.Raw.App() instead.")]
+        [Obsolete("Use Client.Methods.GetApp() or Methods.Raw.GetApp() instead.")]
         public string GetAppAsRawJson(string identifier = "app") {
-            return Methods.Raw.App(identifier);
+            return Methods.Raw.GetApp(identifier);
         }
 
         /// <summary>
         /// Gets information about an application with the specified ID.
         /// </summary>
         /// <param name="id">The ID of the application.</param>
-        [Obsolete("Use Methods.App() instead")]
+        [Obsolete("Use Methods.GetApp() instead")]
         public FacebookAppResponse GetApp(long id) {
-            return Methods.App(id);
+            return Methods.GetApp(id);
         }
 
         /// <summary>
         /// Gets information about the current app by calling the
         /// <var>/app</var> method. This requires an app access token.
         /// </summary>
-        [Obsolete("Use Methods.App() instead")]
+        [Obsolete("Use Methods.GetApp() instead")]
         public FacebookAppResponse GetApp() {
-            return Methods.App();
+            return Methods.GetApp();
         }
 
         #endregion
@@ -182,7 +181,7 @@ namespace Skybrud.Social.Facebook {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
-        [Obsolete("Use Client.Methods.Events() or Methods.Raw.Events() instead.")]
+        [Obsolete("Use Client.Methods.GetEvents() or Methods.Raw.GetEvents() instead.")]
         public string GetEventsAsRawJson(string identifier, int limit = 0) {
             return Methods.Raw.GetEvents(identifier, limit);
         }
@@ -192,8 +191,9 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
+        [Obsolete("Use Client.Methods.GetEvents() or Methods.Raw.GetEvents() instead.")]
         public FacebookEventsResponse GetEvents(long id, int limit = 0) {
-            return GetEvents(id + "", limit);
+            return Methods.GetEvents(id + "", limit);
         }
 
         /// <summary>
@@ -201,11 +201,10 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="name">The name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
+        [Obsolete("Use Methods.GetEvents() instead.")]
         public FacebookEventsResponse GetEvents(string name, int limit = 0) {
-            return FacebookEventsResponse.ParseJson(GetEventsAsRawJson(name, limit));
+            return Methods.GetEvents(name, limit);
         }
-
-        #endregion
 
         #endregion
 
@@ -217,10 +216,9 @@ namespace Skybrud.Social.Facebook {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of entries to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.GetFeed() or Methods.Raw.GetFeed() instead.")]
         public string GetFeedAsRawJson(string identifier, int limit = 0) {
-            NameValueCollection query = new NameValueCollection {{"access_token", AccessToken}};
-            if (limit > 0) query.Add("limit", limit + "");
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+            return Client.Methods.GetFeed(identifier, limit);
         }
 
         /// <summary>
@@ -228,8 +226,9 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of entries to return.</param>
+        [Obsolete("Use Client.Methods.GetFeed() or Methods.Raw.GetFeed() instead.")]
         public FacebookFeedResponse GetFeed(long id, int limit = 0) {
-            return GetFeed(id + "", limit);
+            return Methods.GetFeed(id + "", limit);
         }
 
         /// <summary>
@@ -237,8 +236,9 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="name">The name of the user/page.</param>
         /// <param name="limit">The maximum amount of entries to return.</param>
+        [Obsolete("Use Methods.GetFeed() instead.")]
         public FacebookFeedResponse GetFeed(string name, int limit = 0) {
-            return FacebookFeedResponse.ParseJson(GetFeedAsRawJson(name, limit));
+            return Methods.GetFeed(name, limit);
         }
 
         #endregion
@@ -251,10 +251,9 @@ namespace Skybrud.Social.Facebook {
         /// <param name="identifier">The ID or name.</param>
         /// <param name="limit">The maximum amount of photos to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.GetPhotos() or Methods.Raw.GetPhotos() instead.")]
         public string GetPhotosAsRawJson(string identifier, int limit = 0) {
-            NameValueCollection query = new NameValueCollection { { "access_token", AccessToken } };
-            if (limit > 0) query.Add("limit", limit + "");
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/photos", query);
+            return Client.Methods.GetPhotos(identifier, limit);
         }
 
         /// <summary>
@@ -262,12 +261,14 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="id">The ID.</param>
         /// <param name="limit">The maximum amount of photos to return.</param>
+        [Obsolete("Use Methods.GetPhotos() instead.")]
         public FacebookPhotosResponse GetPhotos(long id, int limit = 0) {
             return GetPhotos(id + "", limit);
         }
 
+        [Obsolete("Use Methods.GetPhotos() instead.")]
         public FacebookPhotosResponse GetPhotos(string name, int limit) {
-            return FacebookPhotosResponse.ParseJson(GetPhotosAsRawJson(name, limit));
+            return FacebookPhotosResponse.ParseJson(Client.Methods.GetPhotos(name, limit));
         }
 
         #endregion
@@ -280,10 +281,9 @@ namespace Skybrud.Social.Facebook {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
+        [Obsolete("Use Client.Methods.GetPosts() or Methods.Raw.GetPosts() instead.")]
         public string GetPostsAsRawJson(string identifier, int limit = 0) {
-            NameValueCollection query = new NameValueCollection { { "access_token", AccessToken } };
-            if (limit > 0) query.Add("limit", limit + "");
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/posts", query);
+            return Client.Methods.GetPosts(identifier, limit);
         }
 
         /// <summary>
@@ -291,8 +291,9 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
+        [Obsolete("Use Methods.GetPosts() instead.")]
         public FacebookPostsResponse GetPosts(long id, int limit = 0) {
-            return GetPosts(id + "", limit);
+            return Methods.GetPosts(id, limit);
         }
 
         /// <summary>
@@ -300,9 +301,12 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="name">The name of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
+        [Obsolete("Use Methods.GetPosts() instead.")]
         public FacebookPostsResponse GetPosts(string name, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(GetPostsAsRawJson(name, limit));
+            return Methods.GetPosts(name, limit);
         }
+
+        #endregion
 
         #endregion
 
