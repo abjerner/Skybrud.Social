@@ -143,12 +143,14 @@
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
+    <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
     <Compile Include="Json\IJsonObject.cs" />
     <Compile Include="Json\JsonArray.cs" />
     <Compile Include="Json\JsonConverter.cs" />
     <Compile Include="Json\JsonObject.cs" />
     <Compile Include="Json\Exceptions\JsonParseException.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="OAuth\OAuthClient.cs" />
     <Compile Include="OAuth\OAuthRequestToken.cs" />
     <Compile Include="OAuth\OAuthAccessToken.cs" />

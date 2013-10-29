@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml.Linq;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
@@ -211,6 +212,36 @@ namespace Skybrud.Social {
 
         public static DateTime GetDateTimeFromUnixTime(string timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Int64.Parse(timestamp));
+        }
+
+        #endregion
+
+        #region Locations and distance
+
+        /// <summary>
+        /// Calculates the distance in meters between two GPS locations.
+        /// </summary>
+        /// <param name="loc1">The first location.</param>
+        /// <param name="loc2">The second location.</param>
+        public static double GetDistance(ILocation loc1, ILocation loc2) {
+            return GetDistance(loc1.Latitude, loc1.Longitude, loc2.Latitude, loc2.Longitude);
+        }
+
+        /// <summary>
+        /// Calculates the distance in meters between two GPS locations.
+        /// </summary>
+        public static double GetDistance(double lat1, double lng1, double lat2, double lng2) {
+
+            // http://stackoverflow.com/a/3440123
+            double ee = (Math.PI * lat1 / 180);
+            double f = (Math.PI * lng1 / 180);
+            double g = (Math.PI * lat2 / 180);
+            double h = (Math.PI * lng2 / 180);
+            double i = (Math.Cos(ee) * Math.Cos(g) * Math.Cos(f) * Math.Cos(h) + Math.Cos(ee) * Math.Sin(f) * Math.Cos(g) * Math.Sin(h) + Math.Sin(ee) * Math.Sin(g));
+            double j = (Math.Acos(i));
+
+            return (6371 * j) * 1000d;
+
         }
 
         #endregion

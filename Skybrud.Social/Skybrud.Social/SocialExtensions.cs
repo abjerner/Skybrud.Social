@@ -3,10 +3,21 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Web;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
+    
     public static class SocialExtensions {
+
+        /// <summary>
+        /// Calculates the distance in meters between two GPS locations.
+        /// </summary>
+        /// <param name="loc1">The first location.</param>
+        /// <param name="loc2">The second location.</param>
+        public static double GetDistance(this ILocation loc1, ILocation loc2) {
+            return SocialUtils.GetDistance(loc1, loc2);
+        }
         
         public static string GetAsString(this HttpWebResponse response) {
             StreamReader reader = new StreamReader(response.GetResponseStream());
