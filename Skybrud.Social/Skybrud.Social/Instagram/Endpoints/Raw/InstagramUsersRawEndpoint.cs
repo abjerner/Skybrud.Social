@@ -90,9 +90,9 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
             // Add any optional parameters
             if (options != null) {
                 if (options.Count > 0) qs.Add("count", options.Count + "");
+                if (options.MinId != null) qs.Add("min_id", options.MinId + "");
+                if (options.MaxId != null) qs.Add("max_id", options.MaxId + "");
             }
-
-            // TODO: Implement other parameters
 
             // Perform the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + identifier + "/media/recent/", qs);

@@ -122,7 +122,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="query">A query string.</param>
         public InstagramUsersResponse Search(string query) {
-            return InstagramUsersResponse.ParseJson(Raw.Search(query, 0));
+            return InstagramUsersResponse.ParseJson(Raw.Search(query));
         }
 
         /// <summary>
