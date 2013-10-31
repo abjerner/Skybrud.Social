@@ -24,6 +24,22 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         #region Methods
 
         /// <summary>
+        /// Gets information about a media object.
+        /// </summary>
+        /// <param name="mediaId">The ID of the media.</param>
+        public string GetMedia(string mediaId) {
+
+            // Declare the query string
+            NameValueCollection qs = new NameValueCollection {
+                {"access_token", Client.AccessToken}
+            };
+
+            // Perform the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/media/" + mediaId, qs);
+
+        }
+
+        /// <summary>
         /// Search for media in a given area. The default time span is set to 5 days. Can return mix of image
         /// and video types.
         /// </summary>

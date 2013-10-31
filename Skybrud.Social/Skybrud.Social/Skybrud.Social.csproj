@@ -134,6 +134,7 @@
     <Compile Include="Instagram\Objects\InstagramVideo.cs" />
     <Compile Include="Instagram\Objects\InstagramVideoSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramMediaSummary.cs" />
+    <Compile Include="Instagram\Responses\InstagramMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramAccessTokenResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUserSummariesResponse.cs" />

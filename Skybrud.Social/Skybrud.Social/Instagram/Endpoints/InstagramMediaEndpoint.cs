@@ -28,6 +28,14 @@ namespace Skybrud.Social.Instagram.Endpoints {
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Gets information about a media object.
+        /// </summary>
+        /// <param name="mediaId">The ID of the media.</param>
+        public InstagramMediaResponse GetMedia(string mediaId) {
+            return InstagramMediaResponse.ParseJson(Raw.GetMedia(mediaId));
+        }
         
         /// <summary>
         /// Search for media in a given area. The default time span is set to 5 days. Can return mix of image
