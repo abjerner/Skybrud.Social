@@ -46,9 +46,9 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets the raw JSON response from the Instagram API with media from the specified <code>tag</code>.
         /// </summary>
         /// <param name="tag">The name of the tag.</param>
-        /// <param name="minId"></param>
-        /// <param name="maxId"></param>
-        public string GetRecentMedia(string tag, string minId = null, string maxId = null) {
+        /// <param name="minTagId"></param>
+        /// <param name="maxTagId"></param>
+        public string GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {
@@ -56,8 +56,8 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
             };
 
             // Add any optional parameters
-            if (!String.IsNullOrWhiteSpace(minId)) qs.Add("min_id", minId);
-            if (!String.IsNullOrWhiteSpace(maxId)) qs.Add("max_id", maxId);
+            if (!String.IsNullOrWhiteSpace(minTagId)) qs.Add("min_tag_id", minTagId);
+            if (!String.IsNullOrWhiteSpace(maxTagId)) qs.Add("max_tag_id", maxTagId);
 
             // Perform the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
