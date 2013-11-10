@@ -85,7 +85,8 @@
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />
-    <Compile Include="GitHub\GitHubOAuthClient.cs" />
+    <Compile Include="GitHub\Endpoints\Raw\GitHubRepositoriesRawEndpoint.cs" />
+    <Compile Include="GitHub\OAuth\GitHubOAuthClient.cs" />
     <Compile Include="GitHub\GitHubScope.cs" />
     <Compile Include="GitHub\GitHubService.cs" />
     <Compile Include="Google\Analytics\AnalyticsDimension.cs" />

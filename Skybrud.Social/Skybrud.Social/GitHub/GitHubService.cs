@@ -1,115 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Net;
-using System.Web;
 using Skybrud.Social.GitHub.Endpoints;
+using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub {
-    
+
     public class GitHubService {
 
-        public NetworkCredential Credential { get; private set; }
-        public string AccessToken { get; private set; }
+        #region Properties
+
+        /// <summary>
+        /// The internal OAuth client for communication with the GitHub API.
+        /// </summary>
+        public GitHubOAuthClient Client { get; private set; }
 
         public GitHubRepositoriesEndpoint Repositories { get; private set; }
 
-        private GitHubService(string accessToken) {
-            AccessToken = accessToken;
+        #endregion
+
+        #region Constructor(s)
+
+        private GitHubService() {
             Repositories = new GitHubRepositoriesEndpoint(this);
         }
 
-        private GitHubService(NetworkCredential credential) {
-            Credential = credential;
-            Repositories = new GitHubRepositoriesEndpoint(this);
-        }
+        #endregion
 
-        public static string GetAuthorizationUrl(string clientId, string redirectUri = null, GitHubScope scope = GitHubScope.Default, string state = null) {
+        #region Static methods
 
-            // Initialize the query string
-            NameValueCollection nvc = new NameValueCollection { { "client_id", clientId } };
+        /// <summary>
+        /// Initialize a new service instance from the specified OAuth client.
+        /// </summary>
+        /// <param name="client">The OAuth client.</param>
+        public static GitHubService CreateFromOAuthClient(GitHubOAuthClient client) {
 
-            // Add the redirect URI (if specified)
-            if (!string.IsNullOrWhiteSpace(redirectUri)) nvc.Add("redirect_uri", redirectUri);
+            // This should never be null
+            if (client == null) throw new ArgumentNullException("client");
 
-            // Get the scope list
-            List<string> scopes = new List<string>();
-            if (scope.HasFlag(GitHubScope.User)) scopes.Add("user");
-            if (scope.HasFlag(GitHubScope.UserEmail)) scopes.Add("user:email");
-            if (scope.HasFlag(GitHubScope.UserFollow)) scopes.Add("user:follow");
-            if (scope.HasFlag(GitHubScope.PublicRepo)) scopes.Add("public_repo");
-            if (scope.HasFlag(GitHubScope.Repo)) scopes.Add("repo");
-            if (scope.HasFlag(GitHubScope.RepoStatus)) scopes.Add("repo:status");
-            if (scope.HasFlag(GitHubScope.DeleteRepo)) scopes.Add("delete_repo");
-            if (scope.HasFlag(GitHubScope.Notifications)) scopes.Add("notifications");
-            if (scope.HasFlag(GitHubScope.Gist)) scopes.Add("gist");
-            if (scopes.Count > 0) nvc.Add("scope", String.Join(",", scopes));
-
-            // Add the state of specified
-            if (!string.IsNullOrWhiteSpace(state)) nvc.Add("state", state);
-
-            // Generate the URL
-            return "https://github.com/login/oauth/authorize?" + SocialUtils.NameValueCollectionToQueryString(nvc);
+            // Initialize the service
+            return new GitHubService();
 
         }
 
-        public static GitHubService CreateFromAccessToken(string token) {
-            return new GitHubService(token);
+        /// <summary>
+        /// Initializes a new service instance from the specifie OAuth 2 access
+        /// token.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        public static GitHubService CreateFromAccessToken(string accessToken) {
+            return CreateFromOAuthClient(new GitHubOAuthClient {
+                AccessToken = accessToken
+            });
         }
 
-        public static GitHubService CreateFromAuthCode(string clientId, string clientSecret, string redirectUri, string code) {
-
-            NameValueCollection parameters = new NameValueCollection {
-                {"client_id", clientId},
-                {"client_secret", clientSecret},
-                {"code", code }
-            };
-
-            // Add the redirect URI (if specified)
-            if (!string.IsNullOrWhiteSpace(redirectUri)) parameters.Add("redirect_uri", redirectUri);
-
-            // Get the response from the server
-            string contents = SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://github.com/login/oauth/access_token", null, parameters);
-
-            // Parse the contents
-            NameValueCollection query = HttpUtility.ParseQueryString(contents);
-
-            // Get the access token
-            return new GitHubService(query["access_token"]);
-
+        /// <summary>
+        /// Initializes a new service instance from the specified username and
+        /// password using basic authentication in the HTTP protocol. Using
+        /// this approach is specific to the GitGub API and not a part of
+        /// OAuth 2.
+        /// </summary>
+        /// <param name="username">The username of the user on GitHub.com</param>
+        /// <param name="password">The password of the user on GitHub.com</param>
+        public static GitHubService CreateFromCredentials(string username, string password) {
+            return CreateFromOAuthClient(new GitHubOAuthClient {
+                Credentials = new NetworkCredential(username, password)
+            });
         }
 
-        public static GitHubService CreateFromCredential(NetworkCredential credential) {
-            return new GitHubService(credential);
+        /// <summary>
+        /// Initializes a new service instance from the specified credentials
+        /// using basic authentication in the HTTP protocol. Using this
+        /// approach is specific to the GitGub API and not a part of OAuth 2.
+        /// </summary>
+        /// <param name="credentials">The credentials of the user on GitHub.com</param>
+        public static GitHubService CreateFromCredentials(NetworkCredential credentials) {
+            return CreateFromOAuthClient(new GitHubOAuthClient {
+                Credentials = credentials
+            });
         }
 
-        public static GitHubService CreateFromCredential(string username, string password) {
-            return new GitHubService(new NetworkCredential(username, password));
-        }
-
-        internal string GenerateAbsoluteUrl(string relative) {
-            return GenerateAbsoluteUrl(relative, null);
-        }
-
-        internal string GenerateAbsoluteUrl(string relative, NameValueCollection query) {
-
-            string url = "https://api.github.com";
-            if (Credential != null) {
-                url = "https://" + Credential.UserName + ":" + Credential.Password + "@api.github.com";
-            } else if (AccessToken != null) {
-                query.Add("access_token", AccessToken);
-            }
-
-            // Add the relative URL
-            url += relative;
-
-            // Append the query string (if not empty)
-            if (query != null && query.Count > 0) url += "?" + SocialUtils.NameValueCollectionToQueryString(query);
-
-            // Now return the URL
-            return url;
-
-        }
+        #endregion
     
     }
 

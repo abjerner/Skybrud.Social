@@ -1,5 +1,8 @@
-﻿namespace Skybrud.Social.GitHub {
+﻿using System;
+
+namespace Skybrud.Social.GitHub {
     
+    [Flags]
     public enum GitHubScope {
         
         /// <summary>

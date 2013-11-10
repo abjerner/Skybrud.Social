@@ -1,27 +1,39 @@
-﻿using System;
+﻿using Skybrud.Social.GitHub.Endpoints.Raw;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
     public class GitHubRepositoriesEndpoint {
 
-        protected GitHubService Service;
+        #region Properties
+
+        /// <summary>
+        /// A reference to the GitHub service.
+        /// </summary>
+        public GitHubService Service { get; private set; }
+
+        /// <summary>
+        /// A reference to the raw endpoint.
+        /// </summary>
+        public GitHubRepositoriesRawEndpoint Raw {
+            get { return Service.Client.Repositories; }
+        }
+
+
+        #endregion
+
+        #region Constructors
 
         internal GitHubRepositoriesEndpoint(GitHubService service) {
             Service = service;
         }
 
-        public string GetContentsAsRawJson(string owner, string repository, string path) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(
-                Service.GenerateAbsoluteUrl(String.Format("/repos/{0}/{1}/contents/{2}", owner, repository, path))
-            );
-        }
+        #endregion
 
+        #region Methods
 
-        public string GetRespositoriesAsRawJson(string username) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(
-                Service.GenerateAbsoluteUrl("/" + (username == null ? "user" : "users/" + username) + "/repos")
-            );
-        }
+        // TODO: Implement some methods
+
+        #endregion
     
     }
 
