@@ -134,7 +134,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         }
 
         /// <summary>
-        /// Exchanges the specified authorization code for an´user access token.
+        /// Exchanges the specified authorization code for a user access token.
         /// </summary>
         /// <param name="authCode">The authorization code received from the Facebook OAuth dialog.</param>
         public string GetAccessTokenFromAuthCode(string authCode) {
