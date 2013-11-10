@@ -3,6 +3,7 @@ using System.Xml.Linq;
 
 namespace Skybrud.Social.Twitter {
 
+    [Obsolete("Use class TwitterOAuthClient instead.")]
     public class TwitterAccessInformation {
     
         public string ConsumerKey { get; set; }
