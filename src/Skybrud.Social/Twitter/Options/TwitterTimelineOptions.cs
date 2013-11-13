@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace Skybrud.Social.Twitter.Options {
 
-namespace Skybrud.Social.Twitter.Options {
-
-    public class TwitterUserTimelineOptions {
+    public class TwitterTimelineOptions {
 
         #region Properties
 
@@ -66,11 +61,11 @@ namespace Skybrud.Social.Twitter.Options {
 
         #region Constructor(s)
 
-        public TwitterUserTimelineOptions() {
+        public TwitterTimelineOptions() {
             IncludeRetweets = true;
         }
 
-        public TwitterUserTimelineOptions(int count) {
+        public TwitterTimelineOptions(int count) {
             Count = count;
             IncludeRetweets = true;
         }

@@ -50,20 +50,20 @@ namespace Skybrud.Social.Twitter.Endpoints {
             return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options));
         }
 
-        public TwitterUserTimeline UserTimeline(long userId, int count) {
-            return TwitterUserTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterUserTimelineOptions(count)));
+        public TwitterTimeline UserTimeline(long userId, int count) {
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)));
         }
 
-        public TwitterUserTimeline UserTimeline(long userId, TwitterUserTimelineOptions options = null) {
-            return TwitterUserTimeline.ParseJson(Raw.GetUserTimeline(userId, options));
+        public TwitterTimeline UserTimeline(long userId, TwitterTimelineOptions options = null) {
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options));
         }
 
-        public TwitterUserTimeline UserTimeline(string screenName, int count) {
-            return TwitterUserTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterUserTimelineOptions(count)));
+        public TwitterTimeline UserTimeline(string screenName, int count) {
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)));
         }
 
-        public TwitterUserTimeline UserTimeline(string screenName, TwitterUserTimelineOptions options = null) {
-            return TwitterUserTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
+        public TwitterTimeline UserTimeline(string screenName, TwitterTimelineOptions options = null) {
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
         }
 
         #endregion

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Skybrud.Social.Json;
+﻿using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
     
-    public class TwitterUserTimeline {
+    public class TwitterTimeline {
 
         #region Properties
 
@@ -34,7 +32,7 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #endregion
 
-        public static TwitterUserTimeline ParseJson(string contents) {
+        public static TwitterTimeline ParseJson(string contents) {
 
             // Deserialize the JSON
             IJsonObject json = JsonConverter.Parse(contents);
@@ -53,7 +51,7 @@ namespace Skybrud.Social.Twitter.Objects {
             JsonArray array = (JsonArray) json;
 
             // Return the instance
-            return new TwitterUserTimeline {
+            return new TwitterTimeline {
                 JsonArray = array,
                 StatusMessages = TwitterStatusMessage.ParseMultiple(array)
             };
