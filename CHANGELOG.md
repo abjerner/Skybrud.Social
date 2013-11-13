@@ -4,6 +4,10 @@ Skybrud.Social Changelog
 ### Skybrud.Social 0.1.0
 _13th of November, 2013_
 
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/0.1.0/Skybrud.Social.v0.1.0.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.1.0">Get on NuGet</a>
+
 This is the first public release since 0.0.0.7 from back in June, so there is a lot of new changes and additions to Skybrud.Social, which includes a number for breaking changes. I have tried to list these changes as best as possible below. 
 
 The implementation of all services have been rewritten to follow a specific structure so that they work in a similar manner.
