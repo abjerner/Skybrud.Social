@@ -4,6 +4,10 @@ Skybrud.Social Changelog
 ### Skybrud.Social 0.1.1
 _15th of November, 2013_
 
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.1.1/Skybrud.Social.v0.1.1.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.1.1">Get on NuGet</a>
+
 __Facebook__
 
 -   Testing uncovered an issue in <var>v0.1.0</var> with the OAuth authentication flow in the Facebook client. The release of <var>v0.1.1</var> fixes this issue.
