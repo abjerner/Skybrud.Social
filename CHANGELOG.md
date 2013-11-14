@@ -1,6 +1,15 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.1.1
+_15th of November, 2013_
+
+__Facebook__
+
+-   Testing uncovered an issue in <var>v0.1.0</var> with the OAuth authentication flow in the Facebook client. The release of <var>v0.1.1</var> fixes this issue.
+
+<br /><br />
+
 ### Skybrud.Social 0.1.0
 _13th of November, 2013_
 
