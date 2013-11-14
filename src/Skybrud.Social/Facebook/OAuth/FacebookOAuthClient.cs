@@ -143,11 +143,10 @@ namespace Skybrud.Social.Facebook.OAuth {
             NameValueCollection query = new NameValueCollection {
                 {"client_id", AppId},
                 {"redirect_uri", ReturnUri},
-                {"client_secret", "authorization_code"},
-                {"redirect_uri", AppSecret},
+                {"client_secret", AppSecret},
                 {"code", authCode }
             };
-
+            
             // Make the call to the API
             string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
 
