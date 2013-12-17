@@ -48,17 +48,17 @@ namespace Skybrud.Social.Google {
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified request token.
-        /// The request token is used for making a call to the Google Accounts
+        /// Initializes a new instance based on the specified refresh token.
+        /// The refresh token is used for making a call to the Google Accounts
         /// API to get a new access token. Access tokens typically expire after
         /// an hour (3600 seconds).
         /// </summary>
         /// <param name="clientId">The client ID.</param>
         /// <param name="clientSecret">The client secret.</param>
-        /// <param name="requestToken">The request token of the user.</param>
-        /// <returns></returns>
-        public static GoogleService CreateFromRequestToken(string clientId, string clientSecret, string requestToken) {
-            
+        /// <param name="refreshToken">The request token of the user.</param>
+        [Obsolete("Use CreateFromRefreshToken() instead.")]
+        public static GoogleService CreateFromRequestToken(string clientId, string clientSecret, string refreshToken) {
+
             // Initialize a new OAuth client with the specified client id and client secret
             GoogleOAuthClient client = new GoogleOAuthClient {
                 ClientId = clientId,
@@ -66,7 +66,37 @@ namespace Skybrud.Social.Google {
             };
 
             // Get a new access token from the specified request token
-            GoogleAccessTokenResponse response = client.GetAccessTokenFromRefreshToken(requestToken);
+            GoogleAccessTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
+
+            // Set the access token on the client
+            client.AccessToken = response.AccessToken;
+
+            // Initialize a new GoogleService instance based on the OAuth client
+            return new GoogleService {
+                Client = client
+            };
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified refresh token.
+        /// The refresh token is used for making a call to the Google Accounts
+        /// API to get a new access token. Access tokens typically expire after
+        /// an hour (3600 seconds).
+        /// </summary>
+        /// <param name="clientId">The client ID.</param>
+        /// <param name="clientSecret">The client secret.</param>
+        /// <param name="refreshToken">The request token of the user.</param>
+        public static GoogleService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
+
+            // Initialize a new OAuth client with the specified client id and client secret
+            GoogleOAuthClient client = new GoogleOAuthClient {
+                ClientId = clientId,
+                ClientSecret = clientSecret
+            };
+
+            // Get a new access token from the specified request token
+            GoogleAccessTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
 
             // Set the access token on the client
             client.AccessToken = response.AccessToken;
