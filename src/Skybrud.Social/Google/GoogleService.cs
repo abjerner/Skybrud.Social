@@ -86,7 +86,7 @@ namespace Skybrud.Social.Google {
         /// </summary>
         /// <param name="clientId">The client ID.</param>
         /// <param name="clientSecret">The client secret.</param>
-        /// <param name="refreshToken">The request token of the user.</param>
+        /// <param name="refreshToken">The refresh token of the user.</param>
         public static GoogleService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
 
             // Initialize a new OAuth client with the specified client id and client secret
