@@ -89,6 +89,7 @@
     <Compile Include="GitHub\OAuth\GitHubOAuthClient.cs" />
     <Compile Include="GitHub\GitHubScope.cs" />
     <Compile Include="GitHub\GitHubService.cs" />
+    <Compile Include="Google\Analytics\AnalyticsScope.cs" />
     <Compile Include="Google\Analytics\Interfaces\IAnalyticsFilter.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataOptions.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDimension.cs" />
@@ -114,7 +115,10 @@
     <Compile Include="Google\GoogleService.cs" />
     <Compile Include="Google\GoogleUserInfo.cs" />
     <Compile Include="Google\OAuth\GoogleAccessTokenResponse.cs" />
+    <Compile Include="Google\OAuth\GoogleAccessType.cs" />
+    <Compile Include="Google\OAuth\GoogleApprovalPrompt.cs" />
     <Compile Include="Google\OAuth\GoogleOAuthClient.cs" />
+    <Compile Include="Google\OAuth\GoogleScope.cs" />
     <Compile Include="Instagram\Endpoints\InstagramEndpoints.cs" />
     <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />

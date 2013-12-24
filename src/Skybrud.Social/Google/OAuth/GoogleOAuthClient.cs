@@ -4,16 +4,7 @@ using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.OAuth {
-
-    public static class GoogleScope {
-
-        public const string OpenId = "openid";
-        public const string Email = "email";
-        public const string Profile = "profile";
-        public const string AnalyticsReadonly = "https://www.googleapis.com/auth/analytics.readonly";
-        
-    }
-
+    
     /// <summary>
     /// A client for handling the communication with the Google APIs using
     /// OAuth 2.0. The client is also responsible for the raw communication
@@ -55,6 +46,25 @@ namespace Skybrud.Social.Google.OAuth {
                 {"response_type", "code"},
                 {"client_id", ClientId + ".apps.googleusercontent.com"},
                 {"access_type", offline ? "offline" : "online"},
+                {"scope", scope},
+                {"redirect_uri", RedirectUri},
+                {"state", state}
+            });
+        }
+
+        /// <summary>
+        /// Gets the authorization URL at accounts.google.com for your application.
+        /// </summary>
+        /// <param name="state">The state of the application.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <param name="accessType">Whether the application should be enabled for offline access. Default is online.</param>
+        /// <param name="approvalPrompt">Whether the user should be re-prompted for scopes that he/she already has approved.</param>
+        public string GetAuthorizationUrl(string state, string scope, GoogleAccessType accessType = GoogleAccessType.Online, GoogleApprovalPrompt approvalPrompt = GoogleApprovalPrompt.Auto) {
+            return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
+                {"response_type", "code"},
+                {"client_id", ClientId + ".apps.googleusercontent.com"},
+                {"access_type", accessType.ToString().ToLower()},
+                {"approval_prompt", approvalPrompt.ToString().ToLower()},
                 {"scope", scope},
                 {"redirect_uri", RedirectUri},
                 {"state", state}
