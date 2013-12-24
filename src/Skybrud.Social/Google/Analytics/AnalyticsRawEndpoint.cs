@@ -104,15 +104,38 @@ namespace Skybrud.Social.Google.Analytics {
         }
 
         public string GetData(string profileId, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
+            return GetData(profileId, new AnalyticsDataOptions {
+                StartDate = startDate,
+                EndDate = endDate,
+                Metrics = metrics,
+                Dimensions = dimensions
+            });
+        }
 
-            // Initialize the query string
-            NameValueCollection query = new NameValueCollection();
-            query.Add("ids", "ga:" + profileId);
-            query.Add("start-date", startDate.ToString("yyyy-MM-dd"));
-            query.Add("end-date", endDate.ToString("yyyy-MM-dd"));
-            query.Add("metrics", String.Join(",", metrics));
-            query.Add("dimensions", String.Join(",", dimensions));
-            query.Add("access_token", Client.AccessToken);
+        public string GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return GetData(profile.Id, startDate, endDate, metrics, dimensions);
+        }
+
+        public string GetData(string profileId, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return GetData(profileId, new AnalyticsDataOptions {
+                StartDate = startDate,
+                EndDate = endDate,
+                Metrics = metrics,
+                Dimensions = dimensions
+            });
+        }
+
+        public string GetData(AnalyticsProfile profile, AnalyticsDataOptions options) {
+            return GetData(profile.Id, options);
+        }
+
+        public string GetData(string profileId, AnalyticsDataOptions options) {
+
+            // Validate arguments
+            if (options == null) throw new ArgumentNullException("options");
+
+            // Generate the name value collection
+            NameValueCollection query = options.ToNameValueCollection(profileId, Client.AccessToken);
 
             // Make the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/data/ga", query);

@@ -1,5 +1,8 @@
-﻿namespace Skybrud.Social.Google.Analytics {
+﻿using System;
+
+namespace Skybrud.Social.Google.Analytics.Objects {
     
+    [Obsolete("Use class AnalyticsMetric instead")]
     public class AnalyticsMetrics {
 
         #region Visitor

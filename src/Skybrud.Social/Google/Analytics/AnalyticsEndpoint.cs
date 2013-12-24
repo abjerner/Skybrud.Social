@@ -11,6 +11,10 @@ namespace Skybrud.Social.Google.Analytics {
         /// </summary>
         public GoogleService Service { get; private set; }
 
+        public AnalyticsRawEndpoint Raw {
+            get { return Service.Client.Analytics; }
+        }
+
         internal AnalyticsEndpoint(GoogleService service) {
             Service = service;
         }
@@ -107,11 +111,27 @@ namespace Skybrud.Social.Google.Analytics {
         #region Data
 
         public AnalyticsDataResponse GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
-            return AnalyticsDataResponse.ParseJson(Service.Client.Analytics.GetData(profile, startDate, endDate, metrics, dimensions));
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profile, startDate, endDate, metrics, dimensions));
         }
 
         public AnalyticsDataResponse GetData(string profileId, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
-            return AnalyticsDataResponse.ParseJson(Service.Client.Analytics.GetData(profileId, startDate, endDate, metrics, dimensions));
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profileId, startDate, endDate, metrics, dimensions));
+        }
+
+        public AnalyticsDataResponse GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profile, startDate, endDate, metrics, dimensions));
+        }
+
+        public AnalyticsDataResponse GetData(string profileId, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profileId, startDate, endDate, metrics, dimensions));
+        }
+
+        public AnalyticsDataResponse GetData(AnalyticsProfile profile, AnalyticsDataOptions options) {
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profile.Id, options));
+        }
+
+        public AnalyticsDataResponse GetData(string profileId, AnalyticsDataOptions options) {
+            return AnalyticsDataResponse.ParseJson(Raw.GetData(profileId, options));
         }
 
         #endregion
