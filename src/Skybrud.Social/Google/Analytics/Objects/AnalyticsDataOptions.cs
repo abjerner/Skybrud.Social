@@ -65,7 +65,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         /// <returns></returns>
         public NameValueCollection ToNameValueCollection(string profileId, string accessToken) {
             NameValueCollection nvc = new NameValueCollection();
-            nvc.Add("ids", "ga:" + profileId);
+            nvc.Add("ids", (profileId.StartsWith("ga:") ? profileId : "ga:" + profileId));
             nvc.Add("start-date", StartDate.ToString("yyyy-MM-dd"));
             nvc.Add("end-date", EndDate.ToString("yyyy-MM-dd"));
             nvc.Add("metrics", Metrics == null ? "" : Metrics.ToString());
