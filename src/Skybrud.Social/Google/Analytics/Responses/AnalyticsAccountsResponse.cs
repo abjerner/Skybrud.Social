@@ -1,4 +1,5 @@
 ﻿using Skybrud.Social.Google.Analytics.Objects;
+using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Responses {
@@ -23,9 +24,17 @@ namespace Skybrud.Social.Google.Analytics.Responses {
         }
 
         public static AnalyticsAccountsResponse Parse(JsonObject obj) {
-            
-            // TODO: Check for any errors
 
+            // Check whether "obj" is NULL
+            if (obj == null) return null;
+
+            // Check for any API errors
+            if (obj.HasValue("error")) {
+                JsonObject error = obj.GetObject("error");
+                throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+            }
+
+            // Initialize the response object
             return new AnalyticsAccountsResponse {
                 Username = obj.GetString("username"),
                 TotalResults = obj.GetInt("totalResults"),
