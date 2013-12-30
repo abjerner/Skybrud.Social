@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.OAuth;
 
@@ -7,7 +6,13 @@ namespace Skybrud.Social.Google {
 
     public class GoogleService {
 
+        #region Private fields
+
         private AnalyticsEndpoint _analytics;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the internal OAuth client.
@@ -20,6 +25,18 @@ namespace Skybrud.Social.Google {
         public AnalyticsEndpoint Analytics {
             get { return _analytics ?? (_analytics = new AnalyticsEndpoint(this)); }
         }
+
+        #endregion
+
+        #region Member methods
+
+        public GoogleUserInfo GetUserInfo() {
+            return GoogleUserInfo.ParseJson(Client.GetUserInfo());
+        }
+
+        #endregion
+
+        #region Static methods
 
         /// <summary>
         /// Initializes a new instance based on the specified OAuth client. The
@@ -58,24 +75,7 @@ namespace Skybrud.Social.Google {
         /// <param name="refreshToken">The request token of the user.</param>
         [Obsolete("Use CreateFromRefreshToken() instead.")]
         public static GoogleService CreateFromRequestToken(string clientId, string clientSecret, string refreshToken) {
-
-            // Initialize a new OAuth client with the specified client id and client secret
-            GoogleOAuthClient client = new GoogleOAuthClient {
-                ClientId = clientId,
-                ClientSecret = clientSecret
-            };
-
-            // Get a new access token from the specified request token
-            GoogleAccessTokenResponse response = client.GetAccessTokenFromRefreshToken(refreshToken);
-
-            // Set the access token on the client
-            client.AccessToken = response.AccessToken;
-
-            // Initialize a new GoogleService instance based on the OAuth client
-            return new GoogleService {
-                Client = client
-            };
-
+            return CreateFromRefreshToken(clientId, clientSecret, refreshToken);
         }
 
         /// <summary>
@@ -88,6 +88,14 @@ namespace Skybrud.Social.Google {
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="refreshToken">The refresh token of the user.</param>
         public static GoogleService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
+            
+            // Validation
+            if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentException("Parameter \"clientId\" cannot be NULL or empty", "clientId");
+            if (clientSecret == null) throw new ArgumentException("Parameter \"clientSecret\" cannot be NULL or empty", "clientSecret");
+            if (refreshToken == null) throw new ArgumentException("Parameter \"refreshToken\" cannot be NULL or empty", "refreshToken");
+
+            // Partial client ID?
+            if (!clientId.EndsWith(".apps.googleusercontent.com")) clientId = clientId + ".apps.googleusercontent.com";
 
             // Initialize a new OAuth client with the specified client id and client secret
             GoogleOAuthClient client = new GoogleOAuthClient {
@@ -108,10 +116,8 @@ namespace Skybrud.Social.Google {
 
         }
 
-        public GoogleUserInfo GetUserInfo() {
-            return GoogleUserInfo.ParseJson(Client.GetUserInfo());
-        }
-    
+        #endregion
+
     }
 
 }
