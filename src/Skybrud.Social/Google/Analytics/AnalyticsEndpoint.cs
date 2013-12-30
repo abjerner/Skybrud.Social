@@ -96,6 +96,16 @@ namespace Skybrud.Social.Google.Analytics {
         }
 
         /// <summary>
+        /// Gets a list of profiles for the specified account.
+        /// </summary>
+        /// <param name="accountId">Account ID for the view (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.</param>
+        /// <param name="maxResults">The maximum number of views (profiles) to include in this response.</param>
+        /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
+        public AnalyticsProfilesResponse GetProfiles(string accountId, int maxResults = 0, int startIndex = 0) {
+            return AnalyticsProfilesResponse.ParseJson(Service.Client.Analytics.GetProfiles(accountId, "~all", maxResults, startIndex));
+        }
+
+        /// <summary>
         /// Gets a list of profiles for the specified account and web property.
         /// </summary>
         /// <param name="accountId">Account ID for the view (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.</param>
