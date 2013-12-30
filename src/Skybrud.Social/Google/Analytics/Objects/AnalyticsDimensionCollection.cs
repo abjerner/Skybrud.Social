@@ -46,6 +46,14 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Operator overloading
 
+        public static implicit operator AnalyticsDimensionCollection(AnalyticsDimension dimension) {
+            return new AnalyticsDimensionCollection(dimension);
+        }
+
+        public static implicit operator AnalyticsDimensionCollection(AnalyticsDimension[] dimensions) {
+            return new AnalyticsDimensionCollection(dimensions);
+        }
+
         public static AnalyticsDimensionCollection operator +(AnalyticsDimensionCollection left, AnalyticsDimension right) {
             left.Add(right);
             return left;
@@ -53,10 +61,6 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         public static implicit operator AnalyticsDimensionCollection(string[] dimensions) {
             return new AnalyticsDimensionCollection(from AnalyticsDimension dimension in dimensions select dimension);
-        }
-
-        public static implicit operator AnalyticsDimensionCollection(AnalyticsDimension[] dimensions) {
-            return new AnalyticsDimensionCollection(dimensions);
         }
 
         #endregion

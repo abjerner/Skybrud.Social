@@ -278,6 +278,10 @@ namespace Skybrud.Social.Google.Analytics.Objects {
             return new AnalyticsDimension(name);
         }
 
+        public static AnalyticsDimensionCollection operator +(AnalyticsDimension left, AnalyticsDimension right) {
+            return new AnalyticsDimensionCollection(left, right);
+        }
+
         #endregion
 
     }

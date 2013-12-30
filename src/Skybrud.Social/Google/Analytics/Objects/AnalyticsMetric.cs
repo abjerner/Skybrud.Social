@@ -259,6 +259,10 @@ namespace Skybrud.Social.Google.Analytics.Objects {
             return new AnalyticsMetric(name);
         }
 
+        public static AnalyticsMetricCollection operator +(AnalyticsMetric left, AnalyticsMetric right) {
+            return new AnalyticsMetricCollection(left, right);
+        }
+
         #endregion
 
     }

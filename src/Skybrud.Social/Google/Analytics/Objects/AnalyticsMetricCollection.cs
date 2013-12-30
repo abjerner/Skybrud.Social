@@ -46,6 +46,14 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Operator overloading
 
+        public static implicit operator AnalyticsMetricCollection(AnalyticsMetric metric) {
+            return new AnalyticsMetricCollection(metric);
+        }
+
+        public static implicit operator AnalyticsMetricCollection(AnalyticsMetric[] metrics) {
+            return new AnalyticsMetricCollection(metrics);
+        }
+
         public static AnalyticsMetricCollection operator +(AnalyticsMetricCollection left, AnalyticsMetric right) {
             left.Add(right);
             return left;
@@ -53,10 +61,6 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         public static implicit operator AnalyticsMetricCollection(string[] metrics) {
             return new AnalyticsMetricCollection(from AnalyticsMetric metric in metrics select metric);
-        }
-
-        public static implicit operator AnalyticsMetricCollection(AnalyticsMetric[] metrics) {
-            return new AnalyticsMetricCollection(metrics);
         }
 
         #endregion
