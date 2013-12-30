@@ -112,6 +112,7 @@
     <Compile Include="Google\Analytics\Responses\AnalyticsDataResponse.cs" />
     <Compile Include="Google\Analytics\Responses\AnalyticsProfilesResponse.cs" />
     <Compile Include="Google\Analytics\Responses\AnalyticsWebPropertiesResponse.cs" />
+    <Compile Include="Google\Exceptions\GoogleApiException.cs" />
     <Compile Include="Google\GoogleService.cs" />
     <Compile Include="Google\GoogleUserInfo.cs" />
     <Compile Include="Google\OAuth\GoogleAccessTokenResponse.cs" />

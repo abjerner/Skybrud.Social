@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Responses {
@@ -78,8 +79,16 @@ namespace Skybrud.Social.Google.Analytics.Responses {
 
         public static AnalyticsDataResponse Parse(JsonObject obj) {
             
+            // Check whether "obj" is NULL
             if (obj == null) return null;
-            
+
+            // Check for any API errors
+            if (obj.HasValue("error")) {
+                JsonObject error = obj.GetObject("error");
+                throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+            }
+
+            // Initialize the response object
             AnalyticsDataResponse response = new AnalyticsDataResponse {
                 Query = obj.GetObject("query", AnalyticsDataQuery.Parse),
                 ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
@@ -98,256 +107,6 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             return response;
 
         }
-
-
-
-        /*
-        {
-          "kind":"analytics#gaData",
-          "id":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:69656201&dimensions=ga:date,ga:year&metrics=ga:visits,ga:pageviews&start-date=2013-08-01&end-date=2013-08-31",
-          "query":{
-            "start-date":"2013-08-01",
-            "end-date":"2013-08-31",
-            "ids":"ga:69656201",
-            "dimensions":"ga:date,ga:year",
-            "metrics":[
-              "ga:visits",
-              "ga:pageviews"
-            ],
-            "start-index":1,
-            "max-results":1000
-          },
-          "itemsPerPage":1000,
-          "totalResults":31,
-          "selfLink":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:69656201&dimensions=ga:date,ga:year&metrics=ga:visits,ga:pageviews&start-date=2013-08-01&end-date=2013-08-31",
-          "profileInfo":{
-            "profileId":"69656201",
-            "accountId":"4864474",
-            "webPropertyId":"UA-4864474-8",
-            "internalWebPropertyId":"67676004",
-            "profileName":"All Web Site Data",
-            "tableId":"ga:69656201"
-          },
-          "containsSampledData":false,
-          "columnHeaders":[
-            {
-              "name":"ga:date",
-              "columnType":"DIMENSION",
-              "dataType":"STRING"
-            },
-            {
-              "name":"ga:year",
-              "columnType":"DIMENSION",
-              "dataType":"STRING"
-            },
-            {
-              "name":"ga:visits",
-              "columnType":"METRIC",
-              "dataType":"INTEGER"
-            },
-            {
-              "name":"ga:pageviews",
-              "columnType":"METRIC",
-              "dataType":"INTEGER"
-            }
-          ],
-          "totalsForAllResults":{
-            "ga:visits":"67",
-            "ga:pageviews":"277"
-          },
-          "rows":[
-            [
-              "20130801",
-              "2013",
-              "2",
-              "4"
-            ],
-            [
-              "20130802",
-              "2013",
-              "1",
-              "5"
-            ],
-            [
-              "20130803",
-              "2013",
-              "1",
-              "1"
-            ],
-            [
-              "20130804",
-              "2013",
-              "2",
-              "2"
-            ],
-            [
-              "20130805",
-              "2013",
-              "6",
-              "16"
-            ],
-            [
-              "20130806",
-              "2013",
-              "3",
-              "11"
-            ],
-            [
-              "20130807",
-              "2013",
-              "5",
-              "29"
-            ],
-            [
-              "20130808",
-              "2013",
-              "1",
-              "1"
-            ],
-            [
-              "20130809",
-              "2013",
-              "3",
-              "10"
-            ],
-            [
-              "20130810",
-              "2013",
-              "2",
-              "14"
-            ],
-            [
-              "20130811",
-              "2013",
-              "6",
-              "17"
-            ],
-            [
-              "20130812",
-              "2013",
-              "1",
-              "2"
-            ],
-            [
-              "20130813",
-              "2013",
-              "3",
-              "17"
-            ],
-            [
-              "20130814",
-              "2013",
-              "2",
-              "61"
-            ],
-            [
-              "20130815",
-              "2013",
-              "1",
-              "1"
-            ],
-            [
-              "20130816",
-              "2013",
-              "1",
-              "8"
-            ],
-            [
-              "20130817",
-              "2013",
-              "0",
-              "0"
-            ],
-            [
-              "20130818",
-              "2013",
-              "1",
-              "1"
-            ],
-            [
-              "20130819",
-              "2013",
-              "0",
-              "0"
-            ],
-            [
-              "20130820",
-              "2013",
-              "1",
-              "1"
-            ],
-            [
-              "20130821",
-              "2013",
-              "2",
-              "2"
-            ],
-            [
-              "20130822",
-              "2013",
-              "2",
-              "5"
-            ],
-            [
-              "20130823",
-              "2013",
-              "1",
-              "8"
-            ],
-            [
-              "20130824",
-              "2013",
-              "0",
-              "0"
-            ],
-            [
-              "20130825",
-              "2013",
-              "1",
-              "8"
-            ],
-            [
-              "20130826",
-              "2013",
-              "6",
-              "18"
-            ],
-            [
-              "20130827",
-              "2013",
-              "3",
-              "7"
-            ],
-            [
-              "20130828",
-              "2013",
-              "5",
-              "17"
-            ],
-            [
-              "20130829",
-              "2013",
-              "1",
-              "2"
-            ],
-            [
-              "20130830",
-              "2013",
-              "4",
-              "9"
-            ],
-            [
-              "20130831",
-              "2013",
-              "0",
-              "0"
-            ]
-          ]
-        }
-        */
-
-
-
 
     }
 
