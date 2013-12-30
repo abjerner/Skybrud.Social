@@ -12,28 +12,56 @@ namespace Skybrud.Social.Google.OAuth {
     /// </summary>
     public class GoogleOAuthClient {
 
+        #region Private fields
+
         private AnalyticsRawEndpoint _analytics;
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
-        /// The ID of the client/application.
+        /// Gets or sets the ID of the client/application. The client ID can be specified as either
+        /// the first part of the client ID (eg. "123456") or or the full
+        /// client ID (eg. "123456.apps.googleusercontent.com").
         /// </summary>
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The secret of the client/application. Guard this with your life!
+        /// Gets the full client ID of the application.
+        /// </summary>
+        public string ClientIdFull {
+            get {
+                if (String.IsNullOrWhiteSpace(ClientId)) return null;
+                return ClientId.EndsWith(".apps.googleusercontent.com") ? ClientId : ClientId + ".apps.googleusercontent.com";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the the secret of the client/application. Guard this with your life!
         /// </summary>
         public string ClientSecret { get; set; }
 
         /// <summary>
-        /// The redirect URL. Must be specified in Google's APIs console.
+        /// Gets or sets the redirect URL. Must be specified in Google's APIs console.
         /// </summary>
         public string RedirectUri { get; set; }
 
+        /// <summary>
+        /// Gets or sets the access token.
+        /// </summary>
         public string AccessToken { get; set; }
 
+        /// <summary>
+        /// Gets a reference to the raw Analytics endpoint.
+        /// </summary>
         public AnalyticsRawEndpoint Analytics {
             get { return _analytics ?? (_analytics = new AnalyticsRawEndpoint(this)); }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Gets the authorization URL at accounts.google.com for your application.
@@ -44,7 +72,7 @@ namespace Skybrud.Social.Google.OAuth {
         public string GetAuthorizationUrl(string state, string scope, bool offline = false) {
             return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
                 {"response_type", "code"},
-                {"client_id", ClientId + ".apps.googleusercontent.com"},
+                {"client_id", ClientIdFull},
                 {"access_type", offline ? "offline" : "online"},
                 {"scope", scope},
                 {"redirect_uri", RedirectUri},
@@ -62,7 +90,7 @@ namespace Skybrud.Social.Google.OAuth {
         public string GetAuthorizationUrl(string state, string scope, GoogleAccessType accessType = GoogleAccessType.Online, GoogleApprovalPrompt approvalPrompt = GoogleApprovalPrompt.Auto) {
             return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
                 {"response_type", "code"},
-                {"client_id", ClientId + ".apps.googleusercontent.com"},
+                {"client_id", ClientIdFull},
                 {"access_type", accessType.ToString().ToLower()},
                 {"approval_prompt", approvalPrompt.ToString().ToLower()},
                 {"scope", scope},
@@ -80,7 +108,7 @@ namespace Skybrud.Social.Google.OAuth {
             // Declare the POST data
             NameValueCollection postData = new NameValueCollection {
                 {"code", code},
-                {"client_id", ClientId + ".apps.googleusercontent.com"},
+                {"client_id", ClientIdFull},
                 {"client_secret", ClientSecret},
                 {"redirect_uri", RedirectUri},
                 {"grant_type", "authorization_code"}
@@ -101,7 +129,7 @@ namespace Skybrud.Social.Google.OAuth {
 
             // Declare the POST data
             NameValueCollection postData = new NameValueCollection {
-                {"client_id", ClientId + ".apps.googleusercontent.com"},
+                {"client_id", ClientIdFull},
                 {"client_secret", ClientSecret},
                 {"refresh_token", refreshToken},
                 {"grant_type", "refresh_token"}
@@ -129,6 +157,8 @@ namespace Skybrud.Social.Google.OAuth {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/oauth2/v3/userinfo", query);
 
         }
+
+        #endregion
 
     }
 
