@@ -96,13 +96,18 @@ namespace Skybrud.Social.Google.Analytics.Responses {
 
             // Parse the rows
             JsonArray rows = obj.GetArray("rows");
-            response.Rows = new AnalyticsDataRow[rows.Length];
-            for (int i = 0; i < rows.Length; i++) {
-                response.Rows[i] = new AnalyticsDataRow {
-                    Index = i,
-                    Cells = rows.GetArray(i).Cast<string>()
-                };
+            if (rows == null) {
+                response.Rows = new AnalyticsDataRow[0];
+            } else {
+                response.Rows = new AnalyticsDataRow[rows.Length];
+                for (int i = 0; i < rows.Length; i++) {
+                    response.Rows[i] = new AnalyticsDataRow {
+                        Index = i,
+                        Cells = rows.GetArray(i).Cast<string>()
+                    };
+                }
             }
+            
             
             return response;
 
