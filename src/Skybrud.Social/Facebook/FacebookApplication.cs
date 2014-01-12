@@ -132,45 +132,7 @@ namespace Skybrud.Social.Facebook {
         }
 
         public string GetAppAccessToken() {
-
-            // TODO: Cleanup?
-
-            // Generate the URL
-            string url = String.Format(
-                "https://graph.facebook.com/oauth/access_token?client_id={0}&client_secret={1}&grant_type=client_credentials",
-                AppId,
-                AppSecret
-            );
-
-            // Initialize the request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-
-            // Set the method
-            request.Method = "GET";
-
-            try {
-
-                // Get the response
-                HttpWebResponse rsp = (HttpWebResponse)request.GetResponse();
-
-                // Read the content
-                StreamReader reader = new StreamReader(rsp.GetResponseStream());
-                string contents = reader.ReadToEnd();
-
-                NameValueCollection nvc = HttpUtility.ParseQueryString(contents);
-                return nvc["access_token"];
-
-            } catch (WebException ex) {
-
-                // Read the content
-                StreamReader reader = new StreamReader(ex.Response.GetResponseStream());
-                string contents = reader.ReadToEnd();
-
-                // Throw the exception
-                throw JsonConverter.ParseObject(contents).GetObject("error", FacebookException.Parse);
-
-            }
-
+            return Client.GetAppAccessToken();
         }
 
     }

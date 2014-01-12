@@ -183,6 +183,29 @@ namespace Skybrud.Social.Facebook.OAuth {
 
         }
 
+        /// <summary>
+        /// Gets an app access token for for the application. An app id and app secret must be present.
+        /// </summary>
+        public string GetAppAccessToken() {
+
+            // Initialize the query string
+            NameValueCollection query = new NameValueCollection {
+                {"client_id", AppId},
+                {"client_secret", AppSecret},
+                {"grant_type", "client_credentials"}
+            };
+
+            // Make the call to the API
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+
+            // Parse the contents
+            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+
+            // Get the access token
+            return response["access_token"];
+
+        }
+
         #endregion
 
     }
