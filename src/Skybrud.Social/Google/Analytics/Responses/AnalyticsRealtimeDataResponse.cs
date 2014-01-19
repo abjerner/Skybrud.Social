@@ -1,10 +1,19 @@
-﻿using Skybrud.Social.Google.Analytics.Objects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Responses {
 
     public class AnalyticsRealtimeDataResponse {
+
+        #region Private fields
+
+        private Dictionary<string, string> _totalsForAllResults = new Dictionary<string, string>();
+
+        #endregion
 
         #region Properties
 
@@ -18,6 +27,10 @@ namespace Skybrud.Social.Google.Analytics.Responses {
         public AnalyticsRealtimeDataQuery Query { get; private set; }
         public AnalyticsDataColumnHeader[] ColumnHeaders { get; private set; }
         public AnalyticsDataRow[] Rows { get; private set; }
+
+        public Dictionary<string, string> TotalsForAllResults {
+            get { return _totalsForAllResults; }
+        }
 
         #endregion
 
@@ -44,6 +57,33 @@ namespace Skybrud.Social.Google.Analytics.Responses {
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
             if (JsonObject != null) JsonObject.SaveJson(path);
+        }
+
+        /// <summary>
+        /// Gets the total value of the name and converts it to <var>T</var>.
+        /// </summary>
+        /// <typeparam name="T">The type to which the value should be converted.</typeparam>
+        /// <param name="name">The name of the value.</param>
+        public T GetTotalValue<T>(string name) {
+            return (T) Convert.ChangeType(_totalsForAllResults[name], typeof(T));
+        }
+
+        /// <summary>
+        /// Gets the total value of the metric and converts it to <var>T</var>.
+        /// </summary>
+        /// <typeparam name="T">The type to which the value should be converted.</typeparam>
+        /// <param name="metric">The metric of the value.</param>
+        public T GetTotalValue<T>(AnalyticsMetric metric) {
+            return (T) Convert.ChangeType(_totalsForAllResults[metric.Name], typeof(T));
+        }
+
+        /// <summary>
+        /// Gets the total value of the metric and converts it to <var>T</var>.
+        /// </summary>
+        /// <typeparam name="T">The type to which the value should be converted.</typeparam>
+        /// <param name="dimension">The name of the value.</param>
+        public T GetTotalValue<T>(AnalyticsDimension dimension) {
+            return (T) Convert.ChangeType(_totalsForAllResults[dimension.Name], typeof(T));
         }
 
         #endregion
@@ -91,6 +131,11 @@ namespace Skybrud.Social.Google.Analytics.Responses {
                 TotalResults = obj.GetInt("totalResults"),
                 ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
             };
+
+            // Get total result values
+            foreach (KeyValuePair<string, object> pair in obj.GetObject("totalsForAllResults").Dictionary) {
+                response._totalsForAllResults.Add(pair.Key, pair.Value.ToString());
+            }
 
             // Parse the rows
             JsonArray rows = obj.GetArray("rows");

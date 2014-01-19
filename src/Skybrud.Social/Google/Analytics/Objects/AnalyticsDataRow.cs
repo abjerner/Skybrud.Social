@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Json;
+﻿using System;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
 
@@ -20,8 +21,21 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Constructors
 
-        private AnalyticsDataRow() {
+        internal AnalyticsDataRow() {
             // Hide default constructor
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets the call value with the specified index and converts it to <var>T</var>.
+        /// </summary>
+        /// <typeparam name="T">The type to which the cell value should be converted.</typeparam>
+        /// <param name="index">The index of the cell.</param>
+        public T GetCellValue<T>(int index) {
+            return (T) Convert.ChangeType(Cells[index], typeof (T));
         }
 
         #endregion

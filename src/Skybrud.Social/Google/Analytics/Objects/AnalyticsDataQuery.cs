@@ -87,7 +87,6 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #endregion
 
-
     }
 
 }
