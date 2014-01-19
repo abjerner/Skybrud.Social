@@ -1,6 +1,24 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.1.2
+_20th of November, 2014_
+
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.1.2/Skybrud.Social.v0.1.2.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.1.2">Get on NuGet</a>
+
+__Google Analytics__
+
+-   Skybrud.Social 0.1.2 primarily focuses on improved support for Google Analytics - including sorting and filtering when fetching data from a profile.
+-   Google has introduced a Realtime API for accessing live data from Google Analytics. Skybrud.Social 0.1.2 now also has support for this API, and live data can noew be retrieved in a similar manner to how regular data is retrieved. The Realtime API is however still in closed beta, so developers must request access by Google in order to use it.
+
+__Facebook__
+
+-   Version 0.1.0 introduced the class <var>FacebookOAuthClient</var> to replace <var>FacebookApplication</var>. However the <var>GetAppAccessToken</var> method was still only available in <var>FacebookApplication</var>. The method is now also been added to <var>FacebookOAuthClient</var>, which is the recommended way to use the method from now on. The method is still available in <var>FacebookApplication</var>, but the entire class is marked as deprecated.
+
+<br /><br />
+
 ### Skybrud.Social 0.1.1
 _15th of November, 2013_
 
@@ -87,25 +105,3 @@ __Vimeo__
 
 -   Skybrud.Social 0.0.0.7 featured an implementation for Vimeo's Simple API. Since there is both a simple and an advanced API, the namespace <var>Skybrud.Social.Vimeo</var> has now been moved to <var>Skybrud.Social.Vimeo.Simple</var>.
 -   Added implementation of the Vimeo Advanced API. This is however still not a complete implementation.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
