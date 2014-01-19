@@ -1,24 +1,22 @@
-﻿using System.Collections.Generic;
-using Skybrud.Social.Google.Analytics.Objects;
+﻿using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Responses {
-    
-    public class AnalyticsDataResponse {
+    public class AnalyticsRealtimeDataResponse {
         
         public int TotalResults { get; private set; }
         public int ItemsPerPage { get; private set; }
 
-        public AnalyticsDataQuery Query { get; private set; }
+        public AnalyticsRealtimeDataQuery Query { get; private set; }
         public AnalyticsDataColumnHeader[] ColumnHeaders { get; private set; }
         public AnalyticsDataRow[] Rows { get; private set; }
 
-        public static AnalyticsDataResponse ParseJson(string json) {
+        public static AnalyticsRealtimeDataResponse ParseJson(string json) {
             return Parse(JsonConverter.ParseObject(json));
         }
 
-        public static AnalyticsDataResponse Parse(JsonObject obj) {
+        public static AnalyticsRealtimeDataResponse Parse(JsonObject obj) {
             
             // Check whether "obj" is NULL
             if (obj == null) return null;
@@ -30,8 +28,8 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             }
 
             // Initialize the response object
-            AnalyticsDataResponse response = new AnalyticsDataResponse {
-                Query = obj.GetObject("query", AnalyticsDataQuery.Parse),
+            AnalyticsRealtimeDataResponse response = new AnalyticsRealtimeDataResponse {
+                Query = obj.GetObject("query", AnalyticsRealtimeDataQuery.Parse),
                 ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
             };
 
@@ -48,6 +46,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
                     };
                 }
             }
+            
             
             return response;
 

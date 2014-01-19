@@ -154,6 +154,80 @@ namespace Skybrud.Social.Google.Analytics {
 
         #endregion
 
+        #region Realtime data
+
+        /// <summary>
+        /// Gets the realtime data from the specified profile and metrics.
+        /// </summary>
+        /// <param name="profile">The Analytics profile to gather realtime data from.</param>
+        /// <param name="metrics">The metrics collection of what data to return.</param>
+        public string GetRealtimeData(AnalyticsProfile profile, AnalyticsMetricCollection metrics) {
+            return GetRealtimeData(profile.Id, metrics);
+        }
+        
+        /// <summary>
+        /// Gets the realtime data from the specified profile, metrics and dimensions.
+        /// </summary>
+        /// <param name="profile">The Analytics profile to gather realtime data from.</param>
+        /// <param name="metrics">The metrics collection of what data to return.</param>
+        /// <param name="dimensions">The dimensions collection of what data to return.</param>
+        public string GetRealtimeData(AnalyticsProfile profile, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return GetRealtimeData(profile.Id, metrics, dimensions);
+        }
+
+        /// <summary>
+        /// Gets the realtime data from the specified profile and options.
+        /// </summary>
+        /// <param name="profile">The Analytics profile to gather realtime data from.</param>
+        /// <param name="options">The options specifying the query.</param>
+        public string GetRealtimeData(AnalyticsProfile profile, AnalyticsRealtimeDataOptions options) {
+            return GetRealtimeData(profile.Id, options);
+        }
+
+        /// <summary>
+        /// Gets the realtime data from the specified profile and metrics.
+        /// </summary>
+        /// <param name="profileId">The ID of the Analytics profile.</param>
+        /// <param name="metrics">The metrics collection of what data to return.</param>
+        public string GetRealtimeData(string profileId, AnalyticsMetricCollection metrics) {
+            return GetRealtimeData(profileId, new AnalyticsRealtimeDataOptions {
+                Metrics = metrics
+            });
+        }
+
+        /// <summary>
+        /// Gets the realtime data from the specified profile and metrics.
+        /// </summary>
+        /// <param name="profileId">The ID of the Analytics profile.</param>
+        /// <param name="metrics">The metrics collection of what data to return.</param>
+        /// <param name="dimensions">The dimensions collection of what data to return.</param>
+        public string GetRealtimeData(string profileId, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
+            return GetRealtimeData(profileId, new AnalyticsRealtimeDataOptions {
+                Metrics = metrics,
+                Dimensions = dimensions
+            });
+        }
+
+        /// <summary>
+        /// Gets the realtime data from the specified profile and options.
+        /// </summary>
+        /// <param name="profileId">The ID of the Analytics profile.</param>
+        /// <param name="options">The options specifying the query.</param>
+        public string GetRealtimeData(string profileId, AnalyticsRealtimeDataOptions options) {
+            
+            // Validate arguments
+            if (options == null) throw new ArgumentNullException("options");
+
+            // Generate the name value collection
+            NameValueCollection query = options.ToNameValueCollection(profileId, Client.AccessToken);
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/data/realtime", query);
+
+        }
+
+        #endregion
+
     }
 
 }

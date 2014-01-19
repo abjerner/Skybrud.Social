@@ -1,6 +1,12 @@
-﻿namespace Skybrud.Social.Google.Analytics.Interfaces {
+﻿using Skybrud.Social.Google.Analytics.Objects;
 
-    public interface IAnalyticsFilter {
+namespace Skybrud.Social.Google.Analytics.Interfaces {
+
+    public interface IAnalyticsFilter : IAnalyticsFilterBlock {
+
+        string Name { get; }
+        string OperatorValue { get; }
+        object Value { get; }
         
     }
 

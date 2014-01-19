@@ -8,6 +8,10 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         private List<AnalyticsMetric> _list = new List<AnalyticsMetric>();
 
+        public int Count {
+            get { return _list.Count; }
+        }
+
         #region Constructors
 
         public AnalyticsMetricCollection(params AnalyticsMetric[] metrics) {

@@ -14,6 +14,14 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Properties
 
+        public string Name {
+            get { return Metric.Name; }
+        }
+
+        public string OperatorValue {
+            get { return Operator.Value; }
+        }
+
         public AnalyticsMetric Metric {
             get { return _metric; }
             set {
@@ -30,13 +38,13 @@ namespace Skybrud.Social.Google.Analytics.Objects {
             }
         }
 
-        public string Value { get; set; }
+        public object Value { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public AnalyticsMetricFilter(AnalyticsMetric metric, AnalyticsMetricOperator op, string value) {
+        public AnalyticsMetricFilter(AnalyticsMetric metric, AnalyticsMetricOperator op, object value) {
 
             if (metric == null) throw new ArgumentNullException("metric");
             if (op == null) throw new ArgumentNullException("op");
