@@ -9,7 +9,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
     public class AnalyticsMetric : IAnalyticsField {
 
         #region Readonly properties
-
+        // ReSharper disable InconsistentNaming
         #region Visitor
 
         public static readonly AnalyticsMetric Visitors = new AnalyticsMetric("ga:visitors");
@@ -67,21 +67,6 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         public static readonly AnalyticsMetric GoalAbandonsAll = new AnalyticsMetric("ga:goalAbandonsAll");
         public static readonly AnalyticsMetric GoalXXAbandonRate = new AnalyticsMetric("ga:goalXXAbandonRate");
         public static readonly AnalyticsMetric GoalAbandonRateAll = new AnalyticsMetric("ga:goalAbandonRateAll");
-
-        #endregion
-
-        #region Platform / Device
-
-
-        #endregion
-
-        #region Geo / Network
-
-
-        #endregion
-
-        #region System
-
 
         #endregion
 
@@ -222,19 +207,9 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #endregion
 
-        #region Experiments
-
-
-        #endregion
-
         #region Custom Variables or Columns
 
         public static readonly AnalyticsMetric MetricXX = new AnalyticsMetric("ga:metricXX");
-
-        #endregion
-
-        #region Time
-
 
         #endregion
 
@@ -243,7 +218,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         public static readonly AnalyticsMetric ActiveVisitors = new AnalyticsMetric("ga:activeVisitors");
 
         #endregion
-
+        // ReSharper restore InconsistentNaming
         #endregion
 
         #region Static properties

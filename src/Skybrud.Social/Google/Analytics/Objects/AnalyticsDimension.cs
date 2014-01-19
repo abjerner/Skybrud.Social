@@ -8,7 +8,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
     public class AnalyticsDimension : IAnalyticsField {
 
         #region Readonly properties
-
+        // ReSharper disable InconsistentNaming
         #region Visitor
 
         public static readonly AnalyticsDimension VisitorType = new AnalyticsDimension("ga:visitorType");
@@ -255,7 +255,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         public static readonly AnalyticsDimension DayOfWeekName = new AnalyticsDimension("ga:dayOfWeekName");
 
         #endregion
-
+// ReSharper restore InconsistentNaming
         #endregion
 
         #region Static properties
