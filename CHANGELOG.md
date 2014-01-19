@@ -12,6 +12,7 @@ __Google Analytics__
 
 -   Skybrud.Social 0.1.2 primarily focuses on improved support for Google Analytics - including sorting and filtering when fetching data from a profile.
 -   Google has introduced a Realtime API for accessing live data from Google Analytics. Skybrud.Social 0.1.2 now also has support for this API, and live data can noew be retrieved in a similar manner to how regular data is retrieved. The Realtime API is however still in closed beta, so developers must request access by Google in order to use it.
+-   In v0.1.1 metrics and dimensions were defined by string constants. To allow for some more powerful logic, these constants have now been turned into instances of <var>AnalyticsMetric</var> and <var>AnalyticsDimension</var> respectively. The two classes now use operator overloading to play nicely with strings, but may still break your existing code in some scenarious if you're using the string constants.
 
 __Facebook__
 
