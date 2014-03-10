@@ -33,9 +33,12 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string GetTagInfo(string tag) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                { "access_token", Client.AccessToken },
-            };
+            NameValueCollection qs = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
+                qs.Add("access_token", Client.AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
+                qs.Add("client_id", Client.ClientId);
+            }
 
             // Perform the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag, qs);
@@ -51,9 +54,12 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                { "access_token", Client.AccessToken },
-            };
+            NameValueCollection qs = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
+                qs.Add("access_token", Client.AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
+                qs.Add("client_id", Client.ClientId);
+            }
 
             // Add any optional parameters
             if (!String.IsNullOrWhiteSpace(minTagId)) qs.Add("min_tag_id", minTagId);
@@ -71,10 +77,12 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string Search(string tag) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                { "q", tag },
-                { "access_token", Client.AccessToken },
-            };
+            NameValueCollection qs = new NameValueCollection { { "q", tag } };
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
+                qs.Add("access_token", Client.AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
+                qs.Add("client_id", Client.ClientId);
+            }
 
             // Perform the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/search/", qs);
