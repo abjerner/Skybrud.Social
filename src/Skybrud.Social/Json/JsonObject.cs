@@ -80,6 +80,22 @@ namespace Skybrud.Social.Json {
             return GetValue<long>(name);
         }
 
+        public int GetInt32(string name) {
+            return GetValue<int>(name);
+        }
+
+        public long GetInt64(string name) {
+            return GetValue<long>(name);
+        }
+
+        public float GetFloat(string name) {
+            return GetValue<float>(name);
+        }
+
+        public float GetFloat(string name, IFormatProvider provider) {
+            return GetValue<float>(name, provider);
+        }
+
         public double GetDouble(string name) {
             return GetValue<double>(name);
         }

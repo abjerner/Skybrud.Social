@@ -73,12 +73,36 @@ namespace Skybrud.Social.Json {
             return (int) Convert.ChangeType(this[index], typeof(int));
         }
 
+        public long GetLong(int index) {
+            return (long) Convert.ChangeType(this[index], typeof(long));
+        }
+
+        public int GetInt32(int index) {
+            return (int) Convert.ChangeType(this[index], typeof(int));
+        }
+
+        public long GetInt64(int index) {
+            return (long) Convert.ChangeType(this[index], typeof(long));
+        }
+
+        public float GetFloat(int index) {
+            return (float) Convert.ChangeType(this[index], typeof(float));
+        }
+
+        public float GetFloat(int index, IFormatProvider provider) {
+            return (float) Convert.ChangeType(this[index], typeof(float), provider);
+        }
+
         public double GetDouble(int index) {
             return (double) Convert.ChangeType(this[index], typeof(double));
         }
 
+        public double GetDouble(int index, IFormatProvider provider) {
+            return (double) Convert.ChangeType(this[index], typeof(double), provider);
+        }
+
         public string GetString(int index) {
-            return (string)Convert.ChangeType(this[index], typeof(string));
+            return (string) Convert.ChangeType(this[index], typeof(string));
         }
 
         public T GetSimpleType<T>(int index) {
