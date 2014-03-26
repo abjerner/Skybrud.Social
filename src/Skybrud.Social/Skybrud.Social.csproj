@@ -209,6 +209,8 @@
     <Compile Include="Facebook\Responses\FacebookMeResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialExtensions.cs" />
+    <Compile Include="SocialHttpRequest.cs" />
+    <Compile Include="SocialHttpResponse.cs" />
     <Compile Include="SocialUtils.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterAccountRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterGeoRawEndpoint.cs" />
