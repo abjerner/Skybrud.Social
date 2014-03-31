@@ -66,6 +66,27 @@ namespace Skybrud.Social.Twitter.Endpoints {
             return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
         }
 
+        #region Write
+
+        /// <summary>
+        /// Posts the specified status message.
+        /// </summary>
+        /// <param name="status">The status message to send.</param>
+        public TwitterStatusMessage PostStatusMessage(string status) {
+            return PostStatusMessage(status, null);
+        }
+
+        /// <summary>
+        /// Posts the specified status message.
+        /// </summary>
+        /// <param name="status">The status message to send.</param>
+        /// <param name="replyTo">The ID of the status message to reply to.</param>
+        public TwitterStatusMessage PostStatusMessage(string status, long? replyTo) {
+            return TwitterStatusMessage.ParseJson(Raw.PostStatusMessage(status, replyTo));
+        }
+
+        #endregion
+
         #endregion
 
     }
