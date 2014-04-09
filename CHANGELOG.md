@@ -2,7 +2,7 @@ Skybrud.Social Changelog
 ========================
 
 ### Skybrud.Social 0.1.2
-_20th of November, 2014_
+_20th of January, 2014_
 
 __Download__
 -   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.1.2/Skybrud.Social.v0.1.2.zip">Download ZIP</a>
