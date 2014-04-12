@@ -126,6 +126,7 @@ namespace Skybrud.Social.Twitter.Objects {
             // Error checking
             if (obj == null) return null;
             if (obj.HasValue("error")) throw TwitterException.Parse(obj.GetArray("error"));
+            if (obj.HasValue("errors")) throw TwitterException.Parse(obj.GetArray("errors"));
 
             TwitterStatusMessage msg = new TwitterStatusMessage {
                 JsonObject = obj,
