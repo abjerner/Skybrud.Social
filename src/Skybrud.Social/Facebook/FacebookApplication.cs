@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Web;
-using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.OAuth;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook {
 

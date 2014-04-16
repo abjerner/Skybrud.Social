@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 

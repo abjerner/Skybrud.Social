@@ -1,5 +1,4 @@
-﻿using System;
-using Skybrud.Social.Facebook.Exceptions;
+﻿using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Json;
 
