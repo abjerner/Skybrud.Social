@@ -73,6 +73,8 @@
     <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
     <Compile Include="Facebook\OAuth\FacebookOAuthClient.cs" />
+    <Compile Include="Facebook\Objects\FacebookStatusMessage.cs" />
+    <Compile Include="Facebook\Objects\FacebookLink.cs" />
     <Compile Include="Facebook\Objects\FacebookPostProperties.cs" />
     <Compile Include="Facebook\Objects\FacebookPostSummary.cs" />
     <Compile Include="Facebook\Objects\FacebookLikes.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Facebook\Objects\FacebookPaging.cs" />
     <Compile Include="Facebook\Objects\FacebookUser.cs" />
     <Compile Include="Facebook\Options\FacebookFeedOptions.cs" />
+    <Compile Include="Facebook\Options\FacebookPostLinkOptions.cs" />
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />

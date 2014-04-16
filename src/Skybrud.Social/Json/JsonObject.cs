@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace Skybrud.Social.Json {
 
@@ -11,6 +12,10 @@ namespace Skybrud.Social.Json {
         #region Properties
         
         public IDictionary<string, object> Dictionary { get; private set; }
+
+        public string[] Keys {
+            get { return Dictionary.Keys.ToArray(); }
+        }
 
         #endregion
 

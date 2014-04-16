@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Json;
+﻿using System.Collections.Generic;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
@@ -22,6 +23,15 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookMessageTag[] ParseMultiple(JsonArray array) {
             return array == null ? new FacebookMessageTag[0] : array.ParseMultiple(Parse);
+        }
+
+        public static FacebookMessageTag[] ParseMultiple(JsonObject obj) {
+            if (obj == null) return null;
+            List<FacebookMessageTag> temp = new List<FacebookMessageTag>();
+            foreach (string key in obj.Keys) {
+                temp.AddRange(obj.GetArray(key, Parse));
+            }
+            return temp.ToArray();
         }
 
     }

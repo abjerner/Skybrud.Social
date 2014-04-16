@@ -1,7 +1,10 @@
-﻿using Skybrud.Social.Facebook.Endpoints.Raw;
+﻿using System.Globalization;
+using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -185,6 +188,104 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookMeResponse Me() {
             return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
         }
+
+        /// <summary>
+        /// Gets information about a status message with the specified <var>ID</var>.
+        /// </summary>
+        /// <param name="statusMessageId">The ID of the status message.</param>
+        public FacebookStatusMessage GetStatusMessage(string statusMessageId) {
+            return FacebookStatusMessage.ParseJson(Raw.GetObject(statusMessageId));
+        }
+
+        #region Post link
+
+        /// <summary>
+        /// Posts a link with the specified options to the feed of the authenticated user.
+        /// </summary>
+        /// <param name="options">The options for the link.</param>
+        /// <returns>Returns the ID of the created link.</returns>
+        public string PostLink(FacebookPostLinkOptions options) {
+            return PostLink("me", options);
+        }
+
+        /// <summary>
+        /// Posts a link with the specified options.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="options">The options for the link.</param>
+        /// <returns>Returns the ID of the created link.</returns>
+        public string PostLink(long identifier, FacebookPostLinkOptions options) {
+            return PostLink(identifier.ToString(CultureInfo.InvariantCulture), options);
+        }
+
+        /// <summary>
+        /// Posts a link with the specified options.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="options">The options for the link.</param>
+        /// <returns>Returns the ID of the created link.</returns>
+        public string PostLink(string identifier, FacebookPostLinkOptions options) {
+
+            // Make the call to the API
+            string response = Raw.PostLink(identifier, options);
+
+            // Parse the raw JSON response
+            JsonObject obj = JsonConverter.ParseObject(response);
+
+            // Some error checking
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+
+            // Get the ID of the created link
+            return obj.GetString("id");
+
+        }
+
+        #endregion
+
+        #region Post status message
+
+        /// <summary>
+        /// Posts a status message to the wall of the authenticated user.
+        /// </summary>
+        /// <param name="message">The text of the status message.</param>
+        /// <returns>Returns the ID of the created status message.</returns>
+        public string PostStatusMessage(string message) {
+            return PostStatusMessage("me", message);
+        }
+
+        /// <summary>
+        /// Posts a status message to the wall of the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="message">The text of the status message.</param>
+        /// <returns>Returns the ID of the created status message.</returns>
+        public string PostStatusMessage(long identifier, string message) {
+            return PostStatusMessage(identifier.ToString(CultureInfo.InvariantCulture), message);
+        }
+
+        /// <summary>
+        /// Posts a status message to the wall of the specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="message">The text of the status message.</param>
+        /// <returns>Returns the ID of the created status message.</returns>
+        public string PostStatusMessage(string identifier, string message) {
+
+            // Make the call to the API
+            string response = Raw.PostStatusMessage(identifier, message);
+
+            // Parse the raw JSON response
+            JsonObject obj = JsonConverter.ParseObject(response);
+
+            // Some error checking
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+
+            // Get the ID of the created link
+            return obj.GetString("id");
+
+        }
+
+        #endregion
     
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Globalization;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
 
@@ -120,6 +121,22 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (!url.StartsWith("https://graph.facebook.com/")) throw new ArgumentException("Invalid URL", "url");
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url);
         }
+
+        /// <summary>
+        /// Gets a link with the specified ID.
+        /// </summary>
+        /// <param name="linkId">The ID of the link.</param>
+        public string GetLink(string linkId) {
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection {
+                {"access_token", Client.AccessToken}
+            };
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + linkId, query);
+
+        }
         
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
@@ -187,6 +204,103 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/posts", query);
         
         }
+
+        /// <summary>
+        /// Gets a status message with the specified ID.
+        /// </summary>
+        /// <param name="statusMessageId">The ID of the status message.</param>
+        public string GetStatusMessage(string statusMessageId) {
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection {
+                {"access_token", Client.AccessToken}
+            };
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + statusMessageId, query);
+
+        }
+
+        #region Post link
+
+        /// <summary>
+        /// Posts a link with the specified options to the feed of the authenticated user.
+        /// </summary>
+        /// <param name="options">The options for the link.</param>
+        public string PostLink(FacebookPostLinkOptions options) {
+            return PostLink("me", options);
+        }
+
+        /// <summary>
+        /// Posts a link with the specified options.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="options">The options for the link.</param>
+        public string PostLink(long identifier, FacebookPostLinkOptions options) {
+            return PostLink(identifier.ToString(CultureInfo.InvariantCulture), options);
+        }
+
+        /// <summary>
+        /// Posts a link with the specified options.
+        /// </summary>
+        /// <param name="identifier">The identifier of user, page or similar.</param>
+        /// <param name="options">The options for the link.</param>
+        public string PostLink(string identifier, FacebookPostLinkOptions options) {
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(options.Link)) query.Add("link", options.Link);
+            if (!String.IsNullOrWhiteSpace(options.Description)) query.Add("description", options.Description);
+            if (!String.IsNullOrWhiteSpace(options.Message)) query.Add("message", options.Message);
+            if (!String.IsNullOrWhiteSpace(options.Name)) query.Add("name", options.Name);
+            if (!String.IsNullOrWhiteSpace(options.Caption)) query.Add("caption", options.Caption);
+            query.Add("access_token", Client.AccessToken);
+
+            // Make the call to the API
+            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+
+        }
+
+        #endregion
+
+        #region Post status message
+
+        /// <summary>
+        /// Posts a status message to the wall of the authenticated user.
+        /// </summary>
+        /// <param name="message">The text of the status message.</param>
+        public string PostStatusMessage(string message) {
+            return PostStatusMessage("me", message);
+        }
+
+        /// <summary>
+        /// Posts a status message to the wall of specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="message">The text of the status message.</param>
+        public string PostStatusMessage(long identifier, string message) {
+            return PostStatusMessage(identifier.ToString(CultureInfo.InvariantCulture), message);
+        }
+
+        /// <summary>
+        /// Posts a status message to the wall of specified <var>identifier</var>.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user, page or similar.</param>
+        /// <param name="message">The text of the status message.</param>
+        public string PostStatusMessage(string identifier, string message) {
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection {
+                {"message", message},
+                {"access_token", Client.AccessToken}
+            };
+
+            // Make the call to the API
+            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+
+        }
+
+        #endregion
 
     }
 
