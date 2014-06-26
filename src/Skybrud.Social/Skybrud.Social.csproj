@@ -130,6 +130,9 @@
     <Compile Include="Google\Analytics\Interfaces\IAnalyticsSortField.cs" />
     <Compile Include="Google\Analytics\Responses\AnalyticsRealtimeDataResponse.cs" />
     <Compile Include="Google\Exceptions\GoogleApiException.cs" />
+    <Compile Include="Google\GoogleApiObject.cs" />
+    <Compile Include="Google\GoogleApiResource.cs" />
+    <Compile Include="Google\GoogleApiResponse.cs" />
     <Compile Include="Google\GoogleService.cs" />
     <Compile Include="Google\GoogleUserInfo.cs" />
     <Compile Include="Google\OAuth\GoogleAccessTokenResponse.cs" />
