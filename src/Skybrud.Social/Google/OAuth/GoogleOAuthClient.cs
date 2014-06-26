@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
+using Skybrud.Social.Google.YouTube;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.OAuth {
@@ -15,6 +16,7 @@ namespace Skybrud.Social.Google.OAuth {
         #region Private fields
 
         private AnalyticsRawEndpoint _analytics;
+        private YouTubeRawEndpoint _youtube;
 
         #endregion
 
@@ -57,6 +59,13 @@ namespace Skybrud.Social.Google.OAuth {
         /// </summary>
         public AnalyticsRawEndpoint Analytics {
             get { return _analytics ?? (_analytics = new AnalyticsRawEndpoint(this)); }
+        }
+
+        /// <summary>
+        /// Gets a reference to the raw YouTube endpoint.
+        /// </summary>
+        public YouTubeRawEndpoint YouTube {
+            get { return _youtube ?? (_youtube = new YouTubeRawEndpoint(this)); }
         }
 
         #endregion
