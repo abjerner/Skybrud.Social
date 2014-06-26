@@ -68,7 +68,8 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         }
 
         /// <summary>
-        /// Gets a user from the specified <var>JsonObject</var>.
+        /// Gets an instance of <var>AnalyticsDataQuery</var> from the specified
+        /// <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static AnalyticsDataQuery Parse(JsonObject obj) {
