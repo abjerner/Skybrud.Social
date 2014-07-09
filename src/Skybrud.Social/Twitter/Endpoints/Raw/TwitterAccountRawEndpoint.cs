@@ -23,7 +23,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         }
 
         #endregion
-        
 
     }
 

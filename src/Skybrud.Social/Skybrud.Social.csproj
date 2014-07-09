@@ -239,10 +239,12 @@
     <Compile Include="SocialHttpResponse.cs" />
     <Compile Include="SocialUtils.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterAccountRawEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterFriendsRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterGeoRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterStatusesRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterUsersRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterAccountEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\TwitterFriendsEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterGeoEndpoint.cs" />
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Endpoints\TwitterStatusesEndpoint.cs" />
@@ -262,9 +264,11 @@
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterTimeline.cs" />
+    <Compile Include="Twitter\Options\TwitterFriendsListOptions.cs" />
     <Compile Include="Twitter\Options\TwitterTimelineOptions.cs" />
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterFriendsListResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterReverseGeocodeResponse.cs" />
     <Compile Include="Twitter\TwitterAccessInformation.cs" />
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
