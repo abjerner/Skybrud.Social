@@ -36,9 +36,18 @@ namespace Skybrud.Social.Instagram.OAuth {
         public string ClientSecret { get; set; }
 
         /// <summary>
-        /// The return URI of your application.
+        /// The redirect URI of your application.
         /// </summary>
-        public string ReturnUri { get; set; }
+        [Obsolete("Use \"RedirectUri\" instead to follow Instagram lingo.")]
+        public string ReturnUri {
+            get { return RedirectUri; }
+            set { RedirectUri = value; }
+        }
+
+        /// <summary>
+        /// The redirect URI of your application.
+        /// </summary>
+        public string RedirectUri { get; set; }
 
         /// <summary>
         /// The access token.
@@ -115,11 +124,11 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="returnUri">The return URI of the app.</param>
-        public InstagramOAuthClient(long appId, string appSecret, string returnUri) {
+        /// <param name="redirectUri">The return URI of the app.</param>
+        public InstagramOAuthClient(long appId, string appSecret, string redirectUri) {
             ClientId = appId + "";
             ClientSecret = appSecret;
-            ReturnUri = returnUri;
+            RedirectUri = redirectUri;
         }
 
         /// <summary>
@@ -137,11 +146,11 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="returnUri">The return URI of the app.</param>
-        public InstagramOAuthClient(string appId, string appSecret, string returnUri) {
+        /// <param name="redirectUri">The return URI of the app.</param>
+        public InstagramOAuthClient(string appId, string appSecret, string redirectUri) {
             ClientId = appId;
             ClientSecret = appSecret;
-            ReturnUri = returnUri;
+            RedirectUri = redirectUri;
         }
 
         #endregion
@@ -167,7 +176,7 @@ namespace Skybrud.Social.Instagram.OAuth {
             return String.Format(
                 "https://api.instagram.com/oauth/authorize/?client_id={0}&redirect_uri={1}&response_type=code&state={2}&scope={3}",
                 HttpUtility.UrlEncode(ClientId),
-                HttpUtility.UrlEncode(ReturnUri),
+                HttpUtility.UrlEncode(RedirectUri),
                 HttpUtility.UrlEncode(state),
                 HttpUtility.UrlEncode(scope.ToString().Replace(", ", "+").ToLower())
             );
@@ -180,7 +189,7 @@ namespace Skybrud.Social.Instagram.OAuth {
                 {"client_id", ClientId},
                 {"client_secret", ClientSecret},
                 {"grant_type", "authorization_code"},
-                {"redirect_uri", ReturnUri},
+                {"redirect_uri", RedirectUri},
                 {"code", authCode }
             };
 
