@@ -19,8 +19,8 @@ namespace Skybrud.Social.Facebook {
         }
 
         public string ReturnUri {
-            get { return Client.ReturnUri; }
-            set { Client.ReturnUri = value; }
+            get { return Client.RedirectUri; }
+            set { Client.RedirectUri = value; }
         }
 
         public FacebookApplication() {
@@ -34,11 +34,11 @@ namespace Skybrud.Social.Facebook {
             };
         }
 
-        public FacebookApplication(long appId, string appSecret, string returnUri) {
+        public FacebookApplication(long appId, string appSecret, string redirectUri) {
             Client = new FacebookOAuthClient {
                 AppId = appId + "",
                 AppSecret = appSecret,
-                ReturnUri = returnUri
+                RedirectUri = redirectUri
             };
         }
 
@@ -49,11 +49,11 @@ namespace Skybrud.Social.Facebook {
             };
         }
 
-        public FacebookApplication(string appId, string appSecret, string returnUri) {
+        public FacebookApplication(string appId, string appSecret, string redirectUri) {
             Client = new FacebookOAuthClient {
                 AppId = appId,
                 AppSecret = appSecret,
-                ReturnUri = returnUri
+                RedirectUri = redirectUri
             };
         }
 

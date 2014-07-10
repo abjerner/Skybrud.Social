@@ -25,9 +25,18 @@ namespace Skybrud.Social.Facebook.OAuth {
         public string AppSecret { get; set; }
 
         /// <summary>
-        /// The return URI of your application.
+        /// The redirect URI of your application.
         /// </summary>
-        public string ReturnUri { get; set; }
+        [Obsolete("Use \"RedirectUri\" instead to follow Facebook lingo.")]
+        public string ReturnUri {
+            get { return RedirectUri; }
+            set { RedirectUri = value; }
+        }
+
+        /// <summary>
+        /// The redirect URI of your application.
+        /// </summary>
+        public string RedirectUri { get; set; }
 
         /// <summary>
         /// The access token.
@@ -76,11 +85,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="returnUri">The return URI of the app.</param>
-        public FacebookOAuthClient(long appId, string appSecret, string returnUri) {
+        /// <param name="redirectUri">The redirect URI of the app.</param>
+        public FacebookOAuthClient(long appId, string appSecret, string redirectUri) {
             AppId = appId + "";
             AppSecret = appSecret;
-            ReturnUri = returnUri;
+            RedirectUri = redirectUri;
         }
 
         /// <summary>
@@ -98,11 +107,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="returnUri">The return URI of the app.</param>
-        public FacebookOAuthClient(string appId, string appSecret, string returnUri) {
+        /// <param name="redirectUri">The redirect URI of the app.</param>
+        public FacebookOAuthClient(string appId, string appSecret, string redirectUri) {
             AppId = appId;
             AppSecret = appSecret;
-            ReturnUri = returnUri;
+            RedirectUri = redirectUri;
         }
 
         #endregion
@@ -127,7 +136,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             return String.Format(
                 "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
                 AppId,
-                ReturnUri,
+                RedirectUri,
                 state,
                 String.Join(",", scope)
             );
@@ -142,7 +151,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             // Initialize the query string
             NameValueCollection query = new NameValueCollection {
                 {"client_id", AppId},
-                {"redirect_uri", ReturnUri},
+                {"redirect_uri", RedirectUri},
                 {"client_secret", AppSecret},
                 {"code", authCode }
             };
