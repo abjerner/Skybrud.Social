@@ -4,7 +4,7 @@ using Skybrud.Social.Twitter.Responses;
 
 namespace Skybrud.Social.Twitter.Endpoints {
     
-    public class TwitterFriendsEndpoint {
+    public class TwitterFollowersEndpoint {
 
         #region Properties
 
@@ -16,15 +16,15 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <summary>
         /// A reference to the raw endpoint.
         /// </summary>
-        public TwitterFriendsRawEndpoint Raw {
-            get { return Service.Client.Friends; }
+        public TwitterFollowersRawEndpoint Raw {
+            get { return Service.Client.Followers; }
         }
 
         #endregion
 
         #region Constructor(s)
 
-        internal TwitterFriendsEndpoint(TwitterService service) {
+        internal TwitterFollowersEndpoint(TwitterService service) {
             Service = service;
         }
 
@@ -47,7 +47,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIdsFromUserId(long userId, TwitterFriendsIdsOptions options) {
+        public TwitterIdsResponse GetIdsFromUserId(long userId, TwitterFollowersIdsOptions options) {
             return TwitterIdsResponse.ParseJson(Raw.GetIdsFromUserId(userId, options));
         }
 
@@ -68,7 +68,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIdsFromScreenName(string screenName, TwitterFriendsIdsOptions options) {
+        public TwitterIdsResponse GetIdsFromScreenName(string screenName, TwitterFollowersIdsOptions options) {
             return TwitterIdsResponse.ParseJson(Raw.GetIdsFromScreenName(screenName, options));
         }
 
@@ -89,7 +89,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetListFromUserId(long userId, TwitterFriendsListOptions options) {
+        public TwitterUserListResponse GetListFromUserId(long userId, TwitterFollowersListOptions options) {
             return TwitterUserListResponse.ParseJson(Raw.GetListFromUserId(userId, options));
         }
 
@@ -110,7 +110,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetListFromScreenName(string screenName, TwitterFriendsListOptions options) {
+        public TwitterUserListResponse GetListFromScreenName(string screenName, TwitterFollowersListOptions options) {
             return TwitterUserListResponse.ParseJson(Raw.GetListFromScreenName(screenName, options));
         }
 

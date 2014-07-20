@@ -1,5 +1,6 @@
 ﻿using System;
 using Skybrud.Social.Json;
+using Skybrud.Social.Twitter.Entities;
 
 namespace Skybrud.Social.Twitter.Objects {
 
@@ -251,15 +252,15 @@ namespace Skybrud.Social.Twitter.Objects {
         /// <em>Nullable</em>. If possible, the user's most recent tweet or retweet. In some circumstances,
         /// this data cannot be provided and this field will be omitted, null, or empty. Perspectival
         /// attributes within tweets embedded within users cannot always be relied upon.
-        /// See <a href="https://dev.twitter.com/docs/faq/#6981">Why areembedded objects stale or inaccurate?</a>.
+        /// See <a href="https://dev.twitter.com/docs/faq/#6981">Why are embedded objects stale or inaccurate?</a>.
         /// </summary>
         public object Status { get; private set; }
 
         /// <summary>
         /// Entities which have been parsed out of the url or description fields defined by the user.
-        /// Read more about <a href="https://dev.twitter.com/docs/platform-objects/entities#user_entities">User Entities</a>.
+        /// Read more about <a href="https://dev.twitter.com/docs/entities#users">Entities for Users</a>.
         /// </summary>
-        public object Entities { get; private set; }
+        public TwitterUserEntities Entities { get; private set; }
 
         #endregion
 
@@ -348,6 +349,7 @@ namespace Skybrud.Social.Twitter.Objects {
             user.FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent");
             user.Notifications = obj.HasValue("notifications") && obj.GetBoolean("notifications");
             user.Status = obj.GetObject("status", TwitterStatusMessage.Parse);
+            user.Entities = obj.GetObject("entities", TwitterUserEntities.Parse);
            
             #endregion
 

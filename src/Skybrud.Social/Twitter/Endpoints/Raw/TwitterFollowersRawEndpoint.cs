@@ -5,7 +5,7 @@ using Skybrud.Social.Twitter.Options;
 
 namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
-    public class TwitterFriendsRawEndpoint {
+    public class TwitterFollowersRawEndpoint {
 
         #region Properties
 
@@ -17,8 +17,8 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         #endregion
 
         #region Constructor
-        
-        internal TwitterFriendsRawEndpoint(TwitterOAuthClient client) {
+
+        internal TwitterFollowersRawEndpoint(TwitterOAuthClient client) {
             Client = client;
         }
 
@@ -41,7 +41,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetIdsFromUserId(long userId, TwitterFriendsIdsOptions options) {
+        public string GetIdsFromUserId(long userId, TwitterFollowersIdsOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -52,7 +52,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/ids.json", query);
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/followers/ids.json", query);
 
         }
 
@@ -73,7 +73,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetIdsFromScreenName(string screenName, TwitterFriendsIdsOptions options) {
+        public string GetIdsFromScreenName(string screenName, TwitterFollowersIdsOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -84,7 +84,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/ids.json", query);
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/followers/ids.json", query);
 
         }
 
@@ -105,7 +105,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetListFromUserId(long userId, TwitterFriendsListOptions options) {
+        public string GetListFromUserId(long userId, TwitterFollowersListOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -116,7 +116,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/list.json", query);
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/followers/list.json", query);
 
         }
 
@@ -137,7 +137,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetListFromScreenName(string screenName, TwitterFriendsListOptions options) {
+        public string GetListFromScreenName(string screenName, TwitterFollowersListOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -148,7 +148,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/list.json", query);
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/followers/list.json", query);
 
         }
 

@@ -156,15 +156,19 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
+        #region GetHomeTimeline(...)
+
         /// <summary>
-        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
+        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
+        /// user and the users they follow.
         /// </summary>
         public string GetHomeTimeline() {
             return GetHomeTimeline(null);
         }
 
         /// <summary>
-        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
+        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
+        /// user and the users they follow. 
         /// </summary>
         /// <param name="options">The options for the call.</param>
         public string GetHomeTimeline(TwitterTimelineOptions options) {
@@ -186,6 +190,10 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/home_timeline.json", qs);
 
         }
+
+        #endregion
+
+        #region GetMentionsTimeline(...)
 
         /// <summary>
         /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
@@ -218,6 +226,10 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         }
 
+        #endregion
+
+        #region GetRetweetsOfMe(...)
+
         /// <summary>
         /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
         /// </summary>
@@ -249,7 +261,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         }
 
-        #region Write
+        #endregion
+
+        #region PostStatusMessage(...)
 
         /// <summary>
         /// Posts the specified status message.

@@ -3,7 +3,7 @@ using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
     
-    public class TwitterFriendsListResponse {
+    public class TwitterUserListResponse {
 
         #region Properties
 
@@ -22,7 +22,7 @@ namespace Skybrud.Social.Twitter.Responses {
 
         #region Constructor(s)
 
-        private TwitterFriendsListResponse() {
+        private TwitterUserListResponse() {
             // Hide default constructor
         }
 
@@ -49,7 +49,7 @@ namespace Skybrud.Social.Twitter.Responses {
 
         #region Static methods
 
-        public static TwitterFriendsListResponse ParseJson(string contents) {
+        public static TwitterUserListResponse ParseJson(string contents) {
 
             // Deserialize the JSON
             JsonObject json = JsonConverter.ParseObject(contents);
@@ -68,9 +68,9 @@ namespace Skybrud.Social.Twitter.Responses {
 
         }
 
-        public static TwitterFriendsListResponse Parse(JsonObject obj) {
+        public static TwitterUserListResponse Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new TwitterFriendsListResponse {
+            return new TwitterUserListResponse {
                 JsonObject = obj,
                 Users = obj.GetArray("users", TwitterUser.Parse),
                 NextCursor = obj.GetLong("next_cursor"),

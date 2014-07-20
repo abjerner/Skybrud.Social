@@ -3,6 +3,7 @@ using System.Globalization;
 using Skybrud.Social.Twitter.Attributes;
 using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
+using Skybrud.Social.Twitter.Options;
 
 namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
@@ -67,6 +68,28 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
         private string GetUser(NameValueCollection qs) {
             return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/show.json", qs);
+        }
+
+        [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
+        public string Search(string query) {
+            return Search(query, null);
+        }
+
+        [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
+        public string Search(string query, TwitterUsersSearchOptions options) {
+
+            // Declare the query string
+            SocialQueryString qs = new SocialQueryString();
+            qs.Set("q", query);
+            if (options != null) {
+                qs.Set("page", options.Page, options.Page > 1);
+                qs.Set("count", options.Count, options.Count != 20);
+                qs.Set("include_entities", options.IncludeEntities, options.IncludeEntities != true);
+            }
+
+            // Make the call to the API
+            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/search.json", qs.NameValueCollection);
+
         }
     
     }

@@ -50,10 +50,10 @@ namespace Skybrud.Social.Twitter.Entities {
         public static TwitterStatusMessageEntities Parse(JsonObject entities) {
             if (entities == null) return null;
             return new TwitterStatusMessageEntities {
-                HashTags = TwitterHashTagEntitity.ParseMultiple(entities.GetArray("hashtags")).ToArray(),
-                Urls = TwitterUrlEntitity.ParseMultiple(entities.GetArray("urls")).ToArray(),
-                Mentions = TwitterMentionEntity.ParseMultiple(entities.GetArray("user_mentions")).ToArray(),
-                Media = TwitterMediaEntity.ParseMultiple(entities.GetArray("media")).ToArray()
+                HashTags = entities.GetArray("hashtags", TwitterHashTagEntitity.Parse),
+                Urls = entities.GetArray("urls", TwitterUrlEntitity.Parse),
+                Mentions = entities.GetArray("user_mentions", TwitterMentionEntity.Parse),
+                Media = entities.GetArray("media", TwitterMediaEntity.Parse)
             };
         }
 

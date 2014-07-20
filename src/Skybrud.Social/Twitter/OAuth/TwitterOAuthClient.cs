@@ -12,6 +12,7 @@ namespace Skybrud.Social.Twitter.OAuth {
     public class TwitterOAuthClient : OAuthClient {
 
         private TwitterAccountRawEndpoint _account;
+        private TwitterFollowersRawEndpoint _followers;
         private TwitterFriendsRawEndpoint _friends;
         private TwitterGeoRawEndpoint _geo;
         private TwitterStatusesRawEndpoint _statuses;
@@ -24,6 +25,13 @@ namespace Skybrud.Social.Twitter.OAuth {
         /// </summary>
         public TwitterAccountRawEndpoint Account {
             get { return _account ?? (_account = new TwitterAccountRawEndpoint(this)); }
+        }
+
+        /// <summary>
+        /// Gets a reference to the followers endpoint.
+        /// </summary>
+        public TwitterFollowersRawEndpoint Followers {
+            get { return _followers ?? (_followers = new TwitterFollowersRawEndpoint(this)); }
         }
 
         /// <summary>

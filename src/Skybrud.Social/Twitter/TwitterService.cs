@@ -9,6 +9,7 @@ namespace Skybrud.Social.Twitter {
         public TwitterOAuthClient Client { get; private set; }
 
         public TwitterAccountEndpoint Account { get; private set; }
+        public TwitterFollowersEndpoint Followers { get; private set; }
         public TwitterFriendsEndpoint Friends { get; private set; }
         public TwitterGeoEndpoint Geo { get; private set; }
         public TwitterStatusesEndpoint Statuses { get; private set; }
@@ -27,7 +28,8 @@ namespace Skybrud.Social.Twitter {
                 TokenSecret = info.AccessTokenSecret
             });
         }
-        
+
+        [Obsolete("Use class TwitterOAuthClient and method CreateFromOAuthClient instead.")]
         public static TwitterService CreateFromAccessInformation(TwitterAccessInformation info) {
             return CreateFromOAuthClient(new TwitterOAuthClient {
                 ConsumerKey = info.ConsumerKey,
@@ -49,6 +51,7 @@ namespace Skybrud.Social.Twitter {
 
             // Set the endpoints etc.
             service.Account = new TwitterAccountEndpoint(service);
+            service.Followers = new TwitterFollowersEndpoint(service);
             service.Friends = new TwitterFriendsEndpoint(service);
             service.Geo = new TwitterGeoEndpoint(service);
             service.Statuses = new TwitterStatusesEndpoint(service);
