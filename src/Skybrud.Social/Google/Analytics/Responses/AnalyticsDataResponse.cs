@@ -49,6 +49,8 @@ namespace Skybrud.Social.Google.Analytics.Responses {
 
         #endregion
 
+        #region Static methods
+
         /// <summary>
         /// Loads an instance of <var>AnalyticsDataResponse</var> from the JSON file at the
         /// specified <var>path</var>.
@@ -84,6 +86,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
 
             // Initialize the response object
             AnalyticsDataResponse response = new AnalyticsDataResponse {
+                JsonObject = obj,
                 Query = obj.GetObject("query", AnalyticsDataQuery.Parse),
                 ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
             };
@@ -105,6 +108,8 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             return response;
 
         }
+
+        #endregion
 
     }
 
