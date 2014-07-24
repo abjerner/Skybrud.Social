@@ -167,6 +167,35 @@ namespace Skybrud.Social.Google.OAuth {
 
         }
 
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. The access token is
+        /// automatically appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        public string DoAuthenticatedGetRequest(string url) {
+            return DoAuthenticatedGetRequest(url, null);
+        }
+
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. The access token is
+        /// automatically appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string for the call.</param>
+        public string DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+
+            // Initialize a new NameValueCollection if NULL
+            if (query == null) query = new NameValueCollection();
+
+            // Set the access token in the query string
+            // TODO: Specify access token in HTTP header instead
+            query.Set("access_token", AccessToken);
+
+            // Make a call to the server
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
+
+        }
+
         #endregion
 
     }
