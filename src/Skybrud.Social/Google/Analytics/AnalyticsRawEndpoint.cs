@@ -7,6 +7,8 @@ namespace Skybrud.Social.Google.Analytics {
 
     public class AnalyticsRawEndpoint {
 
+        protected const string ManagementUrl = "https://www.googleapis.com/analytics/v3/management/";
+
         public GoogleOAuthClient Client { get; private set; }
 
         internal AnalyticsRawEndpoint(GoogleOAuthClient client) {
@@ -47,6 +49,28 @@ namespace Skybrud.Social.Google.Analytics {
         #endregion
 
         #region Profiles
+
+        /// <summary>
+        /// Gets a view (profile) to which the user has access.
+        /// </summary>
+        /// <param name="accountId">Account ID to retrieve the goal for.</param>
+        /// <param name="webPropertyId">Web property ID to retrieve the goal for.</param>
+        /// <param name="profileId">View (Profile) ID to retrieve the goal for.</param>
+        public string GetProfile(string accountId, string webPropertyId, string profileId) {
+
+            // Construct the URL
+            string url = String.Format(
+               "{0}accounts/{1}/webproperties/{2}/profiles/{3}",
+               ManagementUrl,
+               accountId,
+               webPropertyId,
+               profileId
+            );
+
+            // Make the call to the API
+            return Client.DoAuthenticatedGetRequest(url);
+
+        }
 
         /// <summary>
         /// Gets a list of all profiles the user has access to.
@@ -96,12 +120,21 @@ namespace Skybrud.Social.Google.Analytics {
         /// <param name="startIndex">An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.</param>
         public string GetProfiles(string accountId, string webPropertyId, int maxResults = 0, int startIndex = 0) {
 
+            // Construct the query string
             NameValueCollection query = new NameValueCollection();
             if (maxResults > 0) query.Add("max-results", maxResults + "");
             if (startIndex > 0) query.Add("start-index", startIndex + "");
-            query.Add("access_token", Client.AccessToken);
 
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/management/accounts/" + accountId + "/webproperties/" + webPropertyId + "/profiles", query);
+            // Construct the URL
+            string url = String.Format(
+               "{0}accounts/" + accountId + "/webproperties/" + webPropertyId + "/profiles",
+               ManagementUrl,
+               accountId,
+               webPropertyId
+            );
+
+            // Make the call to the API
+            return Client.DoAuthenticatedGetRequest(url, query);
 
         }
 

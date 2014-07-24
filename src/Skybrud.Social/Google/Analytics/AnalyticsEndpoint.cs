@@ -1,6 +1,8 @@
 ﻿using System;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Analytics.Responses;
+using Skybrud.Social.Google.Exceptions;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics {
 
@@ -65,6 +67,16 @@ namespace Skybrud.Social.Google.Analytics {
         #endregion
 
         #region Profiles
+
+        /// <summary>
+        /// Gets a view (profile) to which the user has access.
+        /// </summary>
+        /// <param name="accountId">Account ID to retrieve the goal for.</param>
+        /// <param name="webPropertyId">Web property ID to retrieve the goal for.</param>
+        /// <param name="profileId">View (Profile) ID to retrieve the goal for.</param>
+        public AnalyticsProfile GetProfile(string accountId, string webPropertyId, string profileId) {
+            return AnalyticsProfile.ParseJson(Raw.GetProfile(accountId, webPropertyId, profileId));
+        }
 
         /// <summary>
         /// Gets a list of all profiles the user has access to.

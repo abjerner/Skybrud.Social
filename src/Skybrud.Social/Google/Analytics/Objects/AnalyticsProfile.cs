@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Social.Google.Analytics.Responses;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
@@ -79,6 +80,15 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static AnalyticsProfile Parse(JsonObject obj) {
+
+            // If the specified JsonObject is NULL, we just return NULL
+            if (obj == null) return null;
+
+            // Since the profile might the root object of a response from the
+            // Analytics API, we check the object for any errors
+            AnalyticsResponse.Validate(obj);
+        
+            // Parse the JsonObject
             return new AnalyticsProfile {
                 JsonObject = obj,
                 Id = obj.GetString("id"),
@@ -93,6 +103,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
                 Created = obj.GetDateTime("created"),
                 Updated = obj.GetDateTime("updated")
             };
+        
         }
 
         #endregion

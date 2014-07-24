@@ -125,6 +125,7 @@
     <Compile Include="Google\Analytics\Objects\AnalyticsDataRow.cs" />
     <Compile Include="Google\Analytics\Responses\AnalyticsProfilesResponse.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsRealtimeDataQuery.cs" />
+    <Compile Include="Google\Analytics\Responses\AnalyticsResponse.cs" />
     <Compile Include="Google\Analytics\Responses\AnalyticsWebPropertiesResponse.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsSortOrder.cs" />
     <Compile Include="Google\Analytics\Interfaces\IAnalyticsSortField.cs" />
