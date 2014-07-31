@@ -8,8 +8,8 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #region Properties
 
-        public TwitterHashTagEntitity[] HashTags { get; private set; }
-        public TwitterUrlEntitity[] Urls { get; private set; }
+        public TwitterHashTagEntity[] HashTags { get; private set; }
+        public TwitterUrlEntity[] Urls { get; private set; }
         public TwitterMentionEntity[] Mentions { get; private set; }
         public TwitterMediaEntity[] Media { get; private set; }
 
@@ -50,8 +50,8 @@ namespace Skybrud.Social.Twitter.Entities {
         public static TwitterStatusMessageEntities Parse(JsonObject entities) {
             if (entities == null) return null;
             return new TwitterStatusMessageEntities {
-                HashTags = entities.GetArray("hashtags", TwitterHashTagEntitity.Parse),
-                Urls = entities.GetArray("urls", TwitterUrlEntitity.Parse),
+                HashTags = entities.GetArray("hashtags", TwitterHashTagEntity.Parse),
+                Urls = entities.GetArray("urls", TwitterUrlEntity.Parse),
                 Mentions = entities.GetArray("user_mentions", TwitterMentionEntity.Parse),
                 Media = entities.GetArray("media", TwitterMediaEntity.Parse) ?? new TwitterMediaEntity[0]
             };

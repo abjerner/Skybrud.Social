@@ -8,7 +8,7 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #region Properties
 
-        public TwitterUrlEntitity[] Urls { get; private set; }
+        public TwitterUrlEntity[] Urls { get; private set; }
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace Skybrud.Social.Twitter.Entities {
         public static TwitterUserDescriptionEntities Parse(JsonObject entities) {
             if (entities == null) return null;
             return new TwitterUserDescriptionEntities {
-                Urls = entities.GetArray("urls", TwitterUrlEntitity.Parse)
+                Urls = entities.GetArray("urls", TwitterUrlEntity.Parse)
             };
         }
 

@@ -3,14 +3,14 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Entities {
 
-    public class TwitterUrlEntitity : TwitterBaseEntity {
+    public class TwitterUrlEntity : TwitterBaseEntity {
 
         public string Url { get; private set; }
         public string ExpandedUrl { get; private set; }
         public string DisplayUrl { get; private set; }
 
-        public static IEnumerable<TwitterUrlEntitity> ParseMultiple(JsonArray entities) {
-            List<TwitterUrlEntitity> temp = new List<TwitterUrlEntitity>();
+        public static IEnumerable<TwitterUrlEntity> ParseMultiple(JsonArray entities) {
+            List<TwitterUrlEntity> temp = new List<TwitterUrlEntity>();
             if (entities != null) {
                 for (int i = 0; i < entities.Length; i++) {
                     temp.Add(Parse(entities.GetObject(i)));
@@ -19,8 +19,8 @@ namespace Skybrud.Social.Twitter.Entities {
             return temp;
         }
 
-        public static TwitterUrlEntitity Parse(JsonObject entity) {
-            return new TwitterUrlEntitity {
+        public static TwitterUrlEntity Parse(JsonObject entity) {
+            return new TwitterUrlEntity {
                 Url = entity.GetString("url"),
                 ExpandedUrl = entity.GetString("expanded_url"),
                 DisplayUrl = entity.GetString("display_url"),

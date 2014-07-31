@@ -13,7 +13,7 @@ namespace Skybrud.Social.Twitter.Entities {
         /// specify a single URL in their profiles, but an array is still returned by the Twitter
         /// API.
         /// </summary>
-        public TwitterUrlEntitity[] Urls { get; private set; }
+        public TwitterUrlEntity[] Urls { get; private set; }
 
         #endregion
 
@@ -56,7 +56,7 @@ namespace Skybrud.Social.Twitter.Entities {
         public static TwitterUserUrlEntities Parse(JsonObject entities) {
             if (entities == null) return null;
             return new TwitterUserUrlEntities {
-                Urls = entities.GetArray("urls", TwitterUrlEntitity.Parse)
+                Urls = entities.GetArray("urls", TwitterUrlEntity.Parse)
             };
         }
 
