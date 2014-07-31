@@ -53,7 +53,7 @@ namespace Skybrud.Social.Twitter.Entities {
                 HashTags = entities.GetArray("hashtags", TwitterHashTagEntitity.Parse),
                 Urls = entities.GetArray("urls", TwitterUrlEntitity.Parse),
                 Mentions = entities.GetArray("user_mentions", TwitterMentionEntity.Parse),
-                Media = entities.GetArray("media", TwitterMediaEntity.Parse)
+                Media = entities.GetArray("media", TwitterMediaEntity.Parse) ?? new TwitterMediaEntity[0]
             };
         }
 
