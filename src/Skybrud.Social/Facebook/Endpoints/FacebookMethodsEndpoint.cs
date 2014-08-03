@@ -26,18 +26,24 @@ namespace Skybrud.Social.Facebook.Endpoints {
             Service = service;
         }
 
-        /// <summary>
-        /// Gets debug information about the access token used for accessing the Graph API.
-        /// </summary>
-        public FacebookDebugTokenResponse DebugToken() {
-            return DebugToken(Service.Client.AccessToken);
-        }
+        #region GetAccounts
 
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
         public FacebookAccountsResponse GetAccounts() {
             return FacebookAccountsResponse.ParseJson(Raw.GetAccounts());
+        }
+
+        #endregion
+
+        #region GetApp
+
+        /// <summary>
+        /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
+        /// </summary>
+        public FacebookAppResponse GetApp() {
+            return FacebookAppResponse.ParseJson(Raw.GetApp());
         }
 
         /// <summary>
@@ -48,11 +54,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
             return FacebookAppResponse.ParseJson(Raw.GetApp(id + ""));
         }
 
+        #endregion
+
+        #region DebugToken
+
         /// <summary>
-        /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
+        /// Gets debug information about the access token used for accessing the Graph API.
         /// </summary>
-        public FacebookAppResponse GetApp() {
-            return FacebookAppResponse.ParseJson(Raw.GetApp());
+        public FacebookDebugTokenResponse DebugToken() {
+            return DebugToken(Service.Client.AccessToken);
         }
 
         /// <summary>
@@ -63,6 +73,10 @@ namespace Skybrud.Social.Facebook.Endpoints {
             return FacebookDebugTokenResponse.ParseJson(Raw.DebugToken(accessToken));
         }
 
+        #endregion
+
+        #region GetEvents
+
         /// <summary>
         /// Gets the events of the specified user or page.
         /// </summary>
@@ -71,9 +85,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookEventsResponse GetEvents(long id, int limit = 0) {
             return GetEvents(id + "", limit);
         }
-
-        #region Get feed
-
+        
         /// <summary>
         /// Gets the events of the specified user or page.
         /// </summary>
@@ -82,6 +94,10 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookEventsResponse GetEvents(string identifier, int limit = 0) {
             return FacebookEventsResponse.ParseJson(Raw.GetEvents(identifier, limit));
         }
+
+        #endregion
+
+        #region Get feed
 
         /// <summary>
         /// Gets the feed of the specified user or page.
@@ -130,12 +146,14 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
+        #region Get user
+
         /// <summary>
         /// Gets information about a user with the specified <var>identifier</var>.
         /// </summary>
-        /// <param name="identifier">The ID or username of the user.</param>
-        public FacebookUser GetUser(long identifier) {
-            return GetUser(identifier + "");
+        /// <param name="id">The ID or username of the user.</param>
+        public FacebookUser GetUser(long id) {
+            return GetUser(id + "");
         }
 
         /// <summary>
@@ -145,6 +163,10 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookUser GetUser(string identifier) {
             return FacebookUser.ParseJson(Raw.GetObject(identifier));
         }
+
+        #endregion
+
+        #region GetPhotos
 
         /// <summary>
         /// Gets the photos of the specified album, page or user.
@@ -164,23 +186,31 @@ namespace Skybrud.Social.Facebook.Endpoints {
             return FacebookPhotosResponse.ParseJson(Raw.GetPhotos(identifier, limit));
         }
 
+        #endregion
+
+        #region GetPosts
+
         /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         public FacebookPostsResponse GetPosts(long id, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPosts(id + "", limit));
+            return GetPosts(id + "", limit);
         }
 
         /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
-        /// <param name="name">The name of the user/page.</param>
+        /// <param name="identifier">The identifier of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
-        public FacebookPostsResponse GetPosts(string name, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPosts(name, limit));
+        public FacebookPostsResponse GetPosts(string identifier, int limit = 0) {
+            return FacebookPostsResponse.ParseJson(Raw.GetPosts(identifier, limit));
         }
+
+        #endregion
+
+        #region Me
 
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
@@ -189,6 +219,10 @@ namespace Skybrud.Social.Facebook.Endpoints {
             return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
         }
 
+        #endregion
+
+        #region GetStatusMessage
+
         /// <summary>
         /// Gets information about a status message with the specified <var>ID</var>.
         /// </summary>
@@ -196,6 +230,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookStatusMessage GetStatusMessage(string statusMessageId) {
             return FacebookStatusMessage.ParseJson(Raw.GetObject(statusMessageId));
         }
+
+        #endregion
 
         #region Post link
 
