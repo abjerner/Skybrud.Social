@@ -170,7 +170,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         public FacebookPostsResponse GetPosts(long id, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPhotos(id + "", limit));
+            return FacebookPostsResponse.ParseJson(Raw.GetPosts(id + "", limit));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="name">The name of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         public FacebookPostsResponse GetPosts(string name, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPhotos(name, limit));
+            return FacebookPostsResponse.ParseJson(Raw.GetPosts(name, limit));
         }
 
         /// <summary>
