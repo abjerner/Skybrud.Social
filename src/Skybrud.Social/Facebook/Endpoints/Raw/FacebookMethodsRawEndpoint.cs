@@ -28,7 +28,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             };
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/debug_token", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/debug_token", query);
         
         }
 
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/me/accounts?access_token", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/me/accounts?access_token", query);
 
         }
 
@@ -59,7 +59,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier, query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier, query);
 
         }
 
@@ -77,7 +77,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (limit > 0) query.Add("limit", limit + "");
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/events", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/events", query);
         
         }
         
@@ -107,7 +107,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (options.Until > 0) query.Add("until", options.Until + "");
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
 
         }
 
@@ -118,7 +118,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <returns>The raw JSON response from the API.</returns>
         public string GetFeedFromUrl(string url) {
             if (url == null) throw new ArgumentNullException("url");
-            if (!url.StartsWith("https://graph.facebook.com/")) throw new ArgumentException("Invalid URL", "url");
+            if (!url.StartsWith("https://graph.facebook.com/v1.0/")) throw new ArgumentException("Invalid URL", "url");
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url);
         }
 
@@ -134,7 +134,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             };
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + linkId, query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + linkId, query);
 
         }
         
@@ -165,7 +165,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier, query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier, query);
         
         }
         
@@ -183,7 +183,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (limit > 0) query.Add("limit", limit + "");
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/photos", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/photos", query);
 
         }
         
@@ -201,7 +201,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (limit > 0) query.Add("limit", limit + "");
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/posts", query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
         
         }
 
@@ -217,7 +217,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             };
 
             // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/" + statusMessageId, query);
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + statusMessageId, query);
 
         }
 
@@ -257,7 +257,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             query.Add("access_token", Client.AccessToken);
 
             // Make the call to the API
-            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
 
         }
 
@@ -296,7 +296,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             };
 
             // Make the call to the API
-            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/" + identifier + "/feed", query);
+            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
 
         }
 
