@@ -31,7 +31,19 @@ namespace Skybrud.Social.Twitter {
 
         #region FormatEntities(...)
 
+        #region TwitterStatusMessageEntities
 
+        public static string FormatEntities(string text, ITwitterEntities entities) {
+            return FormatEntities(text, entities.GetAll(), new TwitterDefaultEntityFormatter());
+        }
+
+        public static string FormatEntities(string text, ITwitterEntities entities, ITwitterEntityFormatter formatter) {
+            return FormatEntities(text, entities.GetAll(), formatter);
+        }
+
+        #endregion
+
+        #region TwitterBaseEntity
 
         public static string FormatEntities(string text, IEnumerable<TwitterBaseEntity> entities) {
             return FormatEntities(text, entities, new TwitterDefaultEntityFormatter());
@@ -73,6 +85,8 @@ namespace Skybrud.Social.Twitter {
             return text;
 
         }
+
+        #endregion
 
         #endregion
 

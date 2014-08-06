@@ -253,6 +253,7 @@
     <Compile Include="Twitter\Entities\Formatting\ITwitterEntityFormatter.cs" />
     <Compile Include="Twitter\Entities\Formatting\TwitterExtendedEntityFormatter.cs" />
     <Compile Include="Twitter\Entities\Formatting\TwitterDefaultEntitiesFormatter.cs" />
+    <Compile Include="Twitter\Entities\ITwitterEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserDescriptionEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserUrlEntities.cs" />

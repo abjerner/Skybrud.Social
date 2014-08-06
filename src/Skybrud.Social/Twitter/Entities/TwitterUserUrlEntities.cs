@@ -3,8 +3,8 @@ using System.Linq;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Entities {
-    
-    public class TwitterUserUrlEntities {
+
+    public class TwitterUserUrlEntities : ITwitterEntities {
 
         #region Properties
 
@@ -30,7 +30,7 @@ namespace Skybrud.Social.Twitter.Entities {
         /// <summary>
         /// Gets a collection of all entities in ascending order.
         /// </summary>
-        public IOrderedEnumerable<TwitterBaseEntity> GetAll() {
+        public IEnumerable<TwitterBaseEntity> GetAll() {
             List<TwitterBaseEntity> temp = new List<TwitterBaseEntity>();
             temp.AddRange(Urls);
             return temp.OrderBy(x => x.StartIndex);
@@ -39,7 +39,7 @@ namespace Skybrud.Social.Twitter.Entities {
         /// <summary>
         /// Gets a collection of all entities in descending order.
         /// </summary>
-        public IOrderedEnumerable<TwitterBaseEntity> GetAllReversed() {
+        public IEnumerable<TwitterBaseEntity> GetAllReversed() {
             List<TwitterBaseEntity> temp = new List<TwitterBaseEntity>();
             temp.AddRange(Urls);
             return temp.OrderByDescending(x => x.StartIndex);

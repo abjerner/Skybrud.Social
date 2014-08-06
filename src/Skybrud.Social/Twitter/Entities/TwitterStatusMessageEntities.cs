@@ -4,7 +4,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Entities {
 
-    public class TwitterStatusMessageEntities {
+    public class TwitterStatusMessageEntities : ITwitterEntities {
 
         #region Properties
 
@@ -24,8 +24,11 @@ namespace Skybrud.Social.Twitter.Entities {
         #endregion
 
         #region Member method(s)
-        
-        public IOrderedEnumerable<TwitterBaseEntity> GetAll() {
+
+        /// <summary>
+        /// Gets a collection of all entities in an ascending order.
+        /// </summary>
+        public IEnumerable<TwitterBaseEntity> GetAll() {
             List<TwitterBaseEntity> temp = new List<TwitterBaseEntity>();
             temp.AddRange(HashTags);
             temp.AddRange(Urls);
@@ -34,7 +37,10 @@ namespace Skybrud.Social.Twitter.Entities {
             return temp.OrderBy(x => x.StartIndex);
         }
 
-        public IOrderedEnumerable<TwitterBaseEntity> GetAllReversed() {
+        /// <summary>
+        /// Gets a collection of all entities in an descending order.
+        /// </summary>
+        public IEnumerable<TwitterBaseEntity> GetAllReversed() {
             List<TwitterBaseEntity> temp = new List<TwitterBaseEntity>();
             temp.AddRange(HashTags);
             temp.AddRange(Urls);
