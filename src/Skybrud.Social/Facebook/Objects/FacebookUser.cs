@@ -81,6 +81,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookUser Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookUser {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 FirstName = obj.GetString("first_name"),
