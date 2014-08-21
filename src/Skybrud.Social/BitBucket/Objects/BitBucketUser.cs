@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System.IO;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -6,14 +7,9 @@ namespace Skybrud.Social.BitBucket.Objects {
     /// <summary>
     /// Class describing a BitBucket user.
     /// </summary>
-    public class BitBucketUser {
+    public class BitBucketUser : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// Gets the username of the user.

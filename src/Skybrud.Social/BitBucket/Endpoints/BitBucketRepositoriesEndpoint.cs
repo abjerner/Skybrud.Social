@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
 using Skybrud.Social.BitBucket.Exceptions;
 using Skybrud.Social.BitBucket.Objects;

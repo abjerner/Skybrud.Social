@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.OAuth {
+namespace Skybrud.Social.Google.OAuth {
 
     /// <summary>
     /// Indicates whether the user should be re-prompted for consent. The default is auto, so a

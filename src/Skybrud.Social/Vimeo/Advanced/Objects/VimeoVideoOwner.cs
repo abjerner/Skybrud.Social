@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
 
-    public class VimeoVideoOwner {
+    public class VimeoVideoOwner : SocialJsonObject {
 
         public int Id { get; private set; }
         public string Username { get; private set; }
@@ -17,6 +18,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoVideoOwner Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideoOwner {
+                JsonObject = obj,
                 Id = obj.GetInt("id"),
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),

@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.BitBucket.Objects;
+using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Responses {

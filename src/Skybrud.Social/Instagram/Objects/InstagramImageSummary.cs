@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
-    
-    public class InstagramImageSummary {
+
+    public class InstagramImageSummary : SocialJsonObject {
 
         #region Properties
 
@@ -29,6 +30,7 @@ namespace Skybrud.Social.Instagram.Objects {
                 StandardResolution = new InstagramMediaSummary()
             };
             return new InstagramImageSummary {
+                JsonObject = obj,
                 LowResolution = obj.GetObject("low_resolution", InstagramMediaSummary.Parse),
                 Thumbnail = obj.GetObject("thumbnail", InstagramMediaSummary.Parse),
                 StandardResolution = obj.GetObject("standard_resolution", InstagramMediaSummary.Parse)

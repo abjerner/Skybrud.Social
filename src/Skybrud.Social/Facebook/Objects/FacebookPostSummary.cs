@@ -1,18 +1,13 @@
-﻿using System;
+using System;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookPostSummary : ISocialTimelineEntry {
+    public class FacebookPostSummary : SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         public string Id { get; private set; }
         public FacebookObject From { get; private set; }
@@ -66,7 +61,6 @@ namespace Skybrud.Social.Facebook.Objects {
         }
 
         #endregion
-
 
         #region Static methods
 

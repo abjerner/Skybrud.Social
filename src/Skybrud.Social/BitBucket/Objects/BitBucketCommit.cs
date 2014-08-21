@@ -1,17 +1,13 @@
-﻿using System;
+using System;
 using System.IO;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
 
-    public class BitBucketCommit {
+    public class BitBucketCommit : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The SHA hash identifying the commit.

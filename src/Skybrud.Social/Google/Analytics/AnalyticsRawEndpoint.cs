@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.OAuth;

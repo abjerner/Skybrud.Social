@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Instagram.Exceptions;
 using Skybrud.Social.Json;
 

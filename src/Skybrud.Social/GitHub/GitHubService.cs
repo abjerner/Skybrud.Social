@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using Skybrud.Social.GitHub.Endpoints;
 using Skybrud.Social.GitHub.OAuth;

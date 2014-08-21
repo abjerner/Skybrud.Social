@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Google.Analytics;
+using Skybrud.Social.Google.Analytics;
 
 namespace Skybrud.Social.Google.OAuth {
     

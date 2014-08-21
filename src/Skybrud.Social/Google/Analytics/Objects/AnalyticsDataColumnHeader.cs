@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
 

@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Twitter.Enums {
+namespace Skybrud.Social.Twitter.Enums {
     
     public enum TwitterAuthentication {
         None,

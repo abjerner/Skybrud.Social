@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Twitter.Objects {
+namespace Skybrud.Social.Twitter.Objects {
 
     public class TwitterContributor {
         public long UserId { get; internal set; }

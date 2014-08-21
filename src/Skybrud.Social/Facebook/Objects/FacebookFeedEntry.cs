@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookFeedEntry : ISocialTimelineEntry {
+    public class FacebookFeedEntry: SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
 
@@ -35,6 +35,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookFeedEntry Parse(JsonObject obj) {
             return new FacebookFeedEntry {
+                JsonObject = obj,
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),

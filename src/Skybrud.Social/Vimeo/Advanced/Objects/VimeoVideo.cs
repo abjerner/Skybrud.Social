@@ -4,7 +4,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
     
-    public class VimeoVideo : ISocialTimelineEntry {
+    public class VimeoVideo : SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
 
@@ -129,6 +129,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideo {
+                JsonObject = obj,
                 Id = obj.GetInt("id"),
                 IsHd = obj.GetString("is_hd") == "1",
                 IsTranscoding = obj.GetString("is_transcoding") == "1",

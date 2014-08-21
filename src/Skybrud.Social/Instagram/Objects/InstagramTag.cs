@@ -1,11 +1,12 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
     /// <summary>
     /// Class representing a tag in the Instagram API.
     /// </summary>
-    public class InstagramTag {
+    public class InstagramTag : SocialJsonObject {
 
         #region Properties
 
@@ -33,6 +34,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         public static InstagramTag Parse(JsonObject obj) {
             return new InstagramTag {
+                JsonObject = obj,
                 MediaCount = obj.GetLong("media_count"),
                 Name = obj.GetString("name")
             };

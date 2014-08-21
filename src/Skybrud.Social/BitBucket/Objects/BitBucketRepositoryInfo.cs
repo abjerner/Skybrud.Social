@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
 
-    public class BitBucketRepositoryInfo {
+    public class BitBucketRepositoryInfo : SocialJsonObject {
 
         /// <summary>
         /// The full name of the repository. The full name can be described as "{accountName}/{repoSlug}".
@@ -35,6 +36,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
             // Initialize the object
             return new BitBucketRepositoryInfo {
+                JsonObject = obj,
                 FullName = obj.GetString("full_name"),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)
             };

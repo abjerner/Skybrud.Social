@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Instagram.OAuth;
+using Skybrud.Social.Instagram.OAuth;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     

@@ -1,15 +1,11 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
     
-    public class FacebookUser {
+    public class FacebookUser : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         public long Id { get; private set; }
         public string Name { get; private set; }

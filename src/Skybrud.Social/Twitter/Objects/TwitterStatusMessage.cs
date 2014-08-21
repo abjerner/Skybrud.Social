@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
@@ -6,14 +6,9 @@ using Skybrud.Social.Twitter.Entities;
 
 namespace Skybrud.Social.Twitter.Objects {
 
-    public class TwitterStatusMessage : ISocialTimelineEntry {
+    public class TwitterStatusMessage : SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The ID of the tweet.

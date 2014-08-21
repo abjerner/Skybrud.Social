@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookAccount {
+    public class FacebookAccount : SocialJsonObject {
     
         /// <summary>
         /// The ID of the account.
@@ -43,6 +44,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookAccount Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAccount {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Category = obj.GetString("category"),

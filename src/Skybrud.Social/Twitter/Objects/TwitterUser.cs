@@ -1,18 +1,14 @@
-﻿using System;
+using System;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Entities;
 
 namespace Skybrud.Social.Twitter.Objects {
 
     /// <see cref="https://dev.twitter.com/docs/platform-objects/users"/>
-    public class TwitterUser {
+    public class TwitterUser : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The integer representation of the unique identifier for this User. This number is greater

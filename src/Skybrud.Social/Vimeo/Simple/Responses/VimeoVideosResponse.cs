@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+using System.Xml.Linq;
 using Skybrud.Social.Json;
 using Skybrud.Social.Vimeo.Simple.Objects;
 

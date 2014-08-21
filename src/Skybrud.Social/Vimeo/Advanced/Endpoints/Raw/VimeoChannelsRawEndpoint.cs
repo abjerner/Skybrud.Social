@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Json;
 using Skybrud.Social.Vimeo.Advanced.Enums;

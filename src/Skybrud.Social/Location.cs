@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Interfaces;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social {
 

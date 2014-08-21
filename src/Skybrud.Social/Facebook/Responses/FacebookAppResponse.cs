@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Facebook.Exceptions;
+using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {

@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
     
-    public class FacebookImage {
+    public class FacebookImage : SocialJsonObject {
 
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -11,6 +12,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookImage Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookImage {
+                JsonObject = obj,
                 Width = obj.GetInt("width"),
                 Height = obj.GetInt("height"),
                 Source = obj.GetString("source")

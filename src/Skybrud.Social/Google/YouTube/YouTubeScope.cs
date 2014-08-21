@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.YouTube {
+namespace Skybrud.Social.Google.YouTube {
     
     public class YouTubeScope {
 

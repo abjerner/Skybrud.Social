@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Endpoints.Raw;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     

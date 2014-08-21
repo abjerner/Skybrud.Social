@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Google.Exceptions;
+using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google {

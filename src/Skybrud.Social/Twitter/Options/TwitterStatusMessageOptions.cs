@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Twitter.Options {
+namespace Skybrud.Social.Twitter.Options {
 
     public class TwitterStatusMessageOptions {
 

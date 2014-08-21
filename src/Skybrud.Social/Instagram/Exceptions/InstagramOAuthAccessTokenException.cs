@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Instagram.Exceptions {
+namespace Skybrud.Social.Instagram.Exceptions {
 
     public class InstagramOAuthAccessTokenException : InstagramOAuthException {
         

@@ -1,10 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google {
     
-    public class GoogleApiObject {
-
-        public JsonObject JsonObject { get; protected set; }
+    public class GoogleApiObject : SocialJsonObject {
         
         #region Member methods
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Entities {

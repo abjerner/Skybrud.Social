@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google {
+namespace Skybrud.Social.Google {
     
     public class GoogleApiResource : GoogleApiObject {
 

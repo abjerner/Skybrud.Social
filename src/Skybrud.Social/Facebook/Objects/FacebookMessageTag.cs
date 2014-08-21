@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookMessageTag {
+    public class FacebookMessageTag : SocialJsonObject {
 
         public long Id { get; private set; }
         public string Name { get; private set; }
@@ -13,6 +14,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookMessageTag Parse(JsonObject obj) {
             return new FacebookMessageTag {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Type = obj.GetString("type"),

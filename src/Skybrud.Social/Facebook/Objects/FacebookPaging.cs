@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.Web;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
     
-    public class FacebookPaging {
+    public class FacebookPaging : SocialJsonObject {
 
         #region Properties
 
@@ -60,6 +61,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookPaging Parse(JsonObject obj) {
             FacebookPaging paging = new FacebookPaging();
             if (obj != null) {
+                paging.JsonObject = obj;
                 paging.Previous = obj.GetString("previous");
                 paging.Next = obj.GetString("next");
             }

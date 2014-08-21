@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.OAuth {
+namespace Skybrud.Social.OAuth {
 
     public class OAuthRequestToken {
 

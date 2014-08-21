@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
+namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
 
     public class YouTubePlaylistItemOptions {
 

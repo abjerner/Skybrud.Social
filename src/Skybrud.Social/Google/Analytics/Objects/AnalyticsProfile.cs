@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Google.Analytics.Responses;
 using Skybrud.Social.Json;
 

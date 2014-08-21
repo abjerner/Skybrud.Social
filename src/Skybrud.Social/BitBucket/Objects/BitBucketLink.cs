@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
     
-    public class BitBucketLink {
+    public class BitBucketLink : SocialJsonObject {
 
         public string Name { get; private set; }
         public string Href { get; private set; }
@@ -21,6 +22,7 @@ namespace Skybrud.Social.BitBucket.Objects {
                 JsonObject value = obj.GetObject(key);
                 if (value == null) continue;
                 links.Add(key, new BitBucketLink {
+                    JsonObject = obj,
                     Name = key,
                     Href = value.GetString("href")
                 });

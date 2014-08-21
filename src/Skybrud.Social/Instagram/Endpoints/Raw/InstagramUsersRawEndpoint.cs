@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options;
 

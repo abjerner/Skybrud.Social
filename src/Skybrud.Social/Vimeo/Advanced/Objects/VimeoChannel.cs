@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
     
-    public class VimeoChannel {
+    public class VimeoChannel : SocialJsonObject {
         
         public int Id { get; private set; }
         public bool IsFeatured { get; private set; }
@@ -41,6 +42,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoChannel Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoChannel {
+                JsonObject = obj,
                 Id = obj.GetInt("id"),
                 IsFeatured = obj.GetString("is_featured") == "1",
                 IsSponsored = obj.GetString("is_sponsored") == "1",

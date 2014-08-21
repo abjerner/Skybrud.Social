@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
     
-    public class TwitterTimeline {
+    public class TwitterTimeline : SocialJsonObject {
 
         #region Properties
 
@@ -52,6 +53,7 @@ namespace Skybrud.Social.Twitter.Objects {
 
             // Return the instance
             return new TwitterTimeline {
+                JsonObject = obj,
                 JsonArray = array,
                 StatusMessages = TwitterStatusMessage.ParseMultiple(array)
             };

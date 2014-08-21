@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Responses {

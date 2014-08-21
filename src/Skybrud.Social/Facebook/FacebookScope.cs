@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Facebook {
+namespace Skybrud.Social.Facebook {
     
     public class FacebookScope {
 

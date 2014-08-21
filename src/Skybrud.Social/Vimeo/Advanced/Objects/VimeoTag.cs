@@ -1,8 +1,9 @@
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
     
-    public class VimeoTag {
+    public class VimeoTag : SocialJsonObject {
         
         public int Author { get; private set; }
         public int Id { get; private set; }
@@ -17,6 +18,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoTag Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoTag {
+                JsonObject = obj,
                 Id = obj.GetInt("id"),
                 Author = obj.GetInt("author"),
                 Normalized = obj.GetString("normalized"),

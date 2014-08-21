@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.BitBucket.OAuth;
+using Skybrud.Social.BitBucket.OAuth;
 
 namespace Skybrud.Social.BitBucket.Endpoints.Raw {
     

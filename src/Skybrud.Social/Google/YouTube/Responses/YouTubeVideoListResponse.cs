@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
+using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Google.YouTube.Objects.Videos;
 using Skybrud.Social.Json;
 

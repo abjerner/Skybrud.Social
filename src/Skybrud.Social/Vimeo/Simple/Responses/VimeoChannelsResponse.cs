@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+using System.Xml.Linq;
 using Skybrud.Social.Vimeo.Simple.Objects;
 
 namespace Skybrud.Social.Vimeo.Simple.Responses {

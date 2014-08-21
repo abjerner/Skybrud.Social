@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
+using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.YouTube.Responses {
