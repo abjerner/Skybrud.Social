@@ -51,9 +51,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
 
         #region Constructors
 
-        private YouTubePlaylistItem() {
-            // Hide default constructor
-        }
+        private YouTubePlaylistItem(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -83,8 +81,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static YouTubePlaylistItem Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new YouTubePlaylistItem {
-                JsonObject = obj,
+            return new YouTubePlaylistItem(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
                 Id = obj.GetString("id"),

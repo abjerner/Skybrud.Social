@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
@@ -29,20 +25,13 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
 
         #region Constructor
 
-        internal VimeoChannel() {
-            // Hide default constructor
-        }
+        private VimeoChannel(JsonObject obj) : base(obj) { }
 
         #endregion
 
-        public static VimeoChannel[] Parse(JsonArray array) {
-            return array == null ? new VimeoChannel[0] : array.ParseMultiple(Parse);
-        }
-
         public static VimeoChannel Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoChannel {
-                JsonObject = obj,
+            return new VimeoChannel(obj) {
                 Id = obj.GetInt("id"),
                 IsFeatured = obj.GetString("is_featured") == "1",
                 IsSponsored = obj.GetString("is_sponsored") == "1",

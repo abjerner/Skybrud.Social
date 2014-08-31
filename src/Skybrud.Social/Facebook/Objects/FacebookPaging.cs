@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Specialized;
 using System.Web;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -50,22 +49,18 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructors
 
-        private FacebookPaging() {
-            // Hide default constructor
-        }
+        private FacebookPaging(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         public static FacebookPaging Parse(JsonObject obj) {
-            FacebookPaging paging = new FacebookPaging();
-            if (obj != null) {
-                paging.JsonObject = obj;
-                paging.Previous = obj.GetString("previous");
-                paging.Next = obj.GetString("next");
-            }
-            return paging;
+            if (obj == null) return new FacebookPaging(null);
+            return new FacebookPaging(obj) {
+                Previous =  obj.GetString("previous"),
+                Next = obj.GetString("next")
+            };
         }
 
         #endregion

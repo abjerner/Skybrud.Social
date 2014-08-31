@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
@@ -22,11 +21,16 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public int NumberOfAlbums { get; private set; }
         public int NumberOfChannels { get; private set; }
         public int NumberOfGroups { get; private set; }
+        
+        #region Constructors
+
+        private VimeoUser(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static VimeoUser Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoUser {
-                JsonObject = obj,
+            return new VimeoUser(obj) {
                 Id = obj.GetInt("id"),
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),

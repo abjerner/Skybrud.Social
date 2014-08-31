@@ -1,5 +1,4 @@
 using System.IO;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -50,28 +49,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #region Constructor
 
-        internal BitBucketUser() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the user.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Save the user to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            File.WriteAllText(path, ToJson());
-        }
+        private BitBucketUser(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -99,8 +77,7 @@ namespace Skybrud.Social.BitBucket.Objects {
         /// <param name="obj">The object to parse.</param>
         public static BitBucketUser Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new BitBucketUser {
-                JsonObject = obj,
+            return new BitBucketUser(obj) {
                 Username = obj.GetString("username"),
                 FirstName = obj.GetString("first_name"),
                 LastName = obj.GetString("last_name"),

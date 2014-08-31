@@ -16,9 +16,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         
         #region Constructors
 
-        private YouTubeVideoContentDetails() {
-            // Hide default constructor
-        }
+        private YouTubeVideoContentDetails(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -53,8 +51,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
             if (obj == null) return null;
             
             // Initialize and return the object
-            return new YouTubeVideoContentDetails {
-                JsonObject = obj,
+            return new YouTubeVideoContentDetails(obj) {
                 Duration = obj.GetString("duration"),
                 Dimension = obj.GetString("dimension"),
                 Definition = obj.GetString("definition"),

@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -32,28 +31,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        internal InstagramComment() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private InstagramComment(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -81,21 +59,12 @@ namespace Skybrud.Social.Instagram.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramComment Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new InstagramComment {
-                JsonObject = obj,
+            return new InstagramComment(obj) {
                 Id = obj.GetLong("id"),
                 Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetLong("created_time")),
                 Text = obj.GetString("text"),
                 User = InstagramUserSummary.Parse(obj.GetObject("from"))
             };
-        }
-
-        /// <summary>
-        /// Gets an array of comments from the specified <var>JsonArray</var>.
-        /// </summary>
-        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
-        public static InstagramComment[] ParseMultiple(JsonArray array) {
-            return array == null ? new InstagramComment[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

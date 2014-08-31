@@ -36,28 +36,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        private InstagramLocation() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private InstagramLocation(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -85,21 +64,12 @@ namespace Skybrud.Social.Instagram.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static InstagramLocation Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new InstagramLocation {
-                JsonObject = obj,
+            return new InstagramLocation(obj) {
                 Id = obj.GetInt("id"),
                 Name = obj.GetString("name"),
                 Latitude = obj.GetDouble("latitude"),
                 Longitude = obj.GetDouble("longitude")
             };
-        }
-
-        /// <summary>
-        /// Gets an array of locations from the specified <var>JsonArray</var>.
-        /// </summary>
-        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
-        public static InstagramLocation[] ParseMultiple(JsonArray array) {
-            return array == null ? new InstagramLocation[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

@@ -65,6 +65,7 @@
     <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
+    <Compile Include="SocialJsonArray.cs" />
     <Compile Include="Facebook\Endpoints\FacebookMethodsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />

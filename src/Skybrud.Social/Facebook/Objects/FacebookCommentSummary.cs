@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -12,10 +11,15 @@ namespace Skybrud.Social.Facebook.Objects {
         public FacebookMessageTag[] MessageTags { get; private set; }
         public DateTime CreatedTime { get; private set; }
         public int Likes { get; private set; }
+        
+        #region Constructors
+
+        private FacebookCommentSummary(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static FacebookCommentSummary Parse(JsonObject obj) {
-            return new FacebookCommentSummary {
-                JsonObject = obj,
+            return new FacebookCommentSummary(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),
@@ -23,10 +27,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 CreatedTime = obj.GetDateTime("created_time"),
                 Likes = obj.HasValue("likes") ? obj.GetInt("likes") : 0
             };
-        }
-
-        public static FacebookCommentSummary[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookCommentSummary[0] : array.ParseMultiple(Parse);
         }
 
     }

@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -15,7 +14,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        private InstagramImageSummary() {
+        private InstagramImageSummary(JsonObject obj) : base(obj) {
             // Hide default constructor
         }
 
@@ -24,13 +23,12 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         public static InstagramImageSummary Parse(JsonObject obj) {
-            if (obj == null) return new InstagramImageSummary {
-                LowResolution = new InstagramMediaSummary(),
-                Thumbnail = new InstagramMediaSummary(),
-                StandardResolution = new InstagramMediaSummary()
+            if (obj == null) return new InstagramImageSummary(null) {
+                LowResolution = new InstagramMediaSummary(null),
+                Thumbnail = new InstagramMediaSummary(null),
+                StandardResolution = new InstagramMediaSummary(null)
             };
-            return new InstagramImageSummary {
-                JsonObject = obj,
+            return new InstagramImageSummary(obj) {
                 LowResolution = obj.GetObject("low_resolution", InstagramMediaSummary.Parse),
                 Thumbnail = obj.GetObject("thumbnail", InstagramMediaSummary.Parse),
                 StandardResolution = obj.GetObject("standard_resolution", InstagramMediaSummary.Parse)

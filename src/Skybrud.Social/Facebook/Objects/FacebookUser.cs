@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -13,7 +12,6 @@ namespace Skybrud.Social.Facebook.Objects {
         public string LastName { get; private set; }
         public string Link { get; private set; }
         public string Username { get; private set; }
-        // "birthday": "08/17/1988"
         public FacebookObject Hometown { get; private set; }
         public FacebookObject Location { get; private set; }
         public string Gender { get; private set; }
@@ -27,28 +25,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructors
 
-        private FacebookUser() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private FacebookUser(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -76,8 +53,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookUser Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookUser {
-                JsonObject = obj,
+            return new FacebookUser(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 FirstName = obj.GetString("first_name"),

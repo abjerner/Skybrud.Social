@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -32,28 +31,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        private InstagramUserSummary() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private InstagramUserSummary(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -82,21 +60,12 @@ namespace Skybrud.Social.Instagram.Objects {
         public static InstagramUserSummary Parse(JsonObject obj) {
             if (obj == null) return null;
             string fullname = obj.GetString("full_name");
-            return new InstagramUserSummary {
-                JsonObject = obj,
+            return new InstagramUserSummary(obj) {
                 Id = obj.GetLong("id"),
                 Username = obj.GetString("username"),
                 FullName = String.IsNullOrEmpty(fullname) ? null : fullname,
                 ProfilePicture = obj.GetString("profile_picture")
             };
-        }
-
-        /// <summary>
-        /// Gets an array of multiple users from the specified <var>JsonArray</var>.
-        /// </summary>
-        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
-        public static InstagramUserSummary[] ParseMultiple(JsonArray array) {
-            return array == null ? new InstagramUserSummary[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

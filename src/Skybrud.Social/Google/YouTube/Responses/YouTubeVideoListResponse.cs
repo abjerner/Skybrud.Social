@@ -1,4 +1,3 @@
-using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Google.YouTube.Objects.Videos;
 using Skybrud.Social.Json;
 
@@ -13,6 +12,12 @@ namespace Skybrud.Social.Google.YouTube.Responses {
         public string PrevPageToken { get; private set; }
         public string NextPageToken { get; private set; }
         public YouTubeVideo[] Items { get; private set; }
+
+        #endregion
+        
+        #region Constructors
+
+        private YouTubeVideoListResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -52,8 +57,7 @@ namespace Skybrud.Social.Google.YouTube.Responses {
             JsonObject pageInfo = obj.GetObject("pageInfo");
 
             // Initialize the response object
-            return new YouTubeVideoListResponse {
-                JsonObject = obj,
+            return new YouTubeVideoListResponse(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
                 TotalResults = pageInfo.GetInt("totalResults"),

@@ -14,6 +14,12 @@ namespace Skybrud.Social.Google.YouTube.Responses {
         public YouTubePlaylistItem[] Items { get; private set; }
 
         #endregion
+        
+        #region Constructors
+
+        private YouTubePlaylistItemListResponse(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         #region Static methods
 
@@ -51,8 +57,7 @@ namespace Skybrud.Social.Google.YouTube.Responses {
             JsonObject pageInfo = obj.GetObject("pageInfo");
 
             // Initialize the response object
-            return new YouTubePlaylistItemListResponse {
-                JsonObject = obj,
+            return new YouTubePlaylistItemListResponse(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
                 TotalResults = pageInfo.GetInt("totalResults"),

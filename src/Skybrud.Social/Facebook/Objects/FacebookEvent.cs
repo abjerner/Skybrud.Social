@@ -1,15 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
-    
-    
+
     public class FacebookEvent : SocialJsonObject {
-        
+
+        #region Properties
+
         public long Id { get; private set; }
         public object Owner { get; private set; }
         public string Name { get; private set; }
@@ -23,9 +20,16 @@ namespace Skybrud.Social.Facebook.Objects {
         public string Privacy { get; private set; }
         public DateTime UpdatedTime { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
+        private FacebookEvent(JsonObject obj) : base(obj) { }
+
+        #endregion
+
         public static FacebookEvent Parse(JsonObject obj) {
-            return new FacebookEvent {
-                JsonObject = obj,
+            return new FacebookEvent(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
@@ -37,10 +41,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 Privacy = obj.GetString("privacy"),
                 UpdatedTime = obj.GetDateTime("updated_time")
             };
-        }
-
-        public static FacebookEvent[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookEvent[0] : array.ParseMultiple(Parse);
         }
         
     }

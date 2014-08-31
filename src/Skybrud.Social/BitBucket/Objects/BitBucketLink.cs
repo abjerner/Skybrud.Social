@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -8,6 +7,14 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         public string Name { get; private set; }
         public string Href { get; private set; }
+
+        #region Constructors
+
+        private BitBucketLink(JsonObject obj) : base(obj) {
+            // Hide default constructor
+        }
+
+        #endregion
 
         public static Dictionary<string, BitBucketLink> ParseMultiple(JsonObject obj) {
 
@@ -21,8 +28,7 @@ namespace Skybrud.Social.BitBucket.Objects {
             foreach (string key in obj.Dictionary.Keys) {
                 JsonObject value = obj.GetObject(key);
                 if (value == null) continue;
-                links.Add(key, new BitBucketLink {
-                    JsonObject = obj,
+                links.Add(key, new BitBucketLink(obj) {
                     Name = key,
                     Href = value.GetString("href")
                 });

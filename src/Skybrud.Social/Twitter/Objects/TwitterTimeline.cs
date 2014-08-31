@@ -1,16 +1,10 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
     
-    public class TwitterTimeline : SocialJsonObject {
+    public class TwitterTimeline : SocialJsonArray {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonArray the object was created from.
-        /// </summary>
-        public JsonArray JsonArray { get; private set; }
 
         /// <summary>
         /// Gets the status messages of the timeline.
@@ -29,6 +23,14 @@ namespace Skybrud.Social.Twitter.Objects {
         /// </summary>
         public int Count {
             get { return StatusMessages.Length; }
+        }
+
+        #endregion
+        
+        #region Constructors
+
+        internal TwitterTimeline(JsonArray array) : base(array) {
+            // Hide default constructor
         }
 
         #endregion
@@ -52,10 +54,8 @@ namespace Skybrud.Social.Twitter.Objects {
             JsonArray array = (JsonArray) json;
 
             // Return the instance
-            return new TwitterTimeline {
-                JsonObject = obj,
-                JsonArray = array,
-                StatusMessages = TwitterStatusMessage.ParseMultiple(array)
+            return new TwitterTimeline(array) {
+                StatusMessages = array.ParseMultiple(TwitterStatusMessage.Parse)
             };
 
         }

@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Entities;
 
@@ -262,27 +261,8 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Constructor(s)
 
-        private TwitterUser() {
+        private TwitterUser(JsonObject obj) : base(obj) {
             // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -315,11 +295,10 @@ namespace Skybrud.Social.Twitter.Objects {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw TwitterException.Parse(obj.GetArray("error"));
             
-            TwitterUser user = new TwitterUser();
+            TwitterUser user = new TwitterUser(obj);
 
             #region Basic properties
             
-            user.JsonObject = obj;
             user.Id = obj.GetLong("id");
             user.IdStr = obj.GetString("id_str");
             user.Name = obj.GetString("name");

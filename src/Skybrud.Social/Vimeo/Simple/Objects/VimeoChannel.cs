@@ -8,6 +8,8 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
 
     public class VimeoChannel : SocialJsonObject {
 
+        #region Properties
+
         /// <summary>
         /// Channel ID.
         /// </summary>
@@ -85,9 +87,21 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
 
         public XElement XElement { get; private set; }
 
+        #endregion
+        
+        #region Constructor(s)
+
+        private VimeoChannel(JsonObject obj) : base(obj) { }
+
+        private VimeoChannel(XElement xChannel) : base(null) {
+            XElement = xChannel;
+        }
+
+        #endregion
+
         public static VimeoChannel Parse(XElement xChannel) {
             if (xChannel == null || xChannel.Name != "channel") return null;
-            VimeoChannel channel = new VimeoChannel {
+            VimeoChannel channel = new VimeoChannel(xChannel) {
                 Id = SocialUtils.GetElementValue<int>(xChannel, "id"),
                 Name = SocialUtils.GetElementValue<string>(xChannel, "name"),
                 Description = SocialUtils.GetElementValue<string>(xChannel, "description"),
@@ -102,8 +116,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
                 IsCreator = SocialUtils.GetElementValueOrDefault<string>(xChannel, "is_creator") == "yes",
                 IsMod = SocialUtils.GetElementValueOrDefault<string>(xChannel, "is_mod") == "yes",
                 TotalVideos = SocialUtils.GetElementValue<int>(xChannel, "total_videos"),
-                TotalSubscribers = SocialUtils.GetElementValue<int>(xChannel, "total_subscribers"),
-                XElement = xChannel
+                TotalSubscribers = SocialUtils.GetElementValue<int>(xChannel, "total_subscribers")
             };
             if (channel.Badge == "") channel.Badge = null;
             return channel;
@@ -111,8 +124,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
 
         public static VimeoChannel Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoChannel {
-                JsonObject = obj,
+            return new VimeoChannel(obj) {
                 Id = obj.GetInt("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
@@ -134,10 +146,6 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         public static VimeoChannel[] ParseMultiple(XElement xVideos) {
             if (xVideos == null || xVideos.Name != "channels") return null;
             return (from x in xVideos.Elements("channel") select Parse(x)).ToArray();
-        }
-
-        public static VimeoChannel[] ParseMultiple(JsonArray array){
-            return array == null ? new VimeoChannel[0] : array.ParseMultiple(Parse);
         }
 
     }

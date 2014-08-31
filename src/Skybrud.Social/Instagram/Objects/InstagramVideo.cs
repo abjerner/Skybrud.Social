@@ -12,9 +12,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        internal InstagramVideo() {
-            // Hide default constructor
-        }
+        internal InstagramVideo(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -42,14 +40,6 @@ namespace Skybrud.Social.Instagram.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public new static InstagramVideo Parse(JsonObject obj) {
             return InstagramMedia.Parse(obj) as InstagramVideo;
-        }
-
-        /// <summary>
-        /// Gets an array of videos from the specified <var>JsonArray</var>.
-        /// </summary>
-        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
-        public new static InstagramVideo[] ParseMultiple(JsonArray array) {
-            return array == null ? new InstagramVideo[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

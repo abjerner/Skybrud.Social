@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -42,17 +41,14 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #region Constructor
 
-        internal BitBucketChangeset() {
-            // Hide default constructor
-        }
+        private BitBucketChangeset(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Methods
 
         public static BitBucketChangeset Parse(JsonObject obj) {
-            return new BitBucketChangeset {
-                JsonObject = obj,
+            return new BitBucketChangeset(obj) {
                 Node = obj.GetString("node"),
                 RawAuthor = obj.GetString("raw_author"),
                 Timestamp = DateTime.Parse(obj.GetString("utctimestamp")),

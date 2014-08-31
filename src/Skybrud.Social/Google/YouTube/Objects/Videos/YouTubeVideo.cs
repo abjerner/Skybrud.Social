@@ -46,9 +46,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
 
         #region Constructors
 
-        private YouTubeVideo() {
-            // Hide default constructor
-        }
+        private YouTubeVideo(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -78,8 +76,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static YouTubeVideo Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new YouTubeVideo {
-                JsonObject = obj,
+            return new YouTubeVideo(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
                 Id = obj.GetString("id"),

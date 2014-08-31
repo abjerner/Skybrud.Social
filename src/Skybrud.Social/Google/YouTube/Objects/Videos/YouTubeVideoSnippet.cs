@@ -41,7 +41,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         
         #region Constructors
 
-        private YouTubeVideoSnippet() {
+        private YouTubeVideoSnippet(JsonObject obj) : base(obj) {
             // Hide default constructor
         }
 
@@ -78,8 +78,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
             if (obj == null) return null;
             
             // Initialize the snippet object
-            YouTubeVideoSnippet snippet = new YouTubeVideoSnippet {
-                JsonObject = obj,
+            YouTubeVideoSnippet snippet = new YouTubeVideoSnippet(obj) {
                 ChannelId = obj.GetString("channelId"),
                 ChannelTitle = obj.GetString("channelTitle"),
                 PublishedAt = obj.GetDateTime("publishedAt"),

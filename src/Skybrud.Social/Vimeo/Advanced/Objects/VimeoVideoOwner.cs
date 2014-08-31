@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Advanced.Objects {
@@ -14,11 +13,16 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public string ProfileUrl { get; private set; }
         public string VideosUrl { get; private set; }
         public VimeoThumbnail[] Portraits { get; private set; }
+        
+        #region Constructors
+
+        private VimeoVideoOwner(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static VimeoVideoOwner Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoVideoOwner {
-                JsonObject = obj,
+            return new VimeoVideoOwner(obj) {
                 Id = obj.GetInt("id"),
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),

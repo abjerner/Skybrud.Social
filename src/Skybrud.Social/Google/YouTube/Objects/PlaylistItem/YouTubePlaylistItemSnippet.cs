@@ -20,9 +20,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         
         #region Constructors
 
-        private YouTubePlaylistItemSnippet() {
-            // Hide default constructor
-        }
+        private YouTubePlaylistItemSnippet(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -57,8 +55,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
             if (obj == null) return null;
             
             // Initialize the snippet object
-            YouTubePlaylistItemSnippet snippet = new YouTubePlaylistItemSnippet {
-                JsonObject = obj,
+            YouTubePlaylistItemSnippet snippet = new YouTubePlaylistItemSnippet(obj) {
                 ChannelId = obj.GetString("channelId"),
                 ChannelTitle = obj.GetString("channelTitle"),
                 PublishedAt = obj.GetDateTime("publishedAt"),

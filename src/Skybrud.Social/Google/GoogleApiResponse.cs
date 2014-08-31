@@ -4,6 +4,12 @@ using Skybrud.Social.Json;
 namespace Skybrud.Social.Google {
     
     public class GoogleApiResponse : GoogleApiResource {
+        
+        #region Constructors
+
+        protected GoogleApiResponse(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         /// <summary>
         /// Validates the response and throws an exception if any API errors occur.

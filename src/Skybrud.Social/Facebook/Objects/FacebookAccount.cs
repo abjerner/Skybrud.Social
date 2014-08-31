@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
     public class FacebookAccount : SocialJsonObject {
-    
+
+        #region Properties
+
         /// <summary>
         /// The ID of the account.
         /// </summary>
@@ -36,6 +33,14 @@ namespace Skybrud.Social.Facebook.Objects {
         /// </summary>
         public string[] Permissions { get; internal set; }
 
+        #endregion
+
+        #region Constructors
+
+        private FacebookAccount(JsonObject obj) : base(obj) { }
+
+        #endregion
+
         /// <summary>
         /// Parse the JSON object of an account.
         /// </summary>
@@ -43,18 +48,13 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <returns></returns>
         public static FacebookAccount Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookAccount {
-                JsonObject = obj,
+            return new FacebookAccount(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Category = obj.GetString("category"),
                 AccessToken = obj.GetString("access_token"),
                 Permissions = obj.GetArray<string>("perms") ?? new string[0]
             };
-        }
-        
-        public static FacebookAccount[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookAccount[0] : array.ParseMultiple(Parse);
         }
     
     }

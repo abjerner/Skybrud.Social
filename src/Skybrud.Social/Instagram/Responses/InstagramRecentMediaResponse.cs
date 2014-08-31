@@ -116,7 +116,7 @@ namespace Skybrud.Social.Instagram.Responses {
                 JsonObject = obj,
                 NextUrl = pagination == null ? null : pagination.GetString("next_url"),
                 NextMaxId = pagination == null ? null : pagination.GetString("next_max_id"),
-                Data = InstagramMedia.ParseMultiple(obj.GetArray("data"))
+                Data = obj.GetArray("data", InstagramMedia.Parse)
             };
 
         }

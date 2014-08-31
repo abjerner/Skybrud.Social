@@ -12,9 +12,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         
         #region Constructors
 
-        private YouTubePlaylistItemStatus() {
-            // Hide default constructor
-        }
+        private YouTubePlaylistItemStatus(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -49,8 +47,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
             if (obj == null) return null;
             
             // Initialize and return the status object
-            return new YouTubePlaylistItemStatus {
-                JsonObject = obj,
+            return new YouTubePlaylistItemStatus(obj) {
                 PrivacyStatus = obj.GetString("privacyStatus")
             };
 

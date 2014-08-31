@@ -1,6 +1,5 @@
 using System;
 using Skybrud.Social.Facebook.Exceptions;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -22,28 +21,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructors
 
-        private FacebookLink() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private FacebookLink(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -66,8 +44,7 @@ namespace Skybrud.Social.Facebook.Objects {
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
 
             // Initialize the link object
-            return new FacebookLink {
-                JsonObject = obj,
+            return new FacebookLink(obj) {
                 Id = obj.GetString("id"),
                 Message = obj.GetString("message"),
                 Name = obj.GetString("name"),
@@ -78,10 +55,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 UpdatedTime = DateTime.Parse(obj.GetString("updated_time"))
             };
 
-        }
-
-        public static FacebookLink[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookLink[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

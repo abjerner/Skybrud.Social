@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -16,11 +15,16 @@ namespace Skybrud.Social.Facebook.Objects {
         /// comments, this array will only be a subset of all comments.
         /// </summary>
         public FacebookCommentSummary[] Data { get; private set; }
+        
+        #region Constructors
+
+        private FacebookComments(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static FacebookComments Parse(JsonObject obj) {
-            if (obj == null) return new FacebookComments { Data = new FacebookCommentSummary[0] };
-            return new FacebookComments {
-                JsonObject = obj,
+            if (obj == null) return new FacebookComments(null) { Data = new FacebookCommentSummary[0] };
+            return new FacebookComments(obj) {
                 Count = obj.GetInt("count"),
                 Data = obj.GetArray("data", FacebookCommentSummary.Parse) ?? new FacebookCommentSummary[0]
             };

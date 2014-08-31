@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Entities;
@@ -69,27 +68,8 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Constructor(s)
 
-        private TwitterStatusMessage() {
+        private TwitterStatusMessage(JsonObject obj) : base(obj) {
             // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -123,8 +103,7 @@ namespace Skybrud.Social.Twitter.Objects {
             if (obj.HasValue("error")) throw TwitterException.Parse(obj.GetArray("error"));
             if (obj.HasValue("errors")) throw TwitterException.Parse(obj.GetArray("errors"));
 
-            TwitterStatusMessage msg = new TwitterStatusMessage {
-                JsonObject = obj,
+            TwitterStatusMessage msg = new TwitterStatusMessage(obj) {
                 Id = obj.GetLong("id"),
                 IdStr = obj.GetString("id_str"),
                 Text = obj.GetString("text"),
@@ -176,10 +155,6 @@ namespace Skybrud.Social.Twitter.Objects {
 
             return msg;
 
-        }
-
-        public static TwitterStatusMessage[] ParseMultiple(JsonArray array) {
-            return array == null ? new TwitterStatusMessage[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

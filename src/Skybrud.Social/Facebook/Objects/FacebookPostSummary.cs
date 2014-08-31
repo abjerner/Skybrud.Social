@@ -1,7 +1,6 @@
 using System;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
-using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Facebook.Objects {
 
@@ -37,27 +36,8 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructor(s)
 
-        private FacebookPostSummary() {
+        private FacebookPostSummary(JsonObject obj) : base(obj) {
             // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -84,11 +64,9 @@ namespace Skybrud.Social.Facebook.Objects {
         /// Gets a post from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-
         public static FacebookPostSummary Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookPostSummary {
-                JsonObject = obj,
+            return new FacebookPostSummary(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Application = obj.GetObject("application", FacebookObject.Parse),

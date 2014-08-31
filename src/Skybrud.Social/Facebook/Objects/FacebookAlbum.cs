@@ -1,12 +1,11 @@
-#region
-
 using Skybrud.Social.Json;
 
-#endregion
-
-namespace Skybrud.Social.Facebook.Objects
-{
+namespace Skybrud.Social.Facebook.Objects {
+    
     public class FacebookAlbum : SocialJsonObject {
+
+        #region Properties
+
         public long Id { get; set; }
         public FacebookObject From { get; set; }
         public string Name { get; set; }
@@ -18,52 +17,39 @@ namespace Skybrud.Social.Facebook.Objects
         public string UpdatedTime { get; set; }
         public bool CanUpload { get; set; }
 
+        #endregion
+
+        #region Constructor
+
+        private FacebookAlbum(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
 
         /// <summary>
-        ///     Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson()
-        {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        ///     Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path)
-        {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
-
-        /// <summary>
-        ///     Loads a album from the JSON file at the specified <var>path</var>.
+        /// Loads an album from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
-        public static FacebookAlbum LoadJson(string path)
-        {
+        public static FacebookAlbum LoadJson(string path) {
             return JsonObject.LoadJson(path, Parse);
         }
 
         /// <summary>
-        ///     Gets a album from the specified JSON string.
+        /// Gets an album from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
-        public static FacebookAlbum ParseJson(string json)
-        {
+        public static FacebookAlbum ParseJson(string json) {
             return JsonObject.ParseJson(json, Parse);
         }
 
         /// <summary>
-        ///     Gets a album from the specified <var>JsonObject</var>.
+        /// Gets an album from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static FacebookAlbum Parse(JsonObject obj)
-        {
+        public static FacebookAlbum Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookAlbum
-            {
-                JsonObject = obj,
+            return new FacebookAlbum(obj) {
                 Id = obj.GetLong("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Name = obj.GetString("name"),
@@ -76,5 +62,9 @@ namespace Skybrud.Social.Facebook.Objects
                 CanUpload = obj.GetBoolean("can_upload")
             };
         }
+
+        #endregion
+
     }
+
 }

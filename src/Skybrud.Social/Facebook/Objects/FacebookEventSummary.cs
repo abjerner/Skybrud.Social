@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -12,10 +11,15 @@ namespace Skybrud.Social.Facebook.Objects {
         public DateTime? EndTime { get; private set; }
         public string TimeZone { get; private set; }
         public string Location { get; private set; }
+        
+        #region Constructors
+
+        private FacebookEventSummary(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static FacebookEventSummary Parse(JsonObject obj) {
-            return new FacebookEventSummary {
-                JsonObject = obj,
+            return new FacebookEventSummary(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 StartTime = obj.GetDateTime("start_time"),
@@ -23,10 +27,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 TimeZone = obj.GetString("timezone"),
                 Location = obj.GetString("location")
             };
-        }
-
-        public static FacebookEventSummary[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookEventSummary[0] : array.ParseMultiple(Parse);
         }
 
     }

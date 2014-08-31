@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -21,9 +20,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructors
 
-        private FacebookObject() {
-            // Hide default constructor
-        }
+        private FacebookObject(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -31,15 +28,10 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookObject Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookObject {
-                JsonObject = obj,
+            return new FacebookObject(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name")
             };
-        }
-
-        public static FacebookObject[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookObject[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -28,6 +27,14 @@ namespace Skybrud.Social.BitBucket.Objects {
         public BitBucketLink LinkHtml {
             get { return Links.GetLink("html"); }
         }
+        
+        #region Constructors
+
+        private BitBucketRepositoryInfo(JsonObject obj) : base(obj) {
+            // Hide default constructor
+        }
+
+        #endregion
 
         public static BitBucketRepositoryInfo Parse(JsonObject obj) {
 
@@ -35,8 +42,7 @@ namespace Skybrud.Social.BitBucket.Objects {
             if (obj == null) return null;
 
             // Initialize the object
-            return new BitBucketRepositoryInfo {
-                JsonObject = obj,
+            return new BitBucketRepositoryInfo(obj) {
                 FullName = obj.GetString("full_name"),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)
             };

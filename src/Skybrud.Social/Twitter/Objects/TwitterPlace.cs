@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
@@ -51,28 +50,7 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Constructor(s)
 
-        private TwitterPlace() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private TwitterPlace(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -100,8 +78,7 @@ namespace Skybrud.Social.Twitter.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static TwitterPlace Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new TwitterPlace {
-                JsonObject = obj,
+            return new TwitterPlace(obj) {
                 Id = obj.GetString("id"),
                 Url = obj.GetString("url"),
                 Type = obj.GetString("place_type"),
@@ -111,10 +88,6 @@ namespace Skybrud.Social.Twitter.Objects {
                 Country = obj.GetString("country"),
                 BoundingBox = TwitterBoundingBox.Parse(obj.GetObject("bounding_box"))
             };
-        }
-
-        public static TwitterPlace[] ParseMultiple(JsonArray array) {
-            return array == null ? new TwitterPlace[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

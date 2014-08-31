@@ -1,4 +1,3 @@
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -24,17 +23,14 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        internal InstagramTag() {
-            // Hide default constructor
-        }
+        private InstagramTag(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Methods
 
         public static InstagramTag Parse(JsonObject obj) {
-            return new InstagramTag {
-                JsonObject = obj,
+            return new InstagramTag(obj) {
                 MediaCount = obj.GetLong("media_count"),
                 Name = obj.GetString("name")
             };

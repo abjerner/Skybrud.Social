@@ -32,10 +32,15 @@ namespace Skybrud.Social.Facebook.Objects {
         }
 
         #endregion
+        
+        #region Constructors
+
+        private FacebookFeedEntry(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public static FacebookFeedEntry Parse(JsonObject obj) {
-            return new FacebookFeedEntry {
-                JsonObject = obj,
+            return new FacebookFeedEntry(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),
@@ -54,10 +59,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 Comments = obj.GetObject("comments", FacebookComments.Parse),
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),
             };
-        }
-
-        public static FacebookFeedEntry[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookFeedEntry[0] : array.ParseMultiple(Parse);
         }
     
     }

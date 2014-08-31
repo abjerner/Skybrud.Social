@@ -119,6 +119,12 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         }
 
         #endregion
+        
+        #region Constructors
+
+        private VimeoVideo(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         #region Static initializers
 
@@ -128,8 +134,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoVideo {
-                JsonObject = obj,
+            return new VimeoVideo(obj) {
                 Id = obj.GetInt("id"),
                 IsHd = obj.GetString("is_hd") == "1",
                 IsTranscoding = obj.GetString("is_transcoding") == "1",

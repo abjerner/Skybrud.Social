@@ -74,27 +74,8 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        internal InstagramMedia() {
+        internal InstagramMedia(JsonObject obj) : base(obj) {
             // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-        
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
         }
 
         #endregion
@@ -133,15 +114,14 @@ namespace Skybrud.Social.Instagram.Objects {
             InstagramMedia media = null;
 
             if (type == "image") {
-                media = new InstagramImage();
+                media = new InstagramImage(obj);
             } else if (type == "video") {
-                media = new InstagramVideo {
+                media = new InstagramVideo(obj) {
                     Videos = obj.GetObject("videos", InstagramVideoSummary.Parse)
                 };
             }
 
             if (media != null) {
-                media.JsonObject = obj;
                 media.Id = obj.GetString("id");
                 media.Type = type;
                 media.Tags = obj.GetArray("tags").Cast<string>();
@@ -159,14 +139,6 @@ namespace Skybrud.Social.Instagram.Objects {
 
             return media;
 
-        }
-
-        /// <summary>
-        /// Gets an array of media from the specified instance of <var>JsonArray</var>.
-        /// </summary>
-        /// <param name="array">The instance of <var>JsonArray</var> to parse.</param>
-        public static InstagramMedia[] ParseMultiple(JsonArray array) {
-            return array == null ? new InstagramMedia[0] : array.ParseMultiple(Parse);
         }
 
         #endregion

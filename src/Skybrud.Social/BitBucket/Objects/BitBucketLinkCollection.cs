@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -13,9 +12,11 @@ namespace Skybrud.Social.BitBucket.Objects {
             get { return _links.Values.ToArray(); }
         }
 
-        private BitBucketLinkCollection() {
-            // make constructor private
-        }
+        #region Constructors
+
+        private BitBucketLinkCollection(JsonObject obj) : base(obj) { }
+
+        #endregion
 
         public bool HasLink(string name) {
             return _links.ContainsKey(name);
@@ -31,8 +32,7 @@ namespace Skybrud.Social.BitBucket.Objects {
             // Check if NULL
             if (obj == null) return null;
 
-            return new BitBucketLinkCollection {
-                JsonObject = obj,
+            return new BitBucketLinkCollection(obj) {
                 _links = BitBucketLink.ParseMultiple(obj)
             };
 

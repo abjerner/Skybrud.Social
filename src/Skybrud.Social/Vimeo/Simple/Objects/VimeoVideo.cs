@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Simple.Objects {
 
     public class VimeoVideo : SocialJsonObject {
+
+        #region Properties
 
         /// <summary>
         /// The ID of the video.
@@ -53,9 +54,19 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         /// </summary>
         public string[] Tags { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
+        private VimeoVideo(JsonObject obj) : base(obj) { }
+
+        private VimeoVideo(XElement xVideo) : base(null) { }
+
+        #endregion
+
         public static VimeoVideo Parse(XElement xVideo) {
             if (xVideo == null || xVideo.Name != "video") return null;
-            return new VimeoVideo {
+            return new VimeoVideo(xVideo) {
                 Id = SocialUtils.GetElementValue<int>(xVideo, "id"),
                 Title = SocialUtils.GetElementValue<string>(xVideo, "title"),
                 Description = SocialUtils.GetElementValue<string>(xVideo, "description"),
@@ -70,8 +81,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
 
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new VimeoVideo {
-                JsonObject = obj,
+            return new VimeoVideo(obj) {
                 Id = obj.GetInt("id"),
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),
@@ -87,10 +97,6 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         public static VimeoVideo[] ParseMultiple(XElement xVideos) {
             if (xVideos == null || xVideos.Name != "videos") return null;
             return (from x in xVideos.Elements("video") select Parse(x)).ToArray();
-        }
-
-        public static VimeoVideo[] ParseMultiple(JsonArray array) {
-            return array == null ? new VimeoVideo[0] : array.ParseMultiple(Parse);
         }
 
     }

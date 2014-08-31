@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -17,14 +16,19 @@ namespace Skybrud.Social.Facebook.Objects {
         public DateTime Updated { get; private set; }
         public FacebookImage[] Images { get; private set; }
 
+        #region Constructors
+
+        private FacebookPhoto(JsonObject obj) : base(obj) { }
+
+        #endregion
+
         public FacebookImage GetImageGreaterThanOrEqualTo(int width, int height) {
             return Images.Reverse().FirstOrDefault(x => x.Width >= width && x.Height != height);
         }
 
         public static FacebookPhoto Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookPhoto {
-                JsonObject = obj,
+            return new FacebookPhoto(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Width = obj.GetInt("width"),
@@ -33,12 +37,8 @@ namespace Skybrud.Social.Facebook.Objects {
                 Source = obj.GetString("source"),
                 Created = obj.GetDateTime("created_time"),
                 Updated = obj.GetDateTime("updated_time"),
-                Images = FacebookImage.ParseMultiple(obj.GetArray("images"))
+                Images = obj.GetArray("images", FacebookImage.Parse)
             };
-        }
-
-        public static FacebookPhoto[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookPhoto[0] : array.ParseMultiple(Parse);
         }
     
     }

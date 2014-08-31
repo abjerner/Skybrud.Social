@@ -18,7 +18,7 @@ namespace Skybrud.Social.Vimeo.Simple.Responses {
 
         public static VimeoChannelVideosResponse Parse(JsonArray array) {
             VimeoChannelVideosResponse response = new VimeoChannelVideosResponse {
-                Videos = VimeoVideo.ParseMultiple(array) ?? new VimeoVideo[0]
+                Videos = array.ParseMultiple(VimeoVideo.Parse) ?? new VimeoVideo[0]
             };
             return response;
         }
