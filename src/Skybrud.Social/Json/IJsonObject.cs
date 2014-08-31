@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Json {
+namespace Skybrud.Social.Json {
 
     public interface IJsonObject {
 

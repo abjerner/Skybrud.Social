@@ -1,9 +1,10 @@
-﻿using System;
+using System;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
     
-    public class BitBucketChangeset {
+    public class BitBucketChangeset : SocialJsonObject {
 
         #region Properties
 
@@ -51,6 +52,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         public static BitBucketChangeset Parse(JsonObject obj) {
             return new BitBucketChangeset {
+                JsonObject = obj,
                 Node = obj.GetString("node"),
                 RawAuthor = obj.GetString("raw_author"),
                 Timestamp = DateTime.Parse(obj.GetString("utctimestamp")),

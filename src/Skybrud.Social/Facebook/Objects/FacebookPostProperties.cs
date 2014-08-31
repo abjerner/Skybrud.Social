@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
     
-    public class FacebookPostProperties {
+    public class FacebookPostProperties : SocialJsonObject {
 
         public string Name { get; internal set; }
         public string Text { get; internal set; }
@@ -11,6 +12,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookPostProperties Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookPostProperties {
+                JsonObject = obj,
                 Name = obj.GetString("name"),
                 Text = obj.GetString("text"),
                 Href = obj.GetString("href")

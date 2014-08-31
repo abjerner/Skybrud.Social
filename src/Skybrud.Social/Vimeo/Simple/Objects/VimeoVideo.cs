@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Xml.Linq;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Vimeo.Simple.Objects {
 
-    public class VimeoVideo {
+    public class VimeoVideo : SocialJsonObject {
 
         /// <summary>
         /// The ID of the video.
@@ -70,6 +71,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideo {
+                JsonObject = obj,
                 Id = obj.GetInt("id"),
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),

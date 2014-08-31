@@ -1,9 +1,10 @@
-﻿using System;
+using System;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookCommentSummary {
+    public class FacebookCommentSummary : SocialJsonObject {
 
         public string Id { get; private set; }
         public FacebookObject From { get; private set; }
@@ -14,6 +15,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookCommentSummary Parse(JsonObject obj) {
             return new FacebookCommentSummary {
+                JsonObject = obj,
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {

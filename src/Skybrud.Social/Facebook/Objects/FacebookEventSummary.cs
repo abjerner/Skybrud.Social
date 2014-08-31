@@ -1,9 +1,10 @@
-﻿using System;
+using System;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookEventSummary {
+    public class FacebookEventSummary : SocialJsonObject {
 
         public long Id { get; private set; }
         public string Name { get; private set; }
@@ -14,6 +15,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookEventSummary Parse(JsonObject obj) {
             return new FacebookEventSummary {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 StartTime = obj.GetDateTime("start_time"),

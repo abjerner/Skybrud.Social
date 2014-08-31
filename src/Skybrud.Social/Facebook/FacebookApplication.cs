@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Facebook.OAuth;
 
 namespace Skybrud.Social.Facebook {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using Skybrud.Social.OAuth;
 using Skybrud.Social.Vimeo.Advanced.Endpoints.Raw;
 using Skybrud.Social.Vimeo.Advanced.Responses;

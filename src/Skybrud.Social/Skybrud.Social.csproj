@@ -73,6 +73,7 @@
     <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
     <Compile Include="Facebook\OAuth\FacebookOAuthClient.cs" />
+    <Compile Include="Facebook\Objects\FacebookAlbum.cs" />
     <Compile Include="Facebook\Objects\FacebookStatusMessage.cs" />
     <Compile Include="Facebook\Objects\FacebookLink.cs" />
     <Compile Include="Facebook\Objects\FacebookPostProperties.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
+    <Compile Include="SocialJsonObject.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
     <Compile Include="Json\IJsonObject.cs" />

@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Instagram.Options {
+namespace Skybrud.Social.Instagram.Options {
 
     public class InstagramMediaSearchOptions {
         

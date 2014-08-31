@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.OAuth;
 using Skybrud.Social.Vimeo.Advanced.Endpoints;
 

@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Skybrud.Social.Twitter.OAuth;
 
 namespace Skybrud.Social.Twitter.Endpoints.Raw {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.Linq;
 using Skybrud.Social.Google.YouTube.Objects;

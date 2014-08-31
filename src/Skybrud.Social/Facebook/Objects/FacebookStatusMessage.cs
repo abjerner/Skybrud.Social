@@ -1,17 +1,14 @@
-﻿using System;
+using System;
 using Skybrud.Social.Facebook.Exceptions;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookStatusMessage {
+    public class FacebookStatusMessage : SocialJsonObject {
 
         #region Properties
 
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The ID of the status message.
@@ -99,6 +96,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
             // Initialize the link object
             return new FacebookStatusMessage {
+                JsonObject = obj,
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Message = obj.GetString("message"),

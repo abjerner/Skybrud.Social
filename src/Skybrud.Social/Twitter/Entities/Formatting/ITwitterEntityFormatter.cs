@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Twitter.Entities.Formatting {
+namespace Skybrud.Social.Twitter.Entities.Formatting {
 
     public interface ITwitterEntityFormatter {
 

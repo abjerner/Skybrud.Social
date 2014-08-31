@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Facebook.Options {
+namespace Skybrud.Social.Facebook.Options {
     
     public class FacebookFeedOptions {
 

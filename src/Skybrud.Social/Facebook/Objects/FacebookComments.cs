@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookComments {
+    public class FacebookComments : SocialJsonObject {
 
         /// <summary>
         /// Gets the total amounbt of comments. This value might not always be
@@ -19,6 +20,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookComments Parse(JsonObject obj) {
             if (obj == null) return new FacebookComments { Data = new FacebookCommentSummary[0] };
             return new FacebookComments {
+                JsonObject = obj,
                 Count = obj.GetInt("count"),
                 Data = obj.GetArray("data", FacebookCommentSummary.Parse) ?? new FacebookCommentSummary[0]
             };

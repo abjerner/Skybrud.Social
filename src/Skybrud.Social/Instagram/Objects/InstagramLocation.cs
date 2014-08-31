@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Interfaces;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -6,14 +6,9 @@ namespace Skybrud.Social.Instagram.Objects {
     /// <summary>
     /// Class representing the location of where a media (image or video) was taken. Some media may not have a location.
     /// </summary>
-    public class InstagramLocation : ILocation {
+    public class InstagramLocation : SocialJsonObject, ILocation {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// Gets the ID of the location.

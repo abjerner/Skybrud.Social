@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Interfaces {
+namespace Skybrud.Social.Interfaces {
 
     public interface ILocation {
 

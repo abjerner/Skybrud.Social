@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Twitter.Entities {
+namespace Skybrud.Social.Twitter.Entities {
 
     public class TwitterBaseEntity {
 

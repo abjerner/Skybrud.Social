@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.YouTube.Objects.Videos {
+namespace Skybrud.Social.Google.YouTube.Objects.Videos {
     
     public class YouTubeVideoOptions {
 

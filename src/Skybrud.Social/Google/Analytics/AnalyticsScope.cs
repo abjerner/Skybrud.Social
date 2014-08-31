@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.Analytics {
+namespace Skybrud.Social.Google.Analytics {
     
     /// <summary>
     /// Scopes related to the Google Analytics API.

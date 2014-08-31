@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
     
-    public class BitBucketAuthorUser {
+    public class BitBucketAuthorUser : SocialJsonObject {
 
         /// <summary>
         /// The username of the user.
@@ -44,6 +45,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
             // Initialize the user object
             return new BitBucketAuthorUser {
+                JsonObject = obj,
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)

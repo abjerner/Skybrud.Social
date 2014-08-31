@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.BitBucket.Endpoints;
 using Skybrud.Social.BitBucket.OAuth;
 using Skybrud.Social.OAuth;

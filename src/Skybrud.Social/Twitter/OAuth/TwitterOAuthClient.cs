@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.OAuth;
+using Skybrud.Social.OAuth;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 
 namespace Skybrud.Social.Twitter.OAuth {

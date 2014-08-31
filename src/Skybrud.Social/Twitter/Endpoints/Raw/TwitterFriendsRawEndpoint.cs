@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using System.Globalization;
 using Skybrud.Social.Twitter.OAuth;
 using Skybrud.Social.Twitter.Options;

@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Instagram.Endpoints {
+namespace Skybrud.Social.Instagram.Endpoints {
 
     public class InstagramEndpoints {
 

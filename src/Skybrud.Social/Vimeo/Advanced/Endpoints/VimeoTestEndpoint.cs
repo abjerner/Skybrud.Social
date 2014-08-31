@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Vimeo.Advanced.Responses;
+using Skybrud.Social.Vimeo.Advanced.Responses;
 
 namespace Skybrud.Social.Vimeo.Advanced.Endpoints {
 

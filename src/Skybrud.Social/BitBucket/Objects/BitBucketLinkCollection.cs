@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
 
-    public class BitBucketLinkCollection {
+    public class BitBucketLinkCollection : SocialJsonObject {
 
         private Dictionary<string, BitBucketLink> _links;
 
@@ -31,6 +32,7 @@ namespace Skybrud.Social.BitBucket.Objects {
             if (obj == null) return null;
 
             return new BitBucketLinkCollection {
+                JsonObject = obj,
                 _links = BitBucketLink.ParseMultiple(obj)
             };
 

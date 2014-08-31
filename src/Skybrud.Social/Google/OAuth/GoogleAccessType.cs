@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.OAuth {
+namespace Skybrud.Social.Google.OAuth {
 
     /// <summary>
     /// Indicates whether your application needs to access a Google API when the user is not

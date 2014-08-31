@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
     
-    public class InstagramMediaSummary {
+    public class InstagramMediaSummary : SocialJsonObject {
 
         #region Properties
 
@@ -25,6 +26,7 @@ namespace Skybrud.Social.Instagram.Objects {
         public static InstagramMediaSummary Parse(JsonObject obj) {
             if (obj == null) return new InstagramMediaSummary();
             return new InstagramMediaSummary {
+                JsonObject = obj,
                 Url = obj.GetString("url"),
                 Width = obj.GetInt("width"),
                 Height = obj.GetInt("height")

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Twitter.Enums;
 
 namespace Skybrud.Social.Twitter.Attributes {

@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Twitter.Enums;
+using Skybrud.Social.Twitter.Enums;
 
 namespace Skybrud.Social.Twitter.Options {
 

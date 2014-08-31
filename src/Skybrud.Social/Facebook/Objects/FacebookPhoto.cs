@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Linq;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
     
-    public class FacebookPhoto {
+    public class FacebookPhoto : SocialJsonObject {
 
         public long Id { get; private set; }
         public string Name { get; private set; }
@@ -23,6 +24,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookPhoto Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookPhoto {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
                 Width = obj.GetInt("width"),

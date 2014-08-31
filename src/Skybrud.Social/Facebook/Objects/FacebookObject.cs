@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookObject {
+    public class FacebookObject : SocialJsonObject {
 
         #region Properties
 
@@ -31,6 +32,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookObject Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookObject {
+                JsonObject = obj,
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name")
             };

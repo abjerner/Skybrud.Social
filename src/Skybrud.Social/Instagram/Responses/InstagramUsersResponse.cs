@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {

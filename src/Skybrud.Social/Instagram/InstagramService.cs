@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Instagram.Endpoints;
 using Skybrud.Social.Instagram.OAuth;
 

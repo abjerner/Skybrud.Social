@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Facebook.Endpoints;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Responses;

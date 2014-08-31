@@ -1,16 +1,12 @@
-﻿using Skybrud.Social.Json;
+using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
 
-    public class TwitterCoordinates {
+    public class TwitterCoordinates : SocialJsonObject {
 
         #region Properties
 
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
-    
         public double Latitude { get; internal set; }
         public double Longitude { get; internal set; }
 

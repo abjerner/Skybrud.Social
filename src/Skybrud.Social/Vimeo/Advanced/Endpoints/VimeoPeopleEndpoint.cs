@@ -1,4 +1,4 @@
-﻿using System.Collections.Specialized;
+using System.Collections.Specialized;
 using Skybrud.Social.Json;
 using Skybrud.Social.Vimeo.Advanced.Responses;
 

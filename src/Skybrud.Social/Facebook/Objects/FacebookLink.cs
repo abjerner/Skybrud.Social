@@ -1,17 +1,13 @@
-﻿using System;
+using System;
 using Skybrud.Social.Facebook.Exceptions;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookLink {
+    public class FacebookLink : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         public string Id { get; private set; }
         public string Message { get; private set; }
@@ -71,6 +67,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
             // Initialize the link object
             return new FacebookLink {
+                JsonObject = obj,
                 Id = obj.GetString("id"),
                 Message = obj.GetString("message"),
                 Name = obj.GetString("name"),

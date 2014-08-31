@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Json;
 using Skybrud.Social.Json.Exceptions;
 using Skybrud.Social.Twitter.Enums;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Instagram.Responses;

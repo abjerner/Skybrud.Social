@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Google.Analytics.Interfaces {
+namespace Skybrud.Social.Google.Analytics.Interfaces {
     
     public interface IAnalyticsFilterBlock {
 

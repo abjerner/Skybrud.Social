@@ -1,4 +1,4 @@
-﻿using Skybrud.Social.Google.Analytics.Interfaces;
+using Skybrud.Social.Google.Analytics.Interfaces;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
     
