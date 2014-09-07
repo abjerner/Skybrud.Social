@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
@@ -9,6 +10,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets the internal JsonObject the object was created from.
         /// </summary>
+        [JsonIgnore]
         public JsonObject JsonObject { get; private set; }
 
         #endregion
@@ -22,18 +24,7 @@ namespace Skybrud.Social {
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// This method is only here to make sure that the JsonObject property
-        /// isn't serialized by the <code>JSON.net</code> package. By having
-        /// this method rather than using the <code>JsonIgnore</code>
-        /// attribute, we don't have to create any references to the
-        /// <code>JSON.net</code> package.
-        /// </summary>
-        private bool ShouldSerializeJsonObject() {
-            return false;
-        }
-
+        
         /// <summary>
         /// Generates a JSON string representing the object.
         /// </summary>
