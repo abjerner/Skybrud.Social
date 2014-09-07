@@ -84,28 +84,16 @@ namespace Skybrud.Social.Google.Analytics.Responses {
                 throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
             }
 
-            // Initialize the response object
-            AnalyticsDataResponse response = new AnalyticsDataResponse {
+            // Get the column headers
+            AnalyticsDataColumnHeader[] columns = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse);
+
+            // Initialize and return the response object
+            return new AnalyticsDataResponse {
                 JsonObject = obj,
                 Query = obj.GetObject("query", AnalyticsDataQuery.Parse),
-                ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
+                ColumnHeaders = columns,
+                Rows = AnalyticsDataRow.Parse(columns, obj.GetArray("rows"))
             };
-
-            // Parse the rows
-            JsonArray rows = obj.GetArray("rows");
-            if (rows == null) {
-                response.Rows = new AnalyticsDataRow[0];
-            } else {
-                response.Rows = new AnalyticsDataRow[rows.Length];
-                for (int i = 0; i < rows.Length; i++) {
-                    response.Rows[i] = new AnalyticsDataRow {
-                        Index = i,
-                        Cells = rows.GetArray(i).Cast<string>()
-                    };
-                }
-            }
-            
-            return response;
 
         }
 

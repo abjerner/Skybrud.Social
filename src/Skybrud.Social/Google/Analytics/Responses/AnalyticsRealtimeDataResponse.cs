@@ -124,33 +124,22 @@ namespace Skybrud.Social.Google.Analytics.Responses {
                 throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
             }
 
+            // Get the column headers
+            AnalyticsDataColumnHeader[] columns = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse);
+            
             // Initialize the response object
             AnalyticsRealtimeDataResponse response = new AnalyticsRealtimeDataResponse {
                 JsonObject = obj,
                 Query = obj.GetObject("query", AnalyticsRealtimeDataQuery.Parse),
                 TotalResults = obj.GetInt("totalResults"),
-                ColumnHeaders = obj.GetArray("columnHeaders", AnalyticsDataColumnHeader.Parse)
+                ColumnHeaders = columns,
+                Rows = AnalyticsDataRow.Parse(columns, obj.GetArray("rows"))
             };
 
             // Get total result values
             foreach (KeyValuePair<string, object> pair in obj.GetObject("totalsForAllResults").Dictionary) {
                 response._totalsForAllResults.Add(pair.Key, pair.Value.ToString());
             }
-
-            // Parse the rows
-            JsonArray rows = obj.GetArray("rows");
-            if (rows == null) {
-                response.Rows = new AnalyticsDataRow[0];
-            } else {
-                response.Rows = new AnalyticsDataRow[rows.Length];
-                for (int i = 0; i < rows.Length; i++) {
-                    response.Rows[i] = new AnalyticsDataRow {
-                        Index = i,
-                        Cells = rows.GetArray(i).Cast<string>()
-                    };
-                }
-            }
-            
             
             return response;
 
