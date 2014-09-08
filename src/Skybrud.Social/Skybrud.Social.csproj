@@ -64,6 +64,7 @@
     <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
     <Compile Include="BitBucket\Objects\BitBucketRepositoryInfo.cs" />
     <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketUserRepository.cs" />
     <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
