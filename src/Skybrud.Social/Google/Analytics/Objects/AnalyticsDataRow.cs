@@ -133,6 +133,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
                     // Add the key and value to the dictionary
                     rows[i]._cells.Add(column.Name, new AnalyticsDataCell {
+                        Row = rows[i],
                         Index = j,
                         Column = column,
                         Value = row.GetString(j)

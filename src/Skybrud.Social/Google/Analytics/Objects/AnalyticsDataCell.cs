@@ -1,10 +1,17 @@
 using System;
+using Newtonsoft.Json;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
 
     public class AnalyticsDataCell {
 
         #region Properties
+
+        /// <summary>
+        /// Gets a reference to the parent row.
+        /// </summary>
+        [JsonIgnore]
+        public AnalyticsDataRow Row { get; internal set; }
 
         /// <summary>
         /// Gets the index of the cell.
