@@ -12,6 +12,7 @@ namespace Skybrud.Social.Twitter {
         public TwitterFollowersEndpoint Followers { get; private set; }
         public TwitterFriendsEndpoint Friends { get; private set; }
         public TwitterGeoEndpoint Geo { get; private set; }
+        public TwitterSearchEndpoint Search { get; private set; }
         public TwitterStatusesEndpoint Statuses { get; private set; }
         public TwitterUsersEndpoint Users { get; private set; }
 
@@ -54,6 +55,7 @@ namespace Skybrud.Social.Twitter {
             service.Followers = new TwitterFollowersEndpoint(service);
             service.Friends = new TwitterFriendsEndpoint(service);
             service.Geo = new TwitterGeoEndpoint(service);
+            service.Search = new TwitterSearchEndpoint(service);
             service.Statuses = new TwitterStatusesEndpoint(service);
             service.Users = new TwitterUsersEndpoint(service);
 

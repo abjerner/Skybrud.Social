@@ -248,6 +248,8 @@
     <Compile Include="SocialHttpResponse.cs" />
     <Compile Include="SocialQueryString.cs" />
     <Compile Include="SocialUtils.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterSearchRawEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\TwitterSearchEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterFollowersEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterFollowersRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterAccountRawEndpoint.cs" />
@@ -280,6 +282,7 @@
     <Compile Include="Twitter\Objects\TwitterCoordinates.cs" />
     <Compile Include="Twitter\Objects\TwitterPlace.cs" />
     <Compile Include="Twitter\Objects\TwitterReplyTo.cs" />
+    <Compile Include="Twitter\Objects\TwitterSearchTweetMetaData.cs" />
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterTimeline.cs" />
@@ -291,6 +294,7 @@
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUsersSearchOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterSearchTweetsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterUserListResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterIdsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterReverseGeocodeResponse.cs" />
