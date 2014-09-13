@@ -60,6 +60,11 @@ namespace Skybrud.Social.Instagram.Objects {
         public InstagramUser User { get; private set; }
         public InstagramLocation Location { get; private set; }
 
+        /// <summary>
+        /// Gets an array of users tagged in the photo.
+        /// </summary>
+        public InstagramTaggedUser[] UsersInPhoto { get; private set; }
+
         public DateTime Date {
             get { return Created; }
         }
@@ -131,10 +136,12 @@ namespace Skybrud.Social.Instagram.Objects {
                 media.CommentCount = comments.GetInt("count");
                 media.Comments = comments.GetArray("data", InstagramComment.Parse);
                 media.LikeCount = likes.GetInt("count");
+                media.Likes = likes.GetArray("data", InstagramUserSummary.Parse);
                 media.Images = obj.GetObject("images", InstagramImageSummary.Parse);
                 media.Caption = obj.GetObject("caption", InstagramComment.Parse);
                 media.User = obj.GetObject("user", InstagramUser.Parse);
                 media.Location = obj.GetObject("location", InstagramLocation.Parse);
+                media.UsersInPhoto = obj.GetArray("users_in_photo", InstagramTaggedUser.Parse);
             }
 
             return media;

@@ -70,6 +70,8 @@
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
+    <Compile Include="Instagram\Objects\InstagramPosition.cs" />
+    <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
     <Compile Include="SocialJsonArray.cs" />
     <Compile Include="Facebook\Endpoints\FacebookMethodsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
