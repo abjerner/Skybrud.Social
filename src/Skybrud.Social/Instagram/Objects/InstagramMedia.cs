@@ -8,6 +8,16 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Properties
 
+        // A photo/media may specify an attribution property, but the Instagram documentation has
+        // no information regarding this property. However this Google Groups discussion sheds a
+        // little light on what attribution is:
+        //
+        // https://groups.google.com/forum/#!topic/instagram-api-developers/KvGH1cnjljQ
+        //
+        // However since I haven't been able to find any media with the attribution property, and
+        // that the official documentation doesn't have any information about this property, it is
+        // currently not supported in Skybrud.Social.
+
         /// <summary>
         /// The ID of the media.
         /// </summary>
