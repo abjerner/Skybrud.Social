@@ -1,6 +1,7 @@
 using System;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Options;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
@@ -37,7 +38,9 @@ namespace Skybrud.Social.Instagram.Endpoints {
         public InstagramLocationResponse GetLocation(int locationId) {
             return InstagramLocationResponse.ParseJson(Raw.GetLocation(locationId));
         }
-        
+
+        #region GetRecentMedia(...)
+
         /// <summary>
         /// Get a list of recent media objects from a given location.
         /// </summary>
@@ -50,11 +53,32 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <summary>
         /// Get a list of recent media objects from a given location.
         /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="options">The options for the search.</param>
+        public InstagramRecentMediaResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
+            if (location == null) throw new ArgumentNullException("location");
+            return GetRecentMedia(location.Id, options);
+        }
+
+        /// <summary>
+        /// Get a list of recent media objects from a given location.
+        /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         public InstagramRecentMediaResponse GetRecentMedia(int locationId) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId));
         }
-        
+
+        /// <summary>
+        /// Get a list of recent media objects from a given location.
+        /// </summary>
+        /// <param name="locationId">The ID of the location.</param>
+        /// <param name="options">The options for the search.</param>
+        public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId, options));
+        }
+
+        #endregion
+
         /// <summary>
         /// Search for a location by geographic coordinate within a 1000 meters.
         /// </summary>

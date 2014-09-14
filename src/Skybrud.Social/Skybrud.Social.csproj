@@ -72,6 +72,7 @@
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Instagram\Objects\InstagramPosition.cs" />
     <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
+    <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
     <Compile Include="SocialJsonArray.cs" />
     <Compile Include="Facebook\Endpoints\FacebookMethodsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
@@ -181,7 +182,7 @@
     <Compile Include="Instagram\Endpoints\Raw\InstagramTagsRawEndpoint.cs" />
     <Compile Include="Instagram\Exceptions\InstagramOAuthException.cs" />
     <Compile Include="Instagram\Options\InstagramMediaSearchOptions.cs" />
-    <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
+    <Compile Include="Instagram\Options\InstagramRecentMediaSearchOptions.cs" />
     <Compile Include="Instagram\Exceptions\InstagramNotFoundException.cs" />
     <Compile Include="Instagram\Exceptions\InstagramOAuthAccessTokenException.cs" />
     <Compile Include="Instagram\InstagramScope.cs" />

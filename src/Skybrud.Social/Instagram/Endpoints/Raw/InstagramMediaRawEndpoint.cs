@@ -46,7 +46,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="latitude">The latitude of the point.</param>
         /// <param name="longitude">The longitude of the point.</param>
         public string Search(double latitude, double longitude) {
-            return Search(new InstagramLocationSearchOptions {
+            return Search(new InstagramRecentMediaSearchOptions {
                 Latitude = latitude,
                 Longitude = longitude
             });
@@ -60,7 +60,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="longitude">The longitude of the point.</param>
         /// <param name="distance">The distance/radius in meters. The API allows a maximum radius of 5000 meters.</param>
         public string Search(double latitude, double longitude, int distance) {
-            return Search(new InstagramLocationSearchOptions {
+            return Search(new InstagramRecentMediaSearchOptions {
                 Latitude = latitude,
                 Longitude = longitude,
                 Distance = distance
@@ -72,7 +72,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// exceed 7 days. Defaults time stamps cover the last 5 days. Can return mix of image and video types.
         /// </summary>
         /// <param name="options">The search options.</param>
-        public string Search(InstagramLocationSearchOptions options) {
+        public string Search(InstagramRecentMediaSearchOptions options) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {

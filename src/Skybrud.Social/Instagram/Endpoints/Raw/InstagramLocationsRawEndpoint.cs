@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Globalization;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Options;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     
@@ -37,16 +38,19 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="location">The location.</param>
         public string GetRecentMedia(InstagramLocation location) {
-            
             if (location == null) throw new ArgumentNullException("location");
-            
-            // TODO: Add support for MIN_TIMESTAMP parameter
-            // TODO: Add support for MIN_ID parameter
-            // TODO: Add support for MAX_ID parameter
-            // TODO: Add support for MAX_TIMESTAMP parameter
-            
-            return GetRecentMedia(location.Id);
-        
+            return GetRecentMedia(location.Id, null);
+
+        }
+
+        /// <summary>
+        /// Get a list of recent media objects from a given location.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="options">The options for the search.</param>
+        public string GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
+            if (location == null) throw new ArgumentNullException("location");
+            return GetRecentMedia(location.Id, options);
         }
 
         /// <summary>
@@ -54,16 +58,28 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         public string GetRecentMedia(int locationId) {
+            return GetRecentMedia(locationId, null);
+        }
+
+        /// <summary>
+        /// Get a list of recent media objects from a given location.
+        /// </summary>
+        /// <param name="locationId">The ID of the location.</param>
+        /// <param name="options">The options for the search.</param>
+        public string GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {
                 {"access_token", Client.AccessToken}
             };
-           
-            // TODO: Add support for MIN_TIMESTAMP parameter
-            // TODO: Add support for MIN_ID parameter
-            // TODO: Add support for MAX_ID parameter
-            // TODO: Add support for MAX_TIMESTAMP parameter
+
+            // Add any extra options
+            if (options != null) {
+                if (options.MinTimestamp > 0) qs.Add("min_timestamp", options.MinTimestamp.ToString(CultureInfo.InvariantCulture));
+                if (options.MaxTimestamp > 0) qs.Add("max_timestamp", options.MaxTimestamp.ToString(CultureInfo.InvariantCulture));
+                if (!String.IsNullOrWhiteSpace(options.MinId)) qs.Add("min_id", options.MinId);
+                if (!String.IsNullOrWhiteSpace(options.MaxId)) qs.Add("max_id", options.MaxId);
+            }
 
             // Perform the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", qs);

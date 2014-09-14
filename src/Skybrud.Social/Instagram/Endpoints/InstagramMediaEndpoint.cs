@@ -63,7 +63,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// exceed 7 days. Defaults time stamps cover the last 5 days. Can return mix of image and video types.
         /// </summary>
         /// <param name="options">The search options.</param>
-        public InstagramRecentMediaResponse Search(InstagramLocationSearchOptions options) {
+        public InstagramRecentMediaResponse Search(InstagramRecentMediaSearchOptions options) {
             return InstagramRecentMediaResponse.ParseJson(Raw.Search(options));
         }
 
