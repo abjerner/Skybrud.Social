@@ -201,6 +201,44 @@ namespace Skybrud.Social.Instagram.OAuth {
 
         }
 
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. If an access token has been
+        /// specified for this client, that access token will be added to the query string.
+        /// Similar if a client ID has been specified instead of an access token, that client ID
+        /// will be added to the query string. However some endpoint methods may require an access
+        /// token, and a client ID will therefore not be sufficient for such methods.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        public string DoAuthenticatedGetRequest(string url) {
+            return DoAuthenticatedGetRequest(url, null);
+        }
+
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. If an access token has been
+        /// specified for this client, that access token will be added to the query string.
+        /// Similar if a client ID has been specified instead of an access token, that client ID
+        /// will be added to the query string. However some endpoint methods may require an access
+        /// token, and a client ID will therefore not be sufficient for such methods.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string for the call.</param>
+        public string DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+
+            // Initialize a new NameValueCollection if NULL
+            if (query == null) query = new NameValueCollection();
+
+            // Set the access token ot client ID in the query string
+            if (!String.IsNullOrWhiteSpace(AccessToken)) {
+                query.Add("access_token", AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(ClientId)) {
+                query.Add("client_id", ClientId);
+            }
+
+            // Make a call to the server
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
+
+        }
+        
         #endregion
 
     }

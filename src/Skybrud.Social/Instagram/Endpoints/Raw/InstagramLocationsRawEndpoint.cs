@@ -25,13 +25,19 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
 
         #region Methods
 
+        #region GetLocation(...)
+
         /// <summary>
         /// Gets information about a location with the specified ID.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         public string GetLocation(int locationId) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/locations/" + locationId + "?access_token=" + Client.AccessToken);
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId);
         }
+
+        #endregion
+
+        #region GetRecentMedia(...)
 
         /// <summary>
         /// Get a list of recent media objects from a given location.
@@ -40,7 +46,6 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string GetRecentMedia(InstagramLocation location) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, null);
-
         }
 
         /// <summary>
@@ -69,9 +74,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         public string GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                {"access_token", Client.AccessToken}
-            };
+            NameValueCollection qs = new NameValueCollection();
 
             // Add any extra options
             if (options != null) {
@@ -82,9 +85,13 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
             }
 
             // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", qs);
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", qs);
 
         }
+
+        #endregion
+
+        #region Search(...)
 
         /// <summary>
         /// Search for a location by geographic coordinate within a 1000 meters.
@@ -105,16 +112,17 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {
-                {"access_token", Client.AccessToken},
                 {"lat", latitude.ToString(CultureInfo.InvariantCulture)},
                 {"lng", longitude.ToString(CultureInfo.InvariantCulture)},
-                {"distance", distance + ""}
+                {"distance", distance.ToString(CultureInfo.InvariantCulture)}
             };
 
             // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/locations/search", qs);
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/search", qs);
 
         }
+
+        #endregion
 
         #endregion
 
