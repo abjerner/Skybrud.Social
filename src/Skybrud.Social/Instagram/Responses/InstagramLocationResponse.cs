@@ -12,13 +12,6 @@ namespace Skybrud.Social.Instagram.Responses {
         /// </summary>
         public InstagramLocation Data { get; private set; }
 
-        /// <summary>
-        /// Gets the object representing the location (same as Data).
-        /// </summary>
-        public InstagramLocation User {
-            get { return Data; }
-        }
-
         #endregion
 
         #region Constructors
