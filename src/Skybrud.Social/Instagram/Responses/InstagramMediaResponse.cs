@@ -8,11 +8,6 @@ namespace Skybrud.Social.Instagram.Responses {
         #region Properties
 
         /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
-
-        /// <summary>
         /// Gets the media.
         /// </summary>
         public InstagramMedia Data { get; private set; }
@@ -21,28 +16,7 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
-        internal InstagramMediaResponse() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private InstagramMediaResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -80,9 +54,8 @@ namespace Skybrud.Social.Instagram.Responses {
             ValidateResponse(obj);
 
             // Parse the response
-            return new InstagramMediaResponse {
-                JsonObject = obj,
-                Data = InstagramMedia.Parse(obj.GetObject("data"))
+            return new InstagramMediaResponse(obj) {
+                Data = obj.GetObject("data", InstagramMedia.Parse)
             };
 
         }

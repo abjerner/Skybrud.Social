@@ -4,7 +4,15 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public abstract class InstagramResponse {
+    public abstract class InstagramResponse : SocialJsonObject {
+
+        #region Constructors
+
+        protected InstagramResponse(JsonObject obj) : base(obj) {}
+
+        #endregion
+
+        #region Static methods
 
         public static void ValidateResponse(JsonObject obj) {
 
@@ -61,7 +69,9 @@ namespace Skybrud.Social.Instagram.Responses {
             throw new Exception("Invalid response received from server");
 
         }
-    
+
+        #endregion
+
     }
 
 }

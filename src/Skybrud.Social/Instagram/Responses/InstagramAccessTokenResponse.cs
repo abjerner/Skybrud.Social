@@ -6,12 +6,6 @@ namespace Skybrud.Social.Instagram.Responses {
     public class InstagramAccessTokenResponse : InstagramResponse {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
-
         /// <summary>
         /// The access token.
         /// </summary>
@@ -26,28 +20,7 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
-        internal InstagramAccessTokenResponse() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private InstagramAccessTokenResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -85,7 +58,7 @@ namespace Skybrud.Social.Instagram.Responses {
             ValidateResponse(obj);
 
             // Parse the response
-            return new InstagramAccessTokenResponse {
+            return new InstagramAccessTokenResponse(obj) {
                 AccessToken = obj.GetString("access_token"),
                 User = obj.GetObject("user", InstagramUser.Parse)
             };

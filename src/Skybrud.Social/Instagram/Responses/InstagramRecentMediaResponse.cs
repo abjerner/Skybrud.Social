@@ -1,17 +1,14 @@
 using System.Linq;
+using Newtonsoft.Json;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
+using JsonConverter = Skybrud.Social.Json.JsonConverter;
 
 namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramRecentMediaResponse : InstagramResponse {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// Gets an array of all media in the response.
@@ -21,6 +18,7 @@ namespace Skybrud.Social.Instagram.Responses {
         /// <summary>
         /// Gets an array of all media in the response (same as Data).
         /// </summary>
+        [JsonIgnore]
         public InstagramMedia[] Media {
             get { return Data; }
         }
@@ -28,6 +26,7 @@ namespace Skybrud.Social.Instagram.Responses {
         /// <summary>
         /// Gets an array of all images in the response.
         /// </summary>
+        [JsonIgnore]
         public InstagramImage[] Images {
             get { return Data.OfType<InstagramImage>().ToArray(); }
         }
@@ -35,6 +34,7 @@ namespace Skybrud.Social.Instagram.Responses {
         /// <summary>
         /// Gets an array of all videos in the response.
         /// </summary>
+        [JsonIgnore]
         public InstagramVideo[] Videos {
             get { return Data.OfType<InstagramVideo>().ToArray(); }
         }
@@ -46,28 +46,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
-        internal InstagramRecentMediaResponse() {
-            // Hide default constructor
-        }
+        private InstagramRecentMediaResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
 
         public InstagramRecentMediaResponse GetNextPage() {
             return NextUrl == null ? null : Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject(NextUrl));
@@ -112,8 +95,7 @@ namespace Skybrud.Social.Instagram.Responses {
             JsonObject pagination = obj.GetObject("pagination");
 
             // Parse the response
-            return new InstagramRecentMediaResponse {
-                JsonObject = obj,
+            return new InstagramRecentMediaResponse(obj) {
                 NextUrl = pagination == null ? null : pagination.GetString("next_url"),
                 NextMaxId = pagination == null ? null : pagination.GetString("next_max_id"),
                 Data = obj.GetArray("data", InstagramMedia.Parse)
