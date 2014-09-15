@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
@@ -36,7 +37,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         /// Gets the value of the cell and converts it to <code>T</code>.
         /// </summary>
         public T GetValue<T>() {
-            return (T) Convert.ChangeType(Value, typeof(T));
+            return (T) Convert.ChangeType(Value, typeof(T), CultureInfo.InvariantCulture);
         }
 
         /// <summary>
