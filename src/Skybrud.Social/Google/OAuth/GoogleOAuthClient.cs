@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
+using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Google.YouTube;
 using Skybrud.Social.Json;
 
@@ -148,7 +149,9 @@ namespace Skybrud.Social.Google.OAuth {
             JsonObject json = SocialUtils.DoHttpPostRequestAndGetBodyAsJsonObject("https://accounts.google.com/o/oauth2/token", null, postData);
 
             // Check for an error message
-            if (json.HasValue("error")) throw new Exception(json.GetString("error"));
+            if (json.HasValue("error")) {
+                throw new GoogleOAuthException(json.GetString("error"), json.GetString("error_description"));
+            }
 
             // Parse the JSON response
             return GoogleAccessTokenResponse.Parse(json);
