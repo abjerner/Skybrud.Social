@@ -89,6 +89,23 @@ namespace Skybrud.Social.Google.OAuth {
                 {"state", state}
             });
         }
+        
+        /// <summary>
+        /// Gets the authorization URL at accounts.google.com for your application.
+        /// </summary>
+        /// <param name="state">The state of the application.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <param name="offline">Whether the application should be enabled for offline access. Default is false.</param>
+        public string GetAuthorizationUrl(string state, GoogleScopeCollection scope, bool offline = false) {
+            return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
+                {"response_type", "code"},
+                {"client_id", ClientIdFull},
+                {"access_type", offline ? "offline" : "online"},
+                {"scope", scope + "" },
+                {"redirect_uri", RedirectUri},
+                {"state", state}
+            });
+        }
 
         /// <summary>
         /// Gets the authorization URL at accounts.google.com for your application.
@@ -104,6 +121,25 @@ namespace Skybrud.Social.Google.OAuth {
                 {"access_type", accessType.ToString().ToLower()},
                 {"approval_prompt", approvalPrompt.ToString().ToLower()},
                 {"scope", scope},
+                {"redirect_uri", RedirectUri},
+                {"state", state}
+            });
+        }
+
+        /// <summary>
+        /// Gets the authorization URL at accounts.google.com for your application.
+        /// </summary>
+        /// <param name="state">The state of the application.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <param name="accessType">Whether the application should be enabled for offline access. Default is online.</param>
+        /// <param name="approvalPrompt">Whether the user should be re-prompted for scopes that he/she already has approved.</param>
+        public string GetAuthorizationUrl(string state, GoogleScopeCollection scope, GoogleAccessType accessType = GoogleAccessType.Online, GoogleApprovalPrompt approvalPrompt = GoogleApprovalPrompt.Auto) {
+            return GenerateUrl("https://accounts.google.com/o/oauth2/auth", new NameValueCollection {
+                {"response_type", "code"},
+                {"client_id", ClientIdFull},
+                {"access_type", accessType.ToString().ToLower()},
+                {"approval_prompt", approvalPrompt.ToString().ToLower()},
+                {"scope", scope + ""},
                 {"redirect_uri", RedirectUri},
                 {"state", state}
             });

@@ -71,6 +71,7 @@
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Google\Exceptions\GoogleOAuthException.cs" />
+    <Compile Include="Google\OAuth\GoogleScopeCollection.cs" />
     <Compile Include="Instagram\Objects\InstagramPosition.cs" />
     <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
     <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
