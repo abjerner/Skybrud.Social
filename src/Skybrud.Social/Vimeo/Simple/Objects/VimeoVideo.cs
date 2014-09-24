@@ -90,7 +90,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
                 Duration = TimeSpan.FromSeconds(obj.GetInt("duration")),
                 Width = obj.GetInt("width"),
                 Height = obj.GetInt("height"),
-                Tags = obj.GetArray("tags").Cast<string>()
+                Tags = (obj.GetString("tags") ?? "").Split(new [] {", "}, StringSplitOptions.RemoveEmptyEntries)
             };
         }
 
