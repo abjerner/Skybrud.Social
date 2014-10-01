@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -126,10 +127,24 @@ namespace Skybrud.Social.Google.Analytics.Objects {
                 if (filter == null) {
                     temp += block.ToString();
                 } else {
-                    temp += filter.Name + filter.OperatorValue + HttpUtility.UrlPathEncode(filter.Value + "");
+                    temp += filter.Name + filter.OperatorValue + EscapeFilterValue(filter.Value);
                 }
             }
             return temp;
+        }
+
+        private string EscapeFilterValue(object value) {
+
+            // Make sure the value is property formatted (eg. if the value is a double)
+            string str = String.Format(CultureInfo.InvariantCulture, "{0}", value);
+
+            // Escape special characters (according to https://developers.google.com/analytics/devguides/reporting/core/v3/reference#filterExpressions)
+            str = str.Replace("\\", "\\\\,");
+            str = str.Replace(";", "\\;");
+            str = str.Replace(",", "\\,");
+
+            return str;
+
         }
 
         #endregion
