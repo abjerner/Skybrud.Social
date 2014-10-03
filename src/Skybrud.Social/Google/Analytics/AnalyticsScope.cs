@@ -35,7 +35,7 @@ namespace Skybrud.Social.Google.Analytics {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public AnalyticsScope(string name) : base(name) { }
 
