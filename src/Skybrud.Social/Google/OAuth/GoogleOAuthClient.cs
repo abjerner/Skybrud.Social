@@ -194,16 +194,11 @@ namespace Skybrud.Social.Google.OAuth {
 
         }
 
+        /// <summary>
+        /// Gets information about the authenticated user.
+        /// </summary>
         public string GetUserInfo() {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection {
-                {"access_token", AccessToken},
-            };
-
-            // Make a call to the server
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/oauth2/v3/userinfo", query);
-
+            return DoAuthenticatedGetRequest("https://www.googleapis.com/oauth2/v3/userinfo");
         }
 
         /// <summary>
