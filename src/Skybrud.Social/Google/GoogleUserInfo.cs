@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google {
@@ -7,96 +8,81 @@ namespace Skybrud.Social.Google {
     /// depends on the scope of the application as well as what information the user has specified
     /// and is sharing.
     /// </summary>
-    public class GoogleUserInfo {
+    public class GoogleUserInfo : SocialJsonObject {
 
         #region Properties
 
         /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
-
-        /// <summary>
         /// Gets the ID of the user.
         /// </summary>
+        [JsonProperty("sub")]
         public string Id { get; private set; }
 
         /// <summary>
         /// The full name of the user.
         /// </summary>
+        [JsonProperty("name")]
         public string Name { get; private set; }
 
         /// <summary>
         /// Gets the given name (first name) of the user.
         /// </summary>
+        [JsonProperty("given_name")]
         public string GivenName { get; private set; }
 
         /// <summary>
         /// Gets the family name (last name) of the user.
         /// </summary>
+        [JsonProperty("family_name")]
         public string FamilyName { get; private set; }
 
         /// <summary>
         /// A link to the user's Google+ profile (if the user is on Google+).
         /// </summary>
+        [JsonProperty("profile")]
         public string Profile { get; private set; }
 
         /// <summary>
         /// Gets the URL for the user's profile picture if present.
         /// </summary>
+        [JsonProperty("picture")]
         public string Picture { get; private set; }
 
         /// <summary>
         /// Gets the email address of the user.
         /// </summary>
+        [JsonProperty("email")]
         public string Email { get; private set; }
 
         /// <summary>
         /// Gets whether the email address of the user has been verified.
         /// </summary>
+        [JsonProperty("email_verified")]
         public bool IsEmailVerified { get; private set; }
 
         /// <summary>
         /// Gets the gender of the user.
         /// </summary>
+        [JsonProperty("gender")]
         public string Gender { get; private set; }
 
         /// <summary>
         /// Gets the birth date of the user.
         /// </summary>
+        [JsonProperty("birthdate")]
         public string Birthdate { get; private set; }
 
         /// <summary>
         /// Gets the locale of the user.
         /// </summary>
+        [JsonProperty("locale")]
         public string Locale { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        private GoogleUserInfo() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private GoogleUserInfo(JsonObject obj) : base(obj) { }
 
         #endregion
         
@@ -124,8 +110,7 @@ namespace Skybrud.Social.Google {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static GoogleUserInfo Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new GoogleUserInfo {
-                JsonObject = obj,
+            return new GoogleUserInfo(obj) {
                 Id = obj.GetString("sub"),
                 Name = obj.GetString("name"),
                 GivenName = obj.GetString("given_name"),
