@@ -1,4 +1,6 @@
+using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
+using Skybrud.Social.BitBucket.Exceptions;
 using Skybrud.Social.BitBucket.Responses;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
@@ -19,7 +21,20 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         }
 
         public BitBucketCurrentUserResponse GetInfo() {
-            return BitBucketCurrentUserResponse.ParseJson(Raw.GetInfo());
+
+            HttpStatusCode status;
+
+            // Get the raw data from the API
+            string contents = Raw.GetInfo(out status);
+
+            // Validate the response
+            if (status != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(status);
+            }
+
+            // Parse the response
+            return BitBucketCurrentUserResponse.ParseJson(contents);
+        
         }
     
     }

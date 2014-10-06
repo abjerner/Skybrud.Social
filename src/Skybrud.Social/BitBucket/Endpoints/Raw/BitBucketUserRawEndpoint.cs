@@ -1,3 +1,4 @@
+using System.Net;
 using Skybrud.Social.BitBucket.OAuth;
 
 namespace Skybrud.Social.BitBucket.Endpoints.Raw {
@@ -10,10 +11,21 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             Client = client;
         }
         
+        /// <summary>
+        /// Gets information about the authenticated user.
+        /// </summary>
         public string GetInfo() {
-            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/user");
+            HttpStatusCode statusCode;
+            return GetInfo(out statusCode);
         }
-    
+        
+        /// <summary>
+        /// Gets information about the authenticated user.
+        /// </summary>
+        public string GetInfo(out HttpStatusCode statusCode) {
+            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/user", null, null, out statusCode);
+        }
+
     }
 
 }
