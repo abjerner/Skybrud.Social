@@ -13,6 +13,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             Client = client;
         }
 
+        #region GetChangesets
+
         /// <summary>
         /// Gets a list of change sets associated with a repository. By default, this call returns the 15 most recent
         /// changesets. It also returns the count which is the total number of changesets on the repository. Private
@@ -27,15 +29,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
         /// specified node and includes the older requests that preceded it. The Bitbucket GUI lists the nodes on the
         /// <b>Commit</b> tab. The default <code>start</code> value is the tip.</param>
         public string GetChangesets(string accountName, string repoSlug, int limit = 0, string start = null) {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (limit > 0) query.Add("limit", limit + "");
-            if (!String.IsNullOrWhiteSpace(start)) query.Add("start", start);
-
-            // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/repositories/" + accountName + "/" + repoSlug + "/changesets", query);
-
+            HttpStatusCode statusCode;
+            return GetChangesets(accountName, repoSlug, limit, start, out statusCode);
         }
 
         /// <summary>
@@ -63,6 +58,10 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/repositories/" + accountName + "/" + repoSlug + "/changesets", query, null, out statusCode);
 
         }
+
+        #endregion
+
+        #region GetCommits
 
         /// <summary>
         /// Gets the commit information associated with a repository. By default, this call returns all the commits
@@ -95,6 +94,10 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
 
         }
 
+        #endregion
+
+        #region GetCommit
+
         /// <summary>
         /// Gets the information associated with an individual commit.
         /// </summary>
@@ -125,6 +128,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commit/" + revision, null, null, out statusCode);
 
         }
+
+        #endregion
 
     }
 

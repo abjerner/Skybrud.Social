@@ -21,6 +21,8 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             Service = service;
         }
 
+        #region GetChangesets
+
         /// <summary>
         /// Gets a list of change sets associated with a repository. By default, this call returns the 15 most recent
         /// changesets. It also returns the count which is the total number of changesets on the repository. Private
@@ -35,8 +37,25 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// specified node and includes the older requests that preceded it. The Bitbucket GUI lists the nodes on the
         /// <b>Commit</b> tab. The default <code>start</code> value is the tip.</param>
         public BitBucketChangesetsResponse GetChangesets(string accountName, string repoSlug, int limit = 0, string start = null) {
-            return BitBucketChangesetsResponse.ParseJson(Raw.GetChangesets(accountName, repoSlug, limit, start));
+            
+            HttpStatusCode status;
+
+            // Get the raw data from the API
+            string contents = Raw.GetChangesets(accountName, repoSlug, limit, start, out status);
+
+            // Validate the response
+            if (status != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(status);
+            }
+
+            // Parse the JSON
+            return BitBucketChangesetsResponse.ParseJson(contents);
+        
         }
+
+        #endregion
+
+        #region GetCommits
 
         /// <summary>
         /// Gets the commit information associated with a repository. By default, this call returns all the commits
@@ -62,6 +81,10 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         }
 
+        #endregion
+
+        #region GetCommit
+
         /// <summary>
         /// Gets the information associated with an individual commit.
         /// </summary>
@@ -86,6 +109,8 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             return BitBucketCommit.ParseJson(contents);
 
         }
+
+        #endregion
 
     }
 
