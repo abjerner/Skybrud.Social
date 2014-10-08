@@ -16,6 +16,8 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             get { return Service.Client.Users; }
         }
 
+        #region GetProfile
+
         internal BitBucketUsersEndpoint(BitBucketService service) {
             Service = service;
         }
@@ -36,6 +38,8 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             return BitBucketUserResponse.ParseJson(contents);
         
         }
+
+        #endregion
     
     }
 

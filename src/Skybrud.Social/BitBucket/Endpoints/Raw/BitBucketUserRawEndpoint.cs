@@ -11,6 +11,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             Client = client;
         }
         
+        #region GetInfo
+        
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
@@ -26,6 +28,20 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/user", null, null, out statusCode);
         }
 
+        #endregion
+
+        #region GetRepositories
+
+        public string GetRepositories() {
+            HttpStatusCode statusCode;
+            return GetRepositories(out statusCode);
+        }
+
+        public string GetRepositories(out HttpStatusCode statusCode) {
+            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/user/repositories/", null, null, out statusCode);
+        }
+
+        #endregion
     }
 
 }
