@@ -51,7 +51,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #region GetRepositories
 
-        public BitBucketRepositoriesResponse GetRepositories() {
+        public BitBucketCurrentUserRepositoriesResponse GetRepositories() {
 
             HttpStatusCode status;
 
@@ -64,7 +64,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             }
 
             // Parse the response
-            return BitBucketRepositoriesResponse.ParseJsonArray(contents);
+            return BitBucketCurrentUserRepositoriesResponse.ParseJsonArray(contents);
 
         }
 

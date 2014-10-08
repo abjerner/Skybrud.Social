@@ -3,7 +3,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Responses {
 
-    public class BitBucketRepositoriesResponse : SocialJsonArray {
+    public class BitBucketCurrentUserRepositoriesResponse : SocialJsonArray {
 
         #region Properties
 
@@ -13,19 +13,19 @@ namespace Skybrud.Social.BitBucket.Responses {
 
         #region Constructor
 
-        private BitBucketRepositoriesResponse(JsonArray array) : base(array) { }
+        private BitBucketCurrentUserRepositoriesResponse(JsonArray array) : base(array) { }
 
         #endregion
 
         #region Static methods
 
-        public static BitBucketRepositoriesResponse ParseJsonArray(string str) {
+        public static BitBucketCurrentUserRepositoriesResponse ParseJsonArray(string str) {
             return Parse(JsonConverter.ParseArray(str));
         }
 
-        public static BitBucketRepositoriesResponse Parse(JsonArray array) {
+        public static BitBucketCurrentUserRepositoriesResponse Parse(JsonArray array) {
             if (array == null) return null;
-            return new BitBucketRepositoriesResponse(array) {
+            return new BitBucketCurrentUserRepositoriesResponse(array) {
                 Repositories = array.ParseMultiple(BitBucketUserRepository.Parse)
             };
         }
