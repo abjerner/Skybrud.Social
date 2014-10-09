@@ -70,6 +70,7 @@
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="GitHub\GitHubScopeCollection.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Google\Exceptions\GoogleOAuthException.cs" />
     <Compile Include="Google\OAuth\GoogleScopeCollection.cs" />

@@ -86,7 +86,7 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         #region Methods
 
-        public string GetAuthorizationUrl(string state, GitHubScope scope = GitHubScope.Default) {
+        public string GetAuthorizationUrl(string state, GitHubScopeCollection scopes) {
 
             // Initialize the query string
             NameValueCollection nvc = new NameValueCollection { { "client_id", ClientId } };
@@ -98,17 +98,8 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (!String.IsNullOrWhiteSpace(state)) nvc.Add("state", state);
 
             // Get the scope list
-            List<string> scopes = new List<string>();
-            if (scope.HasFlag(GitHubScope.User)) scopes.Add("user");
-            if (scope.HasFlag(GitHubScope.UserEmail)) scopes.Add("user:email");
-            if (scope.HasFlag(GitHubScope.UserFollow)) scopes.Add("user:follow");
-            if (scope.HasFlag(GitHubScope.PublicRepo)) scopes.Add("public_repo");
-            if (scope.HasFlag(GitHubScope.Repo)) scopes.Add("repo");
-            if (scope.HasFlag(GitHubScope.RepoStatus)) scopes.Add("repo:status");
-            if (scope.HasFlag(GitHubScope.DeleteRepo)) scopes.Add("delete_repo");
-            if (scope.HasFlag(GitHubScope.Notifications)) scopes.Add("notifications");
-            if (scope.HasFlag(GitHubScope.Gist)) scopes.Add("gist");
-            if (scopes.Count > 0) nvc.Add("scope", String.Join(",", scopes));
+            string scope = (scopes == null ? "" : scopes.ToString());
+            if (!String.IsNullOrWhiteSpace(scope)) nvc.Add("scope", scope);
 
             // Generate the URL
             return "https://github.com/login/oauth/authorize?" + SocialUtils.NameValueCollectionToQueryString(nvc);
@@ -147,6 +138,8 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         internal string GenerateAbsoluteUrl(string relative, NameValueCollection query) {
 
+            if (query == null) query = new NameValueCollection();
+
             string url = "https://api.github.com";
             if (Credentials != null) {
                 url = "https://" + Credentials.UserName + ":" + Credentials.Password + "@api.github.com";
@@ -158,7 +151,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             url += relative;
 
             // Append the query string (if not empty)
-            if (query != null && query.Count > 0) url += "?" + SocialUtils.NameValueCollectionToQueryString(query);
+            if (query.Count > 0) url += "?" + SocialUtils.NameValueCollectionToQueryString(query);
 
             // Now return the URL
             return url;

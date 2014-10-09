@@ -20,7 +20,8 @@ namespace Skybrud.Social.GitHub {
 
         #region Constructor(s)
 
-        private GitHubService() {
+        private GitHubService(GitHubOAuthClient client) {
+            Client = client;
             Repositories = new GitHubRepositoriesEndpoint(this);
         }
 
@@ -38,7 +39,7 @@ namespace Skybrud.Social.GitHub {
             if (client == null) throw new ArgumentNullException("client");
 
             // Initialize the service
-            return new GitHubService();
+            return new GitHubService(client);
 
         }
 

@@ -1,62 +1,158 @@
-using System;
-
 namespace Skybrud.Social.GitHub {
-    
-    [Flags]
-    public enum GitHubScope {
+
+    public class GitHubScope {
+
+        #region Constants
         
         /// <summary>
-        /// Public read-only access (includes public user profile info, public repo info, and gists).
+        /// Grants read-only access to public information (includes public user profile info,
+        /// public repository info, and gists).
         /// </summary>
-        Default = 0,
+        public static readonly GitHubScope Default = new GitHubScope(
+            "",
+            "Grants read-only access to public information (includes public user profile info, " +
+            "public repository info, and gists)."
+        );
 
         /// <summary>
-        /// Read/write access to profile info only. Note: this scope includes user:email and user:follow.
+        /// Grants read/write access to profile info only. Note that this scope includes
+        /// <code>user:email</code> and <code>user:follow</code>.
         /// </summary>
-        User = 1,
+        public static readonly GitHubScope User = new GitHubScope(
+            "user",
+            "Grants read/write access to profile info only. Note that this scope includes user:email and user:follow."
+        );
 
         /// <summary>
-        /// Read access to a user’s email addresses.
+        /// Grants read access to a user’s email addresses.
         /// </summary>
-        UserEmail = 2,
+        public static readonly GitHubScope UserEmail = new GitHubScope(
+            "user:email",
+            "Grants read access to a user’s email addresses."
+        );
 
         /// <summary>
-        /// Access to follow or unfollow other users.
+        /// Grants access to follow or unfollow other users.
         /// </summary>
-        UserFollow = 4,
+        public static readonly GitHubScope UserFollow = new GitHubScope(
+            "user:follow",
+            "Grants access to follow or unfollow other users."
+        );
 
         /// <summary>
-        /// Read/write access to public repos and organizations.
+        /// Grants read/write access to code, commit statuses, and deployment statuses for public
+        /// repositories and organizations.
         /// </summary>
-        PublicRepo = 8,
+        public static readonly GitHubScope PublicRepo = new GitHubScope(
+            "public_repo",
+            "Grants read/write access to code, commit statuses, and deployment statuses for " +
+            "public repositories and organizations."
+        );
 
         /// <summary>
-        /// Read/write access to public and private repos and organizations.
+        /// Grants read/write access to code, commit statuses, and deployment statuses for public
+        /// and private repositories and organizations.
         /// </summary>
-        Repo = 16, 
+        public static readonly GitHubScope Repo = new GitHubScope(
+            "repo",
+            "Grants read/write access to code, commit statuses, and deployment statuses for " +
+            "public and private repositories and organizations."
+        );
+
+        // TODO: Add scope "repo_deployment"
 
         /// <summary>
-        /// Read/write access to public and private repository commit statuses. This scope is only necessary to grant
-        /// other users or services access to private repository commit statuses without granting access to the code.
-        /// The repo and public_repo scopes already include access to commit status for private and public
-        /// repositories respectively.
+        /// Grants read/write access to public and private repository commit statuses. This scope
+        /// is only necessary to grant other users or services access to private repository commit
+        /// statuses without granting access to the code.
         /// </summary>
-        RepoStatus = 32,
+        public static readonly GitHubScope RepoStatus = new GitHubScope(
+            "repo:status",
+            "Grants read/write access to public and private repository commit statuses. This " +
+            "scope is only necessary to grant other users or services access to private " +
+            "repository commit statuses without granting access to the code."
+        );
 
         /// <summary>
-        /// Delete access to adminable repositories.
+        /// Grants access to delete adminable repositories.
         /// </summary>
-        DeleteRepo = 64,
+        public static readonly GitHubScope DeleteRepo = new GitHubScope(
+            "delete_repo",
+            "Grants access to delete adminable repositories."
+        );
 
         /// <summary>
-        /// Read access to a user’s notifications. repo is accepted too.
+        /// Grants read access to a user’s notifications. <code>repo</code> also provides this access.
         /// </summary>
-        Notifications = 128,
+        public static readonly GitHubScope Notifications = new GitHubScope(
+            "notifications",
+            "Grants read access to a user’s notifications. repo also provides this access."
+        );
 
         /// <summary>
-        /// Write access to gists.
+        /// Grants write access to gists.
         /// </summary>
-        Gist = 256
+        public static readonly GitHubScope Gist = new GitHubScope(
+            "Gist",
+            "Grants write access to gists."
+        );
+
+        // TODO: Add scope "read:repo_hook"
+        // TODO: Add scope "write:repo_hook"
+        // TODO: Add scope "admin:repo_hook"
+        // TODO: Add scope "read:org"
+        // TODO: Add scope "write:org"
+        // TODO: Add scope "admin:org"
+        // TODO: Add scope "read:public_key"
+        // TODO: Add scope "write:public_key"
+        // TODO: Add scope "admin:public_key"
+
+        #endregion
+
+        #region Properties
+
+        // The name of the scope
+        public string Name { get; private set; }
+
+        // The name of the scope
+        public string Description { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Default and private constructor.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        /// <param name="description">The description of the scope.</param>
+        private GitHubScope(string name, string description = null) {
+            Name = name;
+            Description = description;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        public override string ToString() {
+            return Name;
+        }
+
+        #endregion
+
+        #region Operators
+
+        /// <summary>
+        /// Adding two instance of FacebookScope will result in a FacebookScopeCollection containing both scopes.
+        /// </summary>
+        /// <param name="left">The left scope.</param>
+        /// <param name="right">The right scope.</param>
+        public static GitHubScopeCollection operator +(GitHubScope left, GitHubScope right) {
+            return new GitHubScopeCollection(left, right);
+        }
+
+        #endregion
 
     }
 
