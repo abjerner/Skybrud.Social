@@ -11,6 +11,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             Client = client;
         }
 
+        #region GetProfile
+
         public string GetProfile(string account) {
             HttpStatusCode statusCode;
             return GetProfile(account, out statusCode);
@@ -19,7 +21,25 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
         public string GetProfile(string account, out HttpStatusCode statusCode) {
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/users/" + account, null, null, out statusCode);
         }
-    
+
+        #endregion
+
+        #region GetRepositories
+
+        public string GetRepositories(string username) {
+            HttpStatusCode statusCode;
+            return GetProfile(username, out statusCode);
+        }
+
+        public string GetRepositories(string username, out HttpStatusCode statusCode) {
+            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + username, null, null, out statusCode);
+        }
+
+        #endregion
+
+
+        
+
     }
 
 }

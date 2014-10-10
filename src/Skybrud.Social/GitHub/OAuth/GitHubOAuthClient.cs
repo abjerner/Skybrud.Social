@@ -40,6 +40,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         public NetworkCredential Credentials { get; set; }
 
         public GitHubRepositoriesRawEndpoint Repositories { get; private set; }
+        public GitHubUserRawEndpoint User { get; private set; }
 
         #endregion
 
@@ -50,6 +51,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// </summary>
         public GitHubOAuthClient() {
             Repositories = new GitHubRepositoriesRawEndpoint(this);
+            User = new GitHubUserRawEndpoint(this);
         }
 
         /// <summary>
