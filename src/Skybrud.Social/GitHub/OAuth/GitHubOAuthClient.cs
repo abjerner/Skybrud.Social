@@ -159,14 +159,19 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         }
 
-        public string GetAuthenticatedGetRequest(string url) {
-            return GetAuthenticatedGetRequest(url, null);
+        public string DoAuthenticatedGetRequest(string url) {
+            return DoAuthenticatedGetRequest(url, null);
         }
-        
-        public string GetAuthenticatedGetRequest(string url, NameValueCollection query) {
 
-            // Skip if the URL is empty
-            if (String.IsNullOrWhiteSpace(url)) return null;
+        public string DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+            HttpStatusCode statusCode;
+            return DoAuthenticatedGetRequest(url, query, out statusCode);
+        }
+
+        public string DoAuthenticatedGetRequest(string url, NameValueCollection query, out HttpStatusCode statusCode) {
+
+            // Throw an exception if the URL is empty
+            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
 
             // Initialize a new query string if not specified
             if (query == null) query = new NameValueCollection();
@@ -181,13 +186,14 @@ namespace Skybrud.Social.GitHub.OAuth {
             url += url.Contains("?") ? "&" + queryString : "?" + queryString;
 
             // Initialize a new HTTP request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-            
-            // For some weird reason GitHub seems to require a user agent?
-            request.UserAgent = "Skybrud.Social GitHub OAuth Client";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
+            request.UserAgent = "Skybrud.Social";
 
             // Get the HTTP response
-            HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            statusCode = response.StatusCode;
             using (var rs = response.GetResponseStream()) {
                 using (var sr = new StreamReader(rs)) {
                     return sr.ReadToEnd() + "</pre>";
