@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
@@ -41,6 +40,7 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         public GitHubRepositoriesRawEndpoint Repositories { get; private set; }
         public GitHubUserRawEndpoint User { get; private set; }
+        public GitHubUsersRawEndpoint Users { get; private set; }
 
         #endregion
 
@@ -52,6 +52,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubOAuthClient() {
             Repositories = new GitHubRepositoriesRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);
+            Users = new GitHubUsersRawEndpoint(this);
         }
 
         /// <summary>
@@ -194,11 +195,20 @@ namespace Skybrud.Social.GitHub.OAuth {
             request.UserAgent = "Skybrud.Social";
 
             // Get the HTTP response
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            HttpWebResponse response;
+            try {
+                response = (HttpWebResponse)request.GetResponse();
+            } catch (WebException ex) {
+                response = (HttpWebResponse)ex.Response;
+            }
+                
+            // Get the HTTP status code
             statusCode = response.StatusCode;
-            using (var rs = response.GetResponseStream()) {
-                using (var sr = new StreamReader(rs)) {
-                    return sr.ReadToEnd() + "</pre>";
+
+            // Read the response body
+            using (Stream rs = response.GetResponseStream()) {
+                using (StreamReader sr = new StreamReader(rs)) {
+                    return sr.ReadToEnd();
                 }
             }
 

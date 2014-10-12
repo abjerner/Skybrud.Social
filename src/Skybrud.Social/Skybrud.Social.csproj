@@ -70,8 +70,14 @@
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="GitHub\Endpoints\GitHubUsersEndpoint.cs" />
+    <Compile Include="GitHub\Endpoints\GitHubUserEndpoint.cs" />
+    <Compile Include="GitHub\Endpoints\Raw\GitHubUsersRawEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\Raw\GitHubUserRawEndpoint.cs" />
+    <Compile Include="GitHub\Exceptions\GitHubHttpException.cs" />
     <Compile Include="GitHub\GitHubScopeCollection.cs" />
+    <Compile Include="GitHub\Objects\GitHubUser.cs" />
+    <Compile Include="GitHub\Objects\GitHubUserType.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Google\Exceptions\GoogleOAuthException.cs" />
     <Compile Include="Google\OAuth\GoogleScopeCollection.cs" />

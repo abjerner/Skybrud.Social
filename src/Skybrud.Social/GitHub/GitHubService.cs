@@ -16,6 +16,10 @@ namespace Skybrud.Social.GitHub {
 
         public GitHubRepositoriesEndpoint Repositories { get; private set; }
 
+        public GitHubUserEndpoint User { get; private set; }
+
+        public GitHubUsersEndpoint Users { get; private set; }
+
         #endregion
 
         #region Constructor(s)
@@ -23,6 +27,8 @@ namespace Skybrud.Social.GitHub {
         private GitHubService(GitHubOAuthClient client) {
             Client = client;
             Repositories = new GitHubRepositoriesEndpoint(this);
+            User = new GitHubUserEndpoint(this);
+            Users = new GitHubUsersEndpoint(this);
         }
 
         #endregion
