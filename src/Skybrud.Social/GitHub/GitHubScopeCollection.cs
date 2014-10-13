@@ -8,6 +8,10 @@ namespace Skybrud.Social.GitHub {
 
         private readonly List<GitHubScope> _list = new List<GitHubScope>();
 
+        public GitHubScope[] Items {
+            get { return _list.ToArray(); }
+        }
+
         public GitHubScopeCollection(params GitHubScope[] scopes) {
             _list.AddRange(scopes);
         }

@@ -93,7 +93,7 @@ namespace Skybrud.Social.GitHub {
         /// Grants write access to gists.
         /// </summary>
         public static readonly GitHubScope Gist = new GitHubScope(
-            "Gist",
+            "gist",
             "Grants write access to gists."
         );
 
@@ -126,7 +126,7 @@ namespace Skybrud.Social.GitHub {
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        private GitHubScope(string name, string description = null) {
+        internal GitHubScope(string name, string description = null) {
             Name = name;
             Description = description;
         }

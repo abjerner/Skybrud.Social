@@ -114,7 +114,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// Exchanges the specified authorization code for a user access token.
         /// </summary>
         /// <param name="authCode">The authorization code received from the GitHub OAuth dialog.</param>
-        public string GetAccessTokenFromAuthCode(string authCode) {
+        public GitHubOAuthAccessTokenResponse GetAccessTokenFromAuthCode(string authCode) {
 
             NameValueCollection parameters = new NameValueCollection {
                 {"client_id", ClientId},
@@ -131,8 +131,8 @@ namespace Skybrud.Social.GitHub.OAuth {
             // Parse the contents
             NameValueCollection response = HttpUtility.ParseQueryString(contents);
 
-            // Return the access token
-            return response["access_token"];
+            // Return the response
+            return GitHubOAuthAccessTokenResponse.Parse(response);
 
         }
 

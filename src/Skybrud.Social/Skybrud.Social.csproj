@@ -76,6 +76,7 @@
     <Compile Include="GitHub\Endpoints\Raw\GitHubUserRawEndpoint.cs" />
     <Compile Include="GitHub\Exceptions\GitHubHttpException.cs" />
     <Compile Include="GitHub\GitHubScopeCollection.cs" />
+    <Compile Include="GitHub\OAuth\GitHubOAuthAccessTokenResponse.cs" />
     <Compile Include="GitHub\Objects\GitHubUser.cs" />
     <Compile Include="GitHub\Objects\GitHubUserType.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
