@@ -1,9 +1,8 @@
-using System;
 using System.Net;
 
 namespace Skybrud.Social.GitHub.Exceptions {
     
-    public class GitHubHttpException : Exception {
+    public class GitHubHttpException : GitHubException {
 
         public HttpStatusCode StatusCode { get; private set; }
 

@@ -179,9 +179,6 @@ namespace Skybrud.Social.GitHub.OAuth {
             // Initialize a new query string if not specified
             if (query == null) query = new NameValueCollection();
 
-            // Append the access token to the query string
-            //query.Add("access_token", AccessToken);
-
             // Convert the query string to ... string
             string queryString = SocialUtils.NameValueCollectionToQueryString(query);
 
@@ -194,6 +191,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
             request.UserAgent = "Skybrud.Social";
 
+            // Add an authorization header with the access token
             request.Headers.Add("Authorization: token " + AccessToken);
 
             // Get the HTTP response
@@ -201,6 +199,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             try {
                 response = (HttpWebResponse) request.GetResponse();
             } catch (WebException ex) {
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
                 response = (HttpWebResponse) ex.Response;
             }
                 
