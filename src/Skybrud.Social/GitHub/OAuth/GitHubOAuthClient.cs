@@ -180,7 +180,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (query == null) query = new NameValueCollection();
 
             // Append the access token to the query string
-            query.Add("access_token", AccessToken);
+            //query.Add("access_token", AccessToken);
 
             // Convert the query string to ... string
             string queryString = SocialUtils.NameValueCollectionToQueryString(query);
@@ -189,17 +189,19 @@ namespace Skybrud.Social.GitHub.OAuth {
             url += url.Contains("?") ? "&" + queryString : "?" + queryString;
 
             // Initialize a new HTTP request
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
             // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
             request.UserAgent = "Skybrud.Social";
 
+            request.Headers.Add("Authorization: token " + AccessToken);
+
             // Get the HTTP response
             HttpWebResponse response;
             try {
-                response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse) request.GetResponse();
             } catch (WebException ex) {
-                response = (HttpWebResponse)ex.Response;
+                response = (HttpWebResponse) ex.Response;
             }
                 
             // Get the HTTP status code
@@ -207,6 +209,7 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // Read the response body
             using (Stream rs = response.GetResponseStream()) {
+                if (rs == null) return null;
                 using (StreamReader sr = new StreamReader(rs)) {
                     return sr.ReadToEnd();
                 }
