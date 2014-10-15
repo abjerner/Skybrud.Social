@@ -21,13 +21,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
         #region Methods
 
-        public string GetUser() {
-            HttpStatusCode statusCode;
-            return GetUser(out statusCode);
+        public SocialHttpResponse GetUser() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user");
         }
-        
-        public string GetUser(out HttpStatusCode statusCode) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user", null, out statusCode);
+
+        public SocialHttpResponse GetEmails() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/emails");
+        }
+
+        public SocialHttpResponse GetFollowers() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
+        }
+
+        public SocialHttpResponse GetFollowing() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
+        }
+
+        public SocialHttpResponse IsFollowing(string username) {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/following/" + username);
         }
 
         #endregion

@@ -1,7 +1,5 @@
-using System.Net;
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Exceptions;
-using Skybrud.Social.GitHub.Objects;
+using Skybrud.Social.GitHub.Responses;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
@@ -33,21 +31,8 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        public GitHubUser GetUser(string username) {
-
-            HttpStatusCode status;
-
-            // Get the raw data from the API
-            string contents = Raw.GetUser(username, out status);
-
-            // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new GitHubHttpException(status);
-            }
-
-            // Parse the response
-            return GitHubUser.ParseJson(contents);
-
+        public GitHubUserResponse GetUser(string username) {
+            return GitHubUserResponse.ParseResponse(Raw.GetUser(username));
         }
 
         #endregion

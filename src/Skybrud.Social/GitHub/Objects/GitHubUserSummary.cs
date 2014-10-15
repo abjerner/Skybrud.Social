@@ -3,7 +3,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Objects {
 
-    public class GitHubUser : SocialJsonObject {
+    public class GitHubUserSummary : SocialJsonObject {
 
         #region Properties
 
@@ -39,41 +39,17 @@ namespace Skybrud.Social.GitHub.Objects {
 
         public bool IsSiteAdmin { get; private set; }
 
-        public string Name { get; private set; }
-
-        public string Company { get; private set; }
-
-        public string Location { get; private set; }
-
-        public string Email { get; private set; }
-
-        public string IsHireable { get; private set; }
-
-        public string Bio { get; private set; }
-
-        public int PublicRepos { get; private set; }
-
-        public int PublicGists { get; private set; }
-
-        public int Followers { get; private set; }
-
-        public int Following { get; private set; }
-
-        public DateTime CreatedAt { get; private set; }
-
-        public DateTime UpdatedAt { get; private set; }
-
         #endregion
 
         #region Constructor
 
-        private GitHubUser(JsonObject obj) : base(obj) { }
+        private GitHubUserSummary(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubUser Parse(JsonObject obj) {
+        public static GitHubUserSummary Parse(JsonObject obj) {
 
             if (obj == null) return null;
 
@@ -85,7 +61,7 @@ namespace Skybrud.Social.GitHub.Objects {
                 default: throw new Exception("Unknown user type \"" + strType + "\".");
             }
 
-            return new GitHubUser(obj) {
+            return new GitHubUserSummary(obj) {
                 Login = obj.GetString("login"),
                 Id = obj.GetInt32("id"),
                 AvatarUrl = obj.GetString("avatar_url"),
@@ -101,19 +77,7 @@ namespace Skybrud.Social.GitHub.Objects {
                 EventsUrl = obj.GetString("events_url"),
                 ReceivedEventsUrl = obj.GetString("received_events_url"),
                 Type = type,
-                IsSiteAdmin = obj.GetBoolean("site_admin"),
-                Name = obj.GetString("name"),
-                Company = obj.GetString("company"),
-                Location = obj.GetString("location"),
-                Email = obj.GetString("email"),
-                IsHireable = obj.GetString("hireable"),
-                Bio = obj.GetString("bio"),
-                PublicRepos = obj.GetInt32("public_repos"),
-                PublicGists = obj.GetInt32("public_gists"),
-                Followers = obj.GetInt32("followers"),
-                Following = obj.GetInt32("following"),
-                CreatedAt = obj.GetDateTime("created_at"),
-                UpdatedAt = obj.GetDateTime("updated_at"),
+                IsSiteAdmin = obj.GetBoolean("site_admin")
             };
         
         }

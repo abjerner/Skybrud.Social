@@ -1,7 +1,5 @@
-using System.Net;
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Exceptions;
-using Skybrud.Social.GitHub.Objects;
+using Skybrud.Social.GitHub.Responses;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
@@ -33,21 +31,33 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        public GitHubUser GetUser() {
+        /// <summary>
+        /// Gets information about thr authenticated user.
+        /// </summary>
+        public GitHubUserResponse GetUser() {
+            return GitHubUserResponse.ParseResponse(Raw.GetUser());
+        }
 
-            HttpStatusCode status;
+        public GitHubEmailsResponse GetEmails() {
+            return GitHubEmailsResponse.ParseResponse(Raw.GetEmails());
+        }
 
-            // Get the raw data from the API
-            string contents = Raw.GetUser(out status);
+        /// <summary>
+        /// Gets a list of users following the authenticated user.
+        /// </summary>
+        public GitHubUsersResponse GetFollowers() {
+            return GitHubUsersResponse.ParseResponse(Raw.GetFollowers());
+        }
 
-            // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new GitHubHttpException(status);
-            }
+        /// <summary>
+        /// Gets a list of users the authenticated user is following.
+        /// </summary>
+        public GitHubUsersResponse GetFollowing() {
+            return GitHubUsersResponse.ParseResponse(Raw.GetFollowing());
+        }
 
-            // Parse the response
-            return GitHubUser.ParseJson(contents);
-
+        public GitHubFollowingResponse IsFollowing(string username) {
+            return GitHubFollowingResponse.ParseResponse(Raw.IsFollowing(username));
         }
 
         #endregion

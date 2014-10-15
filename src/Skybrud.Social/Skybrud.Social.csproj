@@ -77,6 +77,13 @@
     <Compile Include="GitHub\Exceptions\GitHubException.cs" />
     <Compile Include="GitHub\Exceptions\GitHubHttpException.cs" />
     <Compile Include="GitHub\GitHubScopeCollection.cs" />
+    <Compile Include="GitHub\Objects\GitHubEmail.cs" />
+    <Compile Include="GitHub\Objects\GitHubUserSummary.cs" />
+    <Compile Include="GitHub\Responses\GitHubEmailsResponse.cs" />
+    <Compile Include="GitHub\Responses\GitHubFollowingResponse.cs" />
+    <Compile Include="GitHub\Responses\GitHubUsersResponse.cs" />
+    <Compile Include="GitHub\Responses\GitHubResponse.cs" />
+    <Compile Include="GitHub\Responses\GitHubUserResponse.cs" />
     <Compile Include="GitHub\OAuth\GitHubOAuthAccessTokenResponse.cs" />
     <Compile Include="GitHub\Objects\GitHubUser.cs" />
     <Compile Include="GitHub\Objects\GitHubUserType.cs" />
