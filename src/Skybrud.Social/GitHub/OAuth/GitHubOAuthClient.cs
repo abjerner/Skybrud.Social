@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using System.IO;
 using System.Net;
 using System.Web;
 using Skybrud.Social.GitHub.Endpoints.Raw;
@@ -162,16 +161,11 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         }
 
-        public string DoAuthenticatedGetRequest(string url) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
             return DoAuthenticatedGetRequest(url, null);
         }
 
-        public string DoAuthenticatedGetRequest(string url, NameValueCollection query) {
-            HttpStatusCode statusCode;
-            return DoAuthenticatedGetRequest(url, query, out statusCode);
-        }
-
-        public string DoAuthenticatedGetRequest(string url, NameValueCollection query, out HttpStatusCode statusCode) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
 
             // Throw an exception if the URL is empty
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
@@ -195,23 +189,11 @@ namespace Skybrud.Social.GitHub.OAuth {
             request.Headers.Add("Authorization: token " + AccessToken);
 
             // Get the HTTP response
-            HttpWebResponse response;
             try {
-                response = (HttpWebResponse) request.GetResponse();
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
             } catch (WebException ex) {
                 if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                response = (HttpWebResponse) ex.Response;
-            }
-                
-            // Get the HTTP status code
-            statusCode = response.StatusCode;
-
-            // Read the response body
-            using (Stream rs = response.GetResponseStream()) {
-                if (rs == null) return null;
-                using (StreamReader sr = new StreamReader(rs)) {
-                    return sr.ReadToEnd();
-                }
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
             }
 
         }
