@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Skybrud.Social {
     
+    [Obsolete("Marking this as obsolete for now since I'm not sure on the final structure of the class.")]
     public class SocialHttpRequest {
 
         #region Private fields
@@ -87,9 +88,10 @@ namespace Skybrud.Social {
 
             // Get the response
             try {
-                return new SocialHttpResponse((HttpWebResponse) request.GetResponse());
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
             } catch (WebException ex) {
-                return new SocialHttpResponse((HttpWebResponse) ex.Response, ex);
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
             }
 
         }

@@ -4,10 +4,17 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
     
+    /// <summary>
+    /// Wrapper class for <code>HttpWebResponse</code>.
+    /// </summary>
     public class SocialHttpResponse {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the underlying <code>HttpWebResponse</code>.
+        /// </summary>
         public HttpWebResponse Response { get; private set; }
-        public WebException Exception { get; private set; }
 
         public HttpStatusCode StatusCode {
             get { return Response.StatusCode; }
@@ -25,24 +32,28 @@ namespace Skybrud.Social {
             get { return Response.ContentType; }
         }
 
-        public WebExceptionStatus WebStatus {
-            get { return Exception == null ? WebExceptionStatus.Success : Exception.Status; }
+        public WebHeaderCollection Headers {
+            get { return Response.Headers; }
         }
-        
-        internal SocialHttpResponse(HttpWebResponse response) {
+
+        #endregion
+
+        #region Constructor
+
+        private SocialHttpResponse(HttpWebResponse response) {
             Response = response;
         }
 
-        internal SocialHttpResponse(HttpWebResponse response, WebException exception) {
-            Response = response;
-            Exception = exception;
-        }
+        #endregion
+
+        #region Member methods
 
         /// <summary>
         /// Gets the response body as a RAW string.
         /// </summary>
         public string GetBodyAsString() {
             using (Stream stream = Response.GetResponseStream()) {
+                if (stream == null) return null;
                 using (StreamReader reader = new StreamReader(stream)) {
                     return reader.ReadToEnd();
                 }
@@ -54,7 +65,8 @@ namespace Skybrud.Social {
         /// <var>JsonArray</var>.
         /// </summary>
         public IJsonObject GetBodyAsJson() {
-            return JsonConverter.Parse(GetBodyAsString());
+            string str = GetBodyAsString();
+            return str == null ? null : JsonConverter.Parse(str);
         }
 
         /// <summary>
@@ -70,6 +82,16 @@ namespace Skybrud.Social {
         public JsonArray GetBodyAsJsonArray() {
             return GetBodyAsJson() as JsonArray;
         }
+
+        #endregion
+
+        #region Static methods
+
+        public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response) {
+            return response == null ? null : new SocialHttpResponse(response);
+        }
+
+        #endregion
 
     }
 
