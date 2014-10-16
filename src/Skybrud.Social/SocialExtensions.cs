@@ -20,8 +20,13 @@ namespace Skybrud.Social {
         }
         
         public static string GetAsString(this HttpWebResponse response) {
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            return reader.ReadToEnd();
+            if (response == null) return null;
+            using (var stream = response.GetResponseStream()) {
+                if (stream == null) return null;
+                using (StreamReader reader = new StreamReader(stream)) {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         public static IJsonObject GetAsJson(this HttpWebResponse response) {
