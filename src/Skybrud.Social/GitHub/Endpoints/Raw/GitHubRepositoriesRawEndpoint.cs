@@ -27,10 +27,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             );
         }
 
-        public string GetRespositories(string username) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(
-                Client.GenerateAbsoluteUrl("/" + (username == null ? "user" : "users/" + username) + "/repos")
-            );
+        public SocialHttpResponse GetRepositories() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/repos");
+        }
+
+        public SocialHttpResponse GetRespositories(string username) {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/repos");
         }
 
         #endregion
