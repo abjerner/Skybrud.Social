@@ -69,10 +69,12 @@ namespace Skybrud.Social.Json {
             return v2 == null ? null : new JsonObject(v2);
         }
 
+        [Obsolete("Use GetInt32 instead")]
         public int GetInt(int index) {
             return (int) Convert.ChangeType(this[index], typeof(int));
         }
 
+        [Obsolete("Use GetInt64 instead")]
         public long GetLong(int index) {
             return (long) Convert.ChangeType(this[index], typeof(long));
         }

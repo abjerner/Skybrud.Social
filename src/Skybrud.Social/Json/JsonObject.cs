@@ -77,10 +77,12 @@ namespace Skybrud.Social.Json {
             return (T) Convert.ChangeType(Dictionary[name], typeof(T), provider);
         }
 
+        [Obsolete("Use GetInt32 instead")]
         public int GetInt(string name) {
             return GetValue<int>(name);
         }
 
+        [Obsolete("Use GetInt64 instead")]
         public long GetLong(string name) {
             return GetValue<long>(name);
         }
