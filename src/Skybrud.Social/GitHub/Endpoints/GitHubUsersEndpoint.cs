@@ -31,8 +31,20 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
+        /// <summary>
+        /// Gets information about a user with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
         public GitHubUserResponse GetUser(string username) {
             return GitHubUserResponse.ParseResponse(Raw.GetUser(username));
+        }
+
+        /// <summary>
+        /// Gets a list of repositories of a user with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        public GitHubRepositoriesResponse GetRepositories(string username) {
+            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
         }
 
         #endregion

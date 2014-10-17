@@ -31,13 +31,6 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        public GitHubRepositoriesResponse GetRepositories() {
-            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories());
-        }
-
-        public GitHubRepositoriesResponse GetRepositories(string username) {
-            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
-        }
 
         #endregion
     

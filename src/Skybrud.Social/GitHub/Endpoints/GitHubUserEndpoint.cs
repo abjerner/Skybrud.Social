@@ -56,8 +56,19 @@ namespace Skybrud.Social.GitHub.Endpoints {
             return GitHubUsersResponse.ParseResponse(Raw.GetFollowing());
         }
 
+        /// <summary>
+        /// Gets whether the authenticated user follows the specified username.
+        /// </summary>
+        /// <param name="username">The username to check.</param>
         public GitHubFollowingResponse IsFollowing(string username) {
             return GitHubFollowingResponse.ParseResponse(Raw.IsFollowing(username));
+        }
+        
+        /// <summary>
+        /// Gets a list of repositories of the authenticated user.
+        /// </summary>
+        public GitHubRepositoriesResponse GetRepositories() {
+            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories());
         }
 
         #endregion
