@@ -1,4 +1,5 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Responses;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
@@ -18,7 +19,6 @@ namespace Skybrud.Social.GitHub.Endpoints {
             get { return Service.Client.Repositories; }
         }
 
-
         #endregion
 
         #region Constructors
@@ -31,7 +31,13 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        // TODO: Implement some methods
+        public GitHubRepositoriesResponse GetRepositories() {
+            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories());
+        }
+
+        public GitHubRepositoriesResponse GetRepositories(string username) {
+            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
+        }
 
         #endregion
     
