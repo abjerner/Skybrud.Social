@@ -23,51 +23,51 @@ namespace Skybrud.Social.GitHub.Objects {
 
         public string Url { get; private set; }
 
-        public DateTime created_at { get; private set; }
+        public DateTime CreatedAt { get; private set; }
         
-        public DateTime updated_at { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
 
-        public DateTime pushed_at { get; private set; }
+        public DateTime PushedAt { get; private set; }
 
-        public string git_url { get; private set; }
+        public string GitUrl { get; private set; }
 
-        public string ssh_url { get; private set; }
+        public string SshUrl { get; private set; }
 
-        public string clone_url { get; private set; }
+        public string CloneUrl { get; private set; }
 
-        public string svn_url { get; private set; }
+        public string SvnUrl { get; private set; }
 
-        public string homepage { get; private set; }
+        public string Homepage { get; private set; }
 
-        public long size { get; private set; }
+        public long Size { get; private set; }
 
-        public int stargazers_count { get; private set; }
+        public int StargazersCount { get; private set; }
 
-        public int watchers_count { get; private set; }
+        public int WatchersCount { get; private set; }
 
-        public string language { get; private set; }
+        public string Language { get; private set; }
 
-        public bool has_issues { get; private set; }
+        public bool HasIssues { get; private set; }
 
-        public bool has_downloads  { get; private set; }
+        public bool HasDownloads  { get; private set; }
 
-        public bool has_wiki  { get; private set; }
+        public bool HasWiki  { get; private set; }
 
-        public bool has_pages { get; private set; }
+        public bool HasPages { get; private set; }
 
-        public int forks_count { get; private set; }
+        public int ForksCount { get; private set; }
 
-        public string mirror_url { get; private set; }
+        public string MirrorUrl { get; private set; }
 
-        public int open_issues_count { get; private set; }
+        public int OpenIssuesCount { get; private set; }
 
-        public int forks { get; private set; }
+        public int Forks { get; private set; }
 
-        public int open_issues { get; private set; }
+        public int OpenIssues { get; private set; }
 
-        public int watchers { get; private set; }
+        public int Watchers { get; private set; }
 
-        public string default_branch { get; private set; }
+        public string DefaultBranch { get; private set; }
 
         #endregion
 
@@ -90,29 +90,29 @@ namespace Skybrud.Social.GitHub.Objects {
                 Description = obj.GetString("description"),
                 IsFork = obj.GetBoolean("fork"),
                 Url = obj.GetString("url"),
-                created_at = obj.GetDateTime("created_at"),
-                updated_at = obj.GetDateTime("updated_at"),
-                pushed_at = obj.GetDateTime("pushed_at"),
-                git_url = obj.GetString("git_url"),
-                ssh_url = obj.GetString("ssh_url"),
-                clone_url = obj.GetString("clone_url"),
-                svn_url = obj.GetString("svn_url"),
-                homepage = obj.GetString("homepage"),
-                size = obj.GetInt64("size"),
-                stargazers_count = obj.GetInt32("stargazers_count"),
-                watchers_count = obj.GetInt32("watchers_count"),
-                language = obj.GetString("language"),
-                has_issues = obj.GetBoolean("has_issues"),
-                has_downloads = obj.GetBoolean("has_downloads"),
-                has_wiki = obj.GetBoolean("has_wiki"),
-                has_pages = obj.GetBoolean("has_pages"),
-                forks_count = obj.GetInt32("forks_count"),
-                mirror_url = obj.GetString("mirror_url"),
-                open_issues_count = obj.GetInt32("open_issues_count"),
-                forks = obj.GetInt32("forks"),
-                open_issues = obj.GetInt32("open_issues"),
-                watchers = obj.GetInt32("watchers"),
-                default_branch = obj.GetString("default_branch")
+                CreatedAt = obj.GetDateTime("created_at"),
+                UpdatedAt = obj.GetDateTime("updated_at"),
+                PushedAt = obj.GetDateTime("pushed_at"),
+                GitUrl = obj.GetString("git_url"),
+                SshUrl = obj.GetString("ssh_url"),
+                CloneUrl = obj.GetString("clone_url"),
+                SvnUrl = obj.GetString("svn_url"),
+                Homepage = obj.GetString("homepage"),
+                Size = obj.GetInt64("size"),
+                StargazersCount = obj.GetInt32("stargazers_count"),
+                WatchersCount = obj.GetInt32("watchers_count"),
+                Language = obj.GetString("language"),
+                HasIssues = obj.GetBoolean("has_issues"),
+                HasDownloads = obj.GetBoolean("has_downloads"),
+                HasWiki = obj.GetBoolean("has_wiki"),
+                HasPages = obj.GetBoolean("has_pages"),
+                ForksCount = obj.GetInt32("forks_count"),
+                MirrorUrl = obj.GetString("mirror_url"),
+                OpenIssuesCount = obj.GetInt32("open_issues_count"),
+                Forks = obj.GetInt32("forks"),
+                OpenIssues = obj.GetInt32("open_issues"),
+                Watchers = obj.GetInt32("watchers"),
+                DefaultBranch = obj.GetString("default_branch")
             };
         }
 
