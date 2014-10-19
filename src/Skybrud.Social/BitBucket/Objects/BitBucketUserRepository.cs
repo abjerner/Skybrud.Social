@@ -7,15 +7,28 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #region Properties
 
-        public string Slug { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string Logo { get; private set; }
+        /// <summary>
+        /// Gets the type of the repository as specified by the <code>scm</code> property.
+        /// </summary>
         public string Type { get; private set; }
+
+        public bool HasWiki { get; private set; }
+        public bool NoForks { get; private set; }
         public string Owner { get; private set; }
+        public string Logo { get; private set; }
+        public long Size { get; private set; }
+        public bool IsReadOnly { get; private set; }
+        public DateTime CreatedOn { get; private set; }
+        public string Website { get; private set; }
+        public string Description { get; private set; }
+        public bool HasIssues { get; private set; }
+        public bool IsFork { get; private set; }
+        public string Slug { get; private set; }
+        public bool IsPrivate { get; private set; }
+        public string Name { get; private set; }
+        public string Language { get; private set; }
+        public DateTime LastUpdated { get; private set; }
         public string Creator { get; private set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime LastUpdated { get; set; }
 
         public string WebUrl {
             get { return "https://bitbucket.org/" + Owner + "/" + Slug; }
@@ -56,20 +69,29 @@ namespace Skybrud.Social.BitBucket.Objects {
         public static BitBucketUserRepository Parse(JsonObject obj) {
             if (obj == null) return null;
             return new BitBucketUserRepository(obj) {
-                Slug = obj.GetString("slug"),
-                Name = obj.GetString("name"),
-                Description = obj.GetString("description"),
-                Logo = obj.GetString("logo"),
-                Owner = obj.GetString("owner"),
-                Creator = obj.GetString("creator"),
                 Type = obj.GetString("scm"),
-                CreatedOn = DateTime.Parse(obj.GetString("created_on")),
-                LastUpdated = DateTime.Parse(obj.GetString("last_updated"))
+                HasWiki = obj.GetBoolean("has_wiki"),
+                NoForks = obj.GetBoolean("no_forks"),
+                Owner = obj.GetString("owner"),
+                Logo = obj.GetString("logo"),
+                Size = obj.GetInt64("size"),
+                IsReadOnly = obj.GetBoolean("read_only"),
+                CreatedOn = obj.GetDateTime("utc_created_on"),
+                Website = obj.GetString("website"),
+                Description = obj.GetString("description"),
+                HasIssues = obj.GetBoolean("has_issues"),
+                IsFork = obj.GetBoolean("is_fork"),
+                Slug = obj.GetString("slug"),
+                IsPrivate = obj.GetBoolean("is_private"),
+                Name = obj.GetString("name"),
+                Language = obj.GetString("language"),
+                LastUpdated = obj.GetDateTime("utc_last_updated"),
+                Creator = obj.GetString("creator")
             };
         }
 
         #endregion
-    
+
     }
 
 }
