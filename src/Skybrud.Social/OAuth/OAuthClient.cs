@@ -324,6 +324,7 @@ namespace Skybrud.Social.OAuth {
             try {
                 return (HttpWebResponse) request.GetResponse();
             } catch (WebException ex) {
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
                 return (HttpWebResponse) ex.Response;
             }
 
