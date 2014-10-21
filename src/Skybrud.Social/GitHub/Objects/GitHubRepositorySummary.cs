@@ -9,6 +9,8 @@ namespace Skybrud.Social.GitHub.Objects {
 
         public int Id { get; private set; }
 
+        public GitHubUserSummary Owner { get; private set; }
+
         public string Name { get; private set; }
 
         public string FullName { get; private set; }
@@ -83,6 +85,7 @@ namespace Skybrud.Social.GitHub.Objects {
             if (obj == null) return null;
             return new GitHubRepositorySummary(obj) {
                 Id = obj.GetInt32("id"),
+                Owner = obj.GetObject("owner", GitHubUserSummary.Parse),
                 Name = obj.GetString("name"),
                 FullName = obj.GetString("full_name"),
                 IsPrivate = obj.GetBoolean("private"),
