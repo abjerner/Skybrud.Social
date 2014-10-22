@@ -1,44 +1,34 @@
-using System.Net;
 using Skybrud.Social.BitBucket.OAuth;
 
 namespace Skybrud.Social.BitBucket.Endpoints.Raw {
     
     public class BitBucketUsersRawEndpoint {
 
+        #region Properties
+
         public BitBucketOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructor
 
         public BitBucketUsersRawEndpoint(BitBucketOAuthClient client) {
             Client = client;
         }
 
-        #region GetProfile
+        #endregion
 
-        public string GetProfile(string account) {
-            HttpStatusCode statusCode;
-            return GetProfile(account, out statusCode);
+        #region Methods
+
+        public SocialHttpResponse GetProfile(string username) {
+            return Client.DoHttpGetRequest("https://bitbucket.org/api/1.0/users/" + username);
         }
 
-        public string GetProfile(string account, out HttpStatusCode statusCode) {
-            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/1.0/users/" + account, null, null, out statusCode);
+        public SocialHttpResponse GetRepositories(string username) {
+            return Client.DoHttpGetRequest("https://bitbucket.org/api/2.0/repositories/" + username);
         }
 
         #endregion
-
-        #region GetRepositories
-
-        public string GetRepositories(string username) {
-            HttpStatusCode statusCode;
-            return GetProfile(username, out statusCode);
-        }
-
-        public string GetRepositories(string username, out HttpStatusCode statusCode) {
-            return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + username, null, null, out statusCode);
-        }
-
-        #endregion
-
-
-        
 
     }
 

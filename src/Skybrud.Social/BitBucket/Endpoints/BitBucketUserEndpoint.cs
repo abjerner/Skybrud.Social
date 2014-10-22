@@ -28,43 +28,35 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #endregion
 
-        #region GetInfo
+        #region Methods
 
         public BitBucketCurrentUserResponse GetInfo() {
 
-            HttpStatusCode status;
-
-            // Get the raw data from the API
-            string contents = Raw.GetInfo(out status);
+            // Make the call to the API
+            SocialHttpResponse response = Raw.GetInfo();
 
             // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+            if (response.StatusCode != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(response.StatusCode);
             }
 
             // Parse the response
-            return BitBucketCurrentUserResponse.ParseJson(contents);
+            return BitBucketCurrentUserResponse.ParseJson(response.GetBodyAsString());
 
         }
 
-        #endregion
-
-        #region GetRepositories
-
         public BitBucketCurrentUserRepositoriesResponse GetRepositories() {
 
-            HttpStatusCode status;
-
-            // Get the raw data from the API
-            string contents = Raw.GetRepositories(out status);
+            // Make the call to the API
+            SocialHttpResponse response = Raw.GetRepositories();
 
             // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+            if (response.StatusCode != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(response.StatusCode);
             }
 
             // Parse the response
-            return BitBucketCurrentUserRepositoriesResponse.ParseJsonArray(contents);
+            return BitBucketCurrentUserRepositoriesResponse.ParseJsonArray(response.GetBodyAsString());
 
         }
 

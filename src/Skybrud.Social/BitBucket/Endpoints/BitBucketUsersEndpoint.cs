@@ -7,6 +7,8 @@ namespace Skybrud.Social.BitBucket.Endpoints {
     
     public class BitBucketUsersEndpoint {
 
+        #region Properties
+
         public BitBucketService Service { get; private set; }
 
         /// <summary>
@@ -16,26 +18,30 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             get { return Service.Client.Users; }
         }
 
-        #region GetProfile
+        #endregion
+
+        #region Constructor
 
         internal BitBucketUsersEndpoint(BitBucketService service) {
             Service = service;
         }
 
-        public BitBucketUserResponse GetProfile(string accountName) {
+        #endregion
 
-            HttpStatusCode status;
+        #region Methods
 
-            // Get the raw data from the API
-            string contents = Raw.GetProfile(accountName, out status);
+        public BitBucketUserResponse GetProfile(string username) {
+
+            // Make the call to the API
+            SocialHttpResponse response = Raw.GetProfile(username);
 
             // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+            if (response.StatusCode != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(response.StatusCode);
             }
 
             // Parse the response
-            return BitBucketUserResponse.ParseJson(contents);
+            return BitBucketUserResponse.ParseJson(response.GetBodyAsString());
         
         }
 
