@@ -273,6 +273,23 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
+        /// Makes a signed GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url) {
+            return DoHttpGetRequest(url, null);
+        }
+
+        /// <summary>
+        /// Makes a signed GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="queryString">The query string.</param>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection queryString) {
+            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, queryString, null));
+        }
+
+        /// <summary>
         /// Makes a signed request to the Twitter API based on the specified parameters.
         /// </summary>
         /// <param name="method">The HTTP method of the request.</param>
