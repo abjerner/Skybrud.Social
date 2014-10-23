@@ -62,12 +62,14 @@
     <Compile Include="BitBucket\Objects\BitBucketCommit.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLink.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketRepository.cs" />
     <Compile Include="BitBucket\Objects\BitBucketRepositoryInfo.cs" />
     <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
     <Compile Include="BitBucket\Objects\BitBucketUserRepository.cs" />
     <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUsersEndpoint.cs" />

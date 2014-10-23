@@ -21,7 +21,7 @@ namespace Skybrud.Social.BitBucket.Responses {
         #region Static methods
 
         public static BitBucketUserResponse ParseJson(string str) {
-            return Parse(JsonConverter.ParseObject(str));
+            return JsonConverter.ParseObject(str, Parse);
         }
 
         public static BitBucketUserResponse Parse(JsonObject obj) {

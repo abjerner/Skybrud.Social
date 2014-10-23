@@ -42,7 +42,22 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Parse the response
             return BitBucketUserResponse.ParseJson(response.GetBodyAsString());
+
+        }
         
+        public BitBucketRepositoriesResponse GetRepositories(string username) {
+
+            // Make the call to the API
+            SocialHttpResponse response = Raw.GetRepositories(username);
+
+            // Validate the response
+            if (response.StatusCode != HttpStatusCode.OK) {
+                throw new BitBucketHttpException(response.StatusCode);
+            }
+
+            // Parse the response
+            return BitBucketRepositoriesResponse.ParseJson(response.GetBodyAsString());
+
         }
 
         #endregion
