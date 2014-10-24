@@ -79,9 +79,11 @@
     <Compile Include="GitHub\Exceptions\GitHubException.cs" />
     <Compile Include="GitHub\Exceptions\GitHubHttpException.cs" />
     <Compile Include="GitHub\GitHubScopeCollection.cs" />
+    <Compile Include="GitHub\Objects\GitHubOrganizationSummary.cs" />
     <Compile Include="GitHub\Objects\GitHubRepositorySummary.cs" />
     <Compile Include="GitHub\Objects\GitHubEmail.cs" />
     <Compile Include="GitHub\Objects\GitHubUserSummary.cs" />
+    <Compile Include="GitHub\Responses\GitHubOrganizationsResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubRepositoriesResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubEmailsResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubFollowingResponse.cs" />

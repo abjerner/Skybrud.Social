@@ -45,6 +45,10 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/repos");
         }
 
+        public SocialHttpResponse GetOrganizations() {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/orgs");
+        }
+
         #endregion
 
     }

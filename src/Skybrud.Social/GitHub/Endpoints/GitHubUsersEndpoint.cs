@@ -47,6 +47,14 @@ namespace Skybrud.Social.GitHub.Endpoints {
             return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
         }
 
+        /// <summary>
+        /// Gets a list of organizations the specified user is a part of.
+        /// </summary>
+        /// <returns></returns>
+        public GitHubOrganizationsResponse GetOrganizations(string username) {
+            return GitHubOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
+        }
+
         #endregion
     
     }
