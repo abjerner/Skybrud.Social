@@ -1,7 +1,6 @@
 ﻿using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Objects {
-   
 
     public class GitHubOrganizationSummary : SocialJsonObject {
 

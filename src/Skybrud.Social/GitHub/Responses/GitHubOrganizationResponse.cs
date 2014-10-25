@@ -5,24 +5,24 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
-    public class GitHubUserResponse : GitHubResponse {
+    public class GitHubOrganizationResponse : GitHubResponse {
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the user.
+        /// Gets a reference to the organization.
         /// </summary>
-        public GitHubUser User { get; private set; }
+        public GitHubOrganization Data { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        private GitHubUserResponse(SocialHttpResponse response) : base(response) { }
+        private GitHubOrganizationResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
-        public static GitHubUserResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubOrganizationResponse ParseResponse(SocialHttpResponse response) {
 
             // Parse the raw JSON response
             JsonObject obj = response.GetBodyAsJsonObject();
@@ -35,8 +35,8 @@ namespace Skybrud.Social.GitHub.Responses {
             }
 
             // Initialize the object to be returned
-            return new GitHubUserResponse(response) {
-                User = GitHubUser.Parse(obj)
+            return new GitHubOrganizationResponse(response) {
+                Data = GitHubOrganization.Parse(obj)
             };
 
         }
