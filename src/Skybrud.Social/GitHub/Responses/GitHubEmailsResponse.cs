@@ -9,7 +9,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
         #region Properties
 
-        public GitHubEmail[] Emails { get; private set; }
+        public SocialJsonArray<GitHubEmail> Data { get; private set; }
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Initialize the object to be returned
             return new GitHubEmailsResponse(response) {
-                Emails = array.ParseMultiple(GitHubEmail.Parse)
+                Data = SocialJsonArray<GitHubEmail>.Parse(array, GitHubEmail.Parse)
             };
 
         }

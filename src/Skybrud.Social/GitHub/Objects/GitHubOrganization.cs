@@ -47,7 +47,7 @@ namespace Skybrud.Social.GitHub.Objects {
 
         public DateTime UpdatedAt { get; private set; }
 
-        // The API also specified the property "type", but I'm not sure an organization can be any
+        // The API also specifies the property "type", but I'm not sure an organization can be any
         // other type than "Organization", so the property is omitted here for now.
 
         #endregion

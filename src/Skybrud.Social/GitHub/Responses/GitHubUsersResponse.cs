@@ -12,7 +12,7 @@ namespace Skybrud.Social.GitHub.Responses {
         /// <summary>
         /// Gets a reference to the user.
         /// </summary>
-        public GitHubUserSummary[] Users { get; private set; }
+        public SocialJsonArray<GitHubUserSummary> Data { get; private set; }
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Initialize the object to be returned
             return new GitHubUsersResponse(response) {
-                Users = array.ParseMultiple(GitHubUserSummary.Parse)
+                Data = SocialJsonArray<GitHubUserSummary>.Parse(array, GitHubUserSummary.Parse)
             };
 
         }
