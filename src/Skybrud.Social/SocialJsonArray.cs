@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Skybrud.Social.Json;
 
@@ -42,6 +45,37 @@ namespace Skybrud.Social {
 
         #endregion
 
+    }
+
+    public class SocialJsonArray<T> : SocialJsonArray, IEnumerable<T> {
+
+        private T[] _array;
+
+        private SocialJsonArray(JsonArray array) : base(array) { }
+
+        public static SocialJsonArray<T> Parse(JsonArray array, Func<JsonObject, T> func) {
+            return new SocialJsonArray<T>(array) {
+                _array = array.ParseMultiple(func)
+            };
+        }
+
+        public T this[int i] {
+            get { return _array[i]; }
+            set { _array[i] = value; }
+        }
+
+        public int Length {
+            get { return _array.Length; }
+        }
+
+        public IEnumerator<T> GetEnumerator() {
+            return ((IEnumerable<T>) _array).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+    
     }
 
 }
