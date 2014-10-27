@@ -1,4 +1,5 @@
 using System;
+using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {
@@ -97,6 +98,7 @@ namespace Skybrud.Social.Facebook.Responses {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookDebugTokenResponse Parse(JsonObject obj) {
             if (obj == null) return null;
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             JsonObject data = obj.GetObject("data");
             return new FacebookDebugTokenResponse {
                 JsonObject = obj,

@@ -1,3 +1,4 @@
+using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -53,6 +54,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookUser Parse(JsonObject obj) {
             if (obj == null) return null;
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             return new FacebookUser(obj) {
                 Id = obj.GetLong("id"),
                 Name = obj.GetString("name"),
