@@ -107,7 +107,6 @@
     <Compile Include="Facebook\Endpoints\FacebookMethodsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
-    <Compile Include="Facebook\FacebookApplication.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
     <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
