@@ -6,15 +6,29 @@ namespace Skybrud.Social.GitHub {
 
     public class GitHubScopeCollection {
 
+        #region Private fields
+
         private readonly List<GitHubScope> _list = new List<GitHubScope>();
+
+        #endregion
+
+        #region Properties
 
         public GitHubScope[] Items {
             get { return _list.ToArray(); }
         }
 
+        #endregion
+
+        #region Constructors
+
         public GitHubScopeCollection(params GitHubScope[] scopes) {
             _list.AddRange(scopes);
         }
+
+        #endregion
+
+        #region Member methods
 
         public void Add(GitHubScope scope) {
             _list.Add(scope);
@@ -32,10 +46,20 @@ namespace Skybrud.Social.GitHub {
             return String.Join(",", ToStringArray());
         }
 
+        #endregion
+
+        #region Operator overloading
+
+        public static implicit operator GitHubScopeCollection(GitHubScope[] array) {
+            return new GitHubScopeCollection(array ?? new GitHubScope[0]);
+        }
+
         public static GitHubScopeCollection operator +(GitHubScopeCollection left, GitHubScope right) {
             left.Add(right);
             return left;
         }
+
+        #endregion
 
     }
 
