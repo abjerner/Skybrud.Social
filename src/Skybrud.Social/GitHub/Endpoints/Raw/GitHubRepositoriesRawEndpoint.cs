@@ -28,7 +28,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         }
 
         public SocialHttpResponse GetCommit(string owner, string repository, string sha) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/git/commits/" + sha);
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits/" + sha);
         }
 
         public SocialHttpResponse GetRepository(string owner, string repository) {
