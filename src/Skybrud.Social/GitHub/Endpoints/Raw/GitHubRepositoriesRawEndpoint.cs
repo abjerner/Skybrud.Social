@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Specialized;
 using Skybrud.Social.GitHub.OAuth;
+using Skybrud.Social.GitHub.Options;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
     
@@ -29,6 +31,22 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
         public SocialHttpResponse GetCommit(string owner, string repository, string sha) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits/" + sha);
+        }
+
+        public SocialHttpResponse GetCommits(string owner, string repository) {
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
+        }
+
+        public SocialHttpResponse GetCommits(string owner, string repository, GitHubGetCommitOptions options) {
+            if (options != null) {
+                NameValueCollection query = new NameValueCollection();
+                if (!String.IsNullOrWhiteSpace(options.Sha)) query.Add("sha", options.Sha);
+                if (!String.IsNullOrWhiteSpace(options.Path)) query.Add("path", options.Path);
+                if (!String.IsNullOrWhiteSpace(options.Author)) query.Add("author", options.Author);
+                if (options.Since != null) query.Add("since", options.Since.ToString());
+                if (options.Until != null) query.Add("until", options.Until.ToString());
+            }
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
         }
 
         public SocialHttpResponse GetRepository(string owner, string repository) {
