@@ -9,6 +9,8 @@ namespace Skybrud.Social {
     /// </summary>
     public class SocialHttpResponse {
 
+        private string _body;
+
         #region Properties
 
         /// <summary>
@@ -36,6 +38,23 @@ namespace Skybrud.Social {
             get { return Response.Headers; }
         }
 
+        /// <summary>
+        /// Gets the response body as a raw string.
+        /// </summary>
+        public string Body {
+            get {
+                if (_body == null) {
+                    using (Stream stream = Response.GetResponseStream()) {
+                        if (stream == null) return null;
+                        using (StreamReader reader = new StreamReader(stream)) {
+                            _body = reader.ReadToEnd();
+                        }
+                    }
+                }
+                return _body;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -52,12 +71,7 @@ namespace Skybrud.Social {
         /// Gets the response body as a RAW string.
         /// </summary>
         public string GetBodyAsString() {
-            using (Stream stream = Response.GetResponseStream()) {
-                if (stream == null) return null;
-                using (StreamReader reader = new StreamReader(stream)) {
-                    return reader.ReadToEnd();
-                }
-            }
+            return Body;
         }
 
         /// <summary>
@@ -65,8 +79,7 @@ namespace Skybrud.Social {
         /// <var>JsonArray</var>.
         /// </summary>
         public IJsonObject GetBodyAsJson() {
-            string str = GetBodyAsString();
-            return str == null ? null : JsonConverter.Parse(str);
+            return Body == null ? null : JsonConverter.Parse(Body);
         }
 
         /// <summary>
