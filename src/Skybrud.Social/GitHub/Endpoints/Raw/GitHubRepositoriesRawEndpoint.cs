@@ -43,8 +43,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
                 if (!String.IsNullOrWhiteSpace(options.Sha)) query.Add("sha", options.Sha);
                 if (!String.IsNullOrWhiteSpace(options.Path)) query.Add("path", options.Path);
                 if (!String.IsNullOrWhiteSpace(options.Author)) query.Add("author", options.Author);
-                if (options.Since != null) query.Add("since", options.Since.ToString());
-                if (options.Until != null) query.Add("until", options.Until.ToString());
+                if (options.Since != null) query.Add("since", options.Since.Value.ToString(SocialUtils.IsoDateFormat));
+                if (options.Until != null) query.Add("until", options.Until.Value.ToString(SocialUtils.IsoDateFormat));
             }
             return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
         }

@@ -217,6 +217,11 @@ namespace Skybrud.Social {
         #region Timestamps
 
         /// <summary>
+        /// ISO 8601 date format.
+        /// </summary>
+        public const string IsoDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssK";
+
+        /// <summary>
         /// Returns the current unix timestamp which is defined as the amount of seconds
         /// since the start of the Unix epoch - 1st of January, 1970 - 00:00:00 GMT.
         /// </summary>
