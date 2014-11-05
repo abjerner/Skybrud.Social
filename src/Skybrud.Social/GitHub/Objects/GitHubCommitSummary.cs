@@ -3,24 +3,24 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Objects {
     
-    public class GitHubCommit : SocialJsonObject {
+    public class GitHubCommitSummary : SocialJsonObject {
 
         #region Properties
 
-        [JsonProperty("sha")]
-        public string Sha { get; private set; }
-
-        [JsonProperty("commit")]
-        public GitHubCommitDetails Commit { get; private set; }
-
         [JsonProperty("url")]
         public string Url { get; private set; }
+
+        [JsonProperty("sha")]
+        public string Sha { get; private set; }
 
         [JsonProperty("html_url")]
         public string HtmlUrl { get; private set; }
 
         [JsonProperty("comments_url")]
         public string CommentsUrl { get; private set; }
+
+        [JsonProperty("commit")]
+        public GitHubCommitDetails Commit { get; private set; }
 
         [JsonProperty("author")]
         public GitHubUserSummary Author { get; private set; }
@@ -35,15 +35,15 @@ namespace Skybrud.Social.GitHub.Objects {
 
         #region Constructor
 
-        private GitHubCommit(JsonObject obj) : base(obj) { }
+        private GitHubCommitSummary(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubCommit Parse(JsonObject obj) {
+        public static GitHubCommitSummary Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new GitHubCommit(obj) {
+            return new GitHubCommitSummary(obj) {
                 Sha = obj.GetString("sha"),
                 Commit = obj.GetObject("commit", GitHubCommitDetails.Parse),
                 Url = obj.GetString("url"),

@@ -78,7 +78,7 @@
     <Compile Include="GitHub\Objects\GitHubCommitTree.cs" />
     <Compile Include="GitHub\Objects\GitHubCommitAuthor.cs" />
     <Compile Include="GitHub\Objects\GitHubCommitDetails.cs" />
-    <Compile Include="GitHub\Objects\GitHubCommit.cs" />
+    <Compile Include="GitHub\Objects\GitHubCommitSummary.cs" />
     <Compile Include="GitHub\Objects\GitHubCommitParent.cs" />
     <Compile Include="GitHub\Options\GitHubGetCommitOptions.cs" />
     <Compile Include="GitHub\Endpoints\Raw\GitHubOrganizationsRawEndpoint.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="GitHub\Objects\GitHubRepositorySummary.cs" />
     <Compile Include="GitHub\Objects\GitHubEmail.cs" />
     <Compile Include="GitHub\Objects\GitHubUserSummary.cs" />
+    <Compile Include="GitHub\Responses\GitHubCommitsResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubRepositoryResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubOrganizationResponse.cs" />
     <Compile Include="GitHub\Responses\GitHubOrganizationsResponse.cs" />

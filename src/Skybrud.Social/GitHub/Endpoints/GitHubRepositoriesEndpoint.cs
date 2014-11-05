@@ -1,4 +1,5 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Options;
 using Skybrud.Social.GitHub.Responses;
 
 namespace Skybrud.Social.GitHub.Endpoints {
@@ -30,6 +31,14 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #endregion
 
         #region Methods
+
+        public GitHubCommitsResponse GetCommits(string owner, string repository) {
+            return GitHubCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
+        }
+
+        public GitHubCommitsResponse GetCommits(string owner, string repository, GitHubGetCommitOptions options) {
+            return GitHubCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository, options));
+        }
 
         public GitHubRepositoryResponse GetRepository(string owner, string repository) {
             return GitHubRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
