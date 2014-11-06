@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.GitHub.Objects {
+namespace Skybrud.Social.GitHub.Objects.Commits {
     
     public class GitHubCommitStats : SocialJsonObject {
 

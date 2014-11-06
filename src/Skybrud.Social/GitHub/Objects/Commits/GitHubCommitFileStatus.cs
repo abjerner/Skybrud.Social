@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.GitHub.Objects {
+﻿namespace Skybrud.Social.GitHub.Objects.Commits {
     
     public enum GitHubCommitFileStatus {
         Added,

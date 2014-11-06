@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.GitHub.Objects {
+namespace Skybrud.Social.GitHub.Objects.Commits {
     
-    public class GitHubCommitTree : SocialJsonObject {
+    public class GitHubCommitParent : SocialJsonObject {
 
         #region Properties
 
@@ -13,21 +13,25 @@ namespace Skybrud.Social.GitHub.Objects {
         [JsonProperty("url")]
         public string Url { get; private set; }
         
+        [JsonProperty("html_url")]
+        public string HtmlUrl { get; private set; }
+        
         #endregion
 
         #region Constructor
 
-        private GitHubCommitTree(JsonObject obj) : base(obj) { }
+        private GitHubCommitParent(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubCommitTree Parse(JsonObject obj) {
+        public static GitHubCommitParent Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new GitHubCommitTree(obj) {
+            return new GitHubCommitParent(obj) {
                 Sha = obj.GetString("sha"),
-                Url = obj.GetString("url")
+                Url = obj.GetString("url"),
+                HtmlUrl = obj.GetString("html_url")
             };
         }
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Skybrud.Social.GitHub.Objects.Commits;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Objects {
