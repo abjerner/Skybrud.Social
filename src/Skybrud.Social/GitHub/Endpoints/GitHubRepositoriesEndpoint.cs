@@ -32,6 +32,10 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
+        public GitHubCommitResponse GetCommit(string owner, string repository, string sha) {
+            return GitHubCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
+        }
+
         public GitHubCommitsResponse GetCommits(string owner, string repository) {
             return GitHubCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
         }
