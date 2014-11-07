@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 using System.Globalization;
 
@@ -23,12 +24,26 @@ namespace Skybrud.Social {
             get { return _nvc; }
         }
 
+        /// <summary>
+        /// Gets the number of key/value pairs contained in the internal <code>NameValueCollection</code> instance.
+        /// </summary>
+        public int Count {
+            get { return _nvc.Count; }
+        }
+
+        /// <summary>
+        /// Gets whether the internal <code>NameValueCollection</code> is empty.
+        /// </summary>
+        public bool IsEmpty {
+            get { return _nvc.Count == 0; }
+        }
+
         #endregion
 
         #region Constructors
 
         public SocialQueryString() {
-            // Expore default constructor
+            // Expose default constructor
         }
 
         public SocialQueryString(NameValueCollection nvc) {
@@ -65,6 +80,11 @@ namespace Skybrud.Social {
 
         public override string ToString() {
             return SocialUtils.NameValueCollectionToQueryString(_nvc);
+        }
+
+        public void Set(string key, Func<string> func, bool condition) {
+            if (!condition) return;
+            _nvc.Set(key, func());
         }
 
         #endregion
