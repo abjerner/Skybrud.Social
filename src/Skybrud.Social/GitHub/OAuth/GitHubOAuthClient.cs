@@ -167,22 +167,20 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, null);
+            return DoAuthenticatedGetRequest(url, (SocialQueryString)null);
         }
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+            return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
+
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
 
             // Throw an exception if the URL is empty
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
 
-            // Initialize a new query string if not specified
-            if (query == null) query = new NameValueCollection();
-
-            // Convert the query string to ... string
-            string queryString = SocialUtils.NameValueCollectionToQueryString(query);
-
             // Append the query string to the URL
-            url += url.Contains("?") ? "&" + queryString : "?" + queryString;
+            if (query != null && !query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
 
             // Initialize a new HTTP request
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);

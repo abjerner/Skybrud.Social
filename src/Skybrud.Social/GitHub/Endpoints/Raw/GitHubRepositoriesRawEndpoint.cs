@@ -38,15 +38,15 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         }
 
         public SocialHttpResponse GetCommits(string owner, string repository, GitHubGetCommitOptions options) {
+            NameValueCollection query = new NameValueCollection();
             if (options != null) {
-                NameValueCollection query = new NameValueCollection();
                 if (!String.IsNullOrWhiteSpace(options.Sha)) query.Add("sha", options.Sha);
                 if (!String.IsNullOrWhiteSpace(options.Path)) query.Add("path", options.Path);
                 if (!String.IsNullOrWhiteSpace(options.Author)) query.Add("author", options.Author);
                 if (options.Since != null) query.Add("since", options.Since.Value.ToString(SocialUtils.IsoDateFormat));
                 if (options.Until != null) query.Add("until", options.Until.Value.ToString(SocialUtils.IsoDateFormat));
             }
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits", query);
         }
 
         public SocialHttpResponse GetRepository(string owner, string repository) {
