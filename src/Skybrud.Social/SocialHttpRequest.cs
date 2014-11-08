@@ -3,16 +3,17 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social {
     
-    [Obsolete("Marking this as obsolete for now since I'm not sure on the final structure of the class.")]
+    //[Obsolete("Marking this as obsolete for now since I'm not sure on the final structure of the class.")]
     public class SocialHttpRequest {
 
         #region Private fields
 
-        private NameValueCollection _headers = new NameValueCollection();
-        private NameValueCollection _queryString = new NameValueCollection();
+        private SocialHeaderCollection _headers = new SocialHeaderCollection();
+        private SocialQueryString _queryString = new SocialQueryString();
         private NameValueCollection _postData = new NameValueCollection();
 
         #endregion
@@ -33,14 +34,16 @@ namespace Skybrud.Social {
         /// </summary>
         public Encoding Encoding { get; set; }
 
-        public NameValueCollection Headers {
+        public TimeSpan Timeout { get; set; }
+
+        public SocialHeaderCollection Headers {
             get { return _headers; }
-            set { _headers = value ?? new NameValueCollection(); }
+            set { _headers = value ?? new SocialHeaderCollection(); }
         }
 
-        public NameValueCollection QueryString {
+        public SocialQueryString QueryString {
             get { return _queryString; }
-            set { _queryString = value ?? new NameValueCollection(); }
+            set { _queryString = value ?? new SocialQueryString(); }
         }
 
         public NameValueCollection PostData {
@@ -55,6 +58,7 @@ namespace Skybrud.Social {
         public SocialHttpRequest() {
             Method = "GET";
             Encoding = Encoding.UTF8;
+            Timeout = TimeSpan.FromSeconds(100);
         }
 
         #endregion
@@ -62,19 +66,19 @@ namespace Skybrud.Social {
         #region Methods
 
         public SocialHttpResponse GetResponse() {
-            
-            // Merge the query string
-            string url = new UriBuilder(Url).MergeQueryString(QueryString).ToString();
+
+            // Build the URL
+            string url = Url;
+            if (QueryString != null && !QueryString.IsEmpty) url += (url.Contains("?") ? "&" : "?") + QueryString;
 
             // Initialize the request
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
-            // Set the method
+            // Misc
             request.Method = Method;
             request.Credentials = Credentials;
-
-            // Add any headers
-            // TODO: Add headers
+            request.Headers = Headers.Headers;
+            request.Timeout = (int) Timeout.TotalMilliseconds;
 
             // Add the request body (if a POST request)
             if (Method == "POST" && PostData != null && PostData.Count > 0) {

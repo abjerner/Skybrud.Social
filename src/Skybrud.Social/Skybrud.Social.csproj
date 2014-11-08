@@ -114,6 +114,7 @@
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Google\Exceptions\GoogleOAuthException.cs" />
     <Compile Include="Google\OAuth\GoogleScopeCollection.cs" />
+    <Compile Include="Http\SocialHeaderCollection.cs" />
     <Compile Include="Instagram\Objects\InstagramPosition.cs" />
     <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
     <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
@@ -390,6 +391,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"</PreBuildEvent>
