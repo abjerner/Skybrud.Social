@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.GitHub.Objects;
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses { 

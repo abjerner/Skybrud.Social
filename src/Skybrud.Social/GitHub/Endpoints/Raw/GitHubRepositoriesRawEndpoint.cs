@@ -2,6 +2,7 @@ using System;
 using System.Collections.Specialized;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
     

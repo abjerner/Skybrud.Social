@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses {
 

@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Web;
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.OAuth {
 

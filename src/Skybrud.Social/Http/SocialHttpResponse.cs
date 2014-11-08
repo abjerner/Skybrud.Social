@@ -2,7 +2,7 @@ using System.IO;
 using System.Net;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social {
+namespace Skybrud.Social.Http {
     
     /// <summary>
     /// Wrapper class for <code>HttpWebResponse</code>.

@@ -1,5 +1,6 @@
 using System.Net;
 using Skybrud.Social.GitHub.OAuth;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
     

@@ -7,6 +7,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.OAuth {
 

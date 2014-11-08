@@ -3,9 +3,8 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
-using Skybrud.Social.Http;
 
-namespace Skybrud.Social {
+namespace Skybrud.Social.Http {
     
     //[Obsolete("Marking this as obsolete for now since I'm not sure on the final structure of the class.")]
     public class SocialHttpRequest {

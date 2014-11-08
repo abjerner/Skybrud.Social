@@ -2,6 +2,7 @@ using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
 using Skybrud.Social.BitBucket.Exceptions;
 using Skybrud.Social.BitBucket.Responses;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
