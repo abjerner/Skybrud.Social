@@ -13,9 +13,6 @@ namespace Skybrud.Social.Instagram {
         /// </summary>
         public InstagramOAuthClient Client { get; private set; }
 
-        [Obsolete("Use Media instead of Endpoint.Media. This is similar for other endpoints as well.")]
-        public InstagramEndpoints Endpoints { get; private set; }
-
         public InstagramLocationsEndpoint Locations { get; private set; }
         public InstagramMediaEndpoint Media { get; private set; }
         public InstagramRelationshipsEndpoint Relationships { get; private set; }
@@ -27,7 +24,6 @@ namespace Skybrud.Social.Instagram {
         #region Constructors
 
         private InstagramService() {
-            Endpoints = new InstagramEndpoints(this);
             Locations = new InstagramLocationsEndpoint(this);
             Media = new InstagramMediaEndpoint(this);
             Relationships = new InstagramRelationshipsEndpoint(this);

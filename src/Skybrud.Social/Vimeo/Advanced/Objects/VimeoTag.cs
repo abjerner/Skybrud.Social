@@ -25,8 +25,8 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoTag Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoTag(obj) {
-                Id = obj.GetInt("id"),
-                Author = obj.GetInt("author"),
+                Id = obj.GetInt32("id"),
+                Author = obj.GetInt32("author"),
                 Normalized = obj.GetString("normalized"),
                 Url = obj.GetString("url"),
                 Content = obj.GetString("_content")

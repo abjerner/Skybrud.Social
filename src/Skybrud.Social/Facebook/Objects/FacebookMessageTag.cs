@@ -19,11 +19,11 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookMessageTag Parse(JsonObject obj) {
             return new FacebookMessageTag(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 Type = obj.GetString("type"),
-                Offset = obj.GetInt("offset"),
-                Length = obj.GetInt("length")
+                Offset = obj.GetInt32("offset"),
+                Length = obj.GetInt32("length")
             };
         }
 

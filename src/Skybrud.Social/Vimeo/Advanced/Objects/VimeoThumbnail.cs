@@ -23,8 +23,8 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoThumbnail Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoThumbnail(obj) {
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height"),
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height"),
                 Url = obj.GetString("_content")
             };
         }

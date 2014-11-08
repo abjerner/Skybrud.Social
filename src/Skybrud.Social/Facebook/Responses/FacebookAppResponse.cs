@@ -85,7 +85,7 @@ namespace Skybrud.Social.Facebook.Responses {
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             return new FacebookAppResponse {
                 JsonObject = obj,
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
                 Category = obj.GetString("category"),
@@ -94,11 +94,11 @@ namespace Skybrud.Social.Facebook.Responses {
                 Namespace = obj.GetString("namespace"),
                 IconUrl = obj.GetString("icon_url"),
                 LogoUrl = obj.GetString("logo_url"),
-                DailyActiveUsers = obj.HasValue("weekly_active_users") ? (int?) obj.GetInt("weekly_active_users") : null,
-                WeeklyActiveUsers = obj.HasValue("weekly_active_users") ? (int?) obj.GetInt("weekly_active_users") : null,
-                MonthlyActiveUsers = obj.HasValue("monthly_active_users") ? (int?) obj.GetInt("monthly_active_users") : null,
-                DailyActiveUserRank = obj.HasValue("daily_active_users_rank") ? (int?) obj.GetInt("daily_active_users_rank") : null,
-                MontlyActiveUserRank = obj.HasValue("monthly_active_users_rank") ? (int?) obj.GetInt("monthly_active_users_rank") : null,
+                DailyActiveUsers = obj.HasValue("weekly_active_users") ? (int?) obj.GetInt32("weekly_active_users") : null,
+                WeeklyActiveUsers = obj.HasValue("weekly_active_users") ? (int?) obj.GetInt32("weekly_active_users") : null,
+                MonthlyActiveUsers = obj.HasValue("monthly_active_users") ? (int?) obj.GetInt32("monthly_active_users") : null,
+                DailyActiveUserRank = obj.HasValue("daily_active_users_rank") ? (int?) obj.GetInt32("daily_active_users_rank") : null,
+                MontlyActiveUserRank = obj.HasValue("monthly_active_users_rank") ? (int?) obj.GetInt32("monthly_active_users_rank") : null,
             };
         }
 

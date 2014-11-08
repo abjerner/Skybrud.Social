@@ -24,8 +24,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 Url = entity.GetString("url"),
                 ExpandedUrl = entity.GetString("expanded_url"),
                 DisplayUrl = entity.GetString("display_url"),
-                StartIndex = entity.GetArray("indices").GetInt(0),
-                EndIndex = entity.GetArray("indices").GetInt(1)
+                StartIndex = entity.GetArray("indices").GetInt32(0),
+                EndIndex = entity.GetArray("indices").GetInt32(1)
             };
         }
 

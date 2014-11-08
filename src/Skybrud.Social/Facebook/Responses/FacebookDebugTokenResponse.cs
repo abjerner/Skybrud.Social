@@ -102,10 +102,10 @@ namespace Skybrud.Social.Facebook.Responses {
             JsonObject data = obj.GetObject("data");
             return new FacebookDebugTokenResponse {
                 JsonObject = obj,
-                AppId = data.GetLong("app_id"),
+                AppId = data.GetInt64("app_id"),
                 IsValid = data.GetBoolean("is_valid"),
                 Application = data.GetString("application"),
-                UserId = data.HasValue("user_id") ? (long?) data.GetLong("user_id") : null,
+                UserId = data.HasValue("user_id") ? (long?) data.GetInt64("user_id") : null,
                 IssuedAt = data.HasValue("issued_at") ? (DateTime?) data.GetDateTimeFromUnixTimestamp("issued_at") : null,
                 ExpiresAt = data.HasValue("expires_at") ? (DateTime?) data.GetDateTimeFromUnixTimestamp("expires_at") : null,
                 Scopes = data.GetArray<string>("scopes") ?? new string[0]

@@ -125,7 +125,7 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         public static VimeoChannel Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoChannel(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
                 Logo = obj.GetString("logo"),
@@ -133,13 +133,13 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
                 Url = obj.GetString("url"),
                 Rss = obj.GetString("rss"),
                 CreatedOn = obj.GetDateTime("created_on"),
-                CreatorId = obj.GetInt("creator_id"),
+                CreatorId = obj.GetInt32("creator_id"),
                 CreatorDisplayName = obj.GetString("creator_display_name"),
                 CreatorUrl = obj.GetString("creator_url"),
                 IsCreator = obj.GetString("is_creator") == "yes",
                 IsMod = obj.GetString("is_mod") == "yes",
-                TotalVideos = obj.GetInt("total_videos"),
-                TotalSubscribers = obj.GetInt("total_subscribers"),
+                TotalVideos = obj.GetInt32("total_videos"),
+                TotalSubscribers = obj.GetInt32("total_subscribers"),
             };
         }
 

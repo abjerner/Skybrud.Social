@@ -16,7 +16,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
 
             // Throw an exception based on the error response
             if (error != null) {
-                throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+                throw new GoogleApiException(error.GetInt32("code"), error.GetString("message"));
             }
 
             // Just return the JSON object

@@ -84,7 +84,7 @@ namespace Skybrud.Social.Facebook.Responses {
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             return new FacebookMeResponse {
                 JsonObject = obj,
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 FirstName = obj.GetString("first_name"),
                 LastName = obj.GetString("last_name"),
@@ -92,9 +92,9 @@ namespace Skybrud.Social.Facebook.Responses {
                 UserName = obj.GetString("username"),
                 Email = obj.GetString("email"),
                 Gender = obj.GetString("gender"),
-                TimeZone = obj.HasValue("timezone") ? (int?)obj.GetInt("timezone") : null,
+                TimeZone = obj.HasValue("timezone") ? (int?) obj.GetInt32("timezone") : null,
                 Locale = obj.GetString("locale"),
-                IsVerified = obj.HasValue("verified") ? (bool?)obj.GetBoolean("verified") : null,
+                IsVerified = obj.HasValue("verified") ? (bool?) obj.GetBoolean("verified") : null,
                 UpdatedTime = obj.GetDateTime("updated_time")
             };
         }

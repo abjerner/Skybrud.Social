@@ -14,7 +14,7 @@ namespace Skybrud.Social.Instagram.Exceptions {
         }
 
         internal InstagramException(JsonObject obj) : base(obj.GetString("error_message")) {
-            Code = obj.GetInt("code");
+            Code = obj.GetInt32("code");
             Type = obj.GetString("error_type");
         }
 

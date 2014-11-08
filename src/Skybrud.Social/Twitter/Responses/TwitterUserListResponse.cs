@@ -58,7 +58,7 @@ namespace Skybrud.Social.Twitter.Responses {
             if (json.HasValue("errors")) {
                 JsonArray errors = json.GetArray("errors");
                 throw new TwitterException(
-                    errors.GetObject(0).GetInt("code"),
+                    errors.GetObject(0).GetInt32("code"),
                     errors.GetObject(0).GetString("message")
                 );
             }
@@ -73,8 +73,8 @@ namespace Skybrud.Social.Twitter.Responses {
             return new TwitterUserListResponse {
                 JsonObject = obj,
                 Users = obj.GetArray("users", TwitterUser.Parse),
-                NextCursor = obj.GetLong("next_cursor"),
-                PreviousCursor = obj.GetLong("previous_cursor")
+                NextCursor = obj.GetInt64("next_cursor"),
+                PreviousCursor = obj.GetInt64("previous_cursor")
             };
         }
 

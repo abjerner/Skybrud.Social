@@ -81,7 +81,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             // Check for any API errors
             if (obj.HasValue("error")) {
                 JsonObject error = obj.GetObject("error");
-                throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+                throw new GoogleApiException(error.GetInt32("code"), error.GetString("message"));
             }
 
             // Get the column headers

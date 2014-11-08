@@ -24,8 +24,8 @@ namespace Skybrud.Social.Instagram.Objects {
             if (obj == null) return new InstagramMediaSummary(null);
             return new InstagramMediaSummary(obj) {
                 Url = obj.GetString("url"),
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height")
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height")
             };
         }
 

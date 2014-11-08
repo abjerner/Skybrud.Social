@@ -31,7 +31,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoUser Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoUser(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),
                 Location = obj.GetString("location"),
@@ -39,14 +39,14 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
                 CreatedOn = obj.GetDateTime("created_on"),
                 ProfileUrl = obj.GetString("profileurl"),
                 VideosUrl = obj.GetString("videosurl"),
-                NumberOfContacts = obj.GetInt("number_of_contacts"),
-                NumberOfUploads = obj.GetInt("number_of_uploads"),
-                NumberOfLikes = obj.GetInt("number_of_likes"),
-                NumberOfVideos = obj.GetInt("number_of_videos"),
-                NumberOfVideosAppearIn = obj.GetInt("number_of_videos_appear_in"),
-                NumberOfAlbums = obj.GetInt("number_of_albums"),
-                NumberOfChannels = obj.GetInt("number_of_channels"),
-                NumberOfGroups = obj.GetInt("number_of_groups")
+                NumberOfContacts = obj.GetInt32("number_of_contacts"),
+                NumberOfUploads = obj.GetInt32("number_of_uploads"),
+                NumberOfLikes = obj.GetInt32("number_of_likes"),
+                NumberOfVideos = obj.GetInt32("number_of_videos"),
+                NumberOfVideosAppearIn = obj.GetInt32("number_of_videos_appear_in"),
+                NumberOfAlbums = obj.GetInt32("number_of_albums"),
+                NumberOfChannels = obj.GetInt32("number_of_channels"),
+                NumberOfGroups = obj.GetInt32("number_of_groups")
             };
         }
 

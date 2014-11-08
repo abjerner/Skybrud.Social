@@ -135,7 +135,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideo(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 IsHd = obj.GetString("is_hd") == "1",
                 IsTranscoding = obj.GetString("is_transcoding") == "1",
                 Privacy = obj.GetString("privacy"),
@@ -144,13 +144,13 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
                 Description = VimeoUtils.TrimToNull(obj.GetString("description")),
                 UploadDate = obj.GetDateTime("upload_date").ToUniversalTime(),
                 ModifiedDate = obj.GetDateTime("modified_date").ToUniversalTime(),
-                Likes = obj.GetInt("number_of_likes"),
-                Plays = obj.GetInt("number_of_plays"),
-                Comments = obj.GetInt("number_of_comments"),
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height"),
+                Likes = obj.GetInt32("number_of_likes"),
+                Plays = obj.GetInt32("number_of_plays"),
+                Comments = obj.GetInt32("number_of_comments"),
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height"),
                 Owner = obj.GetObject("owner", VimeoVideoOwner.Parse),
-                Duration = TimeSpan.FromSeconds(obj.GetInt("duration")),
+                Duration = TimeSpan.FromSeconds(obj.GetInt32("duration")),
                 Tags = VimeoUtils.ParseFromParent(obj, "tags", "tag", VimeoTag.Parse),
                 Cast = VimeoUtils.ParseFromParent(obj, "cast", "member", VimeoCastMember.Parse),
                 Thumbnails = VimeoUtils.ParseFromParent(obj, "thumbnails", "thumbnail", VimeoThumbnail.Parse),

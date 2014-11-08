@@ -18,7 +18,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookLikes Parse(JsonObject obj) {
             if (obj == null) return new FacebookLikes(null) { Data = new FacebookObject[0] };
             return new FacebookLikes(obj) {
-                Count = obj.GetInt("count"),
+                Count = obj.GetInt32("count"),
                 Data = obj.GetArray("data", FacebookObject.Parse) ?? new FacebookObject[0]
             };
         }

@@ -25,10 +25,10 @@ namespace Skybrud.Social.Vimeo.Advanced.Responses {
             if (videos == null) return null;
 
             // More parsing
-            response.OnThisPage = videos.GetInt("on_this_page");
-            response.Page = videos.GetInt("page");
-            response.PerPage = videos.GetInt("perpage");
-            response.Total = videos.GetInt("total");
+            response.OnThisPage = videos.GetInt32("on_this_page");
+            response.Page = videos.GetInt32("page");
+            response.PerPage = videos.GetInt32("perpage");
+            response.Total = videos.GetInt32("total");
             response.Videos = ParseVideos(videos);
 
             // Return the response object

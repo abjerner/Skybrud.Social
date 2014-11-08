@@ -120,7 +120,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             // Check for any API errors
             if (obj.HasValue("error")) {
                 JsonObject error = obj.GetObject("error");
-                throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+                throw new GoogleApiException(error.GetInt32("code"), error.GetString("message"));
             }
 
             // Get the column headers
@@ -130,7 +130,7 @@ namespace Skybrud.Social.Google.Analytics.Responses {
             AnalyticsRealtimeDataResponse response = new AnalyticsRealtimeDataResponse {
                 JsonObject = obj,
                 Query = obj.GetObject("query", AnalyticsRealtimeDataQuery.Parse),
-                TotalResults = obj.GetInt("totalResults"),
+                TotalResults = obj.GetInt32("totalResults"),
                 ColumnHeaders = columns,
                 Rows = AnalyticsDataRow.Parse(columns, obj.GetArray("rows"))
             };

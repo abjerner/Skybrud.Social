@@ -18,10 +18,10 @@ namespace Skybrud.Social.Facebook.Exceptions {
         public static FacebookException Parse(JsonObject obj) {
 
             return new FacebookException(
-                obj.GetInt("code"),
+                obj.GetInt32("code"),
                 obj.GetString("type"),
                 obj.GetString("message"),
-                obj.HasValue("error_subcode") ? obj.GetInt("error_subcode") : 0
+                obj.HasValue("error_subcode") ? obj.GetInt32("error_subcode") : 0
             );
 
         }

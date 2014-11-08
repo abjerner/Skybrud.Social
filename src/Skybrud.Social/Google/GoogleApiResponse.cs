@@ -18,7 +18,7 @@ namespace Skybrud.Social.Google {
         public static void ValidateResponse(JsonObject obj) {
             if (!obj.HasValue("error")) return;
             JsonObject error = obj.GetObject("error");
-            throw new GoogleApiException(error.GetInt("code"), error.GetString("message"));
+            throw new GoogleApiException(error.GetInt32("code"), error.GetString("message"));
         }
 
     }

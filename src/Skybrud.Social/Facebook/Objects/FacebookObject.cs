@@ -29,7 +29,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookObject Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookObject(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name")
             };
         }

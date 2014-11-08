@@ -81,7 +81,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Icon = obj.GetString("icon"),
                 Type = obj.GetString("type"),
                 StatusType = obj.GetString("status_type"),
-                ObjectId = obj.HasValue("object_id") ? (long?) obj.GetLong("object_id") : null,
+                ObjectId = obj.HasValue("object_id") ? (long?) obj.GetInt64("object_id") : null,
                 CreatedTime = obj.GetDateTime("created_time"),
                 UpdatedTime = obj.GetDateTime("updated_time"),
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),

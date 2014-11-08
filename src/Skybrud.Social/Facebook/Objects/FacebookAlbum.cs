@@ -50,12 +50,12 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookAlbum Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAlbum(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Name = obj.GetString("name"),
                 Link = obj.GetString("link"),
                 CoverPhoto = obj.GetString("cover_photo"),
-                Count = obj.GetInt("count"),
+                Count = obj.GetInt32("count"),
                 Type = obj.GetString("type"),
                 CreatedTime = obj.GetString("created_time"),
                 UpdatedTime = obj.GetString("updated_time"),

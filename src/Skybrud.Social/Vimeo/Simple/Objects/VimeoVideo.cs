@@ -82,14 +82,14 @@ namespace Skybrud.Social.Vimeo.Simple.Objects {
         public static VimeoVideo Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideo(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),
                 Url = obj.GetString("url"),
                 UploadedDate = obj.GetDateTime("upload_date"),
-                Duration = TimeSpan.FromSeconds(obj.GetInt("duration")),
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height"),
+                Duration = TimeSpan.FromSeconds(obj.GetInt32("duration")),
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height"),
                 Tags = (obj.GetString("tags") ?? "").Split(new [] {", "}, StringSplitOptions.RemoveEmptyEntries)
             };
         }

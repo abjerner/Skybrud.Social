@@ -22,12 +22,12 @@ namespace Skybrud.Social.Twitter.Entities {
 
         public static TwitterMentionEntity Parse(JsonObject mention) {
             return new TwitterMentionEntity {
-                UserId = mention.GetLong("id"),
+                UserId = mention.GetInt64("id"),
                 UserIdStr = mention.GetString("id_str"),
                 ScreenName = mention.GetString("screen_name"),
                 Name = mention.GetString("name"),
-                StartIndex = mention.GetArray("indices").GetInt(0),
-                EndIndex = mention.GetArray("indices").GetInt(1)
+                StartIndex = mention.GetArray("indices").GetInt32(0),
+                EndIndex = mention.GetArray("indices").GetInt32(1)
             };
         }
 

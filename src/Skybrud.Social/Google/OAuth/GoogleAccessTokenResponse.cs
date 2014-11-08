@@ -31,7 +31,7 @@ namespace Skybrud.Social.Google.OAuth {
             return new GoogleAccessTokenResponse {
                 AccessToken = obj.GetString("access_token"),
                 RefreshToken = obj.GetString("refresh_token"),
-                ExpiresIn = TimeSpan.FromSeconds(obj.GetInt("expires_in")),
+                ExpiresIn = TimeSpan.FromSeconds(obj.GetInt32("expires_in")),
                 TokenType = obj.GetString("token_type")
             };
         }

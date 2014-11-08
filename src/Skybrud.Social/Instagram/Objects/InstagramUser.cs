@@ -74,7 +74,7 @@ namespace Skybrud.Social.Instagram.Objects {
             string website = obj.GetString("website");
             string bio = obj.GetString("bio");
             return new InstagramUser(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Username = obj.GetString("username"),
                 FullName = String.IsNullOrEmpty(fullname) ? null : fullname,
                 ProfilePicture = String.IsNullOrEmpty(picture) ? null : picture,

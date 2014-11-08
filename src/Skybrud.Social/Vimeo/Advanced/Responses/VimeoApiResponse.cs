@@ -32,7 +32,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Responses {
             if (Stat == "fail") {
                 JsonObject err = obj.GetObject("err");
                 if (err != null) {
-                    int code = err.GetInt("code");
+                    int code = err.GetInt32("code");
                     string expl = err.GetString("expl");
                     string msg = err.GetString("msg");
                     throw new VimeoException(code, expl, msg);

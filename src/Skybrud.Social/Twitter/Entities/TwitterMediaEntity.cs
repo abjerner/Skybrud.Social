@@ -27,10 +27,10 @@ namespace Skybrud.Social.Twitter.Entities {
 
         public static TwitterMediaEntity Parse(JsonObject entity) {
             return new TwitterMediaEntity {
-                Id = entity.GetLong("id"),
+                Id = entity.GetInt64("id"),
                 IdStr = entity.GetString("id_str"),
-                StartIndex = entity.GetArray("indices").GetInt(0),
-                EndIndex = entity.GetArray("indices").GetInt(1),
+                StartIndex = entity.GetArray("indices").GetInt32(0),
+                EndIndex = entity.GetArray("indices").GetInt32(1),
                 MediaUrl = entity.GetString("media_url"),
                 MediaUrlHttps = entity.GetString("media_url_https"),
                 Url = entity.GetString("url"),

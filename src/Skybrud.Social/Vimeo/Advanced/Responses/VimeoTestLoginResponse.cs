@@ -30,7 +30,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Responses {
             if (user == null) return null;
             return new VimeoTestLoginResponse {
                 GeneratedIn = obj.GetDouble("generated_in"),
-                Id = user.GetInt("id"),
+                Id = user.GetInt32("id"),
                 Username = user.GetString("username")
             };
         }

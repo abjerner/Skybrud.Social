@@ -50,8 +50,8 @@ namespace Skybrud.Social.BitBucket.Responses {
 
         public static BitBucketCommitsResponse Parse(JsonObject obj) {
             return new BitBucketCommitsResponse {
-                PageLength = obj.GetInt("pagelen"),
-                Page = obj.GetInt("page"),
+                PageLength = obj.GetInt32("pagelen"),
+                Page = obj.GetInt32("page"),
                 Values = obj.GetArray("values", BitBucketCommit.Parse),
                 Next = obj.GetString("next"),
                 HasNext = obj.GetString("next") != null

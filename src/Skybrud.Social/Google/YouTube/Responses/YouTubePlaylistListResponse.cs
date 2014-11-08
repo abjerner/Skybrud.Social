@@ -58,8 +58,8 @@ namespace Skybrud.Social.Google.YouTube.Responses {
             return new YouTubePlaylistListResponse(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
-                TotalResults = pageInfo.GetInt("totalResults"),
-                ResultsPerPage = pageInfo.GetInt("resultsPerPage"),
+                TotalResults = pageInfo.GetInt32("totalResults"),
+                ResultsPerPage = pageInfo.GetInt32("resultsPerPage"),
                 Items = obj.GetArray("items", YouTubePlaylist.Parse) ?? new YouTubePlaylist[0]
             };
         }

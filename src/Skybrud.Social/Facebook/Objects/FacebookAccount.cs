@@ -49,7 +49,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookAccount Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAccount(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 Category = obj.GetString("category"),
                 AccessToken = obj.GetString("access_token"),

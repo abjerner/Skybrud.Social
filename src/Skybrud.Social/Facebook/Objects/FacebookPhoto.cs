@@ -29,10 +29,10 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookPhoto Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookPhoto(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height"),
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height"),
                 Picture = obj.GetString("picture"),
                 Source = obj.GetString("source"),
                 Created = obj.GetDateTime("created_time"),

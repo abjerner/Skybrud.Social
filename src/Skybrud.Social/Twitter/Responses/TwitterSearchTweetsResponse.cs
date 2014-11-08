@@ -21,7 +21,7 @@ namespace Skybrud.Social.Twitter.Responses {
             if (obj.HasValue("errors")) {
                 JsonArray errors = obj.GetArray("errors");
                 throw new TwitterException(
-                    errors.GetObject(0).GetInt("code"),
+                    errors.GetObject(0).GetInt32("code"),
                     errors.GetObject(0).GetString("message")
                 );
             }

@@ -62,7 +62,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),
                 PlaylistId = obj.GetString("playlistId"),
-                Position = obj.GetInt("position")
+                Position = obj.GetInt32("position")
             };
 
             // If the item is a video (which it most likely is), we grab the ID of the video

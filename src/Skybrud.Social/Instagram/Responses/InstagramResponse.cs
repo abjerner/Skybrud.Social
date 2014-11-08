@@ -32,7 +32,7 @@ namespace Skybrud.Social.Instagram.Responses {
             if (meta == null) {
 
                 // Get some values from the "obj" object
-                int code = obj.GetInt("code");
+                int code = obj.GetInt32("code");
                 string type = obj.GetString("error_type");
                 string message = obj.GetString("error_message");
 
@@ -50,7 +50,7 @@ namespace Skybrud.Social.Instagram.Responses {
             if (meta.HasValue("code")) {
 
                 // Get some values from the "meta" object
-                int code = meta.GetInt("code");
+                int code = meta.GetInt32("code");
                 string type = meta.GetString("error_type");
                 string message = meta.GetString("error_message");
 

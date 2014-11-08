@@ -31,7 +31,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         public static InstagramTag Parse(JsonObject obj) {
             return new InstagramTag(obj) {
-                MediaCount = obj.GetLong("media_count"),
+                MediaCount = obj.GetInt64("media_count"),
                 Name = obj.GetString("name")
             };
         }

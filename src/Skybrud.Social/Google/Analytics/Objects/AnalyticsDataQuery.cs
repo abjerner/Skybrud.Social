@@ -79,8 +79,8 @@ namespace Skybrud.Social.Google.Analytics.Objects {
                 Ids = obj.GetString("ids"),
                 StartDate = obj.GetString("start-date"),
                 EndDate = obj.GetString("end-date"),
-                StartIndex = obj.GetInt("start-index"),
-                MaxResults = obj.GetInt("max-results"),
+                StartIndex = obj.GetInt32("start-index"),
+                MaxResults = obj.GetInt32("max-results"),
                 Dimensions = obj.GetString("dimensions"),
                 Metrics = obj.GetArray<string>("metrics")
             };

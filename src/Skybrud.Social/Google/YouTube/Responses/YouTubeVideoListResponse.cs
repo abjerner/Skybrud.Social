@@ -60,8 +60,8 @@ namespace Skybrud.Social.Google.YouTube.Responses {
             return new YouTubeVideoListResponse(obj) {
                 Kind = obj.GetString("kind"),
                 ETag = obj.GetString("etag"),
-                TotalResults = pageInfo.GetInt("totalResults"),
-                ResultsPerPage = pageInfo.GetInt("resultsPerPage"),
+                TotalResults = pageInfo.GetInt32("totalResults"),
+                ResultsPerPage = pageInfo.GetInt32("resultsPerPage"),
                 PrevPageToken = obj.GetString("prevPageToken"),
                 NextPageToken = obj.GetString("nextPageToken"),
                 Items = obj.GetArray("items", YouTubeVideo.Parse) ?? new YouTubeVideo[0]

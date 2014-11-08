@@ -56,7 +56,7 @@ namespace Skybrud.Social.Facebook.Objects {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             return new FacebookUser(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 FirstName = obj.GetString("first_name"),
                 LastName = obj.GetString("last_name"),
@@ -66,7 +66,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Location = obj.GetObject("location", FacebookObject.Parse),
                 Gender = obj.GetString("gender"),
                 Email = obj.GetString("email"),
-                Timezone = obj.GetInt("timezone"),
+                Timezone = obj.GetInt32("timezone"),
                 Locale = obj.GetString("locale"),
                 Languages = obj.GetArray("languages", FacebookObject.Parse) ?? new FacebookObject[0],
                 IsVerified = obj.GetBoolean("verified")

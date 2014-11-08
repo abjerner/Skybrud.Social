@@ -29,7 +29,7 @@ namespace Skybrud.Social.Twitter {
                 obj = obj.GetArray("errors").GetObject(0);
             }
 
-            throw new TwitterException(obj.GetInt("code"), obj.GetString("message"));
+            throw new TwitterException(obj.GetInt32("code"), obj.GetString("message"));
         
         }
     

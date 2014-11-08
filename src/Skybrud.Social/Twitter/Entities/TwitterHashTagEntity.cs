@@ -20,8 +20,8 @@ namespace Skybrud.Social.Twitter.Entities {
         public static TwitterHashTagEntity Parse(JsonObject entity) {
             return new TwitterHashTagEntity {
                 Text = entity.GetString("text"),
-                StartIndex = entity.GetArray("indices").GetInt(0),
-                EndIndex = entity.GetArray("indices").GetInt(1)
+                StartIndex = entity.GetArray("indices").GetInt32(0),
+                EndIndex = entity.GetArray("indices").GetInt32(1)
             };
         }
 

@@ -20,7 +20,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookEventSummary Parse(JsonObject obj) {
             return new FacebookEventSummary(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 StartTime = obj.GetDateTime("start_time"),
                 EndTime = obj.HasValue("end_time") ? (DateTime?) obj.GetDateTime("end_time") : null,

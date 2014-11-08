@@ -38,7 +38,7 @@ namespace Skybrud.Social.Pushover {
             JsonObject json = (JsonObject) response.GetAsJson();
 
             // Return the response body if successful
-            if (response.StatusCode == HttpStatusCode.OK && json.GetInt("status") == 1) return response.GetAsString();
+            if (response.StatusCode == HttpStatusCode.OK && json.GetInt32("status") == 1) return response.GetAsString();
 
             // Throw an exception with the given errors
             throw new PushoverException(response.StatusCode, json.GetArray("errors").Cast<string>());

@@ -141,25 +141,10 @@ namespace Skybrud.Social.Twitter.Objects {
         public bool IsTranslator { get; private set; }
 
         /// <summary>
-        /// <em>Nullable</em>. <em>Perspectival</em>. <em>Deprecated</em>. When true, indicates that the authenticating user is
-        /// following this user. Some false negatives are possible when set to "false", but these
-        /// false negatives are increasingly being represented as "null" instead.
-        /// </summary>
-        [Obsolete("Deprecated in the Twitter API")]
-        public bool? IsFollowing { get; private set; }
-
-        /// <summary>
         /// <em>Nullable</em>. <em>Perspectival</em>. When true, indicates that the authenticating user has issued a
         /// follow request to this protected user account.
         /// </summary>
         public bool? FollowRequestSent { get; private set; }
-
-        /// <summary>
-        /// <em>Nullable</em>. <em>Deprecated</em>. May incorrectly report "false" at times. Indicates whether the
-        /// authenticated user has chosen to receive this user's tweets by SMS.
-        /// </summary>
-        [Obsolete("Deprecated in the Twitter API")]
-        public bool? Notifications { get; private set; }
 
         /// <summary>
         /// The hexadecimal color chosen by the user for their background.
@@ -299,7 +284,7 @@ namespace Skybrud.Social.Twitter.Objects {
 
             #region Basic properties
             
-            user.Id = obj.GetLong("id");
+            user.Id = obj.GetInt64("id");
             user.IdStr = obj.GetString("id_str");
             user.Name = obj.GetString("name");
             user.ScreenName = obj.GetString("screen_name");
@@ -307,22 +292,20 @@ namespace Skybrud.Social.Twitter.Objects {
             user.Url = obj.GetString("url");
             user.Description = obj.GetString("description");
             user.IsProtected = obj.GetBoolean("protected");
-            user.FollowersCount = obj.GetInt("followers_count");
-            user.FriendsCount = obj.GetInt("friends_count");
-            user.ListedCount = obj.GetInt("listed_count");
+            user.FollowersCount = obj.GetInt32("followers_count");
+            user.FriendsCount = obj.GetInt32("friends_count");
+            user.ListedCount = obj.GetInt32("listed_count");
             user.CreatedAt = TwitterUtils.ParseDateTime(obj.GetString("created_at"));
-            user.FavouritesCount = obj.GetInt("favourites_count");
-            if (obj.HasValue("utc_offset")) user.UtcOffset = obj.GetInt("utc_offset");
+            user.FavouritesCount = obj.GetInt32("favourites_count");
+            if (obj.HasValue("utc_offset")) user.UtcOffset = obj.GetInt32("utc_offset");
             user.TimeZone = obj.GetString("time_zone");
             user.IsGeoEnabled = obj.GetBoolean("geo_enabled");
             user.IsVerified = obj.GetBoolean("verified");
-            user.StatusesCount = obj.GetInt("statuses_count");
+            user.StatusesCount = obj.GetInt32("statuses_count");
             user.Language = obj.GetString("lang");
             user.ContributorsEnabled = obj.GetBoolean("contributors_enabled");
             user.IsTranslator = obj.GetBoolean("is_translator");
-            user.IsFollowing = obj.HasValue("following") && obj.GetBoolean("following");
             user.FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent");
-            user.Notifications = obj.HasValue("notifications") && obj.GetBoolean("notifications");
             user.Status = obj.GetObject("status", TwitterStatusMessage.Parse);
             user.Entities = obj.GetObject("entities", TwitterUserEntities.Parse);
            

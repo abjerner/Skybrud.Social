@@ -140,12 +140,12 @@ namespace Skybrud.Social.Instagram.Objects {
                 media.Id = obj.GetString("id");
                 media.Type = type;
                 media.Tags = obj.GetArray("tags").Cast<string>();
-                media.Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetLong("created_time"));
+                media.Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetInt64("created_time"));
                 media.Link = obj.GetString("link");
                 media.Filter = obj.GetString("filter");
-                media.CommentCount = comments.GetInt("count");
+                media.CommentCount = comments.GetInt32("count");
                 media.Comments = comments.GetArray("data", InstagramComment.Parse);
-                media.LikeCount = likes.GetInt("count");
+                media.LikeCount = likes.GetInt32("count");
                 media.Likes = likes.GetArray("data", InstagramUserSummary.Parse);
                 media.Images = obj.GetObject("images", InstagramImageSummary.Parse);
                 media.Caption = obj.GetObject("caption", InstagramComment.Parse);

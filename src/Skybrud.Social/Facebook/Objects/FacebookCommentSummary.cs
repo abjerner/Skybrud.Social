@@ -25,7 +25,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Message = obj.GetString("message"),
                 MessageTags = obj.GetArray("message_tags", FacebookMessageTag.Parse),
                 CreatedTime = obj.GetDateTime("created_time"),
-                Likes = obj.HasValue("likes") ? obj.GetInt("likes") : 0
+                Likes = obj.HasValue("likes") ? obj.GetInt32("likes") : 0
             };
         }
 

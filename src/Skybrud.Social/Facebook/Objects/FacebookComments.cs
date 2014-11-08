@@ -25,7 +25,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookComments Parse(JsonObject obj) {
             if (obj == null) return new FacebookComments(null) { Data = new FacebookCommentSummary[0] };
             return new FacebookComments(obj) {
-                Count = obj.GetInt("count"),
+                Count = obj.GetInt32("count"),
                 Data = obj.GetArray("data", FacebookCommentSummary.Parse) ?? new FacebookCommentSummary[0]
             };
         }

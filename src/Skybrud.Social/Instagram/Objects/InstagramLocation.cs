@@ -65,7 +65,7 @@ namespace Skybrud.Social.Instagram.Objects {
         public static InstagramLocation Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramLocation(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 Name = obj.GetString("name"),
                 Latitude = obj.GetDouble("latitude"),
                 Longitude = obj.GetDouble("longitude")

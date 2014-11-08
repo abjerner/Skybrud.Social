@@ -17,8 +17,8 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookImage Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookImage(obj) {
-                Width = obj.GetInt("width"),
-                Height = obj.GetInt("height"),
+                Width = obj.GetInt32("width"),
+                Height = obj.GetInt32("height"),
                 Source = obj.GetString("source")
             };
         }

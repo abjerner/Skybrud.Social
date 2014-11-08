@@ -23,7 +23,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoVideoOwner Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoVideoOwner(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 Username = obj.GetString("username"),
                 DisplayName = obj.GetString("display_name"),
                 IsPlus = obj.GetString("is_plus") == "1",

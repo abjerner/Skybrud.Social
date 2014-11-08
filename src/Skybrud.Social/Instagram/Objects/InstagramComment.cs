@@ -60,8 +60,8 @@ namespace Skybrud.Social.Instagram.Objects {
         public static InstagramComment Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramComment(obj) {
-                Id = obj.GetLong("id"),
-                Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetLong("created_time")),
+                Id = obj.GetInt64("id"),
+                Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetInt64("created_time")),
                 Text = obj.GetString("text"),
                 User = InstagramUserSummary.Parse(obj.GetObject("from"))
             };

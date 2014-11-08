@@ -32,7 +32,7 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
         public static VimeoChannel Parse(JsonObject obj) {
             if (obj == null) return null;
             return new VimeoChannel(obj) {
-                Id = obj.GetInt("id"),
+                Id = obj.GetInt32("id"),
                 IsFeatured = obj.GetString("is_featured") == "1",
                 IsSponsored = obj.GetString("is_sponsored") == "1",
                 IsSubscribed = obj.GetString("is_subscribed") == "1",
@@ -40,8 +40,8 @@ namespace Skybrud.Social.Vimeo.Advanced.Objects {
                 Description = obj.GetString("description"),
                 CreatedOn = obj.GetDateTime("created_on"),
                 ModifiedOn = obj.GetDateTime("modified_on"),
-                TotalVideos = obj.GetInt("total_videos"),
-                TotalSubscribers = obj.GetInt("total_subscribers"),
+                TotalVideos = obj.GetInt32("total_videos"),
+                TotalSubscribers = obj.GetInt32("total_subscribers"),
                 LogoUrl = obj.GetString("logo_url"),
                 BadgeUrl = obj.GetString("badge_url"),
                 ThumbnailUrl = obj.GetString("thumbnail_url"),

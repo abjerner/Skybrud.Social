@@ -104,7 +104,7 @@ namespace Skybrud.Social.Twitter.Objects {
             if (obj.HasValue("errors")) throw TwitterException.Parse(obj.GetArray("errors"));
 
             TwitterStatusMessage msg = new TwitterStatusMessage(obj) {
-                Id = obj.GetLong("id"),
+                Id = obj.GetInt64("id"),
                 IdStr = obj.GetString("id_str"),
                 Text = obj.GetString("text"),
                 Source = obj.GetString("source"),
@@ -117,15 +117,15 @@ namespace Skybrud.Social.Twitter.Objects {
             // Parse the reply information
             if (obj.HasValue("in_reply_to_status_id")) {
                 msg.InReplyTo = new TwitterReplyTo {
-                    StatusId = obj.GetLong("in_reply_to_status_id"),
+                    StatusId = obj.GetInt64("in_reply_to_status_id"),
                     StatusIdStr = obj.GetString("in_reply_to_status_id_str"),
-                    UserId = obj.GetLong("in_reply_to_user_id"),
+                    UserId = obj.GetInt64("in_reply_to_user_id"),
                     UserIdStr = obj.GetString("in_reply_to_user_id_str"),
                     ScreenName = obj.GetString("in_reply_to_screen_name")
                 };
             }
 
-            msg.Retweets = obj.GetInt("retweet_count");
+            msg.Retweets = obj.GetInt32("retweet_count");
 
             // Related to the authenticating user
             msg.Favorited = obj.GetBoolean("favorited");

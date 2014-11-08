@@ -70,7 +70,7 @@ namespace Skybrud.Social.Twitter.Responses {
             long[] ids = new long[array.Length];
 
             for (int i = 0; i < ids.Length; i++) {
-                ids[i] = array.GetLong(i);
+                ids[i] = array.GetInt64(i);
             }
 
 
@@ -81,8 +81,8 @@ namespace Skybrud.Social.Twitter.Responses {
                 return new TwitterIdsResponse {
                     JsonObject = obj,
                     Ids = ids,
-                    NextCursor = obj.GetLong("next_cursor"),
-                    PreviousCursor = obj.GetLong("previous_cursor")
+                    NextCursor = obj.GetInt64("next_cursor"),
+                    PreviousCursor = obj.GetInt64("previous_cursor")
                 };
         }
 
