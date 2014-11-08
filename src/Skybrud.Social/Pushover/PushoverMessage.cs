@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
-using System.Linq;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Pushover {

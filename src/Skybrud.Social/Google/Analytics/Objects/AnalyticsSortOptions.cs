@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using Skybrud.Social.Google.Analytics.Interfaces;
 
 namespace Skybrud.Social.Google.Analytics.Objects {

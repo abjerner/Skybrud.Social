@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Specialized;
 using System.Linq;
-using Skybrud.Social.Google.YouTube.Objects;
 using Skybrud.Social.Google.YouTube.Objects.Playlist;
 using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Google.YouTube.Objects.Videos;

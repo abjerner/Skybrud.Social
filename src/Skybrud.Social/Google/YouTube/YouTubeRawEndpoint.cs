@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Google.OAuth;
-using Skybrud.Social.Google.YouTube.Objects;
 using Skybrud.Social.Google.YouTube.Objects.Channel;
 using Skybrud.Social.Google.YouTube.Objects.Playlist;
 using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;

@@ -1,8 +1,6 @@
 using System;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Analytics.Responses;
-using Skybrud.Social.Google.Exceptions;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.Analytics {
 

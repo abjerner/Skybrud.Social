@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.Json;
 

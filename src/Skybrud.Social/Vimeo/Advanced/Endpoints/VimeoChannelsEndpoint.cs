@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Skybrud.Social.Json;
 using Skybrud.Social.Vimeo.Advanced.Endpoints.Raw;
 using Skybrud.Social.Vimeo.Advanced.Enums;
