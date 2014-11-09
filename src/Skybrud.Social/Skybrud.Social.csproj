@@ -293,7 +293,7 @@
     <Compile Include="SocialExtensions.cs" />
     <Compile Include="Http\SocialHttpRequest.cs" />
     <Compile Include="Http\SocialHttpResponse.cs" />
-    <Compile Include="SocialQueryString.cs" />
+    <Compile Include="Http\SocialQueryString.cs" />
     <Compile Include="SocialUtils.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterSearchRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterSearchEndpoint.cs" />

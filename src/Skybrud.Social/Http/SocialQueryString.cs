@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Globalization;
 
-namespace Skybrud.Social {
+namespace Skybrud.Social.Http {
 
     /// <summary>
     /// A wrapper class extending the functionality of <code>NameValueCollection</code>.
@@ -42,9 +42,7 @@ namespace Skybrud.Social {
 
         #region Constructors
 
-        public SocialQueryString() {
-            // Expose default constructor
-        }
+        public SocialQueryString() { }
 
         public SocialQueryString(NameValueCollection nvc) {
             _nvc = nvc ?? new NameValueCollection();
@@ -53,6 +51,10 @@ namespace Skybrud.Social {
         #endregion
 
         #region Methods
+
+        public void Add(string key, object value) {
+            _nvc.Add(key, String.Format("{0}", value));
+        }
 
         public void Set(string key, bool value) {
             _nvc.Set(key, value ? "true" : "false");
@@ -86,6 +88,14 @@ namespace Skybrud.Social {
             if (!condition) return;
             _nvc.Set(key, func());
         }
+
+        #region Operator overloading
+
+        public static implicit operator SocialQueryString(NameValueCollection query) {
+            return new SocialQueryString(query);
+        }
+
+        #endregion
 
         #endregion
 
