@@ -20,6 +20,7 @@ namespace Skybrud.Social.Http {
         #region Properties
 
         public string Method { get; set; }
+        public string Accept { get; set; }
         public NetworkCredential Credentials { get; set; }
 
         /// <summary>
@@ -77,6 +78,7 @@ namespace Skybrud.Social.Http {
             request.Method = Method;
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
+            request.Accept = Accept;
             request.Timeout = (int) Timeout.TotalMilliseconds;
 
             // Add the request body (if a POST request)

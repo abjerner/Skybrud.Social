@@ -12,11 +12,6 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public WebHeaderCollection Headers { get; private set; }
 
-        public string Accept {
-            get { return Headers["Accept"]; }
-            set { Headers["Accept"] = value; }
-        }
-
         public string Authorization {
             get { return Headers["Authorization"]; }
             set { Headers["Authorization"] = value; }
