@@ -10,7 +10,7 @@ namespace Skybrud.Social.Twitter.Options {
         /// through the API. If the limit of Tweets has occured since the <var>since_id</var>,
         /// the <var>since_id</var> will be forced to the oldest ID available.
         /// </summary>
-        public int SinceId { get; set; }
+        public long SinceId { get; set; }
 
         /// <summary>
         /// Specifies the number of tweets to try and retrieve, up to a maximum of 200 per
@@ -24,7 +24,7 @@ namespace Skybrud.Social.Twitter.Options {
         /// Returns results with an ID less than (that is, older than) or equal to the
         /// specified ID.
         /// </summary>
-        public int MaxId { get; set; }
+        public long MaxId { get; set; }
 
         /// <summary>
         /// When set to true, each tweet returned in a timeline will include a user object
