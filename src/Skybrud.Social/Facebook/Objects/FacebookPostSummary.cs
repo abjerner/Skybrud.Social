@@ -25,6 +25,13 @@ namespace Skybrud.Social.Facebook.Objects {
         public long? ObjectId { get; private set; }
         public DateTime CreatedTime { get; private set; }
         public DateTime UpdatedTime { get; private set; }
+        
+        /// <summary>
+        /// Gets information about how many times the post has been shared. If the post hasn't yet
+        /// been shared, this property will return <code>NULL</code>.
+        /// </summary>
+        public FacebookShares Shares { get; private set; }
+        
         public FacebookLikes Likes { get; private set; }
         public FacebookComments Comments { get; private set; }
 
@@ -84,6 +91,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 ObjectId = obj.HasValue("object_id") ? (long?) obj.GetInt64("object_id") : null,
                 CreatedTime = obj.GetDateTime("created_time"),
                 UpdatedTime = obj.GetDateTime("updated_time"),
+                Shares = obj.GetObject("shares", FacebookShares.Parse),
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),
                 Comments = obj.GetObject("comments", FacebookComments.Parse)
             };

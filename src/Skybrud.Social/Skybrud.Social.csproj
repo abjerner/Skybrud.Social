@@ -72,6 +72,7 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="Facebook\Objects\FacebookShares.cs" />
     <Compile Include="GitHub\Endpoints\GitHubOrganizationsEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUsersEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUserEndpoint.cs" />

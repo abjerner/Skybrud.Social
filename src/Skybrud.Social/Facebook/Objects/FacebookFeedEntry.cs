@@ -23,6 +23,13 @@ namespace Skybrud.Social.Facebook.Objects {
         public FacebookObject Application { get; private set; }
         public DateTime CreatedTime { get; private set; }
         public DateTime UpdatedTime { get; private set; }
+
+        /// <summary>
+        /// Gets information about how many times the feed entry has been shared. If the feed entry
+        /// hasn't yet been shared, this property will return <code>NULL</code>.
+        /// </summary>
+        public FacebookShares Shares { get; private set; }
+
         public FacebookLikes Likes { get; private set; }
         public FacebookComments Comments { get; private set; }
         public long? ObjectId { get; private set; }
@@ -57,6 +64,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 CreatedTime = obj.GetDateTime("created_time"),
                 UpdatedTime = obj.GetDateTime("updated_time"),
                 Comments = obj.GetObject("comments", FacebookComments.Parse),
+                Shares = obj.GetObject("shares", FacebookShares.Parse),
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),
             };
         }
