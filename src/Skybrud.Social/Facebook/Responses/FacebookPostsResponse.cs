@@ -4,7 +4,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {
 
-    public class FacebookPostsResponse {
+    public class FacebookPostsResponse : SocialJsonObject {
+
+        #region Properties
 
         /// <summary>
         /// Gets an array of all posts in the response.
@@ -22,6 +24,16 @@ namespace Skybrud.Social.Facebook.Responses {
             get; private set;
         }
 
+        #endregion
+
+        #region Constructors
+
+        private FacebookPostsResponse(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
         public static FacebookPostsResponse ParseJson(string contents) {
             return Parse(JsonConverter.ParseObject(contents));
         }
@@ -29,11 +41,13 @@ namespace Skybrud.Social.Facebook.Responses {
         public static FacebookPostsResponse Parse(JsonObject obj) {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
-            return new FacebookPostsResponse {
+            return new FacebookPostsResponse(obj) {
                 Data = obj.GetArray("data", FacebookPostSummary.Parse),
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };
         }
+
+        #endregion
 
     }
 

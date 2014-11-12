@@ -4,14 +4,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {
 
-    public class FacebookDebugTokenResponse {
+    public class FacebookDebugTokenResponse : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// The ID of the application.
@@ -51,23 +46,10 @@ namespace Skybrud.Social.Facebook.Responses {
         public string[] Scopes { get; private set; }
 
         #endregion
+        
+        #region Constructors
 
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private FacebookDebugTokenResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -100,8 +82,7 @@ namespace Skybrud.Social.Facebook.Responses {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
             JsonObject data = obj.GetObject("data");
-            return new FacebookDebugTokenResponse {
-                JsonObject = obj,
+            return new FacebookDebugTokenResponse(obj) {
                 AppId = data.GetInt64("app_id"),
                 IsValid = data.GetBoolean("is_valid"),
                 Application = data.GetString("application"),

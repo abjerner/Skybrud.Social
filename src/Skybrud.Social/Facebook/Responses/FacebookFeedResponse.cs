@@ -4,14 +4,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {
 
-    public class FacebookFeedResponse {
+    public class FacebookFeedResponse : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         /// <summary>
         /// Array of feed entries.
@@ -27,28 +22,7 @@ namespace Skybrud.Social.Facebook.Responses {
 
         #region Constructors
 
-        private FacebookFeedResponse() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private FacebookFeedResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -79,7 +53,7 @@ namespace Skybrud.Social.Facebook.Responses {
         public static FacebookFeedResponse Parse(JsonObject obj) {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
-            return new FacebookFeedResponse {
+            return new FacebookFeedResponse(obj) {
                 Data = obj.GetArray("data", FacebookFeedEntry.Parse),
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };

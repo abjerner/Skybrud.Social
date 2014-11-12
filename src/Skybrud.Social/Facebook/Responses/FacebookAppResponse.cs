@@ -3,14 +3,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses {
 
-    public class FacebookAppResponse {
+    public class FacebookAppResponse : SocialJsonObject {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
 
         public long Id { get; private set; }
         public string Name { get; private set; }
@@ -31,28 +26,7 @@ namespace Skybrud.Social.Facebook.Responses {
 
         #region Constructors
 
-        private FacebookAppResponse() {
-            // Hide default constructor
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Gets a JSON string representing the object.
-        /// </summary>
-        public string ToJson() {
-            return JsonObject == null ? null : JsonObject.ToJson();
-        }
-
-        /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to save the file.</param>
-        public void SaveJson(string path) {
-            if (JsonObject != null) JsonObject.SaveJson(path);
-        }
+        private FacebookAppResponse(JsonObject obj) : base(obj) { }
 
         #endregion
 
@@ -83,8 +57,7 @@ namespace Skybrud.Social.Facebook.Responses {
         public static FacebookAppResponse Parse(JsonObject obj) {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
-            return new FacebookAppResponse {
-                JsonObject = obj,
+            return new FacebookAppResponse(obj) {
                 Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
