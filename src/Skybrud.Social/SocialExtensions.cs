@@ -1,14 +1,39 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
-    
+
     public static class SocialExtensions {
+        
+        /// <summary>
+        /// Serializes the specified collection of <code>SocialJsonObject</code> to a raw JSON
+        /// string.
+        /// </summary>
+        /// <param name="collection">The collection to be serialized.</param>
+        public static string ToJson(this IEnumerable<SocialJsonObject> collection) {
+            if (collection == null) return null;
+            var array = (from item in collection select (object) item.JsonObject).ToArray();
+            return new JsonArray(array).ToJson();
+        }
+
+        /// <summary>
+        /// Serializes and saves the specified collection of <code>SocialJsonObject</code> to a raw
+        /// JSON string.
+        /// </summary>
+        /// <param name="collection">The collection to be serialized.</param>
+        /// <param name="path">The path to the file.</param>
+        public static void SaveJson(this IEnumerable<SocialJsonObject> collection, string path) {
+            if (collection == null) return;
+            var array = (from item in collection select (object) item.JsonObject).ToArray();
+            new JsonArray(array).SaveJson(path);
+        }
 
         /// <summary>
         /// Calculates the distance in meters between two GPS locations.
