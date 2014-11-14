@@ -122,7 +122,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetFeed(long identifier, FacebookFeedOptions options) {
+        public FacebookFeedResponse GetFeed(long identifier, FacebookPagingOptions options) {
             return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier + "", options));
         }
 
@@ -131,7 +131,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
+        public FacebookFeedResponse GetFeed(string identifier, FacebookPagingOptions options) {
             return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, options));
         }
 

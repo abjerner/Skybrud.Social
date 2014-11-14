@@ -73,6 +73,7 @@
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
+    <Compile Include="Facebook\Options\FacebookPagingOptions.cs" />
     <Compile Include="GitHub\Endpoints\GitHubOrganizationsEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUsersEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUserEndpoint.cs" />
@@ -138,7 +139,6 @@
     <Compile Include="Facebook\Objects\FacebookPhoto.cs" />
     <Compile Include="Facebook\Objects\FacebookPaging.cs" />
     <Compile Include="Facebook\Objects\FacebookUser.cs" />
-    <Compile Include="Facebook\Options\FacebookFeedOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPostLinkOptions.cs" />
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />

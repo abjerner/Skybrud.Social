@@ -1,6 +1,6 @@
 namespace Skybrud.Social.Facebook.Options {
     
-    public class FacebookFeedOptions {
+    public class FacebookPagingOptions {
 
         /// <summary>
         /// The amount of entries per page.
