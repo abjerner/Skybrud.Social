@@ -102,9 +102,9 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             // Declare the query string
             NameValueCollection query = new NameValueCollection();
             if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-            if (options.Limit > 0) query.Add("limit", options.Limit + "");
-            if (options.Since > 0) query.Add("since", options.Since + "");
-            if (options.Until > 0) query.Add("until", options.Until + "");
+            if (options != null && options.Limit > 0) query.Add("limit", options.Limit + "");
+            if (options != null && options.Since > 0) query.Add("since", options.Since + "");
+            if (options != null && options.Until > 0) query.Add("until", options.Until + "");
 
             // Make the call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
@@ -204,6 +204,26 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
         
         }
+
+        public string GetPosts(string identifier, FacebookPagingOptions options) {
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection();
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
+            if (options != null && options.Limit > 0) query.Add("limit", options.Limit + "");
+            if (options != null && options.Since > 0) query.Add("since", options.Since + "");
+            if (options != null && options.Until > 0) query.Add("until", options.Until + "");
+
+            // Make the call to the API
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
+        
+        }
+
+
+        
+
+
+
 
         /// <summary>
         /// Gets a status message with the specified ID.

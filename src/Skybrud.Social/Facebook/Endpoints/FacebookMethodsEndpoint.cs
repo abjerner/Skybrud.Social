@@ -202,10 +202,28 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
+        /// <param name="id">The ID of the user/page.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookPostsResponse GetPosts(long id, FacebookPagingOptions options) {
+            return GetPosts(id + "", options);
+        }
+
+        /// <summary>
+        /// Gets the posts by the specified user or page.
+        /// </summary>
         /// <param name="identifier">The identifier of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         public FacebookPostsResponse GetPosts(string identifier, int limit = 0) {
             return FacebookPostsResponse.ParseJson(Raw.GetPosts(identifier, limit));
+        }
+
+        /// <summary>
+        /// Gets the posts by the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The identifier of the user/page.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookPostsResponse GetPosts(string identifier, FacebookPagingOptions options) {
+            return FacebookPostsResponse.ParseJson(Raw.GetPosts(identifier, options));
         }
 
         #endregion
