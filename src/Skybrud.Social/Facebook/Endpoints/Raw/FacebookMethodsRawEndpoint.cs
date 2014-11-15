@@ -5,7 +5,7 @@ using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
-    
+
     public class FacebookMethodsRawEndpoint {
 
         public FacebookOAuthClient Client { get; private set; }
@@ -170,24 +170,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
         
         /// <summary>
-        /// Gets the photos of the specified album, page or user.
-        /// </summary>
-        /// <param name="identifier">The ID or name.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetPhotos(string identifier, int limit = 0) {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-            if (limit > 0) query.Add("limit", limit + "");
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/photos", query);
-
-        }
-        
-        /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
@@ -218,12 +200,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
         
         }
-
-
-        
-
-
-
 
         /// <summary>
         /// Gets a status message with the specified ID.

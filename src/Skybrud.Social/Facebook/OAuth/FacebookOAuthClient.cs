@@ -11,6 +11,7 @@ namespace Skybrud.Social.Facebook.OAuth {
     public class FacebookOAuthClient {
 
         private FacebookMethodsRawEndpoint _methods;
+        private FacebookPhotosRawEndpoint _photos;
 
         #region Properties
 
@@ -50,6 +51,13 @@ namespace Skybrud.Social.Facebook.OAuth {
             get { return _methods ?? (_methods = new FacebookMethodsRawEndpoint(this)); }
         }
 
+        /// <summary>
+        /// Gets a reference to the photos endpoint.
+        /// </summary>
+        public FacebookPhotosRawEndpoint Photos {
+            get { return _photos ?? (_photos = new FacebookPhotosRawEndpoint(this)); }
+        }
+
         #endregion
 
         #region Constructors
@@ -57,9 +65,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <summary>
         /// Initializes an OAuth client with empty information.
         /// </summary>
-        public FacebookOAuthClient() {
-            // default constructor
-        }
+        public FacebookOAuthClient() { }
 
         /// <summary>
         /// Initializes an OAuth client with the specified access token. Using this initializer,

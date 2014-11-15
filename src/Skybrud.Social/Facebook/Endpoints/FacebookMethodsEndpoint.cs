@@ -166,28 +166,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region GetPhotos
-
-        /// <summary>
-        /// Gets the photos of the specified album, page or user.
-        /// </summary>
-        /// <param name="id">The ID.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
-        public FacebookPhotosResponse GetPhotos(long id, int limit = 0) {
-            return GetPhotos(id + "", limit);
-        }
-        
-        /// <summary>
-        /// Gets the photos of the specified album, page or user.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the album, page or user.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
-        public FacebookPhotosResponse GetPhotos(string identifier, int limit = 0) {
-            return FacebookPhotosResponse.ParseJson(Raw.GetPhotos(identifier, limit));
-        }
-
-        #endregion
-
         #region GetPosts
 
         /// <summary>

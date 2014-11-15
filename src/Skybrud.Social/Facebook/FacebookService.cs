@@ -14,6 +14,7 @@ namespace Skybrud.Social.Facebook {
         public FacebookOAuthClient Client { get; private set; }
 
         public FacebookMethodsEndpoint Methods { get; private set; }
+        public FacebookPhotosEndpoint Photos { get; private set; }
 
         #endregion
 
@@ -21,6 +22,7 @@ namespace Skybrud.Social.Facebook {
 
         private FacebookService() {
             Methods = new FacebookMethodsEndpoint(this);
+            Photos = new FacebookPhotosEndpoint(this);
         }
 
         #endregion
