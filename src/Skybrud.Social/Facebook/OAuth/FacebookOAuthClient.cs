@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Specialized;
+using System.Net;
 using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.OAuth {
 
@@ -218,6 +220,62 @@ namespace Skybrud.Social.Facebook.OAuth {
 
             // Get the access token
             return response["access_token"];
+
+        }
+
+        /// <summary>
+        /// Makes a GET request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
+            return DoAuthenticatedGetRequest(url, (SocialQueryString) null);
+        }
+        
+        /// <summary>
+        /// Makes a GET request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string of the request.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+            return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
+
+        /// <summary>
+        /// Makes a GET request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string of the request.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
+
+            // Throw an exception if the URL is empty
+            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+
+            // Initialize a new instance of SocialQueryString if the one specified is NULL
+            if (query == null) query = new SocialQueryString();
+
+            // Append the access token to the query string if present in the client and not already
+            // specified in the query string
+            if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
+                // TODO: Can the access token be specified using an authorization header?
+                query.Add("access_token", AccessToken);
+            }
+
+            // Append the query string to the URL
+            if (!query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
+
+            // Initialize a new HTTP request
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+            // Get the HTTP response
+            try {
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
+            } catch (WebException ex) {
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
+            }
 
         }
 
