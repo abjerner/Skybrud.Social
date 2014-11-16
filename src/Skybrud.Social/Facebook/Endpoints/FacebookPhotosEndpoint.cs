@@ -59,7 +59,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The ID or name of the album, page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
         public FacebookPhotosResponse GetPhotos(string identifier, FacebookPhotosOptions options) {
-            return FacebookPhotosResponse.ParseJson(Raw.GetPhotos(identifier, options));
+            return FacebookPhotosResponse.ParseJson(Raw.GetPhotos(identifier, options).Body);
         }
 
         #endregion
