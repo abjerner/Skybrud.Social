@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Specialized;
 using System.Globalization;
 
@@ -88,14 +89,20 @@ namespace Skybrud.Social.Http {
             if (!condition) return;
             _nvc.Set(key, func());
         }
+        
+        public bool ContainsKey(string key) {
+            return _nvc.Get(key) != null || _nvc.AllKeys.Contains(key);
+        }
+
+        // TODO: Determine which methods from NameValueCollection that also should be exposed in this class
+
+        #endregion
 
         #region Operator overloading
 
         public static implicit operator SocialQueryString(NameValueCollection query) {
             return new SocialQueryString(query);
         }
-
-        #endregion
 
         #endregion
 
