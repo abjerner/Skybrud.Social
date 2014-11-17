@@ -72,12 +72,17 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="Facebook\Collections\FacebookPhotosCollection.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPhotosRawEndpoint.cs" />
+    <Compile Include="Facebook\FacebookHelpers.cs" />
+    <Compile Include="Facebook\Objects\FacebookLocation.cs" />
+    <Compile Include="Facebook\Objects\FacebookPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
     <Compile Include="Facebook\Options\FacebookPagingAltOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPagingOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPhotosOptions.cs" />
+    <Compile Include="Facebook\Responses\FacebookResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubOrganizationsEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUsersEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\GitHubUserEndpoint.cs" />
@@ -145,7 +150,6 @@
     <Compile Include="Facebook\Objects\FacebookUser.cs" />
     <Compile Include="Facebook\Options\FacebookPostLinkOptions.cs" />
     <Compile Include="Facebook\Responses\FacebookPostsResponse.cs" />
-    <Compile Include="Facebook\Responses\FacebookPhotosResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />
     <Compile Include="GitHub\Endpoints\Raw\GitHubRepositoriesRawEndpoint.cs" />
     <Compile Include="GitHub\OAuth\GitHubOAuthClient.cs" />
