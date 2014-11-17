@@ -265,7 +265,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
             JsonObject obj = JsonConverter.ParseObject(response);
 
             // Some error checking
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
 
             // Get the ID of the created link
             return obj.GetString("id");
@@ -310,7 +310,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
             JsonObject obj = JsonConverter.ParseObject(response);
 
             // Some error checking
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
 
             // Get the ID of the created link
             return obj.GetString("id");

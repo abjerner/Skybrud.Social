@@ -70,7 +70,7 @@ namespace Skybrud.Social.Facebook.Objects {
             if (obj == null) return null;
 
             // Some error checking
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
 
             // Initialize the link object
             return new FacebookStatusMessage(obj) {

@@ -55,7 +55,7 @@ namespace Skybrud.Social.Facebook.Responses {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookMeResponse Parse(JsonObject obj) {
             if (obj == null) return null;
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
             return new FacebookMeResponse(obj) {
                 Id = obj.GetInt64("id"),
                 Name = obj.GetString("name"),

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
@@ -36,8 +37,12 @@ namespace Skybrud.Social.Facebook.Responses {
 
             // Validate the response
             if (response.StatusCode != HttpStatusCode.OK) {
-                // TODO: Cast exception of type FacebookException
-                throw new Exception(obj.GetString("message"));
+                JsonObject error = obj.GetObject("error");
+                int code = error.GetInt32("code");
+                string type = error.GetString("type");
+                string message = error.GetString("message");
+                int subcode = error.HasValue("error_subcode") ? error.GetInt32("error_subcode") : 0;
+                throw new FacebookApiException(code, type, message, subcode);
             }
 
             // Initialize the response object

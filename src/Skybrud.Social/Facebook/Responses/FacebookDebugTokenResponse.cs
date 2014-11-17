@@ -80,7 +80,7 @@ namespace Skybrud.Social.Facebook.Responses {
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static FacebookDebugTokenResponse Parse(JsonObject obj) {
             if (obj == null) return null;
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
             JsonObject data = obj.GetObject("data");
             return new FacebookDebugTokenResponse(obj) {
                 AppId = data.GetInt64("app_id"),

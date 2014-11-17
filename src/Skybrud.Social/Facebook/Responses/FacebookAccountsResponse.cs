@@ -17,7 +17,7 @@ namespace Skybrud.Social.Facebook.Responses {
 
         public static FacebookAccountsResponse Parse(JsonObject obj) {
             if (obj == null) return null;
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
+            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
             return new FacebookAccountsResponse(obj) {
                 Data = obj.GetArray("data", FacebookAccount.Parse),
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
