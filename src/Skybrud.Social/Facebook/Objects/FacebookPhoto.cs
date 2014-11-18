@@ -7,8 +7,11 @@ namespace Skybrud.Social.Facebook.Objects {
     public class FacebookPhoto : SocialJsonObject {
 
         public long Id { get; private set; }
+        public FacebookObject From { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public string Icon { get; private set; }
+        public string Link { get; private set; }
         public string Picture { get; private set; }
         public string Source { get; private set; }
         public DateTime Created { get; private set; }
@@ -35,8 +38,11 @@ namespace Skybrud.Social.Facebook.Objects {
             if (obj == null) return null;
             return new FacebookPhoto(obj) {
                 Id = obj.GetInt64("id"),
+                From = obj.GetObject("from", FacebookObject.Parse),
                 Width = obj.GetInt32("width"),
                 Height = obj.GetInt32("height"),
+                Icon = obj.GetString("icon"),
+                Link = obj.GetString("link"),
                 Picture = obj.GetString("picture"),
                 Source = obj.GetString("source"),
                 Place = obj.GetObject("place", FacebookPlace.Parse),
