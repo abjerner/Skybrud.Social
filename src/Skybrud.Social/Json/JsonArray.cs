@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Script.Serialization;
 
 namespace Skybrud.Social.Json {
     
@@ -67,16 +66,6 @@ namespace Skybrud.Social.Json {
             Dictionary<string, object> v2 = this[index] as Dictionary<string, object>;
             if (v1 != null) return v1;
             return v2 == null ? null : new JsonObject(v2);
-        }
-
-        [Obsolete("Use GetInt32 instead")]
-        public int GetInt(int index) {
-            return (int) Convert.ChangeType(this[index], typeof(int));
-        }
-
-        [Obsolete("Use GetInt64 instead")]
-        public long GetLong(int index) {
-            return (long) Convert.ChangeType(this[index], typeof(long));
         }
 
         public int GetInt32(int index) {
