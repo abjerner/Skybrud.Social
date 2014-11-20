@@ -41,7 +41,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
             // Declare the query string
             NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
             if (options != null && options.Limit > 0) query.Add("limit", options.Limit + "");
             if (options != null && options.Before != null) query.Add("before", options.Before);
             if (options != null && options.After != null) query.Add("after", options.After);

@@ -168,38 +168,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier, query);
         
         }
-        
-        ///// <summary>
-        ///// Gets the posts by the specified user or page.
-        ///// </summary>
-        ///// <param name="identifier">The ID or name of the user/page.</param>
-        ///// <param name="limit">The maximum amount of posts to return.</param>
-        ///// <returns>The raw JSON response from the API.</returns>
-        //public string GetPosts(string identifier, int limit = 0) {
-
-        //    // Declare the query string
-        //    NameValueCollection query = new NameValueCollection();
-        //    if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-        //    if (limit > 0) query.Add("limit", limit + "");
-
-        //    // Make the call to the API
-        //    return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
-        
-        //}
-
-        //public string GetPosts(string identifier, FacebookPostsOptions options) {
-
-        //    // Declare the query string
-        //    NameValueCollection query = new NameValueCollection();
-        //    if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-        //    if (options != null && options.Limit > 0) query.Add("limit", options.Limit + "");
-        //    if (options != null && options.Since > 0) query.Add("since", options.Since + "");
-        //    if (options != null && options.Until > 0) query.Add("until", options.Until + "");
-
-        //    // Make the call to the API
-        //    return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
-        
-        //}
 
         /// <summary>
         /// Gets a status message with the specified ID.

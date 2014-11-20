@@ -40,7 +40,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
             // Declare the query string
             SocialQueryString query = new SocialQueryString();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
             if (options != null && options.Limit > 0) query.Add("limit", options.Limit);
             if (options != null && options.Since > 0) query.Add("since", options.Since);
             if (options != null && options.Until > 0) query.Add("until", options.Until);
