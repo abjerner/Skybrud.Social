@@ -182,7 +182,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="id">The ID of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookPostsResponse GetPosts(long id, FacebookPagingOptions options) {
+        public FacebookPostsResponse GetPosts(long id, FacebookPostsOptions options) {
             return GetPosts(id + "", options);
         }
 
@@ -192,7 +192,9 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The identifier of the user/page.</param>
         /// <param name="limit">The maximum amount of posts to return.</param>
         public FacebookPostsResponse GetPosts(string identifier, int limit = 0) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPosts(identifier, limit));
+            return GetPosts(identifier, new FacebookPostsOptions {
+                Limit = limit
+            });
         }
 
         /// <summary>
@@ -200,8 +202,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The identifier of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookPostsResponse GetPosts(string identifier, FacebookPagingOptions options) {
-            return FacebookPostsResponse.ParseJson(Raw.GetPosts(identifier, options));
+        public FacebookPostsResponse GetPosts(string identifier, FacebookPostsOptions options) {
+            return FacebookPostsResponse.ParseJson(Raw.Client.Posts.GetPosts(identifier, options).Body);
         }
 
         #endregion

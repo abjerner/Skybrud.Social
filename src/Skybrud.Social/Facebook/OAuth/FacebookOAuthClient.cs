@@ -14,6 +14,7 @@ namespace Skybrud.Social.Facebook.OAuth {
 
         private FacebookMethodsRawEndpoint _methods;
         private FacebookPhotosRawEndpoint _photos;
+        private FacebookPostsRawEndpoint _posts;
 
         #region Properties
 
@@ -58,6 +59,13 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         public FacebookPhotosRawEndpoint Photos {
             get { return _photos ?? (_photos = new FacebookPhotosRawEndpoint(this)); }
+        }
+
+        /// <summary>
+        /// Gets a reference to the posts endpoint.
+        /// </summary>
+        public FacebookPostsRawEndpoint Posts {
+            get { return _posts ?? (_posts = new FacebookPostsRawEndpoint(this)); }
         }
 
         #endregion
