@@ -5,7 +5,7 @@ namespace Skybrud.Social.Facebook.Collections {
     
     public class FacebookPostsCollection : SocialJsonObject {
 
-        public FacebookPostSummary[] Data {
+        public FacebookPost[] Data {
             get; private set;
         }
 
@@ -22,7 +22,7 @@ namespace Skybrud.Social.Facebook.Collections {
         public static FacebookPostsCollection Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookPostsCollection(obj) {
-                Data = obj.GetArray("data", FacebookPostSummary.Parse),
+                Data = obj.GetArray("data", FacebookPost.Parse),
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };
         }

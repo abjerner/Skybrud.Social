@@ -4,7 +4,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
-    public class FacebookPostSummary : SocialJsonObject, ISocialTimelineEntry {
+    public class FacebookPost : SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
 
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Constructor(s)
 
-        private FacebookPostSummary(JsonObject obj) : base(obj) {
+        private FacebookPost(JsonObject obj) : base(obj) {
             // Hide default constructor
         }
 
@@ -55,7 +55,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// Loads a post from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
-        public static FacebookPostSummary LoadJson(string path) {
+        public static FacebookPost LoadJson(string path) {
             return JsonObject.LoadJson(path, Parse);
         }
 
@@ -63,7 +63,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// Gets a post from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
-        public static FacebookPostSummary ParseJson(string json) {
+        public static FacebookPost ParseJson(string json) {
             return JsonObject.ParseJson(json, Parse);
         }
 
@@ -71,9 +71,9 @@ namespace Skybrud.Social.Facebook.Objects {
         /// Gets a post from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static FacebookPostSummary Parse(JsonObject obj) {
+        public static FacebookPost Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new FacebookPostSummary(obj) {
+            return new FacebookPost(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Application = obj.GetObject("application", FacebookObject.Parse),

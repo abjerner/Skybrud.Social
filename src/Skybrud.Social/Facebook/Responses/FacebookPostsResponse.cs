@@ -11,12 +11,12 @@ namespace Skybrud.Social.Facebook.Responses {
         /// <summary>
         /// Gets an array of all posts in the response.
         /// </summary>
-        public FacebookPostSummary[] Data { get; private set; }
+        public FacebookPost[] Data { get; private set; }
 
         /// <summary>
         /// Gets an array of all posts in the response.
         /// </summary>
-        public FacebookPostSummary[] Posts {
+        public FacebookPost[] Posts {
             get { return Data; }
         }
 
@@ -42,7 +42,7 @@ namespace Skybrud.Social.Facebook.Responses {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
             return new FacebookPostsResponse(obj) {
-                Data = obj.GetArray("data", FacebookPostSummary.Parse),
+                Data = obj.GetArray("data", FacebookPost.Parse),
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };
         }

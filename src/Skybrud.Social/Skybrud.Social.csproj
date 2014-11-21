@@ -145,7 +145,7 @@
     <Compile Include="Facebook\Objects\FacebookStatusMessage.cs" />
     <Compile Include="Facebook\Objects\FacebookLink.cs" />
     <Compile Include="Facebook\Objects\FacebookPostProperties.cs" />
-    <Compile Include="Facebook\Objects\FacebookPostSummary.cs" />
+    <Compile Include="Facebook\Objects\FacebookPost.cs" />
     <Compile Include="Facebook\Objects\FacebookLikes.cs" />
     <Compile Include="Facebook\Objects\FacebookComments.cs" />
     <Compile Include="Facebook\Objects\FacebookImage.cs" />

@@ -30,8 +30,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about a photo with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
-        public FacebookResponse<FacebookPostSummary> GetPost(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetPost(id), FacebookPostSummary.Parse);
+        public FacebookResponse<FacebookPost> GetPost(string id) {
+            return FacebookHelpers.ParseResponse(Raw.GetPost(id), FacebookPost.Parse);
         }
 
         /// <summary>
