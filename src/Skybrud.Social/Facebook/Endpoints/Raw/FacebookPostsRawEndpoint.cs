@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Http;
@@ -27,14 +26,14 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// Gets information about a post with the specified <code>id</code>
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
-        public SocialHttpResponse GetPost(long id) {
+        public SocialHttpResponse GetPost(string id) {
             return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
         }
         
         /// <summary>
         /// Gets the posts of the specified page or user.
         /// </summary>
-        /// <param name="identifier">The ID or name.</param>
+        /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse GetPosts(string identifier, FacebookPostsOptions options) {
 
@@ -45,7 +44,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (options != null && options.Until > 0) query.Add("until", options.Until);
 
             // Make the call to the API
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/photos", query);
+            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
 
         }
 
