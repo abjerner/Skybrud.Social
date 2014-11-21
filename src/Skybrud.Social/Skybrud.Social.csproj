@@ -73,6 +73,8 @@
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="Facebook\Collections\FacebookPhotosCollection.cs" />
+    <Compile Include="Facebook\Collections\FacebookPostsCollection.cs" />
+    <Compile Include="Facebook\Endpoints\FacebookPostsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPostsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPhotosRawEndpoint.cs" />
