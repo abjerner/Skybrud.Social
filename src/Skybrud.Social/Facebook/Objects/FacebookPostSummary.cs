@@ -97,10 +97,6 @@ namespace Skybrud.Social.Facebook.Objects {
             };
         }
 
-        public static FacebookPostSummary[] ParseMultiple(JsonArray array) {
-            return array == null ? new FacebookPostSummary[0] : array.ParseMultiple(Parse);
-        }
-
         #endregion
 
     }
