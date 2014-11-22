@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using System.Globalization;
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
 
@@ -150,14 +149,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// Gets an object (user, post, photo or similar) with the specified <var>identifier</var>.
         /// </summary>
         /// <param name="identifier">The identifier of the object.</param>
-        public string GetObject(long identifier) {
-            return GetObject(identifier + "");
-        }
-
-        /// <summary>
-        /// Gets an object (user, post, photo or similar) with the specified <var>identifier</var>.
-        /// </summary>
-        /// <param name="identifier">The identifier of the object.</param>
         public string GetObject(string identifier) {
 
             // Declare the query string
@@ -198,15 +189,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <summary>
         /// Posts a link with the specified options.
         /// </summary>
-        /// <param name="identifier">The identifier of the user, page or similar.</param>
-        /// <param name="options">The options for the link.</param>
-        public string PostLink(long identifier, FacebookPostLinkOptions options) {
-            return PostLink(identifier.ToString(CultureInfo.InvariantCulture), options);
-        }
-
-        /// <summary>
-        /// Posts a link with the specified options.
-        /// </summary>
         /// <param name="identifier">The identifier of user, page or similar.</param>
         /// <param name="options">The options for the link.</param>
         public string PostLink(string identifier, FacebookPostLinkOptions options) {
@@ -235,15 +217,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="message">The text of the status message.</param>
         public string PostStatusMessage(string message) {
             return PostStatusMessage("me", message);
-        }
-
-        /// <summary>
-        /// Posts a status message to the wall of specified <var>identifier</var>.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user, page or similar.</param>
-        /// <param name="message">The text of the status message.</param>
-        public string PostStatusMessage(long identifier, string message) {
-            return PostStatusMessage(identifier.ToString(CultureInfo.InvariantCulture), message);
         }
 
         /// <summary>

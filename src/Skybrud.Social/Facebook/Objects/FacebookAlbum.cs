@@ -6,7 +6,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Properties
 
-        public long Id { get; set; }
+        public string Id { get; set; }
         public FacebookObject From { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
@@ -50,7 +50,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookAlbum Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAlbum(obj) {
-                Id = obj.GetInt64("id"),
+                Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
                 Name = obj.GetString("name"),
                 Link = obj.GetString("link"),

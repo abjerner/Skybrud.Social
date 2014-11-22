@@ -26,7 +26,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// Gets information about a photo with the specified <code>id</code>
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
-        public SocialHttpResponse GetPhoto(long id) {
+        public SocialHttpResponse GetPhoto(string id) {
             return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
         }
         

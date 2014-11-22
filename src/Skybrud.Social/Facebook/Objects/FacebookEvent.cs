@@ -7,7 +7,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Properties
 
-        public long Id { get; private set; }
+        public string Id { get; private set; }
         public object Owner { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -30,7 +30,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookEvent Parse(JsonObject obj) {
             return new FacebookEvent(obj) {
-                Id = obj.GetInt64("id"),
+                Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
                 Description = obj.GetString("description"),
                 StartTime = obj.GetDateTime("start_time"),

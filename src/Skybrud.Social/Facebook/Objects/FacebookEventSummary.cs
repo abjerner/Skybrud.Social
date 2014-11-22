@@ -5,7 +5,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
     public class FacebookEventSummary : SocialJsonObject {
 
-        public long Id { get; private set; }
+        public string Id { get; private set; }
         public string Name { get; private set; }
         public DateTime StartTime { get; private set; }
         public DateTime? EndTime { get; private set; }
@@ -20,7 +20,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookEventSummary Parse(JsonObject obj) {
             return new FacebookEventSummary(obj) {
-                Id = obj.GetInt64("id"),
+                Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
                 StartTime = obj.GetDateTime("start_time"),
                 EndTime = obj.HasValue("end_time") ? (DateTime?) obj.GetDateTime("end_time") : null,

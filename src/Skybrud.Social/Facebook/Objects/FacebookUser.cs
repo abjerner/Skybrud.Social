@@ -7,7 +7,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Properties
 
-        public long Id { get; private set; }
+        public string Id { get; private set; }
         public string Name { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -56,7 +56,7 @@ namespace Skybrud.Social.Facebook.Objects {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
             return new FacebookUser(obj) {
-                Id = obj.GetInt64("id"),
+                Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
                 FirstName = obj.GetString("first_name"),
                 LastName = obj.GetString("last_name"),

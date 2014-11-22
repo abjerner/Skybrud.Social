@@ -50,8 +50,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the specified app.
         /// </summary>
         /// <param name="id">The ID of the app.</param>
-        public FacebookAppResponse GetApp(long id) {
-            return FacebookAppResponse.ParseJson(Raw.GetApp(id + ""));
+        public FacebookAppResponse GetApp(string id) {
+            return FacebookAppResponse.ParseJson(Raw.GetApp(id));
         }
 
         #endregion
@@ -76,15 +76,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region GetEvents
-
-        /// <summary>
-        /// Gets the events of the specified user or page.
-        /// </summary>
-        /// <param name="id">The ID of the user/page.</param>
-        /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookEventsResponse GetEvents(long id, int limit = 0) {
-            return GetEvents(id + "", limit);
-        }
         
         /// <summary>
         /// Gets the events of the specified user or page.
@@ -98,16 +89,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region Get feed
-
-        /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID of the user/page.</param>
-        /// <param name="limit">The maximum amount of entries to return.</param>
-        public FacebookFeedResponse GetFeed(long identifier, int limit = 0) {
-            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier + "", limit));
-        }
-
+        
         /// <summary>
         /// Gets the feed of the specified user or page.
         /// </summary>
@@ -116,16 +98,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookFeedResponse GetFeed(string identifier, int limit = 0) {
             return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, limit));
         }
-
-        /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID of the user/page.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetFeed(long identifier, FacebookFeedOptions options) {
-            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier + "", options));
-        }
-
+        
         /// <summary>
         /// Gets the feed of the specified user or page.
         /// </summary>
@@ -147,15 +120,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region Get user
-
-        /// <summary>
-        /// Gets information about a user with the specified <var>identifier</var>.
-        /// </summary>
-        /// <param name="id">The ID or username of the user.</param>
-        public FacebookUser GetUser(long id) {
-            return GetUser(id + "");
-        }
-
+        
         /// <summary>
         /// Gets information about a user with the specified <var>identifier</var>.
         /// </summary>
@@ -167,25 +132,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region GetPosts
-
-        /// <summary>
-        /// Gets the posts by the specified user or page.
-        /// </summary>
-        /// <param name="id">The ID of the user/page.</param>
-        /// <param name="limit">The maximum amount of posts to return.</param>
-        public FacebookPostsResponse GetPosts(long id, int limit = 0) {
-            return GetPosts(id + "", limit);
-        }
-
-        /// <summary>
-        /// Gets the posts by the specified user or page.
-        /// </summary>
-        /// <param name="id">The ID of the user/page.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookPostsResponse GetPosts(long id, FacebookPostsOptions options) {
-            return GetPosts(id + "", options);
-        }
-
+        
         /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
@@ -241,17 +188,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public string PostLink(FacebookPostLinkOptions options) {
             return PostLink("me", options);
         }
-
-        /// <summary>
-        /// Posts a link with the specified options.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user, page or similar.</param>
-        /// <param name="options">The options for the link.</param>
-        /// <returns>Returns the ID of the created link.</returns>
-        public string PostLink(long identifier, FacebookPostLinkOptions options) {
-            return PostLink(identifier.ToString(CultureInfo.InvariantCulture), options);
-        }
-
+        
         /// <summary>
         /// Posts a link with the specified options.
         /// </summary>
@@ -286,17 +223,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public string PostStatusMessage(string message) {
             return PostStatusMessage("me", message);
         }
-
-        /// <summary>
-        /// Posts a status message to the wall of the specified <var>identifier</var>.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user, page or similar.</param>
-        /// <param name="message">The text of the status message.</param>
-        /// <returns>Returns the ID of the created status message.</returns>
-        public string PostStatusMessage(long identifier, string message) {
-            return PostStatusMessage(identifier.ToString(CultureInfo.InvariantCulture), message);
-        }
-
+        
         /// <summary>
         /// Posts a status message to the wall of the specified <var>identifier</var>.
         /// </summary>

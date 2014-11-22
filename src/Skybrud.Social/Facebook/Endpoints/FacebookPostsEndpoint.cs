@@ -33,24 +33,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public FacebookResponse<FacebookPost> GetPost(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetPost(id), FacebookPost.Parse);
         }
-
-        /// <summary>
-        /// Gets the posts of the specified page or user.
-        /// </summary>
-        /// <param name="identifier">The identifier of the page or user.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
-        public FacebookResponse<FacebookPostsCollection> GetPosts(long identifier, int limit = 0) {
-            return GetPosts(identifier + "", limit);
-        }
-        
-        /// <summary>
-        /// Gets the photos of the specified page or user.
-        /// </summary>
-        /// <param name="identifier">The identifier of the page or user.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookPostsCollection> GetPosts(long identifier, FacebookPostsOptions options) {
-            return GetPosts(identifier + "", options);
-        }
         
         /// <summary>
         /// Gets the photos of the specified page or user.

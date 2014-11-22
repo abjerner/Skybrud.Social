@@ -9,7 +9,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <summary>
         /// The ID of the account.
         /// </summary>
-        public long Id { get; internal set; }
+        public string Id { get; internal set; }
 
         /// <summary>
         /// Then name of the account.
@@ -49,7 +49,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public static FacebookAccount Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAccount(obj) {
-                Id = obj.GetInt64("id"),
+                Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
                 Category = obj.GetString("category"),
                 AccessToken = obj.GetString("access_token"),

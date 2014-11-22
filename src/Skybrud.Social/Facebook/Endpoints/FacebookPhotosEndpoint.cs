@@ -30,26 +30,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about a photo with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
-        public FacebookResponse<FacebookPhoto> GetPhoto(long id) {
+        public FacebookResponse<FacebookPhoto> GetPhoto(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetPhoto(id), FacebookPhoto.Parse);
-        }
-
-        /// <summary>
-        /// Gets the photos of the specified album, page or user.
-        /// </summary>
-        /// <param name="id">The ID.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
-        public FacebookResponse<FacebookPhotosCollection> GetPhotos(long id, int limit = 0) {
-            return GetPhotos(id + "", limit);
-        }
-        
-        /// <summary>
-        /// Gets the photos of the specified album, page or user.
-        /// </summary>
-        /// <param name="id">The ID.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookPhotosCollection> GetPhotos(long id, FacebookPhotosOptions options) {
-            return GetPhotos(id + "", options);
         }
         
         /// <summary>
