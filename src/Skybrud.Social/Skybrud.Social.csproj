@@ -83,9 +83,10 @@
     <Compile Include="Facebook\Objects\FacebookLocation.cs" />
     <Compile Include="Facebook\Objects\FacebookPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
+    <Compile Include="Facebook\Options\FacebookFeedOptions.cs" />
     <Compile Include="Facebook\Options\FacebookCursorBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPostsOptions.cs" />
-    <Compile Include="Facebook\Options\FacebookPagingOptions.cs" />
+    <Compile Include="Facebook\Options\FacebookTimeBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPhotosOptions.cs" />
     <Compile Include="Facebook\Responses\FacebookResponse.cs" />
     <Compile Include="GitHub\Endpoints\GitHubOrganizationsEndpoint.cs" />

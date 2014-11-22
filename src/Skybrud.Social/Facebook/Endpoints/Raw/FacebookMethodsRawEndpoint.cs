@@ -88,7 +88,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="limit">The maximum amount of entries to return.</param>
         /// <returns>The raw JSON response from the API.</returns>
         public string GetFeed(string identifier, int limit = 0) {
-            return GetFeed(identifier, new FacebookPagingOptions { Limit = limit });
+            return GetFeed(identifier, new FacebookFeedOptions { Limit = limit });
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>The raw JSON response from the API.</returns>
-        public string GetFeed(string identifier, FacebookPagingOptions options) {
+        public string GetFeed(string identifier, FacebookFeedOptions options) {
 
             // Declare the query string
             NameValueCollection query = new NameValueCollection();
