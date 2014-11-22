@@ -9,10 +9,10 @@ Skybrud.Social is a framework in .NET for integration with various social servic
 Install this NuGet package in your Visual Studio project. Makes updating easy.
 
 2. [**ZIP file**][GitHubRelease]  
-Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.dll` to the root directory of your website.
+Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.dll` to the bin directory of your project.
 
 2. [**Builds**][DropboxFolder]  
-I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.dll` to the root directory of your website.
+I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.dll` to the bin directory of your project.
 
 ### Documentation
 
