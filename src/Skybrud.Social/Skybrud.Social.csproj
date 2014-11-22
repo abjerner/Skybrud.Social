@@ -82,6 +82,7 @@
     <Compile Include="Facebook\Endpoints\Raw\FacebookPhotosRawEndpoint.cs" />
     <Compile Include="Facebook\FacebookHelpers.cs" />
     <Compile Include="Facebook\Objects\FacebookCommentsSummary.cs" />
+    <Compile Include="Facebook\Objects\FacebookFrom.cs" />
     <Compile Include="Facebook\Objects\FacebookLocation.cs" />
     <Compile Include="Facebook\Objects\FacebookPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
