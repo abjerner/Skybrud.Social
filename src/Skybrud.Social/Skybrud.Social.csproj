@@ -76,14 +76,15 @@
     <Compile Include="Facebook\Collections\FacebookPostsCollection.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPostsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
+    <Compile Include="Facebook\Endpoints\Raw\FacebookCommentsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPostsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPhotosRawEndpoint.cs" />
     <Compile Include="Facebook\FacebookHelpers.cs" />
     <Compile Include="Facebook\Objects\FacebookLocation.cs" />
     <Compile Include="Facebook\Objects\FacebookPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
+    <Compile Include="Facebook\Options\FacebookCursorBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPostsOptions.cs" />
-    <Compile Include="Facebook\Options\FacebookPagingAltOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPagingOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPhotosOptions.cs" />
     <Compile Include="Facebook\Responses\FacebookResponse.cs" />
