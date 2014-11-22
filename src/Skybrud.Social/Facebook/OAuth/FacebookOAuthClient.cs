@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.OAuth {
@@ -11,11 +12,7 @@ namespace Skybrud.Social.Facebook.OAuth {
     /// Class for handling the raw communication with the Facebook API as well as any OAUth 2.0 communication.
     /// </summary>
     public class FacebookOAuthClient {
-
-        private FacebookMethodsRawEndpoint _methods;
-        private FacebookPhotosRawEndpoint _photos;
-        private FacebookPostsRawEndpoint _posts;
-
+        
         #region Properties
 
         /// <summary>
@@ -48,25 +45,29 @@ namespace Skybrud.Social.Facebook.OAuth {
         public string AccessToken { get; set; }
 
         /// <summary>
+        /// Gets a reference to the comments endpoint.
+        /// </summary>
+        public FacebookCommentsRawEndpoint Comments { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the likes endpoint.
+        /// </summary>
+        public FacebookLikesRawEndpoint Likes { get; private set; }
+
+        /// <summary>
         /// Gets a reference to the methods endpoint.
         /// </summary>
-        public FacebookMethodsRawEndpoint Methods {
-            get { return _methods ?? (_methods = new FacebookMethodsRawEndpoint(this)); }
-        }
+        public FacebookMethodsRawEndpoint Methods { get; private set; }
 
         /// <summary>
         /// Gets a reference to the photos endpoint.
         /// </summary>
-        public FacebookPhotosRawEndpoint Photos {
-            get { return _photos ?? (_photos = new FacebookPhotosRawEndpoint(this)); }
-        }
+        public FacebookPhotosRawEndpoint Photos { get; private set; }
 
         /// <summary>
         /// Gets a reference to the posts endpoint.
         /// </summary>
-        public FacebookPostsRawEndpoint Posts {
-            get { return _posts ?? (_posts = new FacebookPostsRawEndpoint(this)); }
-        }
+        public FacebookPostsRawEndpoint Posts { get; private set; }
 
         #endregion
 
@@ -75,7 +76,13 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <summary>
         /// Initializes an OAuth client with empty information.
         /// </summary>
-        public FacebookOAuthClient() { }
+        public FacebookOAuthClient() {
+            Comments = new FacebookCommentsRawEndpoint(this);
+            Likes = new FacebookLikesRawEndpoint(this);
+            Methods = new FacebookMethodsRawEndpoint(this);
+            Photos = new FacebookPhotosRawEndpoint(this);
+            Posts = new FacebookPostsRawEndpoint(this);
+        }
 
         /// <summary>
         /// Initializes an OAuth client with the specified access token. Using this initializer,
@@ -239,7 +246,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
             return DoAuthenticatedGetRequest(url, (SocialQueryString) null);
         }
-        
+
         /// <summary>
         /// Makes a GET request to the Facebook API. If the <code>AccessToken</code> property has
         /// been specified, the access token will be appended to the query string.
@@ -248,6 +255,16 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="query">The query string of the request.</param>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
             return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
+
+        /// <summary>
+        /// Makes a GET request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="options">The options of the request.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IFacebookOptions options) {
+            return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQuery());
         }
 
         /// <summary>

@@ -4,7 +4,7 @@ using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
     
-    public class FacebookCommentsRawEndpoint {
+    public class FacebookLikesRawEndpoint {
 
         #region Properties
 
@@ -14,7 +14,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #region Constructor
 
-        internal FacebookCommentsRawEndpoint(FacebookOAuthClient client) {
+        internal FacebookLikesRawEndpoint(FacebookOAuthClient client) {
             Client = client;
         }
 
@@ -23,15 +23,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// Gets a list of all likes for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>
         /// <see>
-        ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/object/comments#read</cref>
+        ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/object/likes#read</cref>
         /// </see>
-        public SocialHttpResponse GetComments(string id, FacebookCommentsOptions options) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id + "/comments", options);
+        public SocialHttpResponse GetLikes(string id, FacebookLikesOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id + "/likes", options);
         }
 
         #endregion

@@ -36,16 +36,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse GetPosts(string identifier, FacebookPostsOptions options) {
-
-            // Declare the query string
-            SocialQueryString query = new SocialQueryString();
-            if (options != null && options.Limit > 0) query.Add("limit", options.Limit);
-            if (options != null && options.Since > 0) query.Add("since", options.Since);
-            if (options != null && options.Until > 0) query.Add("until", options.Until);
-
-            // Make the call to the API
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/posts", query);
-
+            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/posts", options);
         }
 
         #endregion
