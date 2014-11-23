@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Specialized;
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options;
 
@@ -34,7 +36,16 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         public string GetUser(long id) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + id + "/?access_token=" + Client.AccessToken);
+
+            SocialQueryString query = new SocialQueryString();
+
+            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
+                query.Set("access_token", Client.AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
+                query.Set("client_id", Client.ClientId);
+            }
+
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + id + "/", query.NameValueCollection);
         }
 
         /// <summary>
