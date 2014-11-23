@@ -21,7 +21,7 @@ namespace Skybrud.Social.Facebook.Responses {
 
     public class FacebookResponse<T> : FacebookResponse {
 
-        public T Data { get; private set; }
+        public T Body { get; private set; }
 
         protected FacebookResponse(SocialHttpResponse response) : base(response) { }
 
@@ -47,7 +47,7 @@ namespace Skybrud.Social.Facebook.Responses {
 
             // Initialize the response object
             return new FacebookResponse<T>(response) {
-                Data = func(obj)
+                Body = func(obj)
             };
 
         }
