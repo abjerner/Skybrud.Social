@@ -37,6 +37,8 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         public string Bio { get; private set; }
 
+        public InstagramUserCounts Counts { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -79,7 +81,8 @@ namespace Skybrud.Social.Instagram.Objects {
                 FullName = String.IsNullOrEmpty(fullname) ? null : fullname,
                 ProfilePicture = String.IsNullOrEmpty(picture) ? null : picture,
                 Website = String.IsNullOrEmpty(website) ? null : website,
-                Bio = String.IsNullOrEmpty(bio) ? null : bio
+                Bio = String.IsNullOrEmpty(bio) ? null : bio,
+                Counts = obj.GetObject("counts", InstagramUserCounts.Parse)
             };
         }
 
