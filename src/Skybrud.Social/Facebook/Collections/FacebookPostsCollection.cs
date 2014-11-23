@@ -5,19 +5,21 @@ namespace Skybrud.Social.Facebook.Collections {
     
     public class FacebookPostsCollection : SocialJsonObject {
 
-        public FacebookPost[] Data {
-            get; private set;
-        }
+        #region Properties
 
-        public FacebookPaging Paging {
-            get; private set;
-        }
-        
+        public FacebookPost[] Data { get; private set; }
+
+        public FacebookPaging Paging { get; private set; }
+
+        #endregion
+
         #region Constructors
 
         private FacebookPostsCollection(JsonObject obj) : base(obj) { }
 
         #endregion
+
+        #region Static methods
 
         public static FacebookPostsCollection Parse(JsonObject obj) {
             if (obj == null) return null;
@@ -26,6 +28,8 @@ namespace Skybrud.Social.Facebook.Collections {
                 Paging = obj.GetObject("paging", FacebookPaging.Parse)
             };
         }
+
+        #endregion
     
     }
 

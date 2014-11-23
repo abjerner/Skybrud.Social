@@ -23,6 +23,14 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
+        /// Gets information about a comment with specified <code>id</code>.
+        /// </summary>
+        /// <param name="id">The ID of the comment.</param>
+        public SocialHttpResponse GetComment(string id) {
+            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
+        }
+
+        /// <summary>
         /// Gets a list of all comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>

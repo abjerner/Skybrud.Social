@@ -89,7 +89,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// the client will have no information about your app.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
-        public FacebookOAuthClient(string accessToken) {
+        public FacebookOAuthClient(string accessToken) : this() {
             AccessToken = accessToken;
         }
 
@@ -98,7 +98,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        public FacebookOAuthClient(long appId, string appSecret) {
+        public FacebookOAuthClient(long appId, string appSecret) : this() {
             AppId = appId + "";
             AppSecret = appSecret;
         }
@@ -109,7 +109,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
         /// <param name="redirectUri">The redirect URI of the app.</param>
-        public FacebookOAuthClient(long appId, string appSecret, string redirectUri) {
+        public FacebookOAuthClient(long appId, string appSecret, string redirectUri) : this() {
             AppId = appId + "";
             AppSecret = appSecret;
             RedirectUri = redirectUri;
@@ -120,7 +120,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
-        public FacebookOAuthClient(string appId, string appSecret) {
+        public FacebookOAuthClient(string appId, string appSecret) : this() {
             AppId = appId;
             AppSecret = appSecret;
         }
@@ -131,7 +131,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="appId">The ID of the app.</param>
         /// <param name="appSecret">The secret of the app.</param>
         /// <param name="redirectUri">The redirect URI of the app.</param>
-        public FacebookOAuthClient(string appId, string appSecret, string redirectUri) {
+        public FacebookOAuthClient(string appId, string appSecret, string redirectUri) : this() {
             AppId = appId;
             AppSecret = appSecret;
             RedirectUri = redirectUri;
