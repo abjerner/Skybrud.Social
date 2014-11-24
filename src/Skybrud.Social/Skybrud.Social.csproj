@@ -102,6 +102,8 @@
     <Compile Include="Facebook\Objects\FacebookPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookShares.cs" />
     <Compile Include="Facebook\Objects\Pages\FacebookPageCategory.cs" />
+    <Compile Include="Facebook\Objects\Pages\FacebookRestaurantServices.cs" />
+    <Compile Include="Facebook\Objects\Pages\FacebookRestaurantSpecialties.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursorBasedPagination.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursors.cs" />
     <Compile Include="Facebook\Options\FacebookLikesOptions.cs" />

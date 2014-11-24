@@ -159,6 +159,16 @@ namespace Skybrud.Social.Facebook.Objects {
         public string PriceRange { get; private set; }
 
         /// <summary>
+        /// Services the restaurant provides. Applicable to <code>Restaurants</code>.
+        /// </summary>
+        public FacebookRestaurantServices RestaurantServices { get; private set; }
+
+        /// <summary>
+        /// The restaurant's specialties. Applicable to <code>Restaurants</code>.
+        /// </summary>
+        public FacebookRestaurantSpecialties RestaurantSpecialties { get; private set; }
+
+        /// <summary>
         /// Gets the number of people talking about the page.
         /// </summary>
         public int TalkingAboutCount { get; private set; }
@@ -225,6 +235,8 @@ namespace Skybrud.Social.Facebook.Objects {
                 Phone = obj.GetString("phone"),
                 PressContact = obj.GetString("press_contact"),
                 PriceRange = obj.GetString("price_range"),
+                RestaurantServices = obj.GetObject("restaurant_services", FacebookRestaurantServices.Parse),
+                RestaurantSpecialties = obj.GetObject("restaurant_specialties", FacebookRestaurantSpecialties.Parse),
                 TalkingAboutCount = obj.GetInt32("talking_about_count"),
                 Username = obj.GetString("username"),
                 Website = obj.GetString("website"),
