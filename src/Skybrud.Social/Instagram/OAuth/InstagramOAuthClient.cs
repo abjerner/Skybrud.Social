@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Specialized;
+using System.Net;
 using System.Web;
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
 using Skybrud.Social.Json;
@@ -209,7 +211,7 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// token, and a client ID will therefore not be sufficient for such methods.
         /// </summary>
         /// <param name="url">The URL to call.</param>
-        public string DoAuthenticatedGetRequest(string url) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
             return DoAuthenticatedGetRequest(url, null);
         }
 
@@ -222,20 +224,47 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string for the call.</param>
-        public string DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
+            return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
 
-            // Initialize a new NameValueCollection if NULL
-            if (query == null) query = new NameValueCollection();
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. If an access token has been
+        /// specified for this client, that access token will be added to the query string.
+        /// Similar if a client ID has been specified instead of an access token, that client ID
+        /// will be added to the query string. However some endpoint methods may require an access
+        /// token, and a client ID will therefore not be sufficient for such methods.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string for the call.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
 
-            // Set the access token ot client ID in the query string
+            // Throw an exception if the URL is empty
+            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+
+            // Initialize a new instance of SocialQueryString if the one specified is NULL
+            if (query == null) query = new SocialQueryString();
+
+            // Append either the access token or the client ID to the query string
             if (!String.IsNullOrWhiteSpace(AccessToken)) {
                 query.Add("access_token", AccessToken);
             } else if (!String.IsNullOrWhiteSpace(ClientId)) {
                 query.Add("client_id", ClientId);
             }
 
-            // Make a call to the server
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
+            // Append the query string to the URL
+            if (!query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
+
+            // Initialize a new HTTP request
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+            // Get the HTTP response
+            try {
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
+            } catch (WebException ex) {
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
+            }
 
         }
         

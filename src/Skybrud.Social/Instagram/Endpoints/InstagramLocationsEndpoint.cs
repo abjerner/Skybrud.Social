@@ -36,7 +36,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         public InstagramLocationResponse GetLocation(int locationId) {
-            return InstagramLocationResponse.ParseJson(Raw.GetLocation(locationId));
+            return InstagramLocationResponse.ParseJson(Raw.GetLocation(locationId).Body);
         }
 
         #region GetRecentMedia(...)
@@ -65,7 +65,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         public InstagramRecentMediaResponse GetRecentMedia(int locationId) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId));
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId).Body);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
         public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId, options));
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId, options).Body);
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         public InstagramLocationsResponse Search(double latitude, double longitude) {
-            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude));
+            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude).Body);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="longitude">The longitude.</param>
         /// <param name="distance">The distance is menters (max: 5000m)</param>
         public InstagramLocationsResponse Search(double latitude, double longitude, int distance) {
-            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude, distance));
+            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude, distance).Body);
         }
 
         #endregion

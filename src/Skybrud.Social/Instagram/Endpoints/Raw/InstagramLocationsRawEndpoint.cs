@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Globalization;
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Instagram.Options;
@@ -31,7 +32,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets information about a location with the specified ID.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
-        public string GetLocation(int locationId) {
+        public SocialHttpResponse GetLocation(int locationId) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId);
         }
 
@@ -43,7 +44,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Get a list of recent media objects from a given location.
         /// </summary>
         /// <param name="location">The location.</param>
-        public string GetRecentMedia(InstagramLocation location) {
+        public SocialHttpResponse GetRecentMedia(InstagramLocation location) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, null);
         }
@@ -53,7 +54,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>
-        public string GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
+        public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
         }
@@ -62,7 +63,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Get a list of recent media objects from a given location.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
-        public string GetRecentMedia(int locationId) {
+        public SocialHttpResponse GetRecentMedia(int locationId) {
             return GetRecentMedia(locationId, null);
         }
 
@@ -71,7 +72,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public string GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
+        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection();
@@ -98,7 +99,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
-        public string Search(double latitude, double longitude) {
+        public SocialHttpResponse Search(double latitude, double longitude) {
             return Search(latitude, longitude, 1000);
         }
 
@@ -108,7 +109,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         /// <param name="distance">The distance is menters (max: 5000m)</param>
-        public string Search(double latitude, double longitude, int distance) {
+        public SocialHttpResponse Search(double latitude, double longitude, int distance) {
 
             // Declare the query string
             NameValueCollection qs = new NameValueCollection {
