@@ -3,7 +3,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
     
-    public class InstagramAccessTokenResponse : InstagramResponse {
+    public class InstagramAccessTokenResponse : InstagramSoonToBeRetiredResponse {
 
         #region Properties
         /// <summary>

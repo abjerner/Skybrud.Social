@@ -1,23 +1,41 @@
-using System;
+﻿using System;
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public abstract class InstagramResponse : SocialJsonObject {
+    public class InstagramResponse {
 
-        #region Constructors
+        /// <summary>
+        /// Gets a reference to the underlying response.
+        /// </summary>
+        public SocialHttpResponse Response { get; private set; }
 
-        protected InstagramResponse(JsonObject obj) : base(obj) {}
+        protected InstagramResponse(SocialHttpResponse response) {
+            Response = response;
+        }
 
-        #endregion
+    }
+
+    public class InstagramResponse<T> : InstagramResponse {
+
+        public InstagramResponseBody<T> Body { get; private set; }
+
+        protected InstagramResponse(SocialHttpResponse response) : base(response) { }
 
         #region Static methods
 
-        public static void ValidateResponse(JsonObject obj) {
+        public static InstagramResponse<T> ParseResponse(SocialHttpResponse response, Func<JsonObject, T> func) {
 
-            // Check whether "obj" is null
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (response == null) return null;
+
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
+            if (obj == null) {
+                // TODO: Use an exception type specific to Instagram
+                throw new Exception("Invalid response received from the Instagram API");
+            }
 
             // Get the "meta" object
             JsonObject meta = obj.GetObject("meta");
@@ -27,27 +45,8 @@ namespace Skybrud.Social.Instagram.Responses {
                 meta = obj;
             }
 
-            // In some special cases like during the OAuth authentication, the
-            // root object is actually the "meta" object if any errors occur
-            if (meta == null) {
-
-                // Get some values from the "obj" object
-                int code = obj.GetInt32("code");
-                string type = obj.GetString("error_type");
-                string message = obj.GetString("error_message");
-
-                if (obj.HasValue("code")) {
-                    if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-                    throw new InstagramException(code, type, message);
-                }
-
-                // Should be OK by now
-                return;
-
-            }
-            
-            // Most responses will have a meta object along with a response code
-            if (meta.HasValue("code")) {
+            // Check for any errors
+            if (meta != null && meta.HasValue("code")) {
 
                 // Get some values from the "meta" object
                 int code = meta.GetInt32("code");
@@ -55,22 +54,37 @@ namespace Skybrud.Social.Instagram.Responses {
                 string message = meta.GetString("error_message");
 
                 // If "code" is 200, everything went fine :D
-                if (code == 200) return;
+                if (code != 200) {
 
-                // Now throw some exceptions
-                if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-                if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
-                if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
+                    // Now throw some exceptions
+                    if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
+                    if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
+                    if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
 
-                throw new InstagramException(code, type, message);
+                    throw new InstagramException(code, type, message);
+
+                }
 
             }
-
-            throw new Exception("Invalid response received from server");
+            
+            // Initialize the response object
+            return new InstagramResponse<T>(response) {
+                Body = new InstagramResponseBody<T> {
+                    Data = obj.GetObject("data", func)
+                }
+            };
 
         }
 
         #endregion
+
+    }
+
+    public class InstagramResponseBody<T> {
+
+        public object Meta { get; set; }
+        
+        public T Data { get; set; } 
 
     }
 

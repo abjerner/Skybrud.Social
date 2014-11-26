@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Exceptions {
 
@@ -11,11 +10,6 @@ namespace Skybrud.Social.Instagram.Exceptions {
         internal InstagramException(int code, string type, string message) : base(message) {
             Code = code;
             Type = type;
-        }
-
-        internal InstagramException(JsonObject obj) : base(obj.GetString("error_message")) {
-            Code = obj.GetInt32("code");
-            Type = obj.GetString("error_type");
         }
 
     }

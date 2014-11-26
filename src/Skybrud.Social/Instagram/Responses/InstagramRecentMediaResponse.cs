@@ -6,7 +6,7 @@ using JsonConverter = Skybrud.Social.Json.JsonConverter;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramRecentMediaResponse : InstagramResponse {
+    public class InstagramRecentMediaResponse : InstagramSoonToBeRetiredResponse {
 
         #region Properties
 
