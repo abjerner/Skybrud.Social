@@ -59,7 +59,7 @@ namespace Skybrud.Social {
         public static int GetBuildNumber() {
 
             // Get the fourth bit as a string
-            string str = GetFileVersion().Split('.')[2];
+            string str = GetFileVersion().Split('.')[3];
 
             // Parse the string into an integer
             return Int32.Parse(str);
