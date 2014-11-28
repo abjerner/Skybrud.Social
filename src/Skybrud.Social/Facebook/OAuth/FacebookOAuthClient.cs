@@ -45,6 +45,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         public string AccessToken { get; set; }
 
         /// <summary>
+        /// Gets a reference to the accounts endpoint.
+        /// </summary>
+        public FacebookAccountsRawEndpoint Accounts { get; private set; }
+
+        /// <summary>
         /// Gets a reference to the comments endpoint.
         /// </summary>
         public FacebookCommentsRawEndpoint Comments { get; private set; }
@@ -82,6 +87,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// Initializes an OAuth client with empty information.
         /// </summary>
         public FacebookOAuthClient() {
+            Accounts = new FacebookAccountsRawEndpoint(this);
             Comments = new FacebookCommentsRawEndpoint(this);
             Likes = new FacebookLikesRawEndpoint(this);
             Methods = new FacebookMethodsRawEndpoint(this);

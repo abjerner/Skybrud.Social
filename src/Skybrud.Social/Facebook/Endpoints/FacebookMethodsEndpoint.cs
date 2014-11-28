@@ -26,17 +26,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
             Service = service;
         }
 
-        #region GetAccounts
-
-        /// <summary>
-        /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
-        /// </summary>
-        public FacebookAccountsResponse GetAccounts() {
-            return FacebookAccountsResponse.ParseJson(Raw.GetAccounts());
-        }
-
-        #endregion
-
         #region GetApp
 
         /// <summary>

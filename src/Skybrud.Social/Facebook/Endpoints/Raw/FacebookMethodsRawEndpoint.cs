@@ -32,21 +32,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
-        /// </summary>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetAccounts() {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/me/accounts?access_token", query);
-
-        }
-
-        /// <summary>
         /// Gets information about the specified app.
         /// </summary>
         /// <param name="identifier">The identifier of the app. Can either be "app" or the ID of the app.</param>

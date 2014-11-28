@@ -13,6 +13,7 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         public FacebookOAuthClient Client { get; private set; }
 
+        public FacebookAccountsEndpoint Accounts { get; private set; }
         public FacebookCommentsEndpoint Comments { get; private set; }
         public FacebookLikesEndpoint Likes { get; private set; }
         public FacebookMethodsEndpoint Methods { get; private set; }
@@ -25,6 +26,7 @@ namespace Skybrud.Social.Facebook {
         #region Constructor(s)
 
         private FacebookService() {
+            Accounts = new FacebookAccountsEndpoint(this);
             Comments = new FacebookCommentsEndpoint(this);
             Likes = new FacebookLikesEndpoint(this);
             Methods = new FacebookMethodsEndpoint(this);
