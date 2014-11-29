@@ -64,19 +64,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region GetEvents
-        
-        /// <summary>
-        /// Gets the events of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookEventsResponse GetEvents(string identifier, int limit = 0) {
-            return FacebookEventsResponse.ParseJson(Raw.GetEvents(identifier, limit));
-        }
-
-        #endregion
-
         #region Get feed
         
         /// <summary>

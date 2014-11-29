@@ -46,24 +46,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier, query);
 
         }
-
-        /// <summary>
-        /// Gets the events of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="limit">The maximum amount of events to return.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetEvents(string identifier, int limit = 0) {
-            
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-            if (limit > 0) query.Add("limit", limit + "");
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/events", query);
-        
-        }
         
         /// <summary>
         /// Gets the feed of the specified user or page.

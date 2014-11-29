@@ -73,16 +73,19 @@
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="Facebook\Collections\FacebookAccountsCollection.cs" />
+    <Compile Include="Facebook\Collections\FacebookEventsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookLikesCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookCommentsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPhotosCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPostsCollection.cs" />
+    <Compile Include="Facebook\Endpoints\FacebookEventsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookAccountsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPagesEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookLikesEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookCommentsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPostsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
+    <Compile Include="Facebook\Endpoints\Raw\FacebookEventsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookAccountsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPagesRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookLikesRawEndpoint.cs" />
@@ -331,7 +334,6 @@
     <Compile Include="Facebook\Responses\FacebookAccountsResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookAppResponse.cs" />
     <Compile Include="Facebook\Objects\FacebookEvent.cs" />
-    <Compile Include="Facebook\Responses\FacebookEventsResponse.cs" />
     <Compile Include="Facebook\Objects\FacebookEventSummary.cs" />
     <Compile Include="Facebook\Responses\FacebookDebugTokenResponse.cs" />
     <Compile Include="Facebook\Responses\FacebookFeedResponse.cs" />
