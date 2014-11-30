@@ -1,6 +1,5 @@
 using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook.Endpoints {
@@ -30,8 +29,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookResponse<FacebookEventSummary> GetEvents(string identifier, int limit = 0) {
-            return FacebookHelpers.ParseResponse(Raw.GetEvents(identifier, limit), FacebookEventSummary.Parse);
+        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier, int limit = 0) {
+            return FacebookHelpers.ParseResponse(Raw.GetEvents(identifier, limit), FacebookEventsCollection.Parse);
         }
 
         #endregion
