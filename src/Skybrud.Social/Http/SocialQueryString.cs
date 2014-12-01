@@ -57,37 +57,12 @@ namespace Skybrud.Social.Http {
             _nvc.Add(key, String.Format("{0}", value));
         }
 
-        public void Set(string key, bool value) {
-            _nvc.Set(key, value ? "true" : "false");
-        }
-
-        public void Set(string key, bool value, bool condition) {
-            if (condition) _nvc.Set(key, value ? "true" : "false");
-        }
-
-        public void Set(string key, int value) {
-            _nvc.Set(key, value.ToString(CultureInfo.InvariantCulture));
-        }
-
-        public void Set(string key, int value, bool condition) {
-            if (condition) _nvc.Set(key, value.ToString(CultureInfo.InvariantCulture));
-        }
-
-        public void Set(string key, string value) {
-            _nvc.Set(key, value);
-        }
-
-        public void Set(string key, string value, bool condition) {
-            if (condition) _nvc.Set(key, value);
+        public void Set(string key, object value) {
+            _nvc.Add(key, String.Format("{0}", value));
         }
 
         public override string ToString() {
             return SocialUtils.NameValueCollectionToQueryString(_nvc);
-        }
-
-        public void Set(string key, Func<string> func, bool condition) {
-            if (!condition) return;
-            _nvc.Set(key, func());
         }
         
         public bool ContainsKey(string key) {
