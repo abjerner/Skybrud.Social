@@ -363,6 +363,7 @@
     <Compile Include="Twitter\Entities\TwitterUserDescriptionEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserUrlEntities.cs" />
+    <Compile Include="Twitter\Enums\TwitterSearchTweetResultType.cs" />
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Endpoints\TwitterStatusesEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterUsersEndpoint.cs" />
@@ -386,6 +387,7 @@
     <Compile Include="Twitter\Options\TwitterFollowersListOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFriendsIdsOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFriendsListOptions.cs" />
+    <Compile Include="Twitter\Options\TwitterSearchTweetOptions.cs" />
     <Compile Include="Twitter\Options\TwitterTimelineOptions.cs" />
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />

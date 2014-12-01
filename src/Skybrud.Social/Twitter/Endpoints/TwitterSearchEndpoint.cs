@@ -1,4 +1,5 @@
 using Skybrud.Social.Twitter.Endpoints.Raw;
+using Skybrud.Social.Twitter.Options;
 using Skybrud.Social.Twitter.Responses;
 
 namespace Skybrud.Social.Twitter.Endpoints {
@@ -46,6 +47,14 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="count">The maximum amount of tweets to return (default: 15, max: 100).</param>
         public TwitterSearchTweetsResponse GetTweets(string query, int count) {
             return TwitterSearchTweetsResponse.ParseJson(Raw.GetTweets(query, count)); 
+        }
+
+        /// <summary>
+        /// Gets tweets matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The search options.</param>
+        public TwitterSearchTweetsResponse GetTweets(TwitterSearchTweetOptions options) {
+            return TwitterSearchTweetsResponse.ParseJson(Raw.GetTweets(options)); 
         }
 
         #endregion

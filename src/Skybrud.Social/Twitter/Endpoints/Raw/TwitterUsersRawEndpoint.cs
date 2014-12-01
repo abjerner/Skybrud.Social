@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 using System.Globalization;
 using Skybrud.Social.Http;
@@ -82,11 +83,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             // Declare the query string
             SocialQueryString qs = new SocialQueryString();
             qs.Set("q", query);
-            if (options != null) {
-                qs.Set("page", options.Page, options.Page > 1);
-                qs.Set("count", options.Count, options.Count != 20);
-                qs.Set("include_entities", options.IncludeEntities, options.IncludeEntities != true);
-            }
+            if (options.Page > 1) qs.Set("page", options.Page);
+            if (options.Count != 20) qs.Set("count", options.Count);
+            if (!options.IncludeEntities) qs.Set("include_entities", "false");
 
             // Make the call to the API
             return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/search.json", qs.NameValueCollection);
