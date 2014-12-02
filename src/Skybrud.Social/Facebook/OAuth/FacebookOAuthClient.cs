@@ -24,16 +24,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// The secret of the app.
         /// </summary>
         public string AppSecret { get; set; }
-
-        /// <summary>
-        /// The redirect URI of your application.
-        /// </summary>
-        [Obsolete("Use \"RedirectUri\" instead to follow Facebook lingo.")]
-        public string ReturnUri {
-            get { return RedirectUri; }
-            set { RedirectUri = value; }
-        }
-
+        
         /// <summary>
         /// The redirect URI of your application.
         /// </summary>
