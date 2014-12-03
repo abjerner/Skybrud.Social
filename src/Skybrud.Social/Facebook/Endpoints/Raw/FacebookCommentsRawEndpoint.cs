@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the comment.</param>
         public SocialHttpResponse GetComment(string id) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
+            return Client.DoAuthenticatedGetRequest("/" + id);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/object/comments#read</cref>
         /// </see>
         public SocialHttpResponse GetComments(string id, FacebookCommentsOptions options) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id + "/comments", options);
+            return Client.DoAuthenticatedGetRequest("/" + id + "/comments", options);
         }
 
         #endregion

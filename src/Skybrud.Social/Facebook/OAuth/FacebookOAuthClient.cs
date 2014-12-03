@@ -293,6 +293,11 @@ namespace Skybrud.Social.Facebook.OAuth {
             // Throw an exception if the URL is empty
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
 
+            // Append the HTTP scheme and API version if not already specified.
+            if (url.StartsWith("/")) {
+                url = "https://graph.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + url;
+            }
+
             // Initialize a new instance of SocialQueryString if the one specified is NULL
             if (query == null) query = new SocialQueryString();
 

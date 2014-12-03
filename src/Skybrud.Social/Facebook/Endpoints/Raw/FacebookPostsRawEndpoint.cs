@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
         public SocialHttpResponse GetPost(string id) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
+            return Client.DoAuthenticatedGetRequest("/" + id);
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse GetPosts(string identifier, FacebookPostsOptions options) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/posts", options);
+            return Client.DoAuthenticatedGetRequest("/" + identifier + "/posts", options);
         }
 
         #endregion

@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
         public SocialHttpResponse GetAccounts() {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/me/accounts");
+            return Client.DoAuthenticatedGetRequest("/me/accounts");
         }
 
         #endregion

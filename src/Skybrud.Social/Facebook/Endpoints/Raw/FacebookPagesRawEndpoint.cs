@@ -26,7 +26,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
         public SocialHttpResponse GetPage(string id) {
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + id);
+            return Client.DoAuthenticatedGetRequest("/" + id);
         }
 
         #endregion

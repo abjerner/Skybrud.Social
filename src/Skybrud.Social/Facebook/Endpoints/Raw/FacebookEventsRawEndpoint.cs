@@ -28,7 +28,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (limit > 0) query.Set("limit", limit);
 
             // Make the call to the API
-            return Client.DoAuthenticatedGetRequest("https://graph.facebook.com/v1.0/" + identifier + "/events", query);
+            return Client.DoAuthenticatedGetRequest("/" + identifier + "/events", query);
 
         }
 

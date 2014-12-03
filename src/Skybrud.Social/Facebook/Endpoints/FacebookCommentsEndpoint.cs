@@ -38,8 +38,16 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets a list of all comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
+        public FacebookResponse<FacebookCommentsCollection> GetComments(string id) {
+            return GetComments(id, new FacebookCommentsOptions());
+        }
+
+        /// <summary>
+        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// </summary>
+        /// <param name="id">The ID of the object.</param>
         /// <param name="limit">The maximum amount of comments to return.</param>
-        public FacebookResponse<FacebookCommentsCollection> GetComments(string id, int? limit = null) {
+        public FacebookResponse<FacebookCommentsCollection> GetComments(string id, int limit) {
             return GetComments(id, new FacebookCommentsOptions {
                 Limit = limit
             });

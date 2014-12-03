@@ -28,8 +28,16 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets the events of the specified user or page.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
+        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier) {
+            return GetEvents(identifier, 0);
+        }
+
+        /// <summary>
+        /// Gets the events of the specified user or page.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier, int limit = 0) {
+        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier, int limit) {
             return FacebookHelpers.ParseResponse(Raw.GetEvents(identifier, limit), FacebookEventsCollection.Parse);
         }
 
