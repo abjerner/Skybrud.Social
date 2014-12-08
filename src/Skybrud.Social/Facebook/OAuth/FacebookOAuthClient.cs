@@ -15,6 +15,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         
         #region Properties
 
+        #region OAuth
+
         /// <summary>
         /// The ID of the app.
         /// </summary>
@@ -35,15 +37,24 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         public string AccessToken { get; set; }
 
+        #endregion
+
         /// <summary>
         /// Sets the of the Facebook Graph API to be used. Defaults to <code>v2.2</code>.
         /// </summary>
         public string Version { get; set; }
 
+        #region Endpoints
+
         /// <summary>
         /// Gets a reference to the accounts endpoint.
         /// </summary>
         public FacebookAccountsRawEndpoint Accounts { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the apps endpoint.
+        /// </summary>
+        public FacebookAppsRawEndpoint Apps { get; private set; }
 
         /// <summary>
         /// Gets a reference to the comments endpoint.
@@ -82,6 +93,8 @@ namespace Skybrud.Social.Facebook.OAuth {
 
         #endregion
 
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -90,6 +103,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         public FacebookOAuthClient() {
             Version = "v2.2";
             Accounts = new FacebookAccountsRawEndpoint(this);
+            Apps = new FacebookAppsRawEndpoint(this);
             Comments = new FacebookCommentsRawEndpoint(this);
             Events = new FacebookEventsRawEndpoint(this);
             Likes = new FacebookLikesRawEndpoint(this);

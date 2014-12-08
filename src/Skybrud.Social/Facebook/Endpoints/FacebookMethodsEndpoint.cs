@@ -26,25 +26,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
             Service = service;
         }
 
-        #region GetApp
-
-        /// <summary>
-        /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
-        /// </summary>
-        public FacebookAppResponse GetApp() {
-            return FacebookAppResponse.ParseJson(Raw.GetApp());
-        }
-
-        /// <summary>
-        /// Gets information about the specified app.
-        /// </summary>
-        /// <param name="id">The ID of the app.</param>
-        public FacebookAppResponse GetApp(string id) {
-            return FacebookAppResponse.ParseJson(Raw.GetApp(id));
-        }
-
-        #endregion
-
         #region DebugToken
 
         /// <summary>
