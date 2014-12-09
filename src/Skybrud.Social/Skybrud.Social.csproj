@@ -86,6 +86,7 @@
     <Compile Include="Facebook\Endpoints\FacebookCommentsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPostsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
+    <Compile Include="Facebook\Endpoints\Raw\FacebookFeedRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookAppsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookEventsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookAccountsRawEndpoint.cs" />
