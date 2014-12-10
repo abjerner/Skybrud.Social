@@ -72,6 +72,7 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="Facebook\Collections\FacebookFeedCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookAccountsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookEventsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookLikesCollection.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Facebook\Endpoints\FacebookAppsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookEventsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookAccountsEndpoint.cs" />
+    <Compile Include="Facebook\Endpoints\FacebookFeedEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPagesEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookLikesEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookCommentsEndpoint.cs" />
