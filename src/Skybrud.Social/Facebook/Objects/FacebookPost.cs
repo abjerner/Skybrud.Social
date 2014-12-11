@@ -22,7 +22,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public string Icon { get; private set; }
         public string Type { get; private set; }
         public string StatusType { get; private set; }
-        public long? ObjectId { get; private set; }
+        public string ObjectId { get; private set; }
         public DateTime CreatedTime { get; private set; }
         public DateTime UpdatedTime { get; private set; }
         
@@ -88,7 +88,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Icon = obj.GetString("icon"),
                 Type = obj.GetString("type"),
                 StatusType = obj.GetString("status_type"),
-                ObjectId = obj.HasValue("object_id") ? (long?) obj.GetInt64("object_id") : null,
+                ObjectId = obj.GetString("object_id"),
                 CreatedTime = obj.GetDateTime("created_time"),
                 UpdatedTime = obj.GetDateTime("updated_time"),
                 Shares = obj.GetObject("shares", FacebookShares.Parse),
