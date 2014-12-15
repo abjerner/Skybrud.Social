@@ -71,22 +71,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             if (!url.StartsWith("https://graph.facebook.com/v1.0/")) throw new ArgumentException("Invalid URL", "url");
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url);
         }
-
-        /// <summary>
-        /// Gets a link with the specified ID.
-        /// </summary>
-        /// <param name="linkId">The ID of the link.</param>
-        public string GetLink(string linkId) {
-
-            // Construct the query string
-            NameValueCollection query = new NameValueCollection {
-                {"access_token", Client.AccessToken}
-            };
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + linkId, query);
-
-        }
         
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.

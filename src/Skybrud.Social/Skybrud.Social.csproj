@@ -119,6 +119,7 @@
     <Compile Include="Facebook\Objects\Pages\FacebookRestaurantSpecialties.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursorBasedPagination.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursors.cs" />
+    <Compile Include="Facebook\Options\FacebookLinksOptions.cs" />
     <Compile Include="Facebook\Options\FacebookLikesOptions.cs" />
     <Compile Include="Facebook\Options\FacebookCommentsOptions.cs" />
     <Compile Include="Facebook\Options\FacebookFeedOptions.cs" />
