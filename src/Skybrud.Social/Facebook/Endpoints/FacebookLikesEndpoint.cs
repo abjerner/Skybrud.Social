@@ -29,7 +29,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets a list of all likes for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
-        /// <param name="limit">The maximum amount of likes to return.</param>
         public FacebookResponse<FacebookLikesCollection> GetLikes(string id) {
             return GetLikes(id, new FacebookLikesOptions());
         }
