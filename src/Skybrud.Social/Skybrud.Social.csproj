@@ -79,6 +79,7 @@
     <Compile Include="Facebook\Collections\FacebookCommentsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPhotosCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPostsCollection.cs" />
+    <Compile Include="Facebook\Endpoints\FacebookLinksEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookAppsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookEventsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookAccountsEndpoint.cs" />
