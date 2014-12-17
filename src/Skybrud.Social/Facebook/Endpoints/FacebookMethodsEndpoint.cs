@@ -45,37 +45,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region Get feed
-        
-        /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="limit">The maximum amount of entries to return.</param>
-        public FacebookFeedResponse GetFeed(string identifier, int limit = 0) {
-            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, limit));
-        }
-        
-        /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
-            return FacebookFeedResponse.ParseJson(Raw.GetFeed(identifier, options));
-        }
-
-        /// <summary>
-        /// Gets the feed of the specified URL. This method can be used for paging purposes. 
-        /// </summary>
-        /// <param name="url">The raw URL to call.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public FacebookFeedResponse GetFeedFromUrl(string url) {
-            return FacebookFeedResponse.ParseJson(Raw.GetFeedFromUrl(url));
-        }
-
-        #endregion
-
         #region Get user
         
         /// <summary>

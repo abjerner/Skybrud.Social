@@ -32,47 +32,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
         
         /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="limit">The maximum amount of entries to return.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetFeed(string identifier, int limit = 0) {
-            return GetFeed(identifier, new FacebookFeedOptions { Limit = limit });
-        }
-
-        /// <summary>
-        /// Gets the feed of the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetFeed(string identifier, FacebookFeedOptions options) {
-
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) query.Add("access_token", Client.AccessToken);
-            if (options != null && options.Limit > 0) query.Add("limit", options.Limit + "");
-            if (options != null && options.Since > 0) query.Add("since", options.Since + "");
-            if (options != null && options.Until > 0) query.Add("until", options.Until + "");
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
-
-        }
-
-        /// <summary>
-        /// Gets the feed of the specified URL. This method can be used for paging purposes. 
-        /// </summary>
-        /// <param name="url">The raw URL to call.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string GetFeedFromUrl(string url) {
-            if (url == null) throw new ArgumentNullException("url");
-            if (!url.StartsWith("https://graph.facebook.com/v1.0/")) throw new ArgumentException("Invalid URL", "url");
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url);
-        }
-        
-        /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
