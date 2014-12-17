@@ -1,4 +1,3 @@
-using System.Globalization;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.Objects;

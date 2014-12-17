@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Responses;
