@@ -39,6 +39,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return Client.DoAuthenticatedGetRequest("/" + identifier + "/links", options);
         }
 
+        /// <summary>
+        /// Posts a link with the specified options.
+        /// </summary>
+        /// <param name="identifier">The identifier of user, page or similar.</param>
+        /// <param name="options">The options for the link.</param>
+        public SocialHttpResponse PostLink(string identifier, FacebookPostLinkOptions options) {
+            return Client.DoAuthenticatedGetRequest("/" + identifier + "/feed", options);
+        }
+
         #endregion
 
     }
