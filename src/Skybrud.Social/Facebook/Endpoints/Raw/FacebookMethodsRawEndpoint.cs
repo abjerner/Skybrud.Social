@@ -69,40 +69,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + statusMessageId, query);
 
         }
-
-        #region Post link
-
-        /// <summary>
-        /// Posts a link with the specified options to the feed of the authenticated user.
-        /// </summary>
-        /// <param name="options">The options for the link.</param>
-        public string PostLink(FacebookPostLinkOptions options) {
-            return PostLink("me", options);
-        }
-
-        /// <summary>
-        /// Posts a link with the specified options.
-        /// </summary>
-        /// <param name="identifier">The identifier of user, page or similar.</param>
-        /// <param name="options">The options for the link.</param>
-        public string PostLink(string identifier, FacebookPostLinkOptions options) {
-
-            // Construct the query string
-            NameValueCollection query = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(options.Link)) query.Add("link", options.Link);
-            if (!String.IsNullOrWhiteSpace(options.Description)) query.Add("description", options.Description);
-            if (!String.IsNullOrWhiteSpace(options.Message)) query.Add("message", options.Message);
-            if (!String.IsNullOrWhiteSpace(options.Name)) query.Add("name", options.Name);
-            if (!String.IsNullOrWhiteSpace(options.Caption)) query.Add("caption", options.Caption);
-            query.Add("access_token", Client.AccessToken);
-
-            // Make the call to the API
-            return SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/" + identifier + "/feed", query);
-
-        }
-
-        #endregion
-
+        
         #region Post status message
 
         /// <summary>

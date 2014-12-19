@@ -123,7 +123,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         public string PostLink(string identifier, FacebookPostLinkOptions options) {
 
             // Make the call to the API
-            string response = Raw.PostLink(identifier, options);
+            string response = Service.Client.Links.PostLink(identifier, options).Body;
 
             // Parse the raw JSON response
             JsonObject obj = JsonConverter.ParseObject(response);
