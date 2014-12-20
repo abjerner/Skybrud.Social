@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #region Methods
 
-        public FacebookResponse<FacebookLink> GetPage(string id) {
+        public FacebookResponse<FacebookLink> GetLink(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetLink(id), FacebookLink.Parse);
         }
 
