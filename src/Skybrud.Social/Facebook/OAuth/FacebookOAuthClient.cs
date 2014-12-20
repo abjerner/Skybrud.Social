@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Net;
+using System.Text;
 using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Options;
@@ -304,8 +306,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options of the request.</param>
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IFacebookOptions options) {
-            return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQuery());
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IFacebookGetOptions options) {
+            return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
         }
 
         /// <summary>
@@ -338,7 +340,74 @@ namespace Skybrud.Social.Facebook.OAuth {
             if (!query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
 
             // Initialize a new HTTP request
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            // Get the HTTP response
+            try {
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
+            } catch (WebException ex) {
+                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
+            }
+
+        }
+
+        /// <summary>
+        /// Makes a POST request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="options">The options of the request.</param>
+        public SocialHttpResponse DoAuthenticatedPostRequest(string url, IFacebookPostOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return DoAuthenticatedPostRequest(url, options.GetQueryString(), options.GetPostData());
+        }
+
+        /// <summary>
+        /// Makes a POST request to the Facebook API. If the <code>AccessToken</code> property has
+        /// been specified, the access token will be appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string of the request.</param>
+        /// <param name="postData">The POST data.</param>
+        public SocialHttpResponse DoAuthenticatedPostRequest(string url, SocialQueryString query, SocialQueryString postData) {
+
+            // Throw an exception if the URL is empty
+            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+
+            // Append the HTTP scheme and API version if not already specified.
+            if (url.StartsWith("/")) {
+                url = "https://graph.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + url;
+            }
+
+            // Initialize a new instance of SocialQueryString if the one specified is NULL
+            if (query == null) query = new SocialQueryString();
+
+            // Append the access token to the query string if present in the client and not already
+            // specified in the query string
+            if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
+                // TODO: Can the access token be specified using an authorization header?
+                query.Add("access_token", AccessToken);
+            }
+
+            // Append the query string to the URL
+            if (!query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
+
+            // Initialize a new HTTP request
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+
+            // Set the HTTP method
+            request.Method = "POST";
+
+            // Write the POST data to the request stream
+            if (postData != null && postData.Count > 0) {
+                string dataString = postData.ToString();
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = dataString.Length;
+                using (Stream stream = request.GetRequestStream()) {
+                    stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+                }
+            }
 
             // Get the HTTP response
             try {

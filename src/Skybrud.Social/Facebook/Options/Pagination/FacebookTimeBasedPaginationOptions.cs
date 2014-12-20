@@ -9,7 +9,7 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/using-graph-api/v2.2#time</cref>
     /// </see>
-    public class FacebookTimeBasedPaginationOptions : IFacebookOptions {
+    public class FacebookTimeBasedPaginationOptions : IFacebookGetOptions {
 
         #region Properties
 
@@ -32,15 +32,12 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
 
         #region Methods
 
-        public virtual SocialQueryString GetQuery() {
-
+        public virtual SocialQueryString GetQueryString() {
             SocialQueryString query = new SocialQueryString();
             if (Limit != null && Limit.Value >= 0) query.Set("limit", Limit.Value);
             if (Since > 0) query.Set("since", Since);
             if (Until > 0) query.Set("until", Until);
-
             return query;
-
         }
 
         #endregion

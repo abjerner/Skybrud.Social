@@ -18,8 +18,8 @@ namespace Skybrud.Social.Facebook.Options {
 
         #region Methods
 
-        public override SocialQueryString GetQuery() {
-            SocialQueryString query = base.GetQuery();
+        public override SocialQueryString GetQueryString() {
+            SocialQueryString query = base.GetQueryString();
             if (IncludeSummary) query.Set("summary", "true");
             // TODO: Implement the "filter" modifier
             return query;

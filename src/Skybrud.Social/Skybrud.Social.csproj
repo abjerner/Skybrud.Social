@@ -120,11 +120,12 @@
     <Compile Include="Facebook\Objects\Pages\FacebookRestaurantSpecialties.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursorBasedPagination.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursors.cs" />
+    <Compile Include="Facebook\Options\IFacebookGetOptions.cs" />
     <Compile Include="Facebook\Options\FacebookLinksOptions.cs" />
     <Compile Include="Facebook\Options\FacebookLikesOptions.cs" />
     <Compile Include="Facebook\Options\FacebookCommentsOptions.cs" />
     <Compile Include="Facebook\Options\FacebookFeedOptions.cs" />
-    <Compile Include="Facebook\Options\IFacebookOptions.cs" />
+    <Compile Include="Facebook\Options\IFacebookPostOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookCursorBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\FacebookPostsOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookTimeBasedPaginationOptions.cs" />

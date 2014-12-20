@@ -8,7 +8,7 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/using-graph-api/v2.2#cursors</cref>
     /// </see>
-    public class FacebookCursorBasedPaginationOptions : IFacebookOptions {
+    public class FacebookCursorBasedPaginationOptions : IFacebookGetOptions {
 
         #region Properties
 
@@ -30,16 +30,13 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
         #endregion
 
         #region Methods
-        
-        public virtual SocialQueryString GetQuery() {
 
+        public virtual SocialQueryString GetQueryString() {
             SocialQueryString query = new SocialQueryString();
             if (Limit != null && Limit.Value >= 0) query.Set("limit", Limit.Value);
             if (Before != null) query.Set("before", Before);
             if (After != null) query.Set("after", After);
-
             return query;
-        
         }
 
         #endregion
