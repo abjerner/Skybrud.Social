@@ -1,6 +1,4 @@
-using System.Net;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Responses;
@@ -10,6 +8,8 @@ using Skybrud.Social.Json;
 namespace Skybrud.Social.Facebook.Endpoints {
     
     public class FacebookLinksEndpoint {
+
+        #region Properties
 
         /// <summary>
         /// A reference to the Facebook service.
@@ -23,9 +23,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
             get { return Service.Client.Links; }
         }
 
+        #endregion
+
+        #region Constructor
+
         internal FacebookLinksEndpoint(FacebookService service) {
             Service = service;
         }
+
+        #endregion
 
         #region Methods
 
