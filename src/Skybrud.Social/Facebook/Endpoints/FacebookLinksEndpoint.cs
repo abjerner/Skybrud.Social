@@ -36,6 +36,10 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #region Methods
 
+        /// <summary>
+        /// Gets information about a link with the specified <code>id</code>.
+        /// </summary>
+        /// <param name="id">The ID of the link.</param>
         public FacebookResponse<FacebookLink> GetLink(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetLink(id), FacebookLink.Parse);
         }
