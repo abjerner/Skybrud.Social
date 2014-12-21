@@ -17,6 +17,21 @@ namespace Skybrud.Social.Facebook.Responses {
             Response = response;
         }
 
+        public static void ValidateResponse(SocialHttpResponse response, JsonObject obj) {
+
+            // Skip error checking if the server responds with an OK status code
+            if (response.StatusCode == HttpStatusCode.OK) return;
+            
+            // Throw an exception based on the error message from the API
+            JsonObject error = obj.GetObject("error");
+            int code = error.GetInt32("code");
+            string type = error.GetString("type");
+            string message = error.GetString("message");
+            int subcode = error.HasValue("error_subcode") ? error.GetInt32("error_subcode") : 0;
+            throw new FacebookApiException(code, type, message, subcode);
+        
+        }
+
     }
 
     public class FacebookResponse<T> : FacebookResponse {
@@ -36,14 +51,7 @@ namespace Skybrud.Social.Facebook.Responses {
             if (obj == null) return null;
 
             // Validate the response
-            if (response.StatusCode != HttpStatusCode.OK) {
-                JsonObject error = obj.GetObject("error");
-                int code = error.GetInt32("code");
-                string type = error.GetString("type");
-                string message = error.GetString("message");
-                int subcode = error.HasValue("error_subcode") ? error.GetInt32("error_subcode") : 0;
-                throw new FacebookApiException(code, type, message, subcode);
-            }
+            ValidateResponse(response, obj);
 
             // Initialize the response object
             return new FacebookResponse<T>(response) {
