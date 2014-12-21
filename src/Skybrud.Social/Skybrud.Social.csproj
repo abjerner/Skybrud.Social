@@ -72,6 +72,7 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="Facebook\Collections\FacebookLinksCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookFeedCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookAccountsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookEventsCollection.cs" />

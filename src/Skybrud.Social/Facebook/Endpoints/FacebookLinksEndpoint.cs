@@ -1,3 +1,4 @@
+using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
@@ -39,7 +40,33 @@ namespace Skybrud.Social.Facebook.Endpoints {
             return FacebookHelpers.ParseResponse(Raw.GetLink(id), FacebookLink.Parse);
         }
 
-        // TODO: Implement GetLinks method
+        /// <summary>
+        /// Gets the links of the specified page or user.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the page or user.</param>
+        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier) {
+            return GetLinks(identifier, new FacebookLinksOptions());
+        }
+
+        /// <summary>
+        /// Gets the links of the specified page or user.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the page or user.</param>
+        /// <param name="limit">The maximum amount of links to return.</param>
+        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier, int limit) {
+            return GetLinks(identifier, new FacebookLinksOptions {
+                Limit = limit
+            });
+        }
+
+        /// <summary>
+        /// Gets the links of the specified page or user.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the page or user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier, FacebookLinksOptions options) {
+            return FacebookHelpers.ParseResponse(Raw.GetLinks(identifier, options), FacebookLinksCollection.Parse);
+        }
 
         /// <summary>
         /// Posts a link with the specified options to the feed of the authenticated user. If
