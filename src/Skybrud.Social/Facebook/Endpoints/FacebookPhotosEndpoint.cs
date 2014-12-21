@@ -38,7 +38,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets the photos of the specified album, page or user.
         /// </summary>
         /// <param name="identifier">The ID or name of the album, page or user.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
         public FacebookResponse<FacebookPhotosCollection> GetPhotos(string identifier) {
             return GetPhotos(identifier, new FacebookPhotosOptions());
         }
