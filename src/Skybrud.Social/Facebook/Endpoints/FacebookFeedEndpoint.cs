@@ -7,6 +7,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
     
     public class FacebookFeedEndpoint {
 
+        #region Properties
+
         /// <summary>
         /// A reference to the Facebook service.
         /// </summary>
@@ -19,9 +21,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
             get { return Service.Client.Feed; }
         }
 
+        #endregion
+
+        #region Constructors
+
         internal FacebookFeedEndpoint(FacebookService service) {
             Service = service;
         }
+
+        #endregion
 
         #region Methods
 

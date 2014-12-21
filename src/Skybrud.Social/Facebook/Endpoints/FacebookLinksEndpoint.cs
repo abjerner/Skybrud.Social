@@ -26,7 +26,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookLinksEndpoint(FacebookService service) {
             Service = service;

@@ -8,6 +8,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
     
     public class FacebookCommentsEndpoint {
 
+        #region Properties
+
         /// <summary>
         /// A reference to the Facebook service.
         /// </summary>
@@ -20,9 +22,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
             get { return Service.Client.Comments; }
         }
 
+        #endregion
+
+        #region Constructors
+
         internal FacebookCommentsEndpoint(FacebookService service) {
             Service = service;
         }
+
+        #endregion
 
         #region Methods
 
