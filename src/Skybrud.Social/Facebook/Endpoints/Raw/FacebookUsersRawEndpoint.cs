@@ -22,7 +22,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         public SocialHttpResponse GetUser(string identifier) {
-            return Client.DoAuthenticatedGetRequest(identifier);
+            return Client.DoAuthenticatedGetRequest("/" + identifier);
         }
 
         #endregion
