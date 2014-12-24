@@ -1,4 +1,5 @@
 ﻿using Skybrud.Social.Facebook.Objects;
+using Skybrud.Social.Facebook.Objects.Pagination;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Collections {
@@ -9,7 +10,7 @@ namespace Skybrud.Social.Facebook.Collections {
 
         public FacebookAlbum[] Data { get; private set; }
 
-        public FacebookPaging Paging { get; private set; }
+        public FacebookCursorBasedPagination Paging { get; private set; }
 
         #endregion
 
@@ -25,7 +26,7 @@ namespace Skybrud.Social.Facebook.Collections {
             if (obj == null) return null;
             return new FacebookAlbumsCollection(obj) {
                 Data = obj.GetArray("data", FacebookAlbum.Parse),
-                Paging = obj.GetObject("paging", FacebookPaging.Parse)
+                Paging = obj.GetObject("paging", FacebookCursorBasedPagination.Parse)
             };
         }
 
