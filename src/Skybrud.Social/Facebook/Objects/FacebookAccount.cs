@@ -7,17 +7,17 @@ namespace Skybrud.Social.Facebook.Objects {
         #region Properties
 
         /// <summary>
-        /// The ID of the account.
+        /// Gets the ID of the account.
         /// </summary>
         public string Id { get; internal set; }
 
         /// <summary>
-        /// Then name of the account.
+        /// Gets the name of the account.
         /// </summary>
         public string Name { get; internal set; }
 
         /// <summary>
-        /// The category of the account.
+        /// Gets the category of the account.
         /// </summary>
         public string Category { get; internal set; }
 
@@ -33,7 +33,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public string AccessToken { get; internal set; }
 
         /// <summary>
-        /// The permissions given to manage the account. Permissions may not be
+        /// Gets the permissions given to manage the account. Permissions may not be
         /// specified for all types of accounts.
         /// </summary>
         public string[] Permissions { get; internal set; }
@@ -45,6 +45,8 @@ namespace Skybrud.Social.Facebook.Objects {
         private FacebookAccount(JsonObject obj) : base(obj) { }
 
         #endregion
+
+        #region Static methods
 
         /// <summary>
         /// Parse the JSON object of an account.
@@ -62,7 +64,9 @@ namespace Skybrud.Social.Facebook.Objects {
                 Permissions = obj.GetArray<string>("perms") ?? new string[0]
             };
         }
-    
+
+        #endregion
+
     }
 
 }
