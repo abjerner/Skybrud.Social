@@ -14,6 +14,7 @@ namespace Skybrud.Social.Facebook {
         public FacebookOAuthClient Client { get; private set; }
 
         public FacebookAccountsEndpoint Accounts { get; private set; }
+        public FacebookAlbumsEndpoint Albums { get; private set; }
         public FacebookAppsEndpoint Apps { get; private set; }
         public FacebookCommentsEndpoint Comments { get; private set; }
         public FacebookEventsEndpoint Events { get; private set; }
@@ -31,6 +32,7 @@ namespace Skybrud.Social.Facebook {
 
         private FacebookService() {
             Accounts = new FacebookAccountsEndpoint(this);
+            Albums = new FacebookAlbumsEndpoint(this);
             Apps = new FacebookAppsEndpoint(this);
             Comments = new FacebookCommentsEndpoint(this);
             Events = new FacebookEventsEndpoint(this);
