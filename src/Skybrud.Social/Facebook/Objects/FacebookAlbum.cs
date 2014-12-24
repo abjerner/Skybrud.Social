@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -6,20 +7,76 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Properties
 
-        public string Id { get; set; }
-        public FacebookObject From { get; set; }
-        public string Name { get; set; }
-        public string Link { get; set; }
-        public string CoverPhoto { get; set; }
-        public int Count { get; set; }
-        public string Type { get; set; }
-        public string CreatedTime { get; set; }
-        public string UpdatedTime { get; set; }
-        public bool CanUpload { get; set; }
+        /// <summary>
+        /// Gets the ID of the album.
+        /// </summary>
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets whether the authenticated user or page can upload photos to this album.
+        /// </summary>
+        public bool CanUpload { get; private set; }
+
+        /// <summary>
+        /// Gets the number of photos in this album.
+        /// </summary>
+        public int Count { get; private set; }
+
+        /// <summary>
+        /// Gets the ID of the album's cover photo.
+        /// </summary>
+        public string CoverPhoto { get; private set; }
+
+        /// <summary>
+        /// Gets the time the album was initially created.
+        /// </summary>
+        public DateTime CreatedTime { get; private set; }
+
+        /// <summary>
+        /// Gets the description of the album.
+        /// </summary>
+        public string Description { get; private set; }
+
+        /// <summary>
+        /// Gets the profile that created the album.
+        /// </summary>
+        public FacebookFrom From { get; private set; }
+
+        /// <summary>
+        /// Gets the link to this album on Facebook.
+        /// </summary>
+        public string Link { get; private set; }
+
+        /// <summary>
+        /// Gets the textual location of the album.
+        /// </summary>
+        public string Location { get; private set; }
+
+        /// <summary>
+        /// Gets the title of the album.
+        /// </summary>
+        public string Name { get; private set; }
+
+        // TODO: Implement the "place" property
+
+        /// <summary>
+        /// Gets the privacy settings for the album.
+        /// </summary>
+        public string Privacy { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the album.
+        /// </summary>
+        public FacebookAlbumType Type { get; private set; }
+
+        /// <summary>
+        /// Gets the last time the album was updated.
+        /// </summary>
+        public string UpdatedTime { get; private set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private FacebookAlbum(JsonObject obj) : base(obj) { }
 
@@ -28,38 +85,25 @@ namespace Skybrud.Social.Facebook.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads an album from the JSON file at the specified <var>path</var>.
+        /// Gets an album from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static FacebookAlbum LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets an album from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static FacebookAlbum ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets an album from the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static FacebookAlbum Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookAlbum(obj) {
                 Id = obj.GetString("id"),
-                From = obj.GetObject("from", FacebookObject.Parse),
-                Name = obj.GetString("name"),
-                Link = obj.GetString("link"),
-                CoverPhoto = obj.GetString("cover_photo"),
+                CanUpload = obj.GetBoolean("can_upload"),
                 Count = obj.GetInt32("count"),
-                Type = obj.GetString("type"),
-                CreatedTime = obj.GetString("created_time"),
-                UpdatedTime = obj.GetString("updated_time"),
-                CanUpload = obj.GetBoolean("can_upload")
+                CoverPhoto = obj.GetString("cover_photo"),
+                CreatedTime = obj.GetDateTime("created_time"),
+                Description = obj.GetString("description"),
+                From = obj.GetObject("from", FacebookFrom.Parse),
+                Link = obj.GetString("link"),
+                Location = obj.GetString("location"),
+                Name = obj.GetString("name"),
+                Privacy = obj.GetString("privacy"),
+                Type = obj.GetEnum<FacebookAlbumType>("type"),
+                UpdatedTime = obj.GetString("updated_time")
             };
         }
 

@@ -72,6 +72,7 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="Facebook\Collections\FacebookAlbumsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookLinksCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookFeedCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookAccountsCollection.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Facebook\Collections\FacebookCommentsCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPhotosCollection.cs" />
     <Compile Include="Facebook\Collections\FacebookPostsCollection.cs" />
+    <Compile Include="Facebook\Endpoints\FacebookAlbumsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookUsersEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookLinksEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookAppsEndpoint.cs" />
@@ -91,6 +93,9 @@
     <Compile Include="Facebook\Endpoints\FacebookCommentsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPostsEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\FacebookPhotosEndpoint.cs" />
+    <Compile Include="Facebook\Endpoints\Raw\FacebookAlbumsRawEndpoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Facebook\Endpoints\Raw\FacebookLinksRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookFeedRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookAppsRawEndpoint.cs" />
@@ -102,6 +107,9 @@
     <Compile Include="Facebook\Endpoints\Raw\FacebookPostsRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookPhotosRawEndpoint.cs" />
     <Compile Include="Facebook\Endpoints\Raw\FacebookUsersRawEndpoint.cs" />
+    <Compile Include="Facebook\Enums\FacebookAlbumType.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Facebook\Enums\FacebookGender.cs" />
     <Compile Include="Facebook\FacebookHelpers.cs" />
     <Compile Include="Facebook\Objects\FacebookApp.cs" />
@@ -124,6 +132,7 @@
     <Compile Include="Facebook\Objects\Pages\FacebookRestaurantSpecialties.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursorBasedPagination.cs" />
     <Compile Include="Facebook\Objects\Pagination\FacebookCursors.cs" />
+    <Compile Include="Facebook\Options\FacebookAlbumsOptions.cs" />
     <Compile Include="Facebook\Options\IFacebookGetOptions.cs" />
     <Compile Include="Facebook\Options\FacebookLinksOptions.cs" />
     <Compile Include="Facebook\Options\FacebookLikesOptions.cs" />

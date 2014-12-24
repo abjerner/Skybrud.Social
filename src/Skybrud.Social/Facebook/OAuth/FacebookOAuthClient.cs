@@ -54,6 +54,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         public FacebookAccountsRawEndpoint Accounts { get; private set; }
 
         /// <summary>
+        /// Gets a reference to the albums endpoint.
+        /// </summary>
+        public FacebookAlbumsRawEndpoint Albums { get; private set; }
+
+        /// <summary>
         /// Gets a reference to the apps endpoint.
         /// </summary>
         public FacebookAppsRawEndpoint Apps { get; private set; }
@@ -131,6 +136,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             Photos = new FacebookPhotosRawEndpoint(this);
             Posts = new FacebookPostsRawEndpoint(this);
             Users = new FacebookUsersRawEndpoint(this);
+            Albums = new FacebookAlbumsRawEndpoint(this);
         }
 
         /// <summary>
