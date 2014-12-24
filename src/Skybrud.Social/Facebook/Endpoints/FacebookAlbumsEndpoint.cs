@@ -38,7 +38,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the album with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the album.</param>
-        public FacebookResponse<FacebookAlbum> GetLink(string id) {
+        public FacebookResponse<FacebookAlbum> GetAlbum(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetAlbum(id), FacebookAlbum.Parse);
         }
 
@@ -46,8 +46,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets the albums of the specified page or user.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetLinks(string identifier) {
-            return GetLinks(identifier, new FacebookAlbumsOptions());
+        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier) {
+            return GetAlbums(identifier, new FacebookAlbumsOptions());
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="limit">The maximum amount of albums to return.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetLinks(string identifier, int limit) {
-            return GetLinks(identifier, new FacebookAlbumsOptions {
+        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier, int limit) {
+            return GetAlbums(identifier, new FacebookAlbumsOptions {
                 Limit = limit
             });
         }
@@ -66,7 +66,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetLinks(string identifier, FacebookAlbumsOptions options) {
+        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier, FacebookAlbumsOptions options) {
             return FacebookHelpers.ParseResponse(Raw.GetAlbums(identifier, options), FacebookAlbumsCollection.Parse);
         }
 
