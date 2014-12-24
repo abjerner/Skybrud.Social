@@ -288,6 +288,42 @@ namespace Skybrud.Social {
 
         #endregion
 
+        #region Enums
+
+        public static T ParseEnum<T>(string str) where T : struct {
+
+            // Check whether the type of T is an enum
+            if (!typeof(T).IsEnum) throw new ArgumentException("Generic type T must be an enum");
+
+            // Parse the enum
+            foreach (string name in Enum.GetNames(typeof(T))) {
+                if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
+                    return (T)Enum.Parse(typeof(T), str, true);
+                }
+            }
+
+            throw new Exception("Unable to parse enum of type " + typeof(T).Name);
+
+        }
+        
+        public static T ParseEnum<T>(string str, T fallback) where T : struct {
+
+            // Check whether the type of T is an enum
+            if (!typeof(T).IsEnum) throw new ArgumentException("Generic type T must be an enum");
+
+            // Parse the enum
+            foreach (string name in Enum.GetNames(typeof(T))) {
+                if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
+                    return (T)Enum.Parse(typeof(T), str, true);
+                }
+            }
+
+            return fallback;
+
+        }
+
+        #endregion
+
     }
 
 }

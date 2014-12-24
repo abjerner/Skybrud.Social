@@ -141,6 +141,14 @@ namespace Skybrud.Social.Json {
             Dictionary[name] = value;
         }
 
+        public T GetEnum<T>(string name) where T : struct {
+            return SocialUtils.ParseEnum<T>(GetString(name));
+        }
+
+        public T GetEnum<T>(string name, T fallback) where T : struct {
+            return SocialUtils.ParseEnum<T>(GetString(name), fallback);
+        }
+
         public void SetInt(string name, int value) {
             Dictionary[name] = value;
         }
