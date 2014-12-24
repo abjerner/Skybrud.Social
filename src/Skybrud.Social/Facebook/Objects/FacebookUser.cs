@@ -98,7 +98,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <summary>
         /// Gets the selected timezone of the user. The timezone is specified as the offset in hours from UTC.
         /// </summary>
-        public int Timezone { get; private set; }
+        public int? Timezone { get; private set; }
 
         /// <summary>
         /// Indicates whether the user account has been verified. This is distinct from the <code>is_verified</code>
@@ -165,7 +165,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Location = obj.GetObject("location", FacebookObject.Parse),
                 MiddleName = obj.GetString("middle_name"),
                 Name = obj.GetString("name"),
-                Timezone = obj.GetInt32("timezone"),
+                Timezone = obj.HasValue("timezone") ? obj.GetInt32("timezone") : (int?) null,
                 Verified = obj.GetBoolean("verified"),
                 Website = obj.GetString("website")
             };
