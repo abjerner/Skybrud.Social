@@ -103,6 +103,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         public FacebookPostsRawEndpoint Posts { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the posts endpoint.
+        /// </summary>
+        public FacebookUsersRawEndpoint Users { get; private set; }
+
         #endregion
 
         #endregion
@@ -125,6 +130,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             Pages = new FacebookPagesRawEndpoint(this);
             Photos = new FacebookPhotosRawEndpoint(this);
             Posts = new FacebookPostsRawEndpoint(this);
+            Users = new FacebookUsersRawEndpoint(this);
         }
 
         /// <summary>

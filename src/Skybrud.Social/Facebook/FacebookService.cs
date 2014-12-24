@@ -23,6 +23,7 @@ namespace Skybrud.Social.Facebook {
         public FacebookPagesEndpoint Pages { get; private set; }
         public FacebookPhotosEndpoint Photos { get; private set; }
         public FacebookPostsEndpoint Posts { get; private set; }
+        public FacebookUsersEndpoint Users { get; private set; }
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace Skybrud.Social.Facebook {
             Pages = new FacebookPagesEndpoint(this);
             Photos = new FacebookPhotosEndpoint(this);
             Posts = new FacebookPostsEndpoint(this);
+            Users = new FacebookUsersEndpoint(this);
         }
 
         #endregion
