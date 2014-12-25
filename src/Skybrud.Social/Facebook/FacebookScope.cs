@@ -1,3 +1,5 @@
+using System;
+
 namespace Skybrud.Social.Facebook {
     
     public class FacebookScope {
@@ -122,8 +124,15 @@ namespace Skybrud.Social.Facebook {
 
         #region Properties
 
-        // The name of the scope
+        /// <summary>
+        /// Gets the name of the scope.
+        /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the description of the scope.
+        /// </summary>
+        public string Description { get; private set; }
 
         #endregion
 
@@ -133,8 +142,10 @@ namespace Skybrud.Social.Facebook {
         /// Default and private constructor.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
-        private FacebookScope(string name, string description = null) {
+        /// <param name="description">The description of the scope.</param>
+        public FacebookScope(string name, string description = null) {
             Name = name;
+            Description = String.IsNullOrWhiteSpace(description) ? null : description.Trim();
         }
 
         #endregion
