@@ -56,6 +56,7 @@ namespace Skybrud.Social.Facebook.Objects {
         #region Static methods
 
         public static FacebookPaging Parse(JsonObject obj) {
+            // TODO: Should we just return NULL if "obj" is NULL?
             if (obj == null) return new FacebookPaging(null);
             return new FacebookPaging(obj) {
                 Previous =  obj.GetString("previous"),

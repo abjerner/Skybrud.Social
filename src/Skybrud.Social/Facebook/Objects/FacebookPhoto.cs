@@ -6,6 +6,8 @@ namespace Skybrud.Social.Facebook.Objects {
     
     public class FacebookPhoto : SocialJsonObject {
 
+        #region Properties
+
         public string Id { get; private set; }
         public FacebookObject From { get; set; }
         public int Width { get; private set; }
@@ -24,15 +26,23 @@ namespace Skybrud.Social.Facebook.Objects {
         /// </summary>
         public FacebookPlace Place { get; private set; }
 
+        #endregion
+
         #region Constructors
 
         private FacebookPhoto(JsonObject obj) : base(obj) { }
 
         #endregion
 
+        #region Member methods
+
         public FacebookImage GetImageGreaterThanOrEqualTo(int width, int height) {
             return Images.Reverse().FirstOrDefault(x => x.Width >= width && x.Height != height);
         }
+
+        #endregion
+
+        #region Static methods
 
         public static FacebookPhoto Parse(JsonObject obj) {
             if (obj == null) return null;
@@ -51,7 +61,9 @@ namespace Skybrud.Social.Facebook.Objects {
                 Images = obj.GetArray("images", FacebookImage.Parse)
             };
         }
-    
+
+        #endregion
+
     }
 
 }

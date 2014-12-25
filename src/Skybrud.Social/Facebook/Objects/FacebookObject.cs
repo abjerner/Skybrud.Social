@@ -7,12 +7,12 @@ namespace Skybrud.Social.Facebook.Objects {
         #region Properties
 
         /// <summary>
-        /// The ID of the object.
+        /// Gets the ID of the object.
         /// </summary>
         public string Id { get; internal set; }
 
         /// <summary>
-        /// The name of the object.
+        /// Gets the name of the object.
         /// </summary>
         public string Name { get; internal set; }
 

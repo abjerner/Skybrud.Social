@@ -80,7 +80,10 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
+        #region Static methods
+
         public static FacebookEvent Parse(JsonObject obj) {
+            if (obj == null) return null;
             return new FacebookEvent(obj) {
                 Id = obj.GetString("id"),
                 Cover = obj.GetObject("cover", FacebookCoverPhoto.Parse),
@@ -89,15 +92,17 @@ namespace Skybrud.Social.Facebook.Objects {
                 IsDateOnly = obj.HasValue("is_date_only") && obj.GetBoolean("is_date_only"),
                 Location = obj.GetString("location"),
                 Name = obj.GetString("name"),
-                // owner
+                // TODO: Implement the "owner" property
                 Privacy = obj.GetString("privacy"),
                 StartTime = obj.GetDateTime("start_time"),
                 TimeZone = obj.GetString("timezone"),
                 UpdatedTime = obj.GetDateTime("updated_time")
-                // venue
+                // TODO: Implement the "venue" property
             };
         }
-        
+
+        #endregion
+
     }
 
 }

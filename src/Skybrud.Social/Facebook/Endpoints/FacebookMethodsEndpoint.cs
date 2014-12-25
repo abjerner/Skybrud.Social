@@ -44,53 +44,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region Get user
-        
-        /// <summary>
-        /// Gets information about a user with the specified <var>identifier</var>.
-        /// </summary>
-        /// <param name="identifier">The ID or username of the user.</param>
-        public FacebookUser GetUser(string identifier) {
-            return FacebookUser.ParseJson(Raw.GetObject(identifier));
-        }
-
-        #endregion
-
-        #region GetPosts
-        
-        /// <summary>
-        /// Gets the posts by the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user/page.</param>
-        /// <param name="limit">The maximum amount of posts to return.</param>
-        public FacebookPostsResponse GetPosts(string identifier, int limit = 0) {
-            return GetPosts(identifier, new FacebookPostsOptions {
-                Limit = limit
-            });
-        }
-
-        /// <summary>
-        /// Gets the posts by the specified user or page.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user/page.</param>
-        /// <param name="options">The options for the call to the API.</param>
-        public FacebookPostsResponse GetPosts(string identifier, FacebookPostsOptions options) {
-            return FacebookPostsResponse.ParseJson(Raw.Client.Posts.GetPosts(identifier, options).Body);
-        }
-
-        #endregion
-
-        #region Me
-
-        /// <summary>
-        /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
-        /// </summary>
-        public FacebookMeResponse Me() {
-            return FacebookMeResponse.ParseJson(Raw.GetObject("me"));
-        }
-
-        #endregion
-
         #region GetStatusMessage
 
         /// <summary>
@@ -98,7 +51,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="statusMessageId">The ID of the status message.</param>
         public FacebookStatusMessage GetStatusMessage(string statusMessageId) {
-            return FacebookStatusMessage.ParseJson(Raw.GetObject(statusMessageId));
+            return FacebookStatusMessage.Parse(JsonObject.ParseJson(Raw.GetObject(statusMessageId)));
         }
 
         #endregion

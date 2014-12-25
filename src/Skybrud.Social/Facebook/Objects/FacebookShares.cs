@@ -10,7 +10,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private FacebookShares(JsonObject obj) : base(obj) { }
 

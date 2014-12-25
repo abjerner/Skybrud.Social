@@ -43,7 +43,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private FacebookLocation(JsonObject obj) : base(obj) { }
 

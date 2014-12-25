@@ -41,31 +41,13 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private FacebookPost(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
+        private FacebookPost(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
-
-        /// <summary>
-        /// Loads a post from the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static FacebookPost LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets a post from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static FacebookPost ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
 
         /// <summary>
         /// Gets a post from the specified <var>JsonObject</var>.

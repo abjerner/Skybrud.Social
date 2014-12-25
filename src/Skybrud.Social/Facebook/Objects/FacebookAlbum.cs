@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Facebook.Objects.Albums;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -61,7 +60,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <summary>
         /// Gets the place of the album.
         /// </summary>
-        public FacebookAlbumPlace Place { get; private set; }
+        public FacebookPlace Place { get; private set; }
 
         /// <summary>
         /// Gets the privacy settings for the album.
@@ -105,7 +104,7 @@ namespace Skybrud.Social.Facebook.Objects {
                 Link = obj.GetString("link"),
                 Location = obj.GetString("location"),
                 Name = obj.GetString("name"),
-                Place = obj.GetObject("place", FacebookAlbumPlace.Parse),
+                Place = obj.GetObject("place", FacebookPlace.Parse),
                 Privacy = obj.GetString("privacy"),
                 Type = obj.GetEnum<FacebookAlbumType>("type"),
                 UpdatedTime = obj.GetString("updated_time")

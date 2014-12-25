@@ -28,7 +28,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private FacebookFrom(JsonObject obj) : base(obj) { }
 

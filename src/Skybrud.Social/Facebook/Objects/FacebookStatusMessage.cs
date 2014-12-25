@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
@@ -8,41 +7,39 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Properties
 
-
         /// <summary>
-        /// The ID of the status message.
+        /// Gets the ID of the status message.
         /// </summary>
         public string Id { get; private set; }
 
         /// <summary>
-        /// Brief information about the entity (eg. user) that posted the status message.
+        /// Gets brief information about the entity (eg. user) that posted the status message.
         /// </summary>
         public FacebookObject From { get; private set; }
 
         /// <summary>
-        /// The text of the status message.
+        /// Gets the text of the status message.
         /// </summary>
         public string Message { get; private set; }
 
         /// <summary>
-        /// An array of all tags used in the message.
+        /// Gets an array of all tags used in the message.
         /// </summary>
         public FacebookMessageTag[] MessageTags { get; private set; }
 
         /// <summary>
-        /// Brief information about the application used to post the status message. If
-        /// the status message was posted directly from facebook.com, this property will
-        /// return <var>NULL</var>.
+        /// Gets brief information about the application used to post the status message. If the status message was
+        /// posted directly from facebook.com, this property will return <code>NULL</code>.
         /// </summary>
         public FacebookObject Application { get; private set; }
 
         /// <summary>
-        /// A timestamp for when the status message was created.
+        /// Gets the timestamp for when the status message was created.
         /// </summary>
         public DateTime CreatedTime { get; private set; }
 
         /// <summary>
-        /// A timestamp for when the status message was last updated.
+        /// ets the timestamp for when the status message was last updated.
         /// </summary>
         public DateTime UpdatedTime { get; private set; }
 
@@ -56,23 +53,8 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Static methods
 
-        public static FacebookStatusMessage LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        public static FacebookStatusMessage ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
         public static FacebookStatusMessage Parse(JsonObject obj) {
-
-            // Return NULL if NULL
             if (obj == null) return null;
-
-            // Some error checking
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
-
-            // Initialize the link object
             return new FacebookStatusMessage(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
@@ -82,7 +64,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 CreatedTime = DateTime.Parse(obj.GetString("created_time")),
                 UpdatedTime = DateTime.Parse(obj.GetString("updated_time"))
             };
-
         }
 
         #endregion

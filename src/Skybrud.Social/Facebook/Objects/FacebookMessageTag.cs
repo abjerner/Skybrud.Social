@@ -5,19 +5,26 @@ namespace Skybrud.Social.Facebook.Objects {
 
     public class FacebookMessageTag : SocialJsonObject {
 
+        #region Properties
+
         public string Id { get; private set; }
         public string Name { get; private set; }
         public string Type { get; private set; }
         public int Offset { get; private set; }
         public int Length { get; private set; }
-        
+
+        #endregion
+
         #region Constructors
 
         private FacebookMessageTag(JsonObject obj) : base(obj) { }
 
         #endregion
 
+        #region Static methods
+
         public static FacebookMessageTag Parse(JsonObject obj) {
+            if (obj == null) return null;
             return new FacebookMessageTag(obj) {
                 Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
@@ -35,6 +42,8 @@ namespace Skybrud.Social.Facebook.Objects {
             }
             return temp.ToArray();
         }
+
+        #endregion
 
     }
 

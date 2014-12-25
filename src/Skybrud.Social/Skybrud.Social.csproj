@@ -108,7 +108,6 @@
     <Compile Include="Facebook\Enums\FacebookAlbumType.cs" />
     <Compile Include="Facebook\Enums\FacebookGender.cs" />
     <Compile Include="Facebook\FacebookHelpers.cs" />
-    <Compile Include="Facebook\Objects\Albums\FacebookAlbumPlace.cs" />
     <Compile Include="Facebook\Objects\FacebookApp.cs" />
     <Compile Include="Facebook\Objects\Pages\FacebookOpeningHours.cs" />
     <Compile Include="Facebook\Objects\Pages\FacebookOpeningRange.cs" />

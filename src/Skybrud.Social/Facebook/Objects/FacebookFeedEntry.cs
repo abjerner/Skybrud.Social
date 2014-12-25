@@ -46,7 +46,10 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #endregion
 
+        #region Static methods
+
         public static FacebookFeedEntry Parse(JsonObject obj) {
+            if (obj == null) return null;
             return new FacebookFeedEntry(obj) {
                 Id = obj.GetString("id"),
                 From = obj.GetObject("from", FacebookObject.Parse),
@@ -68,7 +71,9 @@ namespace Skybrud.Social.Facebook.Objects {
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),
             };
         }
-    
+
+        #endregion
+
     }
 
 }
