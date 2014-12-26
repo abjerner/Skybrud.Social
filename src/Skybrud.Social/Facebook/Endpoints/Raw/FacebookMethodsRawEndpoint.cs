@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Facebook.OAuth;
-using Skybrud.Social.Facebook.Options;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
@@ -11,24 +10,6 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         internal FacebookMethodsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
-        }
-
-        /// <summary>
-        /// Gets debug information about the specified access token.
-        /// </summary>
-        /// <param name="accessToken">The access token to debug.</param>
-        /// <returns>The raw JSON response from the API.</returns>
-        public string DebugToken(string accessToken) {
-            
-            // Declare the query string
-            NameValueCollection query = new NameValueCollection {
-                { "input_token", accessToken },
-                { "access_token", Client.AccessToken }
-            };
-
-            // Make the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/v1.0/debug_token", query);
-        
         }
         
         /// <summary>

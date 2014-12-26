@@ -1,4 +1,5 @@
 ﻿using Skybrud.Social.Facebook.OAuth;
+using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
@@ -11,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookEventsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -21,15 +22,21 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #region Methods
 
-        public SocialHttpResponse GetEvents(string identifier, int limit = 0) {
+        /// <summary>
+        /// Gets information about the event with the specified <code>id</code>.
+        /// </summary>
+        /// <param name="eventId">The ID of the event.</param>
+        public SocialHttpResponse GetEvent(string eventId) {
+            return Client.DoAuthenticatedGetRequest("/" + eventId);
+        }
 
-            // Declare the query string
-            SocialQueryString query = new SocialQueryString();
-            if (limit > 0) query.Set("limit", limit);
-
-            // Make the call to the API
-            return Client.DoAuthenticatedGetRequest("/" + identifier + "/events", query);
-
+        /// <summary>
+        /// Gets a list of events for a user or page with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse GetEvents(string identifier, FacebookEventsOptions options) {
+            return Client.DoAuthenticatedGetRequest("/" + identifier + "/events", options);
         }
 
         #endregion

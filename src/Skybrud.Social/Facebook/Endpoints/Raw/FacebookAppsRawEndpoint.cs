@@ -11,7 +11,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookAppsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -21,9 +21,8 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #region Methods
 
-
         /// <summary>
-        /// Gets information about the specified app.
+        /// Gets information about the app with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier of the app. Can either be "app" or the ID of the app.</param>
         /// <returns>The raw JSON response from the API.</returns>

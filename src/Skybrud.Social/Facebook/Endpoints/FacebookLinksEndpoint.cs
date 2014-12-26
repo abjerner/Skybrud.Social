@@ -13,12 +13,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookLinksRawEndpoint Raw {
             get { return Service.Client.Links; }
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about a link with the specified <code>id</code>.
+        /// Gets information about the link with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the link.</param>
         public FacebookResponse<FacebookLink> GetLink(string id) {
@@ -45,7 +45,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets the links of the specified page or user.
+        /// Gets a list of links of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier) {
@@ -53,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets the links of the specified page or user.
+        /// Gets a list of links of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="limit">The maximum amount of links to return.</param>
@@ -64,7 +64,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets the links of the specified page or user.
+        /// Gets a list of links of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>

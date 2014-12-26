@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookFeedRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -23,22 +23,13 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets the feed of the specified user or page.
+        /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>The raw JSON response from the API.</returns>
         public SocialHttpResponse GetFeed(string identifier, FacebookFeedOptions options) {
-
-            // Declare the query string
-            SocialQueryString query = new SocialQueryString();
-            if (options != null && options.Limit > 0) query.Set("limit", options.Limit);
-            if (options != null && options.Since > 0) query.Set("since", options.Since);
-            if (options != null && options.Until > 0) query.Set("until", options.Until);
-
-            // Make the call to the API
-            return Client.DoAuthenticatedGetRequest("/" + identifier + "/feed", query);
-
+            return Client.DoAuthenticatedGetRequest("/" + identifier + "/feed", options);
         }
 
         #endregion

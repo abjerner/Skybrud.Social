@@ -11,12 +11,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookCommentsRawEndpoint Raw {
             get { return Service.Client.Comments; }
@@ -35,7 +35,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about a comment with specified <code>id</code>.
+        /// Gets information about the comment with specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the comment.</param>
         public FacebookResponse<FacebookComment> GetComment(string id) {
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// Gets a list of comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         public FacebookResponse<FacebookCommentsCollection> GetComments(string id) {
@@ -51,7 +51,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// Gets a list of comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="limit">The maximum amount of comments to return.</param>
@@ -62,7 +62,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// Gets a list of comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>

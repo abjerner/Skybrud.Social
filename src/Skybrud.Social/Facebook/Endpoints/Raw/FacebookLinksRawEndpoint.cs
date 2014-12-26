@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookLinksRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -23,7 +23,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets a link with the specified ID.
+        /// Gets information about the link with the specified <code>linkId</code>.
         /// </summary>
         /// <param name="linkId">The ID of the link.</param>
         public SocialHttpResponse GetLink(string linkId) {
@@ -31,7 +31,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets the links of the specified page or user.
+        /// Gets a list of links of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name.</param>
         /// <param name="options">The options for the call to the API.</param>

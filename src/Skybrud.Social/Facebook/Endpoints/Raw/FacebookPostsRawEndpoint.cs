@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookPostsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -23,15 +23,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
         
         /// <summary>
-        /// Gets information about a post with the specified <code>id</code>
+        /// Gets information about the post with the specified <code>postId</code>
         /// </summary>
-        /// <param name="id">The ID of the photo.</param>
-        public SocialHttpResponse GetPost(string id) {
-            return Client.DoAuthenticatedGetRequest("/" + id);
+        /// <param name="postId">The ID of the photo.</param>
+        public SocialHttpResponse GetPost(string postId) {
+            return Client.DoAuthenticatedGetRequest("/" + postId);
         }
-        
+
         /// <summary>
-        /// Gets the posts of the specified page or user.
+        /// Gets a list of posts of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>

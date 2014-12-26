@@ -10,12 +10,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookLikesRawEndpoint Raw {
             get { return Service.Client.Likes; }
@@ -34,15 +34,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets a list of all likes for an object with the specified <code>id</code>.
+        /// Gets a list of likes of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         public FacebookResponse<FacebookLikesCollection> GetLikes(string id) {
             return GetLikes(id, new FacebookLikesOptions());
         }
-        
+
         /// <summary>
-        /// Gets a list of all likes for an object with the specified <code>id</code>.
+        /// Gets a list of likes of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="limit">The maximum amount of likes to return.</param>
@@ -53,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets a list of all likes for an object with the specified <code>id</code>.
+        /// Gets a list of likes of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>

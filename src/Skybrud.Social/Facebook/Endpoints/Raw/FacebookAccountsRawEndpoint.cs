@@ -11,7 +11,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookAccountsRawEndpoint(FacebookOAuthClient client) {
             Client = client;

@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookAlbumsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -31,7 +31,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets the albums of the specified page or user.
+        /// Gets a list of albums of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>

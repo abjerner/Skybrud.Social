@@ -9,12 +9,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookPagesRawEndpoint Raw {
             get { return Service.Client.Pages; }
@@ -33,9 +33,9 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about a photo with the specified <code>id</code>.
+        /// Gets information about the page with the specified <code>id</code>.
         /// </summary>
-        /// <param name="id">The ID of the photo.</param>
+        /// <param name="id">The ID of the page.</param>
         public FacebookResponse<FacebookPage> GetPage(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetPage(id), FacebookPage.Parse);
         }

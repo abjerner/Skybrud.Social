@@ -9,12 +9,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookAccountsRawEndpoint Raw {
             get { return Service.Client.Accounts; }

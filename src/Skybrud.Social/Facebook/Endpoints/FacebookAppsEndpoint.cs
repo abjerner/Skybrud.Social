@@ -9,12 +9,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookAppsRawEndpoint Raw {
             get { return Service.Client.Apps; }
@@ -33,7 +33,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about the current app by calling the <var>/app</var> method. This requires an app access token.
+        /// Gets information about the current app by calling the <code>/app</code> method. This requires an app access
+        /// token.
         /// </summary>
         public FacebookResponse<FacebookApp> GetApp() {
             return FacebookHelpers.ParseResponse(Raw.GetApp("app"), FacebookApp.Parse);

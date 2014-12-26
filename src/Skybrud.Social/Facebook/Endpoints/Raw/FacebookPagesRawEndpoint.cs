@@ -11,7 +11,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookPagesRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -22,7 +22,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
         
         /// <summary>
-        /// Gets information about a post with the specified <code>id</code>
+        /// Gets information about the post with the specified <code>id</code>
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
         public SocialHttpResponse GetPage(string id) {

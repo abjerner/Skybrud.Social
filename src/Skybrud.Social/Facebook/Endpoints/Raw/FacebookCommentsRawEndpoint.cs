@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookCommentsRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -23,7 +23,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets information about a comment with specified <code>id</code>.
+        /// Gets information about the comment with specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the comment.</param>
         public SocialHttpResponse GetComment(string id) {
@@ -31,7 +31,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets a list of all comments for an object with the specified <code>id</code>.
+        /// Gets a list of comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>

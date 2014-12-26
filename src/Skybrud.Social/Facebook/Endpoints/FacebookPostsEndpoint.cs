@@ -11,12 +11,12 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Properties
 
         /// <summary>
-        /// A reference to the Facebook service.
+        /// Gets a reference to the Facebook service.
         /// </summary>
         public FacebookService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public FacebookPostsRawEndpoint Raw {
             get { return Service.Client.Posts; }
@@ -35,15 +35,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about a photo with the specified <code>id</code>.
+        /// Gets information about the post with the specified <code>id</code>.
         /// </summary>
-        /// <param name="id">The ID of the photo.</param>
+        /// <param name="id">The ID of the post.</param>
         public FacebookResponse<FacebookPost> GetPost(string id) {
             return FacebookHelpers.ParseResponse(Raw.GetPost(id), FacebookPost.Parse);
         }
 
         /// <summary>
-        /// Gets the photos of the specified page or user.
+        /// Gets a list of posts of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         public FacebookResponse<FacebookPostsCollection> GetPosts(string identifier) {
@@ -51,18 +51,18 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
-        /// Gets the photos of the specified page or user.
+        /// Gets a list of posts of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
-        /// <param name="limit">The maximum amount of photos to return.</param>
+        /// <param name="limit">The maximum amount of posts7 to return.</param>
         public FacebookResponse<FacebookPostsCollection> GetPosts(string identifier, int limit) {
             return GetPosts(identifier, new FacebookPostsOptions {
                 Limit = limit
             });
         }
-        
+
         /// <summary>
-        /// Gets the photos of the specified album, page or user.
+        /// Gets a list of posts of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>

@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal FacebookLikesRawEndpoint(FacebookOAuthClient client) {
             Client = client;
@@ -23,7 +23,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets a list of all likes for an object with the specified <code>id</code>.
+        /// Gets a list of likes for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>
