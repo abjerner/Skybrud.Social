@@ -1,8 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace Skybrud.Social.Facebook {
     
     public class FacebookScope {
+
+        #region Private fields
+
+        private static readonly Dictionary<string, FacebookScope> Scopes = new Dictionary<string, FacebookScope>();
+
+        #endregion
 
         #region Constants
 
@@ -158,6 +165,34 @@ namespace Skybrud.Social.Facebook {
 
         #endregion
 
+        #region Static methods
+
+        /// <summary>
+        /// Registers a scope in the internal dictionary.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        /// <param name="description">The description of the scope.</param>
+        internal static FacebookScope RegisterScope(string name, string description = null) {
+            FacebookScope scope = new FacebookScope(name, description);
+            Scopes.Add(scope.Name, scope);
+            return scope;
+        }
+
+        /// <summary>
+        /// Attempts to get a scope with the specified <code>name</code>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        public static FacebookScope GetScope(string name) {
+            FacebookScope scope;
+            return Scopes.TryGetValue(name, out scope) ? scope : null;
+        }
+
+        public static bool ScopeExists(string name) {
+            return Scopes.ContainsKey(name);
+        }
+
+        #endregion
+        
         #region Operators
 
         /// <summary>
