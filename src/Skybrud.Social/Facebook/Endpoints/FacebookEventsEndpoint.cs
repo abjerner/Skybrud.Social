@@ -1,5 +1,6 @@
 using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Responses;
 
@@ -32,6 +33,14 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Gets information about the event with the specified <code>id</code>.
+        /// </summary>
+        /// <param name="id">The ID of the event.</param>
+        public FacebookResponse<FacebookEvent> GetEvent(string id) {
+            return FacebookHelpers.ParseResponse(Raw.GetEvent(id), FacebookEvent.Parse);
+        }
 
         /// <summary>
         /// Gets a list of events of a user or page with the specified <code>identifier</code>.

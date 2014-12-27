@@ -1,9 +1,23 @@
 using System;
+using Skybrud.Social.Facebook.Objects.Events;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
 
+    /// <see>
+    ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/event#read</cref>
+    /// </see>
     public class FacebookEvent : SocialJsonObject {
+
+        // 2014-12-27: The location of an event may be specified as either a string or an already created place.
+        // According to the API documentation, the returned "venue" property will be of the type "Place", but the
+        // returned data doesn't match a place. If the specified location is a string, the returned object for "venue"
+        // will only contain the "name" property. If the location is specified as an already created place, the
+        // returned will look similar the "location" property of a page, but also with an "id" property.
+
+        // 2014-12-27: Even though the Facebook API documenation specifies that an event can have a "cover" property, I
+        // haven't been able to find an event where that is the case. I'm not sure whether the property isn't used
+        // anymore, or whether it simply depends on the scope (which wouldn't make sense).
 
         #region Properties
 
@@ -45,7 +59,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <summary>
         /// Gets the profile that created the event.
         /// </summary>
-        public object Owner { get; private set; }
+        public FacebookEventOwner Owner { get; private set; }
 
         /// <summary>
         /// Gets who can see the event.
@@ -70,7 +84,7 @@ namespace Skybrud.Social.Facebook.Objects {
         /// <summary>
         /// Gets the vanue hosting the event, if any.
         /// </summary>
-        public object Venue { get; private set; }
+        public FacebookEventVenue Venue { get; private set; }
 
         #endregion
 
@@ -92,12 +106,12 @@ namespace Skybrud.Social.Facebook.Objects {
                 IsDateOnly = obj.HasValue("is_date_only") && obj.GetBoolean("is_date_only"),
                 Location = obj.GetString("location"),
                 Name = obj.GetString("name"),
-                // TODO: Implement the "owner" property
+                Owner = obj.GetObject("owner", FacebookEventOwner.Parse),
                 Privacy = obj.GetString("privacy"),
                 StartTime = obj.GetDateTime("start_time"),
                 TimeZone = obj.GetString("timezone"),
-                UpdatedTime = obj.GetDateTime("updated_time")
-                // TODO: Implement the "venue" property
+                UpdatedTime = obj.GetDateTime("updated_time"),
+                Venue = obj.GetObject("venue", FacebookEventVenue.Parse)
             };
         }
 

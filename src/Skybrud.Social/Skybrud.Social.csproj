@@ -110,6 +110,8 @@
     <Compile Include="Facebook\Enums\FacebookAlbumType.cs" />
     <Compile Include="Facebook\Enums\FacebookGender.cs" />
     <Compile Include="Facebook\FacebookHelpers.cs" />
+    <Compile Include="Facebook\Objects\Events\FacebookEventOwner.cs" />
+    <Compile Include="Facebook\Objects\Events\FacebookEventVenue.cs" />
     <Compile Include="Facebook\Objects\FacebookDebugTokenData.cs" />
     <Compile Include="Facebook\Objects\FacebookDebugToken.cs" />
     <Compile Include="Facebook\Objects\FacebookApp.cs" />
