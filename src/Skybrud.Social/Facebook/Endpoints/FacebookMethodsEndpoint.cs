@@ -37,41 +37,6 @@ namespace Skybrud.Social.Facebook.Endpoints {
 
         #endregion
 
-        #region Post link
-
-        /// <summary>
-        /// Posts a link with the specified options to the feed of the authenticated user.
-        /// </summary>
-        /// <param name="options">The options for the link.</param>
-        /// <returns>Returns the ID of the created link.</returns>
-        public string PostLink(FacebookPostLinkOptions options) {
-            return PostLink("me", options);
-        }
-        
-        /// <summary>
-        /// Posts a link with the specified options.
-        /// </summary>
-        /// <param name="identifier">The identifier of the user, page or similar.</param>
-        /// <param name="options">The options for the link.</param>
-        /// <returns>Returns the ID of the created link.</returns>
-        public string PostLink(string identifier, FacebookPostLinkOptions options) {
-
-            // Make the call to the API
-            string response = Service.Client.Links.PostLink(identifier, options).Body;
-
-            // Parse the raw JSON response
-            JsonObject obj = JsonConverter.ParseObject(response);
-
-            // Some error checking
-            if (obj.HasValue("error")) throw obj.GetObject("error", FacebookApiException.Parse);
-
-            // Get the ID of the created link
-            return obj.GetString("id");
-
-        }
-
-        #endregion
-
         #region Post status message
 
         /// <summary>
