@@ -197,8 +197,6 @@
     <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="SocialJsonArray.cs" />
-    <Compile Include="Facebook\Endpoints\FacebookMethodsEndpoint.cs" />
-    <Compile Include="Facebook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
     <Compile Include="Facebook\Exceptions\FacebookApiException.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
     <Compile Include="Facebook\FacebookScopeCollection.cs" />

@@ -21,7 +21,6 @@ namespace Skybrud.Social.Facebook {
         public FacebookEventsEndpoint Events { get; private set; }
         public FacebookLikesEndpoint Likes { get; private set; }
         public FacebookLinksEndpoint Links { get; private set; }
-        public FacebookMethodsEndpoint Methods { get; private set; }
         public FacebookPagesEndpoint Pages { get; private set; }
         public FacebookPhotosEndpoint Photos { get; private set; }
         public FacebookPostsEndpoint Posts { get; private set; }
@@ -40,7 +39,6 @@ namespace Skybrud.Social.Facebook {
             Events = new FacebookEventsEndpoint(this);
             Likes = new FacebookLikesEndpoint(this);
             Links = new FacebookLinksEndpoint(this);
-            Methods = new FacebookMethodsEndpoint(this);
             Pages = new FacebookPagesEndpoint(this);
             Photos = new FacebookPhotosEndpoint(this);
             Posts = new FacebookPostsEndpoint(this);
@@ -67,21 +65,10 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         /// <param name="client">The OAuth client.</param>
         public static FacebookService CreateFromOAuthClient(FacebookOAuthClient client) {
-
-            // This should never be null
             if (client == null) throw new ArgumentNullException("client");
-
-            // Initialize the service
-            FacebookService service = new FacebookService {
+            return new FacebookService {
                 Client = client
             };
-
-            // Set the endpoints etc.
-            service.Methods = new FacebookMethodsEndpoint(service);
-
-            // Return the service
-            return service;
-        
         }
 
         #endregion
