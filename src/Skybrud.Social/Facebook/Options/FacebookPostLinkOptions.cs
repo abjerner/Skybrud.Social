@@ -10,10 +10,6 @@ namespace Skybrud.Social.Facebook.Options {
         public string Description { get; set; }
         public string Name { get; set; }
         public string Caption { get; set; }
-        
-        public bool HasPostData {
-            get { return true; }
-        }
 
         public SocialQueryString GetQueryString() {
             return new SocialQueryString();
