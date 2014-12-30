@@ -2,7 +2,10 @@ using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Albums;
 using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Http;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -68,6 +71,28 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="options">The options for the call to the API.</param>
         public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier, FacebookAlbumsOptions options) {
             return FacebookHelpers.ParseResponse(Raw.GetAlbums(identifier, options), FacebookAlbumsCollection.Parse);
+        }
+
+        /// <summary>
+        /// Creates a new album for the page or user with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns the ID of the created album.</returns>
+        public string PostAlbum(string identifier, FacebookPostAlbumOptions options) {
+
+            // Make the call to the API
+            SocialHttpResponse response = Raw.PostAlbum(identifier, options);
+
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
+
+            // Validate the response
+            FacebookResponse.ValidateResponse(response, obj);
+
+            // Get the ID of the created link
+            return obj.GetString("id");
+
         }
 
         #endregion

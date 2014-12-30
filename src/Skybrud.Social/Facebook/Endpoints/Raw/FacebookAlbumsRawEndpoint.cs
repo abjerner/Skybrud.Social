@@ -1,5 +1,6 @@
 ﻿using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Albums;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
@@ -37,6 +38,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse GetAlbums(string identifier, FacebookAlbumsOptions options) {
             return Client.DoAuthenticatedGetRequest("/" + identifier + "/albums", options);
+        }
+
+        /// <summary>
+        /// Creates a new album for the page or user with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse PostAlbum(string identifier, FacebookPostAlbumOptions options) {
+            return Client.DoAuthenticatedPostRequest("/" + identifier + "/albums", options);
         }
 
         #endregion
