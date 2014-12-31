@@ -344,7 +344,6 @@ namespace Skybrud.Social.Facebook.OAuth {
             // Append the access token to the query string if present in the client and not already
             // specified in the query string
             if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
-                // TODO: Can the access token be specified using an authorization header?
                 query.Add("access_token", AccessToken);
             }
 
@@ -399,7 +398,6 @@ namespace Skybrud.Social.Facebook.OAuth {
             // Append the access token to the query string if present in the client and not already
             // specified in the query string
             if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
-                // TODO: Can the access token be specified using an authorization header?
                 query.Add("access_token", AccessToken);
             }
 
