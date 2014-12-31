@@ -1,6 +1,6 @@
 ﻿using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Facebook.Objects {
+namespace Skybrud.Social.Facebook.Objects.Debug {
     
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/debug_token#read</cref>

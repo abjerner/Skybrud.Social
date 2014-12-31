@@ -2,7 +2,7 @@
 using System.Linq;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Facebook.Objects {
+namespace Skybrud.Social.Facebook.Objects.Debug {
     
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/debug_token#read</cref>
@@ -77,7 +77,7 @@ namespace Skybrud.Social.Facebook.Objects {
             // Parse the array of scopes
             FacebookScope[] scopes = (
                 from name in obj.GetArray<string>("scopes") ?? new string[0]
-                select FacebookScope.GetScope(name) ?? new FacebookScope(name, null)
+                select FacebookScope.GetScope(name) ?? new FacebookScope(name)
             ).ToArray();
 
             // Initialize the instance of FacebookDebugTokenData

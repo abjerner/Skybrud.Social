@@ -1,5 +1,6 @@
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
+using Skybrud.Social.Facebook.Objects.Debug;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook.Endpoints {
