@@ -2,6 +2,7 @@ using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Links;
 using Skybrud.Social.Facebook.Responses;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
