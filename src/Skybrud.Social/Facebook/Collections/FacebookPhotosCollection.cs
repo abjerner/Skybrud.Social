@@ -1,5 +1,6 @@
 using Skybrud.Social.Facebook.Objects;
 using Skybrud.Social.Facebook.Objects.Pagination;
+using Skybrud.Social.Facebook.Objects.Photos;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Collections {

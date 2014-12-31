@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Facebook.Objects {
+namespace Skybrud.Social.Facebook.Objects.Photos {
     
     public class FacebookPhoto : SocialJsonObject {
 
