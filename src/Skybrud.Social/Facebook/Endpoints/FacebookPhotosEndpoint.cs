@@ -1,7 +1,8 @@
 using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
+using Skybrud.Social.Facebook.Objects.Photos;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Photos;
 using Skybrud.Social.Facebook.Responses;
 
 namespace Skybrud.Social.Facebook.Endpoints {
@@ -68,6 +69,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="options">The options for the call to the API.</param>
         public FacebookResponse<FacebookPhotosCollection> GetPhotos(string identifier, FacebookPhotosOptions options) {
             return FacebookHelpers.ParseResponse(Raw.GetPhotos(identifier, options), FacebookPhotosCollection.Parse);
+        }
+
+        /// <summary>
+        /// Posts a new photo to the feed of the user with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The ID of the user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookResponse<FacebookPostPhotoSummary> PostPhoto(string identifier, FacebookPostUserPhotoOptions options) {
+            return FacebookHelpers.ParseResponse(Raw.PostPhoto(identifier, options), FacebookPostPhotoSummary.Parse);
         }
 
         #endregion

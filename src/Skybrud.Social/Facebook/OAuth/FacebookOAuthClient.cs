@@ -372,7 +372,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="options">The options of the request.</param>
         public SocialHttpResponse DoAuthenticatedPostRequest(string url, IFacebookPostOptions options) {
             if (options == null) throw new ArgumentNullException("options");
-            return DoAuthenticatedPostRequest(url, options.GetQueryString(), options.GetPostData());
+            return DoAuthenticatedPostRequest(url, options.GetQueryString(), options.GetPostData(), options.IsMultipart);
         }
 
         /// <summary>
@@ -382,7 +382,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data.</param>
-        public SocialHttpResponse DoAuthenticatedPostRequest(string url, SocialQueryString query, SocialQueryString postData) {
+        /// <param name="isMultipart">If <code>TRUE</code>, the content type of the request will be <code>multipart/form-data</code>, otherwise <code>application/x-www-form-urlencoded</code>.</param>
+        public SocialHttpResponse DoAuthenticatedPostRequest(string url, SocialQueryString query, SocialPostData postData, bool isMultipart) {
 
             // Throw an exception if the URL is empty
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
@@ -413,11 +414,19 @@ namespace Skybrud.Social.Facebook.OAuth {
 
             // Write the POST data to the request stream
             if (postData != null && postData.Count > 0) {
-                string dataString = postData.ToString();
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = dataString.Length;
-                using (Stream stream = request.GetRequestStream()) {
-                    stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+                if (isMultipart) {
+                    string boundary = Guid.NewGuid().ToString().Replace("-", "");
+                    request.ContentType = "multipart/form-data; boundary=" + boundary;
+                    using (Stream stream = request.GetRequestStream()) {
+                        postData.WriteMultipartFormData(stream, boundary);
+                    }
+                } else {
+                    string dataString = postData.ToString();
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.ContentLength = dataString.Length;
+                    using (Stream stream = request.GetRequestStream()) {
+                        stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+                    }
                 }
             }
 

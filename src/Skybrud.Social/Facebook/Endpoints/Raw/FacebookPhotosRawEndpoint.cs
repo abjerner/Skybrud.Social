@@ -1,5 +1,6 @@
 using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Photos;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
@@ -37,6 +38,15 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse GetPhotos(string identifier, FacebookPhotosOptions options) {
             return Client.DoAuthenticatedGetRequest("/" + identifier + "/photos", options);
+        }
+
+        /// <summary>
+        /// Posts a new photo to the feed of the user with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The ID of the user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse PostPhoto(string identifier, FacebookPostUserPhotoOptions options) {
+            return Client.DoAuthenticatedPostRequest("/" + identifier + "/photos", options);
         }
 
         #endregion

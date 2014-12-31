@@ -4,12 +4,18 @@ namespace Skybrud.Social.Facebook.Options {
 
     public interface IFacebookPostOptions : IFacebookGetOptions {
 
+        #region Properties
+
+        bool IsMultipart { get; }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Gets an instance of <code>SocialQueryString</code> representing the POST data.
+        /// Gets an instance of <code>SocialPostData</code> representing the POST data.
         /// </summary>
-        SocialQueryString GetPostData();
+        SocialPostData GetPostData();
 
         #endregion
 
