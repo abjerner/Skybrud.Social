@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Social.Facebook.Enums;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Options.Albums {
@@ -17,6 +18,17 @@ namespace Skybrud.Social.Facebook.Options.Albums {
         /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// Privacy settings for the album. If not supplied, this defaults to the privacy level granted to the app in
+        /// the Login Dialog. This field cannot be used to set a more open privacy setting than the one granted. This
+        /// property only applies when creating a user album, and should therefore not be specified for page albums.
+        /// </summary>
+        public FacebookPrivacyOptions Privacy { get; set; }
+
+        public bool IsMultipart {
+            get { return false; }
+        }
+
         #endregion
 
         #region Member methods
@@ -25,11 +37,12 @@ namespace Skybrud.Social.Facebook.Options.Albums {
             return new SocialQueryString();
         }
 
-        public SocialQueryString GetPostData() {
-            SocialQueryString query = new SocialQueryString();
-            if (!String.IsNullOrWhiteSpace(Name)) query.Add("name", Name);
-            if (!String.IsNullOrWhiteSpace(Message)) query.Add("message", Message);
-            return query;
+        public SocialPostData GetPostData() {
+            SocialPostData postData = new SocialPostData();
+            if (!String.IsNullOrWhiteSpace(Name)) postData.Add("name", Name);
+            if (!String.IsNullOrWhiteSpace(Message)) postData.Add("message", Message);
+            if (Privacy != null && Privacy.Value != FacebookPrivacy.Default) postData.Add("privacy", Privacy.ToString());
+            return postData;
         }
 
         #endregion
