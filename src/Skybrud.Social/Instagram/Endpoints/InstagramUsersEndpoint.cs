@@ -122,7 +122,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="query">A query string.</param>
         public InstagramUsersResponse Search(string query) {
-            return InstagramUsersResponse.ParseJson(Raw.Search(query));
+            return InstagramUsersResponse.ParseJson(Raw.Search(query).Body);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="query">A query string.</param>
         /// <param name="count">Number of users to return.</param>
         public InstagramUsersResponse Search(string query, int count) {
-            return InstagramUsersResponse.ParseJson(Raw.Search(query, count));
+            return InstagramUsersResponse.ParseJson(Raw.Search(query, count).Body);
         }
 
         #endregion
