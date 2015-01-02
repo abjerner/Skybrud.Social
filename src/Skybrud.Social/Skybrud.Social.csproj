@@ -206,6 +206,8 @@
     <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
     <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
+    <Compile Include="Interfaces\IGetOptions.cs" />
+    <Compile Include="Interfaces\IPostOptions.cs" />
     <Compile Include="SocialJsonArray.cs" />
     <Compile Include="Facebook\Exceptions\FacebookApiException.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
