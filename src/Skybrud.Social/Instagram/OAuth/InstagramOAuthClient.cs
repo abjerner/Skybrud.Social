@@ -5,6 +5,7 @@ using System.Web;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.OAuth {
@@ -212,7 +213,7 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, null);
+            return DoAuthenticatedGetRequest(url, new NameValueCollection());
         }
 
         /// <summary>
@@ -226,6 +227,19 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// <param name="query">The query string for the call.</param>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
             return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
+
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. If an access token has been
+        /// specified for this client, that access token will be added to the query string.
+        /// Similar if a client ID has been specified instead of an access token, that client ID
+        /// will be added to the query string. However some endpoint methods may require an access
+        /// token, and a client ID will therefore not be sufficient for such methods.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="query">The query string for the call.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions query) {
+            return DoAuthenticatedGetRequest(url, query == null ? null : query.GetQueryString());
         }
 
         /// <summary>
