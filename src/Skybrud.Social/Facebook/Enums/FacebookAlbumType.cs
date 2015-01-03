@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.Facebook.Objects {
+﻿namespace Skybrud.Social.Facebook.Enums {
     
     public enum FacebookAlbumType {
         App,

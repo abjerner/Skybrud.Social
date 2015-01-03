@@ -1,4 +1,5 @@
 using System;
+using Skybrud.Social.Facebook.Enums;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects {
