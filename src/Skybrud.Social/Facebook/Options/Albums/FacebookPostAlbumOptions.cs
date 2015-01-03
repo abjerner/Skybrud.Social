@@ -2,10 +2,11 @@
 using Skybrud.Social.Facebook.Enums;
 using Skybrud.Social.Facebook.Options.Common;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.Options.Albums {
     
-    public class FacebookPostAlbumOptions : IFacebookPostOptions {
+    public class FacebookPostAlbumOptions : IPostOptions {
 
         #region Properties
 

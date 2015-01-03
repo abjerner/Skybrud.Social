@@ -1,9 +1,10 @@
 using System;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.Options.Links {
 
-    public class FacebookPostLinkOptions : IFacebookPostOptions {
+    public class FacebookPostLinkOptions : IPostOptions {
 
         public string Link { get; set; }
         public string Message { get; set; }

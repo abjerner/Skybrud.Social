@@ -1,14 +1,14 @@
 ﻿using System;
-using Skybrud.Social.Facebook.Options.Albums;
 using Skybrud.Social.Facebook.Options.Common;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.Options.Photos {
 
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/user/photos#publish</cref>
     /// </see>
-    public class FacebookPostUserPhotoOptions : IFacebookPostOptions {
+    public class FacebookPostUserPhotoOptions : IPostOptions {
 
         #region Properties
 

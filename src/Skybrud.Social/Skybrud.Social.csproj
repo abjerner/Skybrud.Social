@@ -141,12 +141,10 @@
     <Compile Include="Facebook\Options\Albums\FacebookPostAlbumOptions.cs" />
     <Compile Include="Facebook\Options\Events\FacebookEventsOptions.cs" />
     <Compile Include="Facebook\Options\Albums\FacebookAlbumsOptions.cs" />
-    <Compile Include="Facebook\Options\IFacebookGetOptions.cs" />
     <Compile Include="Facebook\Options\Links\FacebookLinksOptions.cs" />
     <Compile Include="Facebook\Options\Likes\FacebookLikesOptions.cs" />
     <Compile Include="Facebook\Options\Comments\FacebookCommentsOptions.cs" />
     <Compile Include="Facebook\Options\Feed\FacebookFeedOptions.cs" />
-    <Compile Include="Facebook\Options\IFacebookPostOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookCursorBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\Posts\FacebookPostsOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookTimeBasedPaginationOptions.cs" />

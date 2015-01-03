@@ -1,4 +1,5 @@
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.Options.Pagination {
     
@@ -9,7 +10,7 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/using-graph-api/v2.2#time</cref>
     /// </see>
-    public class FacebookTimeBasedPaginationOptions : IFacebookGetOptions {
+    public class FacebookTimeBasedPaginationOptions : IGetOptions {
 
         #region Properties
 

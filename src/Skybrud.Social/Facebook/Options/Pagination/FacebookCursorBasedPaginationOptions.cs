@@ -1,4 +1,5 @@
 ﻿using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.Options.Pagination {
     
@@ -8,7 +9,7 @@ namespace Skybrud.Social.Facebook.Options.Pagination {
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/using-graph-api/v2.2#cursors</cref>
     /// </see>
-    public class FacebookCursorBasedPaginationOptions : IFacebookGetOptions {
+    public class FacebookCursorBasedPaginationOptions : IGetOptions {
 
         #region Properties
 

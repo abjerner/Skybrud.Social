@@ -5,8 +5,8 @@ using System.Net;
 using System.Text;
 using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Facebook.OAuth {
 
@@ -318,7 +318,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options of the request.</param>
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IFacebookGetOptions options) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
             return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
         }
 
@@ -369,7 +369,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options of the request.</param>
-        public SocialHttpResponse DoAuthenticatedPostRequest(string url, IFacebookPostOptions options) {
+        public SocialHttpResponse DoAuthenticatedPostRequest(string url, IPostOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return DoAuthenticatedPostRequest(url, options.GetQueryString(), options.GetPostData(), options.IsMultipart);
         }
