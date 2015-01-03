@@ -1,6 +1,5 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Responses.Accounts;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -36,8 +35,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about accounts associated with the current user by calling the <code>/me/accounts</code>
         /// method. This call requires a user access token.
         /// </summary>
-        public FacebookResponse<FacebookAccountsCollection> GetAccounts() {
-            return FacebookHelpers.ParseResponse(Raw.GetAccounts(), FacebookAccountsCollection.Parse);
+        public FacebookAccountsResponse GetAccounts() {
+            return FacebookAccountsResponse.ParseResponse(Raw.GetAccounts());
         }
 
         #endregion

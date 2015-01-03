@@ -1,5 +1,6 @@
 ﻿using Skybrud.Social.Facebook.OAuth;
 using Skybrud.Social.Facebook.Options;
+using Skybrud.Social.Facebook.Options.Events;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {

@@ -26,7 +26,6 @@ namespace Skybrud.Social.Facebook.Objects.Albums {
             return new FacebookPostAlbumSummary(obj) {
                 Id = obj.GetString("id")
             };
-
         }
 
         #endregion

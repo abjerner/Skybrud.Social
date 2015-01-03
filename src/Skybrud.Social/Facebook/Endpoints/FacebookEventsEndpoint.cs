@@ -1,8 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Options;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Options.Events;
+using Skybrud.Social.Facebook.Responses.Events;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -38,15 +36,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the event with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the event.</param>
-        public FacebookResponse<FacebookEvent> GetEvent(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetEvent(id), FacebookEvent.Parse);
+        public FacebookEventResponse GetEvent(string id) {
+            return FacebookEventResponse.ParseResponse(Raw.GetEvent(id));
         }
 
         /// <summary>
         /// Gets a list of events of a user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
-        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier) {
+        public FacebookEventsResponse GetEvents(string identifier) {
             return GetEvents(identifier, new FacebookEventsOptions());
         }
 
@@ -55,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier, int limit) {
+        public FacebookEventsResponse GetEvents(string identifier, int limit) {
             return GetEvents(identifier, new FacebookEventsOptions {
                 Limit = limit
             });
@@ -66,8 +64,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID of the object.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookEventsCollection> GetEvents(string identifier, FacebookEventsOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetEvents(identifier, options), FacebookEventsCollection.Parse);
+        public FacebookEventsResponse GetEvents(string identifier, FacebookEventsOptions options) {
+            return FacebookEventsResponse.ParseResponse(Raw.GetEvents(identifier, options));
         }
 
         #endregion

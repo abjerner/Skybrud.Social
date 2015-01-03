@@ -1,6 +1,5 @@
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Responses.Pages;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -36,8 +35,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the page with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the page.</param>
-        public FacebookResponse<FacebookPage> GetPage(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetPage(id), FacebookPage.Parse);
+        public FacebookPageResponse GetPage(string id) {
+            return FacebookPageResponse.ParseResponse(Raw.GetPage(id));
         }
 
         #endregion

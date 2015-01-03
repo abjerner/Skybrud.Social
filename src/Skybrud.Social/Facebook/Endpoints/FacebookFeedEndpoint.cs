@@ -1,7 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Options;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Options.Feed;
+using Skybrud.Social.Facebook.Responses.Feed;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -37,7 +36,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
-        public FacebookResponse<FacebookFeedCollection> GetEvents(string identifier) {
+        public FacebookFeedResponse GetEvents(string identifier) {
             return GetEvents(identifier, new FacebookFeedOptions());
         }
 
@@ -46,7 +45,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookResponse<FacebookFeedCollection> GetEvents(string identifier, int limit) {
+        public FacebookFeedResponse GetEvents(string identifier, int limit) {
             return GetEvents(identifier, new FacebookFeedOptions {
                 Limit = limit
             });
@@ -57,8 +56,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookFeedCollection> GetEvents(string identifier, FacebookFeedOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetFeed(identifier, options), FacebookFeedCollection.Parse);
+        public FacebookFeedResponse GetEvents(string identifier, FacebookFeedOptions options) {
+            return FacebookFeedResponse.ParseResponse(Raw.GetFeed(identifier, options));
         }
 
         #endregion

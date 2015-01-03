@@ -1,7 +1,5 @@
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Objects.Debug;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Responses.Debug;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -36,7 +34,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <summary>
         /// Gets debug information about the access token used for accessing the Graph API.
         /// </summary>
-        public FacebookResponse<FacebookDebugToken> DebugToken() {
+        public FacebookDebugTokenResponse DebugToken() {
             return DebugToken(Service.Client.AccessToken);
         }
 
@@ -44,8 +42,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets debug information about the specified access token.
         /// </summary>
         /// <param name="accessToken">The access token to debug.</param>
-        public FacebookResponse<FacebookDebugToken> DebugToken(string accessToken) {
-            return FacebookHelpers.ParseResponse(Raw.DebugToken(accessToken), FacebookDebugToken.Parse);
+        public FacebookDebugTokenResponse DebugToken(string accessToken) {
+            return FacebookDebugTokenResponse.ParseResponse(Raw.DebugToken(accessToken));
         }
 
         #endregion

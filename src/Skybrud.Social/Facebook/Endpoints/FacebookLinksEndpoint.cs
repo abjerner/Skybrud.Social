@@ -1,11 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Options.Links;
-using Skybrud.Social.Facebook.Responses;
-using Skybrud.Social.Http;
-using Skybrud.Social.Json;
+using Skybrud.Social.Facebook.Responses.Links;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -41,15 +36,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the link with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the link.</param>
-        public FacebookResponse<FacebookLink> GetLink(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetLink(id), FacebookLink.Parse);
+        public FacebookLinkResponse GetLink(string id) {
+            return FacebookLinkResponse.ParseResponse(Raw.GetLink(id));
         }
 
         /// <summary>
         /// Gets a list of links of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
-        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier) {
+        public FacebookLinksResponse GetLinks(string identifier) {
             return GetLinks(identifier, new FacebookLinksOptions());
         }
 
@@ -58,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="limit">The maximum amount of links to return.</param>
-        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier, int limit) {
+        public FacebookLinksResponse GetLinks(string identifier, int limit) {
             return GetLinks(identifier, new FacebookLinksOptions {
                 Limit = limit
             });
@@ -69,8 +64,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookLinksCollection> GetLinks(string identifier, FacebookLinksOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetLinks(identifier, options), FacebookLinksCollection.Parse);
+        public FacebookLinksResponse GetLinks(string identifier, FacebookLinksOptions options) {
+            return FacebookLinksResponse.ParseResponse(Raw.GetLinks(identifier, options));
         }
 
         /// <summary>
@@ -78,8 +73,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// successful, the ID of the created post is returned.
         /// </summary>
         /// <param name="options">The options for the link.</param>
-        /// <returns>Returns the ID of the created link.</returns>
-        public string PostLink(FacebookPostLinkOptions options) {
+        public FacebookPostLinkResponse PostLink(FacebookPostLinkOptions options) {
             return PostLink("me", options);
         }
 
@@ -88,21 +82,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The identifier of the user, page or similar.</param>
         /// <param name="options">The options for the link.</param>
-        /// <returns>Returns the ID of the created link.</returns>
-        public string PostLink(string identifier, FacebookPostLinkOptions options) {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.PostLink(identifier, options);
-
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-
-            // Validate the response
-            FacebookResponse.ValidateResponse(response, obj);
-
-            // Get the ID of the created link
-            return obj.GetString("id");
-
+        public FacebookPostLinkResponse PostLink(string identifier, FacebookPostLinkOptions options) {
+            return FacebookPostLinkResponse.ParseResponse(Raw.PostLink(identifier, options));
         }
 
         #endregion

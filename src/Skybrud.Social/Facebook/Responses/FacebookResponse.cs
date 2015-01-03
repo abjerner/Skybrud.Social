@@ -36,31 +36,9 @@ namespace Skybrud.Social.Facebook.Responses {
 
     public class FacebookResponse<T> : FacebookResponse {
 
-        public T Body { get; private set; }
+        public T Body { get; protected set; }
 
         protected FacebookResponse(SocialHttpResponse response) : base(response) { }
-
-        #region Static methods
-
-        public static FacebookResponse<T> ParseResponse(SocialHttpResponse response, Func<JsonObject, T> func) {
-
-            if (response == null) return null;
-
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-            if (obj == null) return null;
-
-            // Validate the response
-            ValidateResponse(response, obj);
-
-            // Initialize the response object
-            return new FacebookResponse<T>(response) {
-                Body = func(obj)
-            };
-
-        }
-
-        #endregion
 
     }
 

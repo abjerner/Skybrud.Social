@@ -1,6 +1,5 @@
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Responses.Users;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -35,7 +34,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        public FacebookResponse<FacebookUser> GetUser() {
+        public FacebookUserResponse GetUser() {
             return GetUser("me");
         }
 
@@ -43,8 +42,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the user with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the user.</param>
-        public FacebookResponse<FacebookUser> GetUser(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetUser(id), FacebookUser.Parse);
+        public FacebookUserResponse GetUser(string id) {
+            return FacebookUserResponse.ParseResponse(Raw.GetUser(id));
         }
 
         #endregion

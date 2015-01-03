@@ -1,5 +1,6 @@
 ﻿using System;
 using Skybrud.Social.Facebook.Options.Albums;
+using Skybrud.Social.Facebook.Options.Common;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Options.Photos {

@@ -1,8 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Options;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Options.Comments;
+using Skybrud.Social.Facebook.Responses.Comments;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -38,15 +36,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the comment with specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the comment.</param>
-        public FacebookResponse<FacebookComment> GetComment(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetComment(id), FacebookComment.Parse);
+        public FacebookCommentResponse GetComment(string id) {
+            return FacebookCommentResponse.ParseResponse(Raw.GetComment(id));
         }
 
         /// <summary>
         /// Gets a list of comments for an object with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the object.</param>
-        public FacebookResponse<FacebookCommentsCollection> GetComments(string id) {
+        public FacebookCommentsResponse GetComments(string id) {
             return GetComments(id, new FacebookCommentsOptions());
         }
 
@@ -55,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="id">The ID of the object.</param>
         /// <param name="limit">The maximum amount of comments to return.</param>
-        public FacebookResponse<FacebookCommentsCollection> GetComments(string id, int limit) {
+        public FacebookCommentsResponse GetComments(string id, int limit) {
             return GetComments(id, new FacebookCommentsOptions {
                 Limit = limit
             });
@@ -69,8 +67,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <see>
         ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/object/comments#read</cref>
         /// </see>
-        public FacebookResponse<FacebookCommentsCollection> GetComments(string id, FacebookCommentsOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetComments(id, options), FacebookCommentsCollection.Parse);
+        public FacebookCommentsResponse GetComments(string id, FacebookCommentsOptions options) {
+            return FacebookCommentsResponse.ParseResponse(Raw.GetComments(id, options));
         }
 
         #endregion

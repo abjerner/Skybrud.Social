@@ -1,11 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects;
-using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Options.Albums;
-using Skybrud.Social.Facebook.Responses;
-using Skybrud.Social.Http;
-using Skybrud.Social.Json;
+using Skybrud.Social.Facebook.Responses.Albums;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -41,15 +36,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the album with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the album.</param>
-        public FacebookResponse<FacebookAlbum> GetAlbum(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetAlbum(id), FacebookAlbum.Parse);
+        public FacebookAlbumResponse GetAlbum(string id) {
+            return FacebookAlbumResponse.ParseResponse(Raw.GetAlbum(id));
         }
 
         /// <summary>
         /// Gets a list of albums of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier) {
+        public FacebookAlbumsResponse GetAlbums(string identifier) {
             return GetAlbums(identifier, new FacebookAlbumsOptions());
         }
 
@@ -58,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="limit">The maximum amount of albums to return.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier, int limit) {
+        public FacebookAlbumsResponse GetAlbums(string identifier, int limit) {
             return GetAlbums(identifier, new FacebookAlbumsOptions {
                 Limit = limit
             });
@@ -69,8 +64,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookAlbumsCollection> GetAlbums(string identifier, FacebookAlbumsOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetAlbums(identifier, options), FacebookAlbumsCollection.Parse);
+        public FacebookAlbumsResponse GetAlbums(string identifier, FacebookAlbumsOptions options) {
+            return FacebookAlbumsResponse.ParseResponse(Raw.GetAlbums(identifier, options));
         }
 
         /// <summary>
@@ -79,20 +74,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>Returns the ID of the created album.</returns>
-        public string PostAlbum(string identifier, FacebookPostAlbumOptions options) {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.PostAlbum(identifier, options);
-
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-
-            // Validate the response
-            FacebookResponse.ValidateResponse(response, obj);
-
-            // Get the ID of the created link
-            return obj.GetString("id");
-
+        public FacebookPostAlbumResponse PostAlbum(string identifier, FacebookPostAlbumOptions options) {
+            return FacebookPostAlbumResponse.ParseResponse(Raw.PostAlbum(identifier, options));
         }
 
         #endregion

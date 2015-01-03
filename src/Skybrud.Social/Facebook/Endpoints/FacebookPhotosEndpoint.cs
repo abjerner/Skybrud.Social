@@ -1,9 +1,6 @@
-using Skybrud.Social.Facebook.Collections;
 using Skybrud.Social.Facebook.Endpoints.Raw;
-using Skybrud.Social.Facebook.Objects.Photos;
-using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Options.Photos;
-using Skybrud.Social.Facebook.Responses;
+using Skybrud.Social.Facebook.Responses.Photos;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
@@ -39,15 +36,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets information about the photo with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the photo.</param>
-        public FacebookResponse<FacebookPhoto> GetPhoto(string id) {
-            return FacebookHelpers.ParseResponse(Raw.GetPhoto(id), FacebookPhoto.Parse);
+        public FacebookPhotoResponse GetPhoto(string id) {
+            return FacebookPhotoResponse.ParseResponse(Raw.GetPhoto(id));
         }
 
         /// <summary>
         /// Gets a list of photos of the album, user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the album, page or user.</param>
-        public FacebookResponse<FacebookPhotosCollection> GetPhotos(string identifier) {
+        public FacebookPhotosResponse GetPhotos(string identifier) {
             return GetPhotos(identifier, new FacebookPhotosOptions());
         }
 
@@ -56,7 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the album, page or user.</param>
         /// <param name="limit">The maximum amount of photos to return.</param>
-        public FacebookResponse<FacebookPhotosCollection> GetPhotos(string identifier, int limit) {
+        public FacebookPhotosResponse GetPhotos(string identifier, int limit) {
             return GetPhotos(identifier, new FacebookPhotosOptions {
                 Limit = limit
             });
@@ -67,8 +64,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the album, page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookPhotosCollection> GetPhotos(string identifier, FacebookPhotosOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.GetPhotos(identifier, options), FacebookPhotosCollection.Parse);
+        public FacebookPhotosResponse GetPhotos(string identifier, FacebookPhotosOptions options) {
+            return FacebookPhotosResponse.ParseResponse(Raw.GetPhotos(identifier, options));
         }
 
         /// <summary>
@@ -76,8 +73,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID of the user.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookResponse<FacebookPostPhotoSummary> PostPhoto(string identifier, FacebookPostUserPhotoOptions options) {
-            return FacebookHelpers.ParseResponse(Raw.PostPhoto(identifier, options), FacebookPostPhotoSummary.Parse);
+        public FacebookPostPhotoResponse PostPhoto(string identifier, FacebookPostUserPhotoOptions options) {
+            return FacebookPostPhotoResponse.ParseResponse(Raw.PostPhoto(identifier, options));
         }
 
         #endregion
