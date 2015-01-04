@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Skybrud.Social.Facebook.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
