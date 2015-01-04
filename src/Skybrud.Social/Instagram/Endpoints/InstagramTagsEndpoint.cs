@@ -33,7 +33,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="tag">The name of the tag.</param>
         public InstagramTagResponse GetTagInfo(string tag) {
-            return InstagramTagResponse.ParseJson(Raw.GetTagInfo(tag));
+            return InstagramTagResponse.ParseJson(Raw.GetTagInfo(tag).Body);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="minTagId"></param>
         /// <param name="maxTagId"></param>
         public InstagramRecentMediaResponse GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, minTagId, maxTagId));
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, minTagId, maxTagId).Body);
         }
 
         // TODO: Implement Search() method

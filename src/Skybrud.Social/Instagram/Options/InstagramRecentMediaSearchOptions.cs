@@ -1,9 +1,12 @@
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
+
 namespace Skybrud.Social.Instagram.Options {
 
     /// <summary>
     /// Class representing the search options for a given location specified by latitude and longitude.
     /// </summary>
-    public class InstagramRecentMediaSearchOptions {
+    public class InstagramRecentMediaSearchOptions : IGetOptions {
         
         /// <summary>
         /// Latitude of the center search coordinate. If used, <var>Longitude</var> is required.
@@ -29,6 +32,22 @@ namespace Skybrud.Social.Instagram.Options {
         /// A unix timestamp. All media returned will be taken earlier than this timestamp.
         /// </summary>
         public int MaxTimestamp { get; set; }
+
+        public SocialQueryString GetQueryString() {
+
+            // Declare the query string
+            SocialQueryString qs = new SocialQueryString();
+            qs.Add("lat", Latitude);
+            qs.Add("lng", Longitude);
+
+            // Optinal options
+            if (Distance > 0) qs.Add("distance", Distance);
+            if (MinTimestamp > 0) qs.Add("min_timestamp", MinTimestamp);
+            if (MaxTimestamp > 0) qs.Add("max_timestamp", MaxTimestamp);
+
+            return qs;
+
+        }
     
     }
 

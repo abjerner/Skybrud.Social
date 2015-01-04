@@ -1,4 +1,6 @@
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
+using Skybrud.Social.Instagram.Options;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     
@@ -26,8 +28,9 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Required scope: relationships
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public string Follows(long userId) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + userId + "/follows?access_token=" + Client.AccessToken);
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse Follows(long userId, InstagramFollowsOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + userId + "/follows", options);
         }
 
         /// <summary>
@@ -36,8 +39,9 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Required scope: relationships
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public string FollowedBy(long userId) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + userId + "/followed-by?access_token=" + Client.AccessToken);
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse FollowedBy(long userId, InstagramFollowedByOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + userId + "/followed-by", options);
         }
 
         #endregion

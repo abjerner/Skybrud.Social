@@ -1,66 +1,48 @@
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramLocationResponse : InstagramSoonToBeRetiredResponse {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the object representing the location.
-        /// </summary>
-        public InstagramLocation Data { get; private set; }
-
-        #endregion
+    public class InstagramLocationResponse : InstagramResponse<InstagramLocationResponseBody> {
 
         #region Constructors
 
-        internal InstagramLocationResponse(JsonObject obj) : base(obj) { }
+        private InstagramLocationResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        /// <summary>
-        /// Loads an instance of <var>InstagramLocationResponse</var> from
-        /// the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static InstagramLocationResponse LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
+        public static InstagramLocationResponse ParseResponse(SocialHttpResponse response) {
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramLocationResponse</var> from
-        /// the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static InstagramLocationResponse ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
-        }
+            if (response == null) return null;
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramLocationResponse</var> from
-        /// the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static InstagramLocationResponse Parse(JsonObject obj) {
-
-            // Check if null
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
             if (obj == null) return null;
 
             // Validate the response
-            ValidateResponse(obj);
+            ValidateResponse(response, obj);
 
-            // Parse the response
-            return new InstagramLocationResponse(obj) {
-                Data = obj.GetObject("data", InstagramLocation.Parse)
+            // Initialize the response object
+            return new InstagramLocationResponse(response) {
+                Body = InstagramLocationResponseBody.Parse(obj)
             };
 
         }
 
         #endregion
+
+    }
+
+    public class InstagramLocationResponseBody : InstagramResponseBody<InstagramLocation> {
+
+        public static InstagramLocationResponseBody Parse(JsonObject obj) {
+            return new InstagramLocationResponseBody {
+                Data = obj.GetObject("data", InstagramLocation.Parse)
+            };
+        }
 
     }
 

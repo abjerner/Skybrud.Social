@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options;
@@ -22,29 +21,13 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Gets information about the authenticated user.
-        /// </summary>
-        public string GetSelf() {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/self/?access_token=" + Client.AccessToken);
-        }
-
+        
         /// <summary>
         /// Gets information about a user by the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the user.</param>
-        public string GetUser(long id) {
-
-            SocialQueryString query = new SocialQueryString();
-
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
-                query.Set("access_token", Client.AccessToken);
-            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
-                query.Set("client_id", Client.ClientId);
-            }
-
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/users/" + id + "/", query.NameValueCollection);
+        /// <param name="identifier">The identifier of the user.</param>
+        public SocialHttpResponse GetUser(string identifier) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + identifier + "/");
         }
         
         /// <summary>

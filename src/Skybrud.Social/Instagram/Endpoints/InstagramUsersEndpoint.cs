@@ -1,4 +1,4 @@
-using System;
+using System.Globalization;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Options;
 using Skybrud.Social.Instagram.Responses;
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Gets information about the authenticated user.
         /// </summary>
         public InstagramUserResponse GetSelf() {
-            return InstagramUserResponse.ParseJson(Raw.GetSelf());
+            return InstagramUserResponse.ParseResponse(Raw.GetUser("self"));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         public InstagramUserResponse GetInfo(long id) {
-            return InstagramUserResponse.ParseJson(Raw.GetUser(id));
+            return InstagramUserResponse.ParseResponse(Raw.GetUser(id.ToString(CultureInfo.InvariantCulture)));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="query">A query string.</param>
         public InstagramUsersResponse Search(string query) {
-            return InstagramUsersResponse.ParseJson(Raw.Search(query).Body);
+            return InstagramUsersResponse.ParseResponse(Raw.Search(query));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="query">A query string.</param>
         /// <param name="count">Number of users to return.</param>
         public InstagramUsersResponse Search(string query, int count) {
-            return InstagramUsersResponse.ParseJson(Raw.Search(query, count).Body);
+            return InstagramUsersResponse.ParseResponse(Raw.Search(query, count));
         }
 
         #endregion

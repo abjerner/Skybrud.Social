@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Net;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Exceptions;
 using Skybrud.Social.Json;
@@ -16,67 +16,35 @@ namespace Skybrud.Social.Instagram.Responses {
             Response = response;
         }
 
-    }
+        public static void ValidateResponse(SocialHttpResponse response, JsonObject obj) {
 
-    public class InstagramResponse<T> : InstagramResponse {
-
-        public InstagramResponseBody<T> Body { get; private set; }
-
-        protected InstagramResponse(SocialHttpResponse response) : base(response) { }
-
-        #region Static methods
-
-        public static InstagramResponse<T> ParseResponse(SocialHttpResponse response, Func<JsonObject, T> func) {
-
-            if (response == null) return null;
-
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-            if (obj == null) {
-                // TODO: Use an exception type specific to Instagram
-                throw new Exception("Invalid response received from the Instagram API");
-            }
+            // Skip error checking if the server responds with an OK status code
+            if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Get the "meta" object
             JsonObject meta = obj.GetObject("meta");
 
-            // In special cases the root object is meta ()
-            if (meta == null && obj.HasValue("code")) {
-                meta = obj;
-            }
+            // Get some values from the "meta" object
+            int code = meta.GetInt32("code");
+            string type = meta.GetString("error_type");
+            string message = meta.GetString("error_message");
 
-            // Check for any errors
-            if (meta != null && meta.HasValue("code")) {
+            // Now throw some exceptions
+            if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
+            if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
+            if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
 
-                // Get some values from the "meta" object
-                int code = meta.GetInt32("code");
-                string type = meta.GetString("error_type");
-                string message = meta.GetString("error_message");
-
-                // If "code" is 200, everything went fine :D
-                if (code != 200) {
-
-                    // Now throw some exceptions
-                    if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-                    if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
-                    if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
-
-                    throw new InstagramException(code, type, message);
-
-                }
-
-            }
-            
-            // Initialize the response object
-            return new InstagramResponse<T>(response) {
-                Body = new InstagramResponseBody<T> {
-                    Data = obj.GetObject("data", func)
-                }
-            };
+            throw new InstagramException(code, type, message);
 
         }
 
-        #endregion
+    }
+
+    public class InstagramResponse<T> : InstagramResponse {
+
+        public T Body { get; protected set; }
+
+        protected InstagramResponse(SocialHttpResponse response) : base(response) { }
 
     }
 

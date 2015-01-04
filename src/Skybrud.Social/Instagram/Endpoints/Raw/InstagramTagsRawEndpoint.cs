@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
@@ -30,19 +31,8 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets the raw JSON response from the Instagram API with information about the specified <code>tag</code>.
         /// </summary>
         /// <param name="tag">The name of the tag.</param>
-        public string GetTagInfo(string tag) {
-
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
-                qs.Add("access_token", Client.AccessToken);
-            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
-                qs.Add("client_id", Client.ClientId);
-            }
-
-            // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag, qs);
-
+        public SocialHttpResponse GetTagInfo(string tag) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/" + tag);
         }
 
         /// <summary>
@@ -51,22 +41,17 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="tag">The name of the tag.</param>
         /// <param name="minTagId"></param>
         /// <param name="maxTagId"></param>
-        public string GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
+        public SocialHttpResponse GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection();
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
-                qs.Add("access_token", Client.AccessToken);
-            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
-                qs.Add("client_id", Client.ClientId);
-            }
+            SocialQueryString qs = new SocialQueryString();
 
             // Add any optional parameters
             if (!String.IsNullOrWhiteSpace(minTagId)) qs.Add("min_tag_id", minTagId);
             if (!String.IsNullOrWhiteSpace(maxTagId)) qs.Add("max_tag_id", maxTagId);
 
             // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
 
         }
 
@@ -74,18 +59,14 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Search for tags by name. Results are ordered first as an exact match, then by popularity. Short tags will be treated as exact matches.
         /// </summary>
         /// <param name="tag">A valid tag name without a leading #. (eg. snowy, nofilter)</param>
-        public string Search(string tag) {
+        public SocialHttpResponse Search(string tag) {
 
             // Declare the query string
-            NameValueCollection qs = new NameValueCollection { { "q", tag } };
-            if (!String.IsNullOrWhiteSpace(Client.AccessToken)) {
-                qs.Add("access_token", Client.AccessToken);
-            } else if (!String.IsNullOrWhiteSpace(Client.ClientId)) {
-                qs.Add("client_id", Client.ClientId);
-            }
+            SocialQueryString qs = new SocialQueryString();
+            qs.Add("q", tag);
 
             // Perform the call to the API
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.instagram.com/v1/tags/search/", qs);
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/search/", qs);
 
         }
 

@@ -35,8 +35,8 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Gets information about a location with the specified ID. If a location isn't found, an exception will be thrown.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
-        public InstagramResponse<InstagramLocation> GetLocation(int locationId) {
-            return InstagramHelpers.ParseResponse(Raw.GetLocation(locationId), InstagramLocation.Parse);
+        public InstagramLocationResponse GetLocation(int locationId) {
+            return InstagramLocationResponse.ParseResponse(Raw.GetLocation(locationId));
         }
 
         #region GetRecentMedia(...)
