@@ -33,7 +33,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="tag">The name of the tag.</param>
         public InstagramTagResponse GetTagInfo(string tag) {
-            return InstagramTagResponse.ParseJson(Raw.GetTagInfo(tag).Body);
+            return InstagramTagResponse.ParseResponse(Raw.GetTagInfo(tag));
         }
 
         /// <summary>
