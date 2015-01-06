@@ -73,21 +73,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
         public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
-
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection();
-
-            // Add any extra options
-            if (options != null) {
-                if (options.MinTimestamp > 0) qs.Add("min_timestamp", options.MinTimestamp.ToString(CultureInfo.InvariantCulture));
-                if (options.MaxTimestamp > 0) qs.Add("max_timestamp", options.MaxTimestamp.ToString(CultureInfo.InvariantCulture));
-                if (!String.IsNullOrWhiteSpace(options.MinId)) qs.Add("min_id", options.MinId);
-                if (!String.IsNullOrWhiteSpace(options.MaxId)) qs.Add("max_id", options.MaxId);
-            }
-
-            // Perform the call to the API
-            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", qs);
-
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", options);
         }
 
         #endregion
