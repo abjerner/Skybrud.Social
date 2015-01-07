@@ -103,9 +103,17 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Search for a user by name.
         /// </summary>
         /// <param name="query">A query string.</param>
-        /// <param name="count">Number of users to return.</param>
+        /// <param name="count">The maximum amount of users to return.</param>
         public InstagramUsersResponse Search(string query, int count) {
             return InstagramUsersResponse.ParseResponse(Raw.Search(query, count));
+        }
+
+        /// <summary>
+        /// Search for a user by name.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public InstagramUsersResponse Search(InstagramUserSearchOptions options) {
+            return InstagramUsersResponse.ParseResponse(Raw.Search(options));
         }
 
         #endregion

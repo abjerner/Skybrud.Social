@@ -46,19 +46,30 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Search for a user by name.
         /// </summary>
         /// <param name="query">A query string.</param>
-        /// <param name="count">Number of users to return.</param>
-        public SocialHttpResponse Search(string query, int count = 0) {
-
-            // Declare the query string
-            SocialQueryString qs = new SocialQueryString();
-            qs.Add("q", query);
-
-            // Optional
-            if (count > 0) qs.Add("count", count);
-
-            // Perform the call to the API
-            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/search", qs);
-
+        public SocialHttpResponse Search(string query) {
+            return Search(new InstagramUserSearchOptions {
+                Query = query
+            });
+        }
+        
+        /// <summary>
+        /// Search for a user by name.
+        /// </summary>
+        /// <param name="query">A query string.</param>
+        /// <param name="count">The maximum amount of users to return.</param>
+        public SocialHttpResponse Search(string query, int count) {
+            return Search(new InstagramUserSearchOptions {
+                Query = query,
+                Count = count
+            });
+        }
+        
+        /// <summary>
+        /// Search for a user by name.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse Search(InstagramUserSearchOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/search", options);
         }
 
         #endregion
