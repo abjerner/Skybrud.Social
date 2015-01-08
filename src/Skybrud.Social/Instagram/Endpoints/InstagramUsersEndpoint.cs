@@ -49,17 +49,17 @@ namespace Skybrud.Social.Instagram.Endpoints {
         }
 
         /// <summary>
-        /// The the most recent media of the authenticated user.
+        /// Gets the the most recent media of the authenticated user.
         /// </summary>
         public InstagramRecentMediaResponse GetRecentMedia() {
-            return GetRecentMedia(new InstagramMediaSearchOptions());
+            return GetRecentMedia(new InstagramUserRecentMediaOptions());
         }
 
         /// <summary>
-        /// The the most recent media of the authenticated user.
+        /// Gets the the most recent media of the authenticated user.
         /// </summary>
         /// <param name="options">The search options with any optional parameters.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(InstagramMediaSearchOptions options) {
+        public InstagramRecentMediaResponse GetRecentMedia(InstagramUserRecentMediaOptions options) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia("self", options).Body);
         }
 
@@ -68,7 +68,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId) {
-            return GetRecentMedia(userId, new InstagramMediaSearchOptions());
+            return GetRecentMedia(userId, new InstagramUserRecentMediaOptions());
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="userId">The ID of the user.</param>
         /// <param name="count">Count of media to return.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId, int count) {
-            return GetRecentMedia(userId, new InstagramMediaSearchOptions {
+            return GetRecentMedia(userId, new InstagramUserRecentMediaOptions {
                 Count = count
             });
         }
@@ -87,7 +87,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The search options with any optional parameters.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(long userId, InstagramMediaSearchOptions options) {
+        public InstagramRecentMediaResponse GetRecentMedia(long userId, InstagramUserRecentMediaOptions options) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId + "", options).Body);
         }
 

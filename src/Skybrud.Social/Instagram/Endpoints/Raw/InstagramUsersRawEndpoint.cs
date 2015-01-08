@@ -36,7 +36,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="identifier">The identifier of the user.</param>
         /// <param name="options">The search options with any optional parameters.</param>
         /// <returns>Returns the raw JSON response from the API.</returns>
-        public SocialHttpResponse GetRecentMedia(string identifier, InstagramMediaSearchOptions options) {
+        public SocialHttpResponse GetRecentMedia(string identifier, InstagramUserRecentMediaOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + identifier + "/media/recent/", options);
         }
 
