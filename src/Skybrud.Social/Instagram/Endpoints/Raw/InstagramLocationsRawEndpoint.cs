@@ -54,7 +54,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>
-        public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
+        public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptionsOldOne options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
         }
@@ -72,7 +72,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
+        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationSearchOptionsOldOne options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", options);
         }
 
@@ -86,7 +86,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         public SocialHttpResponse Search(double latitude, double longitude) {
-            return Search(latitude, longitude, 1000);
+            return Search(new InstagramLocationSearchOptions {
+                Latitude = latitude,
+                Longitude = longitude
+            });
         }
 
         /// <summary>
@@ -96,17 +99,19 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="longitude">The longitude.</param>
         /// <param name="distance">The distance is menters (max: 5000m)</param>
         public SocialHttpResponse Search(double latitude, double longitude, int distance) {
+            return Search(new InstagramLocationSearchOptions {
+                Latitude = latitude,
+                Longitude = longitude,
+                Distance = distance
+            });
+        }
 
-            // Declare the query string
-            NameValueCollection qs = new NameValueCollection {
-                {"lat", latitude.ToString(CultureInfo.InvariantCulture)},
-                {"lng", longitude.ToString(CultureInfo.InvariantCulture)},
-                {"distance", distance.ToString(CultureInfo.InvariantCulture)}
-            };
-
-            // Perform the call to the API
-            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/search", qs);
-
+        /// <summary>
+        /// Search for a location by geographic coordinate.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse Search(InstagramLocationSearchOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/search", options);
         }
 
         #endregion

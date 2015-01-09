@@ -1,50 +1,43 @@
-using System;
-using System.Collections.Specialized;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options {
-
-    /// <summary>
-    /// Class representing the search options for a known location.
-    /// </summary>
+    
     public class InstagramLocationSearchOptions : IGetOptions {
 
-        /// <summary>
-        /// If specified, only media uploaded after this UNIX timestamp will be returned. The
-        /// timestamp is inclusive - meaning that media with the specified timestamp may be part of
-        /// the response.
-        /// </summary>
-        public long MinTimestamp { get; set; }
+        #region Properties
 
         /// <summary>
-        /// If specified, only media uploaded before this UNIX timestamp will be returned. The
-        /// timestamp is exclusive - meaning that media with the specified timestamp will not be
-        /// part of the response.
+        /// Required: Gets or sets the latitude.
         /// </summary>
-        public long MaxTimestamp { get; set; }
+        public double Latitude { get; set; }
+        
+        /// <summary>
+        /// Required: Gets or sets the longitude.
+        /// </summary>
+        public double Longitude { get; set; }
 
         /// <summary>
-        /// If specified, only media uploaded after this ID will be returned. The media with the
-        /// specified ID may also be a part of the response.
+        /// Optional: Gets or sets the search distance in meters. If not specified (eg. if zero), the default value of
+        /// the Instagram API will be used. The default distance is 1000 meters, while the maximum distance is 5000
+        /// meters.
         /// </summary>
-        public string MinId { get; set; }
+        public int Distance { get; set; }
 
-        /// <summary>
-        /// If specified, only media uploaded before this ID will be returned. The media with the
-        /// specified ID will not be a part of the response.
-        /// </summary>
-        public string MaxId { get; set; }
+        #endregion
+
+        #region Methods
 
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
-            if (MinTimestamp > 0) qs.Add("min_timestamp", MinTimestamp);
-            if (MaxTimestamp > 0) qs.Add("max_timestamp", MaxTimestamp);
-            if (!String.IsNullOrWhiteSpace(MinId)) qs.Add("min_id", MinId);
-            if (!String.IsNullOrWhiteSpace(MaxId)) qs.Add("max_id", MaxId);
+            qs.Add("lat", Latitude);
+            qs.Add("lng", Longitude);
+            if (Distance > 0) qs.Add("distance", Distance);
             return qs;
         }
-    
+
+        #endregion
+
     }
 
 }

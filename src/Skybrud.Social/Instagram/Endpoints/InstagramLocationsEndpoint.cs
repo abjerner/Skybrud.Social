@@ -55,7 +55,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptions options) {
+        public InstagramRecentMediaResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptionsOldOne options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
         }
@@ -73,7 +73,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationSearchOptions options) {
+        public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationSearchOptionsOldOne options) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId, options).Body);
         }
 
