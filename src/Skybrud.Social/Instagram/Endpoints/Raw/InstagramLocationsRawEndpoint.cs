@@ -5,6 +5,7 @@ using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Instagram.Options;
+using Skybrud.Social.Instagram.Options.Locations;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     

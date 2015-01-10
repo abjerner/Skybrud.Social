@@ -1,7 +1,7 @@
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Instagram.Options {
+namespace Skybrud.Social.Instagram.Options.Locations {
     
     public class InstagramLocationSearchOptions : IGetOptions {
 

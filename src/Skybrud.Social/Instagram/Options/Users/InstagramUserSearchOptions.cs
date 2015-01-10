@@ -1,7 +1,7 @@
 ﻿using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Instagram.Options {
+namespace Skybrud.Social.Instagram.Options.Users {
 
     /// <see cref="http://instagram.com/developer/endpoints/users/#get_users_search"/>
     public class InstagramUserSearchOptions : IGetOptions {
