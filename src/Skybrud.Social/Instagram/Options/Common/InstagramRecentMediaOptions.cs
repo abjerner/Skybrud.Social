@@ -2,7 +2,7 @@
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Instagram.Options {
+namespace Skybrud.Social.Instagram.Options.Common {
 
     /// <see>
     ///     <cref>http://instagram.com/developer/endpoints/users/#get_users_media_recent</cref>

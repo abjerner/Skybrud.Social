@@ -220,7 +220,7 @@
     <Compile Include="Http\PostData\SocialPostValue.cs" />
     <Compile Include="Http\SocialHeaderCollection.cs" />
     <Compile Include="Http\SocialPostData.cs" />
-    <Compile Include="Instagram\Options\InstagramRecentMediaOptions.cs" />
+    <Compile Include="Instagram\Options\Common\InstagramRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Locations\InstagramLocationRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Locations\InstagramLocationSearchOptions.cs" />
     <Compile Include="Instagram\Objects\InstagramUserCounts.cs" />
@@ -495,7 +495,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Instagram\Options\Media\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"</PreBuildEvent>
