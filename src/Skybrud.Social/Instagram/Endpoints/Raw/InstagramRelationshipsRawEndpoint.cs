@@ -1,6 +1,7 @@
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options;
+using Skybrud.Social.Instagram.Options.Relationships;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     

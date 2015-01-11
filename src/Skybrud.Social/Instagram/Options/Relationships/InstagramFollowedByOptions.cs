@@ -1,9 +1,9 @@
 ﻿using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Instagram.Options {
+namespace Skybrud.Social.Instagram.Options.Relationships {
 
-    public class InstagramFollowsOptions : IGetOptions {
+    public class InstagramFollowedByOptions : IGetOptions {
 
         #region Properties
 
@@ -13,9 +13,9 @@ namespace Skybrud.Social.Instagram.Options {
 
         #region Constructors
 
-        public InstagramFollowsOptions() { }
+        public InstagramFollowedByOptions() { }
 
-        public InstagramFollowsOptions(int count) {
+        public InstagramFollowedByOptions(int count) {
             Count = count;
         }
 
