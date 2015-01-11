@@ -2,6 +2,7 @@ using System;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Instagram.Options;
+using Skybrud.Social.Instagram.Options.Locations;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
@@ -55,7 +56,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptionsOldOne options) {
+        public InstagramRecentMediaResponse GetRecentMedia(InstagramLocation location, InstagramLocationRecentMediaOptions options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
         }
@@ -73,7 +74,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationSearchOptionsOldOne options) {
+        public InstagramRecentMediaResponse GetRecentMedia(int locationId, InstagramLocationRecentMediaOptions options) {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(locationId, options).Body);
         }
 
@@ -96,6 +97,14 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="distance">The distance is menters (max: 5000m)</param>
         public InstagramLocationsResponse Search(double latitude, double longitude, int distance) {
             return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude, distance).Body);
+        }
+
+        /// <summary>
+        /// Search for a location by geographic coordinate.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public InstagramLocationsResponse Search(InstagramLocationSearchOptions options) {
+            return InstagramLocationsResponse.ParseJson(Raw.Search(options).Body);
         }
 
         #endregion

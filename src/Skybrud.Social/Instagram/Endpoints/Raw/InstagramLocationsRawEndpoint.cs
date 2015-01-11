@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Specialized;
-using System.Globalization;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Objects;
-using Skybrud.Social.Instagram.Options;
 using Skybrud.Social.Instagram.Options.Locations;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
@@ -55,7 +52,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>
-        public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationSearchOptionsOldOne options) {
+        public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationRecentMediaOptions options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
         }
@@ -73,7 +70,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationSearchOptionsOldOne options) {
+        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationRecentMediaOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", options);
         }
 
