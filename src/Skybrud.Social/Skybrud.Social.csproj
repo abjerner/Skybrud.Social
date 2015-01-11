@@ -326,7 +326,6 @@
     <Compile Include="Google\YouTube\YouTubeEndpoint.cs" />
     <Compile Include="Google\YouTube\YouTubeRawEndpoint.cs" />
     <Compile Include="Google\YouTube\YouTubeScope.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramEndpoints.cs" />
     <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />
     <Compile Include="Instagram\Endpoints\InstagramTagsEndpoint.cs" />
