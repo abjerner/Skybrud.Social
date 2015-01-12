@@ -54,11 +54,11 @@ namespace Skybrud.Social.Http {
         #region Methods
 
         public void Add(string key, object value) {
-            _nvc.Add(key, String.Format("{0}", value));
+            _nvc.Add(key, String.Format(CultureInfo.InvariantCulture, "{0}", value));
         }
 
         public void Set(string key, object value) {
-            _nvc.Add(key, String.Format("{0}", value));
+            _nvc.Add(key, String.Format(CultureInfo.InvariantCulture, "{0}", value));
         }
 
         public override string ToString() {
