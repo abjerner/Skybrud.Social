@@ -86,7 +86,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         public InstagramLocationsResponse Search(double latitude, double longitude) {
-            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude).Body);
+            return InstagramLocationsResponse.ParseResponse(Raw.Search(latitude, longitude));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="longitude">The longitude.</param>
         /// <param name="distance">The distance is menters (max: 5000m)</param>
         public InstagramLocationsResponse Search(double latitude, double longitude, int distance) {
-            return InstagramLocationsResponse.ParseJson(Raw.Search(latitude, longitude, distance).Body);
+            return InstagramLocationsResponse.ParseResponse(Raw.Search(latitude, longitude, distance));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
         public InstagramLocationsResponse Search(InstagramLocationSearchOptions options) {
-            return InstagramLocationsResponse.ParseJson(Raw.Search(options).Body);
+            return InstagramLocationsResponse.ParseResponse(Raw.Search(options));
         }
 
         #endregion
