@@ -3,6 +3,9 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Locations {
     
+    /// <see>
+    ///     <cref>http://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
+    /// </see>
     public class InstagramLocationSearchOptions : IGetOptions {
 
         #region Properties
