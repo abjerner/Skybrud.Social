@@ -1,5 +1,3 @@
-using System.Collections.Specialized;
-using System.Globalization;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options;
