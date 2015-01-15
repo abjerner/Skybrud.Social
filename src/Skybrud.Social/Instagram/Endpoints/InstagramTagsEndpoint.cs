@@ -46,6 +46,18 @@ namespace Skybrud.Social.Instagram.Endpoints {
             return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, minTagId, maxTagId).Body);
         }
 
+        /// <summary>
+        /// Gets a list of media from the specified <code>tag</code>.
+        /// </summary>
+        /// <param name="tag">The name of the tag.</param>
+        /// <param name="count">Count of tagged media to return.</param>
+        /// <param name="minTagId">Return media before this min_tag_id</param>
+        /// <param name="maxTagId">Return media after this max_tag_id</param>
+        public InstagramRecentMediaResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null)
+        {
+            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, count, minTagId, maxTagId).Body);
+        }
+
         // TODO: Implement Search() method
 
         #endregion
