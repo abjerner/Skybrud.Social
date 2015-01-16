@@ -5,7 +5,8 @@ using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Instagram.Options.Locations;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
-    
+
+    /// <see cref="http://instagram.com/developer/endpoints/locations/"/>
     public class InstagramLocationsRawEndpoint {
 
         #region Properties
