@@ -228,6 +228,7 @@
     <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
     <Compile Include="Instagram\Options\Relationships\InstagramFollowsOptions.cs" />
     <Compile Include="Instagram\Options\Relationships\InstagramFollowedByOptions.cs" />
+    <Compile Include="Instagram\Options\Tags\InstagramTagRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />

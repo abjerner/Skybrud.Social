@@ -1,6 +1,7 @@
 using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
+using Skybrud.Social.Instagram.Options.Tags;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
     
@@ -41,41 +42,36 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="minTagId"></param>
         /// <param name="maxTagId"></param>
         public SocialHttpResponse GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
-
-            // Declare the query string
-            SocialQueryString qs = new SocialQueryString();
-
-            // Add any optional parameters
-            if (!String.IsNullOrWhiteSpace(minTagId)) qs.Add("min_tag_id", minTagId);
-            if (!String.IsNullOrWhiteSpace(maxTagId)) qs.Add("max_tag_id", maxTagId);
-
-            // Perform the call to the API
-            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
-
+            return GetRecentMedia(tag, new InstagramTagRecentMediaOptions {
+                MinTagId = minTagId,
+                MaxTagId = maxTagId
+            });
         }
 
         /// <summary>
         /// Gets the raw JSON response from the Instagram API with media from the specified <code>tag</code>.
         /// </summary>
         /// <param name="tag">The name of the tag.</param>
-        /// <param name="count">Count of tagged media to return.</param>
+        /// <param name="count">The maximum amount of media to be returned.</param>
         /// <param name="minTagId"></param>
         /// <param name="maxTagId"></param>
-        public SocialHttpResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null)
-        {
-
-            // Declare the query string
-            SocialQueryString qs = new SocialQueryString();
-
-            // Add any optional parameters
-            qs.Add("count", count);
-            if (!String.IsNullOrWhiteSpace(minTagId)) qs.Add("min_tag_id", minTagId);
-            if (!String.IsNullOrWhiteSpace(maxTagId)) qs.Add("max_tag_id", maxTagId);
-
-            // Perform the call to the API
-            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", qs);
-
+        public SocialHttpResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null) {
+            return GetRecentMedia(tag, new InstagramTagRecentMediaOptions {
+                Count = count,
+                MinTagId = minTagId,
+                MaxTagId = maxTagId
+            });
         }
+
+        /// <summary>
+        /// Gets the raw JSON response from the Instagram API with media from the specified <code>tag</code>.
+        /// </summary>
+        /// <param name="tag">The name of the tag.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse GetRecentMedia(string tag, InstagramTagRecentMediaOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/tags/" + tag + "/media/recent/", options);
+        }
+
         /// <summary>
         /// Search for tags by name. Results are ordered first as an exact match, then by popularity. Short tags will be treated as exact matches.
         /// </summary>
