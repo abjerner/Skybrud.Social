@@ -34,7 +34,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="mediaId">The ID of the media.</param>
         public InstagramMediaResponse GetMedia(string mediaId) {
-            return InstagramMediaResponse.ParseJson(Raw.GetMedia(mediaId).Body);
+            return InstagramMediaResponse.ParseResponse(Raw.GetMedia(mediaId));
         }
         
         /// <summary>
