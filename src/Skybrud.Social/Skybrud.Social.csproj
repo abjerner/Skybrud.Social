@@ -231,6 +231,7 @@
     <Compile Include="Instagram\Options\Tags\InstagramTagRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
+    <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="Interfaces\IGetOptions.cs" />
     <Compile Include="Interfaces\IPostOptions.cs" />
