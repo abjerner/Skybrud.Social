@@ -38,11 +38,43 @@ namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramLocationRecentMediaResponseBody : InstagramResponseBody<InstagramMedia[]> {
 
+        public InstagramLocationRecentMediaPagination Pagination { get; private set; }
+
         public static InstagramLocationRecentMediaResponseBody Parse(JsonObject obj) {
             return new InstagramLocationRecentMediaResponseBody {
+                Pagination = obj.GetObject("pagination", InstagramLocationRecentMediaPagination.Parse),
                 Data = obj.GetArray("data", InstagramMedia.Parse)
             };
         }
+
+    }
+
+    public class InstagramLocationRecentMediaPagination : SocialJsonObject {
+
+        #region Properties
+
+        public string NextUrl { get; private set; }
+
+        public string NextMaxId { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private InstagramLocationRecentMediaPagination(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
+        public static InstagramLocationRecentMediaPagination Parse(JsonObject obj) {
+            return new InstagramLocationRecentMediaPagination(obj) {
+                NextUrl = obj.GetString("next_url"),
+                NextMaxId = obj.GetString("next_max_id")
+            };
+        }
+
+        #endregion
 
     }
 
