@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options.Tags;
