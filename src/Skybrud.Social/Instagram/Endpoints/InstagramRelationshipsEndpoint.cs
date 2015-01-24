@@ -5,6 +5,7 @@ using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
 
+    /// <see cref="http://instagram.com/developer/endpoints/relationships/"/>
     public class InstagramRelationshipsEndpoint {
 
         #region Properties

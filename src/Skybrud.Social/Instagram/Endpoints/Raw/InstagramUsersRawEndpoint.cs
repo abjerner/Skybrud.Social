@@ -3,7 +3,8 @@ using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options.Users;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
-    
+
+    /// <see cref="http://instagram.com/developer/endpoints/users/"/>
     public class InstagramUsersRawEndpoint {
 
         #region Properties

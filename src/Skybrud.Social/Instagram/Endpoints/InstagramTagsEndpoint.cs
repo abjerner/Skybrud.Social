@@ -2,7 +2,8 @@ using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
-    
+
+    /// <see cref="http://instagram.com/developer/endpoints/tags/"/>
     public class InstagramTagsEndpoint {
 
         #region Properties

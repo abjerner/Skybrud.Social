@@ -3,7 +3,8 @@ using Skybrud.Social.Instagram.OAuth;
 using Skybrud.Social.Instagram.Options.Relationships;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
-    
+
+    /// <see cref="http://instagram.com/developer/endpoints/relationships/"/>
     public class InstagramRelationshipsRawEndpoint {
 
         #region Properties
