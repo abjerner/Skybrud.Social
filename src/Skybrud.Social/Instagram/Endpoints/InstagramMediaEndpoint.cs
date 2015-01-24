@@ -3,7 +3,8 @@ using Skybrud.Social.Instagram.Options;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
-    
+
+    /// <see cref="http://instagram.com/developer/endpoints/media/"/>
     public class InstagramMediaEndpoint {
 
         #region Properties
