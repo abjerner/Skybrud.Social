@@ -92,8 +92,8 @@ namespace Skybrud.Social.Google {
             
             // Validation
             if (String.IsNullOrWhiteSpace(clientId)) throw new ArgumentException("Parameter \"clientId\" cannot be NULL or empty", "clientId");
-            if (clientSecret == null) throw new ArgumentException("Parameter \"clientSecret\" cannot be NULL or empty", "clientSecret");
-            if (refreshToken == null) throw new ArgumentException("Parameter \"refreshToken\" cannot be NULL or empty", "refreshToken");
+            if (String.IsNullOrWhiteSpace(clientSecret)) throw new ArgumentException("Parameter \"clientSecret\" cannot be NULL or empty", "clientSecret");
+            if (String.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentException("Parameter \"refreshToken\" cannot be NULL or empty", "refreshToken");
 
             // Partial client ID?
             if (!clientId.EndsWith(".apps.googleusercontent.com")) clientId = clientId + ".apps.googleusercontent.com";
