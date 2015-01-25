@@ -37,6 +37,12 @@ namespace Skybrud.Social.Google {
 
         #endregion
 
+        #region Constructors
+
+        private GoogleService() {}
+
+        #endregion
+
         #region Member methods
 
         public GoogleUserInfo GetUserInfo() {
