@@ -87,20 +87,6 @@ namespace Skybrud.Social.Google {
         /// </summary>
         /// <param name="clientId">The client ID.</param>
         /// <param name="clientSecret">The client secret.</param>
-        /// <param name="refreshToken">The request token of the user.</param>
-        [Obsolete("Use CreateFromRefreshToken() instead.")]
-        public static GoogleService CreateFromRequestToken(string clientId, string clientSecret, string refreshToken) {
-            return CreateFromRefreshToken(clientId, clientSecret, refreshToken);
-        }
-
-        /// <summary>
-        /// Initializes a new instance based on the specified refresh token.
-        /// The refresh token is used for making a call to the Google Accounts
-        /// API to get a new access token. Access tokens typically expire after
-        /// an hour (3600 seconds).
-        /// </summary>
-        /// <param name="clientId">The client ID.</param>
-        /// <param name="clientSecret">The client secret.</param>
         /// <param name="refreshToken">The refresh token of the user.</param>
         public static GoogleService CreateFromRefreshToken(string clientId, string clientSecret, string refreshToken) {
             
