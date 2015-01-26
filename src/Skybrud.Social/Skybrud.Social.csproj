@@ -453,6 +453,7 @@
     <Compile Include="Twitter\Responses\TwitterUserListResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterIdsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterReverseGeocodeResponse.cs" />
+    <Compile Include="Twitter\Responses\TwitterUserResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterUsersSearchResponse.cs" />
     <Compile Include="Twitter\TwitterAccessInformation.cs" />
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
