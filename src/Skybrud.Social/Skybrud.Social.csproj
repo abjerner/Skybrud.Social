@@ -419,6 +419,7 @@
     <Compile Include="Twitter\Entities\TwitterUserEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserUrlEntities.cs" />
     <Compile Include="Twitter\Enums\TwitterSearchTweetResultType.cs" />
+    <Compile Include="Twitter\Exceptions\TwitterApiException.cs" />
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Endpoints\TwitterStatusesEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterUsersEndpoint.cs" />
@@ -447,6 +448,7 @@
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUsersSearchOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterSearchTweetsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterUserListResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterIdsResponse.cs" />
