@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.OAuth {
 
@@ -346,6 +347,32 @@ namespace Skybrud.Social.OAuth {
                 return (HttpWebResponse) ex.Response;
             }
 
+        }
+
+        /// <summary>
+        /// Makes a signed request to the Twitter API based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        public virtual HttpWebResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
+
+            // TODO: Should this method have is own implementation instead of calling another DoHttpRequest method?
+        
+            NameValueCollection query = queryString == null ? null : queryString.NameValueCollection;
+            return DoHttpRequest(method, url, query, null);
+        
+        }
+
+        /// <summary>
+        /// Makes a signed request to the Twitter API based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public virtual HttpWebResponse DoHttpRequest(string method, string url, IGetOptions options) {
+            SocialQueryString queryString = options == null ? null : options.GetQueryString();
+            return DoHttpRequest(method, url, queryString);
         }
 
         /// <summary>
