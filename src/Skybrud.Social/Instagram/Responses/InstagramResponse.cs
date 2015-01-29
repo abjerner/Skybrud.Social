@@ -30,11 +30,11 @@ namespace Skybrud.Social.Instagram.Responses {
             string message = meta.GetString("error_message");
 
             // Now throw some exceptions
-            if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-            if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
-            if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
+            if (type == "OAuthException") throw new InstagramOAuthException(response, code, type, message);
+            if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(response, code, type, message);
+            if (type == "APINotFoundError") throw new InstagramNotFoundException(response, code, type, message);
 
-            throw new InstagramException(code, type, message);
+            throw new InstagramException(response, code, type, message);
 
         }
 

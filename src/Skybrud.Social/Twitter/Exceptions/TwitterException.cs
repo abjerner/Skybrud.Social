@@ -3,7 +3,7 @@ using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Twitter.Exceptions {
 
-    public class TwitterApiException : Exception {
+    public class TwitterException : Exception {
 
         #region Properties
 
@@ -15,7 +15,7 @@ namespace Skybrud.Social.Twitter.Exceptions {
 
         #region Constructors
 
-        internal TwitterApiException(SocialHttpResponse response, string message, int code) : base(message) {
+        internal TwitterException(SocialHttpResponse response, string message, int code) : base(message) {
             Response = response;
             Code = code;
         }

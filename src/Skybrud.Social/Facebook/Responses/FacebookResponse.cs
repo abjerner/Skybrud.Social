@@ -27,7 +27,7 @@ namespace Skybrud.Social.Facebook.Responses {
             string type = error.GetString("type");
             string message = error.GetString("message");
             int subcode = error.HasValue("error_subcode") ? error.GetInt32("error_subcode") : 0;
-            throw new FacebookApiException(response, code, type, message, subcode);
+            throw new FacebookException(response, code, type, message, subcode);
         
         }
 

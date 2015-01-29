@@ -236,7 +236,7 @@
     <Compile Include="Interfaces\IGetOptions.cs" />
     <Compile Include="Interfaces\IPostOptions.cs" />
     <Compile Include="SocialJsonArray.cs" />
-    <Compile Include="Facebook\Exceptions\FacebookApiException.cs" />
+    <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
     <Compile Include="Facebook\FacebookScopeCollection.cs" />
     <Compile Include="Facebook\FacebookService.cs" />
@@ -419,7 +419,7 @@
     <Compile Include="Twitter\Entities\TwitterUserEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUserUrlEntities.cs" />
     <Compile Include="Twitter\Enums\TwitterSearchTweetResultType.cs" />
-    <Compile Include="Twitter\Exceptions\TwitterApiException.cs" />
+    <Compile Include="Twitter\Exceptions\TwitterException.cs" />
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Endpoints\TwitterStatusesEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterUsersEndpoint.cs" />

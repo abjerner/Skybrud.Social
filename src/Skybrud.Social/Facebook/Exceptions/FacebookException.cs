@@ -4,7 +4,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Exceptions {
 
-    public class FacebookApiException : Exception {
+    public class FacebookException : Exception {
 
         public SocialHttpResponse Response { get; private set; }
 
@@ -12,7 +12,7 @@ namespace Skybrud.Social.Facebook.Exceptions {
         public string Type { get; private set; }
         public int Subcode { get; private set; }
 
-        public FacebookApiException(SocialHttpResponse response, int code, string type, string message, int subcode = 0) : base(message) {
+        public FacebookException(SocialHttpResponse response, int code, string type, string message, int subcode = 0) : base(message) {
             Response = response;
             Code = code;
             Type = type;
@@ -20,9 +20,9 @@ namespace Skybrud.Social.Facebook.Exceptions {
         }
 
         [Obsolete]
-        public static FacebookApiException Parse(JsonObject obj) {
+        public static FacebookException Parse(JsonObject obj) {
 
-            return new FacebookApiException(
+            return new FacebookException(
                 null,
                 obj.GetInt32("code"),
                 obj.GetString("type"),

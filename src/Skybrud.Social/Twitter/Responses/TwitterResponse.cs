@@ -28,7 +28,7 @@ namespace Skybrud.Social.Twitter.Responses {
             JsonObject error = errors.GetObject(0);
 
             // Throw the exception
-            throw new TwitterApiException(response, error.GetString("message"), error.GetInt32("code"));
+            throw new Exceptions.TwitterException(response, error.GetString("message"), error.GetInt32("code"));
 
         }
 

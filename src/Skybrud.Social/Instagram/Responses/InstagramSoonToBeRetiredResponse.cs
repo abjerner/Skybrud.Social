@@ -37,8 +37,8 @@ namespace Skybrud.Social.Instagram.Responses {
                 string message = obj.GetString("error_message");
 
                 if (obj.HasValue("code")) {
-                    if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-                    throw new InstagramException(code, type, message);
+                    if (type == "OAuthException") throw new InstagramOAuthException(null, code, type, message);
+                    throw new InstagramException(null, code, type, message);
                 }
 
                 // Should be OK by now
@@ -58,11 +58,11 @@ namespace Skybrud.Social.Instagram.Responses {
                 if (code == 200) return;
 
                 // Now throw some exceptions
-                if (type == "OAuthException") throw new InstagramOAuthException(code, type, message);
-                if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(code, type, message);
-                if (type == "APINotFoundError") throw new InstagramNotFoundException(code, type, message);
+                if (type == "OAuthException") throw new InstagramOAuthException(null, code, type, message);
+                if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(null, code, type, message);
+                if (type == "APINotFoundError") throw new InstagramNotFoundException(null, code, type, message);
 
-                throw new InstagramException(code, type, message);
+                throw new InstagramException(null, code, type, message);
 
             }
 
