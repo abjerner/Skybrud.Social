@@ -1,6 +1,5 @@
 using System;
 using Skybrud.Social.Http;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Exceptions {
 
@@ -17,19 +16,6 @@ namespace Skybrud.Social.Facebook.Exceptions {
             Code = code;
             Type = type;
             Subcode = subcode;
-        }
-
-        [Obsolete]
-        public static FacebookException Parse(JsonObject obj) {
-
-            return new FacebookException(
-                null,
-                obj.GetInt32("code"),
-                obj.GetString("type"),
-                obj.GetString("message"),
-                obj.HasValue("error_subcode") ? obj.GetInt32("error_subcode") : 0
-            );
-
         }
 
     }
