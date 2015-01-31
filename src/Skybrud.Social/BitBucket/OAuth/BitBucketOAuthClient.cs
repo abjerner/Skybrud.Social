@@ -4,28 +4,38 @@ using Skybrud.Social.OAuth;
 namespace Skybrud.Social.BitBucket.OAuth {
     
     /// <summary>
-    /// Class for handling the communication with the BitBucket API. The class has
-    /// methods for handling OAuth logins using a three-legged approach as well
-    /// as logic for calling the methods decribed in the BitBucket API (not all
+    /// Class for handling the communication with the BitBucket API. The class has methods for handling OAuth logins
+    /// using a three-legged approach as well as logic for calling the methods decribed in the BitBucket API (not all
     /// has been implemented yet).
     /// </summary>
     public class BitBucketOAuthClient : OAuthClient {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the raw user endpoint.
+        /// </summary>
         public BitBucketUserRawEndpoint User { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw users endpoint.
+        /// </summary>
         public BitBucketUsersRawEndpoint Users { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw repositories endpoint.
+        /// </summary>
         public BitBucketRepositoriesRawEndpoint Repositories { get; private set; }
-        
-        public BitBucketOAuthClient() : this(null, null, null, null, null) {
-            // Call overloaded constructor
-        }
 
-        public BitBucketOAuthClient(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, null, null, null) {
-            // Call overloaded constructor
-        }
+        #endregion
 
-        public BitBucketOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret) : this(consumerKey, consumerSecret, token, tokenSecret, null) {
-            // Call overloaded constructor
-        }
+        #region Constructors
+
+        public BitBucketOAuthClient() : this(null, null, null, null, null) { }
+
+        public BitBucketOAuthClient(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, null, null, null) { }
+
+        public BitBucketOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret) : this(consumerKey, consumerSecret, token, tokenSecret, null) { }
 
         public BitBucketOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret, string callback) {
         
@@ -47,6 +57,8 @@ namespace Skybrud.Social.BitBucket.OAuth {
             Repositories = new BitBucketRepositoriesRawEndpoint(this);
 
         }
+
+        #endregion
 
     }
 

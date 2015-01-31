@@ -7,20 +7,41 @@ namespace Skybrud.Social.BitBucket {
     
     public class BitBucketService {
 
+        #region Properties
+
         /// <summary>
-        /// The OAuth client used for communicating with the BitBucket API.
+        /// Gets a reference to the OAuth client used for communicating with the BitBucket API.
         /// </summary>
         public BitBucketOAuthClient Client { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the user endpoint.
+        /// </summary>
         public BitBucketUserEndpoint User { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the users endpoint.
+        /// </summary>
         public BitBucketUsersEndpoint Users { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the repositories endpoint.
+        /// </summary>
         public BitBucketRepositoriesEndpoint Repositories { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         private BitBucketService() {
             User = new BitBucketUserEndpoint(this);
             Users = new BitBucketUsersEndpoint(this);
             Repositories = new BitBucketRepositoriesEndpoint(this);
         }
+
+        #endregion
+
+        #region Static methods
 
         /// <summary>
         /// Initializes a service reference based on the specified consumer key
@@ -50,13 +71,15 @@ namespace Skybrud.Social.BitBucket {
         }
 
         /// <summary>
-        /// Initialize a service reference based on the specified OAUth client.
+        /// Initialize a service reference based on the specified OAuth client.
         /// </summary>
         /// <param name="client">The OAuth client.</param>
         public static BitBucketService CreateFromOAuthClient(OAuthClient client) {
             if (client == null) throw new ArgumentNullException("client");
             return CreateFromAccessToken(client.ConsumerKey, client.ConsumerSecret, client.Token, client.TokenSecret);
         }
+
+        #endregion
 
     }
 

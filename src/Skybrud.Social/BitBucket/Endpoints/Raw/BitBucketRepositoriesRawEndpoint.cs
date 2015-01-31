@@ -7,11 +7,24 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
     
     public class BitBucketRepositoriesRawEndpoint {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the BitBucket OAuth client.
+        /// </summary>
         public BitBucketOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         public BitBucketRepositoriesRawEndpoint(BitBucketOAuthClient client) {
             Client = client;
         }
+
+        #endregion
+
+        #region Member methods
 
         #region GetChangesets
 
@@ -128,6 +141,8 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             return Client.DoHttpRequestAsString("GET", "https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commit/" + revision, null, null, out statusCode);
 
         }
+
+        #endregion
 
         #endregion
 

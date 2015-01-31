@@ -1,42 +1,35 @@
 using Skybrud.Social.BitBucket.Objects;
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Responses {
 
-    public class BitBucketCurrentUserResponse : SocialJsonObject {
+    public class BitBucketCurrentUserResponse : BitBucketResponse<BitBucketCurrentUser> {
 
-        #region Properties
+        #region Constructors
 
-        /// <summary>
-        /// Gets information about the current user.
-        /// </summary>
-        public BitBucketUser User { get; private set; }
-        
-        /// <summary>
-        /// Gets an array of repositories owned by the current user.
-        /// </summary>
-        public BitBucketUserRepository[] Repositories { get; private set; }
-
-        #endregion
-
-        #region Constructor
-
-        private BitBucketCurrentUserResponse(JsonObject obj) : base(obj) { }
+        private BitBucketCurrentUserResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        public static BitBucketCurrentUserResponse ParseJson(string str) {
-            return Parse(JsonConverter.ParseObject(str));
-        }
+        public static BitBucketCurrentUserResponse ParseResponse(SocialHttpResponse response) {
 
-        public static BitBucketCurrentUserResponse Parse(JsonObject obj) {
+            if (response == null) return null;
+
+            // Validate the response
+            ValidateResponse(response);
+            
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
             if (obj == null) return null;
-            return new BitBucketCurrentUserResponse(obj) {
-                User = obj.GetObject("user", BitBucketUser.Parse),
-                Repositories = obj.GetArray("repositories", BitBucketUserRepository.Parse)
+
+            // Initialize the response object
+            return new BitBucketCurrentUserResponse(response) {
+                Body = BitBucketCurrentUser.Parse(obj)
             };
+
         }
 
         #endregion

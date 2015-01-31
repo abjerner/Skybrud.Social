@@ -8,18 +8,31 @@ namespace Skybrud.Social.BitBucket.Endpoints {
     
     public class BitBucketRepositoriesEndpoint {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the BitBucket service.
+        /// </summary>
         public BitBucketService Service { get; private set; }
 
         /// <summary>
-        /// The implementation of the endpoint for getting the raw server response.
+        /// Gets a reference to the raw repositories endpoint.
         /// </summary>
         public BitBucketRepositoriesRawEndpoint Raw {
             get { return Service.Client.Repositories; }
         }
 
+        #endregion
+        
+        #region Constructors
+
         internal BitBucketRepositoriesEndpoint(BitBucketService service) {
             Service = service;
         }
+
+        #endregion
+        
+        #region Member methods
 
         #region GetChangesets
 
@@ -45,7 +58,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+                throw new BitBucketException(null);
             }
 
             // Parse the JSON
@@ -73,7 +86,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+                throw new BitBucketException(null);
             }
 
             // Parse the JSON
@@ -102,13 +115,15 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (status != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(status);
+                throw new BitBucketException(null);
             }
 
             // Parse the JSON
             return BitBucketCommit.ParseJson(contents);
 
         }
+
+        #endregion
 
         #endregion
 

@@ -53,13 +53,14 @@
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketRepositoriesRawEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketUserRawEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\Raw\BitBucketUsersRawEndpoint.cs" />
-    <Compile Include="BitBucket\Exceptions\BitBucketHttpException.cs" />
+    <Compile Include="BitBucket\Exceptions\BitBucketException.cs" />
     <Compile Include="BitBucket\Objects\BitBucketAuthor.cs" />
     <Compile Include="BitBucket\Objects\BitBucketAuthorUser.cs" />
     <Compile Include="BitBucket\Objects\BitBucketChangeset.cs" />
     <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
     <Compile Include="BitBucket\BitBucketService.cs" />
     <Compile Include="BitBucket\Objects\BitBucketCommit.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketCurrentUser.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLink.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
     <Compile Include="BitBucket\Objects\BitBucketRepository.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="BitBucket\Responses\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketCurrentUserRepositoriesResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketResponse.cs" />
     <Compile Include="Facebook\Objects\Albums\FacebookAlbumsCollection.cs" />
     <Compile Include="Facebook\Objects\Links\FacebookLinksCollection.cs" />
     <Compile Include="Facebook\Objects\Feed\FacebookFeedCollection.cs" />

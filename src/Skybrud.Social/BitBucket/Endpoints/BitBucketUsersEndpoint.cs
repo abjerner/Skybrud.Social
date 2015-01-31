@@ -10,10 +10,13 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the BitBucket service.
+        /// </summary>
         public BitBucketService Service { get; private set; }
 
         /// <summary>
-        /// The implementation of the endpoint for getting the raw server response.
+        /// Gets a reference to the raw users endpoint.
         /// </summary>
         public BitBucketUsersRawEndpoint Raw {
             get { return Service.Client.Users; }
@@ -21,7 +24,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal BitBucketUsersEndpoint(BitBucketService service) {
             Service = service;
@@ -29,7 +32,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         public BitBucketUserResponse GetProfile(string username) {
 
@@ -38,7 +41,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(response.StatusCode);
+                throw new BitBucketException(response);
             }
 
             // Parse the response
@@ -53,7 +56,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(response.StatusCode);
+                throw new BitBucketException(response);
             }
 
             // Parse the response

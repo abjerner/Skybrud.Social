@@ -10,10 +10,13 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the BitBucket service.
+        /// </summary>
         public BitBucketService Service { get; private set; }
 
         /// <summary>
-        /// The implementation of the endpoint for getting the raw server response.
+        /// Gets a reference to the raw user endpoint.
         /// </summary>
         public BitBucketUserRawEndpoint Raw {
             get { return Service.Client.User; }
@@ -21,7 +24,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal BitBucketUserEndpoint(BitBucketService service) {
             Service = service;
@@ -29,21 +32,13 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
+        /// <summary>
+        /// Gets information about the authenticated user.
+        /// </summary>
         public BitBucketCurrentUserResponse GetInfo() {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.GetInfo();
-
-            // Validate the response
-            if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(response.StatusCode);
-            }
-
-            // Parse the response
-            return BitBucketCurrentUserResponse.ParseJson(response.GetBodyAsString());
-
+            return BitBucketCurrentUserResponse.ParseResponse(Raw.GetInfo());
         }
 
         public BitBucketCurrentUserRepositoriesResponse GetRepositories() {
@@ -53,7 +48,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
             // Validate the response
             if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketHttpException(response.StatusCode);
+                throw new BitBucketException(response);
             }
 
             // Parse the response

@@ -7,20 +7,23 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the BitBucket OAuth client.
+        /// </summary>
         public BitBucketOAuthClient Client { get; private set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public BitBucketUserRawEndpoint(BitBucketOAuthClient client) {
             Client = client;
         }
 
         #endregion
-        
-        #region Methods
-        
+
+        #region Member methods
+
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
