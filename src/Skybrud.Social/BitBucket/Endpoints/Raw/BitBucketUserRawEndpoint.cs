@@ -31,6 +31,9 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
             return Client.DoHttpGetRequest("https://bitbucket.org/api/1.0/user");
         }
 
+        /// <summary>
+        /// Gets a list of repositories of the authenticated user.
+        /// </summary>
         public SocialHttpResponse GetRepositories() {
             return Client.DoHttpGetRequest("https://bitbucket.org/api/1.0/user/repositories/");
         }

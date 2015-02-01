@@ -1,8 +1,7 @@
-using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
-using Skybrud.Social.BitBucket.Exceptions;
-using Skybrud.Social.BitBucket.Responses;
-using Skybrud.Social.Http;
+using Skybrud.Social.BitBucket.Options;
+using Skybrud.Social.BitBucket.Responses.Repositories;
+using Skybrud.Social.BitBucket.Responses.Users;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
@@ -34,34 +33,12 @@ namespace Skybrud.Social.BitBucket.Endpoints {
 
         #region Member methods
 
-        public BitBucketUserResponse GetProfile(string username) {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.GetProfile(username);
-
-            // Validate the response
-            if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketException(response);
-            }
-
-            // Parse the response
-            return BitBucketUserResponse.ParseJson(response.GetBodyAsString());
-
-        }
-        
-        public BitBucketRepositoriesResponse GetRepositories(string username) {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.GetRepositories(username);
-
-            // Validate the response
-            if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketException(response);
-            }
-
-            // Parse the response
-            return BitBucketRepositoriesResponse.ParseJson(response.GetBodyAsString());
-
+        /// <summary>
+        /// Gets information about the user with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        public BitBucketUserResponse GetInfo(string username) {
+            return BitBucketUserResponse.ParseResponse(Raw.GetInfo(username));
         }
 
         #endregion

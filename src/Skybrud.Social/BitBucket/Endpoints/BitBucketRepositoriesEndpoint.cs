@@ -1,8 +1,8 @@
-using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
-using Skybrud.Social.BitBucket.Exceptions;
 using Skybrud.Social.BitBucket.Objects;
+using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.BitBucket.Responses;
+using Skybrud.Social.BitBucket.Responses.Repositories;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
@@ -34,8 +34,6 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         
         #region Member methods
 
-        #region GetChangesets
-
         /// <summary>
         /// Gets a list of change sets associated with a repository. By default, this call returns the 15 most recent
         /// changesets. It also returns the count which is the total number of changesets on the repository. Private
@@ -50,25 +48,14 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// specified node and includes the older requests that preceded it. The Bitbucket GUI lists the nodes on the
         /// <b>Commit</b> tab. The default <code>start</code> value is the tip.</param>
         public BitBucketChangesetsResponse GetChangesets(string accountName, string repoSlug, int limit = 0, string start = null) {
-            
-            HttpStatusCode status;
 
             // Get the raw data from the API
-            string contents = Raw.GetChangesets(accountName, repoSlug, limit, start, out status);
-
-            // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketException(null);
-            }
+            string contents = Raw.GetChangesets(accountName, repoSlug, limit, start).Body;
 
             // Parse the JSON
             return BitBucketChangesetsResponse.ParseJson(contents);
         
         }
-
-        #endregion
-
-        #region GetCommits
 
         /// <summary>
         /// Gets the commit information associated with a repository. By default, this call returns all the commits
@@ -79,24 +66,13 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// <param name="page">The page.</param>
         public BitBucketCommitsResponse GetCommits(string accountName, string repoSlug, int page = 0) {
 
-            HttpStatusCode status;
-
             // Get the raw data from the API
-            string contents = Raw.GetCommits(accountName, repoSlug, page, out status);
-
-            // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketException(null);
-            }
+            string contents = Raw.GetCommits(accountName, repoSlug, page).Body;
 
             // Parse the JSON
             return BitBucketCommitsResponse.ParseJson(contents);
 
         }
-
-        #endregion
-
-        #region GetCommit
 
         /// <summary>
         /// Gets the information associated with an individual commit.
@@ -108,22 +84,30 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// name this returns the branch tip (or head).</param>
         public BitBucketCommit GetCommit(string accountName, string repoSlug, string revision) {
 
-            HttpStatusCode status;
-
             // Get the raw data from the API
-            string contents = Raw.GetCommit(accountName, repoSlug, revision, out status);
-
-            // Validate the response
-            if (status != HttpStatusCode.OK) {
-                throw new BitBucketException(null);
-            }
+            string contents = Raw.GetCommit(accountName, repoSlug, revision).Body;
 
             // Parse the JSON
             return BitBucketCommit.ParseJson(contents);
 
         }
 
-        #endregion
+        /// <summary>
+        /// Gets a list of repositories of the with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        public BitBucketRepositoriesResponse GetRepositories(string username) {
+            return BitBucketRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
+        }
+
+        /// <summary>
+        /// Gets a list of repositories of the with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public BitBucketRepositoriesResponse GetRepositories(string username, BitBucketRepositoriesOptions options) {
+            return BitBucketRepositoriesResponse.ParseResponse(Raw.GetRepositories(username, options));
+        }
 
         #endregion
 

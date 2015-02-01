@@ -1,8 +1,5 @@
-using System.Net;
 using Skybrud.Social.BitBucket.Endpoints.Raw;
-using Skybrud.Social.BitBucket.Exceptions;
-using Skybrud.Social.BitBucket.Responses;
-using Skybrud.Social.Http;
+using Skybrud.Social.BitBucket.Responses.User;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
@@ -41,19 +38,11 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             return BitBucketCurrentUserResponse.ParseResponse(Raw.GetInfo());
         }
 
+        /// <summary>
+        /// Gets a list of repositories of the authenticated user.
+        /// </summary>
         public BitBucketCurrentUserRepositoriesResponse GetRepositories() {
-
-            // Make the call to the API
-            SocialHttpResponse response = Raw.GetRepositories();
-
-            // Validate the response
-            if (response.StatusCode != HttpStatusCode.OK) {
-                throw new BitBucketException(response);
-            }
-
-            // Parse the response
-            return BitBucketCurrentUserRepositoriesResponse.ParseJsonArray(response.GetBodyAsString());
-
+            return BitBucketCurrentUserRepositoriesResponse.ParseResponse(Raw.GetRepositories());
         }
 
         #endregion

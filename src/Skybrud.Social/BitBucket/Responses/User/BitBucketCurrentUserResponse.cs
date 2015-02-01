@@ -1,10 +1,9 @@
-using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.BitBucket.Responses {
+namespace Skybrud.Social.BitBucket.Responses.User {
 
-    public class BitBucketCurrentUserResponse : BitBucketResponse<BitBucketCurrentUser> {
+    public class BitBucketCurrentUserResponse : BitBucketResponse<BitBucketCurrentUserResponseBody> {
 
         #region Constructors
 
@@ -27,7 +26,7 @@ namespace Skybrud.Social.BitBucket.Responses {
 
             // Initialize the response object
             return new BitBucketCurrentUserResponse(response) {
-                Body = BitBucketCurrentUser.Parse(obj)
+                Body = BitBucketCurrentUserResponseBody.Parse(obj)
             };
 
         }

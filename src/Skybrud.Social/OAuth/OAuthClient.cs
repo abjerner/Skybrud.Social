@@ -269,7 +269,9 @@ namespace Skybrud.Social.OAuth {
         /// using this method. This is the third and final step of the authorization process.
         /// </summary>
         /// <param name="verifier">The verification key received after the user has accepted the app.</param>
-        /// <see cref="https://dev.twitter.com/docs/auth/3-legged-authorization"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/auth/3-legged-authorization</cref>
+        /// </see>
         public virtual OAuthAccessToken GetAccessToken(string verifier) {
             return OAuthAccessToken.Parse(GetAccessTokenQuery(verifier));
         }
@@ -279,7 +281,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url) {
-            return DoHttpGetRequest(url, null);
+            return DoHttpGetRequest(url, default(NameValueCollection));
         }
 
         /// <summary>
@@ -289,6 +291,16 @@ namespace Skybrud.Social.OAuth {
         /// <param name="queryString">The query string.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection queryString) {
             return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, queryString, null));
+        }
+
+        /// <summary>
+        /// Makes a signed GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
+            NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);
+            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, nvc, null));
         }
 
         /// <summary>

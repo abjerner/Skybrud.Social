@@ -1,32 +1,35 @@
 ﻿using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.BitBucket.Responses {
+namespace Skybrud.Social.BitBucket.Responses.User {
 
-    public class BitBucketUserResponse : SocialJsonObject {
+    public class BitBucketCurrentUserResponseBody : SocialJsonObject {
 
         #region Properties
 
+        /// <summary>
+        /// Gets information about the current user.
+        /// </summary>
         public BitBucketUser User { get; private set; }
+
+        /// <summary>
+        /// Gets an array of repositories owned by the current user.
+        /// </summary>
         public BitBucketUserRepository[] Repositories { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        private BitBucketUserResponse(JsonObject obj) : base(obj) { }
+        private BitBucketCurrentUserResponseBody(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static BitBucketUserResponse ParseJson(string str) {
-            return JsonConverter.ParseObject(str, Parse);
-        }
-
-        public static BitBucketUserResponse Parse(JsonObject obj) {
+        public static BitBucketCurrentUserResponseBody Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new BitBucketUserResponse(obj) {
+            return new BitBucketCurrentUserResponseBody(obj) {
                 User = obj.GetObject("user", BitBucketUser.Parse),
                 Repositories = obj.GetArray("repositories", BitBucketUserRepository.Parse)
             };
