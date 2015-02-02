@@ -4,17 +4,21 @@ namespace Skybrud.Social.BitBucket.Objects {
     
     public class BitBucketAuthor : SocialJsonObject {
 
+        #region Properties
+
         public string Raw { get; private set; }
 
         public BitBucketAuthorUser User { get; private set; }
-        
-        #region Constructors
-
-        private BitBucketAuthor(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
 
         #endregion
+
+        #region Constructors
+
+        private BitBucketAuthor(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
 
         public static BitBucketAuthor Parse(JsonObject obj) {
 
@@ -28,6 +32,8 @@ namespace Skybrud.Social.BitBucket.Objects {
             };
 
         }
+
+        #endregion
 
     }
 

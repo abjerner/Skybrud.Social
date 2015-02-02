@@ -4,6 +4,8 @@ namespace Skybrud.Social.BitBucket.Objects {
     
     public class BitBucketAuthorUser : SocialJsonObject {
 
+        #region Properties
+
         /// <summary>
         /// The username of the user.
         /// </summary>
@@ -33,11 +35,15 @@ namespace Skybrud.Social.BitBucket.Objects {
             get { return Links.GetLink("html"); }
         }
 
-        #region Constructor
+        #endregion
+
+        #region Constructors
 
         private BitBucketAuthorUser(JsonObject obj) : base(obj) { }
 
         #endregion
+
+        #region Static methods
 
         public static BitBucketAuthorUser Parse(JsonObject obj) {
 
@@ -50,8 +56,10 @@ namespace Skybrud.Social.BitBucket.Objects {
                 DisplayName = obj.GetString("display_name"),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)
             };
-        
+
         }
+
+        #endregion
 
     }
 

@@ -5,16 +5,21 @@ namespace Skybrud.Social.BitBucket.Objects {
     
     public class BitBucketLink : SocialJsonObject {
 
+        #region Properties
+
         public string Name { get; private set; }
+
         public string Href { get; private set; }
+
+        #endregion
 
         #region Constructors
 
-        private BitBucketLink(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
+        private BitBucketLink(JsonObject obj) : base(obj) { }
 
         #endregion
+
+        #region Static methods
 
         public static Dictionary<string, BitBucketLink> ParseMultiple(JsonObject obj) {
 
@@ -38,6 +43,8 @@ namespace Skybrud.Social.BitBucket.Objects {
             return links;
 
         }
+
+        #endregion
 
     }
 

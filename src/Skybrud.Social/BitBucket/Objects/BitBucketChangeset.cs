@@ -39,15 +39,16 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private BitBucketChangeset(JsonObject obj) : base(obj) { }
 
         #endregion
 
-        #region Methods
+        #region Static methods
 
         public static BitBucketChangeset Parse(JsonObject obj) {
+            if (obj == null) return null;
             return new BitBucketChangeset(obj) {
                 Node = obj.GetString("node"),
                 RawAuthor = obj.GetString("raw_author"),

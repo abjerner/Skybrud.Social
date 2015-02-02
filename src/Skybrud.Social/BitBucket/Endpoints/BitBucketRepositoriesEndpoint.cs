@@ -3,6 +3,7 @@ using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.BitBucket.Responses;
 using Skybrud.Social.BitBucket.Responses.Repositories;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
@@ -88,7 +89,7 @@ namespace Skybrud.Social.BitBucket.Endpoints {
             string contents = Raw.GetCommit(accountName, repoSlug, revision).Body;
 
             // Parse the JSON
-            return BitBucketCommit.ParseJson(contents);
+            return JsonObject.ParseJson(contents, BitBucketCommit.Parse);
 
         }
 

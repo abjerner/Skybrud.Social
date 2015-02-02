@@ -4,6 +4,8 @@ namespace Skybrud.Social.BitBucket.Objects {
 
     public class BitBucketRepositoryInfo : SocialJsonObject {
 
+        #region Properties
+
         /// <summary>
         /// The full name of the repository. The full name can be described as "{accountName}/{repoSlug}".
         /// </summary>
@@ -27,27 +29,26 @@ namespace Skybrud.Social.BitBucket.Objects {
         public BitBucketLink LinkHtml {
             get { return Links.GetLink("html"); }
         }
-        
-        #region Constructors
-
-        private BitBucketRepositoryInfo(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
 
         #endregion
 
+        #region Constructors
+
+        private BitBucketRepositoryInfo(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
         public static BitBucketRepositoryInfo Parse(JsonObject obj) {
-
-            // Check if NULL
             if (obj == null) return null;
-
-            // Initialize the object
             return new BitBucketRepositoryInfo(obj) {
                 FullName = obj.GetString("full_name"),
                 Links = obj.GetObject("links", BitBucketLinkCollection.Parse)
             };
-
         }
+
+        #endregion
 
     }
 

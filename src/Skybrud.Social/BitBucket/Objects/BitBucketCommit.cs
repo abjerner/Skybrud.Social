@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Objects {
@@ -40,7 +39,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         private BitBucketCommit(JsonObject obj) : base(obj) { } 
 
@@ -49,26 +48,10 @@ namespace Skybrud.Social.BitBucket.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads an instance of <var>BitBucketCommit</var> from the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static BitBucketCommit LoadJson(string path) {
-            return ParseJson(File.ReadAllText(path));
-        }
-
-        /// <summary>
-        /// Parses the specified JSON string and returns an instance of <var>BitBucketCommit</var> if successful.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static BitBucketCommit ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
-        }
-
-        /// <summary>
-        /// Parses the specified <var>JsonObject</var> and returns an instance of <var>BitBucketCommit</var> if
+        /// Parses the specified <code>JsonObject</code> and returns an instance of <code>BitBucketCommit</code> if
         /// successful.
         /// </summary>
-        /// <param name="obj">The <var>JsonObject</var> representing the user.</param>
+        /// <param name="obj">The <code>JsonObject</code> representing the user.</param>
         public static BitBucketCommit Parse(JsonObject obj) {
             if (obj == null) return null;
             return new BitBucketCommit(obj) {

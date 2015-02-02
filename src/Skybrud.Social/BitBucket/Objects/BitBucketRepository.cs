@@ -17,7 +17,7 @@ namespace Skybrud.Social.BitBucket.Objects {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private BitBucketRepository(JsonObject obj) : base(obj) { }
 

@@ -45,27 +45,9 @@ namespace Skybrud.Social.BitBucket.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads an instance of <var>BitBucketUserRepository</var> from the JSON file at the specified
-        /// <var>path</var>.
+        /// Gets an instance of <code>BitBucketUserRepository</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static BitBucketUserRepository LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>BitBucketUserRepository</var> from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static BitBucketUserRepository ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>BitBucketUserRepository</var> from the specified
-        /// <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static BitBucketUserRepository Parse(JsonObject obj) {
             if (obj == null) return null;
             return new BitBucketUserRepository(obj) {
