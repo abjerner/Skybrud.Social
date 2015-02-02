@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using System.Net;
 using Skybrud.Social.BitBucket.OAuth;
 using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.Http;

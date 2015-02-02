@@ -1,6 +1,4 @@
-using System.Collections.Specialized;
 using Skybrud.Social.BitBucket.OAuth;
-using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.BitBucket.Endpoints.Raw {

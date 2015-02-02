@@ -1,6 +1,4 @@
 using Skybrud.Social.BitBucket.Endpoints.Raw;
-using Skybrud.Social.BitBucket.Options;
-using Skybrud.Social.BitBucket.Responses.Repositories;
 using Skybrud.Social.BitBucket.Responses.Users;
 
 namespace Skybrud.Social.BitBucket.Endpoints {

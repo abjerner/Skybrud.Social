@@ -19,14 +19,10 @@ namespace Skybrud.Social.BitBucket.Responses.Users {
 
             // Validate the response
             ValidateResponse(response);
-            
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-            if (obj == null) return null;
 
             // Initialize the response object
             return new BitBucketUserResponse(response) {
-                Body = BitBucketUserResponseBody.Parse(obj)
+                Body = JsonObject.ParseJson(response.Body, BitBucketUserResponseBody.Parse)
             };
 
         }
