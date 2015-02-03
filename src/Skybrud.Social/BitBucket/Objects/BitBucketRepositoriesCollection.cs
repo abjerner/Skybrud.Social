@@ -1,9 +1,8 @@
-﻿using Skybrud.Social.BitBucket.Objects;
-using Skybrud.Social.Json;
+﻿using Skybrud.Social.Json;
 
-namespace Skybrud.Social.BitBucket.Responses.Repositories {
-
-    public class BitBucketRepositoriesResponseBody : SocialJsonObject {
+namespace Skybrud.Social.BitBucket.Objects {
+    
+    public class BitBucketRepositoriesCollection : SocialJsonObject {
 
         #region Properties
 
@@ -29,17 +28,17 @@ namespace Skybrud.Social.BitBucket.Responses.Repositories {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
-        private BitBucketRepositoriesResponseBody(JsonObject obj) : base(obj) { }
+        private BitBucketRepositoriesCollection(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static BitBucketRepositoriesResponseBody Parse(JsonObject obj) {
+        public static BitBucketRepositoriesCollection Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new BitBucketRepositoriesResponseBody(obj) {
+            return new BitBucketRepositoriesCollection(obj) {
                 PageLength = obj.GetInt32("pagelen"),
                 Values = obj.GetArray("values", BitBucketRepository.Parse),
                 Page = obj.GetInt32("page"),

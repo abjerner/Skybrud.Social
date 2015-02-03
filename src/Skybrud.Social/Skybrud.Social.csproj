@@ -60,8 +60,8 @@
     <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
     <Compile Include="BitBucket\BitBucketService.cs" />
     <Compile Include="BitBucket\Objects\BitBucketCommit.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketRepositoriesCollection.cs" />
     <Compile Include="BitBucket\Options\BitBucketRepositoriesOptions.cs" />
-    <Compile Include="BitBucket\Responses\Repositories\BitBucketRepositoriesResponseBody.cs" />
     <Compile Include="BitBucket\Responses\User\BitBucketCurrentUserResponseBody.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLink.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
