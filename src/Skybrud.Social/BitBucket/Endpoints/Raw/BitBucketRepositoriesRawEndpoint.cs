@@ -60,14 +60,20 @@ namespace Skybrud.Social.BitBucket.Endpoints.Raw {
         /// <param name="repoSlug">The repo identifier.</param>
         /// <param name="page">The page.</param>
         public SocialHttpResponse GetCommits(string accountName, string repoSlug, int page) {
+            return GetCommits(accountName, repoSlug, new BitBucketCommitsOptions {
+                Page = page
+            });
+        }
 
-            // Initialize the query string
-            NameValueCollection query = new NameValueCollection();
-            if (page > 0) query.Add("page", page + "");
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commits", query);
-
+        /// <summary>
+        /// Gets the commit information associated with a repository. By default, this call returns all the commits
+        /// across all branches, bookmarks, and tags. The newest commit is first.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse GetCommits(string accountName, string repoSlug, BitBucketCommitsOptions options) {
+            return Client.DoHttpGetRequest("https://bitbucket.org/api/2.0/repositories/" + accountName + "/" + repoSlug + "/commits", options);
         }
 
         /// <summary>

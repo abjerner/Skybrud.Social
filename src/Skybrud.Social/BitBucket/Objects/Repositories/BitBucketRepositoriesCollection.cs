@@ -1,6 +1,6 @@
 ﻿using Skybrud.Social.Json;
 
-namespace Skybrud.Social.BitBucket.Objects {
+namespace Skybrud.Social.BitBucket.Objects.Repositories {
     
     public class BitBucketRepositoriesCollection : SocialJsonObject {
 

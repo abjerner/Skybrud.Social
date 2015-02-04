@@ -3,6 +3,7 @@ using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.BitBucket.Responses;
 using Skybrud.Social.BitBucket.Responses.Repositories;
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
@@ -66,13 +67,18 @@ namespace Skybrud.Social.BitBucket.Endpoints {
         /// <param name="repoSlug">The repo identifier.</param>
         /// <param name="page">The page.</param>
         public BitBucketCommitsResponse GetCommits(string accountName, string repoSlug, int page = 0) {
+            return BitBucketCommitsResponse.ParseResponse(Raw.GetCommits(accountName, repoSlug, page));
+        }
 
-            // Get the raw data from the API
-            string contents = Raw.GetCommits(accountName, repoSlug, page).Body;
-
-            // Parse the JSON
-            return BitBucketCommitsResponse.ParseJson(contents);
-
+        /// <summary>
+        /// Gets the commit information associated with a repository. By default, this call returns all the commits
+        /// across all branches, bookmarks, and tags. The newest commit is first.
+        /// </summary>
+        /// <param name="accountName">The team or individual account owning the repo.</param>
+        /// <param name="repoSlug">The repo identifier.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public BitBucketCommitsResponse GetCommits(string accountName, string repoSlug, BitBucketCommitsOptions options) {
+            return BitBucketCommitsResponse.ParseResponse(Raw.GetCommits(accountName, repoSlug, options));
         }
 
         /// <summary>

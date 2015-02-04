@@ -2,8 +2,8 @@
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.BitBucket.Options {
-    
-    public class BitBucketRepositoriesOptions : IGetOptions {
+
+    public class BitBucketCommitsOptions : IGetOptions {
 
         #region Properties
 
@@ -13,8 +13,7 @@ namespace Skybrud.Social.BitBucket.Options {
         public int Page { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of repositories to returned on each page. Although not documented, the maximum page
-        /// length seems to be <code>100</code>.
+        /// Gets or sets the amount of commits to returned on each page.
         /// </summary>
         public int PageLength { get; set; }
 

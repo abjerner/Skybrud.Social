@@ -60,8 +60,11 @@
     <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
     <Compile Include="BitBucket\BitBucketService.cs" />
     <Compile Include="BitBucket\Objects\BitBucketCommit.cs" />
-    <Compile Include="BitBucket\Objects\BitBucketRepositoriesCollection.cs" />
+    <Compile Include="BitBucket\Objects\Repositories\BitBucketRepositoriesCollection.cs" />
+    <Compile Include="BitBucket\Objects\Repositories\BitBucketCommitsCollection.cs" />
     <Compile Include="BitBucket\Options\BitBucketRepositoriesOptions.cs" />
+    <Compile Include="BitBucket\Options\BitBucketCommitsOptions.cs" />
+    <Compile Include="BitBucket\Responses\Repositories\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\User\BitBucketCurrentUserResponseBody.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLink.cs" />
     <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
@@ -70,7 +73,6 @@
     <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
     <Compile Include="BitBucket\Objects\BitBucketUserRepository.cs" />
     <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
-    <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
     <Compile Include="BitBucket\Responses\User\BitBucketCurrentUserResponse.cs" />
     <Compile Include="BitBucket\Responses\Repositories\BitBucketRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\Users\BitBucketUserResponse.cs" />
