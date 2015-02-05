@@ -74,7 +74,9 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="query">The search query to run against people search.</param>
         public TwitterUsersSearchResponse Search(string query) {
-            return Search(query, null);
+            return Search(new TwitterUsersSearchOptions {
+                Query = query
+            });
         }
 
         /// <summary>
@@ -83,10 +85,9 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// company name, location, or other criteria. Exact match searches are
         /// not supported.
         /// </summary>
-        /// <param name="query">The search query to run against people search.</param>
         /// <param name="options">The search options.</param>
-        public TwitterUsersSearchResponse Search(string query, TwitterUsersSearchOptions options) {
-            return TwitterUsersSearchResponse.ParseJson(Raw.Search(query, options));
+        public TwitterUsersSearchResponse Search(TwitterUsersSearchOptions options) {
+            return TwitterUsersSearchResponse.ParseResponse(Raw.Search(options));
         }
 
     }

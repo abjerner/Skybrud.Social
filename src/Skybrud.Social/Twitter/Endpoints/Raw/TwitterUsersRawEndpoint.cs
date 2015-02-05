@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 using System.Globalization;
 using Skybrud.Social.Http;
@@ -10,11 +11,21 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
     public class TwitterUsersRawEndpoint {
 
+        #region Properties
+
         public TwitterOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         internal TwitterUsersRawEndpoint(TwitterOAuthClient client) {
             Client = client;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Gets the raw API response for a user with the specified ID. Any entities will not be included in the API response.
@@ -71,26 +82,37 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/users/show.json", qs);
         }
 
+        /// <summary>
+        /// Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by
+        /// topical interest, full name, company name, location, or other criteria. Exact match searches are not
+        /// supported.
+        /// 
+        /// Only the first 1,000 matching results are available.
+        /// </summary>
+        /// <param name="query">The search query to run against people search.</param>
         [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
-        public string Search(string query) {
-            return Search(query, null);
+        public SocialHttpResponse Search(string query) {
+            return Search(new TwitterUsersSearchOptions {
+                Query = query
+            });
         }
 
+        /// <summary>
+        /// Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by
+        /// topical interest, full name, company name, location, or other criteria. Exact match searches are not
+        /// supported.
+        /// 
+        /// Only the first 1,000 matching results are available.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
         [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
-        public string Search(string query, TwitterUsersSearchOptions options) {
-
-            // Declare the query string
-            SocialQueryString qs = new SocialQueryString();
-            qs.Set("q", query);
-            if (options.Page > 1) qs.Set("page", options.Page);
-            if (options.Count != 20) qs.Set("count", options.Count);
-            if (!options.IncludeEntities) qs.Set("include_entities", "false");
-
-            // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/users/search.json", qs.NameValueCollection);
-
+        public SocialHttpResponse Search(TwitterUsersSearchOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/users/search.json", options);
         }
-    
+
+        #endregion
+
     }
 
 }

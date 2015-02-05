@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Globalization;
+using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.Attributes;
 using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
@@ -9,13 +10,21 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
     public class TwitterGeoRawEndpoint {
 
+        #region Properties
+
         public TwitterOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         internal TwitterGeoRawEndpoint(TwitterOAuthClient client) {
             Client = client;
         }
 
-        #region Get information about a place
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the raw API response for a place with the specified ID.
@@ -24,13 +33,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/id/:place_id"/>
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
-        public string GetPlace(string id) {
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/geo/id/" + id + ".json");
+        public SocialHttpResponse GetPlace(string id) {
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/geo/id/" + id + ".json");
         }
-
-        #endregion
-
-        #region Get places from a reverse lookup
 
         /// <summary>
         /// Given a latitude and a longitude, searches for up to 20 places that can be used as
@@ -46,7 +51,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// if there not a corresponding <var>lat</var> parameter.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/reverse_geocode"/>
         [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
-        public string ReverseGeocode(double latitude, double longitude) {
+        public SocialHttpResponse ReverseGeocode(double latitude, double longitude) {
             return ReverseGeocode(latitude, longitude, null);
         }
 
@@ -65,7 +70,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/reverse_geocode"/>
         [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
-        public string ReverseGeocode(double latitude, double longitude, TwitterReverseGeocodeOptions options) {
+        public SocialHttpResponse ReverseGeocode(double latitude, double longitude, TwitterReverseGeocodeOptions options) {
 
             // Define the query string
             NameValueCollection qs = new NameValueCollection {
@@ -81,7 +86,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/geo/reverse_geocode.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/geo/reverse_geocode.json", qs);
 
         }
 

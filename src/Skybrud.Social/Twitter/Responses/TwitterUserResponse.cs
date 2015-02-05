@@ -18,16 +18,12 @@ namespace Skybrud.Social.Twitter.Responses {
 
             if (response == null) return null;
 
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
-            if (obj == null) return null;
-
             // Validate the response
-            ValidateResponse(response, obj);
+            ValidateResponse(response);
 
             // Initialize the response object
             return new TwitterUserResponse(response) {
-                Body = TwitterUser.Parse(obj)
+                Body = JsonObject.ParseJson(response.Body, TwitterUser.Parse)
             };
 
         }

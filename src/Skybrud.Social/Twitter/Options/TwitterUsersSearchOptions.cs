@@ -1,8 +1,16 @@
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
+
 namespace Skybrud.Social.Twitter.Options {
 
-    public class TwitterUsersSearchOptions {
+    public class TwitterUsersSearchOptions : IGetOptions {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the search query.
+        /// </summary>
+        public string Query { get; set; }
 
         /// <summary>
         /// Specifies the page of results to retrieve.
@@ -23,12 +31,25 @@ namespace Skybrud.Social.Twitter.Options {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public TwitterUsersSearchOptions() {
             Page = 1;
             Count = 20;
             IncludeEntities = true;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        public SocialQueryString GetQueryString() {
+            SocialQueryString qs = new SocialQueryString();
+            qs.Set("q", Query);
+            if (Page > 1) qs.Set("page", Page);
+            if (Count != 20) qs.Set("count", Count);
+            if (!IncludeEntities) qs.Set("include_entities", "false");
+            return qs;
         }
 
         #endregion

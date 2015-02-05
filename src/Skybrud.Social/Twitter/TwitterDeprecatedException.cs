@@ -4,24 +4,25 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter {
 
-    public class TwitterException : Exception {
+    [Obsolete("Use class TwitterException instead")]
+    public class TwitterDeprecatedException : Exception {
 
         public int Code { get; private set; }
 
-        public TwitterException(int code, string message) : base(message) {
+        public TwitterDeprecatedException(int code, string message) : base(message) {
             Code = code;
         }
 
-        public static TwitterException Parse(string str) {
+        public static TwitterDeprecatedException Parse(string str) {
             IJsonObject obj = JsonConverter.Parse(str);
             return obj is JsonArray ? Parse(obj as JsonArray) : Parse(obj as JsonObject);
         }
 
-        public static TwitterException Parse(JsonArray array) {
+        public static TwitterDeprecatedException Parse(JsonArray array) {
             return array == null ? null : Parse(array.GetObject(0));
         }
         
-        public static TwitterException Parse(JsonObject obj) {
+        public static TwitterDeprecatedException Parse(JsonObject obj) {
 
             // TODO: Does this mess up the stack trace?
 
@@ -29,7 +30,7 @@ namespace Skybrud.Social.Twitter {
                 obj = obj.GetArray("errors").GetObject(0);
             }
 
-            throw new TwitterException(obj.GetInt32("code"), obj.GetString("message"));
+            throw new TwitterDeprecatedException(obj.GetInt32("code"), obj.GetString("message"));
         
         }
     

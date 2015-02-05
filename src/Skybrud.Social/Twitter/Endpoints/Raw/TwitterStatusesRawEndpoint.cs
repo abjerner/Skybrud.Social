@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Globalization;
+using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.Attributes;
 using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
@@ -9,13 +10,21 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
     public class TwitterStatusesRawEndpoint {
 
+        #region Properties
+
         public TwitterOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         internal TwitterStatusesRawEndpoint(TwitterOAuthClient client) {
             Client = client;
         }
 
-        #region Get information about a single tweet
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Alias of GetStatusMessage(). Gets the raw API response for a status message (tweet) with the specified ID.
@@ -23,7 +32,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the status message.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
-        public string GetTweet(long id) {
+        public SocialHttpResponse GetTweet(long id) {
             return GetStatusMessage(id, null);
         }
 
@@ -34,7 +43,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
-        public string GetTweet(long id, TwitterStatusMessageOptions options) {
+        public SocialHttpResponse GetTweet(long id, TwitterStatusMessageOptions options) {
             return GetStatusMessage(id, options);
         }
 
@@ -44,7 +53,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the status message.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
-        public string GetStatusMessage(long id) {
+        public SocialHttpResponse GetStatusMessage(long id) {
             return GetStatusMessage(id, null);
         }
 
@@ -55,7 +64,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
         [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
-        public string GetStatusMessage(long id, TwitterStatusMessageOptions options) {
+        public SocialHttpResponse GetStatusMessage(long id, TwitterStatusMessageOptions options) {
 
             // Define the query string
             NameValueCollection qs = new NameValueCollection { { "id", id.ToString(CultureInfo.InvariantCulture) } };
@@ -66,13 +75,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/show.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/show.json", qs);
 
         }
-
-        #endregion
-
-        #region Gets the timeline for a specific user
 
         /// <summary>
         /// Get the raw API response for a user's timeline.
@@ -81,7 +86,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
-        public string GetUserTimeline(long userId) {
+        public SocialHttpResponse GetUserTimeline(long userId) {
             return GetUserTimeline(userId, null);
         }
 
@@ -93,7 +98,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
-        public string GetUserTimeline(long userId, TwitterTimelineOptions options) {
+        public SocialHttpResponse GetUserTimeline(long userId, TwitterTimelineOptions options) {
 
             // Define the query string
             NameValueCollection qs = new NameValueCollection { { "user_id", userId + "" } };
@@ -110,7 +115,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
 
         }
 
@@ -121,7 +126,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
-        public string GetUserTimeline(string screenName) {
+        public SocialHttpResponse GetUserTimeline(string screenName) {
             return GetUserTimeline(screenName, null);
         }
 
@@ -133,7 +138,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
         [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
-        public string GetUserTimeline(string screenName, TwitterTimelineOptions options) {
+        public SocialHttpResponse GetUserTimeline(string screenName, TwitterTimelineOptions options) {
 
             // Define the query string
             NameValueCollection qs = new NameValueCollection { { "screen_name", screenName } };
@@ -150,19 +155,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
 
         }
-
-        #endregion
-
-        #region GetHomeTimeline(...)
 
         /// <summary>
         /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
         /// user and the users they follow.
         /// </summary>
-        public string GetHomeTimeline() {
+        public SocialHttpResponse GetHomeTimeline() {
             return GetHomeTimeline(null);
         }
 
@@ -171,7 +172,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// user and the users they follow. 
         /// </summary>
         /// <param name="options">The options for the call.</param>
-        public string GetHomeTimeline(TwitterTimelineOptions options) {
+        public SocialHttpResponse GetHomeTimeline(TwitterTimelineOptions options) {
 
             // Initialize the query string
             NameValueCollection qs = new NameValueCollection();
@@ -187,18 +188,14 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/home_timeline.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/home_timeline.json", qs);
 
         }
-
-        #endregion
-
-        #region GetMentionsTimeline(...)
 
         /// <summary>
         /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
         /// </summary>
-        public string GetMentionsTimeline() {
+        public SocialHttpResponse GetMentionsTimeline() {
             return GetMentionsTimeline(null);
         }
 
@@ -206,7 +203,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Gets the most recent mentions (tweets containing a users's @screen_name) for the authenticating user.
         /// </summary>
         /// <param name="options">The options for the call.</param>
-        public string GetMentionsTimeline(TwitterTimelineOptions options) {
+        public SocialHttpResponse GetMentionsTimeline(TwitterTimelineOptions options) {
 
             // Initialize the query string
             NameValueCollection qs = new NameValueCollection();
@@ -222,18 +219,14 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/mentions_timeline.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/mentions_timeline.json", qs);
 
         }
-
-        #endregion
-
-        #region GetRetweetsOfMe(...)
 
         /// <summary>
         /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
         /// </summary>
-        public string GetRetweetsOfMe() {
+        public SocialHttpResponse GetRetweetsOfMe() {
             return GetRetweetsOfMe(null);
         }
 
@@ -241,7 +234,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
         /// </summary>
         /// <param name="options">The options for the call.</param>
-        public string GetRetweetsOfMe(TwitterTimelineOptions options) {
+        public SocialHttpResponse GetRetweetsOfMe(TwitterTimelineOptions options) {
 
             // Initialize the query string
             NameValueCollection qs = new NameValueCollection();
@@ -257,13 +250,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             }
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/statuses/retweets_of_me.json", qs);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/retweets_of_me.json", qs);
 
         }
-
-        #endregion
-
-        #region PostStatusMessage(...)
 
         /// <summary>
         /// Posts the specified status message.

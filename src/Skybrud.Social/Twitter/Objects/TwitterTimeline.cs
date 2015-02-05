@@ -44,7 +44,7 @@ namespace Skybrud.Social.Twitter.Objects {
             JsonObject obj = json as JsonObject;
             if (obj != null) {
                 JsonArray errors = obj.GetArray("errors");
-                throw new TwitterException(
+                throw new TwitterDeprecatedException(
                     errors.GetObject(0).GetInt32("code"),
                     errors.GetObject(0).GetString("message")
                 );

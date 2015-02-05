@@ -1,4 +1,5 @@
 using System.Net;
+using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 
@@ -28,16 +29,15 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterUser VerifyCredentials() {
 
             // Make a call to the API
-            HttpStatusCode status;
-            string response = Raw.VerifyCredentials(out status);
+            SocialHttpResponse response = Raw.VerifyCredentials();
 
             // Check for errors
-            if (status != HttpStatusCode.OK) {
-                throw TwitterException.Parse(response);
+            if (response.StatusCode != HttpStatusCode.OK) {
+                throw TwitterDeprecatedException.Parse(response.Body);
             }
 
             // Parse the response
-            return TwitterUser.ParseJson(response);
+            return TwitterUser.ParseJson(response.Body);
 
         }
     

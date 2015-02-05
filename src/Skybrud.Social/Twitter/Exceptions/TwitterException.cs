@@ -7,8 +7,14 @@ namespace Skybrud.Social.Twitter.Exceptions {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the underlying <code>SocialHttpResponse</code>.
+        /// </summary>
         public SocialHttpResponse Response { get; private set; }
 
+        /// <summary>
+        /// Gets the error code received from the Twitter API.
+        /// </summary>
         public int Code { get; private set; }
 
         #endregion

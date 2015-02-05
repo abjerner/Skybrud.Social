@@ -16,10 +16,12 @@ namespace Skybrud.Social.Twitter.Responses {
             Response = response;
         }
 
-        public static void ValidateResponse(SocialHttpResponse response, JsonObject obj) {
+        public static void ValidateResponse(SocialHttpResponse response) {
 
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
+
+            JsonObject obj = response.GetBodyAsJsonObject();
 
             // Get the "errors" array
             JsonArray errors = obj.GetArray("errors");
@@ -28,7 +30,7 @@ namespace Skybrud.Social.Twitter.Responses {
             JsonObject error = errors.GetObject(0);
 
             // Throw the exception
-            throw new Exceptions.TwitterException(response, error.GetString("message"), error.GetInt32("code"));
+            throw new TwitterException(response, error.GetString("message"), error.GetInt32("code"));
 
         }
 

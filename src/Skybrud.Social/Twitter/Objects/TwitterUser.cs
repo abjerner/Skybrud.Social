@@ -278,7 +278,7 @@ namespace Skybrud.Social.Twitter.Objects {
             
             // Error checking
             if (obj == null) return null;
-            if (obj.HasValue("error")) throw TwitterException.Parse(obj.GetArray("error"));
+            if (obj.HasValue("error")) throw TwitterDeprecatedException.Parse(obj.GetArray("error"));
             
             TwitterUser user = new TwitterUser(obj);
 

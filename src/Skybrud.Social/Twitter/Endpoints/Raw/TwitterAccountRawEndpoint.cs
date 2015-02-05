@@ -1,4 +1,4 @@
-using System.Net;
+using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.OAuth;
 
 namespace Skybrud.Social.Twitter.Endpoints.Raw {
@@ -12,14 +12,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         }
 
         #region Account
-
-        public string VerifyCredentials() {
-            HttpStatusCode status;
-            return VerifyCredentials(out status);
-        }
-
-        public string VerifyCredentials(out HttpStatusCode status) {
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/account/verify_credentials.json", null, null, out status);
+        
+        public SocialHttpResponse VerifyCredentials() {
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/account/verify_credentials.json");
         }
 
         #endregion

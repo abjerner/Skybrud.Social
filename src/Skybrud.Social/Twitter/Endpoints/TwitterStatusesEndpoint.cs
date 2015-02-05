@@ -66,7 +66,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="statusId">The ID of the status message.</param>
         /// <param name="options">Options affecting the response from the Twitter API.</param>
         public TwitterStatusMessage GetStatusMessage(long statusId, TwitterStatusMessageOptions options) {
-            return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options));
+            return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options).Body);
         }
 
         #endregion
@@ -74,39 +74,39 @@ namespace Skybrud.Social.Twitter.Endpoints {
         #region GetUserTimeline(...)
 
         public TwitterTimeline GetUserTimeline(long userId, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)).Body);
         }
 
         public TwitterTimeline GetUserTimeline(long userId, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options).Body);
         }
 
         public TwitterTimeline GetUserTimeline(string screenName, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)).Body);
         }
 
         public TwitterTimeline GetUserTimeline(string screenName, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options).Body);
         }
 
         [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
         public TwitterTimeline UserTimeline(long userId, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)).Body);
         }
 
         [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
         public TwitterTimeline UserTimeline(long userId, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options).Body);
         }
 
         [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
         public TwitterTimeline UserTimeline(string screenName, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)).Body);
         }
 
         [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
         public TwitterTimeline UserTimeline(string screenName, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options));
+            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options).Body);
         }
 
         #endregion
@@ -127,7 +127,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="options">The options for the call.</param>
         public TwitterTimeline GetHomeTimeline(TwitterTimelineOptions options) {
-            return TwitterTimeline.ParseJson(Raw.GetHomeTimeline(options));
+            return TwitterTimeline.ParseJson(Raw.GetHomeTimeline(options).Body);
         }
 
         #endregion
@@ -146,7 +146,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="options">The options for the call.</param>
         public TwitterTimeline GetMentionsTimeline(TwitterTimelineOptions options) {
-            return TwitterTimeline.ParseJson(Raw.GetMentionsTimeline(options));
+            return TwitterTimeline.ParseJson(Raw.GetMentionsTimeline(options).Body);
         }
 
         #endregion
@@ -165,7 +165,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="options">The options for the call.</param>
         public TwitterTimeline GetRetweetsOfMe(TwitterTimelineOptions options) {
-            return TwitterTimeline.ParseJson(Raw.GetRetweetsOfMe(options));
+            return TwitterTimeline.ParseJson(Raw.GetRetweetsOfMe(options).Body);
         }
 
         #endregion

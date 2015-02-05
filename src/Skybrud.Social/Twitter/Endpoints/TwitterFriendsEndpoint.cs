@@ -48,7 +48,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
         public TwitterIdsResponse GetIdsFromUserId(long userId, TwitterFriendsIdsOptions options) {
-            return TwitterIdsResponse.ParseJson(Raw.GetIdsFromUserId(userId, options));
+            return TwitterIdsResponse.ParseJson(Raw.GetIdsFromUserId(userId, options).Body);
         }
 
         #endregion
@@ -69,7 +69,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
         public TwitterIdsResponse GetIdsFromScreenName(string screenName, TwitterFriendsIdsOptions options) {
-            return TwitterIdsResponse.ParseJson(Raw.GetIdsFromScreenName(screenName, options));
+            return TwitterIdsResponse.ParseJson(Raw.GetIdsFromScreenName(screenName, options).Body);
         }
 
         #endregion
@@ -90,7 +90,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
         public TwitterUserListResponse GetListFromUserId(long userId, TwitterFriendsListOptions options) {
-            return TwitterUserListResponse.ParseJson(Raw.GetListFromUserId(userId, options));
+            return TwitterUserListResponse.ParseJson(Raw.GetListFromUserId(userId, options).Body);
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
         public TwitterUserListResponse GetListFromScreenName(string screenName, TwitterFriendsListOptions options) {
-            return TwitterUserListResponse.ParseJson(Raw.GetListFromScreenName(screenName, options));
+            return TwitterUserListResponse.ParseJson(Raw.GetListFromScreenName(screenName, options).Body);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Globalization;
+using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.OAuth;
 using Skybrud.Social.Twitter.Options;
 
@@ -26,13 +27,11 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #region Methods
 
-        #region GetIdsFromUserId(...)
-
         /// <summary>
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public string GetIdsFromUserId(long userId) {
+        public SocialHttpResponse GetIdsFromUserId(long userId) {
             return GetIdsFromUserId(userId, null);
         }
 
@@ -41,7 +40,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetIdsFromUserId(long userId, TwitterFriendsIdsOptions options) {
+        public SocialHttpResponse GetIdsFromUserId(long userId, TwitterFriendsIdsOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -52,19 +51,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/ids.json", query);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/ids.json", query);
 
         }
-
-        #endregion
-
-        #region GetIdsFromScreenName(...)
 
         /// <summary>
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        public string GetIdsFromScreenName(string screenName) {
+        public SocialHttpResponse GetIdsFromScreenName(string screenName) {
             return GetIdsFromScreenName(screenName, null);
         }
 
@@ -73,7 +68,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetIdsFromScreenName(string screenName, TwitterFriendsIdsOptions options) {
+        public SocialHttpResponse GetIdsFromScreenName(string screenName, TwitterFriendsIdsOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -84,19 +79,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/ids.json", query);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/ids.json", query);
 
         }
-
-        #endregion
-
-        #region GetListFromUserId(...)
 
         /// <summary>
         /// Gets a list of friends for a given user using the default options.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public string GetListFromUserId(long userId) {
+        public SocialHttpResponse GetListFromUserId(long userId) {
             return GetListFromUserId(userId, null);
         }
 
@@ -105,7 +96,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetListFromUserId(long userId, TwitterFriendsListOptions options) {
+        public SocialHttpResponse GetListFromUserId(long userId, TwitterFriendsListOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -116,19 +107,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/list.json", query);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/list.json", query);
 
         }
-
-        #endregion
-
-        #region GetListFromScreenName(...)
 
         /// <summary>
         /// Gets a list of friends for a given user using the default options.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        public string GetListFromScreenName(string screenName) {
+        public SocialHttpResponse GetListFromScreenName(string screenName) {
             return GetListFromScreenName(screenName, null);
         }
 
@@ -137,7 +124,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public string GetListFromScreenName(string screenName, TwitterFriendsListOptions options) {
+        public SocialHttpResponse GetListFromScreenName(string screenName, TwitterFriendsListOptions options) {
 
             // Define the query string
             NameValueCollection query = new NameValueCollection {
@@ -148,11 +135,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             if (options != null) options.UpdateNameValueCollection(query);
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("GET", "https://api.twitter.com/1.1/friends/list.json", query);
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/list.json", query);
 
         }
-
-        #endregion
 
         #endregion
 

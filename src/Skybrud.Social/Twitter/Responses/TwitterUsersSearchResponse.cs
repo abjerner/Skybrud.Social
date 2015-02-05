@@ -1,34 +1,34 @@
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
 
-    public class TwitterUsersSearchResponse {
+    public class TwitterUsersSearchResponse : TwitterResponse<TwitterUser[]> {
 
-        public TwitterUser[] Data { get; private set; }
+        #region Constructors
 
-        public static TwitterUsersSearchResponse ParseJson(string json) {
+        private TwitterUsersSearchResponse(SocialHttpResponse response) : base(response) { }
 
-            // Parse the JSON string to either an object (if any errors) or an
-            // array of matched users if successful.
-            IJsonObject converted = JsonConverter.Parse(json);
+        #endregion
 
-            // Check for any errors
-            JsonObject obj = converted as JsonObject;
-            if (obj != null) {
-                JsonArray errors = obj.GetArray("errors");
-                throw new TwitterException(
-                    errors.GetObject(0).GetInt32("code"),
-                    errors.GetObject(0).GetString("message")
-                );
-            }
+        #region Static methods
 
-            // Parse the array
-            return new TwitterUsersSearchResponse {
-                Data = ((JsonArray) converted).ParseMultiple(TwitterUser.Parse)
+        public static TwitterUsersSearchResponse ParseResponse(SocialHttpResponse response) {
+
+            if (response == null) return null;
+
+            // Validate the response
+            ValidateResponse(response);;
+
+            // Initialize the response object
+            return new TwitterUsersSearchResponse(response) {
+                Body = JsonArray.ParseJson(response.Body).ParseMultiple(TwitterUser.Parse)
             };
 
         }
+
+        #endregion
 
     }
 

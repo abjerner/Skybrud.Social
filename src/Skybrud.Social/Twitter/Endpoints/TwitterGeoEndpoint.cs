@@ -1,7 +1,4 @@
-using System.Collections.Specialized;
-using System.Globalization;
 using Skybrud.Social.Twitter.Endpoints.Raw;
-using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
 using Skybrud.Social.Twitter.Responses;
@@ -32,7 +29,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="id">The ID of the place.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/id/:place_id"/>
         public TwitterPlace GetPlace(string id) {
-            return TwitterPlace.ParseJson(Raw.GetPlace(id));
+            return TwitterPlace.ParseJson(Raw.GetPlace(id).Body);
         }
 
         /// <summary>
@@ -67,7 +64,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/reverse_geocode"/>
         public TwitterReverseGeocodeResponse ReverseGeocode(double latitude, double longitude, TwitterReverseGeocodeOptions options) {
-            return TwitterReverseGeocodeResponse.ParseJson(Raw.ReverseGeocode(latitude, longitude, options));
+            return TwitterReverseGeocodeResponse.ParseJson(Raw.ReverseGeocode(latitude, longitude, options).Body);
         }
 
     }
