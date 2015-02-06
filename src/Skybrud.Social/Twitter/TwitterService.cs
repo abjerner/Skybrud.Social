@@ -20,26 +20,6 @@ namespace Skybrud.Social.Twitter {
             // make constructor private
         }
 
-        [Obsolete("Made obsolete to have consistent naming across framework. Use CreateFromAccessInformation or CreateFromOAuthClient instead.")]
-        public static TwitterService GetFromAccessInformation(TwitterAccessInformation info) {
-            return CreateFromOAuthClient(new TwitterOAuthClient {
-                ConsumerKey = info.ConsumerKey,
-                ConsumerSecret = info.ConsumerSecret,
-                Token = info.AccessToken,
-                TokenSecret = info.AccessTokenSecret
-            });
-        }
-
-        [Obsolete("Use class TwitterOAuthClient and method CreateFromOAuthClient instead.")]
-        public static TwitterService CreateFromAccessInformation(TwitterAccessInformation info) {
-            return CreateFromOAuthClient(new TwitterOAuthClient {
-                ConsumerKey = info.ConsumerKey,
-                ConsumerSecret = info.ConsumerSecret,
-                Token = info.AccessToken,
-                TokenSecret = info.AccessTokenSecret
-            });
-        }
-
         public static TwitterService CreateFromOAuthClient(TwitterOAuthClient client) {
 
             // This should never be null

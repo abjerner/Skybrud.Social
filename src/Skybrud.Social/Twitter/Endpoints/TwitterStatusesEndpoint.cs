@@ -1,4 +1,3 @@
-using System;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
@@ -88,27 +87,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterTimeline GetUserTimeline(string screenName, TwitterTimelineOptions options = null) {
             return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options).Body);
         }
-
-        [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
-        public TwitterTimeline UserTimeline(long userId, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)).Body);
-        }
-
-        [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
-        public TwitterTimeline UserTimeline(long userId, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, options).Body);
-        }
-
-        [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
-        public TwitterTimeline UserTimeline(string screenName, int count) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, new TwitterTimelineOptions(count)).Body);
-        }
-
-        [Obsolete("Use method GetUserTimeline(...) instead for consistent naming")]
-        public TwitterTimeline UserTimeline(string screenName, TwitterTimelineOptions options = null) {
-            return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options).Body);
-        }
-
+        
         #endregion
 
         #region GetHomeTimeline(...)
