@@ -32,10 +32,9 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Returns an instance of <var>IJsonObject</var>, which can either be
-        /// a <var>JsonObject</var> or a <var>JsonArray</var> depending on the
-        /// specified JSON string. <var>NULL</var> may be returned if the
-        /// parsed value cannot be converted to either of these two types.
+        /// Returns an instance of <code>IJsonObject</code>, which can either be either an instance of
+        /// <code>JsonObject</code> or an instance of <code>JsonArray</code> depending on the specified JSON string.
+        /// <code>NULL</code> may be returned if the parsed value cannot be converted to either of these two types.
         /// </summary>
         /// <param name="json">The JSON string to parsed.</param>
         public static IJsonObject Parse(string json) {
@@ -58,9 +57,8 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Returns an instance of <var>JsonObject</var> based on the specified
-        /// JSON string. <var>NULL</var> may be returned if the parsed value
-        /// cannot be converted to an instance of <var>JsonObject</var>.
+        /// Returns an instance of <code>JsonObject</code> based on the specified JSON string. <code>NULL</code> may be
+        /// returned if the parsed value cannot be converted to an instance of <code>JsonObject</code>.
         /// </summary>
         /// <param name="json">The JSON string to parsed.</param>
         public static JsonObject ParseObject(string json) {
@@ -68,9 +66,8 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Returns an instance of <var>JsonArray</var> based on the specified
-        /// JSON string. <var>NULL</var> may be returned if the parsed value
-        /// cannot be converted to an instance of <var>JsonArray</var>.
+        /// Returns an instance of <code>JsonArray</code> based on the specified JSON string. <code>NULL</code> may be
+        /// returned if the parsed value cannot be converted to an instance of <code>JsonArray</code>.
         /// </summary>
         /// <param name="json">The JSON string to parsed.</param>
         public static JsonArray ParseArray(string json) {

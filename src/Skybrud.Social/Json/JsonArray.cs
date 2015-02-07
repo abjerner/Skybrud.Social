@@ -8,7 +8,13 @@ namespace Skybrud.Social.Json {
     
     public class JsonArray : IJsonObject {
 
+        #region Private fields
+
         private object[] _array;
+
+        #endregion
+
+        #region Properties
 
         public object[] InternalArray {
             get { return _array; }
@@ -26,6 +32,10 @@ namespace Skybrud.Social.Json {
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         public JsonArray(object[] array) {
             _array = array;
         }
@@ -33,6 +43,10 @@ namespace Skybrud.Social.Json {
         public JsonArray(ArrayList array) {
             _array = array.ToArray();
         }
+
+        #endregion
+
+        #region Member methods
 
         public bool IsArray(int index) {
             return _array[index] is object[];
@@ -106,6 +120,19 @@ namespace Skybrud.Social.Json {
             return temp;
         }
 
+        /// <summary>
+        /// Iterates over each item in the array using a for loop to let you parse each item individually.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func">The function used to parse each item.</param>
+        public T[] For<T>(Func<JsonArray, int, T> func) {
+            T[] array = new T[Length];
+            for (int index = 0; index < Length; index++) {
+                array[index] = func(this, index);
+            }
+            return array;
+        }
+
         public T[] Cast<T>() {
             return _array.Cast<T>().ToArray();
         }
@@ -118,15 +145,19 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Save the array to a JSON file at the specified <var>path</var>.
+        /// Save the array to a JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
             File.WriteAllText(path, ToJson());
         }
 
+        #endregion
+
+        #region Static methods
+
         /// <summary>
-        /// Load an instance of <var>JsonObject</var> from the JSON file at the specified <var>path</var>.
+        /// Loads an instance of <code>JsonArray</code> from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static JsonArray LoadJson(string path) {
@@ -134,7 +165,7 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Load an array of <var>T</var> from the JSON file at the specified <var>path</var>.
+        /// Loads an array of <code>T</code> from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         /// <param name="func">The function used to parse the array.</param>
@@ -143,7 +174,7 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// Gets an instance of <code>JsonArray</code> from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the array.</param>
         public static JsonArray ParseJson(string json) {
@@ -151,13 +182,15 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Gets an array of <var>T</var> from the specified JSON string.
+        /// Gets an array of <code>T</code> from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the array.</param>
         /// <param name="func">The function used to parse the array.</param>
         public static T[] ParseJson<T>(string json, Func<JsonArray, T[]> func) {
             return JsonConverter.ParseArray(json, func);
         }
+
+        #endregion
 
     }
 

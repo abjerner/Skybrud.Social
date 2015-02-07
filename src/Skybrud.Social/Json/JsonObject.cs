@@ -19,7 +19,7 @@ namespace Skybrud.Social.Json {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         public JsonObject(IDictionary<string, object> dictionary) {
             Dictionary = dictionary;
@@ -30,6 +30,8 @@ namespace Skybrud.Social.Json {
         }
 
         #endregion
+
+        #region Member methods
 
         public bool HasValue(string name) {
             return Dictionary.ContainsKey(name) && Dictionary[name] != null;
@@ -59,6 +61,51 @@ namespace Skybrud.Social.Json {
         public T[] GetArray<T>(string name, Func<JsonObject, T> func) {
             JsonArray array = GetArray(name);
             return array == null ? null : array.ParseMultiple(func);
+        }
+
+        /// <summary>
+        /// Gets an array of strings.
+        /// </summary>
+        /// <param name="name">The name of the property holding the array.</param>
+        public string[] GetStringArray(string name) {
+            JsonArray array = GetArray(name);
+            return array == null ? null : array.For((arr, index) => arr.GetString(index));
+        }
+
+        /// <summary>
+        /// Gets an array of 32-bit integers (<code>int</code>).
+        /// </summary>
+        /// <param name="name">The name of the property holding the array.</param>
+        public int[] GetInt32Array(string name) {
+            JsonArray array = GetArray(name);
+            return array == null ? null : array.For((arr, index) => arr.GetInt32(index));
+        }
+
+        /// <summary>
+        /// Gets an array of 64-bit integers (<code>long</code>).
+        /// </summary>
+        /// <param name="name">The name of the property holding the array.</param>
+        public long[] GetInt64Array(string name) {
+            JsonArray array = GetArray(name);
+            return array == null ? null : array.For((arr, index) => arr.GetInt64(index));
+        }
+
+        /// <summary>
+        /// Gets an array of floating point values (<code>float</code>).
+        /// </summary>
+        /// <param name="name">The name of the property holding the array.</param>
+        public float[] GetFloatArray(string name) {
+            JsonArray array = GetArray(name);
+            return array == null ? null : array.For((arr, index) => arr.GetFloat(index));
+        }
+
+        /// <summary>
+        /// Gets an array of doubles.
+        /// </summary>
+        /// <param name="name">The name of the property holding the array.</param>
+        public double[] GetDoubleArray(string name) {
+            JsonArray array = GetArray(name);
+            return array == null ? null : array.For((arr, index) => arr.GetDouble(index));
         }
 
         public T GetValue<T>(string name) {
@@ -146,7 +193,7 @@ namespace Skybrud.Social.Json {
         }
 
         public T GetEnum<T>(string name, T fallback) where T : struct {
-            return SocialUtils.ParseEnum<T>(GetString(name), fallback);
+            return SocialUtils.ParseEnum(GetString(name), fallback);
         }
 
         public void SetInt(string name, int value) {
@@ -177,15 +224,19 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Save the object to a JSON file at the specified <var>path</var>.
+        /// Save the object to a JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public void SaveJson(string path) {
             File.WriteAllText(path, ToJson());
         }
 
+        #endregion
+
+        #region Static methods
+
         /// <summary>
-        /// Load an instance of <var>JsonObject</var> from the JSON file at the specified <var>path</var>.
+        /// Loads an instance of <code>JsonObject</code> from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static JsonObject LoadJson(string path) {
@@ -193,7 +244,7 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Load an instance of <var>T</var> from the JSON file at the specified <var>path</var>.
+        /// Loads an instance of <code>T</code> from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         /// <param name="func">The function used to parse the object.</param>
@@ -202,7 +253,7 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// Gets an instance of <code>JsonObject</code> from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
         public static JsonObject ParseJson(string json) {
@@ -210,14 +261,16 @@ namespace Skybrud.Social.Json {
         }
 
         /// <summary>
-        /// Gets an instance of <var>JsonObject</var> from the specified JSON string.
+        /// Gets an instance of <code>T</code> from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
         /// <param name="func">The function used to parse the object.</param>
         public static T ParseJson<T>(string json, Func<JsonObject, T> func) {
             return JsonConverter.ParseObject(json, func);
         }
-    
+
+        #endregion
+
     }
 
 }
