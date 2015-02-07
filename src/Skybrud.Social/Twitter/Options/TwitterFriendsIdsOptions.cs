@@ -1,9 +1,10 @@
-using System.Collections.Specialized;
-using System.Globalization;
+using System;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Twitter.Options {
-    
-    public class TwitterFriendsIdsOptions {
+
+    public class TwitterFriendsIdsOptions : IGetOptions {
 
         #region Constants
 
@@ -15,6 +16,16 @@ namespace Skybrud.Social.Twitter.Options {
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the ID of the user for whom to return results for.
+        /// </summary>
+        public long UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the screen name of the user for whom to return results for.
+        /// </summary>
+        public string ScreenName { get; set; }
 
         /// <summary>
         /// Causes the results to be broken into pages. If no cursor is
@@ -43,18 +54,15 @@ namespace Skybrud.Social.Twitter.Options {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
-        public void UpdateNameValueCollection(NameValueCollection nvc) {
-
-            if (Cursor != DefaultCursor) {
-                nvc.Add("cursor", Cursor.ToString(CultureInfo.InvariantCulture));
-            }
-
-            if (Count != DefaultCount) {
-                nvc.Add("count", Count.ToString(CultureInfo.InvariantCulture));
-            }
-            
+        public SocialQueryString GetQueryString() {
+            SocialQueryString qs = new SocialQueryString();
+            if (UserId > 0) qs.Set("user_id", UserId);
+            if (!String.IsNullOrWhiteSpace(ScreenName)) qs.Set("screen_name", ScreenName);
+            if (Cursor != DefaultCursor) qs.Set("cursor", Cursor);
+            if (Count != DefaultCount) qs.Set("count", Count);
+            return qs;
         }
 
         #endregion

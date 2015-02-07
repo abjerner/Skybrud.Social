@@ -36,8 +36,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public TwitterIdsResponse GetIdsFromUserId(long userId) {
-            return GetIdsFromUserId(userId, null);
+        public TwitterIdsResponse GetIds(long userId) {
+            return GetIds(userId, null);
         }
 
         /// <summary>
@@ -45,16 +45,16 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIdsFromUserId(long userId, TwitterFollowersIdsOptions options) {
-            return TwitterIdsResponse.ParseResponse(Raw.GetIdsFromUserId(userId, options));
+        public TwitterIdsResponse GetIds(long userId, TwitterFollowersIdsOptions options) {
+            return TwitterIdsResponse.ParseResponse(Raw.GetIds(userId, options));
         }
 
         /// <summary>
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        public TwitterIdsResponse GetIdsFromScreenName(string screenName) {
-            return GetIdsFromScreenName(screenName, null);
+        public TwitterIdsResponse GetIds(string screenName) {
+            return GetIds(screenName, null);
         }
 
         /// <summary>
@@ -62,16 +62,16 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIdsFromScreenName(string screenName, TwitterFollowersIdsOptions options) {
-            return TwitterIdsResponse.ParseResponse(Raw.GetIdsFromScreenName(screenName, options));
+        public TwitterIdsResponse GetIds(string screenName, TwitterFollowersIdsOptions options) {
+            return TwitterIdsResponse.ParseResponse(Raw.GetIds(screenName, options));
         }
 
         /// <summary>
         /// Gets a list of friends for a given user using the default options.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        public TwitterUserListResponse GetListFromUserId(long userId) {
-            return GetListFromUserId(userId, null);
+        public TwitterUserListResponse GetList(long userId) {
+            return GetList(userId, null);
         }
 
         /// <summary>
@@ -79,16 +79,16 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetListFromUserId(long userId, TwitterFollowersListOptions options) {
-            return TwitterUserListResponse.ParseJson(Raw.GetListFromUserId(userId, options).Body);
+        public TwitterUserListResponse GetList(long userId, TwitterFollowersListOptions options) {
+            return TwitterUserListResponse.ParseResponse(Raw.GetList(userId, options));
         }
 
         /// <summary>
         /// Gets a list of friends for a given user using the default options.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        public TwitterUserListResponse GetListFromScreenName(string screenName) {
-            return GetListFromScreenName(screenName, null);
+        public TwitterUserListResponse GetList(string screenName) {
+            return GetList(screenName, null);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetListFromScreenName(string screenName, TwitterFollowersListOptions options) {
-            return TwitterUserListResponse.ParseJson(Raw.GetListFromScreenName(screenName, options).Body);
+        public TwitterUserListResponse GetList(string screenName, TwitterFollowersListOptions options) {
+            return TwitterUserListResponse.ParseResponse(Raw.GetList(screenName, options));
         }
 
         #endregion
