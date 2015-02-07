@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Net;
 using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.Attributes;
 using Skybrud.Social.Twitter.Enums;
@@ -258,7 +259,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Posts the specified status message.
         /// </summary>
         /// <param name="status">The status message to send.</param>
-        public string PostStatusMessage(string status) {
+        public SocialHttpResponse PostStatusMessage(string status) {
             return PostStatusMessage(status, null);
         }
 
@@ -267,14 +268,17 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="status">The status message to send.</param>
         /// <param name="replyTo">The ID of the status message to reply to.</param>
-        public string PostStatusMessage(string status, long? replyTo) {
+        public SocialHttpResponse PostStatusMessage(string status, long? replyTo) {
 
             // Construct the POST data
             NameValueCollection postData = new NameValueCollection {{"status", status}};
             if (replyTo != null) postData.Add("in_reply_to_status_id", replyTo.ToString());
 
             // Make the call to the API
-            return Client.DoHttpRequestAsString("POST", "https://api.twitter.com/1.1/statuses/update.json", null, postData);
+            HttpWebResponse response = Client.DoHttpRequest("POST", "https://api.twitter.com/1.1/statuses/update.json", null, postData);
+
+            // Wrap the response in an instance of SocialHttpResponse
+            return SocialHttpResponse.GetFromWebResponse(response);
 
         }
 

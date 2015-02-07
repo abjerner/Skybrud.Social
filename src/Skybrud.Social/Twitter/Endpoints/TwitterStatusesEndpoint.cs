@@ -165,7 +165,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="status">The status message to send.</param>
         /// <param name="replyTo">The ID of the status message to reply to.</param>
         public TwitterStatusMessage PostStatusMessage(string status, long? replyTo) {
-            return TwitterStatusMessage.ParseJson(Raw.PostStatusMessage(status, replyTo));
+            return TwitterStatusMessage.ParseJson(Raw.PostStatusMessage(status, replyTo).Body);
         }
 
         #endregion
