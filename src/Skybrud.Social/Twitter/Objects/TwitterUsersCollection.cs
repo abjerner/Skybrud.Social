@@ -2,14 +2,14 @@
 
 namespace Skybrud.Social.Twitter.Objects {
 
-    public class TwitterIdsCollection : SocialJsonObject {
+    public class TwitterUsersCollection : SocialJsonObject {
 
         #region Properties
 
         /// <summary>
-        /// Gets the array with the IDs returned in the response.
+        /// Gets the array with the users returned in the response.
         /// </summary>
-        public long[] Ids { get; private set; }
+        public TwitterUser[] Users { get; private set; }
 
         /// <summary>
         /// Gets the cursor pointing to the next page in the result set.
@@ -25,20 +25,20 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Constructors
 
-        private TwitterIdsCollection(JsonObject obj) : base(obj) { }
+        private TwitterUsersCollection(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>TwitterIdsCollection</code> from the specified <var>JsonObject</var>.
+        /// Gets an instance of <code>TwitterUsersCollection</code> from the specified <var>JsonObject</var>.
         /// </summary>
         /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
-        public static TwitterIdsCollection Parse(JsonObject obj) {
+        public static TwitterUsersCollection Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new TwitterIdsCollection(obj) {
-                Ids = obj.GetArray("ids").For((array, index) => array.GetInt64(index)),
+            return new TwitterUsersCollection(obj) {
+                Users = obj.GetArray("users", TwitterUser.Parse),
                 NextCursor = obj.GetInt64("next_cursor"),
                 PreviousCursor = obj.GetInt64("previous_cursor")
             };

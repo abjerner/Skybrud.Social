@@ -1,3 +1,4 @@
+using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
@@ -29,7 +30,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="id">The ID of the place.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/geo/id/:place_id"/>
         public TwitterPlace GetPlace(string id) {
-            return TwitterPlace.ParseJson(Raw.GetPlace(id).Body);
+            return JsonObject.ParseJson(Raw.GetPlace(id).Body, TwitterPlace.Parse);
         }
 
         /// <summary>

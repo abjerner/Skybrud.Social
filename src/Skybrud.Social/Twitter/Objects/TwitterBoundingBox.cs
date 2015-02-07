@@ -2,17 +2,29 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Objects {
     
-    public class TwitterBoundingBox {
+    public class TwitterBoundingBox : SocialJsonObject {
+
+        #region Properties
 
         /// <summary>
-        /// The type of the bounding box
+        /// The type of the bounding box.
         /// </summary>
         public string Type { get; private set; }
 
         /// <summary>
-        /// The set of coordinates describing the bounding box
+        /// The set of coordinates describing the bounding box.
         /// </summary>
         public TwitterCoordinates[][] Coordinates { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private TwitterBoundingBox(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
 
         public static TwitterBoundingBox Parse(JsonObject obj) {
 
@@ -23,7 +35,7 @@ namespace Skybrud.Social.Twitter.Objects {
             JsonArray coordinates = obj.GetArray("coordinates");
 
             // Initialize the bounding box
-            TwitterBoundingBox boundingBox = new TwitterBoundingBox {
+            TwitterBoundingBox boundingBox = new TwitterBoundingBox(obj) {
                 Type = obj.GetString("type"),
                 Coordinates = new TwitterCoordinates[coordinates.Length][]
             };
@@ -35,8 +47,10 @@ namespace Skybrud.Social.Twitter.Objects {
 
             // Return the building box
             return boundingBox;
-        
+
         }
+
+        #endregion
 
     }
 

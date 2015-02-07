@@ -10,22 +10,22 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Properties
 
         /// <summary>
-        /// The ID of the tweet.
+        /// Gets the ID of the tweet.
         /// </summary>
         public long Id { get; private set; }
 
         /// <summary>
-        /// The date and time for when the tweet was created in UTC/GMT.
+        /// Gets the date and time for when the tweet was created in UTC/GMT.
         /// </summary>
         public DateTime CreatedAt { get; private set; }
 
         /// <summary>
-        /// The text or message of the tweet.
+        /// Gets the text or message of the tweet.
         /// </summary>
         public string Text { get; private set; }
 
         /// <summary>
-        /// The source/client used for making the tweet.
+        /// Gets the source/client used for making the tweet.
         /// </summary>
         public string Source { get; private set; }
         
@@ -68,36 +68,18 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private TwitterStatusMessage(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
+        private TwitterStatusMessage(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Loads a status message (tweet) from the JSON file at the specified <var>path</var>.
+        /// Gets an instance of <code>TwitterStatusMessage</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static TwitterStatusMessage LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets a status message (tweet) from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static TwitterStatusMessage ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets a status message (tweet) from the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static TwitterStatusMessage Parse(JsonObject obj) {
 
             // Error checking
@@ -138,7 +120,7 @@ namespace Skybrud.Social.Twitter.Objects {
 
             // For some weird reason Twitter flips the coordinates by writing longitude before latitude
             // See: https://dev.twitter.com/docs/platform-objects/tweets#obj-coordinates)
-            msg.Coordinates = TwitterCoordinates.Parse(obj.GetObject("coordinates"));
+            msg.Coordinates = obj.GetObject("coordinates", TwitterCoordinates.Parse);
 
             // See: https://dev.twitter.com/docs/platform-objects/tweets#obj-contributors
             /*if (tweet.contributors != null) {

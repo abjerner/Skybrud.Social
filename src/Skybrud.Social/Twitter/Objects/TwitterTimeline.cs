@@ -29,9 +29,7 @@ namespace Skybrud.Social.Twitter.Objects {
         
         #region Constructors
 
-        internal TwitterTimeline(JsonArray array) : base(array) {
-            // Hide default constructor
-        }
+        private TwitterTimeline(JsonArray array) : base(array) { }
 
         #endregion
 

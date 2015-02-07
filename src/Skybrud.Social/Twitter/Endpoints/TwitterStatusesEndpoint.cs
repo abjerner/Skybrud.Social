@@ -1,3 +1,4 @@
+using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
@@ -45,7 +46,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
         /// <param name="options">Options affecting the response from the Twitter API.</param>
-        public TwitterStatusMessage GetTweet(long statusId, TwitterStatusMessageOptions options = null) {
+        public TwitterStatusMessage GetTweet(long statusId, TwitterStatusMessageOptions options) {
             return GetStatusMessage(statusId, options);
         }
 
@@ -63,7 +64,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="statusId">The ID of the status message.</param>
         /// <param name="options">Options affecting the response from the Twitter API.</param>
         public TwitterStatusMessage GetStatusMessage(long statusId, TwitterStatusMessageOptions options) {
-            return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options).Body);
+            return JsonObject.ParseJson(Raw.GetStatusMessage(statusId, options).Body, TwitterStatusMessage.Parse);
         }
 
         public TwitterTimeline GetUserTimeline(long userId, int count) {
@@ -143,7 +144,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="status">The status message to send.</param>
         /// <param name="replyTo">The ID of the status message to reply to.</param>
         public TwitterStatusMessage PostStatusMessage(string status, long? replyTo) {
-            return TwitterStatusMessage.ParseJson(Raw.PostStatusMessage(status, replyTo).Body);
+            return JsonObject.ParseJson(Raw.PostStatusMessage(status, replyTo).Body, TwitterStatusMessage.Parse);
         }
 
         #endregion

@@ -7,48 +7,48 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Properties
 
         /// <summary>
-        /// The ID of the place.
+        /// Gets the ID of the place.
         /// </summary>
         public string Id { get; private set; }
 
         /// <summary>
-        /// The URL for the place in the Twitter API.
+        /// Gets the URL for the place in the Twitter API.
         /// </summary>
         public string Url { get; private set; }
 
         /// <summary>
-        /// The type of the place.
+        /// Gets the type of the place.
         /// </summary>
         public string Type { get; private set; }
 
         /// <summary>
-        /// The name of the place.
+        /// Gets the name of the place.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// The full name of the place.
+        /// Gets the full name of the place.
         /// </summary>
         public string FullName { get; private set; }
 
         /// <summary>
-        /// The country code of the place.
+        /// Gets the country code of the place.
         /// </summary>
         public string CountryCode { get; private set; }
 
         /// <summary>
-        /// The country of the place.
+        /// Gets the country name of the place.
         /// </summary>
         public string Country { get; private set; }
 
         /// <summary>
-        /// The bounding box describing the place.
+        /// Gets the bounding box describing the place.
         /// </summary>
         public TwitterBoundingBox BoundingBox { get; private set; }
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         private TwitterPlace(JsonObject obj) : base(obj) { }
 
@@ -57,25 +57,9 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads a place from the JSON file at the specified <var>path</var>.
+        /// Gets an instance of <code>TwitterPlace</code> from the specified <code>TwitterPlace</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static TwitterPlace LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets a place from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static TwitterPlace ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets a place from the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static TwitterPlace Parse(JsonObject obj) {
             if (obj == null) return null;
             return new TwitterPlace(obj) {
@@ -86,7 +70,7 @@ namespace Skybrud.Social.Twitter.Objects {
                 FullName = obj.GetString("full_name"),
                 CountryCode = obj.GetString("country_code"),
                 Country = obj.GetString("country"),
-                BoundingBox = TwitterBoundingBox.Parse(obj.GetObject("bounding_box"))
+                BoundingBox = obj.GetObject("bounding_box", TwitterBoundingBox.Parse)
             };
         }
 

@@ -6,26 +6,19 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Properties
 
-        public double Latitude { get; internal set; }
-        public double Longitude { get; internal set; }
+        public double Latitude { get; private set; }
+
+        public double Longitude { get; private set; }
 
         #endregion
         
-        #region Constructor(s)
+        #region Constructors
 
         private TwitterCoordinates(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
-
-        /// <summary>
-        /// Loads an object from the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static TwitterCoordinates LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
 
         public static TwitterCoordinates Parse(JsonObject obj) {
             if (obj == null) return null;
