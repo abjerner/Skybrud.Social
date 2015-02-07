@@ -1,89 +1,31 @@
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
+using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
     
-    public class TwitterIdsResponse {
+    public class TwitterIdsResponse : TwitterResponse<TwitterIdsCollection> {
 
-        #region Properties
+        #region Constructors
 
-        /// <summary>
-        /// Gets the internal JsonObject the object was created from.
-        /// </summary>
-        public JsonObject JsonObject { get; private set; }
-
-        /// <summary>
-        /// Gets an array of the IDs on the current page.
-        /// </summary>
-        public long[] Ids { get; protected set; }
-
-        /// <summary>
-        /// Gets the cursor for the next page.
-        /// </summary>
-        public long NextCursor { get; protected set; }
-
-        /// <summary>
-        /// Gets the cursor for the previous page.
-        /// </summary>
-        public long PreviousCursor { get; protected set; }
-
-        #endregion
-
-        #region Constructor
-
-        protected TwitterIdsResponse() {
-            // Hide default constructor
-        }
+        protected TwitterIdsResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        /// <summary>
-        /// Loads a response from the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static TwitterIdsResponse LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
+        public static TwitterIdsResponse ParseResponse(SocialHttpResponse response) {
 
-        /// <summary>
-        /// Gets a response from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static TwitterIdsResponse ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
+            if (response == null) return null;
 
-        /// <summary>
-        /// Gets a response from the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static TwitterIdsResponse Parse(JsonObject obj) {
-            if (obj == null) return null;
+            // Validate the response
+            ValidateResponse(response);
 
+            // Initialize the response object
+            return new TwitterIdsResponse(response) {
+                Body = JsonObject.ParseJson(response.Body, TwitterIdsCollection.Parse)
+            };
 
-
-            JsonArray array = obj.GetArray("ids");
-
-
-
-            long[] ids = new long[array.Length];
-
-            for (int i = 0; i < ids.Length; i++) {
-                ids[i] = array.GetInt64(i);
-            }
-
-
-
-
-
-
-                return new TwitterIdsResponse {
-                    JsonObject = obj,
-                    Ids = ids,
-                    NextCursor = obj.GetInt64("next_cursor"),
-                    PreviousCursor = obj.GetInt64("previous_cursor")
-                };
         }
 
         #endregion

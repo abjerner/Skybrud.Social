@@ -23,7 +23,12 @@ namespace Skybrud.Social.Twitter.Responses {
 
             JsonObject obj = response.GetBodyAsJsonObject();
 
-            // Get the "errors" array
+            // For some types of errors, Twitter will only respond with an error message
+            if (obj.HasValue("error")) {
+                throw new TwitterException(response, obj.GetString("error"), 0);
+            }
+
+            // However in most cases, Twitter responds with an array of errors
             JsonArray errors = obj.GetArray("errors");
 
             // Get the first error (don't remember ever seeing multiple errors in the same response)

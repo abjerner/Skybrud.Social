@@ -440,6 +440,7 @@
     <Compile Include="Twitter\Objects\TwitterBoundingBox.cs" />
     <Compile Include="Twitter\Objects\TwitterContributor.cs" />
     <Compile Include="Twitter\Objects\TwitterCoordinates.cs" />
+    <Compile Include="Twitter\Objects\TwitterIdsCollection.cs" />
     <Compile Include="Twitter\Objects\TwitterPlace.cs" />
     <Compile Include="Twitter\Objects\TwitterReplyTo.cs" />
     <Compile Include="Twitter\Objects\TwitterSearchTweetMetaData.cs" />
