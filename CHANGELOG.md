@@ -1,6 +1,25 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.9.0-alpha1
+_7th of February, 2015_
+
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.9.0-alpha1/Skybrud.Social.v0.9.0-alpha1.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.9.0-alpha1">Get on NuGet</a>
+
+Skybrud.Social 0.9.0-alpha1 is - as suggested by it's name - is an alpha release. This means that things are as heavily tested, and that there therefore is a higher risk of experiencing bugs. If you encounter any bugs, or simply things you feel should be different, please make sure to [create an issue][Issues]. That would help me a lot.
+
+A lot has changed with this release, so I'm not going to list all breaking changes here. However one of the most signicant changes is what is returned by the calls to the various APIs.
+
+**Raw endpoints**  
+Skybrud.Social has a lot of raw endpoints for the various services. These endpoint deal with the raw communication, and are probably not used by much users. In earlier releases, a call with a method in a raw endpoint would typically return a string representing the response body. Some services/APIs specify extra information in the response headers. Some return an empty response body if an error occurs, but only set a HTTP status code in the response informing about the error. So since it wasn't possible to gather these information from the response body, methods in the raw endpoints will now return an instance of `SocialHttpResponse` instead. This class will have properties like `StatusCode` returning an instance of `HttpStatusCode`, and `Body` returning the response body as a string. Not all methods have been updated to return an instance of `SocialHttpResponse`, but this will be fixed in v1.0 or before.
+
+**Object-oriented endpoint**  
+Some of the normal endpoints (solid or object-oriented endpoints if you will) have also been updated. Where a call for information about a given Twitter user previously would return an instance of `TwitterUser` representing the response body, that same method will now return an instance of `TwitterUserResponse` more widely representing the entire response. The `Body` property will then return the `TwitterUser` object parsed from the response body. The `Response` property will in a similar way return the underlying instance of `SocialHttpResponse`.
+
+This release also features a lot of other fixes and additions. But this being an alpha release, they will be left somewhat undocumented for now. Along with my work towards v1.0, I'm also taking the time to finally writing some proper documentation, so there will be plenty of examples on how to use and utilize Skybrud.Social v1.0. An optimistic plan is to have v1.0 released in one of the upcoming weeks.
+
 ### Skybrud.Social 0.1.2
 _20th of January, 2014_
 
@@ -106,3 +125,6 @@ __Vimeo__
 
 -   Skybrud.Social 0.0.0.7 featured an implementation for Vimeo's Simple API. Since there is both a simple and an advanced API, the namespace <var>Skybrud.Social.Vimeo</var> has now been moved to <var>Skybrud.Social.Vimeo.Simple</var>.
 -   Added implementation of the Vimeo Advanced API. This is however still not a complete implementation.
+
+
+[Issues]: https://github.com/abjerner/Skybrud.Social/issues
