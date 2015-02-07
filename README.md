@@ -14,6 +14,14 @@ Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.dll` to th
 2. [**Builds**][DropboxFolder]  
 I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.dll` to the bin directory of your project.
 
+### Found a bug? Have a question?
+
+* Please feel free to [create an issue][Issues], and I will get back to you ;)
+
+### Changelog
+
+* [Significant changes will be listed in the changelog][Changelog]
+
 ### Documentation
 
 Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [Skybrud.Social website][Website].
@@ -22,3 +30,5 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social
 [GitHubRelease]: https://github.com/abjerner/Skybrud.Social/releases/latest
 [DropboxFolder]: https://www.dropbox.com/sh/ubak1qionvji8mf/AACq5X5b2Ic6MPPZznrzfsl2a?dl=0
+[Changelog]: https://github.com/abjerner/Skybrud.Social/blob/master/CHANGELOG.md
+[Issues]: https://github.com/abjerner/Skybrud.Social/issues
