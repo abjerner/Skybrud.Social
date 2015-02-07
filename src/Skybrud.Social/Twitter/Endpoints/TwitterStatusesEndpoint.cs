@@ -22,7 +22,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         internal TwitterStatusesEndpoint(TwitterService service) {
             Service = service;
@@ -31,8 +31,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
         #endregion
 
         #region Member methods
-
-        #region GetStatusMessage(...)
 
         /// <summary>
         /// Alias of GetStatusMessage(). Gets information about a status message (tweet) with the specified ID.
@@ -68,10 +66,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
             return TwitterStatusMessage.ParseJson(Raw.GetStatusMessage(statusId, options).Body);
         }
 
-        #endregion
-
-        #region GetUserTimeline(...)
-
         public TwitterTimeline GetUserTimeline(long userId, int count) {
             return TwitterTimeline.ParseJson(Raw.GetUserTimeline(userId, new TwitterTimelineOptions(count)).Body);
         }
@@ -87,10 +81,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterTimeline GetUserTimeline(string screenName, TwitterTimelineOptions options = null) {
             return TwitterTimeline.ParseJson(Raw.GetUserTimeline(screenName, options).Body);
         }
-        
-        #endregion
-
-        #region GetHomeTimeline(...)
 
         /// <summary>
         /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
@@ -109,10 +99,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
             return TwitterTimeline.ParseJson(Raw.GetHomeTimeline(options).Body);
         }
 
-        #endregion
-
-        #region GetMentionsTimeline(...)
-
         /// <summary>
         /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
         /// </summary>
@@ -128,10 +114,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
             return TwitterTimeline.ParseJson(Raw.GetMentionsTimeline(options).Body);
         }
 
-        #endregion
-
-        #region GetRetweetsOfMe(...)
-
         /// <summary>
         /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
         /// </summary>
@@ -146,10 +128,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterTimeline GetRetweetsOfMe(TwitterTimelineOptions options) {
             return TwitterTimeline.ParseJson(Raw.GetRetweetsOfMe(options).Body);
         }
-
-        #endregion
-
-        #region PostStatusMessage(...)
 
         /// <summary>
         /// Posts the specified status message.
@@ -167,8 +145,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterStatusMessage PostStatusMessage(string status, long? replyTo) {
             return TwitterStatusMessage.ParseJson(Raw.PostStatusMessage(status, replyTo).Body);
         }
-
-        #endregion
 
         #endregion
 

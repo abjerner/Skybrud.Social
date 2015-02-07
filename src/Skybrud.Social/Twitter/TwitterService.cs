@@ -6,6 +6,8 @@ namespace Skybrud.Social.Twitter {
 
     public class TwitterService {
 
+        #region Properties
+
         public TwitterOAuthClient Client { get; private set; }
 
         public TwitterAccountEndpoint Account { get; private set; }
@@ -16,9 +18,15 @@ namespace Skybrud.Social.Twitter {
         public TwitterStatusesEndpoint Statuses { get; private set; }
         public TwitterUsersEndpoint Users { get; private set; }
 
-        private TwitterService() {
-            // make constructor private
-        }
+        #endregion
+
+        #region Constructors
+
+        private TwitterService() { }
+
+        #endregion
+
+        #region Static methods
 
         public static TwitterService CreateFromOAuthClient(TwitterOAuthClient client) {
 
@@ -43,6 +51,8 @@ namespace Skybrud.Social.Twitter {
             return service;
 
         }
+
+        #endregion
 
     }
 

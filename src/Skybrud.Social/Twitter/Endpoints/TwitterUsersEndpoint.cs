@@ -6,21 +6,31 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
     public class TwitterUsersEndpoint {
 
+        #region Properties
+
         /// <summary>
-        /// A reference to the Twitter service.
+        /// Gets a reference to the Twitter service.
         /// </summary>
         public TwitterService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw users endpoint.
         /// </summary>
         public TwitterUsersRawEndpoint Raw {
             get { return Service.Client.Users; }
         }
 
+        #endregion
+
+        #region Constructors
+
         internal TwitterUsersEndpoint(TwitterService service) {
             Service = service;
         }
+
+        #endregion
+
+        #region Member methods
 
         public TwitterUserResponse Show(long userId) {
             return TwitterUserResponse.ParseResponse(Raw.GetUser(userId, false));
@@ -39,28 +49,28 @@ namespace Skybrud.Social.Twitter.Endpoints {
         }
 
         /// <summary>
-        /// Alias of <var>Show</var>.
+        /// Alias of <code>Show</code>.
         /// </summary>
         public TwitterUserResponse GetUser(long userId) {
             return TwitterUserResponse.ParseResponse(Raw.GetUser(userId, false));
         }
 
         /// <summary>
-        /// Alias of <var>Show</var>.
+        /// Alias of <code>Show</code>.
         /// </summary>
         public TwitterUserResponse GetUser(long userId, bool includeEntities) {
             return TwitterUserResponse.ParseResponse(Raw.GetUser(userId, includeEntities));
         }
 
         /// <summary>
-        /// Alias of <var>Show</var>.
+        /// Alias of <code>Show</code>.
         /// </summary>
         public TwitterUserResponse GetUser(string screenName) {
             return TwitterUserResponse.ParseResponse(Raw.GetUser(screenName, false));
         }
 
         /// <summary>
-        /// Alias of <var>Show</var>.
+        /// Alias of <code>Show</code>.
         /// </summary>
         public TwitterUserResponse GetUser(string screenName, bool includeEntities) {
             return TwitterUserResponse.ParseResponse(Raw.GetUser(screenName, includeEntities));
@@ -89,6 +99,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterUsersSearchResponse Search(TwitterUsersSearchOptions options) {
             return TwitterUsersSearchResponse.ParseResponse(Raw.Search(options));
         }
+
+        #endregion
 
     }
 
