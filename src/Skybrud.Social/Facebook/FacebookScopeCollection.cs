@@ -50,6 +50,10 @@ namespace Skybrud.Social.Facebook {
 
         #region Operator overloading
 
+        public static implicit operator FacebookScopeCollection(FacebookScope scope) {
+            return new FacebookScopeCollection(scope);
+        }
+
         public static implicit operator FacebookScopeCollection(FacebookScope[] array) {
             return new FacebookScopeCollection(array ?? new FacebookScope[0]);
         }
