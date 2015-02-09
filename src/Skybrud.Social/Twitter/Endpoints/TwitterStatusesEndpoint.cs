@@ -2,6 +2,7 @@ using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Endpoints.Raw;
 using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
+using Skybrud.Social.Twitter.Responses;
 
 namespace Skybrud.Social.Twitter.Endpoints {
 
@@ -37,7 +38,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// Alias of GetStatusMessage(). Gets information about a status message (tweet) with the specified ID.
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
-        public TwitterStatusMessage GetTweet(long statusId) {
+        public TwitterStatusMessageResponse GetTweet(long statusId) {
             return GetStatusMessage(statusId, null);
         }
 
@@ -46,7 +47,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
         /// <param name="options">Options affecting the response from the Twitter API.</param>
-        public TwitterStatusMessage GetTweet(long statusId, TwitterStatusMessageOptions options) {
+        public TwitterStatusMessageResponse GetTweet(long statusId, TwitterStatusMessageOptions options) {
             return GetStatusMessage(statusId, options);
         }
 
@@ -54,7 +55,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// Gets information about a status message (tweet) with the specified ID.
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
-        public TwitterStatusMessage GetStatusMessage(long statusId) {
+        public TwitterStatusMessageResponse GetStatusMessage(long statusId) {
             return GetStatusMessage(statusId, null);
         }
 
@@ -63,8 +64,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
         /// <param name="options">Options affecting the response from the Twitter API.</param>
-        public TwitterStatusMessage GetStatusMessage(long statusId, TwitterStatusMessageOptions options) {
-            return JsonObject.ParseJson(Raw.GetStatusMessage(statusId, options).Body, TwitterStatusMessage.Parse);
+        public TwitterStatusMessageResponse GetStatusMessage(long statusId, TwitterStatusMessageOptions options) {
+            return TwitterStatusMessageResponse.ParseResponse(Raw.GetStatusMessage(statusId, options));
         }
 
         public TwitterTimeline GetUserTimeline(long userId, int count) {
