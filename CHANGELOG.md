@@ -8,7 +8,7 @@ __Download__
 -   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.9.0-alpha1/Skybrud.Social.v0.9.0-alpha1.zip">Download ZIP</a>
 -   <a href="https://www.nuget.org/packages/Skybrud.Social/0.9.0-alpha1">Get on NuGet</a>
 
-Skybrud.Social 0.9.0-alpha1 is - as suggested by it's name - is an alpha release. This means that things are as heavily tested, and that there therefore is a higher risk of experiencing bugs. If you encounter any bugs, or simply things you feel should be different, please make sure to [create an issue][Issues]. That would help me a lot.
+Skybrud.Social 0.9.0-alpha1 is - as suggested by it's name - is an alpha release. This means that things are not as heavily tested, and that there therefore is a higher risk of experiencing bugs. If you encounter any bugs, or simply things you feel should be different, please make sure to [create an issue][Issues]. That would help me a lot.
 
 A lot has changed with this release, so I'm not going to list all breaking changes here. However one of the most signicant changes is what is returned by the calls to the various APIs.
 
@@ -19,6 +19,9 @@ Skybrud.Social has a lot of raw endpoints for the various services. These endpoi
 Some of the normal endpoints (solid or object-oriented endpoints if you will) have also been updated. Where a call for information about a given Twitter user previously would return an instance of `TwitterUser` representing the response body, that same method will now return an instance of `TwitterUserResponse` more widely representing the entire response. The `Body` property will then return the `TwitterUser` object parsed from the response body. The `Response` property will in a similar way return the underlying instance of `SocialHttpResponse`.
 
 This release also features a lot of other fixes and additions. But this being an alpha release, they will be left somewhat undocumented for now. Along with my work towards v1.0, I'm also taking the time to finally writing some proper documentation, so there will be plenty of examples on how to use and utilize Skybrud.Social v1.0. An optimistic plan is to have v1.0 released in one of the upcoming weeks.
+
+**Facebook**
+In earlier versions, all methods in the Facebook API were exposed through the `Methods` endpoint. As of this release, methods are now located in a relevant endpoint - eg. a `Posts` endpoint for dealing with posts, and a `Pages` endpoint for dealing with pages.
 
 ### Skybrud.Social 0.1.2
 _20th of January, 2014_
