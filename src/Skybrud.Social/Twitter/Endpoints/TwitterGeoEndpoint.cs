@@ -8,22 +8,32 @@ namespace Skybrud.Social.Twitter.Endpoints {
 
     public class TwitterGeoEndpoint {
 
+        #region Properties
+
         /// <summary>
-        /// A reference to the Twitter service.
+        /// Gets a reference to the Twitter service.
         /// </summary>
         public TwitterService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public TwitterGeoRawEndpoint Raw {
             get { return Service.Client.Geo; }
         }
 
+        #endregion
+
+        #region Constructors
+
         internal TwitterGeoEndpoint(TwitterService service) {
             Service = service;
         }
-        
+
+        #endregion
+
+        #region Member methods
+
         /// <summary>
         /// Gets information about a place with with the specified ID.
         /// </summary>
@@ -67,6 +77,8 @@ namespace Skybrud.Social.Twitter.Endpoints {
         public TwitterReverseGeocodeResponse ReverseGeocode(double latitude, double longitude, TwitterReverseGeocodeOptions options) {
             return TwitterReverseGeocodeResponse.ParseJson(Raw.ReverseGeocode(latitude, longitude, options).Body);
         }
+
+        #endregion
 
     }
 
