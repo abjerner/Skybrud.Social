@@ -447,7 +447,7 @@
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterTimeline.cs" />
-    <Compile Include="Twitter\Objects\TwitterUsersCollection.cs" />
+    <Compile Include="Twitter\Objects\TwitterUserCollection.cs" />
     <Compile Include="Twitter\Options\TwitterFollowersIdsOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFollowersListOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFriendsIdsOptions.cs" />
