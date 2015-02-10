@@ -3,12 +3,12 @@ using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
-    
+
     public class TwitterIdsResponse : TwitterResponse<TwitterIdsCollection> {
 
         #region Constructors
 
-        protected TwitterIdsResponse(SocialHttpResponse response) : base(response) { }
+        private TwitterIdsResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 

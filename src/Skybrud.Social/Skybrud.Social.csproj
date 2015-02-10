@@ -457,6 +457,7 @@
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUsersSearchOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterPlaceResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterSearchTweetsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterStatusMessageResponse.cs" />

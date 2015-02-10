@@ -4,17 +4,17 @@ using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
 
-    public class TwitterUserResponse : TwitterResponse<TwitterUser> {
+    public class TwitterPlaceResponse : TwitterResponse<TwitterPlace> {
 
         #region Constructors
 
-        private TwitterUserResponse(SocialHttpResponse response) : base(response) { }
+        private TwitterPlaceResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        public static TwitterUserResponse ParseResponse(SocialHttpResponse response) {
+        public static TwitterPlaceResponse ParseResponse(SocialHttpResponse response) {
 
             if (response == null) return null;
 
@@ -22,8 +22,8 @@ namespace Skybrud.Social.Twitter.Responses {
             ValidateResponse(response);
 
             // Initialize the response object
-            return new TwitterUserResponse(response) {
-                Body = JsonObject.ParseJson(response.Body, TwitterUser.Parse)
+            return new TwitterPlaceResponse(response) {
+                Body = JsonObject.ParseJson(response.Body, TwitterPlace.Parse)
             };
 
         }

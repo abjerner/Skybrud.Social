@@ -3,8 +3,8 @@ using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Objects;
 
 namespace Skybrud.Social.Twitter.Responses {
-    
-    public class TwitterUserListResponse : TwitterResponse<TwitterUsersCollection> {
+
+    public class TwitterUserListResponse : TwitterResponse<TwitterUserCollection> {
 
         #region Constructors
 
@@ -23,13 +23,13 @@ namespace Skybrud.Social.Twitter.Responses {
 
             // Initialize the response object
             return new TwitterUserListResponse(response) {
-                Body = JsonObject.ParseJson(response.Body, TwitterUsersCollection.Parse)
+                Body = JsonObject.ParseJson(response.Body, TwitterUserCollection.Parse)
             };
 
         }
 
         #endregion
-    
+
     }
 
 }

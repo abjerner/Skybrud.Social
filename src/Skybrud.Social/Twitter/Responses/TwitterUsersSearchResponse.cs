@@ -19,7 +19,7 @@ namespace Skybrud.Social.Twitter.Responses {
             if (response == null) return null;
 
             // Validate the response
-            ValidateResponse(response);;
+            ValidateResponse(response);
 
             // Initialize the response object
             return new TwitterUsersSearchResponse(response) {
