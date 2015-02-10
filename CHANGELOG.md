@@ -20,7 +20,7 @@ Some of the normal endpoints (solid or object-oriented endpoints if you will) ha
 
 This release also features a lot of other fixes and additions. But this being an alpha release, they will be left somewhat undocumented for now. Along with my work towards v1.0, I'm also taking the time to finally writing some proper documentation, so there will be plenty of examples on how to use and utilize Skybrud.Social v1.0. An optimistic plan is to have v1.0 released in one of the upcoming weeks.
 
-**Facebook**
+**Facebook**  
 In earlier versions, all methods in the Facebook API were exposed through the `Methods` endpoint. As of this release, methods are now located in a relevant endpoint - eg. a `Posts` endpoint for dealing with posts, and a `Pages` endpoint for dealing with pages.
 
 ### Skybrud.Social 0.1.2
