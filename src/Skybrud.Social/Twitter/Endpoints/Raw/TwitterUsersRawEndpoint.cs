@@ -2,8 +2,6 @@ using System;
 using System.Collections.Specialized;
 using System.Globalization;
 using Skybrud.Social.Http;
-using Skybrud.Social.Twitter.Attributes;
-using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
 using Skybrud.Social.Twitter.Options;
 
@@ -32,7 +30,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUser(long id) {
             return GetUser(id, false);
         }
@@ -43,7 +40,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUser(long id, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "user_id", id.ToString(CultureInfo.InvariantCulture) } };
             if (includeEntities) qs.Add("include_entities", "true");
@@ -55,7 +51,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUser(string screenName) {
             return GetUser(screenName, false);
         }
@@ -66,7 +61,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUser(string screenName, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "screen_name", screenName } };
             if (includeEntities) qs.Add("include_entities", "true");
@@ -90,7 +84,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Only the first 1,000 matching results are available.
         /// </summary>
         /// <param name="query">The search query to run against people search.</param>
-        [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse Search(string query) {
             return Search(new TwitterUsersSearchOptions {
                 Query = query
@@ -105,7 +98,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Only the first 1,000 matching results are available.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        [TwitterMethod(rateLimited: true, rate: "180/user", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse Search(TwitterUsersSearchOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/users/search.json", options);

@@ -1,6 +1,4 @@
 using Skybrud.Social.Http;
-using Skybrud.Social.Twitter.Attributes;
-using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
 using Skybrud.Social.Twitter.Options;
 
@@ -31,7 +29,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/api/1.1/get/geo/id/:place_id</cref>
         /// </see>
-        [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
         public SocialHttpResponse GetPlace(string id) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/geo/id/" + id + ".json");
         }
@@ -51,7 +48,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/api/1.1/get/geo/reverse_geocode</cref>
         /// </see>
-        [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
         public SocialHttpResponse ReverseGeocode(double latitude, double longitude) {
             return ReverseGeocode(new TwitterReverseGeocodeOptions {
                 Latitude = latitude,
@@ -68,7 +64,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/api/1.1/get/geo/reverse_geocode</cref>
         /// </see>
-        [TwitterMethod(rateLimited: true, rate: "15/user", authentication: TwitterAuthentication.UserContext)]
         public SocialHttpResponse ReverseGeocode(TwitterReverseGeocodeOptions options) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/geo/reverse_geocode.json", options);
         }

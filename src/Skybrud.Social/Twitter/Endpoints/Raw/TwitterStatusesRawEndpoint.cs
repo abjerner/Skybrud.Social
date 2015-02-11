@@ -2,8 +2,6 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Net;
 using Skybrud.Social.Http;
-using Skybrud.Social.Twitter.Attributes;
-using Skybrud.Social.Twitter.Enums;
 using Skybrud.Social.Twitter.OAuth;
 using Skybrud.Social.Twitter.Options;
 
@@ -32,7 +30,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetTweet(long id) {
             return GetStatusMessage(id, null);
         }
@@ -43,7 +40,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetTweet(long id, TwitterStatusMessageOptions options) {
             return GetStatusMessage(id, options);
         }
@@ -53,7 +49,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetStatusMessage(long id) {
             return GetStatusMessage(id, null);
         }
@@ -64,7 +59,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 180/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetStatusMessage(long id, TwitterStatusMessageOptions options) {
 
             // Define the query string
@@ -86,7 +80,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="userId">The ID of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUserTimeline(long userId) {
             return GetUserTimeline(userId, null);
         }
@@ -98,7 +91,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUserTimeline(long userId, TwitterTimelineOptions options) {
 
             // Define the query string
@@ -126,7 +118,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="screenName">The screen name of the user.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUserTimeline(string screenName) {
             return GetUserTimeline(screenName, null);
         }
@@ -138,7 +129,6 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
         /// <returns></returns>
-        [TwitterMethod(rateLimited: true, rate: "180/user, 300/app", authentication: TwitterAuthentication.Required)]
         public SocialHttpResponse GetUserTimeline(string screenName, TwitterTimelineOptions options) {
 
             // Define the query string
