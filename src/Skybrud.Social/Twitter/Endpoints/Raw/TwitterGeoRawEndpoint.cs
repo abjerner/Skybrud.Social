@@ -8,6 +8,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the OAuth 1.0a client.
+        /// </summary>
         public TwitterOAuthClient Client { get; private set; }
 
         #endregion
@@ -20,7 +23,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
-        #region Properties
+        #region Member methods
 
         /// <summary>
         /// Gets the raw API response for a place with the specified ID.

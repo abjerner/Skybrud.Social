@@ -11,6 +11,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the OAuth 1.0a client.
+        /// </summary>
         public TwitterOAuthClient Client { get; private set; }
 
         #endregion
@@ -23,13 +26,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         /// <summary>
         /// Alias of GetStatusMessage(). Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
+        /// </see>
         public SocialHttpResponse GetTweet(long id) {
             return GetStatusMessage(id, null);
         }
@@ -39,7 +44,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
+        /// </see>
         public SocialHttpResponse GetTweet(long id, TwitterStatusMessageOptions options) {
             return GetStatusMessage(id, options);
         }
@@ -48,7 +55,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
+        /// </see>
         public SocialHttpResponse GetStatusMessage(long id) {
             return GetStatusMessage(id, null);
         }
@@ -58,7 +67,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
+        /// </see>
         public SocialHttpResponse GetStatusMessage(long id, TwitterStatusMessageOptions options) {
 
             // Define the query string
@@ -78,8 +89,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Get the raw API response for a user's timeline.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
-        /// <returns></returns>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
         public SocialHttpResponse GetUserTimeline(long userId) {
             return GetUserTimeline(userId, null);
         }
@@ -89,8 +101,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options used when making the call to the API.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
-        /// <returns></returns>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
         public SocialHttpResponse GetUserTimeline(long userId, TwitterTimelineOptions options) {
 
             // Define the query string
@@ -116,8 +129,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Get the raw API response for a user's timeline.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
-        /// <returns></returns>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
         public SocialHttpResponse GetUserTimeline(string screenName) {
             return GetUserTimeline(screenName, null);
         }
@@ -127,8 +141,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options used when making the call to the API.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline"/>
-        /// <returns></returns>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
         public SocialHttpResponse GetUserTimeline(string screenName, TwitterTimelineOptions options) {
 
             // Define the query string

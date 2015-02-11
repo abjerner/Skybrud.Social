@@ -49,8 +49,10 @@ namespace Skybrud.Social.Twitter.Objects {
 
         public TwitterStatusMessageEntities Entities { get; private set; }
 
-        public TwitterContributor[] Contributors { get; private set; }
+        // public TwitterContributor[] Contributors { get; private set; }
+        
         public TwitterCoordinates Coordinates { get; private set; }
+        
         public TwitterPlace Place { get; private set; }
 
         /// <summary>

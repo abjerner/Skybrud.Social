@@ -3,17 +3,19 @@ using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Entities;
 
 namespace Skybrud.Social.Twitter.Objects {
-
-    /// <see cref="https://dev.twitter.com/docs/platform-objects/users"/>
+    
+    /// <see>
+    ///     <cref>https://dev.twitter.com/docs/platform-objects/users</cref>
+    /// </see>
     public class TwitterUser : SocialJsonObject {
 
         #region Properties
 
         /// <summary>
         /// The integer representation of the unique identifier for this User. This number is greater
-        /// than 53 bits and some programming languages may have difficulty/silent defects in
+        /// than 64 bits and some programming languages may have difficulty/silent defects in
         /// interpreting it. Using a signed 64 bit integer for storing this identifier is safe.
-        /// Use <var>id_str</var> for fetching the identifier to stay on the safe side.
+        /// Use <code>id_str</code> for fetching the identifier to stay on the safe side.
         /// </summary>
         public long Id { get; private set; }
 
@@ -214,11 +216,6 @@ namespace Skybrud.Social.Twitter.Objects {
         public bool ProfileUseBackgroundImage { get; private set; }
 
         /// <summary>
-        /// Indicates that the user would like to see media inline. Somewhat disused.
-        /// </summary>
-        public bool ShowAllInlineMedia { get; private set; }
-
-        /// <summary>
         /// Boolean	When true, indicates that the user has not altered the theme or background of their user profile.
         /// </summary>
         public bool HasDefaultProfile { get; private set; }
@@ -244,90 +241,60 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private TwitterUser(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
+        private TwitterUser(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Loads a user from the JSON file at the specified <var>path</var>.
+        /// Gets an instance of <code>TwitterUser</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static TwitterUser LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets a user from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static TwitterUser ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets a user from the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static TwitterUser Parse(JsonObject obj) {
-
-            TwitterUser user = new TwitterUser(obj);
-
-            #region Basic properties
-            
-            user.Id = obj.GetInt64("id");
-            user.IdStr = obj.GetString("id_str");
-            user.Name = obj.GetString("name");
-            user.ScreenName = obj.GetString("screen_name");
-            user.Location = obj.GetString("location");
-            user.Url = obj.GetString("url");
-            user.Description = obj.GetString("description");
-            user.IsProtected = obj.GetBoolean("protected");
-            user.FollowersCount = obj.GetInt32("followers_count");
-            user.FriendsCount = obj.GetInt32("friends_count");
-            user.ListedCount = obj.GetInt32("listed_count");
-            user.CreatedAt = TwitterUtils.ParseDateTime(obj.GetString("created_at"));
-            user.FavouritesCount = obj.GetInt32("favourites_count");
-            if (obj.HasValue("utc_offset")) user.UtcOffset = obj.GetInt32("utc_offset");
-            user.TimeZone = obj.GetString("time_zone");
-            user.IsGeoEnabled = obj.GetBoolean("geo_enabled");
-            user.IsVerified = obj.GetBoolean("verified");
-            user.StatusesCount = obj.GetInt32("statuses_count");
-            user.Language = obj.GetString("lang");
-            user.ContributorsEnabled = obj.GetBoolean("contributors_enabled");
-            user.IsTranslator = obj.GetBoolean("is_translator");
-            user.FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent");
-            user.Status = obj.GetObject("status", TwitterStatusMessage.Parse);
-            user.Entities = obj.GetObject("entities", TwitterUserEntities.Parse);
-           
-            #endregion
-
-            #region Profile properties
-            
-            user.HasDefaultProfile = obj.GetBoolean("default_profile");
-            user.HasDefaultProfileImage = obj.GetBoolean("default_profile_image");
-            user.ProfileBackgroundColor = obj.GetString("profile_background_color");
-            user.ProfileBackgroundImageUrl = obj.GetString("profile_background_image_url");
-            user.ProfileBackgroundImageUrlHttps = obj.GetString("profile_background_image_url_https");
-            user.ProfileBackgroundTile = obj.GetBoolean("profile_background_tile");
-            user.ProfileBannerUrl = obj.GetString("profile_banner_url");
-            user.ProfileImageUrl = obj.GetString("profile_image_url");
-            user.ProfileImageUrlHttps = obj.GetString("profile_image_url_https");
-            user.ProfileLinkColor = obj.GetString("profile_link_color");
-            user.ProfileSidebarBorderColor = obj.GetString("profile_sidebar_border_color");
-            user.ProfileSidebarFillColor = obj.GetString("profile_sidebar_fill_color");
-            user.ProfileTextColor = obj.GetString("profile_text_color");
-            user.ProfileUseBackgroundImage = obj.GetBoolean("profile_use_background_image");
-            
-            #endregion
-
-            return user;
-
+            if (obj == null) return null;
+            return new TwitterUser(obj) {
+                Id = obj.GetInt64("id"),
+                IdStr = obj.GetString("id_str"),
+                Name = obj.GetString("name"),
+                ScreenName = obj.GetString("screen_name"),
+                Location = obj.GetString("location"),
+                Url = obj.GetString("url"),
+                Description = obj.GetString("description"),
+                IsProtected = obj.GetBoolean("protected"),
+                FollowersCount = obj.GetInt32("followers_count"),
+                FriendsCount = obj.GetInt32("friends_count"),
+                ListedCount = obj.GetInt32("listed_count"),
+                CreatedAt = TwitterUtils.ParseDateTime(obj.GetString("created_at")),
+                FavouritesCount = obj.GetInt32("favourites_count"),
+                UtcOffset = obj.HasValue("utc_offset") ? obj.GetInt32("utc_offset") : (int?) null,
+                TimeZone = obj.GetString("time_zone"),
+                IsGeoEnabled = obj.GetBoolean("geo_enabled"),
+                IsVerified = obj.GetBoolean("verified"),
+                StatusesCount = obj.GetInt32("statuses_count"),
+                Language = obj.GetString("lang"),
+                ContributorsEnabled = obj.GetBoolean("contributors_enabled"),
+                IsTranslator = obj.GetBoolean("is_translator"),
+                FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent"),
+                Status = obj.GetObject("status", TwitterStatusMessage.Parse),
+                Entities = obj.GetObject("entities", TwitterUserEntities.Parse),
+                HasDefaultProfile = obj.GetBoolean("default_profile"),
+                HasDefaultProfileImage = obj.GetBoolean("default_profile_image"),
+                ProfileBackgroundColor = obj.GetString("profile_background_color"),
+                ProfileBackgroundImageUrl = obj.GetString("profile_background_image_url"),
+                ProfileBackgroundImageUrlHttps = obj.GetString("profile_background_image_url_https"),
+                ProfileBackgroundTile = obj.GetBoolean("profile_background_tile"),
+                ProfileBannerUrl = obj.GetString("profile_banner_url"),
+                ProfileImageUrl = obj.GetString("profile_image_url"),
+                ProfileImageUrlHttps = obj.GetString("profile_image_url_https"),
+                ProfileLinkColor = obj.GetString("profile_link_color"),
+                ProfileSidebarBorderColor = obj.GetString("profile_sidebar_border_color"),
+                ProfileSidebarFillColor = obj.GetString("profile_sidebar_fill_color"),
+                ProfileTextColor = obj.GetString("profile_text_color"),
+                ProfileUseBackgroundImage = obj.GetBoolean("profile_use_background_image")
+            };
         }
 
         #endregion

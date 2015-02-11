@@ -4,14 +4,29 @@ namespace Skybrud.Social.Twitter.Objects {
 
     public class TwitterSearchTweetMetaData : SocialJsonObject {
 
+        #region Properties
+
         public float CompletedIn { get; private set; }
+        
         public long MaxId { get; private set; }
+        
         public string Query { get; private set; }
+        
         public string RefreshUrl { get; private set; }
+        
         public int Count { get; private set; }
+        
         public long SinceId { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
         public TwitterSearchTweetMetaData(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
 
         public static TwitterSearchTweetMetaData Parse(JsonObject obj) {
             return new TwitterSearchTweetMetaData(obj) {
@@ -23,6 +38,8 @@ namespace Skybrud.Social.Twitter.Objects {
                 SinceId = obj.GetInt64("since_id")
             };
         }
+
+        #endregion
 
     }
 

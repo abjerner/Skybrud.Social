@@ -9,21 +9,22 @@ namespace Skybrud.Social.Twitter.Entities {
         #region Properties
 
         public TwitterHashTagEntity[] HashTags { get; private set; }
+        
         public TwitterUrlEntity[] Urls { get; private set; }
+        
         public TwitterMentionEntity[] Mentions { get; private set; }
+        
         public TwitterMediaEntity[] Media { get; private set; }
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private TwitterStatusMessageEntities() {
-            // make constructor private
-        }
+        private TwitterStatusMessageEntities() { }
 
         #endregion
 
-        #region Member method(s)
+        #region Member methods
 
         /// <summary>
         /// Gets a collection of all entities in an ascending order.
@@ -51,7 +52,7 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #endregion
 
-        #region Static method(s)
+        #region Static methods
 
         public static TwitterStatusMessageEntities Parse(JsonObject entities) {
             if (entities == null) return null;

@@ -11,6 +11,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the OAuth 1.0a client.
+        /// </summary>
         public TwitterOAuthClient Client { get; private set; }
 
         #endregion
@@ -23,13 +26,15 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         /// <summary>
         /// Gets the raw API response for a user with the specified ID. Any entities will not be included in the API response.
         /// </summary>
         /// <param name="id">The ID of the user.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/users/show</cref>
+        /// </see>
         public SocialHttpResponse GetUser(long id) {
             return GetUser(id, false);
         }
@@ -39,7 +44,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/users/show</cref>
+        /// </see>
         public SocialHttpResponse GetUser(long id, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "user_id", id.ToString(CultureInfo.InvariantCulture) } };
             if (includeEntities) qs.Add("include_entities", "true");
@@ -50,7 +57,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Gets the raw API response for a user with the specified screen name. Any entities will not be included in the API response.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/users/show</cref>
+        /// </see>
         public SocialHttpResponse GetUser(string screenName) {
             return GetUser(screenName, false);
         }
@@ -60,7 +69,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         /// <param name="includeEntities">Whether entities should be included in the API response.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/users/show</cref>
+        /// </see>
         public SocialHttpResponse GetUser(string screenName, bool includeEntities) {
             NameValueCollection qs = new NameValueCollection { { "screen_name", screenName } };
             if (includeEntities) qs.Add("include_entities", "true");
@@ -71,7 +82,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// Gets the raw API response for a user described by the specified <var>NameValueCollection</var>.
         /// </summary>
         /// <param name="qs">The <code>NameValueCollection</code> describing the user.</param>
-        /// <see cref="https://dev.twitter.com/docs/api/1.1/get/users/show"/>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/users/show</cref>
+        /// </see>
         private SocialHttpResponse GetUser(NameValueCollection qs) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/users/show.json", qs);
         }

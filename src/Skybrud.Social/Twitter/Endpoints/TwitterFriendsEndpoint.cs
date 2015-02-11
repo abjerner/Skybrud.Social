@@ -37,16 +37,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public TwitterIdsResponse GetIds(long userId) {
-            return GetIds(userId, null);
-        }
-
-        /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIds(long userId, TwitterFriendsIdsOptions options) {
-            return TwitterIdsResponse.ParseResponse(Raw.GetIds(userId, options));
+            return TwitterIdsResponse.ParseResponse(Raw.GetIds(userId));
         }
 
         /// <summary>
@@ -54,16 +45,15 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public TwitterIdsResponse GetIds(string screenName) {
-            return GetIds(screenName, null);
+            return TwitterIdsResponse.ParseResponse(Raw.GetIds(screenName));
         }
 
         /// <summary>
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterIdsResponse GetIds(string screenName, TwitterFriendsIdsOptions options) {
-            return TwitterIdsResponse.ParseResponse(Raw.GetIds(screenName, options));
+        public TwitterIdsResponse GetIds(TwitterFriendsIdsOptions options) {
+            return TwitterIdsResponse.ParseResponse(Raw.GetIds(options));
         }
 
         /// <summary>
@@ -71,16 +61,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public TwitterUserListResponse GetList(long userId) {
-            return GetList(userId, null);
-        }
-
-        /// <summary>
-        /// Gets a list of friends for a given user using the default options.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetList(long userId, TwitterFriendsListOptions options) {
-            return TwitterUserListResponse.ParseResponse(Raw.GetList(userId, options));
+            return TwitterUserListResponse.ParseResponse(Raw.GetList(userId));
         }
 
         /// <summary>
@@ -88,16 +69,15 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public TwitterUserListResponse GetList(string screenName) {
-            return GetList(screenName, null);
+            return TwitterUserListResponse.ParseResponse(Raw.GetList(screenName));
         }
 
         /// <summary>
         /// Gets a list of friends for a given user using the specified options.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public TwitterUserListResponse GetList(string screenName, TwitterFriendsListOptions options) {
-            return TwitterUserListResponse.ParseResponse(Raw.GetList(screenName, options));
+        public TwitterUserListResponse GetList(TwitterFriendsListOptions options) {
+            return TwitterUserListResponse.ParseResponse(Raw.GetList(options));
         }
 
         #endregion

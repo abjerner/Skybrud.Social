@@ -5,9 +5,23 @@ namespace Skybrud.Social.Twitter.Entities {
 
     public class TwitterUrlEntity : TwitterBaseEntity {
 
+        #region Properties
+
         public string Url { get; private set; }
+        
         public string ExpandedUrl { get; private set; }
+        
         public string DisplayUrl { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private TwitterUrlEntity() { }
+
+        #endregion
+
+        #region Static methods
 
         public static IEnumerable<TwitterUrlEntity> ParseMultiple(JsonArray entities) {
             List<TwitterUrlEntity> temp = new List<TwitterUrlEntity>();
@@ -28,6 +42,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 EndIndex = entity.GetArray("indices").GetInt32(1)
             };
         }
+
+        #endregion
 
     }
 

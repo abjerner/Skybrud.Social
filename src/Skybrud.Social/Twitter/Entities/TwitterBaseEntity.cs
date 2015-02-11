@@ -2,9 +2,7 @@ namespace Skybrud.Social.Twitter.Entities {
 
     public class TwitterBaseEntity {
 
-        protected TwitterBaseEntity() {
-            // make constructor protected
-        }
+        #region Properties
 
         public int StartIndex { get; protected set; }
         public int EndIndex { get; protected set; }
@@ -12,6 +10,14 @@ namespace Skybrud.Social.Twitter.Entities {
         public int[] Indices {
             get { return new[] { StartIndex, EndIndex }; }
         }
+
+        #endregion
+
+        #region Constructors
+
+        protected TwitterBaseEntity() { }
+
+        #endregion
 
     }
 

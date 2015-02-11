@@ -12,15 +12,13 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private TwitterUserDescriptionEntities() {
-            // Hide default constructor
-        }
+        private TwitterUserDescriptionEntities() { }
 
         #endregion
 
-        #region Member method(s)
+        #region Member methods
 
         /// <summary>
         /// Gets a collection of all entities in an ascending order.
@@ -42,7 +40,7 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #endregion
 
-        #region Static method(s)
+        #region Static methods
 
         public static TwitterUserDescriptionEntities Parse(JsonObject entities) {
             if (entities == null) return null;

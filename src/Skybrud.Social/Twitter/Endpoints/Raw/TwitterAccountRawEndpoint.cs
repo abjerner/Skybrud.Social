@@ -5,14 +5,25 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
     public class TwitterAccountRawEndpoint {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the OAuth 1.0a client.
+        /// </summary>
         public TwitterOAuthClient Client { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         internal TwitterAccountRawEndpoint(TwitterOAuthClient client) {
             Client = client;
         }
 
-        #region Account
-        
+        #endregion
+
+        #region Member methods
+
         public SocialHttpResponse VerifyCredentials() {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/account/verify_credentials.json");
         }

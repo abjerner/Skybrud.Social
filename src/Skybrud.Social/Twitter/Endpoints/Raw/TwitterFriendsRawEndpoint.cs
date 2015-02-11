@@ -30,16 +30,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public SocialHttpResponse GetIds(long userId) {
-            return GetIds(userId, null);
-        }
-
-        /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetIds(long userId, TwitterFriendsIdsOptions options) {
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/ids.json", options);
+            return GetIds(new TwitterFriendsIdsOptions {
+                UserId = userId
+            });
         }
 
         /// <summary>
@@ -47,15 +40,16 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public SocialHttpResponse GetIds(string screenName) {
-            return GetIds(screenName, null);
+            return GetIds(new TwitterFriendsIdsOptions {
+                ScreenName = screenName
+            });
         }
 
         /// <summary>
         /// Gets a list of IDs representing the friends of a given user.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetIds(string screenName, TwitterFriendsIdsOptions options) {
+        public SocialHttpResponse GetIds(TwitterFriendsIdsOptions options) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/ids.json", options);
         }
 
@@ -64,16 +58,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public SocialHttpResponse GetList(long userId) {
-            return GetList(userId, null);
-        }
-
-        /// <summary>
-        /// Gets a list of friends for a given user using the default options.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetList(long userId, TwitterFriendsListOptions options) {
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/list.json", options);
+            return GetList(new TwitterFriendsListOptions {
+                UserId = userId
+            });
         }
 
         /// <summary>
@@ -81,15 +68,16 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public SocialHttpResponse GetList(string screenName) {
-            return GetList(screenName, null);
+            return GetList(new TwitterFriendsListOptions {
+                ScreenName = screenName
+            });
         }
 
         /// <summary>
         /// Gets a list of friends for a given user using the specified options.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetList(string screenName, TwitterFriendsListOptions options) {
+        public SocialHttpResponse GetList(TwitterFriendsListOptions options) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/friends/list.json", options);
         }
 

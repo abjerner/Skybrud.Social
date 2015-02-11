@@ -5,7 +5,19 @@ namespace Skybrud.Social.Twitter.Entities {
 
     public class TwitterHashTagEntity : TwitterBaseEntity {
 
+        #region Properties
+
         public string Text { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private TwitterHashTagEntity() { }
+
+        #endregion
+
+        #region Static methods
 
         public static IEnumerable<TwitterHashTagEntity> ParseMultiple(JsonArray entities) {
             List<TwitterHashTagEntity> temp = new List<TwitterHashTagEntity>();
@@ -24,6 +36,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 EndIndex = entity.GetArray("indices").GetInt32(1)
             };
         }
+
+        #endregion
 
     }
 

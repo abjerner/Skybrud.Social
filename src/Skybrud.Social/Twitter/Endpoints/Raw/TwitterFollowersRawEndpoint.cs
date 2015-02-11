@@ -15,7 +15,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         internal TwitterFollowersRawEndpoint(TwitterOAuthClient client) {
             Client = client;
@@ -23,73 +23,61 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #endregion
 
-        #region Methods
+        #region Membmer methods
 
         /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
+        /// Gets a list of IDs representing the followers of a given user.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public SocialHttpResponse GetIds(long userId) {
-            return GetIds(userId, null);
+            return GetIds(new TwitterFollowersIdsOptions {
+                UserId = userId
+            });
         }
 
         /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetIds(long userId, TwitterFollowersIdsOptions options) {
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/followers/ids.json", options);
-        }
-
-        /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
+        /// Gets a list of IDs representing the followers of a given user.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public SocialHttpResponse GetIds(string screenName) {
-            return GetIds(screenName, null);
+            return GetIds(new TwitterFollowersIdsOptions {
+                ScreenName = screenName
+            });
         }
 
         /// <summary>
-        /// Gets a list of IDs representing the friends of a given user.
+        /// Gets a list of IDs representing the followers of a given user.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetIds(string screenName, TwitterFollowersIdsOptions options) {
+        public SocialHttpResponse GetIds(TwitterFollowersIdsOptions options) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/followers/ids.json", options);
         }
 
         /// <summary>
-        /// Gets a list of friends for a given user using the default options.
+        /// Gets a list of followers for a given user using the default options.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public SocialHttpResponse GetList(long userId) {
-            return GetList(userId, null);
+            return GetList(new TwitterFollowersListOptions {
+                UserId = userId
+            });
         }
 
         /// <summary>
-        /// Gets a list of friends for a given user using the default options.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetList(long userId, TwitterFollowersListOptions options) {
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/followers/list.json", options);
-        }
-
-        /// <summary>
-        /// Gets a list of friends for a given user using the default options.
+        /// Gets a list of followers for a given user using the default options.
         /// </summary>
         /// <param name="screenName">The screen name of the user.</param>
         public SocialHttpResponse GetList(string screenName) {
-            return GetList(screenName, null);
+            return GetList(new TwitterFollowersListOptions {
+                ScreenName = screenName
+            });
         }
 
         /// <summary>
-        /// Gets a list of friends for a given user using the specified options.
+        /// Gets a list of followers for a given user using the specified options.
         /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
         /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetList(string screenName, TwitterFollowersListOptions options) {
+        public SocialHttpResponse GetList(TwitterFollowersListOptions options) {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/followers/list.json", options);
         }
 

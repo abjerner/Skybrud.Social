@@ -7,19 +7,18 @@ namespace Skybrud.Social.Twitter.Entities {
         #region Properties
 
         public TwitterUserUrlEntities Url { get; private set; }
+        
         public TwitterUserDescriptionEntities Description { get; private set; }
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
-        private TwitterUserEntities() {
-            // Hide default constructor
-        }
+        private TwitterUserEntities() { }
 
         #endregion
 
-        #region Static method(s)
+        #region Static methods
 
         public static TwitterUserEntities Parse(JsonObject entities) {
             if (entities == null) return null;
@@ -32,4 +31,5 @@ namespace Skybrud.Social.Twitter.Entities {
         #endregion
 
     }
+
 }

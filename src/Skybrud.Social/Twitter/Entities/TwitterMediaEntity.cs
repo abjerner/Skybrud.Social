@@ -5,15 +5,35 @@ namespace Skybrud.Social.Twitter.Entities {
 
     public class TwitterMediaEntity : TwitterBaseEntity {
 
+        #region Properties
+
         public long Id { get; private set; }
+        
         public string IdStr { get; private set; }
+        
         public string MediaUrl { get; private set; }
+        
         public string MediaUrlHttps { get; private set; }
+        
         public string Url { get; private set; }
+        
         public string DisplayUrl { get; private set; }
+        
         public string ExpandedUrl { get; private set; }
+        
         public string Type { get; private set; }
+        
         public long SourceStatusId { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private TwitterMediaEntity() { }
+
+        #endregion
+
+        #region Static methods
 
         public static IEnumerable<TwitterMediaEntity> ParseMultiple(JsonArray entities) {
             List<TwitterMediaEntity> temp = new List<TwitterMediaEntity>();
@@ -40,6 +60,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 //SourceStatusId = entity.source_status_id
             };
         }
+
+        #endregion
 
     }
 
