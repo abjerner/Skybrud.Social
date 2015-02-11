@@ -437,12 +437,16 @@
     <Compile Include="Twitter\Entities\TwitterStatusMessageEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUrlEntity.cs" />
     <Compile Include="Twitter\Enums\TwitterGranularity.cs" />
+    <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeParameters.cs" />
+    <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeQuery.cs" />
+    <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeResult.cs" />
     <Compile Include="Twitter\Objects\TwitterBoundingBox.cs" />
     <Compile Include="Twitter\Objects\TwitterContributor.cs" />
     <Compile Include="Twitter\Objects\TwitterCoordinates.cs" />
     <Compile Include="Twitter\Objects\TwitterIdsCollection.cs" />
     <Compile Include="Twitter\Objects\TwitterPlace.cs" />
     <Compile Include="Twitter\Objects\TwitterReplyTo.cs" />
+    <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeResults.cs" />
     <Compile Include="Twitter\Objects\TwitterSearchTweetMetaData.cs" />
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />

@@ -1,10 +1,26 @@
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Twitter.Enums;
 
 namespace Skybrud.Social.Twitter.Options {
 
-    public class TwitterReverseGeocodeOptions {
+    public class TwitterReverseGeocodeOptions : IGetOptions {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the latitude to search around. This parameter will be ignored unless it is inside the range
+        /// -90.0 to +90.0 (North is positive) inclusive. It will  also be ignored if there isn't a corresponding
+        /// <code>long</code> parameter.
+        /// </summary>
+        public double Latitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is
+        /// positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if
+        /// <code>geo_enabled</code> is disabled, or if there not a corresponding <code>lat</code> parameter.
+        /// </summary>
+        public double Longitude { get; set; }
 
         /// <summary>
         /// A hint on the "region" in which to search. If a number, then this is a radius in meters,
@@ -35,9 +51,7 @@ namespace Skybrud.Social.Twitter.Options {
 
         #region Constructors
 
-        public TwitterReverseGeocodeOptions() {
-            // default constructor
-        }
+        public TwitterReverseGeocodeOptions() { }
 
         public TwitterReverseGeocodeOptions(string accurary = "0m", TwitterGranularity granularity = TwitterGranularity.Neighborhood, int maxResults = 0) {
             Accurary = accurary;
@@ -47,7 +61,7 @@ namespace Skybrud.Social.Twitter.Options {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         public TwitterReverseGeocodeOptions SetAccuraryInMeters(int meters) {
             Accurary = meters + "m";
@@ -59,8 +73,26 @@ namespace Skybrud.Social.Twitter.Options {
             return this;
         }
 
-        #endregion
+        public SocialQueryString GetQueryString() {
 
+            // Initialize the query string
+            SocialQueryString query = new SocialQueryString();
+
+            // Set required parameters
+            query.Set("lat", Latitude);
+            query.Set("long", Longitude);
+
+            // Set optional parameters
+            if (Accurary != null && Accurary != "0m") query.Set("accuracy", Accurary);
+            if (Granularity != default(TwitterGranularity)) query.Set("granularity", Granularity.ToString().ToLower());
+            if (MaxResults > 0) query.Set("max_results", MaxResults);
+
+            return query;
+
+        }
+
+        #endregion
+    
     }
 
 }
