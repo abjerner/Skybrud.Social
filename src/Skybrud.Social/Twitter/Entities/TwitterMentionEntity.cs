@@ -25,16 +25,6 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #region Static methods
 
-        public static IEnumerable<TwitterMentionEntity> ParseMultiple(JsonArray mentions) {
-            List<TwitterMentionEntity> temp = new List<TwitterMentionEntity>();
-            if (mentions != null) {
-                for (int i = 0; i < mentions.Length; i++) {
-                    temp.Add(Parse(mentions.GetObject(i)));
-                }
-            }
-            return temp;
-        }
-
         public static TwitterMentionEntity Parse(JsonObject mention) {
             return new TwitterMentionEntity {
                 UserId = mention.GetInt64("id"),

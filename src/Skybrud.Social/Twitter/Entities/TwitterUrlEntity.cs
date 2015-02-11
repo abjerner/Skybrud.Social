@@ -23,16 +23,6 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #region Static methods
 
-        public static IEnumerable<TwitterUrlEntity> ParseMultiple(JsonArray entities) {
-            List<TwitterUrlEntity> temp = new List<TwitterUrlEntity>();
-            if (entities != null) {
-                for (int i = 0; i < entities.Length; i++) {
-                    temp.Add(Parse(entities.GetObject(i)));
-                }
-            }
-            return temp;
-        }
-
         public static TwitterUrlEntity Parse(JsonObject entity) {
             return new TwitterUrlEntity {
                 Url = entity.GetString("url"),

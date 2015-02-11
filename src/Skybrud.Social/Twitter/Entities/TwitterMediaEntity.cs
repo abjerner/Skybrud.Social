@@ -35,16 +35,6 @@ namespace Skybrud.Social.Twitter.Entities {
 
         #region Static methods
 
-        public static IEnumerable<TwitterMediaEntity> ParseMultiple(JsonArray entities) {
-            List<TwitterMediaEntity> temp = new List<TwitterMediaEntity>();
-            if (entities != null) {
-                for (int i = 0; i < entities.Length; i++) {
-                    temp.Add(Parse(entities.GetObject(i)));
-                }
-            }
-            return temp;
-        }
-
         public static TwitterMediaEntity Parse(JsonObject entity) {
             return new TwitterMediaEntity {
                 Id = entity.GetInt64("id"),
