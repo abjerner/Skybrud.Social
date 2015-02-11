@@ -11,6 +11,8 @@ namespace Skybrud.Social.Twitter.OAuth {
     /// </summary>
     public class TwitterOAuthClient : OAuthClient {
 
+        #region Private fields
+
         private TwitterAccountRawEndpoint _account;
         private TwitterFollowersRawEndpoint _followers;
         private TwitterFriendsRawEndpoint _friends;
@@ -18,6 +20,8 @@ namespace Skybrud.Social.Twitter.OAuth {
         private TwitterSearchRawEndpoint _search;
         private TwitterStatusesRawEndpoint _statuses;
         private TwitterUsersRawEndpoint _users;
+
+        #endregion
 
         #region Properties
 
@@ -74,17 +78,11 @@ namespace Skybrud.Social.Twitter.OAuth {
 
         #region Constructors
 
-        public TwitterOAuthClient() : this(null, null, null, null, null) {
-            // Call overloaded constructor
-        }
+        public TwitterOAuthClient() : this(null, null, null, null, null) { }
 
-        public TwitterOAuthClient(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, null, null, null) {
-            // Call overloaded constructor
-        }
+        public TwitterOAuthClient(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, null, null, null) { }
 
-        public TwitterOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret) : this(consumerKey, consumerSecret, token, tokenSecret, null) {
-            // Call overloaded constructor
-        }
+        public TwitterOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret) : this(consumerKey, consumerSecret, token, tokenSecret, null) { }
 
         public TwitterOAuthClient(string consumerKey, string consumerSecret, string token, string tokenSecret, string callback) {
         

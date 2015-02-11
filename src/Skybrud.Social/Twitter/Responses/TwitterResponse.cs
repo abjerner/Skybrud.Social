@@ -7,14 +7,24 @@ namespace Skybrud.Social.Twitter.Responses {
 
     public class TwitterResponse {
 
+        #region Properties
+
         /// <summary>
         /// Gets a reference to the underlying response.
         /// </summary>
         public SocialHttpResponse Response { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
         protected TwitterResponse(SocialHttpResponse response) {
             Response = response;
         }
+
+        #endregion
+
+        #region Static methods
 
         public static void ValidateResponse(SocialHttpResponse response) {
 
@@ -39,13 +49,23 @@ namespace Skybrud.Social.Twitter.Responses {
 
         }
 
+        #endregion
+
     }
 
     public class TwitterResponse<T> : TwitterResponse {
 
+        #region Properties
+
         public T Body { get; protected set; }
 
+        #endregion
+
+        #region Constructors
+
         protected TwitterResponse(SocialHttpResponse response) : base(response) { }
+
+        #endregion
 
     }
 
