@@ -82,11 +82,6 @@ namespace Skybrud.Social.Twitter.Objects {
         /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static TwitterStatusMessage Parse(JsonObject obj) {
 
-            // Error checking
-            if (obj == null) return null;
-            if (obj.HasValue("error")) throw TwitterDeprecatedException.Parse(obj.GetArray("error"));
-            if (obj.HasValue("errors")) throw TwitterDeprecatedException.Parse(obj.GetArray("errors"));
-
             TwitterStatusMessage msg = new TwitterStatusMessage(obj) {
                 Id = obj.GetInt64("id"),
                 Text = obj.GetString("text"),

@@ -275,11 +275,7 @@ namespace Skybrud.Social.Twitter.Objects {
         /// </summary>
         /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
         public static TwitterUser Parse(JsonObject obj) {
-            
-            // Error checking
-            if (obj == null) return null;
-            if (obj.HasValue("error")) throw TwitterDeprecatedException.Parse(obj.GetArray("error"));
-            
+
             TwitterUser user = new TwitterUser(obj);
 
             #region Basic properties

@@ -18,14 +18,6 @@ namespace Skybrud.Social.Twitter.Responses {
 
             if (obj == null) return null;
 
-            if (obj.HasValue("errors")) {
-                JsonArray errors = obj.GetArray("errors");
-                throw new TwitterDeprecatedException(
-                    errors.GetObject(0).GetInt32("code"),
-                    errors.GetObject(0).GetString("message")
-                );
-            }
-
             // Parse the array
             return new TwitterSearchTweetsResponse(obj) {
                 Statuses = obj.GetArray("statuses", TwitterStatusMessage.Parse),

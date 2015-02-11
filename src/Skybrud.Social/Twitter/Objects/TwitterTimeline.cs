@@ -38,16 +38,6 @@ namespace Skybrud.Social.Twitter.Objects {
             // Deserialize the JSON
             IJsonObject json = JsonConverter.Parse(contents);
 
-            // Can there be multiple errors? Need. More. Data.
-            JsonObject obj = json as JsonObject;
-            if (obj != null) {
-                JsonArray errors = obj.GetArray("errors");
-                throw new TwitterDeprecatedException(
-                    errors.GetObject(0).GetInt32("code"),
-                    errors.GetObject(0).GetString("message")
-                );
-            }
-
             // Cast to an array
             JsonArray array = (JsonArray) json;
 
