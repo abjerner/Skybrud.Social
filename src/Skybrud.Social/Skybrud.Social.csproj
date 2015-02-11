@@ -440,6 +440,7 @@
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeParameters.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeQuery.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeResult.cs" />
+    <Compile Include="Twitter\Objects\Search\TwitterSearchTweetsResults.cs" />
     <Compile Include="Twitter\Objects\TwitterBoundingBox.cs" />
     <Compile Include="Twitter\Objects\TwitterContributor.cs" />
     <Compile Include="Twitter\Objects\TwitterCoordinates.cs" />
@@ -447,7 +448,7 @@
     <Compile Include="Twitter\Objects\TwitterPlace.cs" />
     <Compile Include="Twitter\Objects\TwitterReplyTo.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeResults.cs" />
-    <Compile Include="Twitter\Objects\TwitterSearchTweetMetaData.cs" />
+    <Compile Include="Twitter\Objects\Search\TwitterSearchTweetsMetaData.cs" />
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterTimeline.cs" />

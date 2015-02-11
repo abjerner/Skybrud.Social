@@ -1,8 +1,8 @@
 ﻿using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Twitter.Objects {
+namespace Skybrud.Social.Twitter.Objects.Search {
 
-    public class TwitterSearchTweetMetaData : SocialJsonObject {
+    public class TwitterSearchTweetsMetaData : SocialJsonObject {
 
         #region Properties
 
@@ -22,14 +22,14 @@ namespace Skybrud.Social.Twitter.Objects {
 
         #region Constructors
 
-        public TwitterSearchTweetMetaData(JsonObject obj) : base(obj) { }
+        public TwitterSearchTweetsMetaData(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static TwitterSearchTweetMetaData Parse(JsonObject obj) {
-            return new TwitterSearchTweetMetaData(obj) {
+        public static TwitterSearchTweetsMetaData Parse(JsonObject obj) {
+            return new TwitterSearchTweetsMetaData(obj) {
                 CompletedIn = obj.GetFloat("completed_in"),
                 MaxId = obj.GetInt64("max_id"),
                 Query = obj.GetString("query"),

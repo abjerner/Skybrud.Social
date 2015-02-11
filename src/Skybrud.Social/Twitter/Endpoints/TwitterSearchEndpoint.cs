@@ -37,7 +37,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="query">The search query.</param>
         public TwitterSearchTweetsResponse GetTweets(string query) {
-            return TwitterSearchTweetsResponse.ParseJson(Raw.GetTweets(query).Body); 
+            return TwitterSearchTweetsResponse.ParseResponse(Raw.GetTweets(query)); 
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="query">The search query.</param>
         /// <param name="count">The maximum amount of tweets to return (default: 15, max: 100).</param>
         public TwitterSearchTweetsResponse GetTweets(string query, int count) {
-            return TwitterSearchTweetsResponse.ParseJson(Raw.GetTweets(query, count).Body); 
+            return TwitterSearchTweetsResponse.ParseResponse(Raw.GetTweets(query, count)); 
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         /// <param name="options">The search options.</param>
         public TwitterSearchTweetsResponse GetTweets(TwitterSearchTweetOptions options) {
-            return TwitterSearchTweetsResponse.ParseJson(Raw.GetTweets(options).Body); 
+            return TwitterSearchTweetsResponse.ParseResponse(Raw.GetTweets(options)); 
         }
 
         #endregion

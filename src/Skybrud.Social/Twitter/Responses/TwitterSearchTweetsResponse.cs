@@ -1,30 +1,34 @@
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
-using Skybrud.Social.Twitter.Objects;
+using Skybrud.Social.Twitter.Objects.Search;
 
 namespace Skybrud.Social.Twitter.Responses {
 
-    public class TwitterSearchTweetsResponse : SocialJsonObject {
+    public class TwitterSearchTweetsResponse : TwitterResponse<TwitterSearchTweetsResults> {
 
-        public TwitterStatusMessage[] Statuses { get; private set; }
-        public TwitterSearchTweetMetaData MetaData { get; private set; }
+        #region Constructors
 
-        public TwitterSearchTweetsResponse(JsonObject obj) : base(obj) { }
+        private TwitterSearchTweetsResponse(SocialHttpResponse response) : base(response) { }
 
-        public static TwitterSearchTweetsResponse ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
+        #endregion
 
-        public static TwitterSearchTweetsResponse Parse(JsonObject obj) {
+        #region Static methods
 
-            if (obj == null) return null;
+        public static TwitterSearchTweetsResponse ParseResponse(SocialHttpResponse response) {
 
-            // Parse the array
-            return new TwitterSearchTweetsResponse(obj) {
-                Statuses = obj.GetArray("statuses", TwitterStatusMessage.Parse),
-                MetaData = obj.GetObject("search_metadata", TwitterSearchTweetMetaData.Parse)
+            if (response == null) return null;
+
+            // Validate the response
+            ValidateResponse(response);
+
+            // Initialize the response object
+            return new TwitterSearchTweetsResponse(response) {
+                Body = JsonObject.ParseJson(response.Body, TwitterSearchTweetsResults.Parse)
             };
 
         }
+
+        #endregion
 
     }
 
