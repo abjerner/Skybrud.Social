@@ -472,7 +472,6 @@
     <Compile Include="Twitter\Responses\TwitterUserResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterUsersSearchResponse.cs" />
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
-    <Compile Include="Twitter\TwitterDeprecatedException.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
     <Compile Include="Twitter\TwitterUtils.cs" />
     <Compile Include="Vimeo\Advanced\Endpoints\Raw\VimeoChannelsRawEndpoint.cs" />
