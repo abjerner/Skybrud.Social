@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Twitter.Entities {
@@ -22,8 +21,6 @@ namespace Skybrud.Social.Twitter.Entities {
         public string ExpandedUrl { get; private set; }
         
         public string Type { get; private set; }
-        
-        public long SourceStatusId { get; private set; }
 
         #endregion
 
@@ -46,8 +43,7 @@ namespace Skybrud.Social.Twitter.Entities {
                 Url = entity.GetString("url"),
                 DisplayUrl = entity.GetString("display_url"),
                 ExpandedUrl = entity.GetString("expanded_url"),
-                Type = entity.GetString("type"),
-                //SourceStatusId = entity.source_status_id
+                Type = entity.GetString("type")
             };
         }
 
