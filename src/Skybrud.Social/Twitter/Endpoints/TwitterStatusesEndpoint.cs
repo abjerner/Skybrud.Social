@@ -35,23 +35,6 @@ namespace Skybrud.Social.Twitter.Endpoints {
         #region Member methods
 
         /// <summary>
-        /// Alias of GetStatusMessage(). Gets information about a status message (tweet) with the specified ID.
-        /// </summary>
-        /// <param name="statusId">The ID of the status message.</param>
-        public TwitterStatusMessageResponse GetTweet(long statusId) {
-            return GetStatusMessage(statusId, null);
-        }
-
-        /// <summary>
-        /// Alias of GetStatusMessage(). Gets information about a status message (tweet) with the specified ID.
-        /// </summary>
-        /// <param name="statusId">The ID of the status message.</param>
-        /// <param name="options">Options affecting the response from the Twitter API.</param>
-        public TwitterStatusMessageResponse GetTweet(long statusId, TwitterStatusMessageOptions options) {
-            return GetStatusMessage(statusId, options);
-        }
-
-        /// <summary>
         /// Gets information about a status message (tweet) with the specified ID.
         /// </summary>
         /// <param name="statusId">The ID of the status message.</param>
