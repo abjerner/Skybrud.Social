@@ -23,27 +23,26 @@ namespace Skybrud.Social.Twitter.Options {
         public double Longitude { get; set; }
 
         /// <summary>
-        /// A hint on the "region" in which to search. If a number, then this is a radius in meters,
-        /// but it can also take a string that is suffixed with ft to specify feet. If this is not
-        /// passed in, then it is assumed to be 0m. If coming from a device, in practice, this value
-        /// is whatever accuracy the device has measuring its location (whether it be coming from a
-        /// GPS, WiFi triangulation, etc.).
+        /// A hint on the "region" in which to search. If a number, then this is a radius in meters, but it can also
+        /// take a string that is suffixed with ft to specify feet. If this is not passed in, then it is assumed to be
+        /// <code>0m</code>. If coming from a device, in practice, this value is whatever accuracy the device has
+        /// measuring its location (whether it be coming from a GPS, WiFi triangulation, etc.).
         /// </summary>
         public string Accurary { get; set; }
 
         /// <summary>
-        /// This is the minimal granularity of place types to return and must be one of: <var>poi</var>,
-        /// <var>neighborhood</var>, <var>city</var>, <var>admin</var> or <var>country</var>. If no
-        /// granularity is provided for the request <var>neighborhood</var> is assumed. Setting this to
-        /// <var>city</var>, for example, will find places which have a type of <var>city</var>,
-        /// <var>admin</var> or <var>country</var>.
+        /// This is the minimal granularity of place types to return and must be one of: <code>poi</code>,
+        /// <code>neighborhood</code>, <code>city</code>, <code>admin</code> or <code>country</code>. If no granularity
+        /// is provided for the request <code>neighborhood</code> is assumed. Setting this to <code>city</code>, for
+        /// example, will find places which have a type of <code>city</code>, <code>admin</code> or
+        /// <code>country</code>.
         /// </summary>
         public TwitterGranularity Granularity { get; set; }
 
         /// <summary>
-        /// A hint as to the number of results to return. This does not guarantee that the number of
-        /// results returned will equal max_results, but instead informs how many "nearby" results to
-        /// return. Ideally, only pass in the number of places you intend to display to the user here.
+        /// A hint as to the number of results to return. This does not guarantee that the number of results returned
+        /// will equal max_results, but instead informs how many "nearby" results to return. Ideally, only pass in the
+        /// number of places you intend to display to the user here.
         /// </summary>
         public int MaxResults { get; set; }
 

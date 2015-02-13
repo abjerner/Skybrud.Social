@@ -28,30 +28,26 @@ namespace Skybrud.Social.Twitter.Options {
         public string ScreenName { get; set; }
 
         /// <summary>
-        /// Causes the results to be broken into pages. If no cursor is
-        /// provided, a value of <code>-1</code> will be assumed, which is the
-        /// first "page".
+        /// Causes the results to be broken into pages. If no cursor is provided, a value of <code>-1</code> will be
+        /// assumed, which is the first "page".
         /// 
-        /// The response from the API will include a <code>previous_cursor</code>
-        /// and <code>next_cursor</code> to allow paging back and forth.
+        /// The response from the API will include a <code>previous_cursor</code> and <code>next_cursor</code> to allow
+        /// paging back and forth.
         /// </summary>
         public long Cursor { get; set; }
 
         /// <summary>
-        /// The number of users to return per page, up to a maximum of 200.
-        /// Defaults to 20.
+        /// The number of users to return per page, up to a maximum of 200. Defaults to 20.
         /// </summary>
         public int Count { get; set; }
 
         /// <summary>
-        /// When set to <em>true</em> statuses will not be included in the
-        /// returned user objects.
+        /// When set to <code>true</code> statuses will not be included in the returned user objects.
         /// </summary>
         public bool SkipStatus { get; set; }
 
         /// <summary>
-        /// The user object entities node will be disincluded when set to
-        /// <code>false</code>.
+        /// The user object entities node will be disincluded when set to <code>false</code>.
         /// </summary>
         public bool IncludeUserEntities { get; set; }
         
