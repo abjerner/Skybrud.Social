@@ -33,15 +33,15 @@ namespace Skybrud.Social.OAuth {
         public string ConsumerSecret { get; set; }
 
         /// <summary>
-        /// A unique/random value specifying the <var>oauth_nonce</var>
-        /// parameter in the OAuth protocol. Along with <var>oauth_timestamp</var>,
+        /// A unique/random value specifying the <code>oauth_nonce</code>
+        /// parameter in the OAuth protocol. Along with <code>oauth_timestamp</code>,
         /// it will make sure each request is only sent once to the OAUth server.
         /// </summary>
         public string Nonce { get; set; }
 
         /// <summary>
-        /// The current UNIX timestamp specifying the <var>oauth_timestamp</var>
-        /// in the OAuth protocol. Along with <var>oauth_nonce</var>,
+        /// The current UNIX timestamp specifying the <code>oauth_timestamp</code>
+        /// in the OAuth protocol. Along with <code>oauth_nonce</code>,
         /// it will make sure each request is only sent once to the OAUth server.
         /// </summary>
         public string Timestamp { get; set; }
@@ -62,7 +62,7 @@ namespace Skybrud.Social.OAuth {
         public string Version { get; set; }
 
         /// <summary>
-        /// A callback URL. This property specified the <var>oauth_callback</var> parameter
+        /// A callback URL. This property specified the <code>oauth_callback</code> parameter
         /// and is used for 3-legged logins. In most cases this proparty should be empty.
         /// </summary>
         public string Callback { get; set; }
@@ -90,8 +90,8 @@ namespace Skybrud.Social.OAuth {
         public string AccessTokenUrl { get; set; }
 
         /// <summary>
-        /// If <var>TRUE</var>, new requests will automatically reset
-        /// the <var>oauth_timestamp</var> and <var>oauth_nonce</var>
+        /// If <code>TRUE</code>, new requests will automatically reset
+        /// the <code>oauth_timestamp</code> and <code>oauth_nonce</code>
         /// with new values. I should only be disabled for testing
         /// purposes.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Skybrud.Social.OAuth {
         #endregion
 
         /// <summary>
-        /// Updates the <var>oauth_timestamp</var> and <var>oauth_nonce</var>
+        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code>
         /// parameters with new values for another request.
         /// </summary>
         public virtual void Reset() {
@@ -301,6 +301,25 @@ namespace Skybrud.Social.OAuth {
         public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
             NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);
             return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, nvc, null));
+        }
+
+        /// <summary>
+        /// Makes a signed POST request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IPostOptions options) {
+
+            SocialQueryString query = (options == null ? null : options.GetQueryString());
+            SocialPostData postData = (options == null ? null : options.GetPostData());
+
+            NameValueCollection nvcQuery = (query == null ? null : query.NameValueCollection);
+            NameValueCollection nvcPostData = (postData == null ? null : postData.ToNameValueCollection());
+
+            // TODO: Converting the POST data to a NameValueCollection will not support multipart data
+
+            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("POST", url, nvcQuery, nvcPostData));
+
         }
 
         /// <summary>
