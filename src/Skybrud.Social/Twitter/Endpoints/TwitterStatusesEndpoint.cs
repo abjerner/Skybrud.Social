@@ -1,5 +1,4 @@
 using Skybrud.Social.Twitter.Endpoints.Raw;
-using Skybrud.Social.Twitter.Objects;
 using Skybrud.Social.Twitter.Options;
 using Skybrud.Social.Twitter.Responses;
 
@@ -64,6 +63,14 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// <param name="replyTo">The ID of the status message to reply to.</param>
         public TwitterStatusMessageResponse PostStatusMessage(string status, long? replyTo) {
             return TwitterStatusMessageResponse.ParseResponse(Raw.PostStatusMessage(status, replyTo));
+        }
+
+        /// <summary>
+        /// Posts the specified status message.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public TwitterStatusMessageResponse PostStatusMessage(TwitterPostStatusMessageOptions options) {
+            return TwitterStatusMessageResponse.ParseResponse(Raw.PostStatusMessage(options));
         }
 
         /// <summary>

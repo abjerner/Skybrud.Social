@@ -56,7 +56,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </summary>
         /// <param name="status">The status message to send.</param>
         public SocialHttpResponse PostStatusMessage(string status) {
-            return PostStatusMessage(status, null);
+            return PostStatusMessage(new TwitterPostStatusMessageOptions { Status = status });
         }
 
         /// <summary>
@@ -65,17 +65,16 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <param name="status">The status message to send.</param>
         /// <param name="replyTo">The ID of the status message to reply to.</param>
         public SocialHttpResponse PostStatusMessage(string status, long? replyTo) {
+            return PostStatusMessage(new TwitterPostStatusMessageOptions { Status = status, ReplyTo = replyTo });
+        }
 
-            // Construct the POST data
-            NameValueCollection postData = new NameValueCollection { { "status", status } };
-            if (replyTo != null) postData.Add("in_reply_to_status_id", replyTo.ToString());
-
-            // Make the call to the API
-            HttpWebResponse response = Client.DoHttpRequest("POST", "https://api.twitter.com/1.1/statuses/update.json", null, postData);
-
-            // Wrap the response in an instance of SocialHttpResponse
-            return SocialHttpResponse.GetFromWebResponse(response);
-
+        /// <summary>
+        /// Posts the specified status message.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse PostStatusMessage(TwitterPostStatusMessageOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpPostRequest("https://api.twitter.com/1.1/statuses/update.json", options);
         }
 
         /// <summary>
