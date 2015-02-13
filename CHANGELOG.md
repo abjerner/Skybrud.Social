@@ -1,6 +1,31 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.9.0
+_13th of February, 2015_
+
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.9.0/Skybrud.Social.v0.9.0.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.9.0" target="_blank">Get on NuGet</a>
+
+Since it has been more than a year since `v0.1.2`, there is a lot of (breaking) changes in `v0.9.0`, and it will take too long time to address them here. I'm working on a new website for Skybrud.Social, that also will contain a long awaited and improved documentation, that will address some of these changes, or at least contain samples on how to use the most recent code.
+
+The changes since `v0.9.0-alpha` mostly consist of improvements to the Twitter implementation, which also has lead to some breaking changes. Here is a small summary of what was changed.
+
+**Twitter**
+
+* All methods in the various Twitter endpoints now return an object representing the entire response, rather than just the response body. Eg. the `GetStatusMessage` will now return an instance of `TwitterStatusMessageResponse` rather than `TwitterStatusMessage` as before.
+
+*  The structure of the `TwitterReverseGeocodeResponse` class (which was introduced in `v0.9.0-alpha`) has now been updated to more closely follow the names and structure of the JSON returned by the Twitter API.
+
+* The `TwitterMethodAttribute` class was removed. This class was probably only used internally, and used for documentation purposes.
+
+* Until now the `TwitterStatusMessage` class has had a property named `Contributors`. The `contributors` property is still present in the returned JSON, but is has been empty in all cases that I have encountered, and Twitter has very limited documentation on the property. It has therefore been removed for now.
+
+* As of `v0.9.0-alpha` the old `TwitterException` was renamed to `TwitterDeprecatedException` since a new and improved `TwitterException` was added instead. The remaining code still using `TwitterDeprecatedException` has now been removed, and the class has therefore been removed as well.
+
+* The `GetTweet` methods in the `Statuses` endpoint has now been removed since they we're really just aliases of the `GetStatusMessage` methods.
+
 ### Skybrud.Social 0.9.0-alpha1
 _7th of February, 2015_
 
