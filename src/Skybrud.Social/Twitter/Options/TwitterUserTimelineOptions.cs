@@ -1,11 +1,22 @@
+using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Twitter.Options {
 
-    public class TwitterTimelineOptions : IGetOptions {
+    public class TwitterUserTimelineOptions : IGetOptions {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the ID of the user for whom to return results for.
+        /// </summary>
+        public long UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the screen name of the user for whom to return results for.
+        /// </summary>
+        public string ScreenName { get; set; }
 
         /// <summary>
         /// Returns results with an ID greater than (that is, more recent than) the
@@ -64,11 +75,28 @@ namespace Skybrud.Social.Twitter.Options {
 
         #region Constructors
 
-        public TwitterTimelineOptions() {
+        public TwitterUserTimelineOptions() {
             IncludeRetweets = true;
         }
 
-        public TwitterTimelineOptions(int count) {
+        public TwitterUserTimelineOptions(long userId) {
+            UserId = userId;
+            IncludeRetweets = true;
+        }
+
+        public TwitterUserTimelineOptions(long userId, int count) {
+            UserId = userId;
+            Count = count;
+            IncludeRetweets = true;
+        }
+
+        public TwitterUserTimelineOptions(string screenName) {
+            ScreenName = screenName;
+            IncludeRetweets = true;
+        }
+
+        public TwitterUserTimelineOptions(string screenName, int count) {
+            ScreenName = screenName;
             Count = count;
             IncludeRetweets = true;
         }
@@ -83,13 +111,15 @@ namespace Skybrud.Social.Twitter.Options {
             SocialQueryString qs = new SocialQueryString();
 
             // Add optional parameters
-            if (SinceId > 0) qs.Add("since_id", SinceId);
-            if (Count > 0) qs.Add("count", Count);
-            if (MaxId > 0) qs.Add("max_id", MaxId);
-            if (TrimUser) qs.Add("trim_user", "true");
-            if (ExcludeReplies) qs.Add("exclude_replies", "true");
-            if (ContributorDetails) qs.Add("contributor_details", "true");
-            if (!IncludeRetweets) qs.Add("include_rts", "false");
+            if (UserId > 0) qs.Set("user_id", UserId);
+            if (!String.IsNullOrWhiteSpace(ScreenName)) qs.Set("screen_name", ScreenName);
+            if (SinceId > 0) qs.Set("since_id", SinceId);
+            if (Count > 0) qs.Set("count", Count);
+            if (MaxId > 0) qs.Set("max_id", MaxId);
+            if (TrimUser) qs.Set("trim_user", "true");
+            if (ExcludeReplies) qs.Set("exclude_replies", "true");
+            if (ContributorDetails) qs.Set("contributor_details", "true");
+            if (!IncludeRetweets) qs.Set("include_rts", "false");
 
             return qs;
 

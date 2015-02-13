@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Specialized;
-using System.Globalization;
 using System.Net;
 using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.OAuth;
@@ -31,210 +31,24 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// <summary>
         /// Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the status message.</param>
+        /// <param name="statusId">The ID of the status message.</param>
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
         /// </see>
-        public SocialHttpResponse GetStatusMessage(long id) {
-            return GetStatusMessage(id, null);
+        public SocialHttpResponse GetStatusMessage(long statusId) {
+            return GetStatusMessage(new TwitterStatusMessageOptions(statusId));
         }
 
         /// <summary>
         /// Gets the raw API response for a status message (tweet) with the specified ID.
         /// </summary>
-        /// <param name="id">The ID of the status message.</param>
         /// <param name="options">The options used when making the call to the API.</param>
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/show/:id</cref>
         /// </see>
-        public SocialHttpResponse GetStatusMessage(long id, TwitterStatusMessageOptions options) {
-
-            // Define the query string
-            NameValueCollection qs = new NameValueCollection { { "id", id.ToString(CultureInfo.InvariantCulture) } };
-            if (options != null) {
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.IncludeMyRetweet) qs.Add("include_my_retweet", "true");
-                if (options.IncludeEntities) qs.Add("include_entities", "true");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/show.json", qs);
-
-        }
-
-        /// <summary>
-        /// Get the raw API response for a user's timeline.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <see>
-        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
-        /// </see>
-        public SocialHttpResponse GetUserTimeline(long userId) {
-            return GetUserTimeline(userId, null);
-        }
-
-        /// <summary>
-        /// Get the raw API response for a user's timeline.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        /// <param name="options">The options used when making the call to the API.</param>
-        /// <see>
-        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
-        /// </see>
-        public SocialHttpResponse GetUserTimeline(long userId, TwitterTimelineOptions options) {
-
-            // Define the query string
-            NameValueCollection qs = new NameValueCollection { { "user_id", userId + "" } };
-
-            // Add optional parameters
-            if (options != null) {
-                if (options.SinceId > 0) qs.Add("since_id", options.SinceId + "");
-                if (options.Count > 0) qs.Add("count", options.Count + "");
-                if (options.MaxId > 0) qs.Add("max_id", options.MaxId + "");
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.ExcludeReplies) qs.Add("exclude_replies", "true");
-                if (options.ContributorDetails) qs.Add("contributor_details", "true");
-                if (!options.IncludeRetweets) qs.Add("include_rts", "false");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
-
-        }
-
-        /// <summary>
-        /// Get the raw API response for a user's timeline.
-        /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
-        /// <see>
-        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
-        /// </see>
-        public SocialHttpResponse GetUserTimeline(string screenName) {
-            return GetUserTimeline(screenName, null);
-        }
-
-        /// <summary>
-        /// Get the raw API response for a user's timeline.
-        /// </summary>
-        /// <param name="screenName">The screen name of the user.</param>
-        /// <param name="options">The options used when making the call to the API.</param>
-        /// <see>
-        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
-        /// </see>
-        public SocialHttpResponse GetUserTimeline(string screenName, TwitterTimelineOptions options) {
-
-            // Define the query string
-            NameValueCollection qs = new NameValueCollection { { "screen_name", screenName } };
-
-            // Add optional parameters
-            if (options != null) {
-                if (options.SinceId > 0) qs.Add("since_id", options.SinceId + "");
-                if (options.Count > 0) qs.Add("count", options.Count + "");
-                if (options.MaxId > 0) qs.Add("max_id", options.MaxId + "");
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.ExcludeReplies) qs.Add("exclude_replies", "true");
-                if (options.ContributorDetails) qs.Add("contributor_details", "true");
-                if (!options.IncludeRetweets) qs.Add("include_rts", "false");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/user_timeline.json", qs);
-
-        }
-
-        /// <summary>
-        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
-        /// user and the users they follow.
-        /// </summary>
-        public SocialHttpResponse GetHomeTimeline() {
-            return GetHomeTimeline(null);
-        }
-
-        /// <summary>
-        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating
-        /// user and the users they follow. 
-        /// </summary>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetHomeTimeline(TwitterTimelineOptions options) {
-
-            // Initialize the query string
-            NameValueCollection qs = new NameValueCollection();
-
-            // Add optional parameters
-            if (options != null) {
-                if (options.SinceId > 0) qs.Add("since_id", options.SinceId + "");
-                if (options.Count > 0) qs.Add("count", options.Count + "");
-                if (options.MaxId > 0) qs.Add("max_id", options.MaxId + "");
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.ExcludeReplies) qs.Add("exclude_replies", "true");
-                if (options.ContributorDetails) qs.Add("contributor_details", "true");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/home_timeline.json", qs);
-
-        }
-
-        /// <summary>
-        /// Gets a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. 
-        /// </summary>
-        public SocialHttpResponse GetMentionsTimeline() {
-            return GetMentionsTimeline(null);
-        }
-
-        /// <summary>
-        /// Gets the most recent mentions (tweets containing a users's @screen_name) for the authenticating user.
-        /// </summary>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetMentionsTimeline(TwitterTimelineOptions options) {
-
-            // Initialize the query string
-            NameValueCollection qs = new NameValueCollection();
-
-            // Add optional parameters
-            if (options != null) {
-                if (options.SinceId > 0) qs.Add("since_id", options.SinceId + "");
-                if (options.Count > 0) qs.Add("count", options.Count + "");
-                if (options.MaxId > 0) qs.Add("max_id", options.MaxId + "");
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.ExcludeReplies) qs.Add("exclude_replies", "true");
-                if (options.ContributorDetails) qs.Add("contributor_details", "true");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/mentions_timeline.json", qs);
-
-        }
-
-        /// <summary>
-        /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
-        /// </summary>
-        public SocialHttpResponse GetRetweetsOfMe() {
-            return GetRetweetsOfMe(null);
-        }
-
-        /// <summary>
-        /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
-        /// </summary>
-        /// <param name="options">The options for the call.</param>
-        public SocialHttpResponse GetRetweetsOfMe(TwitterTimelineOptions options) {
-
-            // Initialize the query string
-            NameValueCollection qs = new NameValueCollection();
-
-            // Add optional parameters
-            if (options != null) {
-                if (options.SinceId > 0) qs.Add("since_id", options.SinceId + "");
-                if (options.Count > 0) qs.Add("count", options.Count + "");
-                if (options.MaxId > 0) qs.Add("max_id", options.MaxId + "");
-                if (options.TrimUser) qs.Add("trim_user", "true");
-                if (options.ExcludeReplies) qs.Add("exclude_replies", "true");
-                if (options.ContributorDetails) qs.Add("contributor_details", "true");
-            }
-
-            // Make the call to the API
-            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/retweets_of_me.json", qs);
-
+        public SocialHttpResponse GetStatusMessage(TwitterStatusMessageOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/show.json", options);
         }
 
         /// <summary>
@@ -253,7 +67,7 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         public SocialHttpResponse PostStatusMessage(string status, long? replyTo) {
 
             // Construct the POST data
-            NameValueCollection postData = new NameValueCollection {{"status", status}};
+            NameValueCollection postData = new NameValueCollection { { "status", status } };
             if (replyTo != null) postData.Add("in_reply_to_status_id", replyTo.ToString());
 
             // Make the call to the API
@@ -262,6 +76,138 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
             // Wrap the response in an instance of SocialHttpResponse
             return SocialHttpResponse.GetFromWebResponse(response);
 
+        }
+
+        /// <summary>
+        /// Get the raw API response for a user's timeline.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
+        public SocialHttpResponse GetUserTimeline(long userId) {
+            return GetUserTimeline(new TwitterUserTimelineOptions(userId));
+        }
+
+        /// <summary>
+        /// Get the raw API response for a user's timeline.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <param name="count">The maximum amount of tweets to return.</param>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
+        public SocialHttpResponse GetUserTimeline(long userId, int count) {
+            return GetUserTimeline(new TwitterUserTimelineOptions(userId, count));
+        }
+
+        /// <summary>
+        /// Get the raw API response for a user's timeline.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user.</param>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
+        public SocialHttpResponse GetUserTimeline(string screenName) {
+            return GetUserTimeline(new TwitterUserTimelineOptions(screenName));
+        }
+
+        /// <summary>
+        /// Get the raw API response for a user's timeline.
+        /// </summary>
+        /// <param name="screenName">The screen name of the user.</param>
+        /// <param name="count">The maximum amount of tweets to return.</param>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
+        public SocialHttpResponse GetUserTimeline(string screenName, int count) {
+            return GetUserTimeline(new TwitterUserTimelineOptions(screenName, count));
+        }
+
+        /// <summary>
+        /// Get the raw API response for a user's timeline.
+        /// </summary>
+        /// <param name="options">The options used when making the call to the API.</param>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline</cref>
+        /// </see>
+        public SocialHttpResponse GetUserTimeline(TwitterUserTimelineOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/user_timeline.json", options);
+        }
+
+        /// <summary>
+        /// Gets a collection of the most recent tweets and retweets posted by the authenticating
+        /// user and the users they follow.
+        /// </summary>
+        public SocialHttpResponse GetHomeTimeline() {
+            return GetHomeTimeline(new TwitterTimelineOptions());
+        }
+
+        /// <summary>
+        /// Gets a collection of the most recent tweets and retweets posted by the authenticating
+        /// user and the users they follow.
+        /// </summary>
+        /// <param name="count">The maximum amount of tweets to return.</param>
+        public SocialHttpResponse GetHomeTimeline(int count) {
+            return GetHomeTimeline(new TwitterTimelineOptions(count));
+        }
+
+        /// <summary>
+        /// Gets a collection of the most recent tweets and retweets posted by the authenticating
+        /// user and the users they follow. 
+        /// </summary>
+        /// <param name="options">The options for the call.</param>
+        public SocialHttpResponse GetHomeTimeline(TwitterTimelineOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/home_timeline.json", options);
+        }
+
+        /// <summary>
+        /// Gets the most recent mentions (tweets containing the users's @screen_name) for the authenticating user.
+        /// </summary>
+        public SocialHttpResponse GetMentionsTimeline() {
+            return GetMentionsTimeline(new TwitterTimelineOptions());
+        }
+
+        /// <summary>
+        /// Gets the most recent mentions (tweets containing the users's @screen_name) for the authenticating user.
+        /// </summary>
+        /// <param name="count">The maximum amount of tweets to return.</param>
+        public SocialHttpResponse GetMentionsTimeline(int count) {
+            return GetMentionsTimeline(new TwitterTimelineOptions(count));
+        }
+
+        /// <summary>
+        /// Gets the most recent mentions (tweets containing the users's @screen_name) for the authenticating user.
+        /// </summary>
+        /// <param name="options">The options for the call.</param>
+        public SocialHttpResponse GetMentionsTimeline(TwitterTimelineOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/mentions_timeline.json", options);
+        }
+
+        /// <summary>
+        /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
+        /// </summary>
+        public SocialHttpResponse GetRetweetsOfMe() {
+            return GetRetweetsOfMe(new TwitterTimelineOptions());
+        }
+
+        /// <summary>
+        /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
+        /// </summary>
+        /// <param name="count">The maximum amount of tweets to return.</param>
+        public SocialHttpResponse GetRetweetsOfMe(int count) {
+            return GetRetweetsOfMe(new TwitterTimelineOptions(count));
+        }
+
+        /// <summary>
+        /// Returns the most recent tweets authored by the authenticating user that have been retweeted by others.
+        /// </summary>
+        /// <param name="options">The options for the call.</param>
+        public SocialHttpResponse GetRetweetsOfMe(TwitterTimelineOptions options) {
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/statuses/retweets_of_me.json", options);
         }
 
         #endregion

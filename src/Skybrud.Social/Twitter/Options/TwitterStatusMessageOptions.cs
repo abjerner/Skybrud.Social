@@ -1,6 +1,16 @@
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
+
 namespace Skybrud.Social.Twitter.Options {
 
-    public class TwitterStatusMessageOptions {
+    public class TwitterStatusMessageOptions : IGetOptions {
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the ID of the status message to be found.
+        /// </summary>
+        public long Id { get; set; }
 
         /// <summary>
         /// When set to <var>true</var>, each tweet returned in a timeline will include a user object
@@ -20,6 +30,31 @@ namespace Skybrud.Social.Twitter.Options {
         /// The entities node will be disincluded when set to <var>false</var>.
         /// </summary>
         public bool IncludeEntities = false;
+
+        #endregion
+
+        #region Constructors
+
+        public TwitterStatusMessageOptions() { }
+
+        public TwitterStatusMessageOptions(long statusId) {
+            Id = statusId;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        public SocialQueryString GetQueryString() {
+            SocialQueryString query = new SocialQueryString();
+            query.Set("id", Id);
+            if (TrimUser) query.Add("trim_user", "true");
+            if (IncludeMyRetweet) query.Add("include_my_retweet", "true");
+            if (IncludeEntities) query.Add("include_entities", "true");
+            return query;
+        }
+
+        #endregion
 
     }
 

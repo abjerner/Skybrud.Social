@@ -451,8 +451,8 @@
     <Compile Include="Twitter\Objects\Search\TwitterSearchTweetsMetaData.cs" />
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
-    <Compile Include="Twitter\Objects\TwitterTimeline.cs" />
     <Compile Include="Twitter\Objects\TwitterUserCollection.cs" />
+    <Compile Include="Twitter\Options\TwitterUserTimelineOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFollowersIdsOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFollowersListOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFriendsIdsOptions.cs" />
@@ -462,6 +462,7 @@
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUsersSearchOptions.cs" />
+    <Compile Include="Twitter\Responses\TwitterTimelineResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterPlaceResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterSearchTweetsResponse.cs" />
