@@ -1,71 +1,48 @@
-using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
+using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
-    
-    public class InstagramAccessTokenResponse : InstagramSoonToBeRetiredResponse {
 
-        #region Properties
-        /// <summary>
-        /// The access token.
-        /// </summary>
-        public string AccessToken { get; private set; }
-        
-        /// <summary>
-        /// Information about the authenticated user.
-        /// </summary>
-        public InstagramUser User { get; private set; }
-
-        #endregion
+    public class InstagramAccessTokenResponse : InstagramResponse<InstagramAccessTokenSummaryResponseBody> {
 
         #region Constructors
 
-        private InstagramAccessTokenResponse(JsonObject obj) : base(obj) { }
+        private InstagramAccessTokenResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        /// <summary>
-        /// Loads an instance of <var>InstagramAccessTokenResponse</var> from
-        /// the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static InstagramAccessTokenResponse LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
+        public static InstagramAccessTokenResponse ParseResponse(SocialHttpResponse response) {
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramAccessTokenResponse</var> from
-        /// the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static InstagramAccessTokenResponse ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
-        }
+            if (response == null) return null;
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramAccessTokenResponse</var> from
-        /// the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static InstagramAccessTokenResponse Parse(JsonObject obj) {
-
-            // Check if null
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
             if (obj == null) return null;
 
             // Validate the response
-            ValidateResponse(obj);
+            ValidateResponse(response, obj);
 
-            // Parse the response
-            return new InstagramAccessTokenResponse(obj) {
-                AccessToken = obj.GetString("access_token"),
-                User = obj.GetObject("user", InstagramUser.Parse)
+            // Initialize the response object
+            return new InstagramAccessTokenResponse(response) {
+                Body = InstagramAccessTokenSummaryResponseBody.Parse(obj)
             };
 
         }
 
         #endregion
+
+    }
+
+    public class InstagramAccessTokenSummaryResponseBody : InstagramResponseBody<InstagramAccessTokenSummary> {
+
+        public static InstagramAccessTokenSummaryResponseBody Parse(JsonObject obj) {
+            return new InstagramAccessTokenSummaryResponseBody {
+                Data = obj.GetObject("data", InstagramAccessTokenSummary.Parse)
+            };
+        }
 
     }
 

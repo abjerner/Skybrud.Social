@@ -197,10 +197,13 @@ namespace Skybrud.Social.Instagram.OAuth {
             };
 
             // Make the call to the API
-            string contents = SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://api.instagram.com/oauth/access_token", null, parameters);
+            HttpWebResponse response = SocialUtils.DoHttpPostRequest("https://api.instagram.com/oauth/access_token", null, parameters);
+
+            // Wrap the native response class
+            SocialHttpResponse social = SocialHttpResponse.GetFromWebResponse(response);
 
             // Parse the response
-            return InstagramAccessTokenResponse.ParseJson(contents);
+            return InstagramAccessTokenResponse.ParseResponse(social);
 
         }
 
