@@ -61,7 +61,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="options">The search options with any optional parameters.</param>
         public InstagramRecentMediaResponse GetRecentMedia(InstagramUserRecentMediaOptions options) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia("self", options).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia("self", options));
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The search options with any optional parameters.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId, InstagramUserRecentMediaOptions options) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(userId + "", options).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(userId + "", options));
         }
 
         /// <summary>

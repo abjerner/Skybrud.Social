@@ -228,6 +228,7 @@
     <Compile Include="Http\SocialHeaderCollection.cs" />
     <Compile Include="Http\SocialPostData.cs" />
     <Compile Include="Instagram\Objects\InstagramAccessTokenSummary.cs" />
+    <Compile Include="Instagram\Objects\Pagination\InstagramIdBasedPagination.cs" />
     <Compile Include="Instagram\Options\Common\InstagramRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Locations\InstagramLocationRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Locations\InstagramLocationSearchOptions.cs" />

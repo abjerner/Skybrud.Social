@@ -44,7 +44,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="minTagId"></param>
         /// <param name="maxTagId"></param>
         public InstagramRecentMediaResponse GetRecentMedia(string tag, string minTagId = null, string maxTagId = null) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, minTagId, maxTagId).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(tag, minTagId, maxTagId));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="maxTagId">Return media after this max_tag_id</param>
         public InstagramRecentMediaResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null)
         {
-            return InstagramRecentMediaResponse.ParseJson(Raw.GetRecentMedia(tag, count, minTagId, maxTagId).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(tag, count, minTagId, maxTagId));
         }
 
         // TODO: Implement Search() method

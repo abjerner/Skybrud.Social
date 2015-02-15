@@ -1,10 +1,10 @@
 using Skybrud.Social.Http;
-using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
+using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramUsersResponse : InstagramResponse<InstagramUserSummarysResponseBody> {
+    public class InstagramUsersResponse : InstagramResponse<InstagramUsersResponseBody> {
 
         #region Constructors
 
@@ -27,7 +27,7 @@ namespace Skybrud.Social.Instagram.Responses {
 
             // Initialize the response object
             return new InstagramUsersResponse(response) {
-                Body = InstagramUserSummarysResponseBody.Parse(obj)
+                Body = InstagramUsersResponseBody.Parse(obj)
             };
 
         }
@@ -36,13 +36,23 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
-    public class InstagramUserSummarysResponseBody : InstagramResponseBody<InstagramUserSummary[]> {
+    public class InstagramUsersResponseBody : InstagramResponseBody<InstagramUserSummary[]> {
 
-        public static InstagramUserSummarysResponseBody Parse(JsonObject obj) {
-            return new InstagramUserSummarysResponseBody {
+        #region Constructors
+
+        protected InstagramUsersResponseBody(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
+        public static InstagramUsersResponseBody Parse(JsonObject obj) {
+            return new InstagramUsersResponseBody(obj) {
                 Data = obj.GetArray("data", InstagramUserSummary.Parse)
             };
         }
+
+        #endregion
 
     }
 

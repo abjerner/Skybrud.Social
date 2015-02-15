@@ -48,11 +48,21 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
-    public class InstagramResponseBody<T> {
+    public class InstagramResponseBody<T> : SocialJsonObject {
+
+        #region Properties
 
         public object Meta { get; set; }
         
-        public T Data { get; set; } 
+        public T Data { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        protected InstagramResponseBody(JsonObject obj) : base(obj) { }
+
+        #endregion
 
     }
 

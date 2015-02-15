@@ -1,106 +1,63 @@
-using System.Linq;
-using Newtonsoft.Json;
-using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Http;
 using Skybrud.Social.Json;
-using JsonConverter = Skybrud.Social.Json.JsonConverter;
+using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Objects.Pagination;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramRecentMediaResponse : InstagramSoonToBeRetiredResponse {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets an array of all media in the response.
-        /// </summary>
-        public InstagramMedia[] Data { get; private set; }
-
-        /// <summary>
-        /// Gets an array of all media in the response (same as Data).
-        /// </summary>
-        [JsonIgnore]
-        public InstagramMedia[] Media {
-            get { return Data; }
-        }
-
-        /// <summary>
-        /// Gets an array of all images in the response.
-        /// </summary>
-        [JsonIgnore]
-        public InstagramImage[] Images {
-            get { return Data.OfType<InstagramImage>().ToArray(); }
-        }
-
-        /// <summary>
-        /// Gets an array of all videos in the response.
-        /// </summary>
-        [JsonIgnore]
-        public InstagramVideo[] Videos {
-            get { return Data.OfType<InstagramVideo>().ToArray(); }
-        }
-
-        public string NextUrl { get; private set; }
-        public string NextMaxId { get; private set; }
-
-        #endregion
+    public class InstagramRecentMediaResponse : InstagramResponse<InstagramMediasResponseBody> {
 
         #region Constructors
 
-        private InstagramRecentMediaResponse(JsonObject obj) : base(obj) { }
-
-        #endregion
-
-        #region Member methods
-
-        public InstagramRecentMediaResponse GetNextPage() {
-            return NextUrl == null ? null : Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject(NextUrl));
-        }
+        private InstagramRecentMediaResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
-        /// <summary>
-        /// Loads an instance of <var>InstagramRecentMediaResponse</var> from
-        /// the JSON file at the specified <var>path</var>.
-        /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static InstagramRecentMediaResponse LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
+        public static InstagramRecentMediaResponse ParseResponse(SocialHttpResponse response) {
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramRecentMediaResponse</var> from
-        /// the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static InstagramRecentMediaResponse ParseJson(string json) {
-            return JsonConverter.ParseObject(json, Parse);
-        }
+            if (response == null) return null;
 
-        /// <summary>
-        /// Gets an instance of <var>InstagramRecentMediaResponse</var> from
-        /// the specified <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
-        public static InstagramRecentMediaResponse Parse(JsonObject obj) {
-
-            // Check if null
+            // Parse the raw JSON response
+            JsonObject obj = response.GetBodyAsJsonObject();
             if (obj == null) return null;
 
             // Validate the response
-            ValidateResponse(obj);
+            ValidateResponse(response, obj);
 
-            // Get the "paging" object
-            JsonObject pagination = obj.GetObject("pagination");
-
-            // Parse the response
-            return new InstagramRecentMediaResponse(obj) {
-                NextUrl = pagination == null ? null : pagination.GetString("next_url"),
-                NextMaxId = pagination == null ? null : pagination.GetString("next_max_id"),
-                Data = obj.GetArray("data", InstagramMedia.Parse)
+            // Initialize the response object
+            return new InstagramRecentMediaResponse(response) {
+                Body = InstagramMediasResponseBody.Parse(obj)
             };
 
+        }
+
+        #endregion
+
+    }
+
+    public class InstagramMediasResponseBody : InstagramResponseBody<InstagramMedia[]> {
+
+        #region Properties
+
+        public InstagramIdBasedPagination Pagination { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        protected InstagramMediasResponseBody(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
+        public static InstagramMediasResponseBody Parse(JsonObject obj) {
+            return new InstagramMediasResponseBody(obj) {
+                Pagination = obj.GetObject("pagination", InstagramIdBasedPagination.Parse),
+                Data = obj.GetArray("data", InstagramMedia.Parse)
+            };
         }
 
         #endregion

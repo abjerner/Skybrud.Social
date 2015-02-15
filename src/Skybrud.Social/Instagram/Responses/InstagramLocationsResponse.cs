@@ -1,6 +1,6 @@
 using Skybrud.Social.Http;
-using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
+using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
 
@@ -38,11 +38,21 @@ namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramLocationsResponseBody : InstagramResponseBody<InstagramLocation[]> {
 
+        #region Constructors
+
+        protected InstagramLocationsResponseBody(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
         public static InstagramLocationsResponseBody Parse(JsonObject obj) {
-            return new InstagramLocationsResponseBody {
+            return new InstagramLocationsResponseBody(obj) {
                 Data = obj.GetArray("data", InstagramLocation.Parse)
             };
         }
+
+        #endregion
 
     }
 

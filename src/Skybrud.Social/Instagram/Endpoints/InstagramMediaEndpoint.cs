@@ -45,7 +45,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="latitude">The latitude of the point.</param>
         /// <param name="longitude">The longitude of the point.</param>
         public InstagramRecentMediaResponse Search(double latitude, double longitude) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.Search(latitude, longitude).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.Search(latitude, longitude));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="longitude">The longitude of the point.</param>
         /// <param name="distance">The distance/radius in meters. The API allows a maximum radius of 5000 meters.</param>
         public InstagramRecentMediaResponse Search(double latitude, double longitude, int distance) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.Search(latitude, longitude, distance).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.Search(latitude, longitude, distance));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// </summary>
         /// <param name="options">The search options.</param>
         public InstagramRecentMediaResponse Search(InstagramRecentMediaSearchOptions options) {
-            return InstagramRecentMediaResponse.ParseJson(Raw.Search(options).Body);
+            return InstagramRecentMediaResponse.ParseResponse(Raw.Search(options));
         }
 
         #endregion

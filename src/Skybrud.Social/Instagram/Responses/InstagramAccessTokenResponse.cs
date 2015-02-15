@@ -38,11 +38,21 @@ namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramAccessTokenSummaryResponseBody : InstagramResponseBody<InstagramAccessTokenSummary> {
 
+        #region Constructors
+
+        protected InstagramAccessTokenSummaryResponseBody(JsonObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Static methods
+
         public static InstagramAccessTokenSummaryResponseBody Parse(JsonObject obj) {
-            return new InstagramAccessTokenSummaryResponseBody {
+            return new InstagramAccessTokenSummaryResponseBody(obj) {
                 Data = obj.GetObject("data", InstagramAccessTokenSummary.Parse)
             };
         }
+
+        #endregion
 
     }
 

@@ -1,6 +1,7 @@
 using Skybrud.Social.Http;
-using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
+using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Objects.Pagination;
 
 namespace Skybrud.Social.Instagram.Responses {
 
@@ -38,39 +39,24 @@ namespace Skybrud.Social.Instagram.Responses {
 
     public class InstagramLocationRecentMediaResponseBody : InstagramResponseBody<InstagramMedia[]> {
 
-        public InstagramLocationRecentMediaPagination Pagination { get; private set; }
-
-        public static InstagramLocationRecentMediaResponseBody Parse(JsonObject obj) {
-            return new InstagramLocationRecentMediaResponseBody {
-                Pagination = obj.GetObject("pagination", InstagramLocationRecentMediaPagination.Parse),
-                Data = obj.GetArray("data", InstagramMedia.Parse)
-            };
-        }
-
-    }
-
-    public class InstagramLocationRecentMediaPagination : SocialJsonObject {
-
         #region Properties
 
-        public string NextUrl { get; private set; }
-
-        public string NextMaxId { get; private set; }
+        public InstagramIdBasedPagination Pagination { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        private InstagramLocationRecentMediaPagination(JsonObject obj) : base(obj) { }
+        protected InstagramLocationRecentMediaResponseBody(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static InstagramLocationRecentMediaPagination Parse(JsonObject obj) {
-            return new InstagramLocationRecentMediaPagination(obj) {
-                NextUrl = obj.GetString("next_url"),
-                NextMaxId = obj.GetString("next_max_id")
+        public static InstagramLocationRecentMediaResponseBody Parse(JsonObject obj) {
+            return new InstagramLocationRecentMediaResponseBody(obj) {
+                Pagination = obj.GetObject("pagination", InstagramIdBasedPagination.Parse),
+                Data = obj.GetArray("data", InstagramMedia.Parse)
             };
         }
 
