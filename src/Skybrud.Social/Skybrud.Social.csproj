@@ -372,7 +372,6 @@
     <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramSoonToBeRetiredResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
     <Compile Include="SocialJsonObject.cs" />
