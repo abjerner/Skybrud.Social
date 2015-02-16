@@ -1,10 +1,11 @@
 using Skybrud.Social.Http;
+using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Exceptions {
 
     public class InstagramOAuthAccessTokenException : InstagramOAuthException {
 
-        public InstagramOAuthAccessTokenException(SocialHttpResponse response, int code, string type, string message) : base(response, code, type, message) { }
+        public InstagramOAuthAccessTokenException(SocialHttpResponse response, InstagramMetaData meta) : base(response, meta) { }
 
     }
 

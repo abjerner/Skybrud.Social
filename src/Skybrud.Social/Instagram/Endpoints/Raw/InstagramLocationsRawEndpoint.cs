@@ -24,7 +24,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         #endregion
 
         #region Methods
-
+        
         /// <summary>
         /// Gets information about a location with the specified ID.
         /// </summary>
@@ -35,7 +35,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Get a list of recent media objects from a given location.
+        /// Gets a list of recent media objects from a given location.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <see cref="http://instagram.com/developer/endpoints/locations/#get_locations_media_recent"/>
@@ -45,7 +45,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Get a list of recent media objects from a given location.
+        /// Gets a list of recent media objects from a given location.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the search.</param>

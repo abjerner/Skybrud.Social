@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Exceptions;
+using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Objects.Common;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
@@ -12,8 +14,14 @@ namespace Skybrud.Social.Instagram.Responses {
         /// </summary>
         public SocialHttpResponse Response { get; private set; }
 
+        /// <summary>
+        /// Gets information about rate limiting.
+        /// </summary>
+        public InstagramRateLimiting RateLimiting { get; private set; }
+
         protected InstagramResponse(SocialHttpResponse response) {
             Response = response;
+            RateLimiting = InstagramRateLimiting.GetFromResponse(response);
         }
 
         public static void ValidateResponse(SocialHttpResponse response, JsonObject obj) {
@@ -22,19 +30,14 @@ namespace Skybrud.Social.Instagram.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Get the "meta" object
-            JsonObject meta = obj.GetObject("meta");
-
-            // Get some values from the "meta" object
-            int code = meta.GetInt32("code");
-            string type = meta.GetString("error_type");
-            string message = meta.GetString("error_message");
+            InstagramMetaData meta = obj.GetObject("meta", InstagramMetaData.Parse);
 
             // Now throw some exceptions
-            if (type == "OAuthException") throw new InstagramOAuthException(response, code, type, message);
-            if (type == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(response, code, type, message);
-            if (type == "APINotFoundError") throw new InstagramNotFoundException(response, code, type, message);
+            if (meta.ErrorType == "OAuthException") throw new InstagramOAuthException(response, meta);
+            if (meta.ErrorType == "OAuthAccessTokenException") throw new InstagramOAuthAccessTokenException(response, meta);
+            if (meta.ErrorType == "APINotFoundError") throw new InstagramNotFoundException(response, meta);
 
-            throw new InstagramException(response, code, type, message);
+            throw new InstagramException(response, meta);
 
         }
 
@@ -52,15 +55,17 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Properties
 
-        public object Meta { get; set; }
+        public InstagramMetaData Meta { get; private set; }
         
-        public T Data { get; set; }
+        public T Data { get; protected set; }
 
         #endregion
 
         #region Constructors
 
-        protected InstagramResponseBody(JsonObject obj) : base(obj) { }
+        protected InstagramResponseBody(JsonObject obj) : base(obj) {
+            Meta = obj.GetObject("meta", InstagramMetaData.Parse);
+        }
 
         #endregion
 

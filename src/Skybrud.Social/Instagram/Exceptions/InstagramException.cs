@@ -1,5 +1,7 @@
 using System;
 using Skybrud.Social.Http;
+using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Instagram.Objects.Common;
 
 namespace Skybrud.Social.Instagram.Exceptions {
 
@@ -13,23 +15,23 @@ namespace Skybrud.Social.Instagram.Exceptions {
         public SocialHttpResponse Response { get; private set; }
 
         /// <summary>
-        /// Gets the error code received from the Instagram API.
+        /// Gets information about rate limiting.
         /// </summary>
-        public int Code { get; private set; }
+        public InstagramRateLimiting RateLimiting { get; private set; }
 
         /// <summary>
-        /// Gets the type of the error received from the Instagram API.
+        /// Gets the meta data of the response.
         /// </summary>
-        public string Type { get; private set; }
+        public InstagramMetaData Meta { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        internal InstagramException(SocialHttpResponse response, int code, string type, string message) : base(message) {
+        internal InstagramException(SocialHttpResponse response, InstagramMetaData meta) : base(meta.ErrorMessage) {
             Response = response;
-            Code = code;
-            Type = type;
+            RateLimiting = InstagramRateLimiting.GetFromResponse(response);
+            Meta = meta;
         }
 
         #endregion
