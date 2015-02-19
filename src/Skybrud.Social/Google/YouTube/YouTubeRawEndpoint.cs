@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Google.OAuth;
-using Skybrud.Social.Google.YouTube.Objects.Channel;
+using Skybrud.Social.Google.YouTube.Endpoints.Raw;
+using Skybrud.Social.Google.YouTube.Objects.Channels;
 using Skybrud.Social.Google.YouTube.Objects.Playlist;
 using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Google.YouTube.Objects.Videos;
@@ -10,11 +11,24 @@ namespace Skybrud.Social.Google.YouTube {
     
     public class YouTubeRawEndpoint {
 
+        #region Properties
+
         public GoogleOAuthClient Client { get; private set; }
+
+        public YouTubeChannelsRawEndpoint Channels { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         public YouTubeRawEndpoint(GoogleOAuthClient client) {
             Client = client;
+            Channels = new YouTubeChannelsRawEndpoint(client);
         }
+
+        #endregion
+
+        #region Member methods
 
         public string GetVideoDetails(string id) {
 
@@ -27,10 +41,12 @@ namespace Skybrud.Social.Google.YouTube {
 
         }
 
+        [Obsolete("Use Channels.GetChannels instead")]
         public string GetMyChannels(YouTubeChannelPart part) {
             return GetMyChannels(new YouTubeChannelPartsCollection(part));
         }
 
+        [Obsolete("Use Channels.GetChannels instead")]
         public string GetMyChannels(YouTubeChannelPartsCollection parts) {
 
             NameValueCollection query = new NameValueCollection();
@@ -129,6 +145,8 @@ namespace Skybrud.Social.Google.YouTube {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/youtube/v3/videos", query);
 
         }
+
+        #endregion
 
         #endregion
 

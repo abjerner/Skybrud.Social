@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skybrud.Social.Google.YouTube.Objects.Channel {
+namespace Skybrud.Social.Google.YouTube.Objects.Channels {
+
     public class YouTubeChannelPartsCollection {
 
         #region Private fields
 
-        private List<YouTubeChannelPart> _list = new List<YouTubeChannelPart>();
+        private readonly List<YouTubeChannelPart> _list = new List<YouTubeChannelPart>();
 
         #endregion
 
@@ -112,4 +113,5 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channel {
         #endregion
 
     }
+
 }

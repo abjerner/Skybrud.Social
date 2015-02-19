@@ -7,7 +7,10 @@ namespace Skybrud.Social.Google {
         public string Kind { get; protected set; }
         public string ETag { get; protected set; }
 
-        protected GoogleApiResource(JsonObject obj) : base(obj) {}
+        protected GoogleApiResource(JsonObject obj) : base(obj) {
+            Kind = obj.GetString("kind");
+            ETag = obj.GetString("etag");
+        }
 
     }
 

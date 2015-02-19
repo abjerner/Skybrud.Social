@@ -1,25 +1,48 @@
 using System.Linq;
+using Skybrud.Social.Google.YouTube.Endpoints;
 using Skybrud.Social.Google.YouTube.Objects.Playlist;
 using Skybrud.Social.Google.YouTube.Objects.PlaylistItem;
 using Skybrud.Social.Google.YouTube.Objects.Videos;
 using Skybrud.Social.Google.YouTube.Responses;
 
 namespace Skybrud.Social.Google.YouTube {
-    
+
     public class YouTubeEndpoint {
+
+        #region Private fields
+
+        private YouTubeChannelsEndpoint _channels;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the parent service of this endpoint.
         /// </summary>
         public GoogleService Service { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the raw YouTube endpoint.
+        /// </summary>
         public YouTubeRawEndpoint Raw {
             get { return Service.Client.YouTube; }
         }
 
+        /// <summary>
+        /// Gets a reference to the channels endpoint.
+        /// </summary>
+        public YouTubeChannelsEndpoint Channels {
+            get { return _channels ?? (_channels = new YouTubeChannelsEndpoint(this)); }
+        }
+
+        #endregion
+
         internal YouTubeEndpoint(GoogleService service) {
             Service = service;
         }
+
+        #region Member methods
 
         #region Playlists
 
@@ -85,6 +108,8 @@ namespace Skybrud.Social.Google.YouTube {
         public YouTubeVideoListResponse ListVideos(YouTubeVideoOptions options) {
             return YouTubeVideoListResponse.ParseJson(Raw.ListVideos(options));
         }
+
+        #endregion
 
         #endregion
 

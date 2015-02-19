@@ -2,20 +2,24 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Skybrud.Social.Google.YouTube.Objects.Channel {
+namespace Skybrud.Social.Google.YouTube.Objects.Channels {
     
     public class YouTubeChannelPart {
 
         public static readonly YouTubeChannelPart Id = new YouTubeChannelPart("id");
         public static readonly YouTubeChannelPart Snippet = new YouTubeChannelPart("snippet");
-        public static readonly YouTubeChannelPart AuditDetails = new YouTubeChannelPart("auditDetails");
-        public static readonly YouTubeChannelPart BrandingSettings = new YouTubeChannelPart("brandingSettings");
         public static readonly YouTubeChannelPart ContentDetails = new YouTubeChannelPart("contentDetails");
-        public static readonly YouTubeChannelPart InvideoPromotion = new YouTubeChannelPart("invideoPromotion");
         public static readonly YouTubeChannelPart Statistics = new YouTubeChannelPart("statistics");
         public static readonly YouTubeChannelPart Status = new YouTubeChannelPart("status");
         public static readonly YouTubeChannelPart TopicDetails = new YouTubeChannelPart("topicDetails");
 
+        public static readonly YouTubeChannelPartsCollection Basic = new YouTubeChannelPartsCollection(
+            Id, Snippet, Statistics
+        );
+
+        public static readonly YouTubeChannelPartsCollection All = new YouTubeChannelPartsCollection(
+            Id, Snippet, ContentDetails, Statistics, Status, TopicDetails
+        );
 
         #region Static properties
 

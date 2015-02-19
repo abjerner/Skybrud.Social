@@ -3,6 +3,8 @@ using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Google.YouTube;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.OAuth {
@@ -207,7 +209,7 @@ namespace Skybrud.Social.Google.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         public string DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, null);
+            return DoAuthenticatedGetRequest(url, default(NameValueCollection));
         }
 
         /// <summary>
@@ -227,6 +229,19 @@ namespace Skybrud.Social.Google.OAuth {
 
             // Make a call to the server
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
+
+        }
+
+        /// <summary>
+        /// Makes an authenticated GET request to the specified URL. The access token is
+        /// automatically appended to the query string.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
+            NameValueCollection query = options.GetQueryString().NameValueCollection;
+            query.Set("access_token", AccessToken);
+            return SocialHttpResponse.GetFromWebResponse(SocialUtils.DoHttpGetRequest(url, query));
 
         }
 
