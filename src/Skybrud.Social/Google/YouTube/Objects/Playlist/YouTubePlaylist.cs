@@ -44,8 +44,6 @@ namespace Skybrud.Social.Google.YouTube.Objects.Playlist {
         public static YouTubePlaylist Parse(JsonObject obj) {
             if (obj == null) return null;
             return new YouTubePlaylist(obj) {
-                Kind = obj.GetString("kind"),
-                ETag = obj.GetString("etag"),
                 Id = obj.GetString("id"),
                 Snippet = obj.GetObject("snippet", YouTubePlaylistSnippet.Parse)
             };

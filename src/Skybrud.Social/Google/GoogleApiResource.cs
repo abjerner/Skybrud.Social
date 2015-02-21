@@ -3,11 +3,9 @@ using Skybrud.Social.Json;
 namespace Skybrud.Social.Google {
     
     public class GoogleApiResource : GoogleApiObject {
-        
-        // TODO: "Kind" and "ETag" should be private rather than protected
 
-        public string Kind { get; protected set; }
-        public string ETag { get; protected set; }
+        public string Kind { get; private set; }
+        public string ETag { get; private set; }
 
         protected GoogleApiResource(JsonObject obj) : base(obj) {
             Kind = obj.GetString("kind");

@@ -77,8 +77,6 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         public static YouTubeVideo Parse(JsonObject obj) {
             if (obj == null) return null;
             return new YouTubeVideo(obj) {
-                Kind = obj.GetString("kind"),
-                ETag = obj.GetString("etag"),
                 Id = obj.GetString("id"),
                 Snippet = obj.GetObject("snippet", YouTubeVideoSnippet.Parse),
                 ContentDetails = obj.GetObject("contentDetails", YouTubeVideoContentDetails.Parse)

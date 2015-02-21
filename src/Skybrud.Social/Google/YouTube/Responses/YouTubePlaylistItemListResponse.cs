@@ -58,8 +58,6 @@ namespace Skybrud.Social.Google.YouTube.Responses {
 
             // Initialize the response object
             return new YouTubePlaylistItemListResponse(obj) {
-                Kind = obj.GetString("kind"),
-                ETag = obj.GetString("etag"),
                 TotalResults = pageInfo.GetInt32("totalResults"),
                 ResultsPerPage = pageInfo.GetInt32("resultsPerPage"),
                 PrevPageToken = obj.GetString("prevPageToken"),
