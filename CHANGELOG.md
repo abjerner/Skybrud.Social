@@ -1,6 +1,17 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.9.1.1
+_22nd of February, 2015_
+
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.9.1.1/Skybrud.Social.v0.9.1.1.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.9.1.1" target="_blank">Get on NuGet</a>
+
+**Instagram**
+
+* Fixed an issue in the Instagram OAuth authentication (introduced in 0.9.1).
+
 ### Skybrud.Social 0.9.1
 _22nd of February, 2015_
 
@@ -13,15 +24,21 @@ __Download__
 * Remaining endpoint methods in the Instagram implementation will now return a representation of the entire response. As an example:
 
     ```C#
-    InstagramAccessTokenResponse response = client.GetAccessTokenFromAuthCode(AuthCode);
-    string accessToken = response.AccessToken;
+    InstagramRecentMediaResponse response = service.Users.GetRecentMedia(userId);
+    
+    foreach (InstagramMedia media in response.Data) {
+        
+    }
     ```
     
     should now be replaced by
     
     ```C#
-    InstagramAccessTokenResponse response = client.GetAccessTokenFromAuthCode(AuthCode);
-    string accessToken = response.Body.Data.AccessToken;
+    InstagramRecentMediaResponse response = service.Users.GetRecentMedia(userId);
+    
+    foreach (InstagramMedia media in response.Body.Data) {
+        
+    }
     ```
 
 * Due to the changes mentioned above (and earlier changes related to the response classes), it is now possible to get information about rate limiting - eg.:
