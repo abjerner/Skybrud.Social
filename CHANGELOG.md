@@ -1,6 +1,68 @@
 Skybrud.Social Changelog
 ========================
 
+### Skybrud.Social 0.9.1
+_22nd of February, 2015_
+
+__Download__
+-   <a href="https://github.com/abjerner/Skybrud.Social/releases/download/v0.9.1/Skybrud.Social.v0.9.1.zip">Download ZIP</a>
+-   <a href="https://www.nuget.org/packages/Skybrud.Social/0.9.1" target="_blank">Get on NuGet</a>
+
+**Instagram**
+
+* Remaining endpoint methods in the Instagram implementation will now return a representation of the entire response. As an example:
+
+    ```C#
+    InstagramAccessTokenResponse response = client.GetAccessTokenFromAuthCode(AuthCode);
+    string accessToken = response.AccessToken;
+    ```
+    
+    should now be replaced by
+    
+    ```C#
+    InstagramAccessTokenResponse response = client.GetAccessTokenFromAuthCode(AuthCode);
+    string accessToken = response.Body.Data.AccessToken;
+    ```
+
+* Due to the changes mentioned above (and earlier changes related to the response classes), it is now possible to get information about rate limiting - eg.:
+
+    ```C#
+    InstagramRecentMediaResponse response = service.Users.GetRecentMedia(userId);
+    
+    int limit = response.RateLimiting.Limit;
+    
+    int remaining = response.RateLimiting.Remaining;
+    ```
+
+**YouTube**
+
+* The `YouTubeEndpoint` class priviously located in the `Skybrud.Social.Google.YouTube` namespace has now been moved to the `Skybrud.Social.Google.YouTube.Endpoints` namespaces. All methods in the class has been moved into four separate endpoint classes:  
+
+    * `YouTubeChannelsEndpoint`
+    * `YouTubePlaylistsEndpoint`
+    * `YouTubePlaylistItemsEndpoint`
+    * `YouTubeVideosEndpoint`  
+
+    A method in the channels endpoint could now be called as:
+    
+    ```C#
+    YouTubeChannelListResponse response = service.YouTube.Channels.GetChannels(...);
+    ```
+
+* Similar to Instagram, all endpoint methods will now return an object representing the entire response. For a list response, each item can now be accessed as:
+
+    ```C#
+    YouTubeVideoListResponse response = service.YouTube.Videos.GetVideos(new YouTubeVideoListOptions {
+        Ids = new [] {"dQw4w9WgXcQ"}
+    });
+    
+    foreach (YouTubeVideo video in response.Body.Items) {
+                        
+    }
+    ```
+
+* Lots of new features have been added, which will soon be covered in the documentation ;)
+
 ### Skybrud.Social 0.9.0
 _13th of February, 2015_
 
