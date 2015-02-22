@@ -2,6 +2,7 @@ using System;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.OAuth;
 using Skybrud.Social.Google.YouTube;
+using Skybrud.Social.Google.YouTube.Endpoints;
 
 namespace Skybrud.Social.Google {
 

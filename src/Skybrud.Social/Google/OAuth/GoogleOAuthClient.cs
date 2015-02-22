@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.Exceptions;
 using Skybrud.Social.Google.YouTube;
+using Skybrud.Social.Google.YouTube.Endpoints.Raw;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;

@@ -1,8 +1,11 @@
 using System;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
+namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItems {
 
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/playlistItems#resource</cref>
+    /// </see>
     public class YouTubePlaylistItem : GoogleApiResource {
 
         #region Properties
@@ -18,6 +21,11 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         public YouTubePlaylistItemSnippet Snippet { get; private set; }
 
         /// <summary>
+        /// Gets or sets the content details object of the item.
+        /// </summary>
+        public YouTubePlaylistItemContentDetails ContentDetails { get; private set; }
+
+        /// <summary>
         /// Gets or sets the status object of the item.
         /// </summary>
         public YouTubePlaylistItemStatus Status { get; private set; }
@@ -28,7 +36,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         /// Gets the YouTube ID of the video.
         /// </summary>
         public string VideoId {
-            get { return Snippet.VideoId; }
+            get { return Snippet.ResourceId.VideoId; }
         }
 
         /// <summary>
@@ -56,34 +64,17 @@ namespace Skybrud.Social.Google.YouTube.Objects.PlaylistItem {
         #endregion
 
         #region Static methods
-
+        
         /// <summary>
-        /// Loads an instance of <var>YouTubePlaylistItem</var> from the JSON file at the specified
-        /// <var>path</var>.
+        /// Gets an instance of <code>YouTubePlaylistItem</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static YouTubePlaylistItem LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>YouTubePlaylistItem</var> from the specified JSON string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static YouTubePlaylistItem ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>YouTubePlaylistItem</var> from the specified
-        /// <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static YouTubePlaylistItem Parse(JsonObject obj) {
             if (obj == null) return null;
             return new YouTubePlaylistItem(obj) {
                 Id = obj.GetString("id"),
                 Snippet = obj.GetObject("snippet", YouTubePlaylistItemSnippet.Parse),
+                ContentDetails = obj.GetObject("contentDetails", YouTubePlaylistItemContentDetails.Parse),
                 Status = obj.GetObject("status", YouTubePlaylistItemStatus.Parse)
             };
         }

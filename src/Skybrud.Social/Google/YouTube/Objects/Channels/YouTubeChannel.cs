@@ -2,6 +2,9 @@
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels#resource</cref>
+    /// </see>
     public class YouTubeChannel : GoogleApiResource {
 
         #region Properties

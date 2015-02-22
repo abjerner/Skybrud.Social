@@ -2,7 +2,10 @@ using System;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.YouTube.Objects.Videos {
-    
+
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/videos#snippet</cref>
+    /// </see>
     public class YouTubeVideoSnippet : GoogleApiObject {
 
         #region Properties
@@ -18,12 +21,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         public string ChannelId { get; private set; }
 
         /// <summary>
-        /// Gets or sets the title of the parent channel.
-        /// </summary>
-        public string ChannelTitle { get; private set; }
-
-        /// <summary>
-        /// gets or sets the title of the YouTube video.
+        /// Gets or sets the title of the YouTube video.
         /// </summary>
         public string Title { get; private set; }
 
@@ -33,58 +31,58 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         public string Description { get; private set; }
 
         /// <summary>
+        /// Gets or set information about the thumbnails available for the video.
+        /// </summary>
+        public YouTubeVideoThumbnails Thumbnails { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the title of the parent channel.
+        /// </summary>
+        public string ChannelTitle { get; private set; }
+
+        public string CategoryId { get; private set; }
+
+        /// <summary>
         /// Gets or sets the "liveBroadcastContent" property.
         /// </summary>
-        public string LiveBroadcastContent { get; private set; } 
+        public YouTubeVideoLiveBroadcastContent LiveBroadcastContent { get; private set; } 
 
         #endregion
         
         #region Constructors
 
-        private YouTubeVideoSnippet(JsonObject obj) : base(obj) {
-            // Hide default constructor
-        }
+        private YouTubeVideoSnippet(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Loads an instance of <var>YouTubeVideoSnippet</var> from the JSON file at the
-        /// specified <var>path</var>.
+        /// Gets an instance of <code>YouTubeVideoSnippet</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="path">The path to the file.</param>
-        public static YouTubeVideoSnippet LoadJson(string path) {
-            return JsonObject.LoadJson(path, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>YouTubeVideoSnippet</var> from the specified JSON
-        /// string.
-        /// </summary>
-        /// <param name="json">The JSON string representation of the object.</param>
-        public static YouTubeVideoSnippet ParseJson(string json) {
-            return JsonObject.ParseJson(json, Parse);
-        }
-
-        /// <summary>
-        /// Gets an instance of <var>YouTubeVideoSnippet</var> from the specified
-        /// <var>JsonObject</var>.
-        /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static YouTubeVideoSnippet Parse(JsonObject obj) {
             
             // Check whether "obj" is NULL
             if (obj == null) return null;
+
+            // Parse the "liveBroadcastContent" property
+            YouTubeVideoLiveBroadcastContent broadcast;
+            string strBroadcast = obj.GetString("liveBroadcastContent");
+            if (!Enum.TryParse(strBroadcast, true, out broadcast)) {
+                throw new Exception("Unknown value for liveBroadcastContent \"" + strBroadcast + "\" - please create an issue so it can be fixed https://github.com/abjerner/Skybrud.Social/issues/new");
+            }
             
             // Initialize the snippet object
             YouTubeVideoSnippet snippet = new YouTubeVideoSnippet(obj) {
-                ChannelId = obj.GetString("channelId"),
-                ChannelTitle = obj.GetString("channelTitle"),
                 PublishedAt = obj.GetDateTime("publishedAt"),
+                ChannelId = obj.GetString("channelId"),
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),
-                LiveBroadcastContent = obj.GetString("liveBroadcastContent")
+                Thumbnails = obj.GetObject("thumbnails", YouTubeVideoThumbnails.Parse),
+                ChannelTitle = obj.GetString("channelTitle"),
+                CategoryId = obj.GetString("categoryId"),
+                LiveBroadcastContent = broadcast
             };
 
             return snippet;

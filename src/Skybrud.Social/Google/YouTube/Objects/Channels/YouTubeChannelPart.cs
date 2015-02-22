@@ -1,10 +1,14 @@
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
-    
+
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels/list#part</cref>
+    /// </see>
     public class YouTubeChannelPart {
+
+        #region Properties
 
         public static readonly YouTubeChannelPart Id = new YouTubeChannelPart("id");
         public static readonly YouTubeChannelPart Snippet = new YouTubeChannelPart("snippet");
@@ -21,24 +25,21 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
             Id, Snippet, ContentDetails, Statistics, Status, TopicDetails
         );
 
-        #region Static properties
-
         public static YouTubeChannelPart[] Values {
-            get {
-                return (
-                    from property in typeof(YouTubeChannelPart).GetFields(BindingFlags.Public | BindingFlags.Static)
-                    select (YouTubeChannelPart) property.GetValue(null)
-                ).ToArray();
-            }
+            get { return All.ToArray(); }
         }
+
+        public string Name { get; private set; }
 
         #endregion
 
-        public string Name { get; private set; }
+        #region Constructors
 
         private YouTubeChannelPart(string name) {
             Name = name;
         }
+
+        #endregion
 
         #region Static methods
 

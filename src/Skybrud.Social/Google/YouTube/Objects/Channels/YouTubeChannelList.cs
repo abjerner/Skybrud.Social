@@ -2,7 +2,10 @@
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
-    public class YouTubeChannelsCollection : GoogleApiResource {
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels/list</cref>
+    /// </see>
+    public class YouTubeChannelList : GoogleApiResource {
 
         #region Properties
 
@@ -14,19 +17,19 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         #region Constructors
 
-        protected YouTubeChannelsCollection(JsonObject obj) : base(obj) { }
+        protected YouTubeChannelList(JsonObject obj) : base(obj) { }
 
         #endregion
         
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>YouTubeChannelsCollection</code> from the specified <code>JsonObject</code>.
+        /// Gets an instance of <code>YouTubeChannelList</code> from the specified <code>JsonObject</code>.
         /// </summary>
         /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
-        public static YouTubeChannelsCollection Parse(JsonObject obj) {
+        public static YouTubeChannelList Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new YouTubeChannelsCollection(obj) {
+            return new YouTubeChannelList(obj) {
                 PageInfo = obj.GetObject("pageInfo", YouTubePageInfo.Parse),
                 Items = obj.GetArray("items", YouTubeChannel.Parse)
             };

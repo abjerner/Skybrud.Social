@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skybrud.Social.Google.YouTube.Objects.Channels {
+namespace Skybrud.Social.Google.YouTube.Objects.Videos {
 
     /// <see>
-    ///     <cref>https://developers.google.com/youtube/v3/docs/channels/list#part</cref>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/videos/list#part</cref>
     /// </see>
-    public class YouTubeChannelPartsCollection {
+    public class YouTubeVideoPartsCollection {
 
         #region Private fields
 
-        private readonly List<YouTubeChannelPart> _list = new List<YouTubeChannelPart>();
+        private readonly List<YouTubeVideoPart> _list = new List<YouTubeVideoPart>();
 
         #endregion
 
@@ -31,13 +31,13 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
         /// <summary>
         /// Initializes an empty collection.
         /// </summary>
-        public YouTubeChannelPartsCollection() { }
+        public YouTubeVideoPartsCollection() { }
 
         /// <summary>
         /// Initializes a collection containing the specified parts.
         /// </summary>
         /// <param name="parts">The parts to add.</param>
-        public YouTubeChannelPartsCollection(params YouTubeChannelPart[] parts) {
+        public YouTubeVideoPartsCollection(params YouTubeVideoPart[] parts) {
             _list.AddRange(parts);
         }
 
@@ -45,7 +45,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
         /// Initializes a collection containing the specified parts.
         /// </summary>
         /// <param name="parts">The parts to add.</param>
-        public YouTubeChannelPartsCollection(IEnumerable<YouTubeChannelPart> parts) {
+        public YouTubeVideoPartsCollection(IEnumerable<YouTubeVideoPart> parts) {
             _list.AddRange(parts);
         }
 
@@ -57,7 +57,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
         /// Adds the specified part to the collection.
         /// </summary>
         /// <param name="part">The part to add.</param>
-        public void Add(YouTubeChannelPart part) {
+        public void Add(YouTubeVideoPart part) {
             _list.Add(part);
         }
 
@@ -65,14 +65,14 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
         /// Adds the specified range of parts to the collection.
         /// </summary>
         /// <param name="parts">The dimensions to add.</param>
-        public void AddRange(IEnumerable<YouTubeChannelPart> parts) {
+        public void AddRange(IEnumerable<YouTubeVideoPart> parts) {
             _list.AddRange(parts);
         }
 
         /// <summary>
         /// Gets an array of the parts currently in the collection.
         /// </summary>
-        public YouTubeChannelPart[] ToArray() {
+        public YouTubeVideoPart[] ToArray() {
             return _list.ToArray();
         }
 
@@ -94,21 +94,21 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         #region Operator overloading
 
-        public static implicit operator YouTubeChannelPartsCollection(YouTubeChannelPart part) {
-            return new YouTubeChannelPartsCollection(part);
+        public static implicit operator YouTubeVideoPartsCollection(YouTubeVideoPart part) {
+            return new YouTubeVideoPartsCollection(part);
         }
 
-        public static implicit operator YouTubeChannelPartsCollection(YouTubeChannelPart[] parts) {
-            return new YouTubeChannelPartsCollection(parts);
+        public static implicit operator YouTubeVideoPartsCollection(YouTubeVideoPart[] parts) {
+            return new YouTubeVideoPartsCollection(parts);
         }
 
-        public static YouTubeChannelPartsCollection operator +(YouTubeChannelPartsCollection left, YouTubeChannelPart right) {
+        public static YouTubeVideoPartsCollection operator +(YouTubeVideoPartsCollection left, YouTubeVideoPart right) {
             left.Add(right);
             return left;
         }
 
-        public static implicit operator YouTubeChannelPartsCollection(string[] parts) {
-            return new YouTubeChannelPartsCollection(from YouTubeChannelPart part in parts select part);
+        public static implicit operator YouTubeVideoPartsCollection(string[] parts) {
+            return new YouTubeVideoPartsCollection(from YouTubeVideoPart part in parts select part);
         }
 
         #endregion

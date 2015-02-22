@@ -2,6 +2,9 @@
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels#statistics</cref>
+    /// </see>
     public class YouTubeChannelStatistics : GoogleApiObject {
 
         #region Properties
@@ -14,7 +17,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         public bool HiddenSubscriberCount { get; private set; }
 
-        public int VideoCount { get; private set; }
+        public long VideoCount { get; private set; }
 
         #endregion
 
@@ -37,7 +40,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
                 CommentCount = obj.GetInt64("commentCount"),
                 SubscriberCount = obj.GetInt64("subscriberCount"),
                 HiddenSubscriberCount = obj.GetBoolean("hiddenSubscriberCount"),
-                VideoCount = obj.GetInt32("videoCount")
+                VideoCount = obj.GetInt64("videoCount")
             };
         }
 

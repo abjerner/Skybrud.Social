@@ -2,7 +2,7 @@
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
-    public class YouTubeChannelSnippetLocalized : GoogleApiObject {
+    public class YouTubeChannelLocalized : GoogleApiObject {
 
         #region Properties
 
@@ -14,15 +14,15 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         #region Constructors
 
-        protected YouTubeChannelSnippetLocalized(JsonObject obj) : base(obj) { }
+        protected YouTubeChannelLocalized(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static YouTubeChannelSnippetLocalized Parse(JsonObject obj) {
+        public static YouTubeChannelLocalized Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new YouTubeChannelSnippetLocalized(obj) {
+            return new YouTubeChannelLocalized(obj) {
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description")
             };

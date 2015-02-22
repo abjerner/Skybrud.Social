@@ -2,7 +2,10 @@
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
-    public class YouTubeChannelSnippetThumbnail : GoogleApiObject {
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels#snippet.thumbnails</cref>
+    /// </see>
+    public class YouTubeChannelThumbnail : GoogleApiObject {
 
         #region Properties
 
@@ -12,15 +15,15 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         #region Constructors
 
-        protected YouTubeChannelSnippetThumbnail(JsonObject obj) : base(obj) { }
+        protected YouTubeChannelThumbnail(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static YouTubeChannelSnippetThumbnail Parse(JsonObject obj) {
+        public static YouTubeChannelThumbnail Parse(JsonObject obj) {
             if (obj == null) return null;
-            return new YouTubeChannelSnippetThumbnail(obj) {
+            return new YouTubeChannelThumbnail(obj) {
                 Url = obj.GetString("url")
             };
         }

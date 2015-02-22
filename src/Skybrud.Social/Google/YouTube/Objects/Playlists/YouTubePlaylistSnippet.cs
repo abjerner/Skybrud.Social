@@ -1,16 +1,23 @@
 using System;
 using Skybrud.Social.Json;
 
-namespace Skybrud.Social.Google.YouTube.Objects.Playlist {
-    
+namespace Skybrud.Social.Google.YouTube.Objects.Playlists {
+
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/playlists#snippet</cref>
+    /// </see>
     public class YouTubePlaylistSnippet : GoogleApiObject {
 
         #region Properties
 
         public DateTime PublishedAt { get; private set; }
+        
         public string ChannelId { get; private set; }
+        
         public string ChannelTitle { get; private set; }
+        
         public string Title { get; private set; }
+        
         public string Description { get; private set; }
 
         #endregion
@@ -24,10 +31,9 @@ namespace Skybrud.Social.Google.YouTube.Objects.Playlist {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <var>YouTubePlaylist</var> from the specified
-        /// <var>JsonObject</var>.
+        /// Gets an instance of <code>YouTubePlaylistSnippet</code> from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static YouTubePlaylistSnippet Parse(JsonObject obj) {
             if (obj == null) return null;
             return new YouTubePlaylistSnippet(obj) {

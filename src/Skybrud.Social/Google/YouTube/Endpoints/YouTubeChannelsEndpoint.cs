@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Google.YouTube.Endpoints.Raw;
+﻿using System;
+using Skybrud.Social.Google.YouTube.Endpoints.Raw;
 using Skybrud.Social.Google.YouTube.Options;
 using Skybrud.Social.Google.YouTube.Responses;
 
@@ -32,22 +33,25 @@ namespace Skybrud.Social.Google.YouTube.Endpoints {
         /// <summary>
         /// Gets a list of channels for the authenticated user.
         /// </summary>
-        public YouTubeChannelsResponse GetChannels() {
-            return YouTubeChannelsResponse.ParseResponse(Raw.GetChannels());
+        public YouTubeChannelListResponse GetChannels() {
+            return YouTubeChannelListResponse.ParseResponse(Raw.GetChannels());
         }
 
         /// <summary>
         /// Gets a list of channels for the specified <code>username</code>.
         /// </summary>
-        public YouTubeChannelsResponse GetChannels(string username) {
-            return YouTubeChannelsResponse.ParseResponse(Raw.GetChannels(username));
+        /// <param name="username">The username.</param>
+        public YouTubeChannelListResponse GetChannels(string username) {
+            return YouTubeChannelListResponse.ParseResponse(Raw.GetChannels(username));
         }
 
         /// <summary>
-        /// Gets a list of channels for the authenticated user.
+        /// Gets a list of channels based on the specified <code>options</code>.
         /// </summary>
-        public YouTubeChannelsResponse GetChannels(YouTubeChannelsOptions options) {
-            return YouTubeChannelsResponse.ParseResponse(Raw.GetChannels(options));
+        /// <param name="options">The options for the call to the API.</param>
+        public YouTubeChannelListResponse GetChannels(YouTubeChannelListOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return YouTubeChannelListResponse.ParseResponse(Raw.GetChannels(options));
         }
 
         #endregion

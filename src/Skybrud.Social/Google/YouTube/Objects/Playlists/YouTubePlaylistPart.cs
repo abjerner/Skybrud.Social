@@ -1,33 +1,43 @@
 using System;
 using System.Linq;
-using System.Reflection;
 
-namespace Skybrud.Social.Google.YouTube.Objects.Playlist {
-    
+namespace Skybrud.Social.Google.YouTube.Objects.Playlists {
+
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/playlists/list#part</cref>
+    /// </see>
     public class YouTubePlaylistPart {
+
+        #region Properties
 
         public static readonly YouTubePlaylistPart Id = new YouTubePlaylistPart("id");
         public static readonly YouTubePlaylistPart Snippet = new YouTubePlaylistPart("snippet");
         public static readonly YouTubePlaylistPart Status = new YouTubePlaylistPart("status");
+        public static readonly YouTubePlaylistPart ContentDetails = new YouTubePlaylistPart("contentDetails");
 
-        #region Static properties
+        public static readonly YouTubePlaylistPartsCollection Basic = new YouTubePlaylistPartsCollection(
+            Id, Snippet
+        );
+
+        public static readonly YouTubePlaylistPartsCollection All = new YouTubePlaylistPartsCollection(
+            Id, Snippet, Status, ContentDetails
+        );
 
         public static YouTubePlaylistPart[] Values {
-            get {
-                return (
-                    from property in typeof(YouTubePlaylistPart).GetFields(BindingFlags.Public | BindingFlags.Static)
-                    select (YouTubePlaylistPart) property.GetValue(null)
-                ).ToArray();
-            }
+            get { return All.ToArray(); }
         }
+
+        public string Name { get; private set; }
 
         #endregion
 
-        public string Name { get; private set; }
+        #region Constructors
 
         private YouTubePlaylistPart(string name) {
             Name = name;
         }
+
+        #endregion
 
         #region Static methods
 

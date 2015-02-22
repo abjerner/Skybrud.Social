@@ -28,7 +28,7 @@ namespace Skybrud.Social.Google.YouTube.Endpoints.Raw {
         /// Gets a list of channels for the authenticated user.
         /// </summary>
         public SocialHttpResponse GetChannels() {
-            return GetChannels(new YouTubeChannelsOptions {
+            return GetChannels(new YouTubeChannelListOptions {
                 Part = YouTubeChannelPart.Basic,
                 Mine = true
             });
@@ -37,17 +37,19 @@ namespace Skybrud.Social.Google.YouTube.Endpoints.Raw {
         /// <summary>
         /// Gets a list of channels for the specified <code>username</code>.
         /// </summary>
+        /// <param name="username">The username.</param>
         public SocialHttpResponse GetChannels(string username) {
-            return GetChannels(new YouTubeChannelsOptions {
+            return GetChannels(new YouTubeChannelListOptions {
                 Part = YouTubeChannelPart.Basic,
                 Username = username
             });
         }
 
         /// <summary>
-        /// Gets a list of channels for the authenticated user.
+        /// Gets a list of channels based on the specified <code>options</code>.
         /// </summary>
-        public SocialHttpResponse GetChannels(YouTubeChannelsOptions options) {
+        /// <param name="options">The options for the call to the API.</param>
+        public SocialHttpResponse GetChannels(YouTubeChannelListOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return Client.DoAuthenticatedGetRequest("https://www.googleapis.com/youtube/v3/channels", options);
 

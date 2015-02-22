@@ -3,6 +3,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/docs/channels#snippet</cref>
+    /// </see>
     public class YouTubeChannelSnippet : GoogleApiObject {
 
         #region Properties
@@ -13,9 +16,9 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
 
         public DateTime PublishedAt { get; private set; }
 
-        public YouTubeChannelSnippetThumbnails Thumbnails { get; private set; }
+        public YouTubeChannelThumbnails Thumbnails { get; private set; }
 
-        public YouTubeChannelSnippetLocalized Localized { get; private set; }
+        public YouTubeChannelLocalized Localized { get; private set; }
 
         #endregion
 
@@ -37,8 +40,8 @@ namespace Skybrud.Social.Google.YouTube.Objects.Channels {
                 Title = obj.GetString("title"),
                 Description = obj.GetString("description"),
                 PublishedAt = obj.GetDateTime("publishedAt"),
-                Thumbnails = obj.GetObject("thumbnails", YouTubeChannelSnippetThumbnails.Parse),
-                Localized = obj.GetObject("localized", YouTubeChannelSnippetLocalized.Parse)
+                Thumbnails = obj.GetObject("thumbnails", YouTubeChannelThumbnails.Parse),
+                Localized = obj.GetObject("localized", YouTubeChannelLocalized.Parse)
             };
         }
 

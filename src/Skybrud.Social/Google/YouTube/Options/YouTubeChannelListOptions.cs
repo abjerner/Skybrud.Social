@@ -5,7 +5,7 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Google.YouTube.Options {
     
-    public class YouTubeChannelsOptions : IGetOptions {
+    public class YouTubeChannelListOptions : IGetOptions {
 
         #region Properties
 
@@ -20,7 +20,12 @@ namespace Skybrud.Social.Google.YouTube.Options {
         public string Username { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum amount if items to return on each page.
+        /// Gets or sets a list of IDs for the channels to be returned.
+        /// </summary>
+        public string[] Ids { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum amount if items to return on each page (maximum is 50).
         /// </summary>
         public int MaxResults { get; set; }
 
@@ -36,12 +41,21 @@ namespace Skybrud.Social.Google.YouTube.Options {
 
         #endregion
 
+        #region Constructors
+
+        public YouTubeChannelListOptions() {
+            Part = YouTubeChannelPart.Basic;
+        }
+
+        #endregion
+
         #region Member methods
 
         public SocialQueryString GetQueryString() {
             SocialQueryString query = new SocialQueryString();
             if (Part != null) query.Add("part", Part.ToString());
             if (!String.IsNullOrWhiteSpace(Username)) query.Add("forUsername", Username);
+            if (Ids != null && Ids.Length > 0) query.Add("id", String.Join(",", Ids));
             if (MaxResults > 0) query.Add("maxResults", MaxResults);
             if (Mine) query.Add("mine", "true");
             if (!String.IsNullOrWhiteSpace(PageToken)) query.Add("pageToken", PageToken);
