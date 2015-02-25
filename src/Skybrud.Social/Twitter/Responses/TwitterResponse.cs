@@ -2,6 +2,7 @@
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Exceptions;
+using Skybrud.Social.Twitter.Objects.Common;
 
 namespace Skybrud.Social.Twitter.Responses {
 
@@ -14,12 +15,18 @@ namespace Skybrud.Social.Twitter.Responses {
         /// </summary>
         public SocialHttpResponse Response { get; private set; }
 
+        /// <summary>
+        /// Gets information about rate limiting.
+        /// </summary>
+        public TwitterRateLimiting RateLimiting { get; private set; }
+
         #endregion
 
         #region Constructors
 
         protected TwitterResponse(SocialHttpResponse response) {
             Response = response;
+            RateLimiting = TwitterRateLimiting.GetFromResponse(response);
         }
 
         #endregion

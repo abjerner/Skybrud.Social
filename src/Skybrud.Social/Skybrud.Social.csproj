@@ -485,6 +485,7 @@
     <Compile Include="Twitter\Entities\TwitterStatusMessageEntities.cs" />
     <Compile Include="Twitter\Entities\TwitterUrlEntity.cs" />
     <Compile Include="Twitter\Enums\TwitterGranularity.cs" />
+    <Compile Include="Twitter\Objects\Common\TwitterRateLimiting.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeParameters.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeQuery.cs" />
     <Compile Include="Twitter\Objects\Geocode\TwitterReverseGeocodeResult.cs" />
