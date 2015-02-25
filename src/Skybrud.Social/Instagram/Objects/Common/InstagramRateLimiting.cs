@@ -15,7 +15,7 @@ namespace Skybrud.Social.Instagram.Objects.Common {
 
         #region Constructors
 
-        internal InstagramRateLimiting(int limit, int remaining) {
+        private InstagramRateLimiting(int limit, int remaining) {
             Limit = limit;
             Remaining = remaining;
         }
