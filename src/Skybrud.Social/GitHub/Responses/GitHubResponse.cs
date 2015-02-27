@@ -43,4 +43,12 @@ namespace Skybrud.Social.GitHub.Responses {
 
     }
 
+    public class GitHubResponse<T> : GitHubResponse {
+
+        public T Body { get; protected set; }
+
+        protected GitHubResponse(SocialHttpResponse response) : base(response) { }
+
+    }
+
 }
