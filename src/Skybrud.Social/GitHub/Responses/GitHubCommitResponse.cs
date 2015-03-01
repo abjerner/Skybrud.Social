@@ -6,13 +6,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
-    public class GitHubCommitResponse : GitHubResponse {
-
-        #region Properties
-
-        public GitHubCommit Data { get; private set; }
-
-        #endregion
+    public class GitHubCommitResponse : GitHubResponse<GitHubCommit> {
 
         #region Constructor
 
@@ -36,7 +30,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Initialize the object to be returned
             return new GitHubCommitResponse(response) {
-                Data = GitHubCommit.Parse(obj)
+                Body = GitHubCommit.Parse(obj)
             };
 
         }

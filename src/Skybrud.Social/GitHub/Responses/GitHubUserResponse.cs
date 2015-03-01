@@ -6,16 +6,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
-    public class GitHubUserResponse : GitHubResponse {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets a reference to the user.
-        /// </summary>
-        public GitHubUser User { get; private set; }
-
-        #endregion
+    public class GitHubUserResponse : GitHubResponse<GitHubUser> {
 
         #region Constructor
 
@@ -37,7 +28,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Initialize the object to be returned
             return new GitHubUserResponse(response) {
-                User = GitHubUser.Parse(obj)
+                Body = GitHubUser.Parse(obj)
             };
 
         }
