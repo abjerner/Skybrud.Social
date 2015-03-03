@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Skybrud.Social.GitHub.Exceptions;
+﻿using System;
 using Skybrud.Social.GitHub.Objects;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
@@ -15,20 +14,16 @@ namespace Skybrud.Social.GitHub.Responses {
         #endregion
 
         public static GitHubUserResponse ParseResponse(SocialHttpResponse response) {
+            
+            // Some input validation
+            if (response == null) throw new ArgumentNullException("response");
 
-            // Parse the raw JSON response
-            JsonObject obj = response.GetBodyAsJsonObject();
+            // Validate the response
+            ValidateResponse(response);
 
-            // Check for any errors
-            if (response.StatusCode != HttpStatusCode.OK) {
-                string message = obj.GetString("message");
-                string url = obj.GetString("documentation_url");
-                throw new GitHubHttpException(response.StatusCode, message, url);
-            }
-
-            // Initialize the object to be returned
+            // Initialize the response object
             return new GitHubUserResponse(response) {
-                Body = GitHubUser.Parse(obj)
+                Body = JsonObject.ParseJson(response.Body, GitHubUser.Parse)
             };
 
         }

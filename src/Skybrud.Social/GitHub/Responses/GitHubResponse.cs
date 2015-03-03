@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Net;
+using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
+using Skybrud.Social.Instagram.Exceptions;
+using Skybrud.Social.Instagram.Objects;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
@@ -37,6 +42,25 @@ namespace Skybrud.Social.GitHub.Responses {
             RateLimitRemaining = Int32.Parse(response.Headers["X-RateLimit-Remaining"]);
             RateLimitReset = SocialUtils.GetDateTimeFromUnixTime(response.Headers["X-RateLimit-Reset"]);
             Response = response;
+        }
+
+        #endregion
+
+        #region Static methods
+        
+        public static void ValidateResponse(SocialHttpResponse response) {
+
+            // Skip error checking if the server responds with an OK status code
+            if (response.StatusCode == HttpStatusCode.OK) return;
+
+            // Get the "meta" object
+            JsonObject obj = response.GetBodyAsJsonObject();
+
+            // Now throw some exceptions
+            string message = obj.GetString("message");
+            string url = obj.GetString("documentation_url");
+            throw new GitHubHttpException(response, message, url);
+
         }
 
         #endregion

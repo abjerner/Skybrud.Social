@@ -40,7 +40,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
                     string message = obj.GetString("message");
                     string url = obj.GetString("documentation_url");
-                    throw new GitHubHttpException(response.StatusCode, message, url);
+                    throw new GitHubHttpException(response, message, url);
                     
             }
 
