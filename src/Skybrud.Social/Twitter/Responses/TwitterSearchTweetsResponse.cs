@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Objects.Search;
@@ -16,7 +17,8 @@ namespace Skybrud.Social.Twitter.Responses {
 
         public static TwitterSearchTweetsResponse ParseResponse(SocialHttpResponse response) {
 
-            if (response == null) return null;
+            // Some input validation
+            if (response == null) throw new ArgumentNullException("response");
 
             // Validate the response
             ValidateResponse(response);
