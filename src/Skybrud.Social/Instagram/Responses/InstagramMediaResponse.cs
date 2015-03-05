@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 using Skybrud.Social.Instagram.Objects;
@@ -16,7 +17,8 @@ namespace Skybrud.Social.Instagram.Responses {
 
         public static InstagramMediaResponse ParseResponse(SocialHttpResponse response) {
 
-            if (response == null) return null;
+            // Some input validation
+            if (response == null) throw new ArgumentNullException("response");
 
             // Parse the raw JSON response
             JsonObject obj = response.GetBodyAsJsonObject();
