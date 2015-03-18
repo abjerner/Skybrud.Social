@@ -42,6 +42,15 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         }
 
         // TODO: Implement /users/self/media/liked
+        /// <summary>
+        /// Get the authenticated users current liked media. Takes a "Count" and "MAX_LIKE_ID"
+        /// </summary>
+        /// <param name="options">The search options with any optional parameters.</param>
+        /// <returns>Returns the raw JSON response from the API.</returns>
+        public SocialHttpResponse GetLiked(InstagramUserLikedMediaOptions options)
+        {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/self/media/liked", options);
+        }
 
         /// <summary>
         /// Search for a user by name.
