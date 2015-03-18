@@ -275,6 +275,7 @@
     <Compile Include="Http\SocialPostData.cs" />
     <Compile Include="Instagram\Objects\InstagramAccessTokenSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramMetaData.cs" />
+    <Compile Include="Instagram\Objects\Pagination\InstagramLikedMediaPagination.cs" />
     <Compile Include="Instagram\Objects\Pagination\InstagramIdBasedPagination.cs" />
     <Compile Include="Instagram\Objects\Common\InstagramRateLimiting.cs" />
     <Compile Include="Instagram\Options\Common\InstagramRecentMediaOptions.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Instagram\Options\Users\InstagramUserLikedMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
+    <Compile Include="Instagram\Responses\InstagramLikedMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="Interfaces\IGetOptions.cs" />

@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Options.Users;
@@ -5,18 +6,20 @@ using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
 
-    /// <see cref="http://instagram.com/developer/endpoints/users/"/>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/</cref>
+    /// </see>
     public class InstagramUsersEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// A reference to the Instagram service.
+        /// Gets a reference to the Instagram service.
         /// </summary>
         public InstagramService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public InstagramUsersRawEndpoint Raw {
             get { return Service.Client.Users; }
@@ -42,9 +45,18 @@ namespace Skybrud.Social.Instagram.Endpoints {
         }
 
         /// <summary>
-        /// Gets information about a user by the specified ID.
+        /// Gets information about the user with the specified <code>userId</code>.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        public InstagramUserResponse GetUser(long userId) {
+            return InstagramUserResponse.ParseResponse(Raw.GetUser(userId.ToString(CultureInfo.InvariantCulture)));
+        }
+
+        /// <summary>
+        /// Gets information about the user with the specified <code>id</code>.
         /// </summary>
         /// <param name="id">The ID of the user.</param>
+        [Obsolete("Use the GetInfo() instead.")]
         public InstagramUserResponse GetInfo(long id) {
             return InstagramUserResponse.ParseResponse(Raw.GetUser(id.ToString(CultureInfo.InvariantCulture)));
         }
@@ -53,7 +65,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Gets the the most recent media of the authenticated user.
         /// </summary>
         public InstagramRecentMediaResponse GetRecentMedia() {
-            return GetRecentMedia(new InstagramUserRecentMediaOptions());
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia("self"));
         }
 
         /// <summary>
@@ -65,31 +77,52 @@ namespace Skybrud.Social.Instagram.Endpoints {
         }
 
         /// <summary>
-        /// Gets the most recent media of the user with the specified ID.
+        /// Gets the most recent media of the user with the specified <code>userId</code>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId) {
-            return GetRecentMedia(userId, new InstagramUserRecentMediaOptions());
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(userId.ToString(CultureInfo.InvariantCulture)));
         }
 
         /// <summary>
-        /// Gets the most recent media of the user with the specified ID.
+        /// Gets the most recent media of the user with the specified <code>userId</code>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <param name="count">Count of media to return.</param>
+        /// <param name="count">The maximum amount of media to be returned.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId, int count) {
-            return GetRecentMedia(userId, new InstagramUserRecentMediaOptions {
-                Count = count
-            });
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(userId.ToString(CultureInfo.InvariantCulture), count));
         }
 
         /// <summary>
-        /// Gets the most recent media of the user with the specified ID.
+        /// Gets the most recent media of the user with the specified <code>userId</code>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The search options with any optional parameters.</param>
         public InstagramRecentMediaResponse GetRecentMedia(long userId, InstagramUserRecentMediaOptions options) {
-            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(userId + "", options));
+            return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(userId.ToString(CultureInfo.InvariantCulture), options));
+        }
+
+        /// <summary>
+        /// Gets a list of media liked by the authenticated user.
+        /// </summary>
+        public InstagramLikedMediaResponse GetLikedMedia() {
+            return InstagramLikedMediaResponse.ParseResponse(Raw.GetLikedMedia());
+        }
+
+        /// <summary>
+        /// Gets a list of media liked by the authenticated user.
+        /// </summary>
+        /// <param name="count">The maximum amount of media to be returned.</param>
+        public InstagramLikedMediaResponse GetLikedMedia(int count) {
+            return InstagramLikedMediaResponse.ParseResponse(Raw.GetLikedMedia(count));
+        }
+
+        /// <summary>
+        /// Gets a list of media liked by the authenticated user.
+        /// </summary>
+        /// <param name="options">The search options with any optional parameters.</param>
+        public InstagramLikedMediaResponse GetLikedMedia(InstagramUserLikedMediaOptions options) {
+            return InstagramLikedMediaResponse.ParseResponse(Raw.GetLikedMedia(options));
         }
 
         /// <summary>
@@ -104,7 +137,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// Search for a user by name.
         /// </summary>
         /// <param name="query">A query string.</param>
-        /// <param name="count">The maximum amount of users to return.</param>
+        /// <param name="count">The maximum amount of users to be returned.</param>
         public InstagramUsersResponse Search(string query, int count) {
             return InstagramUsersResponse.ParseResponse(Raw.Search(query, count));
         }

@@ -1,14 +1,12 @@
-﻿using System;
-using Skybrud.Social.Http;
+﻿using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Users {
     
-    /// <summary>
-    /// http://instagram.com/developer/endpoints/users/#get_users_media_recent
-    /// </summary>
-    public class InstagramUserLikedMediaOptions : IGetOptions
-    {
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed_liked</cref>
+    /// </see>
+    public class InstagramUserLikedMediaOptions : IGetOptions {
 
         #region Properties
 
@@ -20,8 +18,7 @@ namespace Skybrud.Social.Instagram.Options.Users {
         /// <summary>
         /// Only media before this ID is returned.
         /// </summary>
-        // TODO: Not sure whether this is inclusive or exclusive.
-        public string MaxId { get; set; }
+        public string MaxLikeId { get; set; }
 
         #endregion
 
@@ -30,8 +27,7 @@ namespace Skybrud.Social.Instagram.Options.Users {
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
             if (Count > 0) qs.Add("count", Count);
-         
-            if (MaxId != null) qs.Add("max_id", MaxId);
+            if (MaxLikeId != null) qs.Add("max_like_id", MaxLikeId);
             return qs;
         }
 
