@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Skybrud.Social")]
-[assembly: AssemblyDescription(".NET library for integration with various social services such as Facebook, Twitter, Instagram and others")]
+[assembly: AssemblyDescription("Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skybrud.dk a/s")]
 [assembly: AssemblyProduct("Skybrud.Social")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.1.0")]
-[assembly: AssemblyInformationalVersion("0.9.1.1")]
+[assembly: AssemblyVersion("0.9.2")]
+[assembly: AssemblyInformationalVersion("0.9.2")]
