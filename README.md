@@ -20,7 +20,7 @@ I may occasional upload a build to Dropbox. These are builds in between releases
 
 ### Changelog
 
-* [Significant changes will be listed in the changelog][Changelog]
+The [releases page](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, and each there will be some information for each release on the most significant changes.
 
 ### Documentation
 
