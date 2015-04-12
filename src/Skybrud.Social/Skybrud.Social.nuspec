@@ -1,19 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Skybrud.Social</id>
-    <title>Skybrud.Social</title>
-    <version>0.9.1.1</version>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
     <authors>Anders Bjerner</authors>
     <owners>Anders Bjerner</owners>
     <licenseUrl>http://social.skybrud.dk/license.aspx</licenseUrl>
     <projectUrl>http://social.skybrud.dk/</projectUrl>
     <iconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.</description>
+    <description>$description$</description>
     <tags>Facebook, Twitter, Instagram, Vimeo, Google, Analytics, GitHub, BitBucket, Skybrud, social, OAuth, JSON</tags>
+    <dependencies />
   </metadata>
-  <files>
-    <file src="..\src\Skybrud.Social\bin\Release\Skybrud.Social.dll" target="lib" />
-  </files>
 </package>
