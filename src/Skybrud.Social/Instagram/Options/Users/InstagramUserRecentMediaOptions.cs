@@ -17,27 +17,23 @@ namespace Skybrud.Social.Instagram.Options.Users {
         public int Count { get; set; }
 
         /// <summary>
-        /// Only media before this timestamp is returned.
+        /// Gets or sets the maximum timestamp for the search. Only media before this timestamp is returned.
         /// </summary>
-        // TODO: Not sure whether this is inclusive or exclusive.
         public DateTime? MaxTimestamp { get; set; }
 
         /// <summary>
-        /// Only media after this timestamp is returned.
+        /// Gets or sets the minimum timestamp for the search. Only media after this timestamp is returned.
         /// </summary>
-        // TODO: Not sure whether this is inclusive or exclusive.
         public DateTime? MinTimestamp { get; set; }
 
         /// <summary>
-        /// Only media after this ID is returned.
+        /// Gets or sets the minimum media ID for the search. Only media after this ID is returned.
         /// </summary>
-        // TODO: Not sure whether this is inclusive or exclusive.
         public string MinId { get; set; }
 
         /// <summary>
-        /// Only media before this ID is returned.
+        /// Gets or sets the maximum media ID for the search. Only media before this ID is returned.
         /// </summary>
-        // TODO: Not sure whether this is inclusive or exclusive.
         public string MaxId { get; set; }
 
         #endregion
