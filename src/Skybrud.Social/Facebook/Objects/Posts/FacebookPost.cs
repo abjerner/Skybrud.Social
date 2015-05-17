@@ -20,6 +20,7 @@ namespace Skybrud.Social.Facebook.Objects.Posts {
         public string Story { get; private set; }
         public string Picture { get; private set; }
         public string Link { get; private set; }
+        public string Source { get; private set; }
         public string Name { get; private set; }
         public string Icon { get; private set; }
         public string Type { get; private set; }
@@ -68,6 +69,7 @@ namespace Skybrud.Social.Facebook.Objects.Posts {
                 Story = obj.GetString("story"),
                 Picture = obj.GetString("picture"),
                 Link = obj.GetString("link"),
+                Source = obj.GetString("source"),
                 Name = obj.GetString("name"),
                 Icon = obj.GetString("icon"),
                 Type = obj.GetString("type"),
