@@ -26,6 +26,11 @@ namespace Skybrud.Social {
             // Default constructor
         }
 
+        /// <summary>
+        /// Initializes a location with the specified <code>latitude</code> and <code>longitude</code>.
+        /// </summary>
+        /// <param name="latitude">The latitude of the location.</param>
+        /// <param name="longitude">The longitude of the location.</param>
         public Location(double latitude, double longitude) {
             Latitude = latitude;
             Longitude = longitude;

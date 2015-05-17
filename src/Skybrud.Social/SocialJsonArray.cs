@@ -6,6 +6,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
 
+    /// <summary>
+    /// Class representing an array derived from A JSON array.
+    /// </summary>
     public abstract class SocialJsonArray {
 
         #region Properties
@@ -15,6 +18,13 @@ namespace Skybrud.Social {
         /// </summary>
         [JsonIgnore]
         public JsonArray JsonArray { get; private set; }
+
+        /// <summary>
+        /// Gets the length of the array.
+        /// </summary>
+        public int Length {
+            get { return JsonArray == null ? 0 : JsonArray.Length; }
+        }
 
         #endregion
 
@@ -36,7 +46,7 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Saves the object to a JSON file at the specified <var>path</var>.
+        /// Saves the object to a JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to save the file.</param>
         public virtual void SaveJson(string path) {
@@ -47,25 +57,34 @@ namespace Skybrud.Social {
 
     }
 
+    /// <summary>
+    /// Class representing an array derived from A JSON array.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SocialJsonArray<T> : SocialJsonArray, IEnumerable<T> {
+
+        /// <summary>
+        /// Gets or sets the item at the specified <code>index</code>.
+        /// </summary>
+        /// <param name="index">The index of item.</param>
+        public T this[int index] {
+            get { return _array[index]; }
+            set { _array[index] = value; }
+        }
 
         private T[] _array;
 
         private SocialJsonArray(JsonArray array) : base(array) { }
 
+        /// <summary>
+        /// Parses the specified <code>array</code>.
+        /// </summary>
+        /// <param name="array">The array to be parsed.</param>
+        /// <param name="func">The callback function to be used for parsing each item in the array.</param>
         public static SocialJsonArray<T> Parse(JsonArray array, Func<JsonObject, T> func) {
             return new SocialJsonArray<T>(array) {
                 _array = array.ParseMultiple(func)
             };
-        }
-
-        public T this[int i] {
-            get { return _array[i]; }
-            set { _array[i] = value; }
-        }
-
-        public int Length {
-            get { return _array.Length; }
         }
 
         public IEnumerator<T> GetEnumerator() {

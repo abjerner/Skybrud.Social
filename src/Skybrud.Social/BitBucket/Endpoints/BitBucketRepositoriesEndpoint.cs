@@ -3,11 +3,13 @@ using Skybrud.Social.BitBucket.Objects;
 using Skybrud.Social.BitBucket.Options;
 using Skybrud.Social.BitBucket.Responses;
 using Skybrud.Social.BitBucket.Responses.Repositories;
-using Skybrud.Social.Http;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.BitBucket.Endpoints {
     
+    /// <summary>
+    /// Class representing the repositories endpoint in the BitBucket API.
+    /// </summary>
     public class BitBucketRepositoriesEndpoint {
 
         #region Properties
