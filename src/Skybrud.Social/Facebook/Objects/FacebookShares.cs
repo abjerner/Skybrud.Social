@@ -20,7 +20,7 @@ namespace Skybrud.Social.Facebook.Objects {
 
         public static FacebookShares Parse(JsonObject obj) {
             return new FacebookShares(obj) {
-                Count = obj.GetInt32("id")
+                Count = obj.GetInt32("count")
             };
         }
 
