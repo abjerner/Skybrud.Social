@@ -2,6 +2,9 @@
 
 namespace Skybrud.Social.Facebook.Objects {
 
+    /// <summary>
+    /// Class representing a cover photo of a user, page or similar.
+    /// </summary>
     public class FacebookCoverPhoto : SocialJsonObject {
 
         #region Properties
@@ -36,6 +39,10 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>JsonObject</code> into an instance of <code>FacebookCoverPhoto</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
         public static FacebookCoverPhoto Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookCoverPhoto(obj) {

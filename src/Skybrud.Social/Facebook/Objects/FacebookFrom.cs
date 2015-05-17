@@ -2,6 +2,9 @@
 
 namespace Skybrud.Social.Facebook.Objects {
 
+    /// <summary>
+    /// Class representing an object with limited information about either a user or a page.
+    /// </summary>
     public class FacebookFrom : SocialJsonObject {
 
         #region Properties
@@ -36,6 +39,10 @@ namespace Skybrud.Social.Facebook.Objects {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>JsonObject</code> into an instance of <code>FacebookFrom</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
         public static FacebookFrom Parse(JsonObject obj) {
             if (obj == null) return null;
             return new FacebookFrom(obj) {
@@ -44,7 +51,6 @@ namespace Skybrud.Social.Facebook.Objects {
                 Category = obj.GetString("category"),
                 CategoryList = obj.GetArray("category_list", FacebookObject.Parse)
             };
-
         }
 
         #endregion

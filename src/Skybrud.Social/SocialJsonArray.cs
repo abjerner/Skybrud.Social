@@ -60,7 +60,7 @@ namespace Skybrud.Social {
     /// <summary>
     /// Class representing an array derived from A JSON array.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The type of the items to be stored in the array.</typeparam>
     public class SocialJsonArray<T> : SocialJsonArray, IEnumerable<T> {
 
         /// <summary>
