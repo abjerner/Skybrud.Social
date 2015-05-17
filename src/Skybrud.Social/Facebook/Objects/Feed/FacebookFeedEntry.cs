@@ -112,7 +112,7 @@ namespace Skybrud.Social.Facebook.Objects.Feed {
         /// <summary>
         /// If the entry represents an object (eg. a photo or similar), this property will return the ID of that object.
         /// </summary>
-        public long? ObjectId { get; private set; }
+        public string ObjectId { get; private set; }
 
         public DateTime SortDate {
             get { return CreatedTime; }
@@ -154,6 +154,7 @@ namespace Skybrud.Social.Facebook.Objects.Feed {
                 Comments = obj.GetObject("comments", FacebookComments.Parse),
                 Shares = obj.GetObject("shares", FacebookShares.Parse),
                 Likes = obj.GetObject("likes", FacebookLikes.Parse),
+                ObjectId = obj.GetString("object_id")
             };
         }
 
