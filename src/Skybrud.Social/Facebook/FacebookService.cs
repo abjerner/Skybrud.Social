@@ -19,6 +19,7 @@ namespace Skybrud.Social.Facebook {
         public FacebookDebugEndpoint Debug { get; private set; }
         public FacebookCommentsEndpoint Comments { get; private set; }
         public FacebookEventsEndpoint Events { get; private set; }
+        public FacebookFeedEndpoint Feed { get; private set; }
         public FacebookLikesEndpoint Likes { get; private set; }
         public FacebookLinksEndpoint Links { get; private set; }
         public FacebookPagesEndpoint Pages { get; private set; }
@@ -37,6 +38,7 @@ namespace Skybrud.Social.Facebook {
             Debug = new FacebookDebugEndpoint(this);
             Comments = new FacebookCommentsEndpoint(this);
             Events = new FacebookEventsEndpoint(this);
+            Feed = new FacebookFeedEndpoint(this);
             Likes = new FacebookLikesEndpoint(this);
             Links = new FacebookLinksEndpoint(this);
             Pages = new FacebookPagesEndpoint(this);

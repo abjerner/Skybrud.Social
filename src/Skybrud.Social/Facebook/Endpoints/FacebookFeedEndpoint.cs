@@ -3,7 +3,10 @@ using Skybrud.Social.Facebook.Options.Feed;
 using Skybrud.Social.Facebook.Responses.Feed;
 
 namespace Skybrud.Social.Facebook.Endpoints {
-    
+
+    /// <summary>
+    /// Class (endpoint) with methods related to the feed of a user or a page.
+    /// </summary>
     public class FacebookFeedEndpoint {
 
         #region Properties
@@ -36,8 +39,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
-        public FacebookFeedResponse GetEvents(string identifier) {
-            return GetEvents(identifier, new FacebookFeedOptions());
+        public FacebookFeedResponse GetFeed(string identifier) {
+            return GetFeed(identifier, new FacebookFeedOptions());
         }
 
         /// <summary>
@@ -45,8 +48,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
-        public FacebookFeedResponse GetEvents(string identifier, int limit) {
-            return GetEvents(identifier, new FacebookFeedOptions {
+        public FacebookFeedResponse GetFeed(string identifier, int limit) {
+            return GetFeed(identifier, new FacebookFeedOptions {
                 Limit = limit
             });
         }
@@ -56,7 +59,7 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetEvents(string identifier, FacebookFeedOptions options) {
+        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
             return FacebookFeedResponse.ParseResponse(Raw.GetFeed(identifier, options));
         }
 
