@@ -3,6 +3,9 @@ using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Exceptions {
 
+    /// <summary>
+    /// Class representing an exception based on an error from the Facebook Graph API.
+    /// </summary>
     public class FacebookException : Exception {
 
         #region Properties

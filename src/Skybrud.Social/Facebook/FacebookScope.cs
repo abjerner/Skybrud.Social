@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Skybrud.Social.Facebook {
     
+    /// <summary>
+    /// Class representing a scope of the Facebook Graph API.
+    /// </summary>
     public class FacebookScope {
 
         #region Private fields
@@ -182,11 +185,18 @@ namespace Skybrud.Social.Facebook {
         /// Attempts to get a scope with the specified <code>name</code>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
+        /// <returns>Gets a scope matching the specified <code>name</code>, or <code>null</code> if not found-</returns>
         public static FacebookScope GetScope(string name) {
             FacebookScope scope;
             return Scopes.TryGetValue(name, out scope) ? scope : null;
         }
 
+        /// <summary>
+        /// Gets whether the scope is a known scope.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        /// <returns>Returns <code>true</code> if the specified <code>name</code> matches a known
+        /// scope, otherwise <code>false</code>.</returns>
         public static bool ScopeExists(string name) {
             return Scopes.ContainsKey(name);
         }
@@ -196,7 +206,8 @@ namespace Skybrud.Social.Facebook {
         #region Operators
 
         /// <summary>
-        /// Adding two instance of FacebookScope will result in a FacebookScopeCollection containing both scopes.
+        /// Adding two instances of <code>FacebookScope</code> will result in a
+        /// <code>FacebookScopeCollection</code> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>

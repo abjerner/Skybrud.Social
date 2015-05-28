@@ -20,29 +20,29 @@ namespace Skybrud.Social.Facebook.OAuth {
         #region OAuth
 
         /// <summary>
-        /// The ID of the app.
+        /// Gets or sets the ID of the app.
         /// </summary>
         public string AppId { get; set; }
 
         /// <summary>
-        /// The secret of the app.
+        /// Gets or sets the secret of the app.
         /// </summary>
         public string AppSecret { get; set; }
         
         /// <summary>
-        /// The redirect URI of your application.
+        /// Gets or sets the redirect URI of your application.
         /// </summary>
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// The access token.
+        /// Gets or sets the access token.
         /// </summary>
         public string AccessToken { get; set; }
 
         #endregion
 
         /// <summary>
-        /// Sets the of the Facebook Graph API to be used. Defaults to <code>v2.2</code>.
+        /// Gets or sets the version of the Facebook Graph API to be used. Defaults to <code>v2.2</code>.
         /// </summary>
         public string Version { get; set; }
 
@@ -206,6 +206,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="state">The state to send to Facebook's OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
+        /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, FacebookScopeCollection scope) {
             return GetAuthorizationUrl(state, scope.ToString());
         }
@@ -215,6 +216,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="state">The state to send to Facebook's OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
+        /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
             return String.Format(
                 "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
@@ -229,6 +231,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// Exchanges the specified authorization code for a user access token.
         /// </summary>
         /// <param name="authCode">The authorization code received from the Facebook OAuth dialog.</param>
+        /// <returns>Returns an access token based on the specified <code>authCode</code>.</returns>
         public string GetAccessTokenFromAuthCode(string authCode) {
 
             // Initialize the query string
@@ -254,6 +257,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// Attempts to renew the specified user access token. The current access token must be valid.
         /// </summary>
         /// <param name="currentToken">The current access token.</param>
+        /// <returns>Returns the new access token.</returns>
         public string RenewAccessToken(string currentToken) {
 
             // Initialize the query string
@@ -266,6 +270,8 @@ namespace Skybrud.Social.Facebook.OAuth {
 
             // Make the call to the API
             string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+
+            // TODO: Add some validation
 
             // Parse the contents
             NameValueCollection response = HttpUtility.ParseQueryString(contents);
@@ -303,6 +309,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// been specified, the access token will be appended to the query string.
         /// </summary>
         /// <param name="url">The URL to call.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
             return DoAuthenticatedGetRequest(url, (SocialQueryString) null);
         }
@@ -313,6 +320,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
             return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
         }
@@ -323,6 +331,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
             return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
         }
@@ -333,6 +342,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
 
             // Throw an exception if the URL is empty
@@ -380,6 +390,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedPostRequest(string url, IPostOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return DoAuthenticatedPostRequest(url, options.GetQueryString(), options.GetPostData(), options.IsMultipart);
@@ -392,7 +403,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data.</param>
-        /// <param name="isMultipart">If <code>TRUE</code>, the content type of the request will be <code>multipart/form-data</code>, otherwise <code>application/x-www-form-urlencoded</code>.</param>
+        /// <param name="isMultipart">If <code>true</code>, the content type of the request will be <code>multipart/form-data</code>, otherwise <code>application/x-www-form-urlencoded</code>.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> wrapping the response from the Facebook Graph API.</returns>
         public SocialHttpResponse DoAuthenticatedPostRequest(string url, SocialQueryString query, SocialPostData postData, bool isMultipart) {
 
             // Throw an exception if the URL is empty

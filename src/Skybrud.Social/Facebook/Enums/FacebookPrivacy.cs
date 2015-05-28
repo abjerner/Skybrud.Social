@@ -1,5 +1,8 @@
 ﻿namespace Skybrud.Social.Facebook.Enums {
-    
+
+    /// <summary>
+    /// Enumeration describing describing the privacy of an object in the Facebook eco system.
+    /// </summary>
     public enum FacebookPrivacy {
 
         /// <summary>
@@ -22,6 +25,9 @@
         /// </summary>
         FriendsOfFriends,
 
+        /// <summary>
+        /// If the object has a custom privacy setting - eg. only visible to specific users.
+        /// </summary>
         Custom,
 
         /// <summary>
