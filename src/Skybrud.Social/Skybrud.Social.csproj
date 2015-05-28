@@ -560,9 +560,7 @@
     <Compile Include="Vimeo\Simple\VimeoService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
