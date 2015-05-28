@@ -1,31 +1,172 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Skybrud.Social.Google.Analytics.Interfaces;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
 
+    /// <summary>
+    /// Class representing a metric in the Google Analytics API.
+    /// </summary>
     public class AnalyticsMetric : IAnalyticsField {
 
-        #region Readonly properties
-        // ReSharper disable InconsistentNaming
-        #region Visitor
+        private const string GroupUser = "User";
+        private const string GroupSession = "Session";
+        private const string GroupPageTracking = "Page Tracking";
 
-        public static readonly AnalyticsMetric Visitors = new AnalyticsMetric("ga:visitors");
-        public static readonly AnalyticsMetric NewVisits = new AnalyticsMetric("ga:newVisits");
-        public static readonly AnalyticsMetric PercentNewVisits = new AnalyticsMetric("ga:percentNewVisits");
+        #region Readonly properties
+
+        // ReSharper disable InconsistentNaming
+
+        #region Users
+
+        /// <summary>
+        /// Gets the total number of users for the requested time period (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_users</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Users = new AnalyticsMetric("ga:users", GroupUser);
+
+        /// <summary>
+        /// Use <code>Users</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_visitors</cref>
+        /// </see>
+        [Obsolete("Use ga:users instead.")]
+        public static readonly AnalyticsMetric Visitors = new AnalyticsMetric("ga:visitors", GroupUser, true);
+
+        /// <summary>
+        /// Gets the number of users whose session was marked as a first-time session (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_newusers</cref>
+        /// </see>
+        public static readonly AnalyticsMetric NewUsers = new AnalyticsMetric("ga:newUsers", GroupUser);
+
+        /// <summary>
+        /// Use <code>NewUsers</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_newvisits</cref>
+        /// </see>
+        [Obsolete("Use ga:newUsers instead")]
+        public static readonly AnalyticsMetric NewVisits = new AnalyticsMetric("ga:newVisits", GroupUser, true);
+
+        /// <summary>
+        /// Gets the percentage of sessions by people who had never visited your property before (type: percent).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_percentnewsessions</cref>
+        /// </see>
+        public static readonly AnalyticsMetric PercentNewSessions = new AnalyticsMetric("ga:percentNewSessions", GroupUser);
+
+        /// <summary>
+        /// Use <code>PercentNewSessions</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_percentnewvisits</cref>
+        /// </see>
+        [Obsolete("Use ga:percentNewSessions instead")]
+        public static readonly AnalyticsMetric PercentNewVisits = new AnalyticsMetric("ga:percentNewVisits", GroupUser, true);
+
+        /// <summary>
+        /// Gets the total number of sessions divided by the total number of users (type: float).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=user&amp;jump=ga_sessionsperuser</cref>
+        /// </see>
+        public static readonly AnalyticsMetric SessionsPerUser = new AnalyticsMetric("ga:sessionsPerUser", GroupUser);
 
         #endregion
 
         #region Session
 
-        public static readonly AnalyticsMetric Visits = new AnalyticsMetric("ga:visits");
-        public static readonly AnalyticsMetric Bounces = new AnalyticsMetric("ga:bounces");
-        public static readonly AnalyticsMetric EntranceBounceRate = new AnalyticsMetric("ga:entranceBounceRate");
-        public static readonly AnalyticsMetric VisitBounceRate = new AnalyticsMetric("ga:visitBounceRate");
-        public static readonly AnalyticsMetric TimeOnSite = new AnalyticsMetric("ga:timeOnSite");
-        public static readonly AnalyticsMetric AvgTimeOnSite = new AnalyticsMetric("ga:avgTimeOnSite");
+        /// <summary>
+        /// Gets the total number of sessions (type = integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_sessions</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Sessions = new AnalyticsMetric("ga:sessions", GroupSession);
+
+        /// <summary>
+        /// Use <code>Sessions</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_visits</cref>
+        /// </see>
+        [Obsolete("Use ga:sessions instead.")]
+        public static readonly AnalyticsMetric Visits = new AnalyticsMetric("ga:visits", GroupSession, true);
+
+        /// <summary>
+        /// Gets the total number of single page (or single engagement hit) sessions for your property (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_bounces</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Bounces = new AnalyticsMetric("ga:bounces", GroupSession);
+
+        /// <summary>
+        /// Gets the total duration of user sessions represented in total seconds (type: time).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_sessionduration</cref>
+        /// </see>
+        public static readonly AnalyticsMetric SessionDuration = new AnalyticsMetric("ga:sessionDuration", GroupSession);
+
+        /// <summary>
+        /// Use <code>SessionDuration</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_timeonsite</cref>
+        /// </see>
+        [Obsolete("Use ga:sessionDuration instead.")]
+        public static readonly AnalyticsMetric TimeOnSite = new AnalyticsMetric("ga:timeOnSite", GroupSession, true);
+
+        /// <summary>
+        /// Use <code>BounceRate</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_entrancebouncerate</cref>
+        /// </see>
+        [Obsolete("Use ga:bounceRate instead.")]
+        public static readonly AnalyticsMetric EntranceBounceRate = new AnalyticsMetric("ga:entranceBounceRate", GroupSession, true);
+
+        /// <summary>
+        /// Gets the percentage of single-page session (i.e., session in which the person left your property from the first page) (type: percent).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_bouncerate</cref>
+        /// </see>
+        public static readonly AnalyticsMetric BounceRate = new AnalyticsMetric("ga:bounceRate", GroupSession);
+
+        /// <summary>
+        /// Use <code>BounceRate</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_visitbouncerate</cref>
+        /// </see>
+        [Obsolete("Use ga:bounceRate instead.")]
+        public static readonly AnalyticsMetric VisitBounceRate = new AnalyticsMetric("ga:visitBounceRate", GroupSession, true);
+
+        /// <summary>
+        /// Gets the average duration of user sessions represented in total seconds.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_avgsessionduration</cref>
+        /// </see>
+        public static readonly AnalyticsMetric AvgSessionDuration = new AnalyticsMetric("ga:avgSessionDuration", GroupSession);
+
+        /// <summary>
+        /// Use <code>AvgSessionDuration</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=session&amp;jump=ga_avgtimeonsite</cref>
+        /// </see>
+        [Obsolete("Use ga:avgSessionDuration instead.")]
+        public static readonly AnalyticsMetric AvgTimeOnSite = new AnalyticsMetric("ga:avgTimeOnSite", GroupSession, true);
 
         #endregion
 
@@ -78,16 +219,94 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Page Tracking
 
-        public static readonly AnalyticsMetric Entrances = new AnalyticsMetric("ga:entrances");
-        public static readonly AnalyticsMetric EntranceRate = new AnalyticsMetric("ga:entranceRate");
-        public static readonly AnalyticsMetric Pageviews = new AnalyticsMetric("ga:pageviews");
-        public static readonly AnalyticsMetric PageviewsPerVisit = new AnalyticsMetric("ga:pageviewsPerVisit");
-        public static readonly AnalyticsMetric UniquePageviews = new AnalyticsMetric("ga:uniquePageviews");
-        public static readonly AnalyticsMetric PageValue = new AnalyticsMetric("ga:pageValue");
-        public static readonly AnalyticsMetric TimeOnPage = new AnalyticsMetric("ga:timeOnPage");
-        public static readonly AnalyticsMetric AvgTimeOnPage = new AnalyticsMetric("ga:avgTimeOnPage");
-        public static readonly AnalyticsMetric Exits = new AnalyticsMetric("ga:exits");
-        public static readonly AnalyticsMetric ExitRate = new AnalyticsMetric("ga:exitRate");
+        /// <summary>
+        /// Gets the average value of this page or set of pages. Page Value is (ga:transactionRevenue + ga:goalValueAll) / ga:uniquePageviews (for the page or set of pages) (type: currency).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_pagevalue</cref>
+        /// </see>
+        public static readonly AnalyticsMetric PageValue = new AnalyticsMetric("ga:pageValue", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the number of entrances to your property measured as the first pageview in a session. Typically used with landingPagePath (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_entrances</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Entrances = new AnalyticsMetric("ga:entrances", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the total number of pageviews for your property (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_pageviews</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Pageviews = new AnalyticsMetric("ga:pageviews", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the number of different (unique) pages within a session. This takes into account both the pagePath and pageTitle to determine uniqueness (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_uniquepageviews</cref>
+        /// </see>
+        public static readonly AnalyticsMetric UniquePageviews = new AnalyticsMetric("ga:uniquePageviews", GroupPageTracking);
+
+        /// <summary>
+        /// Gets how long a user spent on a particular page in seconds. Calculated by subtracting the initial view time for a particular page from the initial view time for a subsequent page. Thus, this metric does not apply to exit pages for your property (type: time).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_timeonpage</cref>
+        /// </see>
+        public static readonly AnalyticsMetric TimeOnPage = new AnalyticsMetric("ga:timeOnPage", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the number of exits from your property (type: integer).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_exits</cref>
+        /// </see>
+        public static readonly AnalyticsMetric Exits = new AnalyticsMetric("ga:exits", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the percentage of pageviews in which this page was the entrance (type: percent).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_entrancerate</cref>
+        /// </see>
+        public static readonly AnalyticsMetric EntranceRate = new AnalyticsMetric("ga:entranceRate", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the average number of pages viewed during a session, including repeated views of a single page (type: float).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_pageviewspersession</cref>
+        /// </see>
+        public static readonly AnalyticsMetric PageviewsPerSession = new AnalyticsMetric("ga:pageviewsPerSession", GroupPageTracking);
+
+        /// <summary>
+        /// Use <code>PageviewsPerSession</code> instead.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_pageviewspervisit</cref>
+        /// </see>
+        [Obsolete("Use ga:pageviewsPerSession instead.")]
+        public static readonly AnalyticsMetric PageviewsPerVisit = new AnalyticsMetric("ga:pageviewsPerVisit", GroupPageTracking, true);
+
+        /// <summary>
+        /// Gets the average amount of time users spent viewing this page or a set of pages (type: time).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_avgtimeonpage</cref>
+        /// </see>
+        public static readonly AnalyticsMetric AvgTimeOnPage = new AnalyticsMetric("ga:avgTimeOnPage", GroupPageTracking);
+
+        /// <summary>
+        /// Gets the percentage of exits from your property that occurred out of the total page views (type: time).
+        /// </summary>
+        /// <see>
+        ///     <cref>https://developers.google.com/analytics/devguides/reporting/core/dimsmets#view=detail&amp;group=page_tracking&amp;jump=ga_exitrate</cref>
+        /// </see>
+        public static readonly AnalyticsMetric ExitRate = new AnalyticsMetric("ga:exitRate", GroupPageTracking);
 
         #endregion
 
@@ -218,16 +437,21 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         public static readonly AnalyticsMetric ActiveVisitors = new AnalyticsMetric("ga:activeVisitors");
 
         #endregion
+
         // ReSharper restore InconsistentNaming
+
         #endregion
 
         #region Static properties
 
+        /// <summary>
+        /// Gets an array of all metrics.
+        /// </summary>
         public static AnalyticsMetric[] Values {
             get {
                 return (
                     from property in typeof(AnalyticsMetric).GetFields(BindingFlags.Public | BindingFlags.Static)
-                    select (AnalyticsMetric) property.GetValue(null)
+                    select (AnalyticsMetric)property.GetValue(null)
                 ).ToArray();
             }
         }
@@ -237,9 +461,19 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         #region Member properties
 
         /// <summary>
-        /// The name of the dimension.
+        /// Gets the name of the metric.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the group of the metric.
+        /// </summary>
+        public string GroupName { get; private set; }
+
+        /// <summary>
+        /// Gets whether the metric is obsolete.
+        /// </summary>
+        public bool IsObsolete { get; private set; }
 
         #endregion
 
@@ -247,6 +481,17 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         private AnalyticsMetric(string name) {
             Name = name;
+        }
+
+        private AnalyticsMetric(string name, string groupName) {
+            Name = name;
+            GroupName = groupName;
+        }
+
+        private AnalyticsMetric(string name, string groupName, bool obsolete) {
+            Name = name;
+            GroupName = groupName;
+            IsObsolete = obsolete;
         }
 
         #endregion
@@ -290,10 +535,21 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Operator overloading
 
+        /// <summary>
+        /// Gets a reference to the metric with the specified <code>name</code>. If an unknown
+        /// metric is specified, a new instance of <code>AnalyticsMetric</code> will be initialized.
+        /// </summary>
+        /// <param name="name">The name of the metric.</param>
         public static implicit operator AnalyticsMetric(string name) {
-            return Parse(name);
+            AnalyticsMetric metric;
+            return TryParse(name, out metric) ? metric : new AnalyticsMetric(name);
         }
 
+        /// <summary>
+        /// Initializes a new instance of <code>AnalyticsMetricCollection</code> containing both <code>left</code> and <code>right</code>.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         public static AnalyticsMetricCollection operator +(AnalyticsMetric left, AnalyticsMetric right) {
             return new AnalyticsMetricCollection(left, right);
         }
