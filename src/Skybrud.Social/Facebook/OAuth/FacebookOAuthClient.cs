@@ -46,6 +46,11 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// </summary>
         public string Version { get; set; }
 
+        /// <summary>
+        /// Gets or sets the locale of the client.
+        /// </summary>
+        public string Locale { get; set; }
+
         #region Endpoints
 
         /// <summary>
@@ -345,6 +350,12 @@ namespace Skybrud.Social.Facebook.OAuth {
             // specified in the query string
             if (!query.ContainsKey("access_token") && !String.IsNullOrWhiteSpace(AccessToken)) {
                 query.Add("access_token", AccessToken);
+            }
+
+            // Append the locale to the query string if present in the client and not already
+            // specified in the query string
+            if (!query.ContainsKey("locale") && !String.IsNullOrWhiteSpace(Locale)) {
+                query.Add("locale", Locale);
             }
 
             // Append the query string to the URL
