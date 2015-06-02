@@ -4,19 +4,41 @@ using Skybrud.Social.Instagram.OAuth;
 
 namespace Skybrud.Social.Instagram {
     
+    /// <summary>
+    /// Class representing the object oriented implementation of the Instagram API.
+    /// </summary>
     public class InstagramService {
 
         #region Properties
 
         /// <summary>
-        /// The internal OAuth client for communication with the Instagram API.
+        /// Gets a reference to the internal OAuth client for communication with the Instagram API.
         /// </summary>
         public InstagramOAuthClient Client { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the locations endpoint.
+        /// </summary>
         public InstagramLocationsEndpoint Locations { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the media endpoint.
+        /// </summary>
         public InstagramMediaEndpoint Media { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the relationships endpoint.
+        /// </summary>
         public InstagramRelationshipsEndpoint Relationships { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the tags endpoint.
+        /// </summary>
         public InstagramTagsEndpoint Tags { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the users endpoint.
+        /// </summary>
         public InstagramUsersEndpoint Users { get; private set; }
 
         #endregion
