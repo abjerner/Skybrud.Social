@@ -193,7 +193,8 @@ namespace Skybrud.Social.Json {
         }
 
         public T GetEnum<T>(string name, T fallback) where T : struct {
-            return SocialUtils.ParseEnum(GetString(name), fallback);
+            string value = GetString(name);
+            return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.ParseEnum(GetString(name), fallback);
         }
 
         public void SetInt(string name, int value) {
