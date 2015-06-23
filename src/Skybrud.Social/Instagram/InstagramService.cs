@@ -58,7 +58,7 @@ namespace Skybrud.Social.Instagram {
         #region Static methods
 
         /// <summary>
-        /// Initialize a new service instance from the specified access token. Internally a new OAuth client will be
+        /// Initializes a new service instance from the specified access token. Internally a new OAuth client will be
         /// initialized from the access token.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
@@ -67,9 +67,22 @@ namespace Skybrud.Social.Instagram {
                 Client = new InstagramOAuthClient(accessToken)
             };
         }
+        
+        /// <summary>
+        /// Initializes a new service instance from the specified access token. Internally a new OAuth client will be
+        /// initialized from the client ID.
+        /// </summary>
+        /// <param name="clientId">The access token.</param>
+        public static InstagramService CreateFromClientId(string clientId) {
+            return new InstagramService {
+                Client = new InstagramOAuthClient {
+                    ClientId = clientId
+                }
+            };
+        }
 
         /// <summary>
-        /// Initialize a new service instance from the specified OAuth client.
+        /// Initializes a new service instance from the specified OAuth client.
         /// </summary>
         /// <param name="client">The OAuth client.</param>
         public static InstagramService CreateFromOAuthClient(InstagramOAuthClient client) {
