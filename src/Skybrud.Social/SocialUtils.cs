@@ -298,11 +298,11 @@ namespace Skybrud.Social {
             // Parse the enum
             foreach (string name in Enum.GetNames(typeof(T))) {
                 if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
-                    return (T)Enum.Parse(typeof(T), str, true);
+                    return (T) Enum.Parse(typeof(T), str, true);
                 }
             }
 
-            throw new Exception("Unable to parse enum of type " + typeof(T).Name);
+            throw new Exception("Unable to parse enum of type " + typeof(T).Name + " from value \"" + str + "\"");
 
         }
         

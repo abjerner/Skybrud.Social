@@ -24,6 +24,9 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
 
         #region Member methods
 
+        /// <see>
+        ///     <cref>https://dev.twitter.com/rest/reference/get/account/verify_credentials</cref>
+        /// </see>
         public SocialHttpResponse VerifyCredentials() {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/account/verify_credentials.json");
         }
