@@ -156,6 +156,10 @@ namespace Skybrud.Social.Json {
             return GetValue<string>(name);
         }
 
+        public T GetString<T>(string name, Func<string, T> func) {
+            return func(GetValue<string>(name));
+        }
+
         public DateTime GetDateTime(string name) {
             return GetValue<DateTime>(name);
         }
