@@ -297,6 +297,15 @@ namespace Skybrud.Social.OAuth {
         /// Makes a signed GET request to the specified <code>url</code>.
         /// </summary>
         /// <param name="url">The URL to call.</param>
+        /// <param name="queryString">The query string.</param>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString queryString) {
+            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, queryString == null ? null : queryString.NameValueCollection, null));
+        }
+
+        /// <summary>
+        /// Makes a signed GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
         /// <param name="options">The options for the call to the API.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
             NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);

@@ -458,6 +458,13 @@
     <Compile Include="Http\SocialHttpResponse.cs" />
     <Compile Include="Http\SocialQueryString.cs" />
     <Compile Include="SocialUtils.cs" />
+    <Compile Include="Twitter\Endpoints\TwitterListsEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\TwitterFavoritesEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterListsRawEndpoint.cs" />
+    <Compile Include="Twitter\Endpoints\Raw\TwitterFavoritesRawEndpoint.cs" />
+    <Compile Include="Twitter\Enums\TwitterListMode.cs" />
+    <Compile Include="Twitter\Objects\Lists\TwitterList.cs" />
+    <Compile Include="Twitter\Options\Favorites\TwitterGetFavoritesOptions.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterSearchRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterSearchEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterFollowersEndpoint.cs" />
@@ -505,6 +512,11 @@
     <Compile Include="Twitter\Objects\TwitterStatusMessage.cs" />
     <Compile Include="Twitter\Objects\TwitterUser.cs" />
     <Compile Include="Twitter\Objects\TwitterUserCollection.cs" />
+    <Compile Include="Twitter\Options\Lists\TwitterGetMembersOptions.cs" />
+    <Compile Include="Twitter\Options\Lists\TwitterGetMembershipsOptions.cs" />
+    <Compile Include="Twitter\Options\Lists\TwitterGetOwnershipsOptions.cs" />
+    <Compile Include="Twitter\Options\Lists\TwitterGetListsOptions.cs" />
+    <Compile Include="Twitter\Options\Lists\TwitterGetListOptions.cs" />
     <Compile Include="Twitter\Options\TwitterPostStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUserTimelineOptions.cs" />
     <Compile Include="Twitter\Options\TwitterFollowersIdsOptions.cs" />
@@ -516,6 +528,8 @@
     <Compile Include="Twitter\Options\TwitterReverseGeocodeOptions.cs" />
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterUsersSearchOptions.cs" />
+    <Compile Include="Twitter\Responses\Lists\TwitterListResponse.cs" />
+    <Compile Include="Twitter\Responses\Lists\TwitterListsResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterTimelineResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterPlaceResponse.cs" />
     <Compile Include="Twitter\Responses\TwitterResponse.cs" />
