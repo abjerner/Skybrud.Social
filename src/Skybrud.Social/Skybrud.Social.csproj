@@ -296,6 +296,8 @@
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
     <Compile Include="Interfaces\IGetOptions.cs" />
     <Compile Include="Interfaces\IPostOptions.cs" />
+    <Compile Include="Json\Extensions\JObject\JArrayExtensions.cs" />
+    <Compile Include="Json\Extensions\JObject\JObjectExtensions.cs" />
     <Compile Include="SocialJsonArray.cs" />
     <Compile Include="Facebook\Exceptions\FacebookException.cs" />
     <Compile Include="Facebook\FacebookScope.cs" />
