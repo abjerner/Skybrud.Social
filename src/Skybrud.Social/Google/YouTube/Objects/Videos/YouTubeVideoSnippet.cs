@@ -40,6 +40,11 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
         /// </summary>
         public string ChannelTitle { get; private set; }
 
+        /// <summary>
+        /// Gets an array with all tags of the video.
+        /// </summary>
+        public string[] Tags { get; private set; }
+
         public string CategoryId { get; private set; }
 
         /// <summary>
@@ -72,6 +77,9 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
             if (!Enum.TryParse(strBroadcast, true, out broadcast)) {
                 throw new Exception("Unknown value for liveBroadcastContent \"" + strBroadcast + "\" - please create an issue so it can be fixed https://github.com/abjerner/Skybrud.Social/issues/new");
             }
+
+            // Get the array of tags (may not be present)
+            JsonArray tags = obj.GetArray("tags");
             
             // Initialize the snippet object
             YouTubeVideoSnippet snippet = new YouTubeVideoSnippet(obj) {
@@ -81,6 +89,7 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
                 Description = obj.GetString("description"),
                 Thumbnails = obj.GetObject("thumbnails", YouTubeVideoThumbnails.Parse),
                 ChannelTitle = obj.GetString("channelTitle"),
+                Tags = tags == null ? new string[0] : obj.GetArray("tags").Cast<string>(),
                 CategoryId = obj.GetString("categoryId"),
                 LiveBroadcastContent = broadcast
             };
