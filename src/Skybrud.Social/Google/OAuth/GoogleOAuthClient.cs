@@ -59,6 +59,11 @@ namespace Skybrud.Social.Google.OAuth {
         public string AccessToken { get; set; }
 
         /// <summary>
+        /// Gets or sets the server key.
+        /// </summary>
+        public string ServerKey { get; set; }
+
+        /// <summary>
         /// Gets a reference to the raw Analytics endpoint.
         /// </summary>
         public AnalyticsRawEndpoint Analytics {
@@ -224,11 +229,15 @@ namespace Skybrud.Social.Google.OAuth {
             // Initialize a new NameValueCollection if NULL
             if (query == null) query = new NameValueCollection();
 
-            // Set the access token in the query string
-            // TODO: Specify access token in HTTP header instead
-            query.Set("access_token", AccessToken);
+            // Append the access token or server if specified
+            if (!String.IsNullOrWhiteSpace(AccessToken)) {
+                // TODO: Specify access token in HTTP header instead
+                query.Set("access_token", AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(ServerKey)) {
+                query.Set("key", ServerKey);
+            }
 
-            // Make a call to the server
+            // Make a call to the API
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
 
         }
@@ -240,8 +249,19 @@ namespace Skybrud.Social.Google.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options for the call to the API.</param>
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
+
+            // Generate a NameValueCollection for the query string
             NameValueCollection query = options.GetQueryString().NameValueCollection;
-            query.Set("access_token", AccessToken);
+
+            // Append the access token or server if specified
+            if (!String.IsNullOrWhiteSpace(AccessToken)) {
+                // TODO: Specify access token in HTTP header instead
+                query.Set("access_token", AccessToken);
+            } else if (!String.IsNullOrWhiteSpace(ServerKey)) {
+                query.Set("key", ServerKey);
+            }
+
+            // Make a call to the API
             return SocialHttpResponse.GetFromWebResponse(SocialUtils.DoHttpGetRequest(url, query));
 
         }
