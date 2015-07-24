@@ -1,11 +1,13 @@
 using System;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.OAuth;
-using Skybrud.Social.Google.YouTube;
 using Skybrud.Social.Google.YouTube.Endpoints;
 
 namespace Skybrud.Social.Google {
 
+    /// <summary>
+    /// Class working as an entry point to the Google APIs supported by Skybrud.Social.
+    /// </summary>
     public class GoogleService {
 
         #region Private fields
@@ -40,12 +42,16 @@ namespace Skybrud.Social.Google {
 
         #region Constructors
 
-        private GoogleService() {}
+        private GoogleService() { }
 
         #endregion
 
         #region Member methods
 
+        /// <summary>
+        /// Gets information about the authenticated user.
+        /// </summary>
+        /// <returns></returns>
         public GoogleUserInfo GetUserInfo() {
             return GoogleUserInfo.ParseJson(Client.GetUserInfo());
         }

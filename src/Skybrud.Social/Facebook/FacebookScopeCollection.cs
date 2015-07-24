@@ -5,7 +5,7 @@ using System.Linq;
 namespace Skybrud.Social.Facebook {
     
     /// <summary>
-    /// Class representing a collection of scopes for the facebook Graph API.
+    /// Class representing a collection of scopes for the Facebook Graph API.
     /// </summary>
     public class FacebookScopeCollection {
 
