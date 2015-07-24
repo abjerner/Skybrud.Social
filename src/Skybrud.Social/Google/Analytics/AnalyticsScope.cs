@@ -1,9 +1,10 @@
+using System;
 using Skybrud.Social.Google.OAuth;
 
 namespace Skybrud.Social.Google.Analytics {
     
     /// <summary>
-    /// Scopes related to the Google Analytics API.
+    /// Class representing a scope in the Google Analytics API.
     /// </summary>
     public class AnalyticsScope : GoogleScope {
         
@@ -12,49 +13,48 @@ namespace Skybrud.Social.Google.Analytics {
         /// <summary>
         /// Read-only access to the Analytics API.
         /// </summary>
-        public static readonly AnalyticsScope Readonly = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics.readonly",
-            "Read-only access to the Analytics API."
-        );
+        [Obsolete("Use AnalyticsScopes.Readonly instead.")]
+        public static readonly AnalyticsScope Readonly = AnalyticsScopes.Readonly;
 
         /// <summary>
         /// Write access to the Analytics API.
         /// </summary>
-        public static readonly AnalyticsScope Write = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics",
-            "Write access to the Analytics API."
-        );
+        [Obsolete("Use AnalyticsScopes.Write instead.")]
+        public static readonly AnalyticsScope Write = AnalyticsScopes.Write;
 
         /// <summary>
         /// Edit Google Analytics management entities.
         /// </summary>
-        public static readonly AnalyticsScope Edit = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics.edit",
-            "Edit Google Analytics management entities."
-        );
+        [Obsolete("Use AnalyticsScopes.Edit instead.")]
+        public static readonly AnalyticsScope Edit = AnalyticsScopes.Edit;
 
         /// <summary>
         /// View and manage user permissions for Analytics accounts.
         /// </summary>
-        public static readonly AnalyticsScope ManageUsers = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics.readonly",
-            "View and manage user permissions for Analytics accounts."
-        );
+        [Obsolete("Use AnalyticsScopes.ManageUsers instead.")]
+        public static readonly AnalyticsScope ManageUsers = AnalyticsScopes.ManageUsers;
 
         /// <summary>
         /// View Google Analytics user permissions.
         /// </summary>
-        public static readonly AnalyticsScope ManageUsersReadonly = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics.manage.users.readonly",
-            "View Google Analytics user permissions."
-        );
+        [Obsolete("Use AnalyticsScopes.ManageUsersReadonly instead.")]
+        public static readonly AnalyticsScope ManageUsersReadonly = AnalyticsScopes.ManageUsersReadonly;
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new scope with the specified <code>name</code>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
         public AnalyticsScope(string name) : base(name) { }
 
+        /// <summary>
+        /// Initializes a new scope with the specified <code>name</code> and <code>description</code>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        /// <param name="description">The description of the scope.</param>
         public AnalyticsScope(string name, string description) : base(name, description) { }
 
         #endregion

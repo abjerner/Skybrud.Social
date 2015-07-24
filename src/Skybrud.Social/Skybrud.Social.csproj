@@ -220,9 +220,11 @@
     <Compile Include="GitHub\OAuth\GitHubOAuthAccessTokenResponse.cs" />
     <Compile Include="GitHub\Objects\GitHubUser.cs" />
     <Compile Include="GitHub\Objects\GitHubUserType.cs" />
+    <Compile Include="Google\Analytics\AnalyticsScopes.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
     <Compile Include="Google\Exceptions\GoogleOAuthException.cs" />
     <Compile Include="Google\OAuth\GoogleScopeCollection.cs" />
+    <Compile Include="Google\OAuth\GoogleScopes.cs" />
     <Compile Include="Google\YouTube\Endpoints\YouTubeVideosEndpoint.cs" />
     <Compile Include="Google\YouTube\Endpoints\Raw\YouTubeVideosRawEndpoint.cs" />
     <Compile Include="Google\YouTube\Endpoints\YouTubePlaylistItemsEndpoint.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Google\YouTube\Options\YouTubeChannelListOptions.cs" />
     <Compile Include="Google\YouTube\Responses\YouTubeChannelListResponse.cs" />
     <Compile Include="Google\YouTube\Responses\YouTubeResponse.cs" />
+    <Compile Include="Google\YouTube\YouTubeScopes.cs" />
     <Compile Include="Http\PostData\ISocialDataValue.cs" />
     <Compile Include="Http\PostData\SocialPostFileValue.cs" />
     <Compile Include="Http\PostData\SocialPostValue.cs" />

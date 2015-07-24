@@ -1,7 +1,14 @@
+using System;
 using Skybrud.Social.Google.OAuth;
 
 namespace Skybrud.Social.Google.YouTube {
     
+    /// <summary>
+    /// Class representing a scope in the YouTube API.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps#Obtaining_Access_Tokens</cref>
+    /// </see>
     public class YouTubeScope : GoogleScope {
 
         #region Readonly properties
@@ -9,41 +16,42 @@ namespace Skybrud.Social.Google.YouTube {
         /// <summary>
         /// Manage your YouTube account.
         /// </summary>
-        public static readonly YouTubeScope Manage = new YouTubeScope(
-            "https://www.googleapis.com/auth/youtube",
-            "Manage your YouTube account."
-        );
+        [Obsolete("Use YouTubeScopes.Manage instead.")]
+        public static readonly YouTubeScope Manage = YouTubeScopes.Manage;
 
         /// <summary>
         /// View your YouTube account.
         /// </summary>
-        public static readonly YouTubeScope Readonly = new YouTubeScope(
-            "https://www.googleapis.com/auth/youtube.readonly",
-            "View your YouTube account."
-        );
+        [Obsolete("Use YouTubeScopes.Readonly instead.")]
+        public static readonly YouTubeScope Readonly = YouTubeScopes.Readonly;
 
         /// <summary>
         /// Upload YouTube videos and manage your YouTube videos.
         /// </summary>
-        public static readonly YouTubeScope Upload = new YouTubeScope(
-            "https://www.googleapis.com/auth/youtube.upload",
-            "Upload YouTube videos and manage your YouTube videos."
-        );
+        [Obsolete("Use YouTubeScopes.Upload instead.")]
+        public static readonly YouTubeScope Upload = YouTubeScopes.Upload;
 
         /// <summary>
         /// Retrieve the auditDetails part in a channel resource.
         /// </summary>
-        public static readonly YouTubeScope PartnerChannelAudit = new YouTubeScope(
-            "https://www.googleapis.com/auth/youtubepartner-channel-audit",
-            "Retrieve the auditDetails part in a channel resource."
-        );
+        [Obsolete("Use YouTubeScopes.PartnerChannelAudit instead.")]
+        public static readonly YouTubeScope PartnerChannelAudit = YouTubeScopes.PartnerChannelAudit;
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new scope with the specified <code>name</code>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
         public YouTubeScope(string name) : base(name) { }
 
+        /// <summary>
+        /// Initializes a new scope with the specified <code>name</code> and <code>description</code>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        /// <param name="description">The description of the scope.</param>
         public YouTubeScope(string name, string description) : base(name, description) { }
 
         #endregion
