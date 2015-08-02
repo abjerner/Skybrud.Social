@@ -9,6 +9,8 @@ namespace Skybrud.Social.Google.Analytics.Objects {
     /// </summary>
     public class AnalyticsProfile {
 
+        // TODO: Move class to the "Skybrud.Social.Google.Analytics.Objects.Profiles" namespace for v1.0
+
         #region Properties
 
         /// <summary>

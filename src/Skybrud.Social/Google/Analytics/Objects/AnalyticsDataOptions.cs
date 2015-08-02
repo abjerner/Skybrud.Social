@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 
 namespace Skybrud.Social.Google.Analytics.Objects {
 
+    [Obsolete]
     public class AnalyticsDataOptions {
 
         #region Private fields

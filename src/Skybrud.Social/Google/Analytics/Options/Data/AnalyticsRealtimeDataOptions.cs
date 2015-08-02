@@ -1,10 +1,14 @@
 using System;
-using System.Collections.Specialized;
+using Skybrud.Social.Google.Analytics.Objects;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Google.Analytics.Objects {
+namespace Skybrud.Social.Google.Analytics.Options.Data {
 
-    [Obsolete]
-    public class AnalyticsRealtimeDataOptions {
+    /// <summary>
+    /// Class representing the options for getting realtime data from the Analytics API.
+    /// </summary>
+    public class AnalyticsRealtimeDataOptions : IGetOptions {
 
         #region Private fields
 
@@ -14,6 +18,11 @@ namespace Skybrud.Social.Google.Analytics.Objects {
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the ID of the profile.
+        /// </summary>
+        public string ProfileId { get; set; }
 
         /// <summary>
         /// Gets or sets the metrics.
@@ -50,29 +59,42 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance with default options.
+        /// </summary>
         public AnalyticsRealtimeDataOptions() {
             MaxResults = 1000;
+        }
+
+        /// <summary>
+        /// Initializes a new instance with default options and based on the specified <code>profile</code>.
+        /// </summary>
+        /// <param name="profile">The profile.</param>
+        public AnalyticsRealtimeDataOptions(AnalyticsProfile profile) : this() {
+            if (profile == null) throw new ArgumentNullException("profile");
+            ProfileId = profile.Id;
+        }
+
+        /// <summary>
+        /// Initializes a new instance with default options and based on the profile with the specified <code>profileId</code>.
+        /// </summary>
+        /// <param name="profileId">The ID of the profile.</param>
+        public AnalyticsRealtimeDataOptions(string profileId) : this() {
+            ProfileId = profileId;
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Generates a NameValueCollection with all present arguments.
-        /// </summary>
-        /// <param name="profileId">The ID of the profile.</param>
-        /// <param name="accessToken">A valid access token.</param>
-        /// <returns></returns>
-        public NameValueCollection ToNameValueCollection(string profileId, string accessToken) {
-            NameValueCollection query = new NameValueCollection();
-            query.Add("ids", (profileId.StartsWith("ga:") ? profileId : "ga:" + profileId));
+        public SocialQueryString GetQueryString() {
+            SocialQueryString query = new SocialQueryString();
+            if (!String.IsNullOrWhiteSpace(ProfileId)) query.Add("ids", (ProfileId.StartsWith("ga:") ? ProfileId : "ga:" + ProfileId));
             query.Add("metrics", Metrics == null ? "" : Metrics.ToString());
             if (Dimensions != null && Dimensions.Count > 0) query.Add("dimensions", Dimensions == null ? "" : Dimensions.ToString());
             if (Filters.HasBlocks) query.Add("filters", Filters.ToString());
             if (Sorting.HasFields) query.Add("sort", Sorting.ToString());
             if (MaxResults > 0 && MaxResults != 1000) query.Add("max-results", MaxResults + "");
-            query.Add("access_token", accessToken);
             return query;
         }
 

@@ -1,22 +1,56 @@
 using System;
 using System.Collections.Specialized;
+using Skybrud.Social.Google.Analytics.Endpoints.Raw;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.OAuth;
 
 namespace Skybrud.Social.Google.Analytics {
 
+    /// <summary>
+    /// Raw implementation of the Analytics endpoint.
+    /// </summary>
     public class AnalyticsRawEndpoint {
+
+        // TODO: Move class to the "Skybrud.Social.Google.Analytics.Endpoints.Raw" namespace for v1.0
 
         protected const string ManagementUrl = "https://www.googleapis.com/analytics/v3/management/";
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the Google OAuth client.
+        /// </summary>
         public GoogleOAuthClient Client { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw management endpoint.
+        /// </summary>
+        public AnalyticsManagementRawEndpoint Management { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw data endpoint.
+        /// </summary>
+        public AnalyticsDataRawEndpoint Data { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         internal AnalyticsRawEndpoint(GoogleOAuthClient client) {
             Client = client;
+            Management = new AnalyticsManagementRawEndpoint(client);
+            Data = new AnalyticsDataRawEndpoint(client);
         }
+
+        #endregion
 
         #region Accounts
 
+        /// <summary>
+        /// Gets a list of Analytics accounts of the authenticated user.
+        /// </summary>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        [Obsolete("Use the GetAccounts method in the new Management endpoint. See release notes for v0.9.4 for further information.")]
         public string GetAccounts() {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://www.googleapis.com/analytics/v3/management/accounts", new NameValueCollection {
                 {"access_token", Client.AccessToken}
@@ -27,14 +61,17 @@ namespace Skybrud.Social.Google.Analytics {
 
         #region Web properties
 
+        [Obsolete("Use the GetWebProperties method in the new Management endpoint. See release notes for v0.9.4 for further information.")]
         public string GetWebProperties(int maxResults = 0, int startIndex = 0) {
             return GetWebProperties("~all", maxResults, startIndex);
         }
 
+        [Obsolete("Use the GetWebProperties method in the new Management endpoint. See release notes for v0.9.4 for further information.")]
         public string GetWebProperties(AnalyticsAccount account, int maxResults = 0, int startIndex = 0) {
             return GetWebProperties(account.Id, maxResults, startIndex);
         }
 
+        [Obsolete("Use the GetWebProperties method in the new Management endpoint. See release notes for v0.9.4 for further information.")]
         public string GetWebProperties(string accountId, int maxResults = 0, int startIndex = 0) {
 
             NameValueCollection query = new NameValueCollection();
@@ -142,10 +179,12 @@ namespace Skybrud.Social.Google.Analytics {
 
         #region Data
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
             return GetData(profile.Id, startDate, endDate, metrics, dimensions);
         }
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(string profileId, DateTime startDate, DateTime endDate, string[] metrics, string[] dimensions) {
             return GetData(profileId, new AnalyticsDataOptions {
                 StartDate = startDate,
@@ -155,10 +194,12 @@ namespace Skybrud.Social.Google.Analytics {
             });
         }
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(AnalyticsProfile profile, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
             return GetData(profile.Id, startDate, endDate, metrics, dimensions);
         }
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(string profileId, DateTime startDate, DateTime endDate, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
             return GetData(profileId, new AnalyticsDataOptions {
                 StartDate = startDate,
@@ -168,10 +209,12 @@ namespace Skybrud.Social.Google.Analytics {
             });
         }
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(AnalyticsProfile profile, AnalyticsDataOptions options) {
             return GetData(profile.Id, options);
         }
 
+        [Obsolete("Use the GetData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetData(string profileId, AnalyticsDataOptions options) {
 
             // Validate arguments
@@ -194,6 +237,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// </summary>
         /// <param name="profile">The Analytics profile to gather realtime data from.</param>
         /// <param name="metrics">The metrics collection of what data to return.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(AnalyticsProfile profile, AnalyticsMetricCollection metrics) {
             return GetRealtimeData(profile.Id, metrics);
         }
@@ -204,6 +248,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// <param name="profile">The Analytics profile to gather realtime data from.</param>
         /// <param name="metrics">The metrics collection of what data to return.</param>
         /// <param name="dimensions">The dimensions collection of what data to return.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(AnalyticsProfile profile, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
             return GetRealtimeData(profile.Id, metrics, dimensions);
         }
@@ -213,6 +258,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// </summary>
         /// <param name="profile">The Analytics profile to gather realtime data from.</param>
         /// <param name="options">The options specifying the query.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(AnalyticsProfile profile, AnalyticsRealtimeDataOptions options) {
             return GetRealtimeData(profile.Id, options);
         }
@@ -222,6 +268,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// </summary>
         /// <param name="profileId">The ID of the Analytics profile.</param>
         /// <param name="metrics">The metrics collection of what data to return.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(string profileId, AnalyticsMetricCollection metrics) {
             return GetRealtimeData(profileId, new AnalyticsRealtimeDataOptions {
                 Metrics = metrics
@@ -234,6 +281,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// <param name="profileId">The ID of the Analytics profile.</param>
         /// <param name="metrics">The metrics collection of what data to return.</param>
         /// <param name="dimensions">The dimensions collection of what data to return.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(string profileId, AnalyticsMetricCollection metrics, AnalyticsDimensionCollection dimensions) {
             return GetRealtimeData(profileId, new AnalyticsRealtimeDataOptions {
                 Metrics = metrics,
@@ -246,6 +294,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// </summary>
         /// <param name="profileId">The ID of the Analytics profile.</param>
         /// <param name="options">The options specifying the query.</param>
+        [Obsolete("Use the GetRealtimeData method in the new Data endpoint. See release notes for v0.9.4 for further information.")]
         public string GetRealtimeData(string profileId, AnalyticsRealtimeDataOptions options) {
             
             // Validate arguments
