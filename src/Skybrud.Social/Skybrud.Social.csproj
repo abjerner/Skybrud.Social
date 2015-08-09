@@ -316,6 +316,7 @@
     <Compile Include="Instagram\Options\Users\InstagramUserLikedMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
+    <Compile Include="Instagram\Responses\InstagramSearchTagsResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLikedMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />

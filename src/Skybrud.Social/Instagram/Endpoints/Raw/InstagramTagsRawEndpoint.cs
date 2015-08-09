@@ -12,6 +12,9 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
         public InstagramOAuthClient Client { get; private set; }
 
         #endregion

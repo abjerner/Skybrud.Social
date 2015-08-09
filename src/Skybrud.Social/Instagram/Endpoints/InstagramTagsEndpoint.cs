@@ -8,6 +8,9 @@ namespace Skybrud.Social.Instagram.Endpoints {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the parent Instagram service.
+        /// </summary>
         public InstagramService Service { get; private set; }
 
         /// <summary>
@@ -58,7 +61,13 @@ namespace Skybrud.Social.Instagram.Endpoints {
             return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(tag, count, minTagId, maxTagId));
         }
 
-        // TODO: Implement Search() method
+        /// <summary>
+        /// Search for tags by name. Results are ordered first as an exact match, then by popularity. Short tags will be treated as exact matches.
+        /// </summary>
+        /// <param name="tag">A valid tag name without a leading #. (eg. snowy, nofilter)</param>
+        public InstagramSearchTagsResponse Search(string tag) {
+            return InstagramSearchTagsResponse.ParseResponse(Raw.Search(tag));
+        }
 
         #endregion
 
