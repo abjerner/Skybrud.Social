@@ -312,9 +312,11 @@
     <Compile Include="Instagram\Options\Relationships\InstagramFollowsOptions.cs" />
     <Compile Include="Instagram\Options\Relationships\InstagramFollowedByOptions.cs" />
     <Compile Include="Instagram\Options\Tags\InstagramTagRecentMediaOptions.cs" />
+    <Compile Include="Instagram\Options\Users\InstagramUserFeedOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserLikedMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
     <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
+    <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLikedMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
@@ -449,7 +451,7 @@
     <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramUserFeedResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
     <Compile Include="SocialJsonObject.cs" />
     <Compile Include="Interfaces\ILocation.cs" />

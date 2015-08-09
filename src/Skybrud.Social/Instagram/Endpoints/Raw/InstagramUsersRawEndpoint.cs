@@ -38,6 +38,23 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         }
 
         /// <summary>
+        /// Gets the feed of the authenticated user.
+        /// </summary>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public SocialHttpResponse GetUserFeed() {
+            return GetUserFeed(new InstagramUserFeedOptions());
+        }
+
+        /// <summary>
+        /// Gets the feed of the authenticated user.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public SocialHttpResponse GetUserFeed(InstagramUserFeedOptions options) {
+            return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/self/feed", options);
+        }
+
+        /// <summary>
         /// Gets the most recent media published by the user with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier of the user.</param>

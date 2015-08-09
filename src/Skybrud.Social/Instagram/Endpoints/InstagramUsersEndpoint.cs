@@ -45,6 +45,22 @@ namespace Skybrud.Social.Instagram.Endpoints {
         }
 
         /// <summary>
+        /// Gets the feed of the authenticated user.
+        /// </summary>
+        public InstagramUserFeedResponse GetUserFeed() {
+            return GetUserFeed(new InstagramUserFeedOptions());
+        }
+
+        /// <summary>
+        /// Gets the feed of the authenticated user.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public InstagramUserFeedResponse GetUserFeed(InstagramUserFeedOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return InstagramUserFeedResponse.ParseResponse(Raw.GetUserFeed(options));
+        }
+
+        /// <summary>
         /// Gets information about the user with the specified <code>userId</code>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
