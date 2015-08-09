@@ -11,7 +11,7 @@ using Skybrud.Social.Interfaces;
 namespace Skybrud.Social.Facebook.OAuth {
 
     /// <summary>
-    /// Class for handling the raw communication with the Facebook API as well as any OAUth 2.0 communication.
+    /// Class for handling the raw communication with the Facebook API as well as any OAuth 2.0 communication.
     /// </summary>
     public class FacebookOAuthClient {
         
