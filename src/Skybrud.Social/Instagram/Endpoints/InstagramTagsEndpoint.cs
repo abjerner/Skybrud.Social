@@ -54,8 +54,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="count">Count of tagged media to return.</param>
         /// <param name="minTagId">Return media before this min_tag_id</param>
         /// <param name="maxTagId">Return media after this max_tag_id</param>
-        public InstagramRecentMediaResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null)
-        {
+        public InstagramRecentMediaResponse GetRecentMedia(string tag, int count, string minTagId = null, string maxTagId = null) {
             return InstagramRecentMediaResponse.ParseResponse(Raw.GetRecentMedia(tag, count, minTagId, maxTagId));
         }
 
