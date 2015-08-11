@@ -13,7 +13,7 @@
         /// <summary>
         /// Specifies that the user is a male.
         /// </summary>
-        Make,
+        Male,
 
         /// <summary>
         /// Specifies that the user is a female.
