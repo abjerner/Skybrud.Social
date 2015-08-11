@@ -7,23 +7,35 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Responses {
 
-    public class InstagramResponse {
+    /// <summary>
+    /// Class representing a response from the Instagram API.
+    /// </summary>
+    public class InstagramResponse : SocialResponse {
 
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
-
+        #region Properties
+        
         /// <summary>
         /// Gets information about rate limiting.
         /// </summary>
         public InstagramRateLimiting RateLimiting { get; private set; }
 
-        protected InstagramResponse(SocialHttpResponse response) {
-            Response = response;
+        #endregion
+
+        #region Constructors
+
+        protected InstagramResponse(SocialHttpResponse response) : base(response) {
             RateLimiting = InstagramRateLimiting.GetFromResponse(response);
         }
 
+        #endregion
+        
+        #region Static methods
+
+        /// <summary>
+        /// Validates the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The response to be validated.</param>
+        /// <param name="obj">The object representing the response object.</param>
         public static void ValidateResponse(SocialHttpResponse response, JsonObject obj) {
 
             // Skip error checking if the server responds with an OK status code
@@ -41,22 +53,48 @@ namespace Skybrud.Social.Instagram.Responses {
 
         }
 
+        #endregion
+
     }
 
+    /// <summary>
+    /// Class representing a response from the Instagram API.
+    /// </summary>
     public class InstagramResponse<T> : InstagramResponse {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the body of the response.
+        /// </summary>
         public T Body { get; protected set; }
+
+        #endregion
+
+        #region Constructors
 
         protected InstagramResponse(SocialHttpResponse response) : base(response) { }
 
+        #endregion
+
     }
 
+    /// <summary>
+    /// Class representing the response body of a response from the Instagram API.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class InstagramResponseBody<T> : SocialJsonObject {
 
         #region Properties
 
+        /// <summary>
+        /// Gets meta data about the response.
+        /// </summary>
         public InstagramMetaData Meta { get; private set; }
         
+        /// <summary>
+        /// Gets the data of the response.
+        /// </summary>
         public T Data { get; protected set; }
 
         #endregion

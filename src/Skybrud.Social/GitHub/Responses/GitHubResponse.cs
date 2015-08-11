@@ -2,13 +2,14 @@
 using System.Net;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
-using Skybrud.Social.Instagram.Exceptions;
-using Skybrud.Social.Instagram.Objects;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
-    public abstract class GitHubResponse {
+    /// <summary>
+    /// Class representing a response from the GitHub API.
+    /// </summary>
+    public abstract class GitHubResponse : SocialResponse {
 
         #region Properties
 
@@ -28,26 +29,24 @@ namespace Skybrud.Social.GitHub.Responses {
         /// </summary>
         public DateTime RateLimitReset { get; private set; }
 
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
-
         #endregion
 
         #region Constructor
 
-        protected GitHubResponse(SocialHttpResponse response) {
+        protected GitHubResponse(SocialHttpResponse response) : base(response) {
             RateLimit = Int32.Parse(response.Headers["X-RateLimit-Limit"]);
             RateLimitRemaining = Int32.Parse(response.Headers["X-RateLimit-Remaining"]);
             RateLimitReset = SocialUtils.GetDateTimeFromUnixTime(response.Headers["X-RateLimit-Reset"]);
-            Response = response;
         }
 
         #endregion
 
         #region Static methods
-        
+
+        /// <summary>
+        /// Validates the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
 
             // Skip error checking if the server responds with an OK status code
@@ -67,11 +66,25 @@ namespace Skybrud.Social.GitHub.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing a response from the GitHub API.
+    /// </summary>
     public class GitHubResponse<T> : GitHubResponse {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the body of the response.
+        /// </summary>
         public T Body { get; protected set; }
 
+        #endregion
+
+        #region Constructors
+
         protected GitHubResponse(SocialHttpResponse response) : base(response) { }
+
+        #endregion
 
     }
 

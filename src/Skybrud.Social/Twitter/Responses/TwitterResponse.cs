@@ -6,14 +6,12 @@ using Skybrud.Social.Twitter.Objects.Common;
 
 namespace Skybrud.Social.Twitter.Responses {
 
-    public class TwitterResponse {
+    /// <summary>
+    /// Class representing a response from the Twitter API.
+    /// </summary>
+    public class TwitterResponse : SocialResponse {
 
         #region Properties
-
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
 
         /// <summary>
         /// Gets information about rate limiting.
@@ -24,8 +22,7 @@ namespace Skybrud.Social.Twitter.Responses {
 
         #region Constructors
 
-        protected TwitterResponse(SocialHttpResponse response) {
-            Response = response;
+        protected TwitterResponse(SocialHttpResponse response) : base(response) {
             RateLimiting = TwitterRateLimiting.GetFromResponse(response);
         }
 
@@ -33,6 +30,10 @@ namespace Skybrud.Social.Twitter.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Validates the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
 
             // Skip error checking if the server responds with an OK status code
@@ -60,10 +61,16 @@ namespace Skybrud.Social.Twitter.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing a response from the Twitter API.
+    /// </summary>
     public class TwitterResponse<T> : TwitterResponse {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the body of the response.
+        /// </summary>
         public T Body { get; protected set; }
 
         #endregion

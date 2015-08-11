@@ -8,16 +8,15 @@ namespace Skybrud.Social.Google.YouTube.Responses {
     /// <summary>
     /// Class representing a response from the YouTube API.
     /// </summary>
-    public class YouTubeResponse {
+    public class YouTubeResponse : SocialResponse {
 
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
+        #region Constructors
 
-        protected YouTubeResponse(SocialHttpResponse response) {
-            Response = response;
-        }
+        protected YouTubeResponse(SocialHttpResponse response) : base(response) { }
+
+        #endregion
+
+        #region Static methodssponse = response;
 
         /// <summary>
         /// Validates the specified <code>response</code>.
@@ -39,6 +38,8 @@ namespace Skybrud.Social.Google.YouTube.Responses {
             throw new YouTubeException(response, code, message);
 
         }
+
+        #endregion
 
     }
 

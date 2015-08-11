@@ -10,22 +10,11 @@ namespace Skybrud.Social.Google.Analytics.Responses {
     /// <summary>
     /// Class representing a response from the Analytics API.
     /// </summary>
-    public class AnalyticsResponse {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
-
-        #endregion
+    public class AnalyticsResponse : SocialResponse {
 
         #region Constructors
         
-        protected AnalyticsResponse(SocialHttpResponse response) {
-            Response = response;
-        }
+        protected AnalyticsResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
@@ -100,12 +89,20 @@ namespace Skybrud.Social.Google.Analytics.Responses {
     /// </summary>
     public class AnalyticsResponse<T> : AnalyticsResponse {
 
+        #region Properties
+
         /// <summary>
         /// Gets the body of the response.
         /// </summary>
         public T Body { get; protected set; }
 
+        #endregion
+
+        #region Constructors
+
         protected AnalyticsResponse(SocialHttpResponse response) : base(response) { }
+
+        #endregion
 
     }
 

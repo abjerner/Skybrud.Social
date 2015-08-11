@@ -18,22 +18,37 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public HttpWebResponse Response { get; private set; }
 
+        /// <summary>
+        /// Gets the status code returned by the server.
+        /// </summary>
         public HttpStatusCode StatusCode {
             get { return Response.StatusCode; }
         }
 
+        /// <summary>
+        /// Gets the status description returned by the server.
+        /// </summary>
         public string StatusDescription {
             get { return Response.StatusDescription; }
         }
 
+        /// <summary>
+        /// Gets the HTTP method of the request to the server.
+        /// </summary>
         public string Method {
             get { return Response.Method; }
         }
 
+        /// <summary>
+        /// Gets the content type of the request.
+        /// </summary>
         public string ContentType {
             get { return Response.ContentType; }
         }
 
+        /// <summary>
+        /// Gets a collections of headers returned by the server.
+        /// </summary>
         public WebHeaderCollection Headers {
             get { return Response.Headers; }
         }
@@ -100,6 +115,11 @@ namespace Skybrud.Social.Http {
 
         #region Static methods
 
+        /// <summary>
+        /// Creates a new instance based on the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The instance of <code>HttpWebResponse</code> to be parsed.</param>
+        /// <returns>Returns a new instance of <code>SocialHttpResponse</code> based on the specified <code>response</code>.</returns>
         public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response) {
             return response == null ? null : new SocialHttpResponse(response);
         }

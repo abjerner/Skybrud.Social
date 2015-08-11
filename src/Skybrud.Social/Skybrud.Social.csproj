@@ -298,6 +298,7 @@
     <Compile Include="Http\PostData\SocialPostValue.cs" />
     <Compile Include="Http\SocialHeaderCollection.cs" />
     <Compile Include="Http\SocialPostData.cs" />
+    <Compile Include="Http\SocialResponse.cs" />
     <Compile Include="Instagram\Objects\InstagramAccessTokenSummary.cs" />
     <Compile Include="Instagram\Objects\InstagramMetaData.cs" />
     <Compile Include="Instagram\Objects\Pagination\InstagramLikedMediaPagination.cs" />

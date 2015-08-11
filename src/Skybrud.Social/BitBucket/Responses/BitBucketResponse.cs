@@ -4,23 +4,23 @@ using Skybrud.Social.Http;
 
 namespace Skybrud.Social.BitBucket.Responses {
 
-    public class BitBucketResponse {
+    /// <summary>
+    /// Class representing a response from the BitBucket API.
+    /// </summary>
+    public class BitBucketResponse : SocialResponse {
 
-        #region Properties
+        #region Constructors
 
-        /// <summary>
-        /// Gets a reference to the underlying response.
-        /// </summary>
-        public SocialHttpResponse Response { get; private set; }
-
-        protected BitBucketResponse(SocialHttpResponse response) {
-            Response = response;
-        }
+        protected BitBucketResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Validates the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
 
             // Skip error checking if the server responds with an OK status code
@@ -35,11 +35,25 @@ namespace Skybrud.Social.BitBucket.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing a response from the BitBucket API.
+    /// </summary>
     public class BitBucketResponse<T> : BitBucketResponse {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the body of the response.
+        /// </summary>
         public T Body { get; protected set; }
 
+        #endregion
+
+        #region Constructors
+
         protected BitBucketResponse(SocialHttpResponse response) : base(response) { }
+
+        #endregion
 
     }
 
