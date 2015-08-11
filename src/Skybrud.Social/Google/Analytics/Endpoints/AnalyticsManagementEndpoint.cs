@@ -52,12 +52,26 @@ namespace Skybrud.Social.Google.Analytics.Endpoints {
         }
 
         /// <summary>
+        /// Gets a list of web properties using default options.
+        /// </summary>
+        public AnalyticsWebPropertiesResponse GetWebProperties() {
+            return GetWebProperties(new AnalyticsWebPropertiesOptions());
+        }
+
+        /// <summary>
         /// Gets a list of web properties based on the specified <code>options</code>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
         public AnalyticsWebPropertiesResponse GetWebProperties(AnalyticsWebPropertiesOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return AnalyticsWebPropertiesResponse.ParseResponse(Raw.GetWebProperties(options));
+        }
+
+        /// <summary>
+        /// Gets a list of profiles using default options.
+        /// </summary>
+        public AnalyticsProfilesResponse GetProfiles() {
+            return GetProfiles(new AnalyticsProfilesOptions());
         }
 
         /// <summary>
