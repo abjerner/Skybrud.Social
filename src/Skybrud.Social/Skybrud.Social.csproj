@@ -121,6 +121,7 @@
     <Compile Include="Facebook\Objects\Albums\FacebookPostAlbumSummary.cs" />
     <Compile Include="Facebook\Objects\Links\FacebookPostLinkSummary.cs" />
     <Compile Include="Facebook\Objects\Photos\FacebookPostPhotoSummary.cs" />
+    <Compile Include="Facebook\Options\Accounts\FacebookGetAccountsOptions.cs" />
     <Compile Include="Facebook\Options\Common\FacebookPrivacyOptions.cs" />
     <Compile Include="Facebook\Enums\FacebookAlbumType.cs" />
     <Compile Include="Facebook\Enums\FacebookGender.cs" />
