@@ -11,6 +11,11 @@ namespace Skybrud.Social.Facebook.Options.Albums {
         #region Properties
 
         /// <summary>
+        /// Gets or sets the identifier (ID or alias) of the user or page.
+        /// </summary>
+        public string Identifier { get; set; }
+
+        /// <summary>
         /// The name given to the album. This field is required.
         /// </summary>
         public string Name { get; set; }

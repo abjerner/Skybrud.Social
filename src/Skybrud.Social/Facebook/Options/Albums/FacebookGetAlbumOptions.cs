@@ -3,12 +3,12 @@ using Skybrud.Social.Facebook.Fields;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Facebook.Options.User {
-    
+namespace Skybrud.Social.Facebook.Options.Albums {
+
     /// <summary>
-    /// Class representing the options for a call to the Facebook Graph API to get information about a single user.
+    /// Class representing the options for a call to the Facebook Graph API to get information about a single album.
     /// </summary>
-    public class FacebookGetUserOptions : IGetOptions {
+    public class FacebookGetAlbumOptions : IGetOptions {
 
         #region Properties
 
@@ -29,7 +29,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         /// <summary>
         /// Initializes an instance with default options.
         /// </summary>
-        public FacebookGetUserOptions() {
+        public FacebookGetAlbumOptions() {
             Fields = new FacebookFieldsCollection();
         }
 
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         /// Initializes an instance with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID) of the user.</param>
-        public FacebookGetUserOptions(string identifier) : this() {
+        public FacebookGetAlbumOptions(string identifier) : this() {
             Identifier = identifier;
         }
 
@@ -59,7 +59,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         }
 
         #endregion
-    
+
     }
 
 }

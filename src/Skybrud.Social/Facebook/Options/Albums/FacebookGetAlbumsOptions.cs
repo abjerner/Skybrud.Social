@@ -1,14 +1,14 @@
 ﻿using System;
 using Skybrud.Social.Facebook.Fields;
+using Skybrud.Social.Facebook.Options.Pagination;
 using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces;
 
-namespace Skybrud.Social.Facebook.Options.User {
-    
+namespace Skybrud.Social.Facebook.Options.Albums {
+
     /// <summary>
-    /// Class representing the options for a call to the Facebook Graph API to get information about a single user.
+    /// Class representing the options for a call to the Facebook Graph API to get a list of albums.
     /// </summary>
-    public class FacebookGetUserOptions : IGetOptions {
+    public class FacebookGetAlbumsOptions : FacebookCursorBasedPaginationOptions {
 
         #region Properties
 
@@ -29,7 +29,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         /// <summary>
         /// Initializes an instance with default options.
         /// </summary>
-        public FacebookGetUserOptions() {
+        public FacebookGetAlbumsOptions() {
             Fields = new FacebookFieldsCollection();
         }
 
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         /// Initializes an instance with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID) of the user.</param>
-        public FacebookGetUserOptions(string identifier) : this() {
+        public FacebookGetAlbumsOptions(string identifier) : this() {
             Identifier = identifier;
         }
 
@@ -45,13 +45,15 @@ namespace Skybrud.Social.Facebook.Options.User {
 
         #region Member methods
 
-        public SocialQueryString GetQueryString() {
+        public override SocialQueryString GetQueryString() {
+
+            // Get the query string
+            SocialQueryString query = base.GetQueryString();
 
             // Convert the collection of fields to a string
             string fields = (Fields == null ? "" : Fields.ToString()).Trim();
 
-            // Construct the query string
-            SocialQueryString query = new SocialQueryString();
+            // Update the query string
             if (!String.IsNullOrWhiteSpace(fields)) query.Set("fields", fields);
 
             return query;
@@ -59,7 +61,7 @@ namespace Skybrud.Social.Facebook.Options.User {
         }
 
         #endregion
-    
+
     }
 
 }
