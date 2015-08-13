@@ -1,9 +1,13 @@
+using System;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Options.Posts;
 using Skybrud.Social.Facebook.Responses.Posts;
 
 namespace Skybrud.Social.Facebook.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the implementation of the posts endpoint.
+    /// </summary>
     public class FacebookPostsEndpoint {
 
         #region Properties
@@ -41,11 +45,19 @@ namespace Skybrud.Social.Facebook.Endpoints {
         }
 
         /// <summary>
+        /// Gets information about the post matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookPostResponse GetPost(FacebookGetPostOptions options) {
+            return FacebookPostResponse.ParseResponse(Raw.GetPost(options));
+        }
+
+        /// <summary>
         /// Gets a list of posts of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         public FacebookPostsResponse GetPosts(string identifier) {
-            return GetPosts(identifier, new FacebookPostsOptions());
+            return GetPosts(new FacebookGetPostsOptions(identifier));
         }
 
         /// <summary>
@@ -54,7 +66,8 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="limit">The maximum amount of posts7 to return.</param>
         public FacebookPostsResponse GetPosts(string identifier, int limit) {
-            return GetPosts(identifier, new FacebookPostsOptions {
+            return GetPosts(new FacebookGetPostsOptions {
+                Identifier = identifier,
                 Limit = limit
             });
         }
@@ -64,8 +77,17 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// </summary>
         /// <param name="identifier">The identifier (ID or name) of the page or user.</param>
         /// <param name="options">The options for the call to the API.</param>
+        [Obsolete("Use method overload.")]
         public FacebookPostsResponse GetPosts(string identifier, FacebookPostsOptions options) {
             return FacebookPostsResponse.ParseResponse(Raw.GetPosts(identifier, options));
+        }
+
+        /// <summary>
+        /// Gets a list of posts of the user or page matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookPostsResponse GetPosts(FacebookGetPostsOptions options) {
+            return FacebookPostsResponse.ParseResponse(Raw.GetPosts(options));
         }
 
         #endregion

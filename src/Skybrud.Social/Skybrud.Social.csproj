@@ -159,6 +159,8 @@
     <Compile Include="Facebook\Options\Comments\FacebookCommentsOptions.cs" />
     <Compile Include="Facebook\Options\Feed\FacebookFeedOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookCursorBasedPaginationOptions.cs" />
+    <Compile Include="Facebook\Options\Posts\FacebookGetPostsOptions.cs" />
+    <Compile Include="Facebook\Options\Posts\FacebookGetPostOptions.cs" />
     <Compile Include="Facebook\Options\Posts\FacebookPostsOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookTimeBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\Photos\FacebookPhotosOptions.cs" />
