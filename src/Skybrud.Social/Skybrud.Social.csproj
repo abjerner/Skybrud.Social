@@ -158,6 +158,7 @@
     <Compile Include="Facebook\Options\Likes\FacebookLikesOptions.cs" />
     <Compile Include="Facebook\Options\Comments\FacebookCommentsOptions.cs" />
     <Compile Include="Facebook\Options\Feed\FacebookFeedOptions.cs" />
+    <Compile Include="Facebook\Options\Pages\FacebookGetPageOptions.cs" />
     <Compile Include="Facebook\Options\Pagination\FacebookCursorBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\Photos\FacebookGetPhotoOptions.cs" />
     <Compile Include="Facebook\Options\Photos\FacebookGetPhotosOptions.cs" />
