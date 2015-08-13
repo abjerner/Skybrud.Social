@@ -80,6 +80,8 @@
     <Compile Include="BitBucket\Responses\User\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketResponse.cs" />
     <Compile Include="BitBucket\Responses\Users\BitBucketUserResponseBody.cs" />
+    <Compile Include="Facebook\Fields\FacebookField.cs" />
+    <Compile Include="Facebook\Fields\FacebookFieldsCollection.cs" />
     <Compile Include="Facebook\Objects\Albums\FacebookAlbumsCollection.cs" />
     <Compile Include="Facebook\Objects\Links\FacebookLinksCollection.cs" />
     <Compile Include="Facebook\Objects\Feed\FacebookFeedCollection.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Facebook\Options\Pagination\FacebookTimeBasedPaginationOptions.cs" />
     <Compile Include="Facebook\Options\Photos\FacebookPhotosOptions.cs" />
     <Compile Include="Facebook\Options\Photos\FacebookPostUserPhotoOptions.cs" />
+    <Compile Include="Facebook\Options\User\FacebookGetUserOptions.cs" />
     <Compile Include="Facebook\Responses\Accounts\FacebookAccountsResponse.cs" />
     <Compile Include="Facebook\Responses\Albums\FacebookAlbumResponse.cs" />
     <Compile Include="Facebook\Responses\Albums\FacebookAlbumsResponse.cs" />

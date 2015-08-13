@@ -1,8 +1,13 @@
+using System;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Options.User;
 using Skybrud.Social.Facebook.Responses.Users;
 
 namespace Skybrud.Social.Facebook.Endpoints {
     
+    /// <summary>
+    /// Class representing the implementation of the users endpoint.
+    /// </summary>
     public class FacebookUsersEndpoint {
 
         #region Properties
@@ -44,6 +49,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="id">The ID of the user.</param>
         public FacebookUserResponse GetUser(string id) {
             return FacebookUserResponse.ParseResponse(Raw.GetUser(id));
+        }
+
+        /// <summary>
+        /// Gets information about the user matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookUserResponse GetUser(FacebookGetUserOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return FacebookUserResponse.ParseResponse(Raw.GetUser(options));
         }
 
         #endregion
