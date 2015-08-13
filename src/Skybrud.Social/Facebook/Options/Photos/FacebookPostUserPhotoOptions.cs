@@ -11,6 +11,11 @@ namespace Skybrud.Social.Facebook.Options.Photos {
     public class FacebookPostUserPhotoOptions : IPostOptions {
 
         #region Properties
+        
+        /// <summary>
+        /// Gets or sets the identifier (ID or alias) of the user, page or album to which the photo should be uploaded.
+        /// </summary>
+        public string Identifier { get; set; }
 
         /// <summary>
         /// Gets or sets the photo. Either this or <code>url</code> field is required, but both should not be used
