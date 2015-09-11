@@ -1,7 +1,7 @@
 Skybrud.Social.Microsoft
 ========================
 
-As this is an experimental project, it won't be released on NuGet or similar for now. You can however [**grab a build from Dropbox**](https://www.dropbox.com/sh/ubak1qionvji8mf/AACpWl98c0k8bYhoNGBBvMJsa/Skybrud.Social.Microsoft%20-%20Build%200.0.1.2%20(2015-09-12)?dl=0) or download the repository and build the `Skybrud.Social.Microsoft` project.
+As this is an experimental project, it won't be released on NuGet or similar for now. You can however [**grab a build from Dropbox**](https://www.dropbox.com/sh/ubak1qionvji8mf/AACY2DjhldUXVhTpc3X8b8oXa/Skybrud.Social.Microsoft%20-%20Build%200.0.1.2%20%282015-09-12%29?dl=0) or download the repository and build the `Skybrud.Social.Microsoft` project.
 
 ## Usage
 
