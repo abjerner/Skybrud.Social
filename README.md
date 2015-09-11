@@ -26,6 +26,15 @@ The [releases page](https://github.com/abjerner/Skybrud.Social/releases) lists a
 
 Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [Skybrud.Social website][Website].
 
+### Experimantal
+
+Supporting and maintaining the implementation for each service takes up a lot of time. I have played around with a few other services than whats officially supported in Skybrud.Social, but haven't had the time to finish these. They should therefore be treated as experimental and under development:
+
+* [**LinkedIn**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.LinkedIn)<br />Adds support for both OAuth 1.0a and OAuth 2 authenticcation as well as limited access to the LinkedIn API.
+
+* [**Microsoft**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.Microsoft)<br />Lets users authenticate using their Microsoft / Windows Live account (user), as well as getting information about that user.
+
+
 [Website]: http://social.skybrud.dk/
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social
 [GitHubRelease]: https://github.com/abjerner/Skybrud.Social/releases/latest
