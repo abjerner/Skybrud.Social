@@ -5,4 +5,4 @@ As this is an experimental project, it won't be released on NuGet or similar for
 
 ## Usage
 
-For setting up OAuth 2 authentication with LinkedIn, you can use [this comment](https://github.com/abjerner/Skybrud.Social/issues/29#issuecomment-130429396) for inspiration.
+For setting up OAuth 2 authentication with LinkedIn, you can use [**this comment**](https://github.com/abjerner/Skybrud.Social/issues/29#issuecomment-130429396) for inspiration.
