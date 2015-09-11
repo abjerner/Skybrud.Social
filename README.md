@@ -16,11 +16,11 @@ I may occasional upload a build to Dropbox. These are builds in between releases
 
 ### Found a bug? Have a question?
 
-* Please feel free to [create an issue][Issues], and I will get back to you ;)
+* Please feel free to [**create an issue**][Issues], and I will get back to you ;)
 
 ### Changelog
 
-The [releases page](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, and each there will be some information for each release on the most significant changes.
+The [**releases page**](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, and each there will be some information for each release on the most significant changes.
 
 ### Documentation
 
