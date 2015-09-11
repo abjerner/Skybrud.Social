@@ -5,8 +5,10 @@ using System.Net;
 using System.Text;
 
 namespace Skybrud.Social.Http {
-    
-    //[Obsolete("Marking this as obsolete for now since I'm not sure on the final structure of the class.")]
+
+    /// <summary>
+    /// Wrapper class for <code>HttpWebResponse</code>.
+    /// </summary>
     public class SocialHttpRequest {
 
         #region Private fields
@@ -19,13 +21,37 @@ namespace Skybrud.Social.Http {
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the HTTP method of the request.
+        /// </summary>
         public string Method { get; set; }
+
+        /// <summary>
+        /// Gets or sets the accept headerof the request.
+        /// </summary>
         public string Accept { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user agent header of the request.
+        /// </summary>
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authorization header of the request.
+        /// </summary>
+        public string Authorization {
+            get { return Headers.Authorization; }
+            set { Headers.Authorization = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the credentials (username and password) of the request.
+        /// </summary>
         public NetworkCredential Credentials { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL of the request. The query string can either be specified directly
-        /// in the URL, or separately through the <var>QueryString</var> property.
+        /// Gets or sets the URL of the request. The query string can either be specified directly in the URL, or
+        /// separately through the <code>QueryString</code> property.
         /// </summary>
         public string Url { get; set; }
 
@@ -34,18 +60,30 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public Encoding Encoding { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timeout of the request. Default is 100 seconds.
+        /// </summary>
         public TimeSpan Timeout { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of headers.
+        /// </summary>
         public SocialHeaderCollection Headers {
             get { return _headers; }
             set { _headers = value ?? new SocialHeaderCollection(); }
         }
 
+        /// <summary>
+        /// Gets or sets the query string of the request.
+        /// </summary>
         public SocialQueryString QueryString {
             get { return _queryString; }
             set { _queryString = value ?? new SocialQueryString(); }
         }
 
+        /// <summary>
+        /// Gets or sets the POST data of the request.
+        /// </summary>
         public NameValueCollection PostData {
             get { return _postData; }
             set { _postData = value ?? new NameValueCollection(); }
@@ -55,6 +93,9 @@ namespace Skybrud.Social.Http {
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new request with default options.
+        /// </summary>
         public SocialHttpRequest() {
             Method = "GET";
             Encoding = Encoding.UTF8;
@@ -65,7 +106,20 @@ namespace Skybrud.Social.Http {
 
         #region Methods
 
+        /// <summary>
+        /// Executes the request and returns the corresponding response as an instance of <code>SocialHttpResponse</code>.
+        /// </summary>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetResponse() {
+            return GetResponse(null);
+        }
+
+        /// <summary>
+        /// Executes the request and returns the corresponding response as an instance of <code>SocialHttpResponse</code>.
+        /// </summary>
+        /// <param name="callback">Lets you specify a callback method for modifying the underlying <code>HttpWebRequest</code>.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public SocialHttpResponse GetResponse(Action<HttpWebRequest> callback) {
 
             // Build the URL
             string url = Url;
@@ -79,6 +133,7 @@ namespace Skybrud.Social.Http {
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
             request.Accept = Accept;
+            request.UserAgent = UserAgent;
             request.Timeout = (int) Timeout.TotalMilliseconds;
 
             // Add the request body (if a POST request)
@@ -90,6 +145,9 @@ namespace Skybrud.Social.Http {
                     stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
                 }
             }
+
+            // Call the callback
+            if (callback != null) callback(request);
 
             // Get the response
             try {
