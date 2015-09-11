@@ -27,7 +27,7 @@ namespace Skybrud.Social.Http {
         public string Method { get; set; }
 
         /// <summary>
-        /// Gets or sets the accept headerof the request.
+        /// Gets or sets the accept header of the request.
         /// </summary>
         public string Accept { get; set; }
 
