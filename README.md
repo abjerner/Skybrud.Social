@@ -24,7 +24,7 @@ The [**releases page**](https://github.com/abjerner/Skybrud.Social/releases) lis
 
 ### Documentation
 
-Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [Skybrud.Social website][Website].
+Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [**Skybrud.Social website**][Website].
 
 ### Experimantal
 
