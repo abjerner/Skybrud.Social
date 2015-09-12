@@ -134,7 +134,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             string contents = SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://github.com/login/oauth/access_token", null, parameters);
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            NameValueCollection response = SocialUtils.ParseQueryString(contents);
 
             // Return the response
             return GitHubOAuthAccessTokenResponse.Parse(response);

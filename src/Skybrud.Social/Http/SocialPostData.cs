@@ -65,7 +65,7 @@ namespace Skybrud.Social.Http {
         }
 
         public override string ToString() {
-            return String.Join("&", _data.Select(pair => HttpUtility.UrlEncode(pair.Key) + "=" + HttpUtility.UrlEncode(pair.Value.ToString())));
+            return String.Join("&", _data.Select(pair => SocialUtils.UrlEncode(pair.Key) + "=" + SocialUtils.UrlEncode(pair.Value.ToString())));
         }
 
         public virtual NameValueCollection ToNameValueCollection() {

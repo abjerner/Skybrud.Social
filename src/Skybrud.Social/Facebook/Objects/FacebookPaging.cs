@@ -25,7 +25,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public int? Since {
             get {
                 if (Previous != null) {
-                    NameValueCollection response = HttpUtility.ParseQueryString(Previous);
+                    NameValueCollection response = SocialUtils.ParseQueryString(Previous);
                     if (response["since"] != null) return Int32.Parse(response["since"]);
                 }
                 return null;
@@ -38,7 +38,7 @@ namespace Skybrud.Social.Facebook.Objects {
         public int? Until {
             get {
                 if (Next != null) {
-                    NameValueCollection response = HttpUtility.ParseQueryString(Next);
+                    NameValueCollection response = SocialUtils.ParseQueryString(Next);
                     if (response["until"] != null) return Int32.Parse(response["until"]);
                 }
                 return null;

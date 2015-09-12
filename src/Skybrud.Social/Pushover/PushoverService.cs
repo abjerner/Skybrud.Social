@@ -16,7 +16,7 @@ namespace Skybrud.Social.Pushover {
             nvc.Add("user", user);
             nvc.Add("message", message);
 
-            string data = String.Join("&", Array.ConvertAll(nvc.AllKeys, key => String.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(nvc[key]))));
+            string data = String.Join("&", Array.ConvertAll(nvc.AllKeys, key => String.Format("{0}={1}", SocialUtils.UrlEncode(key), SocialUtils.UrlEncode(nvc[key]))));
 
             //throw new Exception(data);
 

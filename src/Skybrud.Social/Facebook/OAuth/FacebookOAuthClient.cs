@@ -246,7 +246,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            NameValueCollection response = SocialUtils.ParseQueryString(contents);
 
             // Get the access token
             return response["access_token"];
@@ -274,7 +274,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             // TODO: Add some validation
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            NameValueCollection response = SocialUtils.ParseQueryString(contents);
 
             // Get the access token
             return response["access_token"];
@@ -297,7 +297,7 @@ namespace Skybrud.Social.Facebook.OAuth {
             string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            NameValueCollection response = SocialUtils.ParseQueryString(contents);
 
             // Get the access token
             return response["access_token"];

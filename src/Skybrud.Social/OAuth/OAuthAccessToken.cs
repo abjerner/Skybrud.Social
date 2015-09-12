@@ -39,7 +39,7 @@ namespace Skybrud.Social.OAuth {
         public static OAuthAccessToken Parse(string str) {
 
             // Convert the query string to a NameValueCollection
-            NameValueCollection query = HttpUtility.ParseQueryString(str);
+            NameValueCollection query = SocialUtils.ParseQueryString(str);
 
             // Get the user ID
             long userId;

@@ -14,7 +14,12 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
     
+    /// <summary>
+    /// Static class with various utility methods used througout Skybrud.Social.
+    /// </summary>
     public static class SocialUtils {
+
+        #region Version
 
         /// <summary>
         /// Gets the assembly version as a string.
@@ -65,6 +70,8 @@ namespace Skybrud.Social {
             return Int32.Parse(str);
 
         }
+
+        #endregion
 
         #region HTTP helpers
 
@@ -173,19 +180,46 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
+        /// Encodes a URL string.
+        /// </summary>
+        /// <param name="str">The string to be encoded.</param>
+        /// <returns>Returns the encoded string.</returns>
+        public static string UrlEncode(string str) {
+            return HttpUtility.UrlEncode(str);
+        }
+
+        /// <summary>
+        /// Decodes a URL string.
+        /// </summary>
+        /// <param name="str">The string to be decoded.</param>
+        /// <returns>Returns the decoded string.</returns>
+        public static string UrlDecode(string str) {
+            return HttpUtility.UrlDecode(str);
+        }
+
+        /// <summary>
+        /// Parses a query string into a <code>System.Collections.Specialized.NameValueCollection</code> using <code>System.Text.Encoding.UTF8</code> encoding.
+        /// </summary>
+        /// <param name="query">The query string to parse.</param>
+        /// <returns>A <code>System.Collections.Specialized.NameValueCollection</code> of query parameters and values.</returns>
+        public static NameValueCollection ParseQueryString(string query) {
+            return HttpUtility.ParseQueryString(query);
+        }
+
+        /// <summary>
         /// Converts the specified <var>NameValueCollection</var> into a query string using the proper encoding.
         /// </summary>
         /// <param name="collection">The collection to convert.</param>
         /// <returns></returns>
         public static string NameValueCollectionToQueryString(NameValueCollection collection) {
-            return String.Join("&", Array.ConvertAll(collection.AllKeys, key => HttpUtility.UrlEncode(key) + "=" + HttpUtility.UrlEncode(collection[key])));
+            return String.Join("&", Array.ConvertAll(collection.AllKeys, key => UrlEncode(key) + "=" + UrlEncode(collection[key])));
         }
 
         public static string NameValueCollectionToQueryString(NameValueCollection collection, bool includeIfNull) {
             return String.Join("&", (
                 from string key in collection.Keys
                 where collection[key] != null || includeIfNull
-                select HttpUtility.UrlEncode(key) + "=" + HttpUtility.UrlEncode(collection[key])
+                select UrlEncode(key) + "=" + UrlEncode(collection[key])
             ));
         }
 

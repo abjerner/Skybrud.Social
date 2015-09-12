@@ -252,7 +252,7 @@ namespace Skybrud.Social.OAuth {
             }
 
             // Convert the query string to a NameValueCollection
-            NameValueCollection query = HttpUtility.ParseQueryString(response);
+            NameValueCollection query = SocialUtils.ParseQueryString(response);
 
             // Return the request token
             return new OAuthRequestToken {
@@ -460,7 +460,7 @@ namespace Skybrud.Social.OAuth {
             }
 
             // Convert the query string to a NameValueCollection
-            return HttpUtility.ParseQueryString(response);
+            return SocialUtils.ParseQueryString(response);
 
         }
     

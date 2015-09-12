@@ -69,14 +69,14 @@ namespace Skybrud.Social {
         
         public static void AppendQueryString(this UriBuilder builder, NameValueCollection values) {
             if (values == null || values.Count == 0) return;
-            NameValueCollection nvc = HttpUtility.ParseQueryString(builder.Query);
+            NameValueCollection nvc = SocialUtils.ParseQueryString(builder.Query);
             nvc.Add(values);
             builder.Query = SocialUtils.NameValueCollectionToQueryString(nvc);
         }
         
         public static UriBuilder MergeQueryString(this UriBuilder builder, NameValueCollection values) {
             if (values == null || values.Count == 0) return builder;
-            builder.Query = SocialUtils.NameValueCollectionToQueryString(HttpUtility.ParseQueryString(builder.Query).Set(values));
+            builder.Query = SocialUtils.NameValueCollectionToQueryString(SocialUtils.ParseQueryString(builder.Query).Set(values));
             return builder;
         }
         
