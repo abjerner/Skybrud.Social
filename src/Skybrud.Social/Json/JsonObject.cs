@@ -7,12 +7,21 @@ using System.Linq;
 
 namespace Skybrud.Social.Json {
 
+    /// <summary>
+    /// Class representing a JSON object.
+    /// </summary>
     public class JsonObject : IJsonObject {
 
         #region Properties
         
+        /// <summary>
+        /// Gets a reference to the underlying dictionary.
+        /// </summary>
         public IDictionary<string, object> Dictionary { get; private set; }
 
+        /// <summary>
+        /// Gets an array of all keys in the underlying dictionary.
+        /// </summary>
         public string[] Keys {
             get { return Dictionary.Keys.ToArray(); }
         }
@@ -21,204 +30,433 @@ namespace Skybrud.Social.Json {
 
         #region Constructors
 
-        public JsonObject(IDictionary<string, object> dictionary) {
-            Dictionary = dictionary;
-        }
-
+        /// <summary>
+        /// Initializes a new JSON object.
+        /// </summary>
         public JsonObject() {
             Dictionary = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        /// Initializes a new JSON object from the specified <code>dictionary</code>.
+        /// </summary>
+        /// <param name="dictionary">The dictionary the JSON object should be based on.</param>
+        public JsonObject(IDictionary<string, object> dictionary) {
+            Dictionary = dictionary;
         }
 
         #endregion
 
         #region Member methods
 
-        public bool HasValue(string name) {
-            return Dictionary.ContainsKey(name) && Dictionary[name] != null;
+        /// <summary>
+        /// Gets whether a property with the specified <code>propertyName</code> exists, and has a value different from <code>null</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public bool HasValue(string propertyName) {
+            return Dictionary.ContainsKey(propertyName) && Dictionary[propertyName] != null;
         }
 
-        public JsonObject GetObject(string name) {
+        /// <summary>
+        /// Gets an instance of <code>JsonObject</code> from a property with specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public JsonObject GetObject(string propertyName) {
             object value;
-            return Dictionary.TryGetValue(name, out value) && value is Dictionary<string, object> ? new JsonObject((Dictionary<string, object>) value) : null;
+            return Dictionary.TryGetValue(propertyName, out value) && value is Dictionary<string, object> ? new JsonObject((Dictionary<string, object>)value) : null;
         }
 
-        public T GetObject<T>(string name, Func<JsonObject, T> func) {
-            JsonObject obj = GetObject(name);
+        /// <summary>
+        /// Gets an instance of <code>T</code> from the <code>JsonObject</code> of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <typeparam name="T">The return type.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetObject<T>(string propertyName, Func<JsonObject, T> func) {
+            JsonObject obj = GetObject(propertyName);
             return obj == null ? default(T) : func(obj);
         }
 
-        public JsonArray GetArray(string name) {
+        /// <summary>
+        /// Gets an instance of <code>JsonArray</code> from a property with specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public JsonArray GetArray(string propertyName) {
             object value;
-            return Dictionary.TryGetValue(name, out value) && value is ArrayList ? new JsonArray((ArrayList) value) : null;
+            return Dictionary.TryGetValue(propertyName, out value) && value is ArrayList ? new JsonArray((ArrayList)value) : null;
         }
 
-        public T[] GetArray<T>(string name) {
+        /// <summary>
+        /// Gets an array of <code>T</code> from a property with specified <code>propertyName</code>.
+        /// </summary>
+        /// <typeparam name="T">The type of items in the array.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
+        public T[] GetArray<T>(string propertyName) {
             object value;
-            JsonArray array = Dictionary.TryGetValue(name, out value) && value is ArrayList ? new JsonArray((ArrayList) value) : null;
+            JsonArray array = Dictionary.TryGetValue(propertyName, out value) && value is ArrayList ? new JsonArray((ArrayList)value) : null;
             return array == null ? null : array.Cast<T>();
         }
 
-        public T[] GetArray<T>(string name, Func<JsonObject, T> func) {
-            JsonArray array = GetArray(name);
+        /// <summary>
+        /// Gets an array of <code>T</code> from a property with specified <code>propertyName</code>.
+        /// </summary>
+        /// <typeparam name="T">The type of items in the array.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T[] GetArray<T>(string propertyName, Func<JsonObject, T> func) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.ParseMultiple(func);
         }
 
         /// <summary>
         /// Gets an array of strings.
         /// </summary>
-        /// <param name="name">The name of the property holding the array.</param>
-        public string[] GetStringArray(string name) {
-            JsonArray array = GetArray(name);
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public string[] GetStringArray(string propertyName) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.For((arr, index) => arr.GetString(index));
         }
 
         /// <summary>
         /// Gets an array of 32-bit integers (<code>int</code>).
         /// </summary>
-        /// <param name="name">The name of the property holding the array.</param>
-        public int[] GetInt32Array(string name) {
-            JsonArray array = GetArray(name);
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public int[] GetInt32Array(string propertyName) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.For((arr, index) => arr.GetInt32(index));
         }
 
         /// <summary>
         /// Gets an array of 64-bit integers (<code>long</code>).
         /// </summary>
-        /// <param name="name">The name of the property holding the array.</param>
-        public long[] GetInt64Array(string name) {
-            JsonArray array = GetArray(name);
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public long[] GetInt64Array(string propertyName) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.For((arr, index) => arr.GetInt64(index));
         }
 
         /// <summary>
         /// Gets an array of floating point values (<code>float</code>).
         /// </summary>
-        /// <param name="name">The name of the property holding the array.</param>
-        public float[] GetFloatArray(string name) {
-            JsonArray array = GetArray(name);
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public float[] GetFloatArray(string propertyName) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.For((arr, index) => arr.GetFloat(index));
         }
 
         /// <summary>
         /// Gets an array of doubles.
         /// </summary>
-        /// <param name="name">The name of the property holding the array.</param>
-        public double[] GetDoubleArray(string name) {
-            JsonArray array = GetArray(name);
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public double[] GetDoubleArray(string propertyName) {
+            JsonArray array = GetArray(propertyName);
             return array == null ? null : array.For((arr, index) => arr.GetDouble(index));
         }
 
-        public T GetValue<T>(string name) {
-            return GetValue<T>(name, CultureInfo.InvariantCulture);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <typeparam name="T">The return type.</typeparam>
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        public T GetValue<T>(string propertyName) {
+            return GetValue<T>(propertyName, CultureInfo.InvariantCulture);
         }
-        
-        public T GetValue<T>(string name, IFormatProvider provider) {
-            if (!HasValue(name)) return default(T);
+
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <typeparam name="T">The return type.</typeparam>
+        /// <param name="propertyName">The name of the property holding the array.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        public T GetValue<T>(string propertyName, IFormatProvider provider) {
+            if (!HasValue(propertyName)) return default(T);
             if (typeof(T) == typeof(JsonObject)) {
-                object obj = Dictionary[name];
+                object obj = Dictionary[propertyName];
                 if (obj is Dictionary<string, object>) {
-                    obj = new JsonObject((Dictionary<string, object>) Dictionary[name]);
+                    obj = new JsonObject((Dictionary<string, object>)Dictionary[propertyName]);
                 }
                 return (T) obj;
             }
-            return (T) Convert.ChangeType(Dictionary[name], typeof(T), provider);
+            return (T) Convert.ChangeType(Dictionary[propertyName], typeof(T), provider);
         }
 
-        public int GetInt32(string name) {
-            return GetValue<int>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public int GetInt32(string propertyName) {
+            return GetValue<int>(propertyName);
         }
 
-        public long GetInt64(string name) {
-            return GetValue<long>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetInt32<T>(string propertyName, Func<int, T> func) {
+            return func(GetValue<int>(propertyName));
         }
 
-        public float GetFloat(string name) {
-            return GetValue<float>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public long GetInt64(string propertyName) {
+            return GetValue<long>(propertyName);
         }
 
-        public float GetFloat(string name, IFormatProvider provider) {
-            return GetValue<float>(name, provider);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetInt64<T>(string propertyName, Func<long, T> func) {
+            return func(GetValue<long>(propertyName));
         }
 
-        public double GetDouble(string name) {
-            return GetValue<double>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public float GetFloat(string propertyName) {
+            return GetValue<float>(propertyName);
         }
 
-        public double GetDouble(string name, IFormatProvider provider) {
-            return GetValue<double>(name, provider);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetFloat<T>(string propertyName, Func<float, T> func) {
+            return func(GetValue<float>(propertyName));
         }
 
-        public bool GetBoolean(string name) {
-            return GetValue<bool>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        public float GetFloat(string propertyName, IFormatProvider provider) {
+            return GetValue<float>(propertyName, provider);
         }
 
-        public string GetString(string name) {
-            return GetValue<string>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetFloat<T>(string propertyName, IFormatProvider provider, Func<float, T> func) {
+            return func(GetValue<float>(propertyName, provider));
         }
 
-        public T GetString<T>(string name, Func<string, T> func) {
-            return func(GetValue<string>(name));
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public double GetDouble(string propertyName) {
+            return GetValue<double>(propertyName);
         }
 
-        public DateTime GetDateTime(string name) {
-            return GetValue<DateTime>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetDouble<T>(string propertyName, Func<double, T> func) {
+            return func(GetValue<double>(propertyName));
         }
 
-        public DateTime GetDateTimeFromUnixTimestamp(string name) {
-            return SocialUtils.GetDateTimeFromUnixTime(GetValue<int>(name));
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        public double GetDouble(string propertyName, IFormatProvider provider) {
+            return GetValue<double>(propertyName, provider);
         }
 
-        public DateTimeOffset GetDateTimeOffset(string name) {
-            return GetValue<DateTimeOffset>(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetDouble<T>(string propertyName, IFormatProvider provider, Func<double, T> func) {
+            return func(GetValue<double>(propertyName, provider));
         }
 
-        public bool IsObject(string name) {
-            return HasValue(name) && Dictionary[name] is IDictionary<string, object>;
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public bool GetBoolean(string propertyName) {
+            return GetValue<bool>(propertyName);
         }
 
-        public bool IsArray(string name) {
-            return HasValue(name) && Dictionary[name] is ArrayList;
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetBoolean<T>(string propertyName, Func<bool, T> func) {
+            return func(GetValue<bool>(propertyName));
         }
 
-        public void GetLong(string name, long value) {
-            Dictionary[name] = value;
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public string GetString(string propertyName) {
+            return GetValue<string>(propertyName);
         }
 
-        public void GetDouble(string name, double value) {
-            Dictionary[name] = value;
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public T GetString<T>(string propertyName, Func<string, T> func) {
+            return func(GetValue<string>(propertyName));
         }
 
-        public void GetBoolean(string name, bool value) {
-            Dictionary[name] = value;
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public DateTime GetDateTime(string propertyName) {
+            return GetValue<DateTime>(propertyName);
         }
 
-        public T GetEnum<T>(string name) where T : struct {
-            return SocialUtils.ParseEnum<T>(GetString(name));
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public DateTime GetDateTimeFromUnixTimestamp(string propertyName) {
+            return SocialUtils.GetDateTimeFromUnixTime(GetValue<int>(propertyName));
         }
 
-        public T GetEnum<T>(string name, T fallback) where T : struct {
-            string value = GetString(name);
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public DateTimeOffset GetDateTimeOffset(string propertyName) {
+            return GetValue<DateTimeOffset>(propertyName);
+        }
+
+        /// <summary>
+        /// Gets whether the value of the property with the specified <code>propertyName</code> is an object.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public bool IsObject(string propertyName) {
+            return HasValue(propertyName) && Dictionary[propertyName] is IDictionary<string, object>;
+        }
+
+        /// <summary>
+        /// Gets whether the value of the property with the specified <code>propertyName</code> is an array.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public bool IsArray(string propertyName) {
+            return HasValue(propertyName) && Dictionary[propertyName] is ArrayList;
+        }
+
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public T GetEnum<T>(string propertyName) where T : struct {
+            return SocialUtils.ParseEnum<T>(GetString(propertyName));
+        }
+
+        /// <summary>
+        /// Gets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="fallback">The fallback value if the property value could not be parsed.</param>
+        public T GetEnum<T>(string propertyName, T fallback) where T : struct {
+            string value = GetString(propertyName);
             return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.ParseEnum(value, fallback);
         }
 
-        public void SetInt(string name, int value) {
-            Dictionary[name] = value;
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        [Obsolete("Use the SetInt32 method instead.")]
+        public void SetInt(string propertyName, int value) {
+            Dictionary[propertyName] = value;
         }
 
-        public void SetString(string name, string value) {
-            Dictionary[name] = value;
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetInt32(string propertyName, int value) {
+            Dictionary[propertyName] = value;
         }
 
-        public void SetObject(string name, JsonObject value) {
-            Dictionary[name] = (value == null ? null : value.Dictionary);
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetInt64(string propertyName, long value) {
+            Dictionary[propertyName] = value;
         }
 
-        public void SetArray(string name, JsonArray value) {
-            Dictionary[name] = (value == null ? null : value.InternalArray);
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetDouble(string propertyName, double value) {
+            Dictionary[propertyName] = value;
         }
 
-        public void SetNull(string name) {
-            Dictionary[name] = null;
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetBoolean(string propertyName, bool value) {
+            Dictionary[propertyName] = value;
+        }
+
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetString(string propertyName, string value) {
+            Dictionary[propertyName] = value;
+        }
+
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetObject(string propertyName, JsonObject value) {
+            Dictionary[propertyName] = (value == null ? null : value.Dictionary);
+        }
+
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The new value of the property.</param>
+        public void SetArray(string propertyName, JsonArray value) {
+            Dictionary[propertyName] = (value == null ? null : value.InternalArray);
+        }
+
+        /// <summary>
+        /// Sets the value of the property with the specified <code>propertyName</code> to <code>null</code>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property.</param>
+        public void SetNull(string propertyName) {
+            Dictionary[propertyName] = null;
         }
 
         /// <summary>
