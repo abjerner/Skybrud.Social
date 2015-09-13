@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\SkybrudMetadataAttribute.cs" />
     <Compile Include="BitBucket\Endpoints\BitBucketRepositoriesEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\BitBucketUserEndpoint.cs" />
     <Compile Include="BitBucket\Endpoints\BitBucketUsersEndpoint.cs" />
