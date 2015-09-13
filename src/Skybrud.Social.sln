@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.LinkedIn", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.Microsoft", "Skybrud.Social.Microsoft\Skybrud.Social.Microsoft.csproj", "{DABC5422-2B84-46F2-BD6A-8FB7753EAA06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.Slack", "Skybrud.Social.Slack\Skybrud.Social.Slack.csproj", "{4C00CE12-558C-47A7-B804-B3448DF002C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,15 @@ Global
 		{DABC5422-2B84-46F2-BD6A-8FB7753EAA06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DABC5422-2B84-46F2-BD6A-8FB7753EAA06}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DABC5422-2B84-46F2-BD6A-8FB7753EAA06}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
