@@ -22,7 +22,7 @@ namespace Skybrud.Social.Microsoft.Objects.Authentication {
         public TimeSpan ExpiresIn { get; private set; }
 
         /// <summary>
-        /// Gets a collection of the scopes the user granted.
+        /// Gets a collection of the scopes the user has granted.
         /// </summary>
         public MicrosoftScopeCollection Scope { get; private set; }
 

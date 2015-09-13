@@ -36,6 +36,7 @@ namespace Skybrud.Social.Microsoft.Responses.Authentication {
         }
 
         #endregion
+
     }
 
 }
