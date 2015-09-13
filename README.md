@@ -34,6 +34,8 @@ Supporting and maintaining the implementation for each service takes up a lot of
 
 * [**Microsoft**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.Microsoft)<br />Lets users authenticate using their Microsoft / Windows Live account (user), as well as getting information about that user.
 
+* [**Slack**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.Slack)<br />Authentication and implementation of basic user methods.
+
 
 [Website]: http://social.skybrud.dk/
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social
