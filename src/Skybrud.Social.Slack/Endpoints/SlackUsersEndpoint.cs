@@ -41,7 +41,7 @@ namespace Skybrud.Social.Slack.Endpoints {
         /// <see>
         ///     <cref>https://api.slack.com/methods/users.info</cref>
         /// </see>
-        public SlackGetUserInfoResponse GetUser(string userId) {
+        public SlackGetUserInfoResponse GetInfo(string userId) {
             return SlackGetUserInfoResponse.ParseResponse(Raw.GetInfo(userId));
         }
 
@@ -51,7 +51,7 @@ namespace Skybrud.Social.Slack.Endpoints {
         /// <see>
         ///     <cref>https://api.slack.com/methods/users.list</cref>
         /// </see>
-        public SlackGetUserListResponse GetUsers() {
+        public SlackGetUserListResponse GetList() {
             return SlackGetUserListResponse.ParseResponse(Raw.GetList());
         }
 

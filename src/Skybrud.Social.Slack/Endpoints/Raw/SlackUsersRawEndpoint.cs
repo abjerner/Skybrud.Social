@@ -35,7 +35,7 @@ namespace Skybrud.Social.Slack.Endpoints.Raw {
         ///     <cref>https://api.slack.com/methods/users.info</cref>
         /// </see>
         public SocialHttpResponse GetInfo(string userId) {
-            return Client.DoAuthenticatedGetRequest("https://slack.com/api/users.list");
+            return Client.DoAuthenticatedGetRequest("https://slack.com/api/users.info?user=" + userId);
         }
 
         /// <summary>
