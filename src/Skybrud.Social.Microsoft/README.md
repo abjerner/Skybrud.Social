@@ -91,7 +91,7 @@ MicrosoftService service = MicrosoftService.CreateFromOAuthClient(client);
 <br />
 ##### Getting information about the authenticated user
 
-User information can be access through the Windows Live endpoint and the `GetSelf` method. Some properties depends on the scope specified - eg. information about emails of the user is only returned when the user has granted the `WindowsLiveScopes.Emails` scope.
+User information can be accessed through the Windows Live endpoint and the `GetSelf` method. Some properties depends on the scope specified - eg. information about emails of the user is only returned when the user has granted the `WindowsLiveScopes.Emails` scope.
 
 ```C#
 WindowsLiveUserResponse response = service.WindowsLive.GetSelf();
@@ -132,7 +132,7 @@ In the example below, I've tried to demonstrate how a login page can be implemen
         }
     };
 
-    // Configure the OAuth client based on the options of the prevalue options
+    // Configure the OAuth client
     MicrosoftOAuthClient client = new MicrosoftOAuthClient {
         ClientId = "Insert your client ID here",
         ClientSecret = "Insert your client secret here",
