@@ -53,7 +53,7 @@ The authorization code can be obtained using the `GetAccessTokenFromAuthCode` me
 
 ```C#
 // Exchange the authorization code for an access token
-MicrosoftTokenResponse response = client.GetAccessTokenFromAuthCode(input.Code);
+MicrosoftTokenResponse response = client.GetAccessTokenFromAuthCode(Request.QueryString["code"]);
 
 // Get the access token from the response body
 string accessToken = response.Body.AccessToken;
