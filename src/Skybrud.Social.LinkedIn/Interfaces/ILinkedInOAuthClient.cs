@@ -6,6 +6,9 @@
 
         string GetGroupPosts(long groupId, string[] fields);
 
+        string GetBasicProfile();
+        string GetBasicProfile(string[] fields);
+
     }
 
 }

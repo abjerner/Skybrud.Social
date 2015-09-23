@@ -48,6 +48,14 @@ namespace Skybrud.Social.LinkedIn.OAuth1a {
 
         #region Methods from interface ILinkedInOAuthClient
 
+        public string GetBasicProfile() {
+            throw new NotImplementedException();
+        }
+
+        public string GetBasicProfile(string[] fields) {
+            throw new NotImplementedException();
+        }
+
         public string GetGroupPosts(long groupId) {
             return GetGroupPosts(groupId, LinkedInConstants.GroupPostsDefaultFields);
         }
@@ -67,7 +75,6 @@ namespace Skybrud.Social.LinkedIn.OAuth1a {
         }
 
         #endregion
-
     }
 
 }

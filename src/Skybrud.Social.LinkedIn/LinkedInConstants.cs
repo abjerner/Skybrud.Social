@@ -3,6 +3,22 @@
     public class LinkedInConstants {
         
         /// <summary>
+        /// The default fields used when fetching basic profile info.
+        /// </summary>
+        /// <see cref="https://developer.linkedin.com/docs/fields/basic-profile" />
+        public static readonly string[] BasicProfileDefaultFields = new[] {
+            "id",
+            "firstName",
+            "lastName",
+            "headline",
+            "num-connections",
+            "num-connections-capped",
+            "summary",
+            "pictureUrl",
+            "public-profile-url"
+        };
+
+        /// <summary>
         /// The default fields used when fetching group posts.
         /// </summary>
         /// <see cref="https://developer.linkedin.com/documents/groups-fields"/>

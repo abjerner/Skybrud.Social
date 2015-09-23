@@ -41,11 +41,28 @@ namespace Skybrud.Social.LinkedIn.OAuth2 {
             return ("https://www.linkedin.com/uas/oauth2/authorization?" + SocialUtils.NameValueCollectionToQueryString(query, true));
         }
 
-        public string Test(params string[] fields) {
-            return SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://api.linkedin.com/v1/people/~" + ((fields.Length == 0) ? "" : (":(" + String.Join(",", fields) + ")")) + "?oauth2_access_token=" + AccessToken);
+        #region Methods from interface ILinkedInOAuthClient
+
+        public string GetBasicProfile() {
+            return GetBasicProfile(LinkedInConstants.BasicProfileDefaultFields);
         }
 
-        #region Methods from interface ILinkedInOAuthClient
+        public string GetBasicProfile(params string[] fields) {
+            // Declare the base URL
+            string url = String.Format(
+                "{0}{1}",
+                "https://api.linkedin.com/v1/people/~",
+                (fields.Length == 0) ? "" : (":(" + String.Join(",", fields) + ")")
+            );
+
+            // Declare the query string
+            NameValueCollection query = new NameValueCollection {
+                {"oauth2_access_token", AccessToken}
+            };
+
+            // Make the request and return the response body
+            return SocialUtils.DoHttpGetRequestAndGetBodyAsString(url, query);
+        }
 
         public string GetGroupPosts(long groupId) {
             return GetGroupPosts(groupId, LinkedInConstants.GroupPostsDefaultFields);
