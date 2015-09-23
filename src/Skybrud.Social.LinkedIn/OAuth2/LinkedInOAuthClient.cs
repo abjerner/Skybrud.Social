@@ -31,6 +31,16 @@ namespace Skybrud.Social.LinkedIn.OAuth2 {
 
         }
 
+        /// <summary>
+        /// Generates the authorization URL using the specified state and scope.
+        /// </summary>
+        /// <param name="state">The state to send to LinkedIn's OAuth login page.</param>
+        /// <param name="scope">The scope of the application.</param>
+        /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
+        public string GetAuthorizationUrl(string state, params string[] scope) {
+            return GetAuthorizationUrl(state, String.Join(",", scope));
+        }
+
         public string GetAuthorizationUrl(string state, string scope = null) {
             NameValueCollection query = new NameValueCollection();
             query.Add("response_type", "code");
