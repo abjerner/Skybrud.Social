@@ -115,7 +115,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <summary>
         /// Generates the authorization URL using the specified state and scope.
         /// </summary>
-        /// <param name="state">The state to send to Microsoft's OAuth login page.</param>
+        /// <param name="state">The state to send to the Microsoft OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
         /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, MicrosoftScopeCollection scope) {
@@ -125,7 +125,7 @@ namespace Skybrud.Social.Microsoft.OAuth {
         /// <summary>
         /// Generates the authorization URL using the specified state and scope.
         /// </summary>
-        /// <param name="state">The state to send to Facebook's OAuth login page.</param>
+        /// <param name="state">The state to send to the Microsoft OAuth login page.</param>
         /// <param name="scope">The scope of the application.</param>
         /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
