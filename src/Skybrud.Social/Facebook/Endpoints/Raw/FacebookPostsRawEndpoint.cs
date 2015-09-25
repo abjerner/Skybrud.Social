@@ -53,6 +53,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// <param name="options">The options for the call to the API.</param>
         [Obsolete("Use method overload.")]
         public SocialHttpResponse GetPosts(string identifier, FacebookPostsOptions options) {
+            // TODO: Remove in v1.0
             return Client.DoAuthenticatedGetRequest("/" + identifier + "/posts", options);
         }
 

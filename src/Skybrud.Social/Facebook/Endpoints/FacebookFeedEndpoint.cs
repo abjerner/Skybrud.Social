@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Facebook.Options.Feed;
 using Skybrud.Social.Facebook.Responses.Feed;
@@ -34,13 +35,24 @@ namespace Skybrud.Social.Facebook.Endpoints {
         #endregion
 
         #region Methods
+        
+        /// <summary>
+        /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
+        /// </summary>
+        /// <param name="identifier">The ID or name of the user/page.</param>
+        /// <param name="options">The options for the call to the API.</param>
+        [Obsolete("Use method overload.")]
+        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
+            // TODO: Remove in v1.0
+            return FacebookFeedResponse.ParseResponse(Raw.GetFeed(identifier, options));
+        }
 
         /// <summary>
         /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
         /// </summary>
         /// <param name="identifier">The ID or name of the user/page.</param>
         public FacebookFeedResponse GetFeed(string identifier) {
-            return GetFeed(identifier, new FacebookFeedOptions());
+            return GetFeed(new FacebookGetFeedOptions(identifier));
         }
 
         /// <summary>
@@ -49,18 +61,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="limit">The maximum amount of events to return.</param>
         public FacebookFeedResponse GetFeed(string identifier, int limit) {
-            return GetFeed(identifier, new FacebookFeedOptions {
-                Limit = limit
-            });
+            return GetFeed(new FacebookGetFeedOptions(identifier, limit));
         }
 
         /// <summary>
-        /// Gets a list of entries from the feed of the user or page with the specified <code>identifier</code>.
+        /// Gets a list of entries from the feed of the user or page matching the specified <code>options</code>.
         /// </summary>
-        /// <param name="identifier">The ID or name of the user/page.</param>
         /// <param name="options">The options for the call to the API.</param>
-        public FacebookFeedResponse GetFeed(string identifier, FacebookFeedOptions options) {
-            return FacebookFeedResponse.ParseResponse(Raw.GetFeed(identifier, options));
+        public FacebookFeedResponse GetFeed(FacebookGetFeedOptions options) {
+            return FacebookFeedResponse.ParseResponse(Raw.GetFeed(options));
         }
 
         #endregion
