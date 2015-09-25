@@ -54,6 +54,15 @@ namespace Skybrud.Social.LinkedIn {
             return LinkedInPostsResponse.ParseXml(Client.GetGroupPosts(groupId, fields));
         }
 
+        public LinkedInBasicProfileResponse GetBasicProfile() {
+            return GetBasicProfile(LinkedInConstants.BasicProfileDefaultFields);
+        }
+
+        public LinkedInBasicProfileResponse GetBasicProfile(string[] fields) {
+            string xmlResponse = Client.GetBasicProfile(fields);
+            return LinkedInBasicProfileResponse.ParseXml(xmlResponse);
+        }
+
     }
 
 }
