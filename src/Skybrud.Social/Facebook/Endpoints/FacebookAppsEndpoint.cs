@@ -1,8 +1,13 @@
+using System;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Options.Apps;
 using Skybrud.Social.Facebook.Responses.Apps;
 
 namespace Skybrud.Social.Facebook.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the implementation of the accounts endpoint.
+    /// </summary>
     public class FacebookAppsEndpoint {
 
         #region Properties
@@ -45,6 +50,15 @@ namespace Skybrud.Social.Facebook.Endpoints {
         /// <param name="id">The ID of the app.</param>
         public FacebookAppResponse GetApp(string id) {
             return FacebookAppResponse.ParseResponse(Raw.GetApp(id));
+        }
+
+        /// <summary>
+        /// Gets information about the app matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        public FacebookAppResponse GetApp(FacebookGetAppOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return FacebookAppResponse.ParseResponse(Raw.GetApp(options));
         }
 
         #endregion
