@@ -31,7 +31,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <code>/me/accounts</code>
-        /// method. This call requires a user access token.
+        /// method. This call requires a user access token as well as the <code>manage_scope</code>.
         /// </summary>
         /// <returns>The raw JSON response from the API.</returns>
         public SocialHttpResponse GetAccounts() {
@@ -40,7 +40,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
 
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <code>/me/accounts</code>
-        /// method. This call requires a user access token.
+        /// method. This call requires a user access token as well as the <code>manage_scope</code>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>The raw JSON response from the API.</returns>
