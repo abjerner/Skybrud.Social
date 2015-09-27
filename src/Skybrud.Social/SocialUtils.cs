@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
@@ -171,12 +172,40 @@ namespace Skybrud.Social {
 
         #region Other
 
+        /// <summary>
+        /// Converts a camel cased reprenstation of an enum to a lower case string where words are separated with underscore.
+        /// </summary>
+        /// <param name="e">The enum to be converted.</param>
+        /// <returns>Returns the converted string.</returns>
         public static string CamelCaseToUnderscore(Enum e) {
             return CamelCaseToUnderscore(e.ToString());
         }
-        
+
+        /// <summary>
+        /// Converts a camel cased string to a lower case string where words are separated with underscore.
+        /// </summary>
+        /// <param name="str">The camel cased string to be converted.</param>
+        /// <returns>Returns the converted string.</returns>
         public static string CamelCaseToUnderscore(string str) {
             return Regex.Replace(str, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
+        }
+
+        /// <summary>
+        /// Converts a string separated by underscoes to a upper camel cased string.
+        /// </summary>
+        /// <param name="str">The camel cased string to be converted.</param>
+        /// <returns>Returns the converted string.</returns>
+        public static string UnderscoreToCamelCase(string str) {
+            if (String.IsNullOrWhiteSpace(str)) return str;
+            List<string> temp = new List<string>();
+            foreach (string piece in str.Split(new [] {'_'}, StringSplitOptions.RemoveEmptyEntries)) {
+                if (piece.Length == 1) {
+                    temp.Add(piece.ToUpper());
+                } else if (piece.Length > 1) {
+                    temp.Add(piece.Substring(0, 1).ToUpper() + piece.Substring(1));
+                }
+            }
+            return String.Join("", temp);
         }
 
         /// <summary>
