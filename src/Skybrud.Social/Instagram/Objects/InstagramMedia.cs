@@ -101,7 +101,9 @@ namespace Skybrud.Social.Instagram.Objects {
         /// Loads a media from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
+        [Obsolete]
         public static InstagramMedia LoadJson(string path) {
+            // TODO: Remove for v1.0
             return JsonObject.LoadJson(path, Parse);
         }
 
@@ -109,7 +111,9 @@ namespace Skybrud.Social.Instagram.Objects {
         /// Gets a media from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
+        [Obsolete]
         public static InstagramMedia ParseJson(string json) {
+            // TODO: Remove for v1.0
             return JsonObject.ParseJson(json, Parse);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
@@ -16,7 +17,9 @@ namespace Skybrud.Social.Instagram.Objects {
         /// Loads an image from the JSON file at the specified <var>path</var>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
+        [Obsolete]
         public new static InstagramMedia LoadJson(string path) {
+            // TODO: Remove for v1.0
             return JsonObject.LoadJson(path, Parse);
         }
 
@@ -24,7 +27,9 @@ namespace Skybrud.Social.Instagram.Objects {
         /// Gets an image from the specified JSON string.
         /// </summary>
         /// <param name="json">The JSON string representation of the object.</param>
+        [Obsolete]
         public new static InstagramMedia ParseJson(string json) {
+            // TODO: Remove for v1.0
             return JsonObject.ParseJson(json, Parse);
         }
 
