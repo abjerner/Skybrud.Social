@@ -2,14 +2,26 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class with various statistics about a user.
+    /// </summary>
     public class InstagramUserCounts : SocialJsonObject {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the amount of media the user has uploaded.
+        /// </summary>
         public int Media { get; private set; }
 
+        /// <summary>
+        /// Gets the amount of other users following the user.
+        /// </summary>
         public int FollowedBy { get; private set; }
 
+        /// <summary>
+        /// Gets the amount of other users followed by the user.
+        /// </summary>
         public int Follows { get; private set; }
 
         #endregion
@@ -23,9 +35,10 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Gets a user from the specified <var>JsonObject</var>.
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramUserCounts</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramUserCounts</code>.</returns>
         public static InstagramUserCounts Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramUserCounts(obj) {

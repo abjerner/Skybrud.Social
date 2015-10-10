@@ -3,27 +3,30 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class representing a summary of an Instagram user.
+    /// </summary>
     public class InstagramUserSummary : SocialJsonObject {
 
         #region Properties
 
         /// <summary>
-        /// The ID of the user.
+        /// Gets the ID of the user.
         /// </summary>
         public long Id { get; private set; }
 
         /// <summary>
-        /// The username of the user.
+        /// Gets the username of the user.
         /// </summary>
         public string Username { get; private set; }
 
         /// <summary>
-        /// The full name of the users.
+        /// Gets the full name of the users.
         /// </summary>
         public string FullName { get; private set; }
 
         /// <summary>
-        /// The profile picture of the user.
+        /// Gets the profile picture of the user.
         /// </summary>
         public string ProfilePicture { get; private set; }
 
@@ -54,9 +57,10 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Gets a user from the specified <var>JsonObject</var>.
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramUserSummary</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramUserSummary</code>.</returns>
         public static InstagramUserSummary Parse(JsonObject obj) {
             if (obj == null) return null;
             string fullname = obj.GetString("full_name");

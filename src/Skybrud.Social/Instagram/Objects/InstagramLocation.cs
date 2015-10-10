@@ -43,7 +43,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads a location from the JSON file at the specified <var>path</var>.
+        /// Loads a location from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramLocation LoadJson(string path) {
@@ -59,9 +59,10 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Gets a location from the specified <var>JsonObject</var>.
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramLocation</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramLocation</code>.</returns>
         public static InstagramLocation Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramLocation(obj) {

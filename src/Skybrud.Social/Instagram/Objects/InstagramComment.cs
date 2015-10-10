@@ -3,27 +3,30 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class representing a comment of a media.
+    /// </summary>
     public class InstagramComment : SocialJsonObject {
 
         #region Properties
         
         /// <summary>
-        /// The ID of the comment.
+        /// Gets the ID of the comment.
         /// </summary>
         public long Id { get; internal set; }
 
         /// <summary>
-        /// The timestamp for when the comment was created.
+        /// Gets the timestamp for when the comment was created.
         /// </summary>
         public DateTime Created { get; internal set; }
 
         /// <summary>
-        /// The text/message of the comment.
+        /// Gets the text/message of the comment.
         /// </summary>
         public string Text { get; internal set; }
 
         /// <summary>
-        /// The user responsible for the comment.
+        /// Gets the user responsible for the comment.
         /// </summary>
         public InstagramUserSummary User { get; internal set; }
 
@@ -38,7 +41,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads a comment from the JSON file at the specified <var>path</var>.
+        /// Loads a comment from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramComment LoadJson(string path) {
@@ -54,9 +57,9 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Gets a comment from the specified <var>JsonObject</var>.
+        /// Gets a comment from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static InstagramComment Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramComment(obj) {

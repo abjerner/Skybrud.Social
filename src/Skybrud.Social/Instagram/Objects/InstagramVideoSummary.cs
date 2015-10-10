@@ -2,6 +2,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class representing a summary of the video formats available for an Instagram media.
+    /// </summary>
     public class InstagramVideoSummary : SocialJsonObject {
 
         #region Properties
@@ -11,7 +14,14 @@ namespace Skybrud.Social.Instagram.Objects {
         /// </summary>
         public InstagramMediaSummary LowBandwidth { get; private set; }
 
+        /// <summary>
+        /// Gets information about the low resolution format.
+        /// </summary>
         public InstagramMediaSummary LowResolution { get; private set; }
+
+        /// <summary>
+        /// Gets information about the standard resolution format.
+        /// </summary>
         public InstagramMediaSummary StandardResolution { get; private set; }
 
         #endregion
@@ -24,6 +34,11 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramVideoSummary</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramVideoSummary</code>.</returns>
         public static InstagramVideoSummary Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramVideoSummary(obj) {

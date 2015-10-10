@@ -3,40 +3,46 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class representing an Instagram user.
+    /// </summary>
     public class InstagramUser : SocialJsonObject {
 
         #region Properties
 
         /// <summary>
-        /// The ID of the user.
+        /// Gets the ID of the user.
         /// </summary>
         public long Id { get; private set; }
 
         /// <summary>
-        /// The username of the user.
+        /// Gets the username of the user.
         /// </summary>
         public string Username { get; private set; }
 
         /// <summary>
-        /// The full name of the user. A user may not have specified a full name.
+        /// Gets the full name of the user. A user may not have specified a full name.
         /// </summary>
         public string FullName { get; private set; }
 
         /// <summary>
-        /// The profile picture of the user.
+        /// Gets the profile picture of the user.
         /// </summary>
         public string ProfilePicture { get; private set; }
 
         /// <summary>
-        /// The website of the user. A user may not have specified a website.
+        /// Gets the website of the user. A user may not have specified a website.
         /// </summary>
         public string Website { get; private set; }
 
         /// <summary>
-        /// The bio of the user. A user may not have specified a bio.
+        /// Gets the bio of the user. A user may not have specified a bio.
         /// </summary>
         public string Bio { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to various statistics about the user.
+        /// </summary>
         public InstagramUserCounts Counts { get; private set; }
 
         #endregion
@@ -50,7 +56,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads a user from the JSON file at the specified <var>path</var>.
+        /// Loads a user from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         public static InstagramUser LoadJson(string path) {
@@ -66,9 +72,10 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Gets a user from the specified <var>JsonObject</var>.
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramUser</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramUser</code>.</returns>
         public static InstagramUser Parse(JsonObject obj) {
             if (obj == null) return null;
             string fullname = obj.GetString("full_name");

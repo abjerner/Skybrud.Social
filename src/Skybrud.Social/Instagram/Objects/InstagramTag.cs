@@ -27,8 +27,13 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #endregion
 
-        #region Methods
+        #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramTag</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramTag</code>.</returns>
         public static InstagramTag Parse(JsonObject obj) {
             return new InstagramTag(obj) {
                 MediaCount = obj.GetInt64("media_count"),

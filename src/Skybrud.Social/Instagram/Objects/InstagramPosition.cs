@@ -26,12 +26,17 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        public InstagramPosition(JsonObject obj) : base(obj) { }
+        private InstagramPosition(JsonObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramPosition</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramPosition</code>.</returns>
         public static InstagramPosition Parse(JsonObject obj) {
             if (obj == null) return null;
             return new InstagramPosition(obj) {

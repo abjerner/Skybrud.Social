@@ -3,6 +3,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
 
+    /// <summary>
+    /// Class representing an Instagram image.
+    /// </summary>
     public class InstagramImage : InstagramMedia {
 
         #region Constructors
@@ -14,7 +17,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         /// <summary>
-        /// Loads an image from the JSON file at the specified <var>path</var>.
+        /// Loads an image from the JSON file at the specified <code>path</code>.
         /// </summary>
         /// <param name="path">The path to the file.</param>
         [Obsolete]
@@ -34,9 +37,9 @@ namespace Skybrud.Social.Instagram.Objects {
         }
 
         /// <summary>
-        /// Gets an image from the specified <var>JsonObject</var>.
+        /// Gets an image from the specified <code>JsonObject</code>.
         /// </summary>
-        /// <param name="obj">The instance of <var>JsonObject</var> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public new static InstagramImage Parse(JsonObject obj) {
             return InstagramMedia.Parse(obj) as InstagramImage;
         }
