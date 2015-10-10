@@ -23,11 +23,7 @@ namespace Skybrud.Social.Instagram.Objects {
         #region Static methods
 
         public static InstagramImageSummary Parse(JsonObject obj) {
-            if (obj == null) return new InstagramImageSummary(null) {
-                LowResolution = new InstagramMediaSummary(null),
-                Thumbnail = new InstagramMediaSummary(null),
-                StandardResolution = new InstagramMediaSummary(null)
-            };
+            if (obj == null) return null;
             return new InstagramImageSummary(obj) {
                 LowResolution = obj.GetObject("low_resolution", InstagramMediaSummary.Parse),
                 Thumbnail = obj.GetObject("thumbnail", InstagramMediaSummary.Parse),
