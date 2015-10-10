@@ -41,8 +41,8 @@ namespace Skybrud.Social.Instagram.Responses {
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
 
-            // Get the "meta" object
-            InstagramMetaData meta = obj.GetObject("meta", InstagramMetaData.Parse);
+            // Get the "meta" object (may be the root object for some errors)
+            InstagramMetaData meta = obj.HasValue("code") ? InstagramMetaData.Parse(obj) : obj.GetObject("meta", InstagramMetaData.Parse);
 
             // Now throw some exceptions
             if (meta.ErrorType == "OAuthException") throw new InstagramOAuthException(response, meta);
