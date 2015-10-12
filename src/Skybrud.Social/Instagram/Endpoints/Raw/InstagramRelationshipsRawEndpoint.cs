@@ -4,11 +4,19 @@ using Skybrud.Social.Instagram.Options.Relationships;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
 
-    /// <see cref="http://instagram.com/developer/endpoints/relationships/"/>
+    /// <summary>
+    /// Class representing the raw implementation of the relationships endpoint.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/relationships/</cref>
+    /// </see>
     public class InstagramRelationshipsRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the Instagram OAuth client.
+        /// </summary>
         public InstagramOAuthClient Client { get; private set; }
 
         #endregion
@@ -30,6 +38,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/relationships/#get_users_follows</cref>
+        /// </see>
         public SocialHttpResponse Follows(long userId, InstagramFollowsOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + userId + "/follows", options);
         }
@@ -41,6 +53,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/relationships/#get_users_followed_by</cref>
+        /// </see>
         public SocialHttpResponse FollowedBy(long userId, InstagramFollowedByOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/users/" + userId + "/followed-by", options);
         }

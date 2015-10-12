@@ -4,6 +4,9 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Common {
 
+    /// <summary>
+    /// Class representing the options for getting a list of recent media.
+    /// </summary>
     /// <see>
     ///     <cref>http://instagram.com/developer/endpoints/users/#get_users_media_recent</cref>
     ///     <cref>http://instagram.com/developer/endpoints/locations/#get_locations_media_recent</cref>
@@ -45,6 +48,9 @@ namespace Skybrud.Social.Instagram.Options.Common {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
             if (Count > 0) qs.Add("count", Count);

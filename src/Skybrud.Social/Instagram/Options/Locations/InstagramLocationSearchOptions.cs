@@ -3,8 +3,11 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Locations {
     
+    /// <summary>
+    /// Class representing the options for for getting a list of locations within a given radius.
+    /// </summary>
     /// <see>
-    ///     <cref>http://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
+    ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
     /// </see>
     public class InstagramLocationSearchOptions : IGetOptions {
 
@@ -31,6 +34,9 @@ namespace Skybrud.Social.Instagram.Options.Locations {
 
         #region Methods
 
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
             qs.Add("lat", Latitude);

@@ -4,11 +4,19 @@ using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
 
-    /// <see cref="http://instagram.com/developer/endpoints/relationships/"/>
+    /// <summary>
+    /// Class representing the implementation of the relationships endpoint.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/relationships/</cref>
+    /// </see>
     public class InstagramRelationshipsEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the Instagram service.
+        /// </summary>
         public InstagramService Service { get; private set; }
 
         /// <summary>

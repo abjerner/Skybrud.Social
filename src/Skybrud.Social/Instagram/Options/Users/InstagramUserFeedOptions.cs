@@ -3,6 +3,9 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Users {
     
+    /// <summary>
+    /// Class representing the options for getting the feed of the authenticated user.
+    /// </summary>
     /// <see>
     ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed</cref>
     /// </see>
@@ -29,6 +32,9 @@ namespace Skybrud.Social.Instagram.Options.Users {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
             if (Count > 0) qs.Add("count", Count);

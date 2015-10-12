@@ -3,8 +3,13 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options {
 
+    /// <summary>
+    /// Class representing the search options for getting a list of recent media.
+    /// </summary>
     public class InstagramMediaSearchOptions : IGetOptions {
-        
+
+        #region Properties
+
         /// <summary>
         /// Count of media to return.
         /// </summary>
@@ -20,6 +25,13 @@ namespace Skybrud.Social.Instagram.Options {
         /// </summary>
         public string MaxId { get; set; }
 
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
             SocialQueryString query = new SocialQueryString();
             if (Count > 0) query.Add("count", Count);
@@ -27,7 +39,9 @@ namespace Skybrud.Social.Instagram.Options {
             if (MaxId != null) query.Add("max_id", MaxId);
             return query;
         }
-    
+
+        #endregion
+
     }
 
 }

@@ -6,6 +6,9 @@ using Skybrud.Social.Instagram.Objects.Pagination;
 
 namespace Skybrud.Social.Instagram.Responses {
 
+    /// <summary>
+    /// Class representing the response of a call for getting a list of recent media.
+    /// </summary>
     public class InstagramRecentMediaResponse : InstagramResponse<InstagramMediasResponseBody> {
 
         #region Constructors
@@ -16,6 +19,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>InstagramRecentMediaResponse</code>.
+        /// </summary>
+        /// <param name="response">The response to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramRecentMediaResponse</code>.</returns>
         public static InstagramRecentMediaResponse ParseResponse(SocialHttpResponse response) {
 
             // Some input validation
@@ -39,10 +47,16 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing the response body of a call for getting a list of recent media.
+    /// </summary>
     public class InstagramMediasResponseBody : InstagramResponseBody<InstagramMedia[]> {
 
         #region Properties
 
+        /// <summary>
+        /// Gets pagination information of the response.
+        /// </summary>
         public InstagramIdBasedPagination Pagination { get; private set; }
 
         #endregion
@@ -55,6 +69,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramMediasResponseBody</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramMediasResponseBody</code>.</returns>
         public static InstagramMediasResponseBody Parse(JsonObject obj) {
             return new InstagramMediasResponseBody(obj) {
                 Pagination = obj.GetObject("pagination", InstagramIdBasedPagination.Parse),

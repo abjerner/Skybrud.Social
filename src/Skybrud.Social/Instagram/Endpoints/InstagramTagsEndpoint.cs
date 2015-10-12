@@ -2,14 +2,19 @@ using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
-
-    /// <see cref="http://instagram.com/developer/endpoints/tags/"/>
+    
+    /// <summary>
+    /// Class representing the implementation of the tags endpoint.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/tags/</cref>
+    /// </see>
     public class InstagramTagsEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent Instagram service.
+        /// Gets a reference to the Instagram service.
         /// </summary>
         public InstagramService Service { get; private set; }
 

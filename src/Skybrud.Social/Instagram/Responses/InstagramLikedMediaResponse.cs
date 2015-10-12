@@ -6,6 +6,12 @@ using Skybrud.Social.Instagram.Objects.Pagination;
 
 namespace Skybrud.Social.Instagram.Responses {
 
+    /// <summary>
+    /// Class representing the response of a call to the liked media of the authenticated user.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed_liked</cref>
+    /// </see>
     public class InstagramLikedMediaResponse : InstagramResponse<InstagramLikedMediaResponseBody> {
 
         #region Constructors
@@ -16,6 +22,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>InstagramLikedMediaResponse</code>.
+        /// </summary>
+        /// <param name="response">The response to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramLikedMediaResponse</code>.</returns>
         public static InstagramLikedMediaResponse ParseResponse(SocialHttpResponse response) {
 
             // Some input validation
@@ -39,10 +50,19 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing the response body of a call to the liked media of the authenticated user.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed_liked</cref>
+    /// </see>
     public class InstagramLikedMediaResponseBody : InstagramResponseBody<InstagramMedia[]> {
 
         #region Properties
 
+        /// <summary>
+        /// Gets pagination information of the response.
+        /// </summary>
         public InstagramLikedMediaPagination Pagination { get; private set; }
 
         #endregion
@@ -55,6 +75,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramLikedMediaResponseBody</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramLikedMediaResponseBody</code>.</returns>
         public static InstagramLikedMediaResponseBody Parse(JsonObject obj) {
             return new InstagramLikedMediaResponseBody(obj) {
                 Pagination = obj.GetObject("pagination", InstagramLikedMediaPagination.Parse),

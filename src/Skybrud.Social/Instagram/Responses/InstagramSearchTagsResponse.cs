@@ -5,6 +5,9 @@ using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
     
+    /// <summary>
+    /// Class representing the response of a call for getting a list of tags matching a given query.
+    /// </summary>
     /// <see>
     ///     <cref>https://instagram.com/developer/endpoints/tags/#get_tags_search</cref>
     /// </see>
@@ -46,6 +49,9 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing the response body of a call for getting a list of tags matching a given query.
+    /// </summary>
     /// <see>
     ///     <cref>https://instagram.com/developer/endpoints/tags/#get_tags_search</cref>
     /// </see>

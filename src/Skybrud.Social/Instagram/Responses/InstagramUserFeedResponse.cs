@@ -4,7 +4,13 @@ using Skybrud.Social.Json;
 using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
-
+    
+    /// <summary>
+    /// Class representing the response of a call for getting the feed of the autenticated user.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed</cref>
+    /// </see>
     public class InstagramUserFeedResponse : InstagramResponse<InstagramUserFeedResponseBody> {
 
         #region Constructors
@@ -15,6 +21,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>InstagramUserFeedResponse</code>.
+        /// </summary>
+        /// <param name="response">The response to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramUserFeedResponse</code>.</returns>
         public static InstagramUserFeedResponse ParseResponse(SocialHttpResponse response) {
 
             // Some input validation
@@ -38,6 +49,12 @@ namespace Skybrud.Social.Instagram.Responses {
 
     }
 
+    /// <summary>
+    /// Class representing the response body of a call for getting the feed of the autenticated user.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_feed</cref>
+    /// </see>
     public class InstagramUserFeedResponseBody : InstagramResponseBody<InstagramMedia[]> {
 
         #region Constructors
@@ -48,6 +65,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>InstagramUserFeedResponseBody</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramUserFeedResponseBody</code>.</returns>
         public static InstagramUserFeedResponseBody Parse(JsonObject obj) {
             return new InstagramUserFeedResponseBody(obj) {
                 Data = obj.GetArray("data", InstagramMedia.Parse)

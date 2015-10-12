@@ -2,6 +2,9 @@ using System;
 
 namespace Skybrud.Social.Instagram {
 
+    /// <summary>
+    /// Enum class representing the scopes of the Instagram API.
+    /// </summary>
     [Flags]
     public enum InstagramScope {
 

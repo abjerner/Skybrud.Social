@@ -6,6 +6,9 @@ using Skybrud.Social.Instagram.Options.Locations;
 
 namespace Skybrud.Social.Instagram.Endpoints.Raw {
 
+    /// <summary>
+    /// Class representing the raw implementation of the locations endpoint.
+    /// </summary>
     /// <see>
     ///     <cref>https://instagram.com/developer/endpoints/locations/</cref>
     /// </see>
@@ -34,6 +37,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets information about a location with the specified <code>locationId</code>.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations</cref>
+        /// </see>
         public SocialHttpResponse GetLocation(int locationId) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId);
         }
@@ -42,6 +49,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets a list of recent media from the specified <code>location</code>.
         /// </summary>
         /// <param name="location">The location.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_media_recent</cref>
+        /// </see>
         public SocialHttpResponse GetRecentMedia(InstagramLocation location) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, null);
@@ -52,6 +63,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_media_recent</cref>
+        /// </see>
         public SocialHttpResponse GetRecentMedia(InstagramLocation location, InstagramLocationRecentMediaOptions options) {
             if (location == null) throw new ArgumentNullException("location");
             return GetRecentMedia(location.Id, options);
@@ -61,6 +76,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets a list of recent media from a location with the specified <code>locationId</code>.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_media_recent</cref>
+        /// </see>
         public SocialHttpResponse GetRecentMedia(int locationId) {
             return GetRecentMedia(locationId, null);
         }
@@ -70,6 +89,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_media_recent</cref>
+        /// </see>
         public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationRecentMediaOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", options);
         }
@@ -80,7 +103,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
-        /// <see cref="http://instagram.com/developer/endpoints/locations/#get_locations_search"/>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
+        /// </see>
         public SocialHttpResponse Search(double latitude, double longitude) {
             return Search(new InstagramLocationSearchOptions {
                 Latitude = latitude,
@@ -95,7 +121,10 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         /// <param name="distance">The distance is meters (max: 5000m)</param>
-        /// <see cref="http://instagram.com/developer/endpoints/locations/#get_locations_search"/>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
+        /// </see>
         public SocialHttpResponse Search(double latitude, double longitude, int distance) {
             return Search(new InstagramLocationSearchOptions {
                 Latitude = latitude,
@@ -105,10 +134,13 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets a list of locations with a geographic coordinate within the radius of blah blah blah.
+        /// Gets a list of locations with a geographic coordinate within the radius as described in the specified <code>options</code>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        /// <see cref="http://instagram.com/developer/endpoints/locations/#get_locations_search"/>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response from the Instagram API.</returns>
+        /// <see>
+        ///     <cref>https://instagram.com/developer/endpoints/locations/#get_locations_search</cref>
+        /// </see>
         public SocialHttpResponse Search(InstagramLocationSearchOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/search", options);
         }

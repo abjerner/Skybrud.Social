@@ -5,6 +5,9 @@ using Skybrud.Social.Instagram.Objects.Common;
 
 namespace Skybrud.Social.Instagram.Exceptions {
 
+    /// <summary>
+    /// Class representing an exception/error returned by the Instagram API.
+    /// </summary>
     public class InstagramException : Exception {
 
         #region Properties

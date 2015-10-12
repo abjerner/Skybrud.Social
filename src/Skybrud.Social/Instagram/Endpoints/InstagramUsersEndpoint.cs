@@ -6,6 +6,9 @@ using Skybrud.Social.Instagram.Responses;
 
 namespace Skybrud.Social.Instagram.Endpoints {
 
+    /// <summary>
+    /// Class representing the implementation of the users endpoint.
+    /// </summary>
     /// <see>
     ///     <cref>https://instagram.com/developer/endpoints/users/</cref>
     /// </see>
@@ -74,6 +77,7 @@ namespace Skybrud.Social.Instagram.Endpoints {
         /// <param name="id">The ID of the user.</param>
         [Obsolete("Use the GetInfo() instead.")]
         public InstagramUserResponse GetInfo(long id) {
+            // TODO: Remove for v1.0
             return InstagramUserResponse.ParseResponse(Raw.GetUser(id.ToString(CultureInfo.InvariantCulture)));
         }
 

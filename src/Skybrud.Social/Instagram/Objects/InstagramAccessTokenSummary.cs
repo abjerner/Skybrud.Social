@@ -2,9 +2,13 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
     
+    /// <summary>
+    /// Class representing the response body of a call to exchange an authorization code for an access token.
+    /// </summary>
     public class InstagramAccessTokenSummary : SocialJsonObject {
 
         #region Properties
+        
         /// <summary>
         /// Gets the access token.
         /// </summary>

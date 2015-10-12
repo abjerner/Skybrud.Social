@@ -5,6 +5,9 @@ using Skybrud.Social.Instagram.Objects;
 
 namespace Skybrud.Social.Instagram.Responses {
 
+    /// <summary>
+    /// Class representing the response of a call to exchange an authorization code for an access token.
+    /// </summary>
     public class InstagramAccessTokenResponse : InstagramResponse<InstagramAccessTokenSummary> {
 
         #region Constructors
@@ -15,6 +18,11 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>InstagramAccessTokenResponse</code>.
+        /// </summary>
+        /// <param name="response">The response to be parsed.</param>
+        /// <returns>Returns an instance of <code>InstagramAccessTokenResponse</code> representing the response.</returns>
         public static InstagramAccessTokenResponse ParseResponse(SocialHttpResponse response) {
 
             // Some input validation

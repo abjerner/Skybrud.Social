@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Specialized;
 using System.Net;
-using System.Web;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
 using Skybrud.Social.Interfaces;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.OAuth {
 
     /// <summary>
-    /// Class for handling the raw communication with the Instagram API as well
-    /// as any OAuth 2.0 communication/authentication.
+    /// Class for handling the raw communication with the Instagram API as well as any OAuth 2.0
+    /// communication/authentication.
     /// </summary>
     public class InstagramOAuthClient {
 
@@ -29,17 +27,17 @@ namespace Skybrud.Social.Instagram.OAuth {
         #region Properties
 
         /// <summary>
-        /// The ID of the app/client.
+        /// Gets or sets the ID of the app/client.
         /// </summary>
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The secret of the app/client.
+        /// Gets or sets the secret of the app/client.
         /// </summary>
         public string ClientSecret { get; set; }
 
         /// <summary>
-        /// The redirect URI of your application.
+        /// Gets or sets the redirect URI of your application.
         /// </summary>
         [Obsolete("Use \"RedirectUri\" instead to follow Instagram lingo.")]
         public string ReturnUri {
@@ -48,12 +46,12 @@ namespace Skybrud.Social.Instagram.OAuth {
         }
 
         /// <summary>
-        /// The redirect URI of your application.
+        /// Gets or sets the redirect URI of your application.
         /// </summary>
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// The access token.
+        /// Gets or sets the access token.
         /// </summary>
         public string AccessToken { get; set; }
 
@@ -104,8 +102,8 @@ namespace Skybrud.Social.Instagram.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified access token. Using this initializer,
-        /// the client will have no information about your app.
+        /// Initializes an OAuth client with the specified access token. Using this initializer, the client will have
+        /// no information about your app.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
         public InstagramOAuthClient(string accessToken) {
@@ -161,8 +159,8 @@ namespace Skybrud.Social.Instagram.OAuth {
         #region Methods
 
         /// <summary>
-        /// Gets an authorization URL using the specified <var>state</var>.
-        /// This URL will only make your application request a basic scope.
+        /// Gets an authorization URL using the specified <code>state</code>. This URL will only make your application
+        /// request a basic scope.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         public string GetAuthorizationUrl(string state) {
@@ -170,8 +168,7 @@ namespace Skybrud.Social.Instagram.OAuth {
         }
 
         /// <summary>
-        /// Gets an authorization URL using the specified <var>state</var> and
-        /// request the specified <var>scope</var>.
+        /// Gets an authorization URL using the specified <var>state</var> and request the specified <code>scope</code>.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
@@ -185,6 +182,11 @@ namespace Skybrud.Social.Instagram.OAuth {
             );
         }
 
+        /// <summary>
+        /// Makes a call to the Instagram API to exchange the specified <code>authCode</code> for an access token.
+        /// </summary>
+        /// <param name="authCode">The authorization code obtained from an OAuth 2.0 login flow.</param>
+        /// <returns>Returns an instance of <code>InstagramAccessTokenResponse</code> representing the response from the server.</returns>
         public InstagramAccessTokenResponse GetAccessTokenFromAuthCode(string authCode) {
         
             // Initialize collection with POST data

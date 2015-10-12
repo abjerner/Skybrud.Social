@@ -9,12 +9,12 @@ namespace Skybrud.Social.Instagram.Options {
     public class InstagramRecentMediaSearchOptions : IGetOptions {
         
         /// <summary>
-        /// Latitude of the center search coordinate. If used, <var>Longitude</var> is required.
+        /// Latitude of the center search coordinate. If used, <code>Longitude</code> is required.
         /// </summary>
         public double Latitude { get; set; }
 
         /// <summary>
-        /// Longitude of the center search coordinate. If used, <var>Latitude</var> is required.
+        /// Longitude of the center search coordinate. If used, <code>Latitude</code> is required.
         /// </summary>
         public double Longitude { get; set; }
 
@@ -33,6 +33,9 @@ namespace Skybrud.Social.Instagram.Options {
         /// </summary>
         public int MaxTimestamp { get; set; }
 
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
 
             // Declare the query string

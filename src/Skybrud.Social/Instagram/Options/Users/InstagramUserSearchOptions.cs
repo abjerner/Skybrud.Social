@@ -3,7 +3,12 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.Options.Users {
 
-    /// <see cref="http://instagram.com/developer/endpoints/users/#get_users_search"/>
+    /// <summary>
+    /// Class representing the options for for getting a list of users matching a given query.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://instagram.com/developer/endpoints/users/#get_users_search</cref>
+    /// </see>
     public class InstagramUserSearchOptions : IGetOptions {
 
         #region Properties
@@ -14,7 +19,7 @@ namespace Skybrud.Social.Instagram.Options.Users {
         public string Query { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum amount of users to return.
+        /// Gets or sets the maximum amount of users to be returned.
         /// </summary>
         public int Count { get; set; }
 
@@ -22,6 +27,9 @@ namespace Skybrud.Social.Instagram.Options.Users {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets an instance of <code>SocialQueryString</code> representing the GET parameters.
+        /// </summary>
         public SocialQueryString GetQueryString() {
             SocialQueryString qs = new SocialQueryString();
             qs.Add("q", Query);
