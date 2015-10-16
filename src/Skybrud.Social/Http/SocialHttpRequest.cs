@@ -159,10 +159,10 @@ namespace Skybrud.Social.Http {
 
             // Get the response
             try {
-                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
+                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse, this);
             } catch (WebException ex) {
                 if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
+                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse, this);
             }
 
         }
