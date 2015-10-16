@@ -30,3 +30,8 @@ PinterestOAuthClient client = new PinterestAuthClient {
 Authentication requires that you specify the client ID, client secret and redirect URI of your app (client).
 
 * [**List of existing app** *at developers.pinterest.com*](https://developers.pinterest.com/apps/)
+
+
+## Documentation
+
+Although still a bit limited, further documentation can be found at the [Skybrud.Social website](http://social.skybrud.dk/pinterest/).
