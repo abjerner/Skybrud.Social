@@ -37,6 +37,14 @@ namespace Skybrud.Social.Http {
         public string UserAgent { get; set; }
 
         /// <summary>
+        /// Gets or sets the accept language of the request.
+        /// </summary>
+        public string AcceptLanguage {
+            get { return Headers.Headers["Accept-Language"]; }
+            set { Headers.Headers["Accept-Language"] = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the authorization header of the request.
         /// </summary>
         public string Authorization {
