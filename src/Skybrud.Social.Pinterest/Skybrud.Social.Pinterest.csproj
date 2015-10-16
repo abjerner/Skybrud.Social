@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,14 +43,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\PinterestUsersEndpoint.cs" />
+    <Compile Include="Endpoints\Raw\PinterestUsersRawEndpoint.cs" />
+    <Compile Include="Exceptions\PinterestException.cs" />
+    <Compile Include="Fields\PinterestField.cs" />
+    <Compile Include="Fields\PinterestFieldsCollection.cs" />
+    <Compile Include="JsonUtils.cs" />
+    <Compile Include="OAuth\PinterestOAuthClient.cs" />
+    <Compile Include="Objects\Authentication\PinterestTokenResponseBody.cs" />
+    <Compile Include="Objects\PinterestError.cs" />
+    <Compile Include="Objects\PinterestObject.cs" />
+    <Compile Include="Objects\Users\PinterestUser.cs" />
+    <Compile Include="Objects\Users\PinterestUserCounts.cs" />
+    <Compile Include="Objects\Users\PinterestUserImage.cs" />
+    <Compile Include="Objects\Users\PinterestUserImageSize.cs" />
+    <Compile Include="Options\PinterestGetUserOptions.cs" />
+    <Compile Include="PinterestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
+    <Compile Include="Responses\Authentication\PinterestTokenResponse.cs" />
+    <Compile Include="Responses\PinterestResponse.cs" />
+    <Compile Include="Responses\Users\PinterestGetUserResponse.cs" />
+    <Compile Include="Scopes\PinterestScope.cs" />
+    <Compile Include="Scopes\PinterestScopeCollection.cs" />
+    <Compile Include="Scopes\PinterestScopes.cs" />
+    <Compile Include="SocialDateTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Skybrud.Social\Skybrud.Social.csproj">
       <Project>{b1ee1531-e2fc-419c-b7da-ffb415417fc5}</Project>
       <Name>Skybrud.Social</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
