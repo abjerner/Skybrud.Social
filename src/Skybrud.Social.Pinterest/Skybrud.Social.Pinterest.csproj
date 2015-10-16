@@ -48,6 +48,7 @@
     <Compile Include="Exceptions\PinterestException.cs" />
     <Compile Include="Fields\PinterestField.cs" />
     <Compile Include="Fields\PinterestFieldsCollection.cs" />
+    <Compile Include="Fields\PinterestUserFields.cs" />
     <Compile Include="JsonUtils.cs" />
     <Compile Include="OAuth\PinterestOAuthClient.cs" />
     <Compile Include="Objects\Authentication\PinterestTokenResponseBody.cs" />

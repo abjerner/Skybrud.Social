@@ -101,6 +101,14 @@ namespace Skybrud.Social.Pinterest.Fields {
         }
 
         /// <summary>
+        /// Initializes a new collection based on a single instance of <code>PinterestField</code>.
+        /// </summary>
+        /// <param name="field">The array of fields the collection should be based on.</param>
+        public static implicit operator PinterestFieldsCollection(PinterestField field) {
+            return new PinterestFieldsCollection(field);
+        }
+
+        /// <summary>
         /// Adds support for adding a <code>field</code> to the <code>collection</code> using the plus operator.
         /// </summary>
         /// <param name="collection">The collection to which <code>field</code> will be added.</param>

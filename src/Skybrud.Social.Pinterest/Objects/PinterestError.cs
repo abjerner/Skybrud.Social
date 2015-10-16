@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Social.Json.Extensions.JObject;
 using Skybrud.Social.Time;
 
@@ -25,6 +26,30 @@ namespace Skybrud.Social.Pinterest.Objects {
         public string Message { get; private set; }
 
         public string Type { get; private set; }
+
+        public bool HasStatus {
+            get { return !String.IsNullOrWhiteSpace(Status); }
+        }
+
+        public bool HasCode {
+            get { return Code > 0; }
+        }
+
+        public bool HasHost {
+            get { return !String.IsNullOrWhiteSpace(Host); }
+        }
+
+        public bool HasGeneratedAt {
+            get { return GeneratedAt != null; }
+        }
+
+        public bool HasMessage {
+            get { return !String.IsNullOrWhiteSpace(Message); }
+        }
+
+        public bool HasType {
+            get { return !String.IsNullOrWhiteSpace(Type); }
+        }
 
         #endregion
 

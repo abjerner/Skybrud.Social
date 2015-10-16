@@ -156,6 +156,26 @@ namespace Skybrud.Social.Time {
 
         #endregion
 
+        #region Member methods
+
+        public override string ToString() {
+            return DateTime.ToString(DateTimeFormatInfo.CurrentInfo);
+        }
+
+        public string ToString(IFormatProvider provider) {
+            return DateTime.ToString(provider);
+        }
+
+        public string ToString(string format) {
+            return DateTime.ToString(format, DateTimeFormatInfo.CurrentInfo);
+        }
+
+        public string ToString(string format, IFormatProvider provider) {
+            return DateTime.ToString(format, provider);
+        }
+
+        #endregion
+
         #region Static methods
 
         public static SocialDateTime Parse(string str) {

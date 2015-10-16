@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Social.Json.Extensions.JObject;
 using Skybrud.Social.Time;
 
@@ -7,6 +8,8 @@ namespace Skybrud.Social.Pinterest.Objects.Users {
     public class PinterestUser : PinterestObject {
 
         #region Properties
+
+        public string Id { get; private set; }
 
         public string Username { get; private set; }
 
@@ -26,7 +29,41 @@ namespace Skybrud.Social.Pinterest.Objects.Users {
 
         public PinterestUserCounts Counts { get; private set; }
 
-        public string Id { get; private set; }
+        public bool HasUsername {
+            get { return !String.IsNullOrWhiteSpace(Username); }
+        }
+
+        public bool HasBio {
+            get { return !String.IsNullOrWhiteSpace(Bio); }
+        }
+
+        public bool HasFirstName {
+            get { return !String.IsNullOrWhiteSpace(FirstName); }
+        }
+
+        public bool HasLastName {
+            get { return !String.IsNullOrWhiteSpace(LastName); }
+        }
+
+        public bool HasAccountType {
+            get { return !String.IsNullOrWhiteSpace(AccountType); }
+        }
+
+        public bool HasUrl {
+            get { return !String.IsNullOrWhiteSpace(Url); }
+        }
+
+        public bool HasCreatedAt {
+            get { return CreatedAt != null; }
+        }
+
+        public bool HasImage {
+            get { return Image != null; }
+        }
+
+        public bool HasCounts {
+            get { return Counts != null; }
+        }
 
         #endregion
 
