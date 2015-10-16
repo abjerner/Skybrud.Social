@@ -36,6 +36,8 @@ Supporting and maintaining the implementation for each service takes up a lot of
 
 * [**Slack**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.Slack)<br />Authentication and implementation of basic user methods.
 
+* [**Pinterest**](https://github.com/abjerner/Skybrud.Social/tree/master/src/Skybrud.Social.Pinterest)<br />This project current support authentication with the Pinterest APi as well as an implementation of the users endpoint.
+
 
 [Website]: http://social.skybrud.dk/
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social
