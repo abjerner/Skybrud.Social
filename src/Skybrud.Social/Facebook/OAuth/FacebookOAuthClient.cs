@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
+using Skybrud.Social.Facebook.Responses.Authentication;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
@@ -234,6 +235,8 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <returns>Returns an access token based on the specified <code>authCode</code>.</returns>
         public string GetAccessTokenFromAuthCode(string authCode) {
 
+            // TODO: Remove for v1.0
+
             // Initialize the query string
             NameValueCollection query = new NameValueCollection {
                 {"client_id", AppId},
@@ -250,6 +253,37 @@ namespace Skybrud.Social.Facebook.OAuth {
 
             // Get the access token
             return response["access_token"];
+
+        }
+
+        /// <summary>
+        /// Exchanges the specified authorization code for a refresh token and an access token. This method currently
+        /// serves as an alternative to the <code>GetAccessTokenFromAuthCode</code> as it will return an instance of
+        /// <code>FacebookTokenResponse</code> representing the entire response from the Facebook Graph API rather than
+        /// string holding the access token. This method will be the default approach for Skybrud.Social v1.0.
+        /// </summary>
+        /// <param name="authCode">The authorization code received from the Pinterest OAuth dialog.</param>
+        /// <returns>Returns an access token based on the specified <code>authCode</code>.</returns>
+        public FacebookTokenResponse GetAccessTokenFromAuthCodeAlt(string authCode) {
+
+            // TODO: Rename to "GetAccessTokenFromAuthCode" for v1.0
+
+            // Initialize the query string
+            NameValueCollection query = new NameValueCollection {
+                {"client_id", AppId},
+                {"redirect_uri", RedirectUri},
+                {"client_secret", AppSecret},
+                {"code", authCode }
+            };
+
+            // Make the call to the API
+            HttpWebResponse response = SocialUtils.DoHttpGetRequest("https://graph.facebook.com/oauth/access_token", query);
+
+            // Wrap the native response class
+            SocialHttpResponse social = SocialHttpResponse.GetFromWebResponse(response);
+
+            // Parse the response
+            return FacebookTokenResponse.ParseResponse(social);
 
         }
 

@@ -177,6 +177,7 @@
     <Compile Include="Facebook\Responses\Albums\FacebookAlbumsResponse.cs" />
     <Compile Include="Facebook\Responses\Albums\FacebookPostAlbumResponse.cs" />
     <Compile Include="Facebook\Responses\Apps\FacebookAppResponse.cs" />
+    <Compile Include="Facebook\Responses\Authentication\FacebookTokenResponse.cs" />
     <Compile Include="Facebook\Responses\Comments\FacebookCommentResponse.cs" />
     <Compile Include="Facebook\Responses\Comments\FacebookCommentsResponse.cs" />
     <Compile Include="Facebook\Responses\Debug\FacebookDebugTokenResponse.cs" />
