@@ -1,4 +1,5 @@
 using Skybrud.Social.Json;
+using Skybrud.Social.Twitter.Objects.Media;
 
 namespace Skybrud.Social.Twitter.Entities {
 
@@ -17,10 +18,15 @@ namespace Skybrud.Social.Twitter.Entities {
         public string Url { get; private set; }
         
         public string DisplayUrl { get; private set; }
-        
+
         public string ExpandedUrl { get; private set; }
-        
+
         public string Type { get; private set; }
+
+        /// <summary>
+        /// Gets an object with references to the resized formats of the media.
+        /// </summary>
+        public TwitterMediaFormats Sizes { get; private set; }
 
         #endregion
 
@@ -43,7 +49,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 Url = entity.GetString("url"),
                 DisplayUrl = entity.GetString("display_url"),
                 ExpandedUrl = entity.GetString("expanded_url"),
-                Type = entity.GetString("type")
+                Type = entity.GetString("type"),
+                Sizes = entity.GetObject("sizes", TwitterMediaFormats.Parse)
             };
         }
 

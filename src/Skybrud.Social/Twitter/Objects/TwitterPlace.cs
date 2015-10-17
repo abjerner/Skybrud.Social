@@ -57,7 +57,7 @@ namespace Skybrud.Social.Twitter.Objects {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>TwitterPlace</code> from the specified <code>TwitterPlace</code>.
+        /// Gets an instance of <code>TwitterPlace</code> from the specified <code>JsonObject</code>.
         /// </summary>
         /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
         public static TwitterPlace Parse(JsonObject obj) {

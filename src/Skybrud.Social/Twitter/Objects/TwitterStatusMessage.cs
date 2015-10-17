@@ -2,6 +2,7 @@ using System;
 using Skybrud.Social.Interfaces;
 using Skybrud.Social.Json;
 using Skybrud.Social.Twitter.Entities;
+using Skybrud.Social.Twitter.Objects.Statuses;
 
 namespace Skybrud.Social.Twitter.Objects {
 
@@ -49,6 +50,11 @@ namespace Skybrud.Social.Twitter.Objects {
 
         public TwitterStatusMessageEntities Entities { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to extended entities mentioned in the status message.
+        /// </summary>
+        public TwitterExtendedEntities ExtendedEntities { get; private set; }
+
         // public TwitterContributor[] Contributors { get; private set; }
         
         public TwitterCoordinates Coordinates { get; private set; }
@@ -66,6 +72,13 @@ namespace Skybrud.Social.Twitter.Objects {
 
         public DateTime SortDate {
             get { return CreatedAt; }
+        }
+
+        /// <summary>
+        /// Gets whether the status message has any extended entities.
+        /// </summary>
+        public bool HasExtendedEntities {
+            get { return ExtendedEntities != null; }
         }
 
         #endregion
@@ -114,6 +127,8 @@ namespace Skybrud.Social.Twitter.Objects {
 
             // Parse the entities (if any)
             msg.Entities = obj.GetObject("entities", TwitterStatusMessageEntities.Parse);
+
+            msg.ExtendedEntities = obj.GetObject("extended_entities", TwitterExtendedEntities.Parse);
 
             // For some weird reason Twitter flips the coordinates by writing longitude before latitude
             // See: https://dev.twitter.com/docs/platform-objects/tweets#obj-coordinates)
