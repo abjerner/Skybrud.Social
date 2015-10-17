@@ -28,6 +28,18 @@ namespace Skybrud.Social.Twitter.Entities {
         /// </summary>
         public TwitterMediaFormats Sizes { get; private set; }
 
+        /// <summary>
+        /// Gets an object with video information if the media is a video, otherwise <code>null</code>.
+        /// </summary>
+        public TwitterVideoInfo VideoInfo { get; private set; }
+
+        /// <summary>
+        /// Gets whether the media entity has any video information.
+        /// </summary>
+        public bool HasVideoInfo {
+            get { return VideoInfo != null; }
+        }
+
         #endregion
 
         #region Constructors
@@ -50,7 +62,8 @@ namespace Skybrud.Social.Twitter.Entities {
                 DisplayUrl = entity.GetString("display_url"),
                 ExpandedUrl = entity.GetString("expanded_url"),
                 Type = entity.GetString("type"),
-                Sizes = entity.GetObject("sizes", TwitterMediaFormats.Parse)
+                Sizes = entity.GetObject("sizes", TwitterMediaFormats.Parse),
+                VideoInfo = entity.GetObject("video_info", TwitterVideoInfo.Parse)
             };
         }
 

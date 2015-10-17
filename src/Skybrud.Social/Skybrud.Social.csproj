@@ -510,6 +510,8 @@
     <Compile Include="Twitter\Objects\Lists\TwitterList.cs" />
     <Compile Include="Twitter\Objects\Media\TwitterMediaFormats.cs" />
     <Compile Include="Twitter\Objects\Media\TwitterMediaFormat.cs" />
+    <Compile Include="Twitter\Objects\Media\TwitterVideoInfo.cs" />
+    <Compile Include="Twitter\Objects\Media\TwitterVideoFormat.cs" />
     <Compile Include="Twitter\Objects\Statuses\TwitterExtendedEntities.cs" />
     <Compile Include="Twitter\Options\Favorites\TwitterGetFavoritesOptions.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterSearchRawEndpoint.cs" />
