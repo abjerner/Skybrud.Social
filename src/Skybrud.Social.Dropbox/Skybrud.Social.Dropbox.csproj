@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Endpoints\Raw\DropboxFilesRawEndpoint.cs" />
-    <Compile Include="JsonUtils.cs" />
     <Compile Include="OAuth\DropboxOAuthClient.cs" />
     <Compile Include="Objects\Authentication\DropboxTokenResponseBody.cs" />
     <Compile Include="Objects\DropboxObject.cs" />

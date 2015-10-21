@@ -29,7 +29,7 @@ namespace Skybrud.Social.Dropbox.Responses.Authentication {
 
             // Initialize the response object
             return new DropboxTokenResponse(response) {
-                Body = JsonUtils.ParseJsonObject(response.Body, DropboxTokenResponseBody.Parse)
+                Body = SocialUtils.ParseJsonObject(response.Body, DropboxTokenResponseBody.Parse)
             };
 
         }
