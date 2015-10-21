@@ -79,6 +79,18 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
+        /// Gets a 32-bit integer (int) from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public static T GetInt34<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<int, T> func) {
+            if (obj == null) return default(T);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(T) : func(property.Value<int>());
+        }
+
+        /// <summary>
         /// Gets the integer value from the property with the specified <code>propertyName</code> and parses it into an instance of
         /// <code>T</code> using the specified <code>callback</code>.
         /// </summary>
@@ -104,6 +116,18 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
+        /// Gets 64-bit integer (long) from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public static T GetInt64<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<long, T> func) {
+            if (obj == null) return default(T);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(T) : func(property.Value<long>());
+        }
+
+        /// <summary>
         /// Gets a float from a property with the specified <code>propertyName</code>.
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>
@@ -115,6 +139,18 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
+        /// Gets a float from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public static T GetFloat<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<float, T> func) {
+            if (obj == null) return default(T);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(T) : func(property.Value<float>());
+        }
+
+        /// <summary>
         /// Gets a double from a property with the specified <code>propertyName</code>.
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>
@@ -123,6 +159,18 @@ namespace Skybrud.Social.Json.Extensions.JObject {
             if (obj == null) return default(double);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(double) : property.Value<double>();
+        }
+
+        /// <summary>
+        /// Gets a double from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="func">A callback function used for parsing or converting the property value.</param>
+        public static T GetDouble<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<double, T> func) {
+            if (obj == null) return default(T);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(T) : func(property.Value<double>());
         }
 
         /// <summary>
