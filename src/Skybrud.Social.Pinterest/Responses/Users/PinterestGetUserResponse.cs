@@ -33,7 +33,7 @@ namespace Skybrud.Social.Pinterest.Responses.Users {
 
             // Initialize the response object
             return new PinterestGetUserResponse(response) {
-                Body = JsonUtils.ParseJsonObject(response.Body, PinterestGetUserResponseBody.Parse)
+                Body = SocialUtils.ParseJsonObject(response.Body, PinterestGetUserResponseBody.Parse)
             };
 
         }

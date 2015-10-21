@@ -30,7 +30,7 @@ namespace Skybrud.Social.Pinterest.Responses.Authentication {
 
             // Initialize the response object
             return new PinterestTokenResponse(response) {
-                Body = JsonUtils.ParseJsonObject(response.Body, PinterestTokenResponseBody.Parse)
+                Body = SocialUtils.ParseJsonObject(response.Body, PinterestTokenResponseBody.Parse)
             };
 
         }

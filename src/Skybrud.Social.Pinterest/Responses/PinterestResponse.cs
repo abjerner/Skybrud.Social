@@ -32,7 +32,7 @@ namespace Skybrud.Social.Pinterest.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Parse the JSON response
-            PinterestError error = JsonUtils.ParseJsonObject(response.Body, PinterestError.Parse);
+            PinterestError error = SocialUtils.ParseJsonObject(response.Body, PinterestError.Parse);
 
             // Throw the exception
             throw new PinterestException(response, error);

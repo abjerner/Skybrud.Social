@@ -49,7 +49,6 @@
     <Compile Include="Fields\PinterestField.cs" />
     <Compile Include="Fields\PinterestFieldsCollection.cs" />
     <Compile Include="Fields\PinterestUserFields.cs" />
-    <Compile Include="JsonUtils.cs" />
     <Compile Include="OAuth\PinterestOAuthClient.cs" />
     <Compile Include="Objects\Authentication\PinterestTokenResponseBody.cs" />
     <Compile Include="Objects\PinterestError.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Scopes\PinterestScope.cs" />
     <Compile Include="Scopes\PinterestScopeCollection.cs" />
     <Compile Include="Scopes\PinterestScopes.cs" />
-    <Compile Include="SocialDateTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Skybrud.Social\Skybrud.Social.csproj">
