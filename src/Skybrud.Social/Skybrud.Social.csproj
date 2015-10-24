@@ -236,11 +236,15 @@
     <Compile Include="GitHub\Objects\GitHubUser.cs" />
     <Compile Include="GitHub\Objects\GitHubUserType.cs" />
     <Compile Include="Google\Analytics\AnalyticsScopes.cs" />
+    <Compile Include="Google\Analytics\Dimensions\AnalyticsDimensions.cs" />
+    <Compile Include="Google\Analytics\Dimensions\AnalyticsRealtimeDimensions.cs" />
     <Compile Include="Google\Analytics\Endpoints\AnalyticsDataEndpoint.cs" />
     <Compile Include="Google\Analytics\Endpoints\AnalyticsManagementEndpoint.cs" />
     <Compile Include="Google\Analytics\Endpoints\Raw\AnalyticsDataRawEndpoint.cs" />
     <Compile Include="Google\Analytics\Endpoints\Raw\AnalyticsManagementRawEndpoint.cs" />
     <Compile Include="Google\Analytics\Exceptions\AnalyticsException.cs" />
+    <Compile Include="Google\Analytics\Metrics\AnalyticsMetrics.cs" />
+    <Compile Include="Google\Analytics\Metrics\AnalyticsRealtimeMetrics.cs" />
     <Compile Include="Google\Analytics\Objects\Common\AnalyticsPermissions.cs" />
     <Compile Include="Google\Analytics\Objects\Accounts\AnalyticsAccountsResponseBody.cs" />
     <Compile Include="Google\Analytics\Objects\AnalyticsDataCell.cs" />
