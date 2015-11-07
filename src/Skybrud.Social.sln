@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social", "Skybrud.Social\Skybrud.Social.csproj", "{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.LinkedIn", "Skybrud.Social.LinkedIn\Skybrud.Social.LinkedIn.csproj", "{0C83EB16-9B30-4B49-BB65-5255A2121140}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.Slack", "Skybrud.Social.Slack\Skybrud.Social.Slack.csproj", "{4C00CE12-558C-47A7-B804-B3448DF002C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.Pinterest", "Skybrud.Social.Pinterest\Skybrud.Social.Pinterest.csproj", "{FB44FFDB-EC9F-4A25-BCDE-9857D56414DB}"
@@ -31,15 +29,6 @@ Global
 		{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}.Release|x86.ActiveCfg = Release|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0C83EB16-9B30-4B49-BB65-5255A2121140}.Release|x86.ActiveCfg = Release|Any CPU
 		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C00CE12-558C-47A7-B804-B3448DF002C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
