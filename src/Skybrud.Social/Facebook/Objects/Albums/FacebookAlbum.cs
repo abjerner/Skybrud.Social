@@ -4,6 +4,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects.Albums {
     
+    /// <summary>
+    /// Class representing an album as returned by the Facebook Graph API.
+    /// </summary>
     public class FacebookAlbum : SocialJsonObject {
 
         #region Properties
@@ -24,9 +27,9 @@ namespace Skybrud.Social.Facebook.Objects.Albums {
         public int Count { get; private set; }
 
         /// <summary>
-        /// Gets the ID of the album's cover photo.
+        /// Gets a summary of the album's cover photo.
         /// </summary>
-        public string CoverPhoto { get; private set; }
+        public FacebookAlbumCoverPhoto CoverPhoto { get; private set; }
 
         /// <summary>
         /// Gets the time the album was initially created.
@@ -82,7 +85,22 @@ namespace Skybrud.Social.Facebook.Objects.Albums {
 
         #region Constructors
 
-        private FacebookAlbum(JsonObject obj) : base(obj) { }
+        private FacebookAlbum(JsonObject obj) : base(obj) {
+            Id = obj.GetString("id");
+            CanUpload = obj.GetBoolean("can_upload");
+            Count = obj.GetInt32("count");
+            CoverPhoto = obj.GetObject("cover_photo", FacebookAlbumCoverPhoto.Parse);
+            CreatedTime = obj.GetDateTime("created_time");
+            Description = obj.GetString("description");
+            From = obj.GetObject("from", FacebookFrom.Parse);
+            Link = obj.GetString("link");
+            Location = obj.GetString("location");
+            Name = obj.GetString("name");
+            Place = obj.GetObject("place", FacebookPlace.Parse);
+            Privacy = obj.GetString("privacy");
+            Type = obj.HasValue("type") ? obj.GetEnum<FacebookAlbumType>("type") : FacebookAlbumType.Unspecified;
+            UpdatedTime = obj.GetString("updated_time");
+        }
 
         #endregion
 
@@ -92,24 +110,10 @@ namespace Skybrud.Social.Facebook.Objects.Albums {
         /// Gets an album from the specified <code>JsonObject</code>.
         /// </summary>
         /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
+        /// <returns>Returns an instance of <code>FacebookAlbum</code>, or <code>null</code> if the specified
+        /// <code>obj</code> is <code>null</code>.</returns>
         public static FacebookAlbum Parse(JsonObject obj) {
-            if (obj == null) return null;
-            return new FacebookAlbum(obj) {
-                Id = obj.GetString("id"),
-                CanUpload = obj.GetBoolean("can_upload"),
-                Count = obj.GetInt32("count"),
-                CoverPhoto = obj.GetString("cover_photo"),
-                CreatedTime = obj.GetDateTime("created_time"),
-                Description = obj.GetString("description"),
-                From = obj.GetObject("from", FacebookFrom.Parse),
-                Link = obj.GetString("link"),
-                Location = obj.GetString("location"),
-                Name = obj.GetString("name"),
-                Place = obj.GetObject("place", FacebookPlace.Parse),
-                Privacy = obj.GetString("privacy"),
-                Type = obj.GetEnum<FacebookAlbumType>("type"),
-                UpdatedTime = obj.GetString("updated_time")
-            };
+            return obj == null ? null : new FacebookAlbum(obj);
         }
 
         #endregion

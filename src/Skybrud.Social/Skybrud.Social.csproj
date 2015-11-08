@@ -83,6 +83,7 @@
     <Compile Include="BitBucket\Responses\Users\BitBucketUserResponseBody.cs" />
     <Compile Include="Facebook\Fields\FacebookField.cs" />
     <Compile Include="Facebook\Fields\FacebookFieldsCollection.cs" />
+    <Compile Include="Facebook\Objects\Albums\FacebookAlbumCoverPhoto.cs" />
     <Compile Include="Facebook\Objects\Albums\FacebookAlbumsCollection.cs" />
     <Compile Include="Facebook\Objects\Links\FacebookLinksCollection.cs" />
     <Compile Include="Facebook\Objects\Feed\FacebookFeedCollection.cs" />
