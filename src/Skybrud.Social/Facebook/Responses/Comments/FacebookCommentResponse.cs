@@ -6,6 +6,8 @@ namespace Skybrud.Social.Facebook.Responses.Comments {
 
     public class FacebookCommentResponse : FacebookResponse<FacebookComment> {
 
+        // TODO: Rename to "FacebookGetCommentResponse" in v1.0
+
         #region Constructors
 
         private FacebookCommentResponse(SocialHttpResponse response) : base(response) { }

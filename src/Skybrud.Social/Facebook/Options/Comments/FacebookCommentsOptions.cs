@@ -1,8 +1,13 @@
-﻿using Skybrud.Social.Facebook.Options.Pagination;
+﻿using System;
+using Skybrud.Social.Facebook.Options.Pagination;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Options.Comments {
 
+    /// <summary>
+    /// Class representing the options for getting a list of comments.
+    /// </summary>
+    [Obsolete("Use the FacebookGetCommentsOptions class instead.")]
     public class FacebookCommentsOptions : FacebookCursorBasedPaginationOptions {
 
         #region Properties
