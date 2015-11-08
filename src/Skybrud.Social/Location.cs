@@ -2,6 +2,9 @@ using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social {
 
+    /// <summary>
+    /// Class representing a location identified by latitude and longitude.
+    /// </summary>
     public class Location : ILocation {
 
         #region Properties
@@ -22,9 +25,10 @@ namespace Skybrud.Social {
 
         #region Constructors
 
-        public Location() {
-            // Default constructor
-        }
+        /// <summary>
+        /// Initializes a location with default latitude and longitude.
+        /// </summary>
+        public Location() { }
 
         /// <summary>
         /// Initializes a location with the specified <code>latitude</code> and <code>longitude</code>.
