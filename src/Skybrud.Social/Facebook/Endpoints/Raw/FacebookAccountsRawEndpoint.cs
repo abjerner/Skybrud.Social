@@ -13,7 +13,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         #region Properties
 
         /// <summary>
-        /// Gets a reference of the OAuth client.
+        /// Gets a reference to the OAuth client.
         /// </summary>
         public FacebookOAuthClient Client { get; private set; }
 
