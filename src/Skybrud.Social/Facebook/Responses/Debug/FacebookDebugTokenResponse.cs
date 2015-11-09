@@ -4,6 +4,9 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Responses.Debug {
 
+    /// <summary>
+    /// Class representing the response for getting information about a given access token.
+    /// </summary>
     public class FacebookDebugTokenResponse : FacebookResponse<FacebookDebugToken> {
 
         #region Constructors
@@ -14,6 +17,11 @@ namespace Skybrud.Social.Facebook.Responses.Debug {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>FacebookDebugTokenResponse</code>.
+        /// </summary>
+        /// <param name="response">The response to be parsed.</param>
+        /// <returns>Returns an instance of <code>FacebookDebugTokenResponse</code> representing the response.</returns>
         public static FacebookDebugTokenResponse ParseResponse(SocialHttpResponse response) {
 
             if (response == null) return null;

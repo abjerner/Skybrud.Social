@@ -4,8 +4,11 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects.Debug {
     
+    /// <summary>
+    /// Class representing the metadata about a given access token.
+    /// </summary>
     /// <see>
-    ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/debug_token#read</cref>
+    ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.5/debug_token#read</cref>
     /// </see>
     public class FacebookDebugTokenData : SocialJsonObject {
 
@@ -58,9 +61,11 @@ namespace Skybrud.Social.Facebook.Objects.Debug {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>FacebookDebugTokenData</code> from the specified <var>JsonObject</var>.
+        /// Gets an instance of <code>FacebookDebugTokenData</code> from the specified <code>obj</code>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JsonObject</code> to parse.</param>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>FacebookDebugTokenData</code>, or <code>null</code> if
+        /// <code>obj</code> is <code>null</code>.</returns>
         public static FacebookDebugTokenData Parse(JsonObject obj) {
             
             // Check if NULL

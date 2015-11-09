@@ -2,11 +2,17 @@
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
-    
+
+    /// <summary>
+    /// Class representing the raw implementation of the debug endpoint.
+    /// </summary>
     public class FacebookDebugRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the OAuth client.
+        /// </summary>
         public FacebookOAuthClient Client { get; private set; }
 
         #endregion
