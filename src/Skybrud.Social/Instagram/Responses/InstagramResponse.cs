@@ -23,6 +23,10 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The underlying raw response the instance should be based on.</param>
         protected InstagramResponse(SocialHttpResponse response) : base(response) {
             RateLimiting = InstagramRateLimiting.GetFromResponse(response);
         }
@@ -73,6 +77,10 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The underlying raw response the instance should be based on.</param>
         protected InstagramResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
@@ -101,6 +109,10 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> representing the response body.</param>
         protected InstagramResponseBody(JsonObject obj) : base(obj) {
             Meta = obj.GetObject("meta", InstagramMetaData.Parse);
         }

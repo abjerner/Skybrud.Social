@@ -44,6 +44,10 @@ namespace Skybrud.Social.Instagram.Scopes {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the name of the scope.
+        /// </summary>
+        /// <returns>Returns the name of the scope.</returns>
         public override string ToString() {
             return Name;
         }

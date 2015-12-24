@@ -63,6 +63,10 @@ namespace Skybrud.Social.Instagram.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> representing the response body.</param>
         protected InstagramUsersResponseBody(JsonObject obj) : base(obj) { }
 
         #endregion
