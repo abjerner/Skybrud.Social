@@ -6,7 +6,10 @@ namespace Skybrud.Social.Instagram {
     /// Enum class representing the scopes of the Instagram API.
     /// </summary>
     [Flags]
+    [Obsolete("Use static class InstagramScopes instead for accesssing known scopes.")]
     public enum InstagramScope {
+
+        // TODO: Remove in v1.0
 
         /// <summary>
         /// To read any and all data related to a user (e.g. following/followed-by lists, photos, etc.) (granted by default).

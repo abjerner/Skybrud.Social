@@ -347,6 +347,9 @@
     <Compile Include="Instagram\Responses\InstagramLikedMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />
     <Compile Include="Instagram\Responses\InstagramResponse.cs" />
+    <Compile Include="Instagram\Scopes\InstagramScopeCollection.cs" />
+    <Compile Include="Instagram\Scopes\InstagramScope.cs" />
+    <Compile Include="Instagram\Scopes\InstagramScopes.cs" />
     <Compile Include="Interfaces\IGetOptions.cs" />
     <Compile Include="Interfaces\IPostOptions.cs" />
     <Compile Include="Json\Extensions\JObject\JArrayExtensions.cs" />

@@ -4,6 +4,7 @@ using System.Net;
 using Skybrud.Social.Http;
 using Skybrud.Social.Instagram.Endpoints.Raw;
 using Skybrud.Social.Instagram.Responses;
+using Skybrud.Social.Instagram.Scopes;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.Instagram.OAuth {
@@ -164,7 +165,7 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         public string GetAuthorizationUrl(string state) {
-            return GetAuthorizationUrl(state, InstagramScope.Basic);
+            return GetAuthorizationUrl(state, InstagramScopes.Basic);
         }
 
         /// <summary>
@@ -172,14 +173,49 @@ namespace Skybrud.Social.Instagram.OAuth {
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
+        [Obsolete("Use method overloads instead.")]
         public string GetAuthorizationUrl(string state, InstagramScope scope) {
-            return String.Format(
-                "https://api.instagram.com/oauth/authorize/?client_id={0}&redirect_uri={1}&response_type=code&state={2}&scope={3}",
-                SocialUtils.UrlEncode(ClientId),
-                SocialUtils.UrlEncode(RedirectUri),
-                SocialUtils.UrlEncode(state),
-                SocialUtils.UrlEncode(scope.ToString().Replace(", ", "+").ToLower())
-            );
+            // TODO: Remove in v1.0
+            return GetAuthorizationUrl(state, scope.ToString().Replace(", ", " ").ToLower());
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <var>state</var> and request the specified <code>scope</code>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        public string GetAuthorizationUrl(string state, InstagramScopeCollection scope) {
+            return GetAuthorizationUrl(state, scope.ToString());
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <var>state</var> and request the specified <code>scope</code>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        public string GetAuthorizationUrl(string state, params string[] scope) {
+
+            // Do we have a valid "state" ?
+            if (String.IsNullOrWhiteSpace(state)) {
+                throw new ArgumentNullException("state", "A valid state should be specified as it is part of the security of OAuth 2.0.");
+            }
+
+            // Construct the query string
+            NameValueCollection query = new NameValueCollection {
+                {"client_id", ClientId},
+                {"redirect_uri", RedirectUri},
+                {"response_type", "code"},
+                {"state", state}
+            };
+
+            // Append the scope (if specified)
+            if (scope != null && scope.Length > 0) {
+                query.Add("scope", String.Join(" ", scope));
+            }
+
+            // Construct thr authorization URL
+            return "https://api.instagram.com/oauth/authorize/?" + SocialUtils.NameValueCollectionToQueryString(query);
+
         }
 
         /// <summary>
