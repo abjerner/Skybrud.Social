@@ -103,8 +103,8 @@ namespace Skybrud.Social.Instagram.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified access token. Using this initializer, the client will have
-        /// no information about your app.
+        /// Initializes an OAuth client with the specified <code>accessToken</code>. Using this initializer, the client
+        /// will have no information about your app.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
         public InstagramOAuthClient(string accessToken) {
@@ -112,46 +112,48 @@ namespace Skybrud.Social.Instagram.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified app ID and app secret.
+        /// Initializes an OAuth client with the specified <code>clientId</code> and <code>clientSecret</code>.
         /// </summary>
-        /// <param name="appId">The ID of the app.</param>
-        /// <param name="appSecret">The secret of the app.</param>
-        public InstagramOAuthClient(long appId, string appSecret) {
-            ClientId = appId + "";
-            ClientSecret = appSecret;
+        /// <param name="clientId">The ID of the client/app.</param>
+        /// <param name="clientSecret">The secret of the client/app.</param>
+        public InstagramOAuthClient(long clientId, string clientSecret) {
+            // TODO: Remove for v1.0 (user constructor overload with string parameters instead)
+            ClientId = clientId + "";
+            ClientSecret = clientSecret;
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified app ID, app secret and return URI.
+        /// Initializes an OAuth client with the specified <code>clientId</code>, <code>clientSecret</code> and <code>redirectUri</code>.
         /// </summary>
-        /// <param name="appId">The ID of the app.</param>
-        /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="redirectUri">The return URI of the app.</param>
-        public InstagramOAuthClient(long appId, string appSecret, string redirectUri) {
-            ClientId = appId + "";
-            ClientSecret = appSecret;
+        /// <param name="clientId">The ID of the client/app.</param>
+        /// <param name="clientSecret">The secret of the client/app.</param>
+        /// <param name="redirectUri">The return URI of the client/app.</param>
+        public InstagramOAuthClient(long clientId, string clientSecret, string redirectUri) {
+            // TODO: Remove for v1.0 (user constructor overload with string parameters instead)
+            ClientId = clientId + "";
+            ClientSecret = clientSecret;
             RedirectUri = redirectUri;
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified app ID and app secret.
+        /// Initializes an OAuth client with the specified <code>clientId</code> and <code>clientSecret</code>.
         /// </summary>
-        /// <param name="appId">The ID of the app.</param>
-        /// <param name="appSecret">The secret of the app.</param>
-        public InstagramOAuthClient(string appId, string appSecret) {
-            ClientId = appId;
-            ClientSecret = appSecret;
+        /// <param name="clientId">The ID of the client/app.</param>
+        /// <param name="clientSecret">The secret of the client/app.</param>
+        public InstagramOAuthClient(string clientId, string clientSecret) {
+            ClientId = clientId;
+            ClientSecret = clientSecret;
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified app ID, app secret and return URI.
+        /// Initializes an OAuth client with the specified <code>clientId</code>, <code>clientSecret</code> and <code>redirectUri</code>.
         /// </summary>
-        /// <param name="appId">The ID of the app.</param>
-        /// <param name="appSecret">The secret of the app.</param>
-        /// <param name="redirectUri">The return URI of the app.</param>
-        public InstagramOAuthClient(string appId, string appSecret, string redirectUri) {
-            ClientId = appId;
-            ClientSecret = appSecret;
+        /// <param name="clientId">The ID of the client/app.</param>
+        /// <param name="clientSecret">The secret of the client/app.</param>
+        /// <param name="redirectUri">The return URI of the client/app.</param>
+        public InstagramOAuthClient(string clientId, string clientSecret, string redirectUri) {
+            ClientId = clientId;
+            ClientSecret = clientSecret;
             RedirectUri = redirectUri;
         }
 
