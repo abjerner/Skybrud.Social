@@ -84,6 +84,7 @@
     <Compile Include="Facebook\Constants\FacebookAlbumFields.cs" />
     <Compile Include="Facebook\Constants\FacebookAppFields.cs" />
     <Compile Include="Facebook\Constants\FacebookCommentFields.cs" />
+    <Compile Include="Facebook\Constants\FacebookEventFields.cs" />
     <Compile Include="Facebook\Fields\FacebookField.cs" />
     <Compile Include="Facebook\Fields\FacebookFieldsCollection.cs" />
     <Compile Include="Facebook\Objects\Albums\FacebookAlbumCoverPhoto.cs" />

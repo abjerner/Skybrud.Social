@@ -3,7 +3,10 @@ using Skybrud.Social.Facebook.Options.Events;
 using Skybrud.Social.Facebook.Responses.Events;
 
 namespace Skybrud.Social.Facebook.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the implementation of the events endpoint.
+    /// </summary>
     public class FacebookEventsEndpoint {
 
         #region Properties

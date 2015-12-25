@@ -1,8 +1,12 @@
 using System;
 using Skybrud.Social.Json;
+using Skybrud.Social.Time;
 
 namespace Skybrud.Social.Facebook.Objects.Events {
 
+    /// <summary>
+    /// Class representing an event in the Facebook Graph API.
+    /// </summary>
     /// <see>
     ///     <cref>https://developers.facebook.com/docs/graph-api/reference/v2.2/event#read</cref>
     /// </see>
@@ -18,7 +22,7 @@ namespace Skybrud.Social.Facebook.Objects.Events {
         // haven't been able to find an event where that is the case. I'm not sure whether the property isn't used
         // anymore, or whether it simply depends on the scope (which wouldn't make sense).
 
-        #region Properties
+        #region Properties mapped from Facebook
 
         /// <summary>
         /// Gets the ID of the event.
@@ -26,37 +30,32 @@ namespace Skybrud.Social.Facebook.Objects.Events {
         public string Id { get; private set; }
 
         /// <summary>
-        /// Gets the cover photo of the event.
+        /// Gets the cover photo of the event, or <code>null</code> if not available/specified.
         /// </summary>
         public FacebookCoverPhoto Cover { get; private set; }
 
         /// <summary>
-        /// Gets the long-form description of the event.
-        /// </summary>
-        public string Description { get; private set; }
-
-        /// <summary>
-        /// Gets the end time of the event. Not all events have an end time.
-        /// </summary>
-        public DateTime? EndTime { get; private set; }
-
-        /// <summary>
-        /// Gets whether the event only has a date specified, but no time.
-        /// </summary>
-        public bool IsDateOnly { get; private set; }
-
-        /// <summary>
-        /// Gets the location of the event, if any.
-        /// </summary>
-        public string Location { get; private set; }
-
-        /// <summary>
-        /// Gets the name of the event.
+        /// Gets the name of the event, or <code>null</code> if not available.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets the profile that created the event.
+        /// Gets the long-form description of the event, or <code>null</code> if not available/specified.
+        /// </summary>
+        public string Description { get; private set; }
+
+        /// <summary>
+        /// Gets the start time of the event.
+        /// </summary>
+        public SocialDateTime StartTime { get; private set; }
+
+        /// <summary>
+        /// Gets the end time of the event. Not all events have an end time.
+        /// </summary>
+        public SocialDateTime EndTime { get; private set; }
+
+        /// <summary>
+        /// Gets the profile that created the event, or <code>null</code> if not available.
         /// </summary>
         public FacebookEventOwner Owner { get; private set; }
 
@@ -66,11 +65,6 @@ namespace Skybrud.Social.Facebook.Objects.Events {
         public string Privacy { get; private set; }
 
         /// <summary>
-        /// Gets the start time of the event.
-        /// </summary>
-        public DateTime StartTime { get; private set; }
-
-        /// <summary>
         /// Gets the timezone of the event.
         /// </summary>
         public string TimeZone { get; private set; }
@@ -78,40 +72,89 @@ namespace Skybrud.Social.Facebook.Objects.Events {
         /// <summary>
         /// Gets the last time the event was updated.
         /// </summary>
-        public DateTime UpdatedTime { get; private set; }
+        public SocialDateTime UpdatedTime { get; private set; }
 
         /// <summary>
-        /// Gets the vanue hosting the event, if any.
+        /// Gets the type of the event.
         /// </summary>
-        public FacebookEventVenue Venue { get; private set; }
+        public string Type { get; private set; }
+
+        #endregion
+
+        #region Custom properties
+
+        /// <summary>
+        /// Gets whether a name was specified for the event.
+        /// </summary>
+        public bool HasName {
+            get { return !String.IsNullOrWhiteSpace(Name); }
+        }
+
+        /// <summary>
+        /// Gets whether a description was specified for the event.
+        /// </summary>
+        public bool HasDescription {
+            get { return !String.IsNullOrWhiteSpace(Description); }
+        }
+
+        /// <summary>
+        /// Gets whether an start time was specified for the event.
+        /// </summary>
+        public bool HasStartTime {
+            get { return StartTime != null; }
+        }
+
+        /// <summary>
+        /// Gets whether an end time was specified for the event.
+        /// </summary>
+        public bool HasEndTime {
+            get { return EndTime != null; }
+        }
+
+        /// <summary>
+        /// Gets whether a time zone was specified for the event.
+        /// </summary>
+        public bool HasTimeZone {
+            get { return !String.IsNullOrWhiteSpace(TimeZone); }
+        }
+
+        /// <summary>
+        /// Gets whether a type was specified for the event.
+        /// </summary>
+        public bool HasType {
+            get { return !String.IsNullOrWhiteSpace(Type); }
+        }
 
         #endregion
 
         #region Constructors
 
-        private FacebookEvent(JsonObject obj) : base(obj) { }
+        protected FacebookEvent(JsonObject obj) : base(obj) {
+            Id = obj.GetString("id");
+            Cover = obj.GetObject("cover", FacebookCoverPhoto.Parse);
+            Name = obj.GetString("name");
+            Description = obj.GetString("description");
+            StartTime = obj.GetString("start_time", SocialDateTime.Parse);
+            EndTime = obj.GetString("end_time", SocialDateTime.Parse);
+            Owner = obj.GetObject("owner", FacebookEventOwner.Parse);
+            Privacy = obj.GetString("privacy");
+            TimeZone = obj.GetString("timezone");
+            Type = obj.GetString("type");
+            UpdatedTime = obj.GetString("updated_time", SocialDateTime.Parse);
+        }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Gets an instance of <code>FacebookEvent</code> from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>FacebookEvent</code>, or <code>null</code> if <code>obj</code> is
+        /// <code>null</code>.</returns>
         public static FacebookEvent Parse(JsonObject obj) {
-            if (obj == null) return null;
-            return new FacebookEvent(obj) {
-                Id = obj.GetString("id"),
-                Cover = obj.GetObject("cover", FacebookCoverPhoto.Parse),
-                Description = obj.GetString("description"),
-                EndTime = obj.HasValue("end_time") ? (DateTime?)obj.GetDateTime("end_time") : null,
-                IsDateOnly = obj.HasValue("is_date_only") && obj.GetBoolean("is_date_only"),
-                Location = obj.GetString("location"),
-                Name = obj.GetString("name"),
-                Owner = obj.GetObject("owner", FacebookEventOwner.Parse),
-                Privacy = obj.GetString("privacy"),
-                StartTime = obj.GetDateTime("start_time"),
-                TimeZone = obj.GetString("timezone"),
-                UpdatedTime = obj.GetDateTime("updated_time"),
-                Venue = obj.GetObject("venue", FacebookEventVenue.Parse)
-            };
+            return obj == null ? null : new FacebookEvent(obj);
         }
 
         #endregion

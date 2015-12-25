@@ -1,20 +1,13 @@
-using System;
 using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.Objects.Events {
 
-    public class FacebookEventSummary : SocialJsonObject {
+    /// <summary>
+    /// Class representing the summary about an event.
+    /// </summary>
+    public class FacebookEventSummary : FacebookEvent {
 
-        #region Properties
-
-        public string Id { get; private set; }
-        public string Name { get; private set; }
-        public DateTime StartTime { get; private set; }
-        public DateTime? EndTime { get; private set; }
-        public string TimeZone { get; private set; }
-        public string Location { get; private set; }
-
-        #endregion
+        // TODO: Remove class for v1.0 (the class FacebookEvent should be used instead)
 
         #region Constructors
 
@@ -24,16 +17,14 @@ namespace Skybrud.Social.Facebook.Objects.Events {
 
         #region Static methods
 
-        public static FacebookEventSummary Parse(JsonObject obj) {
-            if (obj == null) return null;
-            return new FacebookEventSummary(obj) {
-                Id = obj.GetString("id"),
-                Name = obj.GetString("name"),
-                StartTime = obj.GetDateTime("start_time"),
-                EndTime = obj.HasValue("end_time") ? (DateTime?) obj.GetDateTime("end_time") : null,
-                TimeZone = obj.GetString("timezone"),
-                Location = obj.GetString("location")
-            };
+        /// <summary>
+        /// Gets an instance of <code>FacebookEventSummary</code> from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JsonObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>FacebookEventSummary</code>, or <code>null</code> if <code>obj</code>
+        /// is <code>null</code>.</returns>
+        public new static FacebookEventSummary Parse(JsonObject obj) {
+            return obj == null ? null : new FacebookEventSummary(obj);
         }
 
         #endregion

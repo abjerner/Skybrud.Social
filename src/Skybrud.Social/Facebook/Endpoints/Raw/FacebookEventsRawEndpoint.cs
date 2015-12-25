@@ -1,14 +1,19 @@
 ﻿using Skybrud.Social.Facebook.OAuth;
-using Skybrud.Social.Facebook.Options;
 using Skybrud.Social.Facebook.Options.Events;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.Facebook.Endpoints.Raw {
-    
+
+    /// <summary>
+    /// Class representing the raw implementation of the events endpoint.
+    /// </summary>
     public class FacebookEventsRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the OAuth client.
+        /// </summary>
         public FacebookOAuthClient Client { get; private set; }
 
         #endregion
