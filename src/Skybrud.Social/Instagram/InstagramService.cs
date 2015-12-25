@@ -73,6 +73,7 @@ namespace Skybrud.Social.Instagram {
         /// initialized from the client ID.
         /// </summary>
         /// <param name="clientId">The access token.</param>
+        [Obsolete("Instagram no longer supports using the client ID for accessing the API. Apps registered with Instagram before the 17th of November 2015 will however continue to work as before until June 2016. See the documentation for further details.")]
         public static InstagramService CreateFromClientId(string clientId) {
             return new InstagramService {
                 Client = new InstagramOAuthClient {
