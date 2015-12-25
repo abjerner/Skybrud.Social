@@ -6,19 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.OAuth {
 
     /// <summary>
-    /// OAuth client following the OAuth 1.0a protocol. The client will handle
-    /// the necessary communication with the OAuth server (Service Provider).
-    /// This includes the technical part with signatures, authorization headers
-    /// and similar. The client can also be used for 3-legged logins.
+    /// OAuth client following the OAuth 1.0a protocol. The client will handle the necessary communication with the
+    /// OAuth server (Service Provider). This includes the technical part with signatures, authorization headers and
+    /// similar. The client can also be used for 3-legged logins.
     /// </summary>
     public class OAuthClient {
+
+        #region Properties
 
         /// <summary>
         /// The consumer key of your application.
@@ -26,9 +26,8 @@ namespace Skybrud.Social.OAuth {
         public string ConsumerKey { get; set; }
 
         /// <summary>
-        /// The consumer secret of your application. The consumer secret is
-        /// sensitiveinformation used to identify your application. Users s
-        /// hould never beshown this value.
+        /// The consumer secret of your application. The consumer secret is sensitive information used to identify your
+        /// application. Users should never be shown this value.
         /// </summary>
         public string ConsumerSecret { get; set; }
 
@@ -66,7 +65,7 @@ namespace Skybrud.Social.OAuth {
         /// and is used for 3-legged logins. In most cases this proparty should be empty.
         /// </summary>
         public string Callback { get; set; }
-        
+
         /// <summary>
         /// As the first step of the 3-legged login process, the client
         /// must obtain a request token through this URL. If possible
@@ -90,15 +89,18 @@ namespace Skybrud.Social.OAuth {
         public string AccessTokenUrl { get; set; }
 
         /// <summary>
-        /// If <code>TRUE</code>, new requests will automatically reset
-        /// the <code>oauth_timestamp</code> and <code>oauth_nonce</code>
-        /// with new values. I should only be disabled for testing
-        /// purposes.
+        /// If <code>true</code>, new requests will automatically reset the <code>oauth_timestamp</code> and
+        /// <code>oauth_nonce</code> with new values. It should only be disabled for testing purposes.
         /// </summary>
         public bool AutoReset { get; set; }
 
+        #endregion
+
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new OAuth client with default options.
+        /// </summary>
         public OAuthClient() {
             AutoReset = true;
             Nonce = OAuthUtils.GenerateNonce();
@@ -106,6 +108,11 @@ namespace Skybrud.Social.OAuth {
             Version = "1.0";
         }
 
+        /// <summary>
+        /// Initializes a new OAuth client with the specified <code>consumerKey</code> and <code>consumerSecret</code>.
+        /// </summary>
+        /// <param name="consumerKey">The consumer key of your application.</param>
+        /// <param name="consumerSecret">The consumer secret of your application.</param>
         public OAuthClient(string consumerKey, string consumerSecret) {
             AutoReset = true;
             ConsumerKey = consumerKey;
@@ -115,6 +122,13 @@ namespace Skybrud.Social.OAuth {
             Version = "1.0";
         }
 
+        /// <summary>
+        /// Initializes a new OAuth client with the specified <code>consumerKey</code>, <code>consumerSecret</code> and
+        /// <code>callback</code>.
+        /// </summary>
+        /// <param name="consumerKey">The consumer key of your application.</param>
+        /// <param name="consumerSecret">The consumer secret of your application.</param>
+        /// <param name="callback">The callback URI of your application.</param>
         public OAuthClient(string consumerKey, string consumerSecret, string callback) {
             AutoReset = true;
             ConsumerKey = consumerKey;
@@ -127,9 +141,10 @@ namespace Skybrud.Social.OAuth {
 
         #endregion
 
+        #region Member methods
+
         /// <summary>
-        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code>
-        /// parameters with new values for another request.
+        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code> parameters with new values for another request.
         /// </summary>
         public virtual void Reset() {
             Nonce = OAuthUtils.GenerateNonce();
@@ -170,7 +185,7 @@ namespace Skybrud.Social.OAuth {
                     sorted.Add(Uri.EscapeDataString(key), Uri.EscapeDataString(queryString[key]));
                 }
             }
-            
+
             // Add parameters from the POST data
             if (body != null) {
                 foreach (string key in body) {
@@ -241,7 +256,7 @@ namespace Skybrud.Social.OAuth {
             // Some error checking
             if (RequestTokenUrl == null) throw new ArgumentNullException("RequestTokenUrl");
             if (AuthorizeUrl == null) throw new ArgumentNullException("AuthorizeUrl");
-            
+
             // Get the request token
             HttpStatusCode status;
             string response = DoHttpRequestAsString("POST", RequestTokenUrl, null, null, out status);
@@ -343,7 +358,7 @@ namespace Skybrud.Social.OAuth {
             // Check if NULL
             if (queryString == null) queryString = new NameValueCollection();
             if (postData == null) postData = new NameValueCollection();
-            
+
             // Merge the query string
             if (queryString.Count > 0) {
                 UriBuilder builder = new UriBuilder(url);
@@ -351,7 +366,7 @@ namespace Skybrud.Social.OAuth {
             }
 
             // Initialize the request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             // Generate the signature
             string signature = GenerateSignature(method, url, queryString, postData);
@@ -381,10 +396,10 @@ namespace Skybrud.Social.OAuth {
 
             // Get the response
             try {
-                return (HttpWebResponse) request.GetResponse();
+                return (HttpWebResponse)request.GetResponse();
             } catch (WebException ex) {
                 if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                return (HttpWebResponse) ex.Response;
+                return (HttpWebResponse)ex.Response;
             }
 
         }
@@ -398,10 +413,10 @@ namespace Skybrud.Social.OAuth {
         public virtual HttpWebResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
 
             // TODO: Should this method have is own implementation instead of calling another DoHttpRequest method?
-        
+
             NameValueCollection query = queryString == null ? null : queryString.NameValueCollection;
             return DoHttpRequest(method, url, query, null);
-        
+
         }
 
         /// <summary>
@@ -448,11 +463,11 @@ namespace Skybrud.Social.OAuth {
         private NameValueCollection GetAccessTokenQuery(string verifier) {
 
             // Some error checking
-            if (AccessTokenUrl == null) throw new ArgumentNullException("AccessTokenUrl");
+            if (String.IsNullOrWhiteSpace(AccessTokenUrl)) throw new ArgumentException("The AccessTokenUrl property should not be empty at this point.");
 
             // Get the access token
             HttpStatusCode status;
-            string response = DoHttpRequestAsString("POST", AccessTokenUrl, null, new NameValueCollection {{"oauth_verifier", verifier}}, out status);
+            string response = DoHttpRequestAsString("POST", AccessTokenUrl, null, new NameValueCollection { { "oauth_verifier", verifier } }, out status);
 
             // Check for errors
             if (status != HttpStatusCode.OK) {
@@ -463,7 +478,9 @@ namespace Skybrud.Social.OAuth {
             return SocialUtils.ParseQueryString(response);
 
         }
-    
+
+        #endregion
+
     }
 
 }
