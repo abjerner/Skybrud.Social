@@ -242,6 +242,7 @@
     <Compile Include="GitHub\OAuth\GitHubOAuthAccessTokenResponse.cs" />
     <Compile Include="GitHub\Objects\GitHubUser.cs" />
     <Compile Include="GitHub\Objects\GitHubUserType.cs" />
+    <Compile Include="GitHub\Scopes\GitHubScopes.cs" />
     <Compile Include="Google\Analytics\AnalyticsScopes.cs" />
     <Compile Include="Google\Analytics\Dimensions\AnalyticsDimensions.cs" />
     <Compile Include="Google\Analytics\Dimensions\AnalyticsRealtimeDimensions.cs" />
