@@ -236,6 +236,17 @@ namespace Skybrud.Social.Json.Extensions.JObject {
 
         }
 
+        /// <summary>
+        /// Gets an instance of <code>DateTime</code> from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        public static DateTime GetDateTime(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+            if (obj == null) return default(DateTime);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(DateTime) : DateTime.Parse(property.Value<string>());
+        }
+
     }
 
 }

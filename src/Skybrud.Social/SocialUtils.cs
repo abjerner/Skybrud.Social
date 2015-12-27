@@ -434,8 +434,16 @@ namespace Skybrud.Social {
 
         }
 
-        public static T ParseJsonArray<T>(string json, Func<JArray, T> func) {
+        private static T ParseJsonArray<T>(string json, Func<JArray, T> func) {
+            // TODO: Is this ever used?
             return func(ParseJsonArray(json));
+        }
+
+        public static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
+            return (
+                from JObject item in ParseJsonArray(json)
+                select func(item)
+            ).ToArray();
         }
 
         #endregion
