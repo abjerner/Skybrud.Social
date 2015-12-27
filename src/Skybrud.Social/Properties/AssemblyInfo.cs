@@ -33,5 +33,5 @@ using Skybrud.Social.Attributes;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0-alpha1")]
-[assembly: SkybrudMetadata("StartDate", "2012-07-30")]
+[assembly: AssemblyInformationalVersion("1.0.0-alpha1")]
+[assembly: AssemblyMetadata("StartDate", "2012-07-30")]
