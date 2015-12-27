@@ -32,6 +32,6 @@ using Skybrud.Social.Attributes;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.4.1")]
-[assembly: AssemblyInformationalVersion("0.9.4.1")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0-alpha1")]
 [assembly: SkybrudMetadata("StartDate", "2012-07-30")]
