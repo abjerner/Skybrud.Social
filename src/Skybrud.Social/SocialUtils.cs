@@ -408,18 +408,18 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance <code>T</code>.
+        /// Parses the specified <code>json</code> string into an instance of <code>T</code>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="json"></param>
-        /// <param name="func"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type to be returned.</typeparam>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         public static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
             return func(ParseJsonObject(json));
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance <code>JArray</code>.
+        /// Parses the specified <code>json</code> string into an instance of <code>JArray</code>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <code>JArray</code> parsed from the specified <code>json</code> string.</returns>
@@ -434,11 +434,12 @@ namespace Skybrud.Social {
 
         }
 
-        private static T ParseJsonArray<T>(string json, Func<JArray, T> func) {
-            // TODO: Is this ever used?
-            return func(ParseJsonArray(json));
-        }
-
+        /// <summary>
+        /// Parses the specified <code>json</code> string into an array of <code>T</code>.
+        /// </summary>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         public static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return (
                 from JObject item in ParseJsonArray(json)
