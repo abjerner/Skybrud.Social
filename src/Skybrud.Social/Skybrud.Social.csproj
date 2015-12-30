@@ -84,6 +84,7 @@
     <Compile Include="BitBucket\Responses\User\BitBucketCurrentUserRepositoriesResponse.cs" />
     <Compile Include="BitBucket\Responses\BitBucketResponse.cs" />
     <Compile Include="BitBucket\Responses\Users\BitBucketUserResponseBody.cs" />
+    <Compile Include="Exceptions\PropertyNotSetException.cs" />
     <Compile Include="Facebook\Constants\FacebookAlbumFields.cs" />
     <Compile Include="Facebook\Constants\FacebookAppFields.cs" />
     <Compile Include="Facebook\Constants\FacebookCommentFields.cs" />
