@@ -79,11 +79,6 @@
     <Compile Include="OAuth\OAuthException.cs" />
     <Compile Include="OAuth\OAuthUtils.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
-    <Compile Include="Pushover\PushoverException.cs" />
-    <Compile Include="Pushover\PushoverMessage.cs" />
-    <Compile Include="Pushover\PushoverPriority.cs" />
-    <Compile Include="Pushover\PushoverService.cs" />
-    <Compile Include="Pushover\PushoverSound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialExtensions.cs" />
     <Compile Include="Http\SocialHttpRequest.cs" />
