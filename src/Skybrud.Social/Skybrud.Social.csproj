@@ -136,32 +136,6 @@
     <Compile Include="Http\SocialHeaderCollection.cs" />
     <Compile Include="Http\SocialPostData.cs" />
     <Compile Include="Http\SocialResponse.cs" />
-    <Compile Include="Instagram\Objects\InstagramAccessTokenSummary.cs" />
-    <Compile Include="Instagram\Objects\InstagramMetaData.cs" />
-    <Compile Include="Instagram\Objects\Pagination\InstagramLikedMediaPagination.cs" />
-    <Compile Include="Instagram\Objects\Pagination\InstagramIdBasedPagination.cs" />
-    <Compile Include="Instagram\Objects\Common\InstagramRateLimiting.cs" />
-    <Compile Include="Instagram\Options\Common\InstagramRecentMediaOptions.cs" />
-    <Compile Include="Instagram\Options\Locations\InstagramLocationRecentMediaOptions.cs" />
-    <Compile Include="Instagram\Options\Locations\InstagramLocationSearchOptions.cs" />
-    <Compile Include="Instagram\Objects\InstagramUserCounts.cs" />
-    <Compile Include="Instagram\Objects\InstagramPosition.cs" />
-    <Compile Include="Instagram\Objects\InstagramTaggedUser.cs" />
-    <Compile Include="Instagram\Options\Relationships\InstagramFollowsOptions.cs" />
-    <Compile Include="Instagram\Options\Relationships\InstagramFollowedByOptions.cs" />
-    <Compile Include="Instagram\Options\Tags\InstagramTagRecentMediaOptions.cs" />
-    <Compile Include="Instagram\Options\Users\InstagramUserFeedOptions.cs" />
-    <Compile Include="Instagram\Options\Users\InstagramUserLikedMediaOptions.cs" />
-    <Compile Include="Instagram\Options\Users\InstagramUserRecentMediaOptions.cs" />
-    <Compile Include="Instagram\Options\Users\InstagramUserSearchOptions.cs" />
-    <Compile Include="Instagram\Responses\InstagramSearchTagsResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramLikedMediaResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramLocationRecentMediaResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramResponse.cs" />
-    <Compile Include="Instagram\Scopes\InstagramScopeCollection.cs" />
-    <Compile Include="Instagram\Scopes\InstagramScope.cs" />
-    <Compile Include="Instagram\Scopes\InstagramScopes.cs" />
     <Compile Include="Interfaces\IGetOptions.cs" />
     <Compile Include="Interfaces\IPostOptions.cs" />
     <Compile Include="Json\Extensions\JObject\JArrayExtensions.cs" />
@@ -235,44 +209,6 @@
     <Compile Include="Google\YouTube\Endpoints\YouTubeEndpoint.cs" />
     <Compile Include="Google\YouTube\Endpoints\Raw\YouTubeRawEndpoint.cs" />
     <Compile Include="Google\YouTube\YouTubeScope.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramTagsEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\Raw\InstagramMediaRawEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\Raw\InstagramRelationshipsRawEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\Raw\InstagramUsersRawEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\Raw\InstagramLocationsRawEndpoint.cs" />
-    <Compile Include="Instagram\Endpoints\Raw\InstagramTagsRawEndpoint.cs" />
-    <Compile Include="Instagram\Exceptions\InstagramOAuthException.cs" />
-    <Compile Include="Instagram\Options\InstagramMediaSearchOptions.cs" />
-    <Compile Include="Instagram\Options\InstagramRecentMediaSearchOptions.cs" />
-    <Compile Include="Instagram\Exceptions\InstagramNotFoundException.cs" />
-    <Compile Include="Instagram\Exceptions\InstagramOAuthAccessTokenException.cs" />
-    <Compile Include="Instagram\InstagramScope.cs" />
-    <Compile Include="Instagram\OAuth\InstagramOAuthClient.cs" />
-    <Compile Include="Instagram\Objects\InstagramImageSummary.cs" />
-    <Compile Include="Instagram\Objects\InstagramComment.cs" />
-    <Compile Include="Instagram\Exceptions\InstagramException.cs" />
-    <Compile Include="Instagram\Objects\InstagramImage.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramRelationshipsEndpoint.cs" />
-    <Compile Include="Instagram\InstagramService.cs" />
-    <Compile Include="Instagram\Endpoints\InstagramUsersEndpoint.cs" />
-    <Compile Include="Instagram\Objects\InstagramLocation.cs" />
-    <Compile Include="Instagram\Objects\InstagramMedia.cs" />
-    <Compile Include="Instagram\Objects\InstagramTag.cs" />
-    <Compile Include="Instagram\Objects\InstagramUserSummary.cs" />
-    <Compile Include="Instagram\Objects\InstagramUser.cs" />
-    <Compile Include="Instagram\Objects\InstagramVideo.cs" />
-    <Compile Include="Instagram\Objects\InstagramVideoSummary.cs" />
-    <Compile Include="Instagram\Objects\InstagramMediaSummary.cs" />
-    <Compile Include="Instagram\Responses\InstagramMediaResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramAccessTokenResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramLocationResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramUserFeedResponse.cs" />
-    <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
     <Compile Include="SocialJsonObject.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
@@ -426,9 +362,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Skybrud.Social.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Instagram\Options\Media\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
