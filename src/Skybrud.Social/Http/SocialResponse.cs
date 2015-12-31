@@ -5,15 +5,16 @@ using Newtonsoft.Json.Linq;
 namespace Skybrud.Social.Http {
     
     /// <summary>
-    /// Class representing a response from a call to a server. Generally this class should be used to represent the
-    /// object oriented (parsed) response wrapping an instance of <code>SocialHttpResponse</code> (raw response).
+    /// Class representing a response from a call to a server. Generally this class (or other classes inheriting from
+    /// this class) should be used to represent the object oriented (parsed) response wrapping an instance of
+    /// <code>SocialHttpResponse</code> (raw response).
     /// </summary>
     public class SocialResponse {
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the underlying response.
+        /// Gets a reference to the underlying raw response.
         /// </summary>
         public SocialHttpResponse Response { get; private set; }
 
@@ -39,14 +40,14 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets the content type of the request.
+        /// Gets the content type of the response.
         /// </summary>
         public string ContentType {
             get { return Response.ContentType; }
         }
 
         /// <summary>
-        /// Gets a collections of headers returned by the server.
+        /// Gets a collection of headers returned by the server.
         /// </summary>
         public WebHeaderCollection Headers {
             get { return Response.Headers; }
@@ -56,6 +57,10 @@ namespace Skybrud.Social.Http {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified raw <code>response</code>.
+        /// </summary>
+        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
         protected SocialResponse(SocialHttpResponse response) {
             Response = response;
         }
