@@ -120,18 +120,6 @@ namespace Skybrud.Social {
             return DoHttpGetRequest(url, queryString).GetAsString();
         }
 
-        public static IJsonObject DoHttpGetRequestAndGetBodyAsJson(string url, NameValueCollection queryString = null) {
-            return DoHttpGetRequest(url, queryString).GetAsJson();
-        }
-
-        public static JsonObject DoHttpGetRequestAndGetBodyAsJsonObject(string url, NameValueCollection queryString = null) {
-            return DoHttpGetRequest(url, queryString).GetAsJsonObject();
-        }
-
-        public static JsonArray DoHttpGetRequestAndGetBodyAsJsonArray(string url, NameValueCollection queryString = null) {
-            return DoHttpGetRequest(url, queryString).GetAsJsonArray();
-        }
-
         public static XElement DoHttpGetRequestAndGetBodyAsXml(string url, NameValueCollection queryString = null) {
             HttpWebResponse response = DoHttpGetRequest(url, queryString);
             Stream stream = response.GetResponseStream();
@@ -148,18 +136,6 @@ namespace Skybrud.Social {
 
         public static string DoHttpPostRequestAndGetBodyAsString(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
             return DoHttpPostRequest(url, queryString, postData).GetAsString();
-        }
-
-        public static IJsonObject DoHttpPostRequestAndGetBodyAsJson(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            return DoHttpPostRequest(url, queryString, postData).GetAsJson();
-        }
-
-        public static JsonObject DoHttpPostRequestAndGetBodyAsJsonObject(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            return DoHttpPostRequest(url, queryString, postData).GetAsJsonObject();
-        }
-
-        public static JsonArray DoHttpPostRequestAndGetBodyAsJsonArray(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            return DoHttpPostRequest(url, queryString, postData).GetAsJsonArray();
         }
 
         public static XElement DoHttpPostRequestAndGetBodyAsXml(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {

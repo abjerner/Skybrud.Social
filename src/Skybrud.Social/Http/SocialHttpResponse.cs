@@ -95,28 +95,6 @@ namespace Skybrud.Social.Http {
             return Body;
         }
 
-        /// <summary>
-        /// Gets the response body as an instance of either <var>JsonObject</var> or
-        /// <var>JsonArray</var>.
-        /// </summary>
-        public IJsonObject GetBodyAsJson() {
-            return Body == null ? null : JsonConverter.Parse(Body);
-        }
-
-        /// <summary>
-        /// Gets the response body as an instance of <var>JsonObject</var>.
-        /// </summary>
-        public JsonObject GetBodyAsJsonObject() {
-            return GetBodyAsJson() as JsonObject;
-        }
-
-        /// <summary>
-        /// Gets the response body as an instance of <var>JsonArray</var>.
-        /// </summary>
-        public JsonArray GetBodyAsJsonArray() {
-            return GetBodyAsJson() as JsonArray;
-        }
-
         #endregion
 
         #region Static methods

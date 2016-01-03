@@ -13,29 +13,6 @@ namespace Skybrud.Social {
     public static class SocialExtensions {
         
         /// <summary>
-        /// Serializes the specified collection of <code>SocialJsonObject</code> to a raw JSON
-        /// string.
-        /// </summary>
-        /// <param name="collection">The collection to be serialized.</param>
-        public static string ToJson(this IEnumerable<SocialJsonObject> collection) {
-            if (collection == null) return null;
-            var array = (from item in collection select (object) item.JsonObject).ToArray();
-            return new JsonArray(array).ToJson();
-        }
-
-        /// <summary>
-        /// Serializes and saves the specified collection of <code>SocialJsonObject</code> to a raw
-        /// JSON string.
-        /// </summary>
-        /// <param name="collection">The collection to be serialized.</param>
-        /// <param name="path">The path to the file.</param>
-        public static void SaveJson(this IEnumerable<SocialJsonObject> collection, string path) {
-            if (collection == null) return;
-            var array = (from item in collection select (object) item.JsonObject).ToArray();
-            new JsonArray(array).SaveJson(path);
-        }
-
-        /// <summary>
         /// Calculates the distance in meters between two GPS locations.
         /// </summary>
         /// <param name="loc1">The first location.</param>
@@ -52,19 +29,6 @@ namespace Skybrud.Social {
                     return reader.ReadToEnd();
                 }
             }
-        }
-
-        public static IJsonObject GetAsJson(this HttpWebResponse response) {
-            Stream stream = response.GetResponseStream();
-            return stream == null ? null : JsonConverter.Parse(new StreamReader(stream).ReadToEnd());
-        }
-
-        public static JsonObject GetAsJsonObject(this HttpWebResponse response) {
-            return GetAsJson(response) as JsonObject;
-        }
-
-        public static JsonArray GetAsJsonArray(this HttpWebResponse response) {
-            return GetAsJson(response) as JsonArray;
         }
         
         public static void AppendQueryString(this UriBuilder builder, NameValueCollection values) {
