@@ -1,7 +1,13 @@
 Skybrud.Social
-==============
+============
 
-Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.
+Skybrud.Social in general is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.
+
+**Notice** As of `v1.0`, this repository / package will just contain the core functionality, and not the implementation for the individual services. Each supported service will now have it's own repository and package. You can find a list of [supported services](#services) further down this page.
+
+
+
+
 
 ### Installation
 
@@ -14,47 +20,51 @@ Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.dll` to th
 2. [**Builds**][DropboxFolder]  
 I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.dll` to the bin directory of your project.
 
+
+
+
+
 ### Found a bug? Have a question?
 
 * Please feel free to [**create an issue**][Issues], and I will get back to you ;)
+
+
+
+
 
 ### Changelog
 
 The [**releases page**](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, and each there will be some information for each release on the most significant changes.
 
+
+
+
+
 ### Documentation
 
-Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [**Skybrud.Social website**][Website].
+Improving the code has higher priority than documentation, so I'm currently a bit behind on the documentation. For the small amount of documentation already written, have a look at the [**Skybrud.Social website**][Website]. The website will contain documentation for the core functionality as well as the implementation of the individual services.
+
+
+
+
 
 ### Services
+* [Skybrud.Social.**BitBucket**](RepoBitBucket)
+* [Skybrud.Social.**Facebook**](RepoFacebook)
+* [Skybrud.Social.**GitHub**](RepoGitHub)
+* [Skybrud.Social.**Google**](RepoGoogle) Analytics + YouTube
+* [Skybrud.Social.**Instagram**](RepoInstagram)
+* [Skybrud.Social.**LinkedIn**](RepoLinkedIn)
+* [Skybrud.Social.**Microsoft**](RepoMicrosoft) Windows Live
+* [Skybrud.Social.**Pinterest**](RepoPinterest)
+* [Skybrud.Social.**Slack**](RepoSlack)
+* [Skybrud.Social.**Twitter**](RepoTwitter)
+* [Skybrud.Social.**Vimeo**](RepoVimeo)
+* Skybrud.Social.**Yammer** *(coming soon)*
+* Skybrud.Social.**Spotify** *(coming soon)*
 
-Skybrud.Social natively supports the following services:
 
-* <strong>BitBucket</strong> ([See documentation][WebsiteBitBucket] &bull; OAuth 1.0a)
 
-* <strong>Facebook</strong> ([See documentation][WebsiteFacebook] &bull; OAuth 2.0)
-
-* <strong>GitHub</strong> ([See documentation][WebsiteGitHub] &bull; OAuth 2.0)
-
-* <strong>Google</strong> ([See documentation][WebsiteGoogle] &bull; OAuth 2.0)
-  * <strong>Analytics</strong> ([See documentation][WebsiteAnalytics])
-  * <strong>YouTube</strong> ([See documentation][WebsiteYouTube])
-
-* <strong>Instagram</strong> ([See documentation][WebsiteInstagram] &bull; OAuth 2.0)
-
-* <strong>Twitter</strong> ([See documentation][WebsiteTwitter] &bull; OAuth 1.0a)
-
-* <strong>Vimeo</strong> ([See documentation][WebsiteVimeo] &bull; OAuth 1.0a)
-
-In addition to the services listed above, a number of other services are also supported in individual repositories/packages:
-
-* <strong>LinkedIn</strong> ([See documentation][WebsiteLinkedIn] &bull; OAuth 1.0a and 2.0 &bull; Version: *Not yet released*)
-
-* <strong>Microsoft</strong> ([See documentation][WebsiteMicrosoft] &bull; OAuth 2.0 &bull; Version: *Not yet released*)
-
-* <strong>Pinterest</strong> ([See documentation][WebsitePinterest] &bull; OAuth 2.0 &bull; Version: *Not yet released*)
-
-* <strong>Slack</strong> ([See documentation][WebsiteSlack] &bull; OAuth 2.0 &bull; Version: *Not yet released*)
 
 
 
@@ -79,6 +89,29 @@ In addition to the services listed above, a number of other services are also su
 [WebsiteSlack]: http://social.skybrud.dk/slack/
 [WebsiteSpotify]: http://social.skybrud.dk/spotify/
 [WebsiteYammer]: http://social.skybrud.dk/yammer/
+
+
+
+
+
+
+[RepoBitBucket]: https://github.com/abjerner/Skybrud.Social.BitBucket
+[RepoFacebook]: https://github.com/abjerner/Skybrud.Social.Facebook
+[RepoGitHub]: https://github.com/abjerner/Skybrud.Social.GitHub
+[RepoGoogle]: https://github.com/abjerner/Skybrud.Social.Google
+[RepoInstagram]: https://github.com/abjerner/Skybrud.Social.Instagram
+[RepoLinkedIn]: https://github.com/abjerner/Skybrud.Social.LinkedIn
+[RepoMicrosoft]: https://github.com/abjerner/Skybrud.Social.Microsoft
+[RepoPinterest]: https://github.com/abjerner/Skybrud.Social.Pinterest
+[RepoSlack]: https://github.com/abjerner/Skybrud.Social.Slack
+[RepoTwitter]: https://github.com/abjerner/Skybrud.Social.Twitter
+[RepoVimeo]: https://github.com/abjerner/Skybrud.Social.Vimeo
+
+
+
+
+
+
 
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social
 [GitHubRelease]: https://github.com/abjerner/Skybrud.Social/releases/latest
