@@ -49,17 +49,17 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 
 
 ### Services
-* [Skybrud.Social.**BitBucket**](RepoBitBucket)
-* [Skybrud.Social.**Facebook**](RepoFacebook)
-* [Skybrud.Social.**GitHub**](RepoGitHub)
-* [Skybrud.Social.**Google**](RepoGoogle) Analytics + YouTube
-* [Skybrud.Social.**Instagram**](RepoInstagram)
-* [Skybrud.Social.**LinkedIn**](RepoLinkedIn)
-* [Skybrud.Social.**Microsoft**](RepoMicrosoft) Windows Live
-* [Skybrud.Social.**Pinterest**](RepoPinterest)
-* [Skybrud.Social.**Slack**](RepoSlack)
-* [Skybrud.Social.**Twitter**](RepoTwitter)
-* [Skybrud.Social.**Vimeo**](RepoVimeo)
+* [Skybrud.Social.**BitBucket**][RepoBitBucket]
+* [Skybrud.Social.**Facebook**][RepoFacebook]
+* [Skybrud.Social.**GitHub**][RepoGitHub]
+* [Skybrud.Social.**Google**][RepoGoogle] Analytics + YouTube
+* [Skybrud.Social.**Instagram**][RepoInstagram]
+* [Skybrud.Social.**LinkedIn**][RepoLinkedIn]
+* [Skybrud.Social.**Microsoft**][RepoMicrosoft] Windows Live
+* [Skybrud.Social.**Pinterest**][RepoPinterest]
+* [Skybrud.Social.**Slack**][RepoSlack]
+* [Skybrud.Social.**Twitter**][RepoTwitter]
+* [Skybrud.Social.**Vimeo**][RepoVimeo]
 * Skybrud.Social.**Yammer** *(coming soon)*
 * Skybrud.Social.**Spotify** *(coming soon)*
 
