@@ -247,6 +247,46 @@ namespace Skybrud.Social.Json.Extensions.JObject {
             return property == null ? default(DateTime) : DateTime.Parse(property.Value<string>());
         }
 
+        /// <summary>
+        /// Gets whether a property with the specified whether a property with the specified <code>propertyName</code> exists and isn't <code>null</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>Returns <code>true</code> if the property exists and the value isn't <code>null</code>, otherwise <code>false</code>.</returns>
+        public static bool HasValue(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+            return obj != null && obj.Property(propertyName) != null && obj.GetValue(propertyName) != null;
+        }
+
+        /// <summary>
+        /// Gets a string array from the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>Returns the property value as a string array.</returns>
+        public static string[] GetStringArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+            return obj.GetArray(propertyName, x => (string) Convert.ChangeType(x, typeof(string)));
+        }
+
+        /// <summary>
+        /// Gets an array of <code>int</code> from the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>Returns the property value as an array of <code>int</code>.</returns>
+        public static int[] GetInt32Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+            return obj.GetArray(propertyName, x => (int) Convert.ChangeType(x, typeof(int)));
+        }
+
+        /// <summary>
+        /// Gets an array of <code>long</code> from the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>Returns the property value as an array of <code>long</code>.</returns>
+        public static long[] GetInt64Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+            return obj.GetArray(propertyName, x => (long) Convert.ChangeType(x, typeof(long)));
+        }
+
     }
 
 }
