@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace Skybrud.Social.OAuth {
+namespace Skybrud.Social.OAuth.Exceptions {
     
     public class OAuthException : Exception {
 

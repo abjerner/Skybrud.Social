@@ -6,8 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using Skybrud.Social.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
+using Skybrud.Social.OAuth.Objects;
+using Skybrud.Social.OAuth.Responses;
 
 namespace Skybrud.Social.OAuth {
 
@@ -21,69 +24,68 @@ namespace Skybrud.Social.OAuth {
         #region Properties
 
         /// <summary>
-        /// The consumer key of your application.
+        /// Gets or sets the consumer key of your application.
         /// </summary>
         public string ConsumerKey { get; set; }
 
         /// <summary>
-        /// The consumer secret of your application. The consumer secret is sensitive information used to identify your
-        /// application. Users should never be shown this value.
+        /// Gets or sets the consumer secret of your application. The consumer secret is sensitive information used to
+        /// identify your application. Users should never be shown this value.
         /// </summary>
         public string ConsumerSecret { get; set; }
 
         /// <summary>
-        /// A unique/random value specifying the <code>oauth_nonce</code>
-        /// parameter in the OAuth protocol. Along with <code>oauth_timestamp</code>,
-        /// it will make sure each request is only sent once to the OAUth server.
+        /// Gets or sets a unique/random value specifying the <code>oauth_nonce</code> parameter in the OAuth protocol.
+        /// Along with <code>oauth_timestamp</code>, it will make sure each request is only sent once to the OAuth
+        /// server (provider).
         /// </summary>
         public string Nonce { get; set; }
 
         /// <summary>
-        /// The current UNIX timestamp specifying the <code>oauth_timestamp</code>
-        /// in the OAuth protocol. Along with <code>oauth_nonce</code>,
-        /// it will make sure each request is only sent once to the OAUth server.
+        /// Gets or sets the current UNIX timestamp specifying the <code>oauth_timestamp</code> in the OAuth protocol.
+        /// Along with <code>oauth_nonce</code>, it will make sure each request is only sent once to the OAuth server
+        /// (provider).
         /// </summary>
         public string Timestamp { get; set; }
 
         /// <summary>
-        /// The request token or access token used to access the OAuth server on behalf of a user.
+        /// Gets or sets the request token or access token used to access the OAuth server on behalf of a user.
         /// </summary>
         public string Token { get; set; }
 
         /// <summary>
-        /// The request token secret or access token secret used to access the OAuth server on behalf of a user.
+        /// Gets or sets the request token secret or access token secret used to access the OAuth server on behalf of a
+        /// user.
         /// </summary>
         public string TokenSecret { get; set; }
 
         /// <summary>
-        /// The version of the OAuth protocol.
+        /// Gets or sets the version of the OAuth protocol.
         /// </summary>
         public string Version { get; set; }
 
         /// <summary>
-        /// A callback URL. This property specified the <code>oauth_callback</code> parameter
-        /// and is used for 3-legged logins. In most cases this proparty should be empty.
+        /// Gets or sets the callback URL. This property specified the <code>oauth_callback</code> parameter and is
+        /// used for 3-legged logins. You only need to specify this property for authentication - it is not necessary
+        /// toset this property when just making calls to the API. 
         /// </summary>
         public string Callback { get; set; }
 
         /// <summary>
-        /// As the first step of the 3-legged login process, the client
-        /// must obtain a request token through this URL. If possible
-        /// this URL should always use HTTPS.
+        /// Gets or sets the request token URL. As the first step of the 3-legged login process, the client must obtain
+        /// a request token through this URL. If possible this URL should always use HTTPS.
         /// </summary>
         public string RequestTokenUrl { get; set; }
 
         /// <summary>
-        /// As the second step of the 3-legged login process, the user
-        /// is redirected to this URL for authorizing the login. If
-        /// possible this URL should always use HTTPS.
+        /// Gets or sets the authorization URL. As the second step of the 3-legged login process, the user is
+        /// redirected to this URL for authorizing the login. If possible this URL should always use HTTPS.
         /// </summary>
         public string AuthorizeUrl { get; set; }
 
         /// <summary>
-        /// In the final step of the 3-legged login process, the OAuth
-        /// client will exchange the request token for an access token.
-        /// It will do so using this URL. If possible this URL should
+        /// Gets or sets the access token URL. In the final step of the 3-legged login process, the OAuth client will
+        /// exchange the request token for an access token. It will do so using this URL. If possible this URL should
         /// always use HTTPS.
         /// </summary>
         public string AccessTokenUrl { get; set; }
@@ -144,7 +146,9 @@ namespace Skybrud.Social.OAuth {
         #region Member methods
 
         /// <summary>
-        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code> parameters with new values for another request.
+        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code> parameters with new values for
+        /// another request. If the property <code>AutoReset</code> is <code>true</code>, this method will be called
+        /// automatically before each request to the underlying API.
         /// </summary>
         public virtual void Reset() {
             Nonce = OAuthUtils.GenerateNonce();
@@ -246,36 +250,31 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Gets a request token from the Twitter API. After acquiring a request token, the user
-        /// should be redirected to the Twitter website for approving the application. If successful,
-        /// the user will be redirected back to the specified callback URL where you then can exchange
-        /// the request token for an access token.
+        /// Gets a request token from the provider. After acquiring a request token, the user should be redirected
+        /// to the website of the provider for approving the application. If successful, the user will be redirected
+        /// back to the specified callback URL where you then can exchange the request token for an access token.
         /// </summary>
-        public virtual OAuthRequestToken GetRequestToken() {
+        public virtual OAuthRequestTokenResponse GetRequestToken() {
+
+            // Make the call to the API/provider
+            SocialHttpResponse response = GetRequestTokenResponse();
+
+            // Parse the response body
+            OAuthRequestToken body = OAuthRequestToken.Parse(this, response.Body);
+
+            // Parse the response
+            return OAuthRequestTokenResponse.ParseResponse(response, body);
+
+        }
+
+        protected virtual SocialHttpResponse GetRequestTokenResponse() {
 
             // Some error checking
-            if (RequestTokenUrl == null) throw new ArgumentNullException("RequestTokenUrl");
-            if (AuthorizeUrl == null) throw new ArgumentNullException("AuthorizeUrl");
+            if (String.IsNullOrWhiteSpace(RequestTokenUrl)) throw new PropertyNotSetException("RequestTokenUrl");
+            if (String.IsNullOrWhiteSpace(AuthorizeUrl)) throw new PropertyNotSetException("AuthorizeUrl");
 
-            // Get the request token
-            HttpStatusCode status;
-            string response = DoHttpRequestAsString("POST", RequestTokenUrl, null, null, out status);
-
-            // Check for errors
-            if (status != HttpStatusCode.OK) {
-                throw new OAuthException(status, response);
-            }
-
-            // Convert the query string to a NameValueCollection
-            NameValueCollection query = SocialUtils.ParseQueryString(response);
-
-            // Return the request token
-            return new OAuthRequestToken {
-                Token = query["oauth_token"],
-                TokenSecret = query["oauth_token_secret"],
-                CallbackConfirmed = query["oauth_callback_confirmed"] == "true",
-                AuthorizeUrl = AuthorizeUrl + "?oauth_token=" + query["oauth_token"]
-            };
+            // Make the call to the API/provider
+            return DoHttpPostRequest(RequestTokenUrl, null, null);
 
         }
 
@@ -287,8 +286,32 @@ namespace Skybrud.Social.OAuth {
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/auth/3-legged-authorization</cref>
         /// </see>
-        public virtual OAuthAccessToken GetAccessToken(string verifier) {
-            return OAuthAccessToken.Parse(GetAccessTokenQuery(verifier));
+        public virtual OAuthAccessTokenResponse GetAccessToken(string verifier) {
+
+            // Make the call to the API/provider
+            SocialHttpResponse response = GetAccessTokenResponse(verifier);
+
+            // Parse the response body
+            OAuthAccessToken body = OAuthAccessToken.Parse(this, response.Body);
+
+            // Parse the response
+            return OAuthAccessTokenResponse.ParseResponse(response, body);
+
+        }
+
+        protected virtual SocialHttpResponse GetAccessTokenResponse(string verifier) {
+
+            // Some error checking
+            if (String.IsNullOrWhiteSpace(AccessTokenUrl)) throw new PropertyNotSetException("AccessTokenUrl");
+
+            // Initialize the POST data
+            NameValueCollection postData = new NameValueCollection {
+                {"oauth_verifier", verifier}
+            };
+
+            // Make the call to the API/provider
+            return DoHttpPostRequest(AccessTokenUrl, null, postData);
+
         }
 
         /// <summary>
@@ -305,7 +328,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="queryString">The query string.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection queryString) {
-            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, queryString, null));
+            return DoHttpRequest("GET", url, queryString, null);
         }
 
         /// <summary>
@@ -314,7 +337,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="queryString">The query string.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString queryString) {
-            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, queryString == null ? null : queryString.NameValueCollection, null));
+            return DoHttpRequest("GET", url, queryString == null ? null : queryString.NameValueCollection, null);
         }
 
         /// <summary>
@@ -324,7 +347,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="options">The options for the call to the API.</param>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
             NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);
-            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("GET", url, nvc, null));
+            return DoHttpRequest("GET", url, nvc, null);
         }
 
         /// <summary>
@@ -342,18 +365,36 @@ namespace Skybrud.Social.OAuth {
 
             // TODO: Converting the POST data to a NameValueCollection will not support multipart data
 
-            return SocialHttpResponse.GetFromWebResponse(DoHttpRequest("POST", url, nvcQuery, nvcPostData));
+            return DoHttpRequest("POST", url, nvcQuery, nvcPostData);
 
         }
 
         /// <summary>
-        /// Makes a signed request to the Twitter API based on the specified parameters.
+        /// Makes a signed POST request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL to call.</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="postData">The POST data.</param>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, NameValueCollection queryString, NameValueCollection postData) {
+
+            // Check if NULL
+            if (queryString == null) queryString = new NameValueCollection();
+            if (postData == null) postData = new NameValueCollection();
+
+            // TODO: Converting the POST data to a NameValueCollection will not support multipart data
+
+            return DoHttpRequest("POST", url, queryString, postData);
+
+        }
+
+        /// <summary>
+        /// Makes a signed request to the underlying API based on the specified parameters.
         /// </summary>
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="postData">The POST data.</param>
-        public virtual HttpWebResponse DoHttpRequest(string method, string url, NameValueCollection queryString, NameValueCollection postData) {
+        public virtual SocialHttpResponse DoHttpRequest(string method, string url, NameValueCollection queryString, NameValueCollection postData) {
 
             // Check if NULL
             if (queryString == null) queryString = new NameValueCollection();
@@ -366,7 +407,7 @@ namespace Skybrud.Social.OAuth {
             }
 
             // Initialize the request
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
             // Generate the signature
             string signature = GenerateSignature(method, url, queryString, postData);
@@ -396,21 +437,21 @@ namespace Skybrud.Social.OAuth {
 
             // Get the response
             try {
-                return (HttpWebResponse)request.GetResponse();
+                return SocialHttpResponse.GetFromWebResponse((HttpWebResponse) request.GetResponse());
             } catch (WebException ex) {
                 if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                return (HttpWebResponse)ex.Response;
+                return SocialHttpResponse.GetFromWebResponse((HttpWebResponse) ex.Response);
             }
 
         }
 
         /// <summary>
-        /// Makes a signed request to the Twitter API based on the specified parameters.
+        /// Makes a signed request to the underlying API based on the specified parameters.
         /// </summary>
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
-        public virtual HttpWebResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
+        public virtual SocialHttpResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
 
             // TODO: Should this method have is own implementation instead of calling another DoHttpRequest method?
 
@@ -420,63 +461,14 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Makes a signed request to the Twitter API based on the specified parameters.
+        /// Makes a signed request to the underlying API based on the specified parameters.
         /// </summary>
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="options">The options for the call to the API.</param>
-        public virtual HttpWebResponse DoHttpRequest(string method, string url, IGetOptions options) {
+        public virtual SocialHttpResponse DoHttpRequest(string method, string url, IGetOptions options) {
             SocialQueryString queryString = options == null ? null : options.GetQueryString();
             return DoHttpRequest(method, url, queryString);
-        }
-
-        /// <summary>
-        /// Makes a signed request to the Twitter API based on the specified parameters.
-        /// </summary>
-        /// <param name="method">The HTTP method of the request.</param>
-        /// <param name="url">The base URL of the request (no query string).</param>
-        /// <param name="queryString">The query string.</param>
-        /// <param name="postData">The POST data.</param>
-        public virtual string DoHttpRequestAsString(string method, string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            using (HttpWebResponse response = DoHttpRequest(method, url, queryString, postData)) {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                return reader.ReadToEnd();
-            }
-        }
-
-        /// <summary>
-        /// Makes a signed request to the Twitter API based on the specified parameters.
-        /// </summary>
-        /// <param name="method">The HTTP method of the request.</param>
-        /// <param name="url">The base URL of the request (no query string).</param>
-        /// <param name="queryString">The query string.</param>
-        /// <param name="postData">The POST data.</param>
-        /// <param name="statusCode">The status code of the response.</param>
-        public virtual string DoHttpRequestAsString(string method, string url, NameValueCollection queryString, NameValueCollection postData, out HttpStatusCode statusCode) {
-            using (HttpWebResponse response = DoHttpRequest(method, url, queryString, postData)) {
-                statusCode = response.StatusCode;
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                return reader.ReadToEnd();
-            }
-        }
-
-        private NameValueCollection GetAccessTokenQuery(string verifier) {
-
-            // Some error checking
-            if (String.IsNullOrWhiteSpace(AccessTokenUrl)) throw new ArgumentException("The AccessTokenUrl property should not be empty at this point.");
-
-            // Get the access token
-            HttpStatusCode status;
-            string response = DoHttpRequestAsString("POST", AccessTokenUrl, null, new NameValueCollection { { "oauth_verifier", verifier } }, out status);
-
-            // Check for errors
-            if (status != HttpStatusCode.OK) {
-                throw new OAuthException(status, response);
-            }
-
-            // Convert the query string to a NameValueCollection
-            return SocialUtils.ParseQueryString(response);
-
         }
 
         #endregion
