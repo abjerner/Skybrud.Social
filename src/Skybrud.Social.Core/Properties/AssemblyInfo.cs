@@ -1,11 +1,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Skybrud.Social.Attributes;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Skybrud.Social")]
+[assembly: AssemblyTitle("Skybrud.Social.Core")]
 [assembly: AssemblyDescription("Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skybrud.dk a/s")]

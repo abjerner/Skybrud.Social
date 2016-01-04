@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social", "Skybrud.Social\Skybrud.Social.csproj", "{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.Core", "Skybrud.Social.Core\Skybrud.Social.Core.csproj", "{B1EE1531-E2FC-419C-B7DA-FFB415417FC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
