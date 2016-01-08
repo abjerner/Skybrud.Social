@@ -11,7 +11,7 @@
     <iconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <tags>Skybrud, Social, OAuth, JSON</tags>
+    <tags>Facebook, Twitter, Instagram, Vimeo, Google, Analytics, GitHub, BitBucket, Skybrud, Social, OAuth, JSON</tags>
     <dependencies />
   </metadata>
 </package>

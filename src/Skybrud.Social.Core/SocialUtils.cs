@@ -13,7 +13,6 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.Interfaces;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social {
     
