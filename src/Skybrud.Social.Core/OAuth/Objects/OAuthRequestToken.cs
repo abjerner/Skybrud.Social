@@ -10,6 +10,11 @@ namespace Skybrud.Social.OAuth.Objects {
         #region Properties
 
         /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
+        public OAuthClient Client { get; private set; }
+
+        /// <summary>
         /// Gets the request token.
         /// </summary>
         public string Token { get; private set; }
@@ -31,7 +36,7 @@ namespace Skybrud.Social.OAuth.Objects {
 
         #endregion
 
-        #region Constructor(s)
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance based on the specified <code>client</code> and <code>query</code>.
@@ -39,6 +44,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
         protected OAuthRequestToken(OAuthClient client, NameValueCollection query) {
+            Client = client;
             Token = query["oauth_token"];
             TokenSecret = query["oauth_token_secret"];
             IsCallbackConfirmed = query["oauth_callback_confirmed"] == "true";

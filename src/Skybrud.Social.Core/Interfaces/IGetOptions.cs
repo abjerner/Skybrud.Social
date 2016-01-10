@@ -2,6 +2,9 @@
 
 namespace Skybrud.Social.Interfaces {
 
+    /// <summary>
+    /// Interface representing the options of a HTTP GET request.
+    /// </summary>
     public interface IGetOptions {
 
         #region Methods

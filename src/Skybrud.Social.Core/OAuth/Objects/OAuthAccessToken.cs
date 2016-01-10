@@ -11,6 +11,11 @@ namespace Skybrud.Social.OAuth.Objects {
         #region Properties
 
         /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
+        public OAuthClient Client { get; private set; }
+
+        /// <summary>
         /// Gets the access token.
         /// </summary>
         public string Token { get; private set; }
@@ -35,6 +40,8 @@ namespace Skybrud.Social.OAuth.Objects {
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
         protected OAuthAccessToken(OAuthClient client, NameValueCollection query) {
+
+            Client = client;
 
             // Get the user ID
             long userId;

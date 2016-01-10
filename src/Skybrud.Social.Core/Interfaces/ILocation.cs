@@ -1,5 +1,8 @@
 namespace Skybrud.Social.Interfaces {
 
+    /// <summary>
+    /// Class representing a location based on a latitude and longitude.
+    /// </summary>
     public interface ILocation {
 
         /// <summary>

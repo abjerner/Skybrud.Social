@@ -9,15 +9,15 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social {
     
     /// <summary>
-    /// Static class with various utility methods used througout Skybrud.Social.
+    /// Static class with various utility methods used throughout Skybrud.Social.
     /// </summary>
     public static class SocialUtils {
 
@@ -77,12 +77,10 @@ namespace Skybrud.Social {
 
         #region HTTP helpers
 
-        private static HttpWebResponse DoHttpRequest(string url, string method, NameValueCollection queryString, NameValueCollection postData) {
-
-            // TODO: Decide better naming of method
+        private static SocialHttpResponse DoHttpRequest(string url, string method, NameValueCollection query, NameValueCollection postData) {
 
             // Merge the query string
-            url = new UriBuilder(url).MergeQueryString(queryString).ToString();
+            url = new UriBuilder(url).MergeQueryString(query).ToString();
 
             // Initialize the request
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
@@ -101,49 +99,38 @@ namespace Skybrud.Social {
             }
 
             // Get the response
+            HttpWebResponse response;
             try {
-                return (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse) request.GetResponse();
             } catch (WebException ex) {
-                return (HttpWebResponse)ex.Response;
+                response = (HttpWebResponse) ex.Response;
             }
 
+            // Wrap the .NET response
+            return SocialHttpResponse.GetFromWebResponse(response);
+
         }
 
-        #region GET
-
-        public static HttpWebResponse DoHttpGetRequest(string baseUrl, NameValueCollection queryString = null) {
-            return DoHttpRequest(baseUrl, "GET", queryString, null);
+        /// <summary>
+        /// Makes a HTTP GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="query">The query string of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public static SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query = null) {
+            return DoHttpRequest(url, "GET", query, null);
         }
 
-        public static string DoHttpGetRequestAndGetBodyAsString(string url, NameValueCollection queryString = null) {
-            return DoHttpGetRequest(url, queryString).GetAsString();
+        /// <summary>
+        /// Makes a HTTP GET request to the specified <code>url</code>.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="query">The query string of the request.</param>
+        /// <param name="postData">The POST data of the request.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public static SocialHttpResponse DoHttpPostRequest(string url, NameValueCollection query, NameValueCollection postData) {
+            return DoHttpRequest(url, "POST", query, postData);
         }
-
-        public static XElement DoHttpGetRequestAndGetBodyAsXml(string url, NameValueCollection queryString = null) {
-            HttpWebResponse response = DoHttpGetRequest(url, queryString);
-            Stream stream = response.GetResponseStream();
-            return stream == null ? null : XElement.Parse(new StreamReader(stream).ReadToEnd());
-        }
-
-        #endregion
-
-        #region POST
-
-        public static HttpWebResponse DoHttpPostRequest(string baseUrl, NameValueCollection queryString, NameValueCollection postData) {
-            return DoHttpRequest(baseUrl, "POST", queryString, postData);
-        }
-
-        public static string DoHttpPostRequestAndGetBodyAsString(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            return DoHttpPostRequest(url, queryString, postData).GetAsString();
-        }
-
-        public static XElement DoHttpPostRequestAndGetBodyAsXml(string url, NameValueCollection queryString = null, NameValueCollection postData = null) {
-            HttpWebResponse response = DoHttpPostRequest(url, queryString, postData);
-            Stream stream = response.GetResponseStream();
-            return stream == null ? null : XElement.Parse(new StreamReader(stream).ReadToEnd());
-        }
-
-        #endregion
 
         #endregion
 
@@ -213,42 +200,26 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Converts the specified <var>NameValueCollection</var> into a query string using the proper encoding.
+        /// Converts the specified <code>collection</code> into a query string using the proper encoding.
         /// </summary>
         /// <param name="collection">The collection to convert.</param>
-        /// <returns></returns>
+        /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
         public static string NameValueCollectionToQueryString(NameValueCollection collection) {
             return String.Join("&", Array.ConvertAll(collection.AllKeys, key => UrlEncode(key) + "=" + UrlEncode(collection[key])));
         }
 
+        /// <summary>
+        /// Converts the specified <code>collection</code> into a query string using the proper encoding.
+        /// </summary>
+        /// <param name="collection">The collection to convert.</param>
+        /// <param name="includeIfNull">Specifies whether items that are <code>null</code> should be included in the query string.</param>
+        /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
         public static string NameValueCollectionToQueryString(NameValueCollection collection, bool includeIfNull) {
             return String.Join("&", (
                 from string key in collection.Keys
                 where collection[key] != null || includeIfNull
                 select UrlEncode(key) + "=" + UrlEncode(collection[key])
             ));
-        }
-
-        public static T GetAttributeValue<T>(XElement xElement, string name) {
-            string value = xElement.Attribute(name).Value;
-            return (T)Convert.ChangeType(value, typeof(T));
-        }
-
-        public static T GetAttributeValueOrDefault<T>(XElement xElement, string name) {
-            XAttribute attr = xElement.Attribute(name);
-            if (attr == null) return default(T);
-            return (T)Convert.ChangeType(attr.Value, typeof(T));
-        }
-
-        public static T GetElementValue<T>(XElement xElement, string name) {
-            string value = xElement.Element(name).Value;
-            return (T)Convert.ChangeType(value, typeof(T));
-        }
-
-        public static T GetElementValueOrDefault<T>(XElement xElement, string name) {
-            XElement e = xElement.Element(name);
-            if (e == null) return default(T);
-            return (T)Convert.ChangeType(e.Value, typeof(T));
         }
 
         #endregion
@@ -261,39 +232,64 @@ namespace Skybrud.Social {
         public const string IsoDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssK";
 
         /// <summary>
-        /// Returns the current unix timestamp which is defined as the amount of seconds
-        /// since the start of the Unix epoch - 1st of January, 1970 - 00:00:00 GMT.
+        /// Returns the current unix timestamp which is defined as the amount of seconds since the start of the Unix
+        /// epoch - 1st of January, 1970 - 00:00:00 GMT.
         /// </summary>
         public static long GetCurrentUnixTimestamp() {
             return (long) Math.Floor(GetCurrentUnixTimestampAsDouble());
         }
 
         /// <summary>
-        /// Returns the current unix timestamp which is defined as the amount of seconds
-        /// since the start of the Unix epoch - 1st of January, 1970 - 00:00:00 GMT.
+        /// Returns the current unix timestamp which is defined as the amount of seconds since the start of the Unix
+        /// epoch - 1st of January, 1970 - 00:00:00 GMT.
         /// </summary>
         public static double GetCurrentUnixTimestampAsDouble() {
             return (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
 
+        /// <summary>
+        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp.</param>
+        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(int timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
+        /// <summary>
+        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp.</param>
+        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(double timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
+        /// <summary>
+        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp.</param>
+        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(long timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
+        /// <summary>
+        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// </summary>
+        /// <param name="timestamp">The Unix timestamp.</param>
+        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(string timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Int64.Parse(timestamp));
         }
         
+        /// <summary>
+        /// Gets a Unix timestamp from the specified <code>dateTime</code>.
+        /// </summary>
+        /// <param name="dateTime">The instance of <code>DateTime</code> to be converted.</param>
+        /// <returns></returns>
         public static long GetUnixTimeFromDateTime(DateTime dateTime) {
-            return (int) (dateTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            return (long) (dateTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
 
         #endregion
@@ -305,6 +301,7 @@ namespace Skybrud.Social {
         /// </summary>
         /// <param name="loc1">The first location.</param>
         /// <param name="loc2">The second location.</param>
+        /// <returns>Returns the distance in meters between the two locations.</returns>
         public static double GetDistance(ILocation loc1, ILocation loc2) {
             return GetDistance(loc1.Latitude, loc1.Longitude, loc2.Latitude, loc2.Longitude);
         }
@@ -312,6 +309,11 @@ namespace Skybrud.Social {
         /// <summary>
         /// Calculates the distance in meters between two GPS locations.
         /// </summary>
+        /// <param name="lat1">The latitude of the first location.</param>
+        /// <param name="lng1">The longitude of the first location.</param>
+        /// <param name="lat2">The latitude of the second location.</param>
+        /// <param name="lng2">The longitude of the second location.</param>
+        /// <returns>Returns the distance in meters between the two locations.</returns>
         public static double GetDistance(double lat1, double lng1, double lat2, double lng2) {
 
             // http://stackoverflow.com/a/3440123
@@ -330,6 +332,12 @@ namespace Skybrud.Social {
 
         #region Enums
 
+        /// <summary>
+        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="str">The string to be parsed.</param>
+        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str) where T : struct {
 
             // Check whether the type of T is an enum
@@ -345,7 +353,14 @@ namespace Skybrud.Social {
             throw new Exception("Unable to parse enum of type " + typeof(T).Name + " from value \"" + str + "\"");
 
         }
-        
+
+        /// <summary>
+        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="str">The string to be parsed.</param>
+        /// <param name="fallback">The fallback if the enum could not be parsed.</param>
+        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str, T fallback) where T : struct {
 
             // Check whether the type of T is an enum
@@ -354,7 +369,7 @@ namespace Skybrud.Social {
             // Parse the enum
             foreach (string name in Enum.GetNames(typeof(T))) {
                 if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
-                    return (T)Enum.Parse(typeof(T), str, true);
+                    return (T) Enum.Parse(typeof(T), str, true);
                 }
             }
 

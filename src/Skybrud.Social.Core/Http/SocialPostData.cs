@@ -5,11 +5,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web;
 using Skybrud.Social.Http.PostData;
 
 namespace Skybrud.Social.Http {
-    
+
+    /// <summary>
+    /// Class representing the POST data of a HTTP request.
+    /// </summary>
     public class SocialPostData {
 
         #region Private fields
@@ -20,14 +22,23 @@ namespace Skybrud.Social.Http {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the amount of POST data entries.
+        /// </summary>
         public int Count {
             get { return _data.Count; }
         }
 
+        /// <summary>
+        /// Gets keys of all POST data entiries.
+        /// </summary>
         public Dictionary<string, ISocialPostValue>.KeyCollection Keys {
             get { return _data.Keys; }
         }
 
+        /// <summary>
+        /// Gets values of all POST data entiries.
+        /// </summary>
         public Dictionary<string, ISocialPostValue>.ValueCollection Values {
             get { return _data.Values; }
         }
@@ -36,20 +47,43 @@ namespace Skybrud.Social.Http {
 
         #region Member methods
 
-        public void Add(string name, string value) {
-            _data.Add(name, new SocialPostValue(name, value));
+        /// <summary>
+        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="value">The value of the entry.</param>
+        public void Add(string key, string value) {
+            _data.Add(key, new SocialPostValue(key, value));
+        }
+        
+        /// <summary>
+        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="value">The value of the entry.</param>
+        public void Add(string key, object value) {
+            _data.Add(key, new SocialPostValue(key, String.Format(CultureInfo.InvariantCulture, "{0}", value)));
         }
 
-        public void Add(string name, object value) {
-            _data.Add(name, new SocialPostValue(name, String.Format(CultureInfo.InvariantCulture, "{0}", value)));
+        /// <summary>
+        /// Adds a file entry with the specified <code>key</code> and <code>path</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="path">The path to the file of the entry.</param>
+        public void AddFile(string key, string path) {
+            _data.Add(key, new SocialPostFileValue(key, path));
         }
 
-        public void AddFile(string name, string path) {
-            _data.Add(name, new SocialPostFileValue(name, path));
-        }
-
-        public void AddFile(string name, string path, string contentType, string filename) {
-            _data.Add(name, new SocialPostFileValue(name, path, contentType, filename));
+        /// <summary>
+        /// Adds a file entry with the specified <code>key</code>, <code>path</code>, <code>contentType</code> and
+        /// <code>filename</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="path">The path to the file of the entry.</param>
+        /// <param name="contentType">The content type of the file.</param>
+        /// <param name="filename">The filename of the file.</param>
+        public void AddFile(string key, string path, string contentType, string filename) {
+            _data.Add(key, new SocialPostFileValue(key, path, contentType, filename));
         }
 
         internal static void Write(Stream stream, string str) {

@@ -159,6 +159,7 @@ namespace Skybrud.Social.OAuth {
         /// Generates the string for the authorization header based on the specified signature.
         /// </summary>
         /// <param name="signature">The signature.</param>
+        /// <returns>Returns the generated header string.</returns>
         public virtual string GenerateHeaderString(string signature) {
             string oauthHeaders = "OAuth realm=\"\",";
             if (!String.IsNullOrEmpty(Callback)) oauthHeaders += "oauth_callback=\"" + Uri.EscapeDataString(Callback) + "\",";
@@ -177,6 +178,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="queryString">Values representing the query string.</param>
         /// <param name="body">Values representing the POST body.</param>
+        /// <returns>Returns the generated parameter string.</returns>
         public virtual string GenerateParameterString(NameValueCollection queryString, NameValueCollection body) {
 
             // The parameters must be alphabetically sorted
@@ -215,7 +217,7 @@ namespace Skybrud.Social.OAuth {
         /// <summary>
         /// Generates the key used for making the signature.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the generated signature key.</returns>
         public virtual string GenerateSignatureKey() {
             return Uri.EscapeDataString(ConsumerSecret ?? "") + "&" + Uri.EscapeDataString(TokenSecret ?? "");
         }
@@ -227,7 +229,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
-        /// <returns></returns>
+        /// <returns>Returns the generated signature value.</returns>
         public virtual string GenerateSignatureValue(string method, string url, NameValueCollection queryString, NameValueCollection body) {
             return String.Format(
                 "{0}&{1}&{2}",
@@ -244,6 +246,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
+        /// <returns>Returns the generated signature.</returns>
         public virtual string GenerateSignature(string method, string url, NameValueCollection queryString, NameValueCollection body) {
             HMACSHA1 hasher = new HMACSHA1(new ASCIIEncoding().GetBytes(GenerateSignatureKey()));
             return Convert.ToBase64String(hasher.ComputeHash(new ASCIIEncoding().GetBytes(GenerateSignatureValue(method, url, queryString, body))));
@@ -254,6 +257,7 @@ namespace Skybrud.Social.OAuth {
         /// to the website of the provider for approving the application. If successful, the user will be redirected
         /// back to the specified callback URL where you then can exchange the request token for an access token.
         /// </summary>
+        /// <returns>Returns an instance of <code>OAuthRequestTokenResponse</code> representing the response.</returns>
         public virtual OAuthRequestTokenResponse GetRequestToken() {
 
             // Make the call to the API/provider
@@ -267,6 +271,7 @@ namespace Skybrud.Social.OAuth {
 
         }
 
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         protected virtual SocialHttpResponse GetRequestTokenResponse() {
 
             // Some error checking
@@ -283,6 +288,7 @@ namespace Skybrud.Social.OAuth {
         /// using this method. This is the third and final step of the authorization process.
         /// </summary>
         /// <param name="verifier">The verification key received after the user has accepted the app.</param>
+        /// <returns>Returns an instance of <code>OAuthAccessTokenResponse</code> representing the response.</returns>
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/auth/3-legged-authorization</cref>
         /// </see>
@@ -299,6 +305,7 @@ namespace Skybrud.Social.OAuth {
 
         }
 
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         protected virtual SocialHttpResponse GetAccessTokenResponse(string verifier) {
 
             // Some error checking
@@ -318,6 +325,7 @@ namespace Skybrud.Social.OAuth {
         /// Makes a signed GET request to the specified <code>url</code>.
         /// </summary>
         /// <param name="url">The URL to call.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url) {
             return DoHttpGetRequest(url, default(NameValueCollection));
         }
@@ -326,18 +334,20 @@ namespace Skybrud.Social.OAuth {
         /// Makes a signed GET request to the specified <code>url</code>.
         /// </summary>
         /// <param name="url">The URL to call.</param>
-        /// <param name="queryString">The query string.</param>
-        public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection queryString) {
-            return DoHttpRequest("GET", url, queryString, null);
+        /// <param name="query">The query string.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query) {
+            return DoHttpRequest("GET", url, query, null);
         }
 
         /// <summary>
         /// Makes a signed GET request to the specified <code>url</code>.
         /// </summary>
         /// <param name="url">The URL to call.</param>
-        /// <param name="queryString">The query string.</param>
-        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString queryString) {
-            return DoHttpRequest("GET", url, queryString == null ? null : queryString.NameValueCollection, null);
+        /// <param name="query">The query string.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query) {
+            return DoHttpRequest("GET", url, query == null ? null : query.NameValueCollection, null);
         }
 
         /// <summary>
@@ -345,6 +355,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
             NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);
             return DoHttpRequest("GET", url, nvc, null);
@@ -355,6 +366,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="url">The URL to call.</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IPostOptions options) {
 
             SocialQueryString query = (options == null ? null : options.GetQueryString());
@@ -375,6 +387,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="postData">The POST data.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, NameValueCollection queryString, NameValueCollection postData) {
 
             // Check if NULL
@@ -394,6 +407,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="postData">The POST data.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(string method, string url, NameValueCollection queryString, NameValueCollection postData) {
 
             // Check if NULL
@@ -451,6 +465,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
 
             // TODO: Should this method have is own implementation instead of calling another DoHttpRequest method?
@@ -466,6 +481,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(string method, string url, IGetOptions options) {
             SocialQueryString queryString = options == null ? null : options.GetQueryString();
             return DoHttpRequest(method, url, queryString);

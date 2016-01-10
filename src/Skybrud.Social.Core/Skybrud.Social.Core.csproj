@@ -71,7 +71,6 @@
     <Compile Include="OAuth\Responses\OAuthRequestTokenResponse.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
-    <Compile Include="Json\Exceptions\JsonParseException.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
