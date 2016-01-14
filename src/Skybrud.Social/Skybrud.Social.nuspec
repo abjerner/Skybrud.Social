@@ -12,6 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>Facebook, Twitter, Instagram, Vimeo, Google, Analytics, GitHub, BitBucket, Skybrud, Social, OAuth, JSON</tags>
-    <dependencies />
+    <dependencies>
+      <dependency id="Skybrud.Social.Core" version="$version$" />
+    </dependencies>
   </metadata>
 </package>
