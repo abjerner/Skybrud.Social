@@ -31,6 +31,15 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
+        /// Gets the informational version as a string.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetInformationVersion() {
+            Assembly assembly = typeof(SocialUtils).Assembly;
+            return FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
+        }
+
+        /// <summary>
         /// Gets the file version as a string.
         /// </summary>
         /// <returns></returns>
