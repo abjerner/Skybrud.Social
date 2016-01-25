@@ -264,7 +264,13 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns the property value as a string array.</returns>
         public static string[] GetStringArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            return obj.GetArray(propertyName, x => (string) Convert.ChangeType(x, typeof(string)));
+
+            // Get the array
+            JArray array = obj.GetArray(propertyName);
+
+            // Parse the array items
+            return array.Select(token => (string) Convert.ChangeType(token, typeof (string))).ToArray();
+        
         }
 
         /// <summary>
