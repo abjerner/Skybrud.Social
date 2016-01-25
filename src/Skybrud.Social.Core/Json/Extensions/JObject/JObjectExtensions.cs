@@ -248,13 +248,23 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
-        /// Gets whether a property with the specified whether a property with the specified <code>propertyName</code> exists and isn't <code>null</code>.
+        /// Gets whether a property with the specified whether a property with the specified <code>propertyName</code>
+        /// exists and isn't <code>null</code> (or an empty string).
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns <code>true</code> if the property exists and the value isn't <code>null</code>, otherwise <code>false</code>.</returns>
         public static bool HasValue(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            return obj != null && obj.Property(propertyName) != null && obj.GetValue(propertyName) != null;
+
+            // Jusrt return "false" now if "obj" is "null"
+            if (obj == null) return false;
+            
+            // Get the property (and return "null" if not found)
+            JProperty property = obj.Property(propertyName);
+
+            // And the final check
+            return property != null && !String.IsNullOrEmpty(property.Value + "");
+
         }
 
         /// <summary>
