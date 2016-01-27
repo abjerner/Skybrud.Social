@@ -73,23 +73,11 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static int GetInt32(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return default(int);
+            if (obj == null || !obj.HasValue(propertyName)) return default(int);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(int) : property.Value<int>();
         }
-
-        /// <summary>
-        /// Gets a 32-bit integer (int) from a property with the specified <code>propertyName</code>.
-        /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <param name="func">A callback function used for parsing or converting the property value.</param>
-        public static T GetInt34<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<int, T> func) {
-            if (obj == null) return default(T);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(T) : func(property.Value<int>());
-        }
-
+        
         /// <summary>
         /// Gets the integer value from the property with the specified <code>propertyName</code> and parses it into an instance of
         /// <code>T</code> using the specified <code>callback</code>.
@@ -99,7 +87,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="callback">The callback used for converting the integer value.</param>
         public static T GetInt32<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<int, T> callback) {
-            if (obj == null) return default(T);
+            if (obj == null || !obj.HasValue(propertyName)) return default(T);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(T) : callback(property.Value<int>());
         }
@@ -110,7 +98,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static long GetInt64(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return default(long);
+            if (obj == null || !obj.HasValue(propertyName)) return default(long);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(long) : property.Value<long>();
         }
@@ -122,7 +110,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="func">A callback function used for parsing or converting the property value.</param>
         public static T GetInt64<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<long, T> func) {
-            if (obj == null) return default(T);
+            if (obj == null || !obj.HasValue(propertyName)) return default(T);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(T) : func(property.Value<long>());
         }
@@ -133,7 +121,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static float GetFloat(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return default(float);
+            if (obj == null || !obj.HasValue(propertyName)) return default(float);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(float) : property.Value<float>();
         }
@@ -145,7 +133,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="func">A callback function used for parsing or converting the property value.</param>
         public static T GetFloat<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<float, T> func) {
-            if (obj == null) return default(T);
+            if (obj == null || !obj.HasValue(propertyName)) return default(T);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(T) : func(property.Value<float>());
         }
@@ -156,7 +144,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static double GetDouble(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return default(double);
+            if (obj == null || !obj.HasValue(propertyName)) return default(double);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(double) : property.Value<double>();
         }
@@ -168,7 +156,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="func">A callback function used for parsing or converting the property value.</param>
         public static T GetDouble<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<double, T> func) {
-            if (obj == null) return default(T);
+            if (obj == null || !obj.HasValue(propertyName)) return default(T);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(T) : func(property.Value<double>());
         }
@@ -179,7 +167,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static bool GetBoolean(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return default(bool);
+            if (obj == null || !obj.HasValue(propertyName)) return default(bool);
             JToken property = obj.GetValue(propertyName);
             return property != null && property.Value<bool>();
         }
@@ -255,16 +243,18 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns <code>true</code> if the property exists and the value isn't <code>null</code>, otherwise <code>false</code>.</returns>
         public static bool HasValue(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-
-            // Jusrt return "false" now if "obj" is "null"
-            if (obj == null) return false;
-            
-            // Get the property (and return "null" if not found)
-            JProperty property = obj.Property(propertyName);
-
-            // And the final check
-            return property != null && !String.IsNullOrEmpty(property.Value + "");
-
+            JToken token = obj == null ? null : obj.GetValue(propertyName);
+            return !(
+                token == null
+                ||
+                (token.Type == JTokenType.Array && !token.HasValues)
+                ||
+                (token.Type == JTokenType.Object && !token.HasValues)
+                ||
+                (token.Type == JTokenType.String && token.ToString() == String.Empty)
+                ||
+                token.Type == JTokenType.Null
+            );
         }
 
         /// <summary>
@@ -274,12 +264,8 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns the property value as a string array.</returns>
         public static string[] GetStringArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-
-            // Get the array
             JArray array = obj.GetArray(propertyName);
-
-            // Parse the array items
-            return array.Select(token => (string) Convert.ChangeType(token, typeof (string))).ToArray();
+            return array == null ? null : array.Select(token => (string) Convert.ChangeType(token, typeof(string))).ToArray();
         
         }
 
@@ -290,7 +276,8 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns the property value as an array of <code>int</code>.</returns>
         public static int[] GetInt32Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            return obj.GetArray(propertyName, x => (int) Convert.ChangeType(x, typeof(int)));
+            JArray array = obj.GetArray(propertyName);
+            return array == null ? null : array.Select(token => (int) Convert.ChangeType(token, typeof(int))).ToArray();
         }
 
         /// <summary>
@@ -300,7 +287,8 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>Returns the property value as an array of <code>long</code>.</returns>
         public static long[] GetInt64Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            return obj.GetArray(propertyName, x => (long) Convert.ChangeType(x, typeof(long)));
+            JArray array = obj.GetArray(propertyName);
+            return array == null ? null : array.Select(token => (long) Convert.ChangeType(token, typeof(long))).ToArray();
         }
 
     }
