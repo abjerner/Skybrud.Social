@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -296,8 +297,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <returns>Returns the property value as a string array.</returns>
         public static string[] GetStringArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
             JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => (string) Convert.ChangeType(token, typeof(string))).ToArray();
-        
+            return array == null ? null : array.Select(token => token.Value<string>()).ToArray();
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <returns>Returns the property value as an array of <code>int</code>.</returns>
         public static int[] GetInt32Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
             JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => (int) Convert.ChangeType(token, typeof(int))).ToArray();
+            return array == null ? null : array.Select(token => token.Value<int>()).ToArray();
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <returns>Returns the property value as an array of <code>long</code>.</returns>
         public static long[] GetInt64Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
             JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => (long) Convert.ChangeType(token, typeof(long))).ToArray();
+            return array == null ? null : array.Select(token => token.Value<long>()).ToArray();
         }
 
     }
