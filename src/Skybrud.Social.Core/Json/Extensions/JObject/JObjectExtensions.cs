@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -223,16 +224,46 @@ namespace Skybrud.Social.Json.Extensions.JObject {
             ).ToArray();
 
         }
-
+        
         /// <summary>
-        /// Gets an instance of <code>DateTime</code> from a property with the specified <code>propertyName</code>.
+        /// Gets an instance of <see cref="DateTime"/> from the property with the specified <code>propertyName</code>.
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>
+        /// <returns>Returns an instance of <see cref="DateTime"/> representing the value of the property.</returns>
         public static DateTime GetDateTime(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
             if (obj == null) return default(DateTime);
             JToken property = obj.GetValue(propertyName);
             return property == null ? default(DateTime) : DateTime.Parse(property.Value<string>());
+        }
+
+        /// <summary>
+        /// Gets an instance of <see cref="DateTime"/> from the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="styles">A bitwise combination of the enumeration values that indicates the style elements that
+        /// can be present in the property value for the parse operation to succeed and that defines how to interpret
+        /// the parsed date in relation to the current time zone or the current date. A typical value to specify is
+        /// <see cref="System.Globalization.DateTimeStyles.None"/>.</param>
+        /// <returns>Returns an instance of <see cref="DateTime"/> representing the value of the property.</returns>
+        public static DateTime GetDateTime(this Newtonsoft.Json.Linq.JObject obj, string propertyName, DateTimeStyles styles) {
+            return obj.GetString(propertyName, x => DateTime.Parse(x, CultureInfo.InvariantCulture, styles));
+        }
+
+        /// <summary>
+        /// Gets an instance of <see cref="DateTime"/> from the property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information about the property value.</param>
+        /// <param name="styles">A bitwise combination of the enumeration values that indicates the style elements that
+        /// can be present in the property value for the parse operation to succeed and that defines how to interpret
+        /// the parsed date in relation to the current time zone or the current date. A typical value to specify is
+        /// <see cref="System.Globalization.DateTimeStyles.None"/>.</param>
+        /// <returns>Returns an instance of <see cref="DateTime"/> representing the value of the property.</returns>
+        public static DateTime GetDateTime(this Newtonsoft.Json.Linq.JObject obj, string propertyName, IFormatProvider provider, DateTimeStyles styles) {
+            return obj.GetString(propertyName, x => DateTime.Parse(x, provider, styles));
         }
 
         /// <summary>
