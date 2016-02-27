@@ -84,7 +84,7 @@ namespace Skybrud.Social {
 
         #region HTTP helpers
 
-        private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, NameValueCollection query, NameValueCollection postData) {
+        private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, SocialQueryString query, NameValueCollection postData) {
 
             // Initialize the request
             SocialHttpRequest request = new SocialHttpRequest {
@@ -105,7 +105,7 @@ namespace Skybrud.Social {
         /// <param name="url">The URL of the request.</param>
         /// <param name="query">The query string of the request.</param>
         /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
-        public static SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query = null) {
+        public static SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query = null) {
             return DoHttpRequest(url, SocialHttpMethod.Get, query, null);
         }
 
@@ -116,7 +116,7 @@ namespace Skybrud.Social {
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data of the request.</param>
         /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
-        public static SocialHttpResponse DoHttpPostRequest(string url, NameValueCollection query, NameValueCollection postData) {
+        public static SocialHttpResponse DoHttpPostRequest(string url, SocialQueryString query, NameValueCollection postData) {
             return DoHttpRequest(url, SocialHttpMethod.Post, query, postData);
         }
 
