@@ -112,6 +112,23 @@ namespace Skybrud.Social.Http {
 
         #endregion
 
+        #region Operator overloading
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <param name="nvc">An instance of <see cref="NameValueCollection"/> representing the POST data.</param>
+        /// <returns>Returns an instance of <see cref="SocialPostData"/> based on the specified <code>nvc</code>.</returns>
+        public static implicit operator SocialPostData(NameValueCollection nvc) {
+            SocialPostData data = new SocialPostData();
+            foreach (string key in nvc.Keys) {
+                data.Add(key, nvc[key]);
+            }
+            return data;
+        }
+
+        #endregion
+
     }
 
 }
