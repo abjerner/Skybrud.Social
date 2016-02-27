@@ -4,9 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
@@ -88,35 +86,16 @@ namespace Skybrud.Social {
 
         private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, NameValueCollection query, NameValueCollection postData) {
 
-            // Merge the query string
-            url = new UriBuilder(url).MergeQueryString(query).ToString();
-
             // Initialize the request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+            SocialHttpRequest request = new SocialHttpRequest {
+                Url = url,
+                Method = method,
+                QueryString = query,
+                PostData = postData
+            };
 
-            // Set the method
-            request.Method = method.ToString().ToUpper();
-
-            // Add the request body (if a POST request)
-            if (method == SocialHttpMethod.Post && postData != null && postData.Count > 0) {
-                string dataString = NameValueCollectionToQueryString(postData);
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = dataString.Length;
-                using (Stream stream = request.GetRequestStream()) {
-                    stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
-                }
-            }
-
-            // Get the response
-            HttpWebResponse response;
-            try {
-                response = (HttpWebResponse) request.GetResponse();
-            } catch (WebException ex) {
-                response = (HttpWebResponse) ex.Response;
-            }
-
-            // Wrap the .NET response
-            return SocialHttpResponse.GetFromWebResponse(response);
+            // Make the call to the URL
+            return request.GetResponse();
 
         }
 
