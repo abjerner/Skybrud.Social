@@ -15,7 +15,7 @@ namespace Skybrud.Social.Http {
 
         private SocialHeaderCollection _headers = new SocialHeaderCollection();
         private SocialQueryString _queryString = new SocialQueryString();
-        private NameValueCollection _postData = new NameValueCollection();
+        private SocialPostData _postData = new SocialPostData();
 
         #endregion
 
@@ -92,10 +92,18 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the POST data of the request.
         /// </summary>
-        public NameValueCollection PostData {
+        public SocialPostData PostData {
             get { return _postData; }
-            set { _postData = value ?? new NameValueCollection(); }
+            set { _postData = value ?? new SocialPostData(); }
         }
+
+        /// <summary>
+        /// Gets or sets whether the content type of the HTTP POST request should be <code>multipart/form-data</code>.
+        /// If this property is <code>false</code> for a HTTP POST request, the content type
+        /// <code>application/x-www-form-urlencoded</code> will be used as default instead. If not a HTTP POST request,
+        /// this property will be ignored.
+        /// </summary>
+        public bool IsMultipart { get; set; }
 
         #endregion
 
@@ -108,6 +116,7 @@ namespace Skybrud.Social.Http {
             Method = SocialHttpMethod.Get;
             Encoding = Encoding.UTF8;
             Timeout = TimeSpan.FromSeconds(100);
+            PostData = new SocialPostData();
         }
 
         #endregion
@@ -115,18 +124,18 @@ namespace Skybrud.Social.Http {
         #region Methods
 
         /// <summary>
-        /// Executes the request and returns the corresponding response as an instance of <code>SocialHttpResponse</code>.
+        /// Executes the request and returns the corresponding response as an instance of <see cref="SocialHttpResponse"/>.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public SocialHttpResponse GetResponse() {
             return GetResponse(null);
         }
 
         /// <summary>
-        /// Executes the request and returns the corresponding response as an instance of <code>SocialHttpResponse</code>.
+        /// Executes the request and returns the corresponding response as an instance of <see cref="SocialHttpResponse"/>.
         /// </summary>
-        /// <param name="callback">Lets you specify a callback method for modifying the underlying <code>HttpWebRequest</code>.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <param name="callback">Lets you specify a callback method for modifying the underlying <see cref="HttpWebRequest"/>.</param>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public SocialHttpResponse GetResponse(Action<HttpWebRequest> callback) {
 
             // Build the URL
@@ -145,12 +154,20 @@ namespace Skybrud.Social.Http {
             request.Timeout = (int) Timeout.TotalMilliseconds;
 
             // Add the request body (if a POST request)
-            if (Method == SocialHttpMethod.Post && PostData != null && PostData.Count > 0) {
-                string dataString = SocialUtils.NameValueCollectionToQueryString(PostData);
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = dataString.Length;
-                using (Stream stream = request.GetRequestStream()) {
-                    stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+            if (Method == SocialHttpMethod.Post) {
+                if (IsMultipart) {
+                    string boundary = Guid.NewGuid().ToString().Replace("-", "");
+                    request.ContentType = "multipart/form-data; boundary=" + boundary;
+                    using (Stream stream = request.GetRequestStream()) {
+                        PostData.WriteMultipartFormData(stream, boundary);
+                    }
+                } else {
+                    string dataString = PostData.ToString();
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.ContentLength = dataString.Length;
+                    using (Stream stream = request.GetRequestStream()) {
+                        stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+                    }
                 }
             }
 

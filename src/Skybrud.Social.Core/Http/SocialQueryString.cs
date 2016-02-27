@@ -104,7 +104,7 @@ namespace Skybrud.Social.Http {
         /// <param name="query">An instance of <code>NameValueCollection</code> that should make up the query string.</param>
         /// <returns>An instance of <code>SocialQueryString</code> based on the specified <code>query</code>.</returns>
         public static implicit operator SocialQueryString(NameValueCollection query) {
-            return new SocialQueryString(query);
+            return query == null ? null : new SocialQueryString(query);
         }
 
         #endregion

@@ -56,6 +56,7 @@
     <Compile Include="Http\PostData\SocialPostFileValue.cs" />
     <Compile Include="Http\PostData\SocialPostValue.cs" />
     <Compile Include="Http\SocialHeaderCollection.cs" />
+    <Compile Include="Http\SocialHttpClient.cs" />
     <Compile Include="Http\SocialHttpMethod.cs" />
     <Compile Include="Http\SocialPostData.cs" />
     <Compile Include="Http\SocialResponse.cs" />

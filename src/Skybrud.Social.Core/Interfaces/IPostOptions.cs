@@ -19,7 +19,7 @@ namespace Skybrud.Social.Interfaces {
         #region Methods
 
         /// <summary>
-        /// Gets an instance of <code>SocialPostData</code> representing the POST data.
+        /// Gets an instance of <see cref="SocialPostData"/> representing the POST data.
         /// </summary>
         SocialPostData GetPostData();
 

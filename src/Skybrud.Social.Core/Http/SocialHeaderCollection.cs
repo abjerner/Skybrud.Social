@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Net;
 
 namespace Skybrud.Social.Http {
@@ -12,7 +11,7 @@ namespace Skybrud.Social.Http {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the internal instance of <code>WebHeaderCollection</code>.
+        /// Gets a reference to the internal instance of <see cref="WebHeaderCollection"/>.
         /// </summary>
         public WebHeaderCollection Headers { get; private set; }
 
@@ -23,21 +22,22 @@ namespace Skybrud.Social.Http {
             get { return Headers["Authorization"]; }
             set { Headers["Authorization"] = value; }
         }
-
-        /// <summary>
-        /// Gets or sets the user agent header of the request,
-        /// </summary>
-        [Obsolete("Marking this as obsolete as it will most likely trigger an exception when setting it's value.")]
-        public string UserAgent {
-            get { return Headers["User-Agent"]; }
-            set { Headers["User-Agent"] = value; }
-        }
-
+        
         /// <summary>
         /// Gets amount of headers added to the collection.
         /// </summary>
         public int Count {
             get { return Headers.Count; }
+        }
+
+        /// <summary>
+        /// Gets or set the header with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the header.</param>
+        /// <returns>Returns the value of the header.</returns>
+        public string this[string key] {
+            get { return Headers[key]; }
+            set { Headers[key] = value; }
         }
 
         #endregion
@@ -65,7 +65,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates a new instance from the specified <code>headers</code>.
         /// </summary>
-        /// <param name="headers">The <code>NameValueCollection</code> representing the headers.</param>
+        /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
         public static implicit operator SocialHeaderCollection(NameValueCollection headers) {
 
             // Initialize a new instance of SocialHeaderCollection
@@ -85,7 +85,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates a new instance from the specified <code>headers</code>.
         /// </summary>
-        /// <param name="headers">The <code>WebHeaderCollection</code> representing the headers.</param>
+        /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
         public static implicit operator SocialHeaderCollection(WebHeaderCollection headers) {
 
             // Initialize a new instance of SocialHeaderCollection
