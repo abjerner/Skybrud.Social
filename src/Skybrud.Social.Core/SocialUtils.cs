@@ -86,7 +86,7 @@ namespace Skybrud.Social {
 
         #region HTTP helpers
 
-        private static SocialHttpResponse DoHttpRequest(string url, string method, NameValueCollection query, NameValueCollection postData) {
+        private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, NameValueCollection query, NameValueCollection postData) {
 
             // Merge the query string
             url = new UriBuilder(url).MergeQueryString(query).ToString();
@@ -95,10 +95,10 @@ namespace Skybrud.Social {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
             // Set the method
-            request.Method = method;
+            request.Method = method.ToString().ToUpper();
 
             // Add the request body (if a POST request)
-            if (method == "POST" && postData != null && postData.Count > 0) {
+            if (method == SocialHttpMethod.Post && postData != null && postData.Count > 0) {
                 string dataString = NameValueCollectionToQueryString(postData);
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = dataString.Length;
@@ -127,7 +127,7 @@ namespace Skybrud.Social {
         /// <param name="query">The query string of the request.</param>
         /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public static SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query = null) {
-            return DoHttpRequest(url, "GET", query, null);
+            return DoHttpRequest(url, SocialHttpMethod.Get, query, null);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Skybrud.Social {
         /// <param name="postData">The POST data of the request.</param>
         /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public static SocialHttpResponse DoHttpPostRequest(string url, NameValueCollection query, NameValueCollection postData) {
-            return DoHttpRequest(url, "POST", query, postData);
+            return DoHttpRequest(url, SocialHttpMethod.Post, query, postData);
         }
 
         #endregion

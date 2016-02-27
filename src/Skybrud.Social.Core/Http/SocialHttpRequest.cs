@@ -24,7 +24,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the HTTP method of the request.
         /// </summary>
-        public string Method { get; set; }
+        public SocialHttpMethod Method { get; set; }
 
         /// <summary>
         /// Gets or sets the accept header of the request.
@@ -105,7 +105,7 @@ namespace Skybrud.Social.Http {
         /// Initializes a new request with default options.
         /// </summary>
         public SocialHttpRequest() {
-            Method = "GET";
+            Method = SocialHttpMethod.Get;
             Encoding = Encoding.UTF8;
             Timeout = TimeSpan.FromSeconds(100);
         }
@@ -137,7 +137,7 @@ namespace Skybrud.Social.Http {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
 
             // Misc
-            request.Method = Method;
+            request.Method = Method.ToString().ToUpper();
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
             request.Accept = Accept;
@@ -145,7 +145,7 @@ namespace Skybrud.Social.Http {
             request.Timeout = (int) Timeout.TotalMilliseconds;
 
             // Add the request body (if a POST request)
-            if (Method == "POST" && PostData != null && PostData.Count > 0) {
+            if (Method == SocialHttpMethod.Post && PostData != null && PostData.Count > 0) {
                 string dataString = SocialUtils.NameValueCollectionToQueryString(PostData);
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = dataString.Length;
