@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
@@ -24,6 +25,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets the assembly version as a string.
         /// </summary>
+        /// <returns>Returns a string containing the version of the assembly.</returns>
         public static string GetVersion() {
             return typeof (SocialUtils).Assembly.GetName().Version.ToString();
         }
@@ -31,7 +33,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets the informational version as a string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a string containing the informational version of the assembly.</returns>
         public static string GetInformationVersion() {
             Assembly assembly = typeof(SocialUtils).Assembly;
             return FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
@@ -40,15 +42,17 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets the file version as a string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a string containing the file version of the assembly.</returns>
         public static string GetFileVersion() {
             Assembly assembly = typeof(SocialUtils).Assembly;
             return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
         }
 
         /// <summary>
-        /// Gets the amount of days between the date of this build and the date the project was started - that is the 30th of July, 2012.
+        /// Gets the amount of days between the date of this build and the date the project was started - that is the
+        /// 30th of July, 2012.
         /// </summary>
+        /// <returns>Returns an integer representing the amount of days since the project was started.</returns>
         public static int GetDaysSinceStart() {
 
             // Get the third bit as a string
@@ -62,6 +66,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets the date of this build of Skybrud.Social.
         /// </summary>
+        /// <returns>Gets an instance of <see cref="DateTime"/> representing the build date of the assembly.</returns>
         public static DateTime GetBuildDate() {
             return new DateTime(2012, 7, 30).AddDays(GetDaysSinceStart());
         }
@@ -70,6 +75,7 @@ namespace Skybrud.Social {
         /// Gets the build number of the day. This is mostly used for internal
         /// purposes to distinguish builds with the same assembly version.
         /// </summary>
+        /// <returns>Returns an integer representing the build number of the day.</returns>
         public static int GetBuildNumber() {
 
             // Get the fourth bit as a string
@@ -84,6 +90,14 @@ namespace Skybrud.Social {
 
         #region HTTP helpers
 
+        /// <summary>
+        /// Makes a HTTP request using the specified <code>url</code> and <code>method</code>.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="method">The HTTP hetmhod of the request.</param>
+        /// <param name="query">The query string of the request.</param>
+        /// <param name="postData">The POST data of the request.</param>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, SocialQueryString query, NameValueCollection postData) {
 
             // Initialize the request
@@ -104,7 +118,7 @@ namespace Skybrud.Social {
         /// </summary>
         /// <param name="url">The URL of the request.</param>
         /// <param name="query">The query string of the request.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public static SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query = null) {
             return DoHttpRequest(url, SocialHttpMethod.Get, query, null);
         }
@@ -115,7 +129,7 @@ namespace Skybrud.Social {
         /// <param name="url">The URL of the request.</param>
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data of the request.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public static SocialHttpResponse DoHttpPostRequest(string url, SocialQueryString query, NameValueCollection postData) {
             return DoHttpRequest(url, SocialHttpMethod.Post, query, postData);
         }
@@ -179,7 +193,7 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses a query string into a <code>System.Collections.Specialized.NameValueCollection</code> using <code>System.Text.Encoding.UTF8</code> encoding.
+        /// Parses a query string into an instance of <see cref="NameValueCollection"/> using <see cref="Encoding.UTF8"/> encoding.
         /// </summary>
         /// <param name="query">The query string to parse.</param>
         /// <returns>A <code>System.Collections.Specialized.NameValueCollection</code> of query parameters and values.</returns>
@@ -220,53 +234,55 @@ namespace Skybrud.Social {
         public const string IsoDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssK";
 
         /// <summary>
-        /// Returns the current unix timestamp which is defined as the amount of seconds since the start of the Unix
-        /// epoch - 1st of January, 1970 - 00:00:00 GMT.
+        /// Returns the current Unix timestamp which is defined as the amount of seconds since the start of the Unix
+        /// epoch - that is <code>1st of January, 1970 - 00:00:00 GMT</code>.
         /// </summary>
+        /// <returns>Returns a 64-bit integer representing the current UNIX timestamp.</returns>
         public static long GetCurrentUnixTimestamp() {
             return (long) Math.Floor(GetCurrentUnixTimestampAsDouble());
         }
 
         /// <summary>
         /// Returns the current unix timestamp which is defined as the amount of seconds since the start of the Unix
-        /// epoch - 1st of January, 1970 - 00:00:00 GMT.
+        /// epoch - that is <code>1st of January, 1970 - 00:00:00 GMT</code>.
         /// </summary>
+        /// <returns>Returns a <see cref="double"/> representing the current Unix timestamp.</returns>
         public static double GetCurrentUnixTimestampAsDouble() {
             return (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
 
         /// <summary>
-        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
         /// </summary>
         /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
+        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(int timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         /// <summary>
-        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
         /// </summary>
         /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
+        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(double timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         /// <summary>
-        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
         /// </summary>
         /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
+        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(long timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
         }
 
         /// <summary>
-        /// Gets an instance of <code>DateTime</code> from the specified <code>timestamp</code>.
+        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
         /// </summary>
         /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <code>DateTime</code> from the specified <code>timestamp</code>.</returns>
+        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(string timestamp) {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Int64.Parse(timestamp));
         }
@@ -274,8 +290,8 @@ namespace Skybrud.Social {
         /// <summary>
         /// Gets a Unix timestamp from the specified <code>dateTime</code>.
         /// </summary>
-        /// <param name="dateTime">The instance of <code>DateTime</code> to be converted.</param>
-        /// <returns></returns>
+        /// <param name="dateTime">The instance of <see cref="DateTime"/> to be converted.</param>
+        /// <returns>Returns a 64-bit integer representing the the specified <code>dateTime</code>.</returns>
         public static long GetUnixTimeFromDateTime(DateTime dateTime) {
             return (long) (dateTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
@@ -321,11 +337,11 @@ namespace Skybrud.Social {
         #region Enums
 
         /// <summary>
-        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
+        /// Parses the specified <code>str</code> into the enum of type <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="str">The string to be parsed.</param>
-        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
+        /// <returns>Returns an enum of type <see cref="T"/> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str) where T : struct {
 
             // Check whether the type of T is an enum
@@ -343,12 +359,12 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
+        /// Parses the specified <code>str</code> into the enum of type <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="str">The string to be parsed.</param>
         /// <param name="fallback">The fallback if the enum could not be parsed.</param>
-        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
+        /// <returns>Returns an enum of type <see cref="T"/> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str, T fallback) where T : struct {
 
             // Check whether the type of T is an enum
@@ -370,10 +386,10 @@ namespace Skybrud.Social {
         #region JSON
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance <code>JObject</code>.
+        /// Parses the specified <code>json</code> string into an instance <see cref="JObject"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <code>JObject</code> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
         public static JObject ParseJsonObject(string json) {
 
             // JSON.net is automatically parsing strings that look like dates into in actual dates so that we can't
@@ -386,21 +402,21 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <code>T</code>.
+        /// Parses the specified <code>json</code> string into an instance of <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to be returned.</typeparam>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
-        /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <see cref="T"/>.</param>
+        /// <returns>Returns an instance of <see cref="T"/> parsed from the specified <code>json</code> string.</returns>
         public static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
             return func(ParseJsonObject(json));
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <code>JArray</code>.
+        /// Parses the specified <code>json</code> string into an instance of <see cref="JArray"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <code>JArray</code> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
         public static JArray ParseJsonArray(string json) {
 
             // JSON.net is automatically parsing strings that look like dates into in actual dates so that we can't
@@ -413,11 +429,11 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an array of <code>T</code>.
+        /// Parses the specified <code>json</code> string into an array of <see cref="T"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
-        /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <see cref="T"/>.</param>
+        /// <returns>Returns an array of <see cref="T"/> parsed from the specified <code>json</code> string.</returns>
         public static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return (
                 from JObject item in ParseJsonArray(json)
