@@ -64,7 +64,6 @@
     <Compile Include="Interfaces\IPostOptions.cs" />
     <Compile Include="Json\Extensions\JObject\JArrayExtensions.cs" />
     <Compile Include="Json\Extensions\JObject\JObjectExtensions.cs" />
-    <Compile Include="OAuth2\OAuth2Client.cs" />
     <Compile Include="OAuth\Objects\OAuthAccessToken.cs" />
     <Compile Include="OAuth\OAuthClient.cs" />
     <Compile Include="OAuth\Exceptions\OAuthException.cs" />
