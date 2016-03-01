@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace Skybrud.Social.Time {
@@ -23,15 +22,6 @@ namespace Skybrud.Social.Time {
         public int Day {
             get { return DateTime.Day; }
         }
-
-        /// <summary>
-        /// Hejsa.
-        /// </summary>
-        /// <returns></returns>
-        public List<DateTime> OhMyGod()
-        {
-            return null;
-        } 
 
         /// <summary>
         /// Returns the day-of-week part of this <see cref="SocialDateTime"/>. The returned value is an integer between
