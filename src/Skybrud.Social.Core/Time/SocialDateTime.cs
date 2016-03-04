@@ -11,6 +11,29 @@ namespace Skybrud.Social.Time {
         #region Properties
 
         /// <summary>
+        /// Gets a <see cref="SocialDateTime"/> object that is set to the current date and time on this computer,
+        /// expressed as the local time.
+        /// </summary>
+        public static SocialDateTime Now {
+            get { return new SocialDateTime(DateTime.Now); }
+        }
+
+        /// <summary>
+        /// Gets the current date.
+        /// </summary>
+        public static SocialDateTime Today {
+            get { return new SocialDateTime(DateTime.Today); }
+        }
+
+        /// <summary>
+        /// Gets a <see cref="SocialDateTime"/> object that is set to the current date and time on this computer,
+        /// expressed as the Coordinated Universal Time (UTC).
+        /// </summary>
+        public static SocialDateTime UtcNow {
+            get { return new SocialDateTime(DateTime.UtcNow); }
+        }
+
+        /// <summary>
         /// Gets the wrapped <see cref="DateTime"/>.
         /// </summary>
         public DateTime DateTime { get; private set; }
@@ -113,6 +136,34 @@ namespace Skybrud.Social.Time {
             get { return DateTime.Year; }
         }
 
+        /// <summary>
+        /// Gets the UNIX timestamp for this <see cref="SocialDateTime"/>.
+        /// </summary>
+        public long UnixTimestamp {
+            get { return SocialUtils.GetUnixTimeFromDateTime(DateTime); }
+        }
+
+        /// <summary>
+        /// Gets whether the year of this <see cref="SocialDateTime"/> is a leap year.
+        /// </summary>
+        public bool IsLeapYear {
+            get { return SocialDateHelpers.IsLeapYear(DateTime); }
+        }
+
+        /// <summary>
+        /// Gets whether the day of this <see cref="SocialDateTime"/> is within a weekend.
+        /// </summary>
+        public bool IsWeekend {
+            get { return SocialDateHelpers.IsLeapYear(DateTime); }
+        }
+
+        /// <summary>
+        /// Gets whether the day of this <see cref="SocialDateTime"/> is a weekday.
+        /// </summary>
+        public bool IsWeekday {
+            get { return SocialDateHelpers.IsWeekday(DateTime); }
+        }
+
         #endregion
 
         #region Constructors
@@ -122,6 +173,7 @@ namespace Skybrud.Social.Time {
         /// </summary>
         public SocialDateTime() {
             DateTime = DateTime.MinValue;
+            UpdateProperties();
         }
 
         /// <summary>
@@ -130,6 +182,7 @@ namespace Skybrud.Social.Time {
         /// <param name="dt">The an instance <see cref="DateTime"/> the instance should be based on.</param>
         public SocialDateTime(DateTime dt) {
             DateTime = dt;
+            UpdateProperties();
         }
 
         /// <summary>
@@ -138,6 +191,7 @@ namespace Skybrud.Social.Time {
         /// <param name="ticks">The amount ticks the instance should be based on.</param>
         public SocialDateTime(long ticks) {
             DateTime = new DateTime(ticks);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -147,7 +201,8 @@ namespace Skybrud.Social.Time {
         /// <param name="kind">One of the enumeration values that indicates whether ticks specifies a local time,
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(long ticks, DateTimeKind kind) {
-            DateTime = new DateTime(ticks, kind);  
+            DateTime = new DateTime(ticks, kind);
+            UpdateProperties();
         }    
 
         /// <summary>
@@ -159,6 +214,7 @@ namespace Skybrud.Social.Time {
         /// <param name="day">The day (<code>1</code> through the number of days in month).</param>
         public SocialDateTime(int year, int month, int day) {
             DateTime = new DateTime(year, month, day);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -171,6 +227,7 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, Calendar calendar) {
             DateTime = new DateTime(year, month, day, calendar);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -185,6 +242,7 @@ namespace Skybrud.Social.Time {
         /// <param name="second">The seconds (<code>0</code> through <code>59</code>).</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second) {
             DateTime = new DateTime(year, month, day, hour, minute, second);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -201,6 +259,7 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, kind);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -217,6 +276,7 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, Calendar calendar) {
             DateTime = new DateTime(year, month, day, hour, minute, second, calendar);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -233,6 +293,7 @@ namespace Skybrud.Social.Time {
         /// <param name="millisecond">The milliseconds (<code>0</code> through <code>999</code>).</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -250,6 +311,7 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, kind);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -267,6 +329,7 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, calendar);
+            UpdateProperties();
         }
 
         /// <summary>
@@ -286,6 +349,7 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, calendar, kind);
+            UpdateProperties();
         }
 
         #endregion
@@ -328,14 +392,6 @@ namespace Skybrud.Social.Time {
         /// <see cref="format"/> and <see cref="provider"/>.</returns>
         public string ToString(string format, IFormatProvider provider) {
             return DateTime.ToString(format, provider);
-        }
-
-        /// <summary>
-        /// Gets the UNIX timestamp for this <see cref="SocialDateTime"/>.
-        /// </summary>
-        /// <returns>Returns the UNIX timestamp in seconds.</returns>
-        public long GetUnixTimestamp() {
-            return SocialUtils.GetUnixTimeFromDateTime(DateTime);
         }
 
         /// <summary>
@@ -470,6 +526,11 @@ namespace Skybrud.Social.Time {
             return new SocialDateTime(DateTime.Subtract(value));
         }
 
+        private void UpdateProperties()
+        {
+            
+        }
+
         #endregion
 
         #region Static methods
@@ -492,6 +553,141 @@ namespace Skybrud.Social.Time {
             return new SocialDateTime(SocialUtils.GetDateTimeFromUnixTime(timestamp));
         }
 
+        #endregion
+
+        #region Operator overloading
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="SocialDateTime"/> from the specified <code>timestamp</code>.
+        /// </summary>
+        /// <param name="timestamp">An instance of <see cref="DateTime"/>.</param>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/>.</returns>
+        public static implicit operator SocialDateTime(DateTime timestamp) {
+            return new SocialDateTime(timestamp);
+        }
+
+        /// <summary>
+        /// Adds <code>date</code> and <code>timeSpan</code>.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="timeSpan">The time that should be added to <code>date</code>.</param>
+        /// <returns>Returns the result as a new instance of <see cref="SocialDateTime"/>.</returns>
+        public static SocialDateTime operator +(SocialDateTime date, TimeSpan timeSpan) {
+            return new SocialDateTime(date.DateTime + timeSpan);
+        }
+
+        /// <summary>
+        /// Subtracts <code>timeSpan</code> from <code>date</code>.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="timeSpan">The time that should be subtracted from <code>date</code>.</param>
+        /// <returns>Returns the result as a new instance of <see cref="SocialDateTime"/>.</returns>
+        public static SocialDateTime operator -(SocialDateTime date, TimeSpan timeSpan) {
+            return new SocialDateTime(date.DateTime - timeSpan);
+        }
+        
+        /// <summary>
+        /// Subtracts two instances of <see cref="SocialDateTime"/>.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns the result as an instance of <see cref="TimeSpan"/>.</returns>
+        public static TimeSpan operator -(SocialDateTime d1, SocialDateTime d2) {
+            return d1.DateTime - d2.DateTime;
+        }
+
+        /// <summary>
+        /// Gets whether the timestamps represented by two instances of <see cref="SocialDateTime"/> are equal.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if the two instances represent the same date and time, otherwise <code>false</code>.</returns>
+        public static bool operator ==(SocialDateTime d1, SocialDateTime d2) {
+
+            // Check for NULL conditions
+            object value1 = d1;
+            object value2 = d2;
+            if (value1 == null) return value2 == null;
+            if (value2 == null) return false;
+
+            // Pass the comparison on the the == operator of DateTime
+            return d1.DateTime == d2.DateTime;
+        
+        }
+
+        /// <summary>
+        /// Gets whether the timestamps represented by two instances of <see cref="SocialDateTime"/> are different from each other.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if the two instances represents a different date and time, otherwise <code>false</code>.</returns>
+        public static bool operator !=(SocialDateTime d1, SocialDateTime d2) {
+            return !(d1 == d2);
+        }
+
+        /// <summary>
+        /// Gets whether <code>d1</code> is less than <code>d2</code>.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if <code>d1</code> is less than <code>d2</code>, otherwise <code>false</code>.</returns>
+        public static bool operator <(SocialDateTime d1, SocialDateTime d2) {
+
+            // Check for NULL conditions
+            if (d1 == null) return d2 != null;
+            if (d2 == null) return false;
+
+            // Pass the comparison on the the < operator of DateTime
+            return d1.DateTime < d2.DateTime;
+        
+        }
+
+        /// <summary>
+        /// Gets whether <code>d1</code> is less than or equal to <code>d2</code>.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if <code>d1</code> is less than or equal to <code>d2</code>, otherwise <code>false</code>.</returns>
+        public static bool operator <=(SocialDateTime d1, SocialDateTime d2) {
+            return d1 < d2 || d1 == d2;
+        }
+
+        /// <summary>
+        /// Gets whether <code>d1</code> is greater than <code>d2</code>.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if <code>d1</code> is greater than <code>d2</code>, otherwise <code>false</code>.</returns>
+        public static bool operator >(SocialDateTime d1, SocialDateTime d2) {
+
+            // Check for NULL conditions
+            if (d2 == null) return d1 != null;
+            if (d1 == null) return false;
+
+            // Pass the comparison on the the > operator of DateTime
+            return d1.DateTime > d2.DateTime;
+
+        }
+
+        /// <summary>
+        /// Gets whether <code>d1</code> is greater than or equal to <code>d2</code>.
+        /// </summary>
+        /// <param name="d1">The first instance of <see cref="SocialDateTime"/>.</param>
+        /// <param name="d2">The second instance of <see cref="SocialDateTime"/>.</param>
+        /// <returns>Returns <code>true</code> if <code>d1</code> is greater than or equal to <code>d2</code>, otherwise <code>false</code>.</returns>
+        public static bool operator >=(SocialDateTime d1, SocialDateTime d2) {
+            return d1 > d2 || d1 == d2;
+        }
+
+        public override bool Equals(Object obj) {
+            SocialDateTime time = obj as SocialDateTime;
+            return time != null && (this == time);
+        }
+
+        public override int GetHashCode() {
+            return DateTime.GetHashCode();
+        }
+ 
         #endregion
 
     }
