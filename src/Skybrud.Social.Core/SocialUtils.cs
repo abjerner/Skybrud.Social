@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
+using Skybrud.Social.Time;
 
 namespace Skybrud.Social {
     
@@ -250,7 +251,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// ISO 8601 date format.
         /// </summary>
-        public const string IsoDateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssK";
+        public const string IsoDateFormat = SocialDateHelpers.IsoDateFormat;
 
         /// <summary>
         /// Returns the current Unix timestamp which is defined as the amount of seconds since the start of the Unix
@@ -258,7 +259,7 @@ namespace Skybrud.Social {
         /// </summary>
         /// <returns>Returns a 64-bit integer representing the current UNIX timestamp.</returns>
         public static long GetCurrentUnixTimestamp() {
-            return (long) Math.Floor(GetCurrentUnixTimestampAsDouble());
+            return SocialDateHelpers.GetCurrentUnixTimestamp();
         }
 
         /// <summary>
@@ -267,7 +268,7 @@ namespace Skybrud.Social {
         /// </summary>
         /// <returns>Returns a <see cref="double"/> representing the current Unix timestamp.</returns>
         public static double GetCurrentUnixTimestampAsDouble() {
-            return (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            return SocialDateHelpers.GetCurrentUnixTimestampAsDouble();
         }
 
         /// <summary>
@@ -276,7 +277,7 @@ namespace Skybrud.Social {
         /// <param name="timestamp">The Unix timestamp.</param>
         /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(int timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
+            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
         }
 
         /// <summary>
@@ -285,7 +286,7 @@ namespace Skybrud.Social {
         /// <param name="timestamp">The Unix timestamp.</param>
         /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(double timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
+            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
         }
 
         /// <summary>
@@ -294,7 +295,7 @@ namespace Skybrud.Social {
         /// <param name="timestamp">The Unix timestamp.</param>
         /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(long timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp);
+            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
         }
 
         /// <summary>
@@ -303,7 +304,7 @@ namespace Skybrud.Social {
         /// <param name="timestamp">The Unix timestamp.</param>
         /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
         public static DateTime GetDateTimeFromUnixTime(string timestamp) {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Int64.Parse(timestamp));
+            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
         }
         
         /// <summary>
@@ -312,7 +313,7 @@ namespace Skybrud.Social {
         /// <param name="dateTime">The instance of <see cref="DateTime"/> to be converted.</param>
         /// <returns>Returns a 64-bit integer representing the the specified <code>dateTime</code>.</returns>
         public static long GetUnixTimeFromDateTime(DateTime dateTime) {
-            return (long) (dateTime.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            return SocialDateHelpers.GetUnixTimeFromDateTime(dateTime);
         }
 
         #endregion

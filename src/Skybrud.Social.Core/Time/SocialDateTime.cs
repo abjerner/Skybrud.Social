@@ -164,6 +164,21 @@ namespace Skybrud.Social.Time {
             get { return SocialDateHelpers.IsWeekday(DateTime); }
         }
 
+        /// <summary>
+        /// Gets the week number the ISO8601 week of this <see cref="SocialDateTime"/>.
+        /// </summary>
+        public int WeekNumber {
+            get { return SocialDateHelpers.GetIso8601WeekNumber(DateTime); }
+        }
+
+        /// <summary>
+        /// Gets a reference to an instance of <see cref="SocialDateWeek"/> representing the ISO8601 week of this
+        /// <see cref="SocialDateTime"/>.
+        /// </summary>
+        public SocialDateWeek Week {
+            get { return new SocialDateWeek(DateTime); }
+        }
+
         #endregion
 
         #region Constructors
@@ -173,53 +188,48 @@ namespace Skybrud.Social.Time {
         /// </summary>
         public SocialDateTime() {
             DateTime = DateTime.MinValue;
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="dt"/>.
+        /// Initializes a new instance based on the specified <code>dt</code>.
         /// </summary>
         /// <param name="dt">The an instance <see cref="DateTime"/> the instance should be based on.</param>
         public SocialDateTime(DateTime dt) {
             DateTime = dt;
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified amount of <see cref="ticks"/>.
+        /// Initializes a new instance based on the specified amount of <code>ticks</code>.
         /// </summary>
         /// <param name="ticks">The amount ticks the instance should be based on.</param>
         public SocialDateTime(long ticks) {
             DateTime = new DateTime(ticks);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified amount of <see cref="ticks"/> and <see cref="kind"/>.
+        /// Initializes a new instance based on the specified amount of <code>ticks</code> and <code>kind</code>.
         /// </summary>
         /// <param name="ticks">The amount ticks the instance should be based on.</param>
         /// <param name="kind">One of the enumeration values that indicates whether ticks specifies a local time,
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(long ticks, DateTimeKind kind) {
             DateTime = new DateTime(ticks, kind);
-            UpdateProperties();
         }    
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/> and
-        /// <see cref="day"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code> and
+        /// <code>day</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
         /// <param name="day">The day (<code>1</code> through the number of days in month).</param>
         public SocialDateTime(int year, int month, int day) {
             DateTime = new DateTime(year, month, day);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/> and
-        /// <see cref="day"/> for the specified <see cref="calendar"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code> and
+        /// <code>day</code> for the specified <code>calendar</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -227,12 +237,11 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, Calendar calendar) {
             DateTime = new DateTime(year, month, day, calendar);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/>,
-        /// <see cref="day"/>, <see cref="hour"/>, <see cref="minute"/> and <see cref="second"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>,
+        /// <code>day</code>, <code>hour</code>, <code>minute</code> and <code>second</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -242,12 +251,11 @@ namespace Skybrud.Social.Time {
         /// <param name="second">The seconds (<code>0</code> through <code>59</code>).</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second) {
             DateTime = new DateTime(year, month, day, hour, minute, second);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/>,
-        /// <see cref="day"/>, <see cref="hour"/>, <see cref="minute"/>, <see cref="second"/> and <see cref="kind"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>,
+        /// <code>day</code>, <code>hour</code>, <code>minute</code>, <code>second</code> and <code>kind</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -259,13 +267,11 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, kind);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/>,
-        /// <see cref="day"/>, <see cref="hour"/>, <see cref="minute"/> and <see cref="second"/> for the specified
-        /// <see cref="calendar"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>, <code>day</code>,
+        /// <code>hour</code>, <code>minute</code> and <code>second</code> for the specified  <code>calendar</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -276,13 +282,11 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, Calendar calendar) {
             DateTime = new DateTime(year, month, day, hour, minute, second, calendar);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/>,
-        /// <see cref="day"/>, <see cref="hour"/>, <see cref="minute"/>, <see cref="second"/> and
-        /// <see cref="millisecond"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>, <code>day</code>,
+        /// <code>hour</code>, <code>minute</code>, <code>second</code> and <code>millisecond</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -293,12 +297,11 @@ namespace Skybrud.Social.Time {
         /// <param name="millisecond">The milliseconds (<code>0</code> through <code>999</code>).</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year"/>, <see cref="month"/>, <see cref="day"/>,
-        /// <see cref="hour"/>, <see cref="minute"/>, <see cref="second"/>, <see cref="millisecond"/> and <see cref="kind"/>.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>, <code>day</code>,
+        /// <code>hour</code>, <code>minute</code>, <code>second</code>, <code>millisecond</code> and <code>kind</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -311,13 +314,12 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, kind);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year" />, <see cref="month" />,
-        /// <see cref="day" />, <see cref="hour" />, <see cref="minute" />, <see cref="second" /> and
-        /// <see cref="millisecond" /> for the specified <see cref="calendar" />.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>, <code>day</code>,
+        /// <code>hour</code>, <code>minute</code>, <code>second</code> and <code>millisecond</code> for the specified
+        /// <code>calendar</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -329,13 +331,11 @@ namespace Skybrud.Social.Time {
         /// <param name="calendar">The calendar that is used to interpret year, month, and day.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, calendar);
-            UpdateProperties();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="year" />, <see cref="month" />,
-        /// <see cref="day" />, <see cref="hour" />, <see cref="minute" />, <see cref="second" /> and
-        /// <see cref="millisecond" /> for the specified <see cref="calendar" /> and <see cref="kind" />.
+        /// Initializes a new instance based on the specified <code>year</code>, <code>month</code>, <code>day</code>,
+        /// <code>hour</code>, <code>minute</code>, <code>second</code> and <code>millisecond</code> for the specified<code>calendar</code> and <code>kind</code>.
         /// </summary>
         /// <param name="year">The year (<code>1</code> through <code>9999</code>).</param>
         /// <param name="month">The month (<code>1</code> through <code>12</code>).</param>
@@ -349,47 +349,50 @@ namespace Skybrud.Social.Time {
         /// Coordinated Universal Time (UTC), or neither.</param>
         public SocialDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar, DateTimeKind kind) {
             DateTime = new DateTime(year, month, day, hour, minute, second, millisecond, calendar, kind);
-            UpdateProperties();
         }
 
         #endregion
 
         #region Member methods
-
+        
+        /// <summary>
+        /// Converts the value of the current <see cref="SocialDateTime"/> to its equivalent string representation. 
+        /// </summary>
+        /// <returns>A string representation of value of the current <see cref="SocialDateTime"/> object.</returns>
         public override string ToString() {
             return DateTime.ToString(DateTimeFormatInfo.CurrentInfo);
         }
 
         /// <summary>
         /// Converts the value of the current <see cref="SocialDateTime"/> to its equivalent string representation
-        /// using the specified <see cref="provider"/>.
+        /// using the specified <code>provider</code>.
         /// </summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <returns>A string representation of value of the current <see cref="SocialDateTime"/> object as specified by
-        /// <see cref="provider"/>.</returns>
+        /// <code>provider</code>.</returns>
         public string ToString(IFormatProvider provider) {
             return DateTime.ToString(provider);
         }
 
         /// <summary>
         /// Converts the value of the current <see cref="SocialDateTime"/> to its equivalent string representation using
-        /// the specified <see cref="format"/>.
+        /// the specified <code>format</code>.
         /// </summary>
         /// <param name="format">A standard or custom date and time format string.</param>
         /// <returns>A string representation of value of the current <see cref="SocialDateTime"/> object as specified by
-        /// <see cref="format"/>.</returns>
+        /// <code>format</code>.</returns>
         public string ToString(string format) {
             return DateTime.ToString(format, DateTimeFormatInfo.CurrentInfo);
         }
 
         /// <summary>
         /// Converts the value of the current <see cref="SocialDateTime"/> to its equivalent string representation using
-        /// the specified <see cref="format"/> and <see cref="provider"/>.
+        /// the specified <code>format</code> and <code>provider</code>.
         /// </summary>
         /// <param name="format">A standard or custom date and time format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <returns>A string representation of value of the current <see cref="SocialDateTime"/> object as specified by
-        /// <see cref="format"/> and <see cref="provider"/>.</returns>
+        /// <code>format</code> and <code>provider</code>.</returns>
         public string ToString(string format, IFormatProvider provider) {
             return DateTime.ToString(format, provider);
         }
@@ -469,7 +472,7 @@ namespace Skybrud.Social.Time {
         /// <returns>An object whose value is the sum of the date and time represented by this instance and months.</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">The resulting <see cref="SocialDateTime"/> is less
         /// than <see cref="System.DateTime.MinValue"/> or greater than <see cref="System.DateTime.MaxValue"/>. Or
-        /// <see cref="months"/> is less than <code>-120000</code> or greater than <code>120000</code>.</exception>
+        /// <code>months</code> is less than <code>-120000</code> or greater than <code>120000</code>.</exception>
         public SocialDateTime AddMonths(int months) {
             return new SocialDateTime(DateTime.AddMonths(months));
         }
@@ -526,9 +529,57 @@ namespace Skybrud.Social.Time {
             return new SocialDateTime(DateTime.Subtract(value));
         }
 
-        private void UpdateProperties()
-        {
-            
+        /// <summary>
+        /// Gets the first day of the month based on this <see cref="SocialDateTime"/>.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="DateTime"/> representing the first day of the month.</returns>
+        public SocialDateTime GetFirstDayOfMonth() {
+            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfMonth(DateTime));
+        }
+
+        /// <summary>
+        /// Gets the last day of the month based on this <see cref="SocialDateTime"/>.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the month.</returns>
+        public SocialDateTime GetLastDayOfMonth() {
+            return new SocialDateTime(SocialDateHelpers.GetLastDayOfMonth(DateTime));
+        }
+
+        /// <summary>
+        /// Gets the first day of the week based on this <see cref="SocialDateTime"/>. <code>Monday</code> is
+        /// considered the first day of the week.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the first day of the week.</returns>
+        public SocialDateTime GetFirstDayOfWeek() {
+            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfWeek(DateTime));
+        }
+
+        /// <summary>
+        /// Gets the first day of the week based on this <see cref="SocialDateTime"/> and <code>startOfWeek</code>.
+        /// </summary>
+        /// <param name="startOfWeek">The first day of the week (eg. <code>Monday</code> or <code>Sunday</code>).</param>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the first day of the week.</returns>
+        public SocialDateTime GetFirstDayOfWeek(DayOfWeek startOfWeek) {
+            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfWeek(DateTime, startOfWeek));
+        }
+
+        /// <summary>
+        /// Gets the last day of the week based on this <see cref="SocialDateTime"/>. <code>Monday</code> is considered
+        /// the first day of the week.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the week.</returns>
+        public SocialDateTime GetLastDayOfWeek() {
+            return new SocialDateTime(SocialDateHelpers.GetLastDayOfWeek(DateTime));
+        }
+
+        /// <summary>
+        /// Gets the last day of the week based on this <see cref="SocialDateTime"/> and <code>startOfWeek</code>.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="startOfWeek">The first day of the week (eg. <code>Monday</code> or <code>Sunday</code>).</param>
+        /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the week.</returns>
+        public SocialDateTime GetLastDayOfWeek(DateTime date, DayOfWeek startOfWeek) {
+            return new SocialDateTime(SocialDateHelpers.GetLastDayOfWeek(DateTime, startOfWeek));
         }
 
         #endregion
@@ -679,11 +730,20 @@ namespace Skybrud.Social.Time {
             return d1 > d2 || d1 == d2;
         }
 
+        /// <summary>
+        /// Gets whether this <see cref="SocialDateTime"/> equals the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The object to compare.</param>
+        /// <returns>Returns whether this <see cref="SocialDateTime"/> equals the specified <code>obj</code>.</returns>
         public override bool Equals(Object obj) {
             SocialDateTime time = obj as SocialDateTime;
             return time != null && (this == time);
         }
 
+        /// <summary>
+        /// Gets the hash code for this <see cref="SocialDateTime"/>
+        /// </summary>
+        /// <returns>Returns the hash code of the object.</returns>
         public override int GetHashCode() {
             return DateTime.GetHashCode();
         }
