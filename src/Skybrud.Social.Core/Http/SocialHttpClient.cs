@@ -119,6 +119,7 @@ namespace Skybrud.Social.Http {
         /// <param name="url">The URL of the request.</param>
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data of the request.</param>
+        /// <param name="isMultipart">Indicates the request should be encoded as <code>multipart/form-data</code>.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, SocialQueryString query, SocialPostData postData, bool isMultipart) {
 

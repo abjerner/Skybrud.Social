@@ -37,6 +37,9 @@ namespace Skybrud.Social.Exceptions {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the message of the exception.
+        /// </summary>
         public override string Message {
             get {
                 String s = base.Message;

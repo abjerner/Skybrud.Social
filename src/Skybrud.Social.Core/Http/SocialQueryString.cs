@@ -78,6 +78,10 @@ namespace Skybrud.Social.Http {
             _nvc.Add(key, String.Format(CultureInfo.InvariantCulture, "{0}", value));
         }
 
+        /// <summary>
+        /// Gets a string representation of the query string.
+        /// </summary>
+        /// <returns>Returns the query string as an URL encoded string.</returns>
         public override string ToString() {
             return SocialUtils.NameValueCollectionToQueryString(_nvc);
         }

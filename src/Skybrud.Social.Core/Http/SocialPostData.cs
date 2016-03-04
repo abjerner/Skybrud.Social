@@ -91,6 +91,11 @@ namespace Skybrud.Social.Http {
             stream.Write(bytes, 0, bytes.Length);
         }
 
+        /// <summary>
+        /// Writes the multipart POST data to the specified <code>stream</code>.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="boundary">The multipart boundary.</param>
         public void WriteMultipartFormData(Stream stream, string boundary) {
             int i = 0;
             foreach (ISocialPostValue value in _data.Values) {
@@ -98,10 +103,18 @@ namespace Skybrud.Social.Http {
             }
         }
 
+        /// <summary>
+        /// Gets a string representation of the POST data.
+        /// </summary>
+        /// <returns>Returns the POST data as an URL encoded string.</returns>
         public override string ToString() {
             return String.Join("&", _data.Select(pair => SocialUtils.UrlEncode(pair.Key) + "=" + SocialUtils.UrlEncode(pair.Value.ToString())));
         }
 
+        /// <summary>
+        /// Converts the POST data into an instance of <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="NameValueCollection"/> representing the POST data.</returns>
         public virtual NameValueCollection ToNameValueCollection() {
             NameValueCollection nvc = new NameValueCollection();
             foreach (var pair in _data) {

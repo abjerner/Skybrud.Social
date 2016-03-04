@@ -357,11 +357,11 @@ namespace Skybrud.Social {
         #region Enums
 
         /// <summary>
-        /// Parses the specified <code>str</code> into the enum of type <see cref="T"/>.
+        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="str">The string to be parsed.</param>
-        /// <returns>Returns an enum of type <see cref="T"/> from the specified <code>str</code>.</returns>
+        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str) where T : struct {
 
             // Check whether the type of T is an enum
@@ -379,12 +379,12 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>str</code> into the enum of type <see cref="T"/>.
+        /// Parses the specified <code>str</code> into the enum of type <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="str">The string to be parsed.</param>
         /// <param name="fallback">The fallback if the enum could not be parsed.</param>
-        /// <returns>Returns an enum of type <see cref="T"/> from the specified <code>str</code>.</returns>
+        /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
         public static T ParseEnum<T>(string str, T fallback) where T : struct {
 
             // Check whether the type of T is an enum
@@ -422,12 +422,12 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <see cref="T"/>.
+        /// Parses the specified <code>json</code> string into an instance of <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type to be returned.</typeparam>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <see cref="T"/>.</param>
-        /// <returns>Returns an instance of <see cref="T"/> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         public static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
             return func(ParseJsonObject(json));
         }
@@ -449,11 +449,11 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an array of <see cref="T"/>.
+        /// Parses the specified <code>json</code> string into an array of <code>T</code>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <see cref="T"/>.</param>
-        /// <returns>Returns an array of <see cref="T"/> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         public static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return (
                 from JObject item in ParseJsonArray(json)
