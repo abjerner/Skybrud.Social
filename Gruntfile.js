@@ -1,4 +1,6 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+
+    var path = require('path');
 
 	// Load the package JSON file
 	var pkg = grunt.file.readJSON('package.json');
@@ -22,14 +24,16 @@ module.exports = function(grunt) {
 	        }
 	    },
 		zip: {
-			release: {
-				//cwd: 'files/',
+		    release: {
+		        router: function (filepath) {
+		            return path.basename(filepath);
+		        },
 			    src: [
-					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.dll',
-					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.xml',
+					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.Core.dll',
+					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.Core.xml',
 					'src/Skybrud.Social.Core/LICENSE.txt'
 				],
-				dest: 'releases/github/' + pkg.name + '.v' + version + '.zip'
+				dest: 'releases/Skybrud.Social.Core.v' + version + '.zip'
 			}
 		}
 	});
