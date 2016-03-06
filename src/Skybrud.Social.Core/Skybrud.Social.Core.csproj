@@ -95,7 +95,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>REM "$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"
+    <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"
 
 copy $(ProjectDir)Properties\AssemblyInfoGenerated.cs $(SolutionDir)Skybrud.Social\Properties\AssemblyInfoVersion.cs
 copy $(ProjectDir)Properties\AssemblyInfoVersion.cs $(SolutionDir)Skybrud.Social\Properties\AssemblyInfoVersion.cs</PreBuildEvent>
