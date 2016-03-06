@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfoVersion.cs" />
     <Compile Include="Exceptions\PropertyNotSetException.cs" />
     <Compile Include="Http\PostData\ISocialDataValue.cs" />
     <Compile Include="Http\PostData\SocialPostFileValue.cs" />
@@ -94,7 +95,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"</PreBuildEvent>
+    <PreBuildEvent>REM "$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2012-07-30 "$(ProjectPath)"
+
+copy $(ProjectDir)Properties\AssemblyInfoGenerated.cs $(SolutionDir)Skybrud.Social\Properties\AssemblyInfoVersion.cs
+copy $(ProjectDir)Properties\AssemblyInfoVersion.cs $(SolutionDir)Skybrud.Social\Properties\AssemblyInfoVersion.cs</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)..\src\build\UpdateAssemblyInfoJson.exe" "$(ProjectPath)" "$(TargetPath)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
