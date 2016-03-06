@@ -216,7 +216,7 @@ namespace Skybrud.Social {
         /// Parses a query string into an instance of <see cref="NameValueCollection"/> using <see cref="Encoding.UTF8"/> encoding.
         /// </summary>
         /// <param name="query">The query string to parse.</param>
-        /// <returns>A <code>System.Collections.Specialized.NameValueCollection</code> of query parameters and values.</returns>
+        /// <returns>A <see cref="NameValueCollection"/> of query parameters and values.</returns>
         public static NameValueCollection ParseQueryString(string query) {
             return HttpUtility.ParseQueryString(query);
         }

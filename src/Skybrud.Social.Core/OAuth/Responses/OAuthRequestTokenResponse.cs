@@ -37,7 +37,7 @@ namespace Skybrud.Social.OAuth.Responses {
         /// </summary>
         /// <param name="response">The raw response.</param>
         /// <param name="body">The object representing the response body.</param>
-        /// <returns>Returns an instance of <code>OAuthRequestTokenResponse</code>.</returns>
+        /// <returns>Returns an instance of <see cref="OAuthRequestTokenResponse"/>.</returns>
         public static OAuthRequestTokenResponse ParseResponse(SocialHttpResponse response, OAuthRequestToken body) {
             return response == null ? null : new OAuthRequestTokenResponse(response, body);
         }

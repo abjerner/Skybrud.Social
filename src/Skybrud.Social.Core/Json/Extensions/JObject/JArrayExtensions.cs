@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 namespace Skybrud.Social.Json.Extensions.JObject {
 
     /// <summary>
-    /// Various extensions methods for <code>JArray</code> that makes manual parsing easier.
+    /// Various extensions methods for <see cref="JArray"/> that makes manual parsing easier.
     /// </summary>
     public static class JArrayExtensions {
 
@@ -98,7 +98,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
-        /// Gets an instance of <code>JArray</code> from the item at the specified <code>index</code> in the array.
+        /// Gets an instance of <see cref="JArray"/> from the item at the specified <code>index</code> in the array.
         /// </summary>
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>

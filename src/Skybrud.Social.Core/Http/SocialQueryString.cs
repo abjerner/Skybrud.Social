@@ -6,7 +6,7 @@ using System.Globalization;
 namespace Skybrud.Social.Http {
 
     /// <summary>
-    /// A wrapper class extending the functionality of <code>NameValueCollection</code>.
+    /// A wrapper class extending the functionality of <see cref="NameValueCollection"/>.
     /// </summary>
     public class SocialQueryString {
 
@@ -19,21 +19,21 @@ namespace Skybrud.Social.Http {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the internal <code>NameValueCollection</code>.
+        /// Gets a reference to the internal <see cref="NameValueCollection"/>.
         /// </summary>
         public NameValueCollection NameValueCollection {
             get { return _nvc; }
         }
 
         /// <summary>
-        /// Gets the number of key/value pairs contained in the internal <code>NameValueCollection</code> instance.
+        /// Gets the number of key/value pairs contained in the internal <see cref="NameValueCollection"/> instance.
         /// </summary>
         public int Count {
             get { return _nvc.Count; }
         }
 
         /// <summary>
-        /// Gets whether the internal <code>NameValueCollection</code> is empty.
+        /// Gets whether the internal <see cref="NameValueCollection"/> is empty.
         /// </summary>
         public bool IsEmpty {
             get { return _nvc.Count == 0; }
@@ -51,7 +51,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Initializes a new instance based on the specified <code>query</code>.
         /// </summary>
-        /// <param name="query">An instance of <code>NameValueCollection</code> that should make up the query string.</param>
+        /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
         public SocialQueryString(NameValueCollection query) {
             _nvc = query ?? new NameValueCollection();
         }
@@ -105,8 +105,8 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Initializes a new instance based on the specified <code>query</code>.
         /// </summary>
-        /// <param name="query">An instance of <code>NameValueCollection</code> that should make up the query string.</param>
-        /// <returns>An instance of <code>SocialQueryString</code> based on the specified <code>query</code>.</returns>
+        /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
+        /// <returns>An instance of <see cref="SocialQueryString"/> based on the specified <code>query</code>.</returns>
         public static implicit operator SocialQueryString(NameValueCollection query) {
             return query == null ? null : new SocialQueryString(query);
         }

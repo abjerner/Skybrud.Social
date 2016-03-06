@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -7,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace Skybrud.Social.Json.Extensions.JObject {
     
     /// <summary>
-    /// Various extensions methods for <code>JObject</code> that makes manual parsing easier.
+    /// Various extensions methods for <see cref="JObject"/> that makes manual parsing easier.
     /// </summary>
     public static class JObjectExtension {
 
@@ -178,7 +177,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// Gets an enum of type <code>T</code> from the property with the specified <code>propertyName</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
-        /// <param name="obj">The instance of <code>JObject</code>.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName) where T : struct {
             return SocialUtils.ParseEnum<T>(GetString(obj, propertyName));
@@ -188,7 +187,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// Gets an enum of type <code>T</code> from the property with the specified <code>propertyName</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
-        /// <param name="obj">The instance of <code>JObject</code>.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="fallback">The fallback value if the value in the JSON couldn't be parsed.</param>
         public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, T fallback) where T : struct {
@@ -197,7 +196,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         }
 
         /// <summary>
-        /// Gets an instance of <code>JArray</code> from a property with the specified <code>propertyName</code>.
+        /// Gets an instance of <see cref="JArray"/> from a property with the specified <code>propertyName</code>.
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>
         /// <param name="propertyName">The name of the property.</param>

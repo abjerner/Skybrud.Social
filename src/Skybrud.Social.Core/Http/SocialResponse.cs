@@ -7,7 +7,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing a response from a call to a server. Generally this class (or other classes inheriting from
     /// this class) should be used to represent the object oriented (parsed) response wrapping an instance of
-    /// <code>SocialHttpResponse</code> (raw response).
+    /// <see cref="SocialHttpResponse"/> (raw response).
     /// </summary>
     public class SocialResponse {
 
@@ -60,7 +60,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Initializes a new instance based on the specified raw <code>response</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         protected SocialResponse(SocialHttpResponse response) {
             Response = response;
         }
@@ -70,10 +70,10 @@ namespace Skybrud.Social.Http {
         #region Member methods
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <code>JObject</code>.
+        /// Parses the specified <code>json</code> string into an instance of <see cref="JObject"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <code>JObject</code> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
         protected static JObject ParseJsonObject(string json) {
             return SocialUtils.ParseJsonObject(json);
         }
@@ -83,17 +83,17 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <typeparam name="T">The type to be returned.</typeparam>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
             return SocialUtils.ParseJsonObject(json, func);
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <code>JArray</code>.
+        /// Parses the specified <code>json</code> string into an instance of <see cref="JArray"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <code>JArray</code> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
         protected static JArray ParseJsonArray(string json) {
             return SocialUtils.ParseJsonArray(json);
         }
@@ -102,7 +102,7 @@ namespace Skybrud.Social.Http {
         /// Parses the specified <code>json</code> string into an array of <code>T</code>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return SocialUtils.ParseJsonArray(json, func);

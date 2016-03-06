@@ -4,7 +4,7 @@ using System.Net;
 namespace Skybrud.Social.Http {
     
     /// <summary>
-    /// Wrapper class for <code>HttpWebResponse</code>.
+    /// Wrapper class for <see cref="HttpWebResponse"/>.
     /// </summary>
     public class SocialHttpResponse {
 
@@ -13,12 +13,12 @@ namespace Skybrud.Social.Http {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the <code>SocialHttpRequest</code> that resulted in the response.
+        /// Gets a reference to the <see cref="SocialHttpRequest"/> that resulted in the response.
         /// </summary>
         public SocialHttpRequest Request { get; private set; }
 
         /// <summary>
-        /// Gets a reference to the underlying <code>HttpWebResponse</code>.
+        /// Gets a reference to the underlying <see cref="HttpWebResponse"/>.
         /// </summary>
         public HttpWebResponse Response { get; private set; }
 
@@ -101,8 +101,8 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates a new instance based on the specified <code>response</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>HttpWebResponse</code> to be parsed.</param>
-        /// <returns>Returns a new instance of <code>SocialHttpResponse</code> based on the specified <code>response</code>.</returns>
+        /// <param name="response">The instance of <see cref="HttpWebResponse"/> to be parsed.</param>
+        /// <returns>Returns a new instance of <see cref="HttpWebResponse"/> based on the specified <code>response</code>.</returns>
         public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response) {
             return response == null ? null : new SocialHttpResponse(null, response);
         }
@@ -110,9 +110,9 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates a new instance based on the specified <code>response</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>HttpWebResponse</code> to be parsed.</param>
-        /// <param name="request">The instance of <code>SocialHttpRequest</code> that resulted in the response.</param>
-        /// <returns>Returns a new instance of <code>SocialHttpResponse</code> based on the specified <code>response</code>.</returns>
+        /// <param name="response">The instance of <see cref="HttpWebResponse"/> to be parsed.</param>
+        /// <param name="request">The instance of <see cref="HttpWebRequest"/> that resulted in the response.</param>
+        /// <returns>Returns a new instance of <see cref="HttpWebResponse"/> based on the specified <code>response</code>.</returns>
         public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response, SocialHttpRequest request) {
             return response == null ? null : new SocialHttpResponse(request, response);
         }

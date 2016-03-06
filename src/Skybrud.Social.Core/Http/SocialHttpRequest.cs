@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Text;
 namespace Skybrud.Social.Http {
 
     /// <summary>
-    /// Wrapper class for <code>HttpWebResponse</code>.
+    /// Wrapper class for <see cref="HttpWebResponse"/>.
     /// </summary>
     public class SocialHttpRequest {
 
@@ -59,7 +58,7 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Gets or sets the URL of the request. The query string can either be specified directly in the URL, or
-        /// separately through the <code>QueryString</code> property.
+        /// separately through the <see cref="QueryString"/> property.
         /// </summary>
         public string Url { get; set; }
 
