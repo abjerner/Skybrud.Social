@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.Core.xml',
 					'src/Skybrud.Social.Core/LICENSE.txt'
 				],
-				dest: 'releases/Skybrud.Social.Core.v' + version + '.zip'
+				dest: 'releases/github/Skybrud.Social.Core.v' + version + '.zip'
 			}
 		}
 	});
