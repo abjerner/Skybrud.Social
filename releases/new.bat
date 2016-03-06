@@ -1,1 +1,0 @@
-"C:\Program Files\WinRAR\winrar.exe" a -ep1 Skybrud.Social.vnext.zip ../src/Skybrud.Social/bin/Release/Skybrud.Social.dll ../src/Skybrud.Social/bin/Release/Skybrud.Social.xml ../src/Skybrud.Social/LICENSE.txt
