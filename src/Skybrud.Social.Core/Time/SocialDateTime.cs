@@ -2,6 +2,8 @@
 using System.Globalization;
 
 namespace Skybrud.Social.Time {
+
+    // ReSharper disable InconsistentNaming
     
     /// <summary>
     /// Class wrapping an instance of <see cref="DateTime"/> (as an alternative to using <see cref="Nullable{DateTime}"/>).
@@ -518,6 +520,212 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
+        /// Compares the value of this instance to a specified <see cref="DateTime"/> value and returns an integer that
+        /// indicates whether this instance is earlier than, the same as, or later than the specified
+        /// <see cref="DateTime"/> value.
+        /// </summary>
+        /// <param name="value">The value to compare to the current instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and the <code>value</code> parameter.</returns>
+        public int CompareTo(DateTime value) {
+            return DateTime.CompareTo(value);
+        }
+
+        /// <summary>
+        /// Compares the value of this instance to a specified <see cref="SocialDateTime"/> value and returns an
+        /// integer that indicates whether this instance is earlier than, the same as, or later than the specified
+        /// <see cref="SocialDateTime"/> value.
+        /// </summary>
+        /// <param name="value">The value to compare to the current instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and the <code>value</code> parameter.</returns>
+        public int CompareTo(SocialDateTime value) {
+            return DateTime.CompareTo(value == null ? default(object) : value.DateTime);
+        }
+
+        /// <summary>
+        /// Compares the value of this instance to a specified object that contains a specified <see cref="DateTime"/>
+        /// value, and returns an integer that indicates whether this instance is earlier than, the same as, or later
+        /// than the specified <see cref="DateTime"/> value.
+        /// </summary>
+        /// <param name="value">The value to compare to the current instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and the <code>value</code> parameter.</returns>
+        public int CompareTo(object value) {
+            return DateTime.CompareTo(value);
+        }
+
+        /// <summary>
+        /// Converts the value of this instance to all the string representations supported by the standard date and
+        /// time format specifiers.
+        /// </summary>
+        /// <returns>A string array where each element is the representation of the value of this instance formatted
+        /// with one of the standard date and time format specifiers.</returns>
+        public string[] GetDateTimeFormats() {
+            return DateTime.GetDateTimeFormats();
+        }
+
+        /// <summary>
+        /// Converts the value of this instance to all the string representations supported by the standard date and
+        /// time format specifiers and the specified culture-specific formatting information.
+        /// </summary>
+        /// <param name="provider">An object that supplies culture-specific formatting information about this instance.</param>
+        /// <returns>A string array where each element is the representation of the value of this instance formatted
+        /// with one of the standard date and time format specifiers.</returns>
+        public string[] GetDateTimeFormats(IFormatProvider provider) {
+            return DateTime.GetDateTimeFormats(provider);
+        }
+
+        /// <summary>
+        /// Converts the value of this instance to all the string representations supported by the specified standard
+        /// date and time format specifier.
+        /// </summary>
+        /// <param name="format">A standard date and time format string.</param>
+        /// <returns>A string array where each element is the representation of the value of this instance formatted
+        /// with the format standard date and time format specifier.</returns>
+        public string[] GetDateTimeFormats(char format) {
+            return DateTime.GetDateTimeFormats(format);
+        }
+
+        /// <summary>
+        /// Converts the value of this instance to all the string representations supported by the specified standard
+        /// date and time format specifier and culture-specific formatting information.
+        /// </summary>
+        /// <param name="format">A date and time format string.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information about this instance.</param>
+        /// <returns>A string array where each element is the representation of the value of this instance formatted
+        /// with one of the standard date and time format specifiers.</returns>
+        public string[] GetDateTimeFormats(char format, IFormatProvider provider) {
+            return DateTime.GetDateTimeFormats(format, provider);
+        }
+
+        /// <summary>
+        /// Indicates whether the internal instance of <see cref="System.DateTime"/> is within the daylight saving time
+        /// range for the current time zone.
+        /// </summary>
+        /// <summary>
+        /// Returns <code>true</code> if <see cref="System.DateTime.Kind"/> is <see cref="System.DateTimeKind.Local"/>
+        /// or <see cref="System.DateTimeKind.Unspecified"/> and the value of the internal instance of
+        /// <see cref="System.DateTime"/> is within the daylight saving time range for the current time zone. Returns
+        /// <code>false</code> if <see cref="System.DateTime.Kind"/> is <see cref="System.DateTimeKind.Utc"/>.
+        /// </summary>
+        public bool IsDaylightSavingTime() {
+            return DateTime.IsDaylightSavingTime();
+        }
+
+        /// <summary>
+        /// Serializes the internal <see cref="System.DateTime"/> object to a 64-bit binary value that subsequently can
+        /// be used to recreate the <see cref="System.DateTime"/> object.
+        /// </summary>
+        /// <returns>A 64-bit signed integer that encodes the <see cref="System.DateTime.Kind"/> and
+        /// <see cref="System.DateTime.Ticks"/> properties.</returns>
+        public long ToBinary() {
+            return DateTime.ToBinary();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to a Windows file time.
+        /// </summary>
+        /// <returns>The value of the internal <see cref="System.DateTime"/> object expressed as a Windows file time.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">The resulting file time would represent a date and
+        /// time before 12:00 midnight January 1, 1601 C.E. UTC.</exception>
+        public long ToFileTime() {
+            return DateTime.ToFileTime();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to a Windows file time.
+        /// </summary>
+        /// <returns>The value of the internal <see cref="System.DateTime"/> object expressed as a Windows file time.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">The resulting file time would represent a date and
+        /// time before 12:00 midnight January 1, 1601 C.E. UTC.</exception>
+        public long ToFileTimeUtc() {
+            return DateTime.ToFileTimeUtc();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to local time.
+        /// </summary>
+        /// <returns>An object whose <see cref="System.DateTime.Kind"/> property is
+        /// <see cref="System.DateTimeKind.Local"/>, and whose value is the local time equivalent to the value of the
+        /// internal <see cref="System.DateTime"/> object, or <see cref="System.DateTime.MaxValue"/> if the converted
+        /// value is too large to be represented by a <see cref="System.DateTime"/> object, or
+        /// <see cref="System.DateTime.MinValue"/> if the converted value is too small to be represented as a
+        /// <see cref="System.DateTime"/> object.</returns>
+        public SocialDateTime ToLocalTime() {
+            return DateTime.ToLocalTime();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to its equivalent long date string
+        /// representation.
+        /// </summary>
+        /// <returns>A string that contains the long date string representation of the current System.DateTime object.</returns>
+        public string ToLongDateString() {
+            return DateTime.ToLongDateString();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to its equivalent long time string
+        /// representation.
+        /// </summary>
+        /// <returns>A string that contains the long time string representation of the current System.DateTime object.</returns>
+        public string ToLongTimeString() {
+            return DateTime.ToLongTimeString();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to the equivalent OLE Automation
+        /// date.
+        /// </summary>
+        /// <returns>A double-precision floating-point number that contains an OLE Automation date equivalent to the
+        /// value of this instance.</returns>
+        /// <exception cref="System.OverflowException">The value of this instance cannot be represented as an OLE
+        /// Automation Date.</exception>
+        public double ToOADate() {
+            return DateTime.ToOADate();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to its equivalent short date string
+        /// representation.
+        /// </summary>
+        /// <returns>A string that contains the short date string representation of the internal
+        /// <see cref="System.DateTime"/> object.</returns>
+        public string ToShortDateString() {
+            return DateTime.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to its equivalent short time string
+        /// representation.
+        /// </summary>
+        /// <returns>A string that contains the short time string representation of the internal
+        /// <see cref="System.DateTime"/> object.</returns>
+        public string ToShortTimeString() {
+            return DateTime.ToShortTimeString();
+        }
+
+        /// <summary>
+        /// Converts the value of the internal <see cref="System.DateTime"/> object to Coordinated Universal Time (UTC).
+        /// </summary>
+        /// <returns>An object whose <code>System.DateTime.Kind</code> property is <code>System.DateTimeKind.Utc</code>,
+        /// and whose value is the UTC equivalent to the value of the internal <see cref="System.DateTime"/> object, or
+        /// <see cref="System.DateTime.MaxValue"/> if the converted value is too large to be represented by a
+        /// <see cref="System.DateTime"/> object, or <see cref="System.DateTime.MinValue"/> if the converted value is
+        /// too small to be represented by a <see cref="System.DateTime"/> object.</returns>
+        public SocialDateTime ToUniversalTime() {
+            return DateTime.ToUniversalTime();
+        }
+        
+        /// <summary>
+        /// Subtracts the specified date and time from this instance.
+        /// </summary>
+        /// <param name="value">The date and time value to subtract.</param>
+        /// <returns>A time interval that is equal to the date and time represented by this instance minus the date
+        /// and time represented by value.</returns>
+        public TimeSpan Subtract(DateTime value) {
+            return DateTime.Subtract(value);
+        }
+
+        /// <summary>
         /// Subtracts the specified duration from this instance.
         /// </summary>
         /// <param name="value">The time interval to subtract.</param>
@@ -741,15 +949,25 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
-        /// Gets the hash code for this <see cref="SocialDateTime"/>
+        /// Gets the hash code for this <see cref="SocialDateTime"/>.
         /// </summary>
         /// <returns>Returns the hash code of the object.</returns>
         public override int GetHashCode() {
             return DateTime.GetHashCode();
         }
+
+        /// <summary>
+        /// Returns the <see cref="System.TypeCode"/> for value type <see cref="DateTime"/>.
+        /// </summary>
+        /// <returns>The enumerated constant, <see cref="System.TypeCode.DateTime"/>.</returns>
+        public TypeCode GetTypeCode() {
+            return DateTime.GetTypeCode();
+        }
  
         #endregion
 
     }
+    
+    // ReSharper restore InconsistentNaming
 
 }
