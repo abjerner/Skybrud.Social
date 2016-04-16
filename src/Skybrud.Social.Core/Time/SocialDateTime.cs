@@ -181,6 +181,13 @@ namespace Skybrud.Social.Time {
             get { return new SocialDateWeek(DateTime); }
         }
 
+        /// <summary>
+        /// Gets the amount of days in the month.
+        /// </summary>
+        public int DaysInMonth {
+            get { return DateTime.DaysInMonth(Year, Month); }
+        }
+
         #endregion
 
         #region Constructors
