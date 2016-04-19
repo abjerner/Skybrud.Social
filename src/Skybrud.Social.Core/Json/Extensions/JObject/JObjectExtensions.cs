@@ -180,7 +180,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="propertyName">The name of the property.</param>
         public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName) where T : struct {
-            return SocialUtils.ParseEnum<T>(GetString(obj, propertyName));
+            return SocialUtils.Enums.ParseEnum<T>(GetString(obj, propertyName));
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Skybrud.Social.Json.Extensions.JObject {
         /// <param name="fallback">The fallback value if the value in the JSON couldn't be parsed.</param>
         public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, T fallback) where T : struct {
             string value = GetString(obj, propertyName);
-            return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.ParseEnum(value, fallback);
+            return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.Enums.ParseEnum(value, fallback);
         }
 
         /// <summary>
