@@ -37,9 +37,9 @@
         /// <param name="timestamp">A timestamp.</param>
         public SocialDateWeek(SocialDateTime timestamp) {
 
-            Week = SocialDateHelpers.GetIso8601WeekNumber(timestamp);
-            Start = SocialDateHelpers.GetFirstDayOfWeek(timestamp.DateTime);
-            End = SocialDateHelpers.GetLastDayOfWeek(timestamp.DateTime);
+            Week = SocialUtils.Time.GetIso8601WeekNumber(timestamp);
+            Start = SocialUtils.Time.GetFirstDayOfWeek(timestamp.DateTime);
+            End = SocialUtils.Time.GetLastDayOfWeek(timestamp.DateTime);
 
             if (End.Month == 1 && Week == 1) {
                 Year = End.Year;

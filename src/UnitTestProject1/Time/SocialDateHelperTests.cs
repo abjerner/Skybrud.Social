@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Skybrud.Social;
 using Skybrud.Social.Time;
 
 namespace UnitTestProject1.Time {
@@ -19,7 +20,7 @@ namespace UnitTestProject1.Time {
             };
 
             foreach (var sample in samples) {
-                Assert.AreEqual(sample.Age, SocialDateHelpers.GetAge(sample.Date, fakeNow));
+                Assert.AreEqual(sample.Age, SocialUtils.Time.GetAge(sample.Date, fakeNow));
             }
 
         }
@@ -38,7 +39,7 @@ namespace UnitTestProject1.Time {
             };
 
             foreach (var sample in samples) {
-                Assert.AreEqual(sample.Week, SocialDateHelpers.GetIso8601WeekNumber(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers)");
+                Assert.AreEqual(sample.Week, SocialUtils.Time.GetIso8601WeekNumber(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers)");
             }
 
         }
@@ -46,26 +47,26 @@ namespace UnitTestProject1.Time {
         [TestMethod]
         public void IsWeekDay() {
 
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 10)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 11)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 12)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 13)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 14)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 15)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekday(new DateTime(2014, 2, 16)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 10)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 11)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 12)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 13)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 14)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 15)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekday(new DateTime(2014, 2, 16)));
 
         }
 
         [TestMethod]
         public void IsWeekend() {
 
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 10)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 11)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 12)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 13)));
-            Assert.AreEqual(false, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 14)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 15)));
-            Assert.AreEqual(true, SocialDateHelpers.IsWeekend(new DateTime(2014, 2, 16)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 10)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 11)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 12)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 13)));
+            Assert.AreEqual(false, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 14)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 15)));
+            Assert.AreEqual(true, SocialUtils.Time.IsWeekend(new DateTime(2014, 2, 16)));
 
         }
 
@@ -109,8 +110,8 @@ namespace UnitTestProject1.Time {
 
                 DateTime dt = new DateTime(sample.Year, 1, 1);
 
-                Assert.AreEqual(sample.IsLeapYear, SocialDateHelpers.IsLeapYear(sample.Year), "\n\n" + sample.Year + " (DateTimeHelpers)");
-                Assert.AreEqual(sample.IsLeapYear, SocialDateHelpers.IsLeapYear(dt), "\n\n" + sample.Year + " (DateTimeHelpers)");
+                Assert.AreEqual(sample.IsLeapYear, SocialUtils.Time.IsLeapYear(sample.Year), "\n\n" + sample.Year + " (DateTimeHelpers)");
+                Assert.AreEqual(sample.IsLeapYear, SocialUtils.Time.IsLeapYear(dt), "\n\n" + sample.Year + " (DateTimeHelpers)");
 
             }
 
@@ -133,8 +134,8 @@ namespace UnitTestProject1.Time {
 
                 DateTime date = DateTime.Parse(sample.Text);
 
-                long local = SocialDateHelpers.GetUnixTimeFromDateTime(date);
-                long utc = SocialDateHelpers.GetUnixTimeFromDateTime(date.ToUniversalTime());
+                long local = SocialUtils.Time.GetUnixTimeFromDateTime(date);
+                long utc = SocialUtils.Time.GetUnixTimeFromDateTime(date.ToUniversalTime());
 
                 Assert.AreEqual(sample.Timestamp, local);
                 Assert.AreEqual(sample.Timestamp, utc);
@@ -162,13 +163,13 @@ namespace UnitTestProject1.Time {
 
             foreach (var sample in samples) {
 
-                DateTime date = SocialDateHelpers.GetDateTimeFromUnixTime(sample.Timestamp);
+                DateTime date = SocialUtils.Time.GetDateTimeFromUnixTime(sample.Timestamp);
 
                 // TODO: Find a way to explicitly specify the local time zone (so the Unit test will complete even when not in Danish timezone).
                 DateTime dateLocal = date;// TimeZoneInfo.ConvertTime(date, TimeZoneInfo.Utc, GetTimeZone(sample.TimeZone));
 
-                string local = dateLocal.ToLocalTime().ToString(SocialDateHelpers.IsoDateFormat);
-                string utc = date.ToUniversalTime().ToString(SocialDateHelpers.IsoDateFormat);
+                string local = dateLocal.ToLocalTime().ToString(SocialUtils.Time.IsoDateFormat);
+                string utc = date.ToUniversalTime().ToString(SocialUtils.Time.IsoDateFormat);
 
                 Assert.AreEqual(sample.TextLocal, local, "local");
                 Assert.AreEqual(sample.TextUTC, utc, "utc");
@@ -199,7 +200,7 @@ namespace UnitTestProject1.Time {
             };
 
             foreach (var sample in samples) {
-                Assert.AreEqual(sample.Expected, SocialDateHelpers.GetFirstDayOfMonth(sample.Date), "DateTimeHelpers");
+                Assert.AreEqual(sample.Expected, SocialUtils.Time.GetFirstDayOfMonth(sample.Date), "DateTimeHelpers");
             }
 
         }
@@ -225,7 +226,7 @@ namespace UnitTestProject1.Time {
             };
 
             foreach (var sample in samples) {
-                Assert.AreEqual(sample.Expected, SocialDateHelpers.GetLastDayOfMonth(sample.Date), "DateTimeHelpers");
+                Assert.AreEqual(sample.Expected, SocialUtils.Time.GetLastDayOfMonth(sample.Date), "DateTimeHelpers");
             }
 
         }
@@ -245,11 +246,11 @@ namespace UnitTestProject1.Time {
 
             foreach (var sample in samples) {
 
-                Assert.AreEqual(sample.Monday, SocialDateHelpers.GetFirstDayOfWeek(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers - implicit)");
+                Assert.AreEqual(sample.Monday, SocialUtils.Time.GetFirstDayOfWeek(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers - implicit)");
 
-                Assert.AreEqual(sample.Monday, SocialDateHelpers.GetFirstDayOfWeek(sample.Date, DayOfWeek.Monday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Monday)");
+                Assert.AreEqual(sample.Monday, SocialUtils.Time.GetFirstDayOfWeek(sample.Date, DayOfWeek.Monday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Monday)");
 
-                Assert.AreEqual(sample.Sunday, SocialDateHelpers.GetFirstDayOfWeek(sample.Date, DayOfWeek.Sunday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Sunday)");
+                Assert.AreEqual(sample.Sunday, SocialUtils.Time.GetFirstDayOfWeek(sample.Date, DayOfWeek.Sunday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Sunday)");
 
             }
 
@@ -270,11 +271,11 @@ namespace UnitTestProject1.Time {
 
             foreach (var sample in samples) {
 
-                Assert.AreEqual(sample.Monday, SocialDateHelpers.GetLastDayOfWeek(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers - implicit)");
+                Assert.AreEqual(sample.Monday, SocialUtils.Time.GetLastDayOfWeek(sample.Date), "\n\n" + sample.Date + " (DateTimeHelpers - implicit)");
 
-                Assert.AreEqual(sample.Monday, SocialDateHelpers.GetLastDayOfWeek(sample.Date, DayOfWeek.Monday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Monday)");
+                Assert.AreEqual(sample.Monday, SocialUtils.Time.GetLastDayOfWeek(sample.Date, DayOfWeek.Monday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Monday)");
 
-                Assert.AreEqual(sample.Sunday, SocialDateHelpers.GetLastDayOfWeek(sample.Date, DayOfWeek.Sunday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Sunday)");
+                Assert.AreEqual(sample.Sunday, SocialUtils.Time.GetLastDayOfWeek(sample.Date, DayOfWeek.Sunday), "\n\n" + sample.Date + " (DateTimeHelpers - explicit: Sunday)");
 
             }
 

@@ -189,79 +189,7 @@ namespace Skybrud.Social {
         }
 
         #endregion
-
-        #region Timestamps
-
-        /// <summary>
-        /// ISO 8601 date format.
-        /// </summary>
-        public const string IsoDateFormat = SocialDateHelpers.IsoDateFormat;
-
-        /// <summary>
-        /// Returns the current Unix timestamp which is defined as the amount of seconds since the start of the Unix
-        /// epoch - that is <code>1st of January, 1970 - 00:00:00 GMT</code>.
-        /// </summary>
-        /// <returns>Returns a 64-bit integer representing the current UNIX timestamp.</returns>
-        public static long GetCurrentUnixTimestamp() {
-            return SocialDateHelpers.GetCurrentUnixTimestamp();
-        }
-
-        /// <summary>
-        /// Returns the current unix timestamp which is defined as the amount of seconds since the start of the Unix
-        /// epoch - that is <code>1st of January, 1970 - 00:00:00 GMT</code>.
-        /// </summary>
-        /// <returns>Returns a <see cref="double"/> representing the current Unix timestamp.</returns>
-        public static double GetCurrentUnixTimestampAsDouble() {
-            return SocialDateHelpers.GetCurrentUnixTimestampAsDouble();
-        }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
-        /// </summary>
-        /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
-        public static DateTime GetDateTimeFromUnixTime(int timestamp) {
-            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
-        }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
-        /// </summary>
-        /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
-        public static DateTime GetDateTimeFromUnixTime(double timestamp) {
-            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
-        }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
-        /// </summary>
-        /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
-        public static DateTime GetDateTimeFromUnixTime(long timestamp) {
-            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
-        }
-
-        /// <summary>
-        /// Gets an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.
-        /// </summary>
-        /// <param name="timestamp">The Unix timestamp.</param>
-        /// <returns>Returns an instance of <see cref="DateTime"/> from the specified <code>timestamp</code>.</returns>
-        public static DateTime GetDateTimeFromUnixTime(string timestamp) {
-            return SocialDateHelpers.GetDateTimeFromUnixTime(timestamp);
-        }
         
-        /// <summary>
-        /// Gets a Unix timestamp from the specified <code>dateTime</code>.
-        /// </summary>
-        /// <param name="dateTime">The instance of <see cref="DateTime"/> to be converted.</param>
-        /// <returns>Returns a 64-bit integer representing the the specified <code>dateTime</code>.</returns>
-        public static long GetUnixTimeFromDateTime(DateTime dateTime) {
-            return SocialDateHelpers.GetUnixTimeFromDateTime(dateTime);
-        }
-
-        #endregion
-
         #region Locations and distance
 
         /// <summary>

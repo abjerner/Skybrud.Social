@@ -142,35 +142,35 @@ namespace Skybrud.Social.Time {
         /// Gets the UNIX timestamp for this <see cref="SocialDateTime"/>.
         /// </summary>
         public long UnixTimestamp {
-            get { return SocialUtils.GetUnixTimeFromDateTime(DateTime); }
+            get { return SocialUtils.Time.GetUnixTimeFromDateTime(DateTime); }
         }
 
         /// <summary>
         /// Gets whether the year of this <see cref="SocialDateTime"/> is a leap year.
         /// </summary>
         public bool IsLeapYear {
-            get { return SocialDateHelpers.IsLeapYear(DateTime); }
+            get { return SocialUtils.Time.IsLeapYear(DateTime); }
         }
 
         /// <summary>
         /// Gets whether the day of this <see cref="SocialDateTime"/> is within a weekend.
         /// </summary>
         public bool IsWeekend {
-            get { return SocialDateHelpers.IsLeapYear(DateTime); }
+            get { return SocialUtils.Time.IsLeapYear(DateTime); }
         }
 
         /// <summary>
         /// Gets whether the day of this <see cref="SocialDateTime"/> is a weekday.
         /// </summary>
         public bool IsWeekday {
-            get { return SocialDateHelpers.IsWeekday(DateTime); }
+            get { return SocialUtils.Time.IsWeekday(DateTime); }
         }
 
         /// <summary>
         /// Gets the week number the ISO8601 week of this <see cref="SocialDateTime"/>.
         /// </summary>
         public int WeekNumber {
-            get { return SocialDateHelpers.GetIso8601WeekNumber(DateTime); }
+            get { return SocialUtils.Time.GetIso8601WeekNumber(DateTime); }
         }
 
         /// <summary>
@@ -749,7 +749,7 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns an instance of <see cref="DateTime"/> representing the first day of the month.</returns>
         public SocialDateTime GetFirstDayOfMonth() {
-            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfMonth(DateTime));
+            return new SocialDateTime(SocialUtils.Time.GetFirstDayOfMonth(DateTime));
         }
 
         /// <summary>
@@ -757,7 +757,7 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the month.</returns>
         public SocialDateTime GetLastDayOfMonth() {
-            return new SocialDateTime(SocialDateHelpers.GetLastDayOfMonth(DateTime));
+            return new SocialDateTime(SocialUtils.Time.GetLastDayOfMonth(DateTime));
         }
 
         /// <summary>
@@ -766,7 +766,7 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the first day of the week.</returns>
         public SocialDateTime GetFirstDayOfWeek() {
-            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfWeek(DateTime));
+            return new SocialDateTime(SocialUtils.Time.GetFirstDayOfWeek(DateTime));
         }
 
         /// <summary>
@@ -775,7 +775,7 @@ namespace Skybrud.Social.Time {
         /// <param name="startOfWeek">The first day of the week (eg. <code>Monday</code> or <code>Sunday</code>).</param>
         /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the first day of the week.</returns>
         public SocialDateTime GetFirstDayOfWeek(DayOfWeek startOfWeek) {
-            return new SocialDateTime(SocialDateHelpers.GetFirstDayOfWeek(DateTime, startOfWeek));
+            return new SocialDateTime(SocialUtils.Time.GetFirstDayOfWeek(DateTime, startOfWeek));
         }
 
         /// <summary>
@@ -784,7 +784,7 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the week.</returns>
         public SocialDateTime GetLastDayOfWeek() {
-            return new SocialDateTime(SocialDateHelpers.GetLastDayOfWeek(DateTime));
+            return new SocialDateTime(SocialUtils.Time.GetLastDayOfWeek(DateTime));
         }
 
         /// <summary>
@@ -794,7 +794,7 @@ namespace Skybrud.Social.Time {
         /// <param name="startOfWeek">The first day of the week (eg. <code>Monday</code> or <code>Sunday</code>).</param>
         /// <returns>Returns an instance of <see cref="SocialDateTime"/> representing the last day of the week.</returns>
         public SocialDateTime GetLastDayOfWeek(DateTime date, DayOfWeek startOfWeek) {
-            return new SocialDateTime(SocialDateHelpers.GetLastDayOfWeek(DateTime, startOfWeek));
+            return new SocialDateTime(SocialUtils.Time.GetLastDayOfWeek(DateTime, startOfWeek));
         }
 
         /// <summary>
@@ -802,15 +802,15 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns the English name of the day.</returns>
         public string GetDayName() {
-            return DateTime.ToString("dddd", CultureInfo.InvariantCulture);
+            return SocialUtils.Time.GetDayName(DateTime);
         }
 
         /// <summary>
-        /// Gets the name of the day according to the current culture.
+        /// Gets the name of the day according to <see cref="CultureInfo.CurrentCulture"/>.
         /// </summary>
         /// <returns>Returns the local name of the day.</returns>
         public string GetLocalDayName() {
-            return DateTime.ToString("dddd", CultureInfo.CurrentCulture);
+            return SocialUtils.Time.GetLocalDayName(DateTime);
         }
 
         /// <summary>
@@ -819,7 +819,7 @@ namespace Skybrud.Social.Time {
         /// <param name="culture">The culture to be used.</param>
         /// <returns>Returns the local name of the day.</returns>
         public string GetLocalDayName(CultureInfo culture) {
-            return DateTime.ToString("dddd", culture);
+            return SocialUtils.Time.GetLocalDayName(DateTime, culture);
         }
 
         /// <summary>
@@ -827,16 +827,16 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <returns>Returns the English name of the month.</returns>
         public string GetMonthName() {
-            return DateTime.ToString("MMMM", CultureInfo.InvariantCulture);
+            return SocialUtils.Time.GetMonthName(DateTime);
         }
 
         /// <summary>
-        /// Gets the name of the month according to the current culture.
+        /// Gets the name of the month according to <see cref="CultureInfo.CurrentCulture"/>.
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>Returns the local name of the month.</returns>
         public string GetLocalMonthName(DateTime date) {
-            return date.ToString("MMMM", CultureInfo.CurrentCulture);
+            return SocialUtils.Time.GetLocalMonthName(DateTime);
         }
 
         /// <summary>
@@ -845,7 +845,7 @@ namespace Skybrud.Social.Time {
         /// <param name="culture">The culture to be used.</param>
         /// <returns>Returns the local name of the month.</returns>
         public string GetLocalMonthName(CultureInfo culture) {
-            return DateTime.ToString("MMMM", culture);
+            return SocialUtils.Time.GetLocalMonthName(DateTime, culture);
         }
 
         #endregion
@@ -867,7 +867,7 @@ namespace Skybrud.Social.Time {
         /// <param name="timestamp">The UNIX timestamp specified in seconds.</param>
         /// <returns>An instance of <see cref="SocialDateTime"/>.</returns>
         public static SocialDateTime FromUnixTimestamp(long timestamp) {
-            return new SocialDateTime(SocialUtils.GetDateTimeFromUnixTime(timestamp));
+            return new SocialDateTime(SocialUtils.Time.GetDateTimeFromUnixTime(timestamp));
         }
 
         #endregion
