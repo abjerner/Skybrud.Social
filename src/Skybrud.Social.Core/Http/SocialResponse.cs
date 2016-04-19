@@ -75,7 +75,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
         protected static JObject ParseJsonObject(string json) {
-            return SocialUtils.ParseJsonObject(json);
+            return SocialUtils.Json.ParseJsonObject(json);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
-            return SocialUtils.ParseJsonObject(json, func);
+            return SocialUtils.Json.ParseJsonObject(json, func);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
         protected static JArray ParseJsonArray(string json) {
-            return SocialUtils.ParseJsonArray(json);
+            return SocialUtils.Json.ParseJsonArray(json);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
-            return SocialUtils.ParseJsonArray(json, func);
+            return SocialUtils.Json.ParseJsonArray(json, func);
         }
 
         #endregion
