@@ -797,6 +797,57 @@ namespace Skybrud.Social.Time {
             return new SocialDateTime(SocialDateHelpers.GetLastDayOfWeek(DateTime, startOfWeek));
         }
 
+        /// <summary>
+        /// Gets the English name of the day.
+        /// </summary>
+        /// <returns>Returns the English name of the day.</returns>
+        public string GetDayName() {
+            return DateTime.ToString("dddd", CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Gets the name of the day according to the current culture.
+        /// </summary>
+        /// <returns>Returns the local name of the day.</returns>
+        public string GetLocalDayName() {
+            return DateTime.ToString("dddd", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Gets the name of the day according to <code>culture</code>.
+        /// </summary>
+        /// <param name="culture">The culture to be used.</param>
+        /// <returns>Returns the local name of the day.</returns>
+        public string GetLocalDayName(CultureInfo culture) {
+            return DateTime.ToString("dddd", culture);
+        }
+
+        /// <summary>
+        /// Gets the English name of the month.
+        /// </summary>
+        /// <returns>Returns the English name of the month.</returns>
+        public string GetMonthName() {
+            return DateTime.ToString("MMMM", CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Gets the name of the month according to the current culture.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>Returns the local name of the month.</returns>
+        public string GetLocalMonthName(DateTime date) {
+            return date.ToString("MMMM", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// Gets the name of the month according to <code>culture</code>.
+        /// </summary>
+        /// <param name="culture">The culture to be used.</param>
+        /// <returns>Returns the local name of the month.</returns>
+        public string GetLocalMonthName(CultureInfo culture) {
+            return DateTime.ToString("MMMM", culture);
+        }
+
         #endregion
 
         #region Static methods

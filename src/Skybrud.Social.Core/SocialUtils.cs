@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,7 +17,7 @@ namespace Skybrud.Social {
     /// <summary>
     /// Static class with various utility methods used throughout Skybrud.Social.
     /// </summary>
-    public static class SocialUtils {
+    public static partial class SocialUtils {
 
         #region Version
 
@@ -157,61 +155,7 @@ namespace Skybrud.Social {
         #endregion
 
         #region Other
-
-        /// <summary>
-        /// Converts a camel cased reprenstation of an enum to a lower case string where words are separated with underscore.
-        /// </summary>
-        /// <param name="e">The enum to be converted.</param>
-        /// <returns>Returns the converted string.</returns>
-        public static string CamelCaseToUnderscore(Enum e) {
-            return CamelCaseToUnderscore(e.ToString());
-        }
-
-        /// <summary>
-        /// Converts a camel cased string to a lower case string where words are separated with underscore.
-        /// </summary>
-        /// <param name="str">The camel cased string to be converted.</param>
-        /// <returns>Returns the converted string.</returns>
-        public static string CamelCaseToUnderscore(string str) {
-            return Regex.Replace(str, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
-        }
-
-        /// <summary>
-        /// Converts a string separated by underscoes to a upper camel cased string.
-        /// </summary>
-        /// <param name="str">The camel cased string to be converted.</param>
-        /// <returns>Returns the converted string.</returns>
-        public static string UnderscoreToCamelCase(string str) {
-            if (String.IsNullOrWhiteSpace(str)) return str;
-            List<string> temp = new List<string>();
-            foreach (string piece in str.Split(new [] {'_'}, StringSplitOptions.RemoveEmptyEntries)) {
-                if (piece.Length == 1) {
-                    temp.Add(piece.ToUpper());
-                } else if (piece.Length > 1) {
-                    temp.Add(piece.Substring(0, 1).ToUpper() + piece.Substring(1));
-                }
-            }
-            return String.Join("", temp);
-        }
-
-        /// <summary>
-        /// Encodes a URL string.
-        /// </summary>
-        /// <param name="str">The string to be encoded.</param>
-        /// <returns>Returns the encoded string.</returns>
-        public static string UrlEncode(string str) {
-            return HttpUtility.UrlEncode(str);
-        }
-
-        /// <summary>
-        /// Decodes a URL string.
-        /// </summary>
-        /// <param name="str">The string to be decoded.</param>
-        /// <returns>Returns the decoded string.</returns>
-        public static string UrlDecode(string str) {
-            return HttpUtility.UrlDecode(str);
-        }
-
+        
         /// <summary>
         /// Parses a query string into an instance of <see cref="NameValueCollection"/> using <see cref="Encoding.UTF8"/> encoding.
         /// </summary>
@@ -227,7 +171,7 @@ namespace Skybrud.Social {
         /// <param name="collection">The collection to convert.</param>
         /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
         public static string NameValueCollectionToQueryString(NameValueCollection collection) {
-            return String.Join("&", Array.ConvertAll(collection.AllKeys, key => UrlEncode(key) + "=" + UrlEncode(collection[key])));
+            return String.Join("&", Array.ConvertAll(collection.AllKeys, key => Strings.UrlEncode(key) + "=" + Strings.UrlEncode(collection[key])));
         }
 
         /// <summary>
@@ -240,7 +184,7 @@ namespace Skybrud.Social {
             return String.Join("&", (
                 from string key in collection.Keys
                 where collection[key] != null || includeIfNull
-                select UrlEncode(key) + "=" + UrlEncode(collection[key])
+                select Strings.UrlEncode(key) + "=" + Strings.UrlEncode(collection[key])
             ));
         }
 

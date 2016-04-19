@@ -108,7 +108,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <returns>Returns the POST data as an URL encoded string.</returns>
         public override string ToString() {
-            return String.Join("&", _data.Select(pair => SocialUtils.UrlEncode(pair.Key) + "=" + SocialUtils.UrlEncode(pair.Value.ToString())));
+            return String.Join("&", _data.Select(pair => SocialUtils.Strings.UrlEncode(pair.Key) + "=" + SocialUtils.Strings.UrlEncode(pair.Value.ToString())));
         }
 
         /// <summary>

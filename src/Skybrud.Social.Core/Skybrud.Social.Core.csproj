@@ -82,7 +82,7 @@
     <Compile Include="Http\SocialHttpResponse.cs" />
     <Compile Include="Http\SocialQueryString.cs" />
     <Compile Include="SocialUtils.cs" />
-    <Compile Include="Strings\SocialStringHelpers.cs" />
+    <Compile Include="SocialUtils.Strings.cs" />
     <Compile Include="Time\SocialDateHelpers.cs" />
     <Compile Include="Time\SocialDateTime.cs" />
     <Compile Include="Time\SocialDateWeek.cs" />
