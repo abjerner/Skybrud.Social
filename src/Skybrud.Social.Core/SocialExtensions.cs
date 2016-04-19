@@ -25,9 +25,9 @@ namespace Skybrud.Social {
         /// <param name="query">The query string.</param>
         public static void AppendQueryString(this UriBuilder builder, NameValueCollection query) {
             if (query == null || query.Count == 0) return;
-            NameValueCollection nvc = SocialUtils.ParseQueryString(builder.Query);
+            NameValueCollection nvc = SocialUtils.Misc.ParseQueryString(builder.Query);
             nvc.Add(query);
-            builder.Query = SocialUtils.NameValueCollectionToQueryString(nvc);
+            builder.Query = SocialUtils.Misc.NameValueCollectionToQueryString(nvc);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Skybrud.Social {
         /// <returns>Returns the builder.</returns>
         public static UriBuilder MergeQueryString(this UriBuilder builder, NameValueCollection query) {
             if (query == null || query.Count == 0) return builder;
-            builder.Query = SocialUtils.NameValueCollectionToQueryString(SocialUtils.ParseQueryString(builder.Query).Set(query));
+            builder.Query = SocialUtils.Misc.NameValueCollectionToQueryString(SocialUtils.Misc.ParseQueryString(builder.Query).Set(query));
             return builder;
         }
         

@@ -63,7 +63,7 @@ namespace Skybrud.Social.OAuth.Objects {
         public static OAuthRequestToken Parse(OAuthClient client, string str) {
 
             // Convert the query string to a NameValueCollection
-            NameValueCollection query = SocialUtils.ParseQueryString(str);
+            NameValueCollection query = SocialUtils.Misc.ParseQueryString(str);
 
             // Initialize a new instance
             return new OAuthRequestToken(client, query);

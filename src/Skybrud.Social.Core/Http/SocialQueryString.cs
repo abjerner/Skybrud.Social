@@ -83,7 +83,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <returns>Returns the query string as an URL encoded string.</returns>
         public override string ToString() {
-            return SocialUtils.NameValueCollectionToQueryString(_nvc);
+            return SocialUtils.Misc.NameValueCollectionToQueryString(_nvc);
         }
         
         /// <summary>

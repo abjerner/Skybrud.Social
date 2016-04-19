@@ -84,6 +84,7 @@
     <Compile Include="SocialUtils.cs" />
     <Compile Include="SocialUtils.Json.cs" />
     <Compile Include="SocialUtils.Locations.cs" />
+    <Compile Include="SocialUtils.Misc.cs" />
     <Compile Include="SocialUtils.Strings.cs" />
     <Compile Include="SocialUtils.Http.cs" />
     <Compile Include="SocialUtils.Version.cs" />

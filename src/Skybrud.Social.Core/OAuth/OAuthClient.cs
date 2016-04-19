@@ -437,7 +437,7 @@ namespace Skybrud.Social.OAuth {
 
             // Add the request body (if a POST request)
             if (method == "POST" && postData.Count > 0) {
-                string dataString = SocialUtils.NameValueCollectionToQueryString(postData);
+                string dataString = SocialUtils.Misc.NameValueCollectionToQueryString(postData);
                 //throw new Exception(dataString);
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = dataString.Length;
