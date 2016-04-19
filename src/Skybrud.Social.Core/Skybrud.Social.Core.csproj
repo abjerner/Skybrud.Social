@@ -82,6 +82,7 @@
     <Compile Include="Http\SocialHttpResponse.cs" />
     <Compile Include="Http\SocialQueryString.cs" />
     <Compile Include="SocialUtils.cs" />
+    <Compile Include="SocialUtils.Locations.cs" />
     <Compile Include="SocialUtils.Strings.cs" />
     <Compile Include="SocialUtils.Http.cs" />
     <Compile Include="SocialUtils.Version.cs" />
