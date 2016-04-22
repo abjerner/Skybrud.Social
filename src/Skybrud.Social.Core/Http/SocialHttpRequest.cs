@@ -63,6 +63,12 @@ namespace Skybrud.Social.Http {
         public string Url { get; set; }
 
         /// <summary>
+        /// Gets or sets the HTTP host of the request. If left blank, the host will be based on <see cref="Url"/>
+        /// instead.
+        /// </summary>
+        public string Host { get; set; }
+
+        /// <summary>
         /// Gets or sets the encoding of the request. Default is UTF-8.
         /// </summary>
         public Encoding Encoding { get; set; }
@@ -151,6 +157,7 @@ namespace Skybrud.Social.Http {
             request.Accept = Accept;
             request.UserAgent = UserAgent;
             request.Timeout = (int) Timeout.TotalMilliseconds;
+            if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
 
             // Add the request body (if a POST request)
             if (Method == SocialHttpMethod.Post) {
