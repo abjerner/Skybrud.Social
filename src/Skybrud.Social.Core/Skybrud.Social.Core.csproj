@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Json\Converters\DateTimeUnixTimeConverter.cs" />
+    <Compile Include="Json\Converters\SocialDateTimeConverter.cs" />
+    <Compile Include="Json\Converters\SocialDateTimeUnixTimeConverter.cs" />
     <Compile Include="Properties\AssemblyInfoVersion.cs" />
     <Compile Include="Exceptions\PropertyNotSetException.cs" />
     <Compile Include="Http\PostData\ISocialDataValue.cs" />

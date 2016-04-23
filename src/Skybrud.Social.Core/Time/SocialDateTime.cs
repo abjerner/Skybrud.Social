@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Newtonsoft.Json;
+using Skybrud.Social.Json.Converters;
 
 namespace Skybrud.Social.Time {
 
@@ -8,6 +10,7 @@ namespace Skybrud.Social.Time {
     /// <summary>
     /// Class wrapping an instance of <see cref="DateTime"/> (as an alternative to using <see cref="Nullable{DateTime}"/>).
     /// </summary>
+    [JsonConverter(typeof(SocialDateTimeConverter))]
     public class SocialDateTime {
 
         #region Properties
@@ -866,7 +869,25 @@ namespace Skybrud.Social.Time {
         /// </summary>
         /// <param name="timestamp">The UNIX timestamp specified in seconds.</param>
         /// <returns>An instance of <see cref="SocialDateTime"/>.</returns>
+        public static SocialDateTime FromUnixTimestamp(int timestamp) {
+            return new SocialDateTime(SocialUtils.Time.GetDateTimeFromUnixTime(timestamp));
+        }
+
+        /// <summary>
+        /// Initialize a new instance from the specified UNIX timestamp.
+        /// </summary>
+        /// <param name="timestamp">The UNIX timestamp specified in seconds.</param>
+        /// <returns>An instance of <see cref="SocialDateTime"/>.</returns>
         public static SocialDateTime FromUnixTimestamp(long timestamp) {
+            return new SocialDateTime(SocialUtils.Time.GetDateTimeFromUnixTime(timestamp));
+        }
+
+        /// <summary>
+        /// Initialize a new instance from the specified UNIX timestamp.
+        /// </summary>
+        /// <param name="timestamp">The UNIX timestamp specified in seconds.</param>
+        /// <returns>An instance of <see cref="SocialDateTime"/>.</returns>
+        public static SocialDateTime FromUnixTimestamp(double timestamp) {
             return new SocialDateTime(SocialUtils.Time.GetDateTimeFromUnixTime(timestamp));
         }
 
