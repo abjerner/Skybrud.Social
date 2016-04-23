@@ -467,12 +467,8 @@ namespace Skybrud.Social.OAuth {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
-
-            // TODO: Should this method have is own implementation instead of calling another DoHttpRequest method?
-
             NameValueCollection query = queryString == null ? null : queryString.NameValueCollection;
             return DoHttpRequest(method, url, query, null);
-
         }
 
         /// <summary>
