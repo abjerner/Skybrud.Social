@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using Newtonsoft.Json;
+using Skybrud.Social;
 using Skybrud.Social.Json.Extensions;
 // ReSharper disable UseObjectOrCollectionInitializer
 using System;
@@ -106,7 +108,7 @@ namespace UnitTestProject1.Json {
 
         [TestMethod]
         public void GetBoolean() {
-            
+
             JObject root = new JObject();
             root.Add("property1", null);
             root.Add("property2", true);
@@ -127,6 +129,29 @@ namespace UnitTestProject1.Json {
             Assert.AreEqual(false, obj.GetBoolean("root.property5"), "Check #6 failed");
             Assert.AreEqual(true, obj.GetBoolean("root.property6"), "Check #7 failed");
             Assert.AreEqual(false, obj.GetBoolean("root.property7"), "Check #8 failed");
+
+        }
+
+        [TestMethod]
+        public void GetEnumValue() {
+
+            JObject root = new JObject();
+            root.Add("property1", "NotFound");
+            root.Add("property2", "notfound");
+            root.Add("property3", "not_found");
+            root.Add("property4", "OK");
+            root.Add("property5", "Ok");
+            root.Add("property6", "ok");
+
+            JObject obj = new JObject();
+            obj.Add("root", root);
+
+            Assert.AreEqual(HttpStatusCode.NotFound, obj.GetEnum<HttpStatusCode>("root.property1"), "Check #1 failed");
+            Assert.AreEqual(HttpStatusCode.NotFound, obj.GetEnum<HttpStatusCode>("root.property2"), "Check #2 failed");
+            Assert.AreEqual(HttpStatusCode.NotFound, obj.GetEnum<HttpStatusCode>("root.property3"), "Check #3 failed");
+            Assert.AreEqual(HttpStatusCode.OK, obj.GetEnum<HttpStatusCode>("root.property4"), "Check #4 failed");
+            Assert.AreEqual(HttpStatusCode.OK, obj.GetEnum<HttpStatusCode>("root.property5"), "Check #5 failed");
+            Assert.AreEqual(HttpStatusCode.OK, obj.GetEnum<HttpStatusCode>("root.property6"), "Check #6 failed");
 
         }
 

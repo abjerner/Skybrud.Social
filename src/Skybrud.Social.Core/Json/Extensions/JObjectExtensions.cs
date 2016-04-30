@@ -237,24 +237,25 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets an enum of type <code>T</code> from the property with the specified <code>propertyName</code>.
+        /// Gets an enum of type <code>T</code> from the token matching the specified <code>path</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName) where T : struct {
-            return SocialUtils.Enums.ParseEnum<T>(GetString(obj, propertyName));
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        public static T GetEnum<T>(this JObject obj, string path) where T : struct {
+            return SocialUtils.Enums.ParseEnum<T>(GetString(obj, path));
         }
 
         /// <summary>
-        /// Gets an enum of type <code>T</code> from the property with the specified <code>propertyName</code>.
+        /// Gets an enum of type <code>T</code> from the token matching the specified <code>path</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
-        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="fallback">The fallback value if the value in the JSON couldn't be parsed.</param>
-        public static T GetEnum<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, T fallback) where T : struct {
-            string value = GetString(obj, propertyName);
+        public static T GetEnum<T>(this JObject obj, string path, T fallback) where T : struct {
+            string value = GetString(obj, path);
             return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.Enums.ParseEnum(value, fallback);
         }
 
