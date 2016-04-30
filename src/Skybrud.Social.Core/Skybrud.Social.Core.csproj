@@ -95,6 +95,7 @@
     <Compile Include="SocialUtils.Time.cs" />
     <Compile Include="Time\SocialDateTime.cs" />
     <Compile Include="Time\SocialDateWeek.cs" />
+    <Compile Include="Time\SocialPartialDate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" />
