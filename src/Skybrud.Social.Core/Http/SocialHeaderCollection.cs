@@ -16,7 +16,41 @@ namespace Skybrud.Social.Http {
         public WebHeaderCollection Headers { get; private set; }
 
         /// <summary>
-        /// Gets or sets the authorization header of the request.
+        /// Gets or sets the character sets that are acceptable - eg. <code>utf8</code>. This property corresponds to
+        /// the <code>Accept-Charset</code> HTTP header.
+        /// </summary>
+        public string AcceptCharset {
+            get { return Headers["Accept-Charset"]; }
+            set { Headers["Accept-Charset"] = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the a list of acceptable encodings - eg. <code>gzip</code> or <code>gzip, deflate</code>. This
+        /// property corresponds to the <code>Accept-Encoding</code> HTTP header.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
+        /// </see>
+        public string AcceptEncoding {
+            get { return Headers["Accept-Encoding"]; }
+            set { Headers["Accept-Encoding"] = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the accept language header of the request - eg. <code>en-US</code>, <code>en</code> or
+        /// <code>da</code>. This property corresponds to the <code>Accept-Language</code> HTTP header.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
+        /// </see>
+        public string AcceptLanguage {
+            get { return Headers["Accept-Language"]; }
+            set { Headers["Accept-Language"] = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the authentication credentials for HTTP authentication. This property corresponds to the
+        /// <code>Authorization</code> HTTP header.
         /// </summary>
         public string Authorization {
             get { return Headers["Authorization"]; }

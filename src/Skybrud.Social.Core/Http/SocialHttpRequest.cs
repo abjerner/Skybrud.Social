@@ -24,33 +24,7 @@ namespace Skybrud.Social.Http {
         /// Gets or sets the HTTP method of the request.
         /// </summary>
         public SocialHttpMethod Method { get; set; }
-
-        /// <summary>
-        /// Gets or sets the accept header of the request.
-        /// </summary>
-        public string Accept { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user agent header of the request.
-        /// </summary>
-        public string UserAgent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the accept language of the request.
-        /// </summary>
-        public string AcceptLanguage {
-            get { return Headers.Headers["Accept-Language"]; }
-            set { Headers.Headers["Accept-Language"] = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the authorization header of the request.
-        /// </summary>
-        public string Authorization {
-            get { return Headers.Authorization; }
-            set { Headers.Authorization = value; }
-        }
-
+        
         /// <summary>
         /// Gets or sets the credentials (username and password) of the request.
         /// </summary>
@@ -110,6 +84,76 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public bool IsMultipart { get; set; }
 
+        #region HTTP Headers
+
+        /// <summary>
+        /// Gets a or sets a list of content types that are acceptable for the response - eg. <code>text/html</code>,
+        /// <code>text/html,application/xhtml+xml</code> or <code>application/json</code>. This property corresponds to
+        /// the <code>Accept</code> HTTP header.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
+        /// </see>
+        public string Accept { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the character sets that are acceptable - eg. <code>utf8</code>. This property corresponds to
+        /// the <code>Accept-Charset</code> HTTP header.
+        /// </summary>
+        public string AcceptCharset {
+            get { return Headers.AcceptCharset; }
+            set { Headers.AcceptCharset = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the a list of acceptable encodings - eg. <code>gzip</code> or <code>gzip, deflate</code>. This
+        /// property corresponds to the <code>Accept-Encoding</code> HTTP header.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
+        /// </see>
+        public string AcceptEncoding {
+            get { return Headers.AcceptEncoding; }
+            set { Headers.AcceptEncoding = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the accept language header of the request - eg. <code>en-US</code>, <code>en</code> or
+        /// <code>da</code>. This property corresponds to the <code>Accept-Language</code> HTTP header.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
+        /// </see>
+        public string AcceptLanguage {
+            get { return Headers.AcceptLanguage; }
+            set { Headers.AcceptLanguage = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the authentication credentials for HTTP authentication. This property corresponds to the
+        /// <code>Authorization</code> HTTP header.
+        /// </summary>
+        public string Authorization {
+            get { return Headers.Authorization; }
+            set { Headers.Authorization = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the address of the previous web page from which a link to the currently requested page was
+        /// followed. (The word "referrer" has been misspelled in the RFC as well as in most implementations to the
+        /// point that it has become standard usage and is considered correct terminology).  This property corresponds
+        /// to the <code>Referer</code> HTTP header.
+        /// </summary>
+        public string Referer { get; set; }
+
+        /// <summary>
+        /// Gets or sets a string representing the user agent. This property corresponds to the <code>User-Agent</code>
+        /// HTTP header.
+        /// </summary>
+        public string UserAgent { get; set; }
+
+        #endregion
+
         #endregion
 
         #region Constructor
@@ -155,6 +199,7 @@ namespace Skybrud.Social.Http {
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
             request.Accept = Accept;
+            request.Referer = Referer;
             request.UserAgent = UserAgent;
             request.Timeout = (int) Timeout.TotalMilliseconds;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
