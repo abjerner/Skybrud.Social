@@ -52,6 +52,51 @@ namespace UnitTestProject1.Json {
         }
 
         [TestMethod]
+        public void GetInt32() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\",\"nothing\":\"0\",\"number\":1234}}}");
+
+            Assert.AreEqual(0, obj.GetInt32("root.nothing"), "Check #1 failed");
+            Assert.AreEqual(1234, obj.GetInt32("root.obj.value"), "Check #2 failed");
+            Assert.AreEqual(0, obj.GetInt32("root.obj.nothing"), "Check #3 failed");
+            Assert.AreEqual(1234, obj.GetInt32("root.obj.number"), "Check #4 failed");
+            Assert.AreEqual(1234, obj.GetInt32("root.obj.number", x => (int) TimeSpan.FromSeconds(x).TotalSeconds), "Check #5 failed");
+
+        }
+
+        [TestMethod]
+        public void GetInt64() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\",\"nothing\":\"0\",\"number\":2147483648}}}");
+
+            Assert.AreEqual(0, obj.GetInt64("root.nothing"), "Check #1 failed");
+            Assert.AreEqual(1234, obj.GetInt64("root.obj.value"), "Check #2 failed");
+            Assert.AreEqual(0, obj.GetInt64("root.obj.nothing"), "Check #3 failed");
+            Assert.AreEqual(2147483648, obj.GetInt64("root.obj.number"), "Check #4 failed");
+            Assert.AreEqual(2147483648, obj.GetInt64("root.obj.number", x => (long) TimeSpan.FromSeconds(x).TotalSeconds), "Check #5 failed");
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
         public void GetStringArray() {
 
             JObject obj = new JObject();
@@ -88,42 +133,6 @@ namespace UnitTestProject1.Json {
             Assert.AreEqual(null, obj.GetInt32Array("property1"));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property2")));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property3")));
-
-        }
-
-        [TestMethod]
-        public void GetInt32() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", 0);
-            obj.Add("property3", "0");
-            obj.Add("property4", 12345);
-            obj.Add("property5", "12345");
-
-            Assert.AreEqual(0, obj.GetInt32("property1"));
-            Assert.AreEqual(0, obj.GetInt32("property2"));
-            Assert.AreEqual(0, obj.GetInt32("property3"));
-            Assert.AreEqual(12345, obj.GetInt32("property4"));
-            Assert.AreEqual(12345, obj.GetInt32("property5"));
-
-        }
-
-        [TestMethod]
-        public void GetInt64() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", 0);
-            obj.Add("property3", "0");
-            obj.Add("property4", 12345);
-            obj.Add("property5", "12345");
-
-            Assert.AreEqual(0, obj.GetInt64("property1"));
-            Assert.AreEqual(0, obj.GetInt64("property2"));
-            Assert.AreEqual(0, obj.GetInt64("property3"));
-            Assert.AreEqual(12345, obj.GetInt64("property4"));
-            Assert.AreEqual(12345, obj.GetInt64("property5"));
 
         }
 

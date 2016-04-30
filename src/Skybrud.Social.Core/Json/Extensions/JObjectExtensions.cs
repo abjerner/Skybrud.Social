@@ -91,51 +91,62 @@ namespace Skybrud.Social.Json.Extensions {
         }
         
         /// <summary>
-        /// Gets a 32-bit integer (int) from a property with the specified <code>propertyName</code>.
+        /// Gets the <see cref="System.Int32"/> value of the token matching the specified <code>path</code>, or
+        /// <code>0</code> if <code>path</code> doesn't match a token.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static int GetInt32(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null || !obj.HasValue(propertyName)) return default(int);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(int) : property.Value<int>();
-        }
-        
-        /// <summary>
-        /// Gets the integer value from the property with the specified <code>propertyName</code> and parses it into an instance of
-        /// <code>T</code> using the specified <code>callback</code>.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="obj">The parent object.</param>
-        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="System.Int32"/>.</returns>
+        public static int GetInt32(this JObject obj, string path) {
+            if (obj == null) return default(int);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(int) : token.Value<int>();
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Int32"/> value of the token matching the specified <code>path</code> and parses
+        /// it into an instance of <code>T</code>, or the default value of <code>T</code> if <code>path</code> doesn't
+        /// match a token.
+        /// </summary>
+        /// <typeparam name="T">The type of the parsed type.</typeparam>
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="callback">The callback used for converting the integer value.</param>
-        public static T GetInt32<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<int, T> callback) {
-            if (obj == null || !obj.HasValue(propertyName)) return default(T);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(T) : callback(property.Value<int>());
+        /// <returns>Returns an instance of <see cref="System.Int32"/>, or <code>0</code> if <code>path</code> doesn't
+        /// match a token.</returns>
+        public static T GetInt32<T>(this JObject obj, string path, Func<int, T> callback) {
+            if (obj == null) return default(T);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(T) : callback(token.Value<int>());
         }
 
         /// <summary>
-        /// Gets 64-bit integer (long) from a property with the specified <code>propertyName</code>.
+        /// Gets the <see cref="System.Int64"/> value of the token matching the specified <code>path</code>, or
+        /// <code>0</code> if <code>path</code> doesn't match a token.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static long GetInt64(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null || !obj.HasValue(propertyName)) return default(long);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(long) : property.Value<long>();
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="System.Int64"/>.</returns>
+        public static long GetInt64(this JObject obj, string path) {
+            if (obj == null) return default(long);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(long) : token.Value<long>();
         }
 
         /// <summary>
-        /// Gets 64-bit integer (long) from a property with the specified <code>propertyName</code>.
+        /// Gets the <see cref="System.Int64"/> value of the token matching the specified <code>path</code> and parses
+        /// it into an instance of <code>T</code>, or the default value of <code>T</code> if <code>path</code> doesn't
+        /// match a token.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <param name="func">A callback function used for parsing or converting the property value.</param>
-        public static T GetInt64<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<long, T> func) {
-            if (obj == null || !obj.HasValue(propertyName)) return default(T);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(T) : func(property.Value<long>());
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">The callback used for converting the token value.</param>
+        /// <returns>Returns an instance of <see cref="System.Int64"/>, or <code>0</code> if <code>path</code> doesn't
+        /// match a token.</returns>
+        public static T GetInt64<T>(this JObject obj, string path, Func<long, T> callback) {
+            if (obj == null) return default(T);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(T) : callback(token.Value<long>());
         }
 
         /// <summary>
