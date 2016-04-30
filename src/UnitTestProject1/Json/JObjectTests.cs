@@ -29,11 +29,25 @@ namespace UnitTestProject1.Json {
 
             JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\"}}}");
 
-            Assert.AreEqual(null, obj.GetObject("nope"), "#1");
-            Assert.AreEqual(null, obj.GetObject("root.nothing"), "#2");
-            Assert.IsNotNull(obj.GetObject("root.obj"), "#3");
-            Assert.AreEqual("1234", obj.GetObject<TestObject>("root.obj").Value, "#4");
-            Assert.AreEqual("1234", obj.GetObject("root.obj", TestObject.Parse).Value, "#5");
+            Assert.AreEqual(null, obj.GetObject("nope"), "Check #1 failed");
+            Assert.AreEqual(null, obj.GetObject("root.nothing"), "Check #2 failed");
+            Assert.IsNotNull(obj.GetObject("root.obj"), "Check #3 failed");
+            Assert.AreEqual("1234", obj.GetObject<TestObject>("root.obj").Value, "Check #4 failed");
+            Assert.AreEqual("1234", obj.GetObject("root.obj", TestObject.Parse).Value, "Check #5 failed");
+
+        }
+
+        [TestMethod]
+        public void GetString() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\",\"nothing\":null,\"empty\":\"\",\"whitespace\":\"    \"}}}");
+
+            Assert.AreEqual(null, obj.GetString("root.nope"), "Check #1 failed");
+            Assert.AreEqual(null, obj.GetString("root.nothing"), "Check #2 failed");
+            Assert.AreEqual("1234", obj.GetString("root.obj.value"), "Check #3 failed");
+            Assert.AreEqual(null, obj.GetString("root.obj.nothing"), "Check #4 failed");
+            Assert.AreEqual("", obj.GetString("root.obj.empty"), "Check #5 failed");
+            Assert.AreEqual("    ", obj.GetString("root.obj.whitespace"), "Check #6 failed");
 
         }
 

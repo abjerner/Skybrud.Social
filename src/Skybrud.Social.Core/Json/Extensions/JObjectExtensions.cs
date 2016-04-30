@@ -64,32 +64,32 @@ namespace Skybrud.Social.Json.Extensions {
         public static T GetObject<T>(this JObject obj, string path, Func<JObject, T> func) {
             return obj == null ? default(T) : func(obj.SelectToken(path) as JObject);
         }
-        
-        /// <summary>
-        /// Gets a string from a property with the specified <code>propertyName</code>.
-        /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static string GetString(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null) return null;
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? null : property.Value<string>();
-        }
 
         /// <summary>
-        /// Gets the string value from the property with the specified <code>propertyName</code> and parses it into an
-        /// instance of <code>T</code> using the specified <code>callback</code>.
+        /// Gets the string value of the token matching the specified <code>path</code>, or <code>null</code> if <code>path</code> doesn't match a token.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="obj">The parent object.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <param name="callback">The callback used for converting the string value.</param>
-        public static T GetString<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<string, T> callback) {
-            if (obj == null) return default(T);
-            JToken property = obj.GetValue(propertyName);
-            return property == null ? default(T) : callback(property.Value<string>());
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="String"/>, or <code>null</code>.</returns>
+        public static string GetString(this JObject obj, string path) {
+            if (obj == null) return null;
+            JToken token = obj.SelectToken(path);
+            return token == null ? null : token.Value<string>();
         }
 
+        /// <summary>
+        /// Gets the value of the token matching the specified <code>path</code>, or <code>null</code> if <code>path</code> doesn't match a token.
+        /// </summary>
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">The callback used for converting the string value.</param>
+        /// <returns>Returns an instance of <see cref="T"/>, or <code>null</code>.</returns>
+        public static T GetString<T>(this JObject obj, string path, Func<string, T> callback) {
+            if (obj == null) return default(T);
+            JToken token = obj.SelectToken(path);
+            return token == null ? default(T) : callback(token.Value<string>());
+        }
+        
         /// <summary>
         /// Gets a 32-bit integer (int) from a property with the specified <code>propertyName</code>.
         /// </summary>
