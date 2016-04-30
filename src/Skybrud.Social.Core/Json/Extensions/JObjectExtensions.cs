@@ -11,6 +11,27 @@ namespace Skybrud.Social.Json.Extensions {
     public static class JObjectExtension {
 
         /// <summary>
+        /// Gets whether a token matching the specified <code>path</code> exists and isn't <code>null</code> (or an empty string).
+        /// </summary>
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns <code>true</code> if the property exists and the value isn't <code>null</code>, otherwise <code>false</code>.</returns>
+        public static bool HasValue(this JObject obj, string path) {
+            JToken token = obj == null ? null : obj.SelectToken(path);
+            return !(
+                token == null
+                ||
+                (token.Type == JTokenType.Array && !token.HasValues)
+                ||
+                (token.Type == JTokenType.Object && !token.HasValues)
+                ||
+                (token.Type == JTokenType.String && token.ToString() == String.Empty)
+                ||
+                token.Type == JTokenType.Null
+            );
+        }
+
+        /// <summary>
         /// Gets an object from a property with the specified <code>path</code>.
         /// </summary>
         /// <param name="obj">The parent object.</param>
@@ -265,28 +286,6 @@ namespace Skybrud.Social.Json.Extensions {
         /// <returns>Returns an instance of <see cref="DateTime"/> representing the value of the property.</returns>
         public static DateTime GetDateTime(this Newtonsoft.Json.Linq.JObject obj, string propertyName, IFormatProvider provider, DateTimeStyles styles) {
             return obj.GetString(propertyName, x => DateTime.Parse(x, provider, styles));
-        }
-
-        /// <summary>
-        /// Gets whether a property with the specified whether a property with the specified <code>propertyName</code>
-        /// exists and isn't <code>null</code> (or an empty string).
-        /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>Returns <code>true</code> if the property exists and the value isn't <code>null</code>, otherwise <code>false</code>.</returns>
-        public static bool HasValue(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            JToken token = obj == null ? null : obj.GetValue(propertyName);
-            return !(
-                token == null
-                ||
-                (token.Type == JTokenType.Array && !token.HasValues)
-                ||
-                (token.Type == JTokenType.Object && !token.HasValues)
-                ||
-                (token.Type == JTokenType.String && token.ToString() == String.Empty)
-                ||
-                token.Type == JTokenType.Null
-            );
         }
 
         /// <summary>

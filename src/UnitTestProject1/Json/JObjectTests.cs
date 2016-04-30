@@ -11,6 +11,20 @@ namespace UnitTestProject1.Json {
     public class JObjectTests {
 
         [TestMethod]
+        public void HasValue() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\",\"nothing\":null,\"empty\":\"\",\"whitespace\":\"    \"}}}");
+
+            Assert.AreEqual(false, obj.HasValue("root.nothing"), "Check #1 failed");
+            Assert.AreEqual(false, obj.HasValue("root.obj.nothing"), "Check #2 failed");
+            Assert.AreEqual(true, obj.HasValue("root.obj"), "Check #3 failed");
+            Assert.AreEqual(true, obj.HasValue("root.obj.value"), "Check #4 failed");
+            Assert.AreEqual(false, obj.HasValue("root.obj.empty"), "Check #5 failed");
+            Assert.AreEqual(true, obj.HasValue("root.obj.whitespace"), "Check #6 failed");
+
+        }
+
+        [TestMethod]
         public void GetObject() {
 
             JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\"}}}");
@@ -20,25 +34,6 @@ namespace UnitTestProject1.Json {
             Assert.IsNotNull(obj.GetObject("root.obj"), "#3");
             Assert.AreEqual("1234", obj.GetObject<TestObject>("root.obj").Value, "#4");
             Assert.AreEqual("1234", obj.GetObject("root.obj", TestObject.Parse).Value, "#5");
-
-        }
-        
-        [TestMethod]
-        public void HasValue() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", "");
-            obj.Add("property3", " ");
-
-            Assert.AreEqual(false, obj.HasValue("property0"), "0");
-            Assert.AreEqual(false, obj.HasValue("property1"), "1");
-            Assert.AreEqual(false, obj.HasValue("property2"), "2");
-            Assert.AreEqual(true, obj.HasValue("property3"), "3");
-            
-            //Assert.IsFalse(obj.HasValue("property1"), "Check for property 1 failed");
-            //Assert.IsFalse(obj.HasValue("property2"), "Check for property 2 failed");
-            //Assert.IsTrue(obj.HasValue("property3"), "Check for property 3 failed");
 
         }
 
