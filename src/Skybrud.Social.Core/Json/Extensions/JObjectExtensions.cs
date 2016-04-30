@@ -157,7 +157,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <returns>Returns an instance of <see cref="System.Int64"/>.</returns>
         public static float GetFloat(this JObject obj, string path) {
-            if (obj == null) return default(long);
+            if (obj == null) return default(float);
             JToken token = obj.SelectToken(path);
             return token == null || token.Type == JTokenType.Null ? default(float) : token.Value<float>();
         }
@@ -169,7 +169,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <param name="callback">A callback function used for parsing or converting the property value.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
         /// <returns>Returns an instance of <see cref="System.Single"/>, or <code>0</code> if <code>path</code> doesn't
         /// match a token.</returns>
         public static T GetFloat<T>(this JObject obj, string path, Func<long, T> callback) {
@@ -186,7 +186,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <returns>Returns an instance of <see cref="System.Double"/>.</returns>
         public static double GetDouble(this JObject obj, string path) {
-            if (obj == null) return default(long);
+            if (obj == null) return default(double);
             JToken token = obj.SelectToken(path);
             return token == null || token.Type == JTokenType.Null ? default(double) : token.Value<double>();
         }
@@ -198,7 +198,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <param name="callback">A callback function used for parsing or converting the property value.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
         /// <returns>Returns an instance of <see cref="System.Double"/>, or <code>0</code> if <code>path</code> doesn't
         /// match a token.</returns>
         public static T GetDouble<T>(this JObject obj, string path, Func<double, T> callback) {
@@ -260,35 +260,137 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="JArray"/> from a property with the specified <code>propertyName</code>.
+        /// Gets an instance of <see cref="JArray"/> from the token matching the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static JArray GetArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            return obj == null ? null : obj.GetValue(propertyName) as JArray;
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="JArray"/>, or <code>null</code> if not found.</returns>
+        public static JArray GetArray(this JObject obj, string path) {
+            if (obj == null) return null;
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? null : token as JArray;
         }
 
         /// <summary>
         /// Gets an array of <code>T</code> from a property with the specified <code>propertyName</code> using the
         /// specified delegate <code>func</code> for parsing each item in the array.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <param name="func">The delegate (callback method) used for parsing each item in the array.</param>
-        public static T[] GetArray<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<Newtonsoft.Json.Linq.JObject, T> func) {
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
+        public static T[] GetArray<T>(this JObject obj, string path, Func<JObject, T> callback) {
 
             if (obj == null) return null;
 
-            JArray property = obj.GetValue(propertyName) as JArray;
-            if (property == null) return null;
+            JArray token = obj.SelectToken(path) as JArray;
+            if (token == null) return null;
 
             return (
-                from Newtonsoft.Json.Linq.JObject child in property
-                select func(child)
+                from JObject child in token
+                select callback(child)
             ).ToArray();
 
         }
+
+        /// <summary>
+        /// Gets the items of the <see cref="JArray"/> from the token matching the specfied <code>path</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an array of <see cref="JToken"/>. If the a matching token isn't found, an empty array will
+        /// still be returned.</returns>
+        public static JToken[] GetArrayItems(this JObject obj, string path) {
+            JArray array = GetArray(obj, path);
+            return array == null ? new JToken[0] : array.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the items of the <see cref="JArray"/> from the token matching the specfied <code>path</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// still be returned.</returns>
+        public static T[] GetArrayItems<T>(this JObject obj, string path) {
+
+            if (obj == null) return new T[0];
+
+            JArray token = obj.SelectToken(path) as JArray;
+            if (token == null) return new T[0];
+
+            return (
+                from JToken child in token
+                select child.Value<T>()
+            ).ToArray();
+
+        }
+
+        /// <summary>
+        /// Gets the items of the <see cref="JArray"/> from the token matching the specfied <code>path</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
+        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// still be returned.</returns>
+        public static T[] GetArrayItems<T>(this JObject obj, string path, Func<JToken, T> callback) {
+
+            if (obj == null) return new T[0];
+
+            JArray token = obj.SelectToken(path) as JArray;
+            if (token == null) return new T[0];
+
+            return (
+                from JObject child in token
+                select callback(child)
+            ).ToArray();
+
+        }
+
+        /// <summary>
+        /// Gets the items of the <see cref="JArray"/> from the token matching the specfied <code>path</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
+        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// still be returned.</returns>
+        public static T[] GetArrayItems<T>(this JObject obj, string path, Func<JObject, T> callback) {
+
+            if (obj == null) return new T[0];
+
+            JArray token = obj.SelectToken(path) as JArray;
+            if (token == null) return new T[0];
+
+            return (
+                from JObject child in token
+                select callback(child)
+            ).ToArray();
+
+        }
+
+        /// <summary>
+        /// Gets the items of the <see cref="JArray"/> from the token matching the specfied <code>path</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
+        /// <returns>Returns an array of <see cref="TValue"/>. If the a matching token isn't found, an empty array will
+        /// still be returned.</returns>
+        public static TValue[] GetArrayItems<TKey, TValue>(this JObject obj, string path, Func<TKey, TValue> callback) where TKey : JToken {
+
+            if (obj == null) return new TValue[0];
+
+            JArray token = obj.SelectToken(path) as JArray;
+            if (token == null) return new TValue[0];
+
+            return (
+                from TKey child in token
+                select callback(child)
+            ).ToArray();
         
+        }
+
         /// <summary>
         /// Gets an instance of <see cref="DateTime"/> from the property with the specified <code>propertyName</code>.
         /// </summary>
@@ -331,36 +433,33 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets a string array from the property with the specified <code>propertyName</code>.
+        /// Gets an array of <see cref="System.String"/> from the token matching the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>Returns the property value as a string array.</returns>
-        public static string[] GetStringArray(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => token.Value<string>()).ToArray();
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns the token value as an array of <see cref="System.String"/>.</returns>
+        public static string[] GetStringArray(this JObject obj, string path) {
+            return GetArrayItems<string>(obj, path);
         }
 
         /// <summary>
-        /// Gets an array of <code>int</code> from the property with the specified <code>propertyName</code>.
+        /// Gets an array of <see cref="System.Int32"/> from the token matching the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>Returns the property value as an array of <code>int</code>.</returns>
-        public static int[] GetInt32Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => token.Value<int>()).ToArray();
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns the token value as an array of <see cref="System.Int32"/>.</returns>
+        public static int[] GetInt32Array(this JObject obj, string path) {
+            return GetArrayItems<int>(obj, path);
         }
 
         /// <summary>
-        /// Gets an array of <code>long</code> from the property with the specified <code>propertyName</code>.
+        /// Gets an array of <see cref="System.Int64"/> from the token matching the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>Returns the property value as an array of <code>long</code>.</returns>
-        public static long[] GetInt64Array(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            JArray array = obj.GetArray(propertyName);
-            return array == null ? null : array.Select(token => token.Value<long>()).ToArray();
+        /// <param name="obj">The instance of <see cref="JObject"/>.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns the token value as an array of <see cref="System.Int64"/>.</returns>
+        public static long[] GetInt64Array(this JObject obj, string path) {
+            return GetArrayItems<long>(obj, path);
         }
 
     }

@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
-using Skybrud.Social;
 using Skybrud.Social.Json.Extensions;
 // ReSharper disable UseObjectOrCollectionInitializer
 using System;
@@ -155,76 +154,104 @@ namespace UnitTestProject1.Json {
 
         }
 
+        [TestMethod]
+        public void GetArray() {
 
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[123,456,789]}}");
 
+            Assert.AreEqual(null, obj.GetArray("null"), "Check #1 failed");
+            Assert.AreEqual(null, obj.GetArray("nothing"), "Check #2 failed");
+            Assert.AreEqual(3, obj.GetArray("root.array").Count, "Check #3 failed");
 
+        }
 
+        [TestMethod]
+        public void GetArrayItems1() {
 
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[123,456,789]}}");
 
+            JToken[] array1 = obj.GetArrayItems("nope");
+            int[] array2 = obj.GetArrayItems<int>("nope");
 
+            JToken[] array3 = obj.GetArrayItems("null");
+            int[] array4 = obj.GetArrayItems<int>("null");
 
+            JToken[] array5 = obj.GetArrayItems("root.array");
+            int[] array6 = obj.GetArrayItems<int>("root.array");
 
+            Assert.AreEqual(0, array1.Length, "Check #1 failed");
+            Assert.AreEqual(0, array2.Length, "Check #2 failed");
+            Assert.AreEqual(0, array3.Length, "Check #3 failed");
+            Assert.AreEqual(0, array4.Length, "Check #4 failed");
+            Assert.AreEqual(3, array5.Length, "Check #5 failed");
+            Assert.AreEqual(3, array6.Length, "Check #6 failed");
 
+            Assert.AreEqual(123, array5[0], "Check #7 failed");
+            Assert.AreEqual(456, array5[1], "Check #8 failed");
+            Assert.AreEqual(789, array5[2], "Check #9 failed");
 
+        }
 
+        [TestMethod]
+        public void GetArrayItems2() {
 
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[{\"value\":\"Alpha\"},{\"value\":\"Bravo\"},{\"value\":\"Charlie\"}]}}");
 
+            TestObject[] array1 = obj.GetArrayItems<JObject, TestObject>("nope", TestObject.Parse);
+            TestObject[] array2 = obj.GetArrayItems("nope", TestObject.Parse);
 
+            TestObject[] array3 = obj.GetArrayItems<JObject, TestObject>("null", TestObject.Parse);
+            TestObject[] array4 = obj.GetArrayItems("null", TestObject.Parse);
 
+            TestObject[] array5 = obj.GetArrayItems<JObject, TestObject>("root.array", TestObject.Parse);
+            TestObject[] array6 = obj.GetArrayItems("root.array", TestObject.Parse);
 
+            Assert.AreEqual(0, array1.Length, "Check #1 failed");
+            Assert.AreEqual(0, array2.Length, "Check #2 failed");
+            Assert.AreEqual(0, array3.Length, "Check #3 failed");
+            Assert.AreEqual(0, array4.Length, "Check #4 failed");
+            Assert.AreEqual(3, array5.Length, "Check #5 failed");
+            Assert.AreEqual(3, array6.Length, "Check #6 failed");
+
+            Assert.AreEqual("Alpha", array5[0].Value, "Check #7 failed");
+            Assert.AreEqual("Bravo", array5[1].Value, "Check #8 failed");
+            Assert.AreEqual("Charlie", array5[2].Value, "Check #9 failed");
+
+        }
 
         [TestMethod]
         public void GetStringArray() {
+            
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[\"Alpha\",\"Bravo\",\"Charlie\"]}}");
 
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", new JArray("hello", "world"));
-
-            Assert.AreEqual(null, obj.GetStringArray("property1"));
-            Assert.AreEqual("hello,world", String.Join(",", obj.GetStringArray("property2")));
+            Assert.AreEqual(0, obj.GetStringArray("null").Length, "Check #1 failed");
+            Assert.AreEqual(0, obj.GetStringArray("nothing").Length, "Check #2 failed");
+            Assert.AreEqual(3, obj.GetStringArray("root.array").Length, "Check #3 failed");
+            Assert.AreEqual("Alpha,Bravo,Charlie", String.Join(",", obj.GetStringArray("root.array")), "Check #4 failed");
 
         }
 
         [TestMethod]
         public void GetInt32Array() {
 
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", new JArray(123, 456));
-            obj.Add("property3", new JArray("123", "456"));
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[123,456,789]}}");
 
-            Assert.AreEqual(null, obj.GetInt32Array("property1"));
-            Assert.AreEqual("123,456", String.Join(",", obj.GetInt32Array("property2")));
-            Assert.AreEqual("123,456", String.Join(",", obj.GetInt32Array("property3")));
+            Assert.AreEqual(0, obj.GetInt32Array("null").Length, "Check #1 failed");
+            Assert.AreEqual(0, obj.GetInt32Array("nothing").Length, "Check #2 failed");
+            Assert.AreEqual(3, obj.GetInt32Array("root.array").Length, "Check #3 failed");
+            Assert.AreEqual("123,456,789", String.Join(",", obj.GetInt32Array("root.array")), "Check #4 failed");
 
         }
 
         [TestMethod]
         public void GetInt64Array() {
 
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", new JArray(123, 456));
-            obj.Add("property3", new JArray("123", "456"));
+            JObject obj = JObject.Parse("{\"null\":null,\"root\":{\"array\":[123,456,789]}}");
 
-            Assert.AreEqual(null, obj.GetInt32Array("property1"));
-            Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property2")));
-            Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property3")));
-
-        }
-
-        [TestMethod]
-        public void GetArray() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", new JArray());
-            obj.Add("property3", new JArray(1,2,3));
-
-            Assert.AreEqual(null, obj.GetArray("property0"));
-            Assert.AreEqual(null, obj.GetArray("property1"));
-            Assert.AreEqual(0, obj.GetArray("property2").Count);
-            Assert.AreEqual(3, obj.GetArray("property3").Count);
+            Assert.AreEqual(0, obj.GetInt64Array("null").Length, "Check #1 failed");
+            Assert.AreEqual(0, obj.GetInt64Array("nothing").Length, "Check #2 failed");
+            Assert.AreEqual(3, obj.GetInt64Array("root.array").Length, "Check #3 failed");
+            Assert.AreEqual("123,456,789", String.Join(",", obj.GetInt64Array("root.array")), "Check #4 failed");
 
         }
         
