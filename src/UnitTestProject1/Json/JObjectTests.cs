@@ -91,6 +91,19 @@ namespace UnitTestProject1.Json {
 
         }
 
+        [TestMethod]
+        public void GetDouble() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"0.123\",\"nothing\":\"0\",\"number\":1234.567}}}");
+
+            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("nothing")), "Check #1 failed");
+            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("root.nothing")), "Check #2 failed");
+            Assert.AreEqual("0.123", String.Format("{0:0.000}", obj.GetDouble("root.obj.value")), "Check #3 failed");
+            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("root.obj.nothing")), "Check #4 failed");
+            Assert.AreEqual("1234.567", String.Format("{0:0.000}", obj.GetDouble("root.obj.number")), "Check #5 failed");
+
+        }
+
 
 
 
@@ -146,25 +159,6 @@ namespace UnitTestProject1.Json {
             Assert.AreEqual(null, obj.GetInt32Array("property1"));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property2")));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property3")));
-
-        }
-
-        [TestMethod]
-        public void GetDouble() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", 0);
-            obj.Add("property3", "0.12");
-            obj.Add("property4", 0.123);
-            obj.Add("property5", 1234.567);
-
-            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("property0")));
-            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("property1")));
-            Assert.AreEqual("0.000", String.Format("{0:0.000}", obj.GetDouble("property2")));
-            Assert.AreEqual("0.120", String.Format("{0:0.000}", obj.GetDouble("property3")));
-            Assert.AreEqual("0.123", String.Format("{0:0.000}", obj.GetDouble("property4")));
-            Assert.AreEqual("1234.567", String.Format("{0:0.000}", obj.GetDouble("property5")));
 
         }
 
