@@ -208,14 +208,32 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets a boolean from a property with the specified <code>propertyName</code>.
+        /// Gets the <see cref="System.Boolean"/> value of the token matching the specified <code>path</code>, or
+        /// <code>0</code> if <code>path</code> doesn't match a token.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static bool GetBoolean(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
-            if (obj == null || !obj.HasValue(propertyName)) return default(bool);
-            JToken property = obj.GetValue(propertyName);
-            return property != null && property.Value<bool>();
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="System.Boolean"/>.</returns>
+        public static bool GetBoolean(this JObject obj, string path) {
+            if (obj == null) return default(bool);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(bool) : token.Value<bool>();
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Boolean"/> value of the token matching the specified <code>path</code> and
+        /// parses it into an instance of <code>T</code>, or the default value of <code>T</code> if <code>path</code>
+        /// doesn't match a token.
+        /// </summary>
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <param name="callback">A callback function used for parsing or converting the token value.</param>
+        /// <returns>Returns an instance of <see cref="System.Boolean"/>, or <code>false</code> if <code>path</code>
+        /// doesn't match a token.</returns>
+        public static T GetBoolean<T>(this JObject obj, string path, Func<double, T> callback) {
+            if (obj == null) return default(T);
+            JToken token = obj.SelectToken(path);
+            return token == null || token.Type == JTokenType.Null ? default(T) : callback(token.Value<long>());
         }
 
         /// <summary>

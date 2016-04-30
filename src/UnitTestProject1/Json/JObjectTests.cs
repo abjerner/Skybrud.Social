@@ -104,6 +104,32 @@ namespace UnitTestProject1.Json {
 
         }
 
+        [TestMethod]
+        public void GetBoolean() {
+            
+            JObject root = new JObject();
+            root.Add("property1", null);
+            root.Add("property2", true);
+            root.Add("property3", false);
+            root.Add("property4", 1);
+            root.Add("property5", 0);
+            root.Add("property6", "true");
+            root.Add("property7", "false");
+
+            JObject obj = new JObject();
+            obj.Add("root", root);
+
+            Assert.AreEqual(false, obj.GetBoolean("root.property0"), "Check #1 failed");
+            Assert.AreEqual(false, obj.GetBoolean("root.property1"), "Check #2 failed");
+            Assert.AreEqual(true, obj.GetBoolean("root.property2"), "Check #3 failed");
+            Assert.AreEqual(false, obj.GetBoolean("root.property3"), "Check #4 failed");
+            Assert.AreEqual(true, obj.GetBoolean("root.property4"), "Check #5 failed");
+            Assert.AreEqual(false, obj.GetBoolean("root.property5"), "Check #6 failed");
+            Assert.AreEqual(true, obj.GetBoolean("root.property6"), "Check #7 failed");
+            Assert.AreEqual(false, obj.GetBoolean("root.property7"), "Check #8 failed");
+
+        }
+
 
 
 
@@ -159,29 +185,6 @@ namespace UnitTestProject1.Json {
             Assert.AreEqual(null, obj.GetInt32Array("property1"));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property2")));
             Assert.AreEqual("123,456", String.Join(",", obj.GetInt64Array("property3")));
-
-        }
-
-        [TestMethod]
-        public void GetBoolean() {
-
-            JObject obj = new JObject();
-            obj.Add("property1", null);
-            obj.Add("property2", true);
-            obj.Add("property3", false);
-            obj.Add("property4", 1);
-            obj.Add("property5", 0);
-            obj.Add("property6", "true");
-            obj.Add("property7", "false");
-
-            Assert.AreEqual(false, obj.GetBoolean("property0"));
-            Assert.AreEqual(false, obj.GetBoolean("property1"));
-            Assert.AreEqual(true, obj.GetBoolean("property2"));
-            Assert.AreEqual(false, obj.GetBoolean("property3"));
-            Assert.AreEqual(true, obj.GetBoolean("property4"));
-            Assert.AreEqual(false, obj.GetBoolean("property5"));
-            Assert.AreEqual(true, obj.GetBoolean("property6"));
-            Assert.AreEqual(false, obj.GetBoolean("property7"));
 
         }
 
