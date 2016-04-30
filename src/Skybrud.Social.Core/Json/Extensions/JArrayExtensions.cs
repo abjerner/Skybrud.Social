@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.Json.Extensions.JObject {
+namespace Skybrud.Social.Json.Extensions {
 
     /// <summary>
     /// Various extensions methods for <see cref="JArray"/> that makes manual parsing easier.
