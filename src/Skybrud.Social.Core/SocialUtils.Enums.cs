@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Web;
 
 namespace Skybrud.Social {
 
@@ -24,10 +20,13 @@ namespace Skybrud.Social {
                 // Check whether the type of T is an enum
                 if (!typeof(T).IsEnum) throw new ArgumentException("Generic type T must be an enum");
 
+                // Convert "str" to camel case and then lowercase
+                string modified = Strings.ToCamelCase(str + "").ToLowerInvariant();
+                
                 // Parse the enum
                 foreach (string name in Enum.GetNames(typeof(T))) {
-                    if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
-                        return (T)Enum.Parse(typeof(T), str, true);
+                    if (name.ToLowerInvariant() == modified) {
+                        return (T) Enum.Parse(typeof(T), modified, true);
                     }
                 }
 
@@ -47,10 +46,13 @@ namespace Skybrud.Social {
                 // Check whether the type of T is an enum
                 if (!typeof(T).IsEnum) throw new ArgumentException("Generic type T must be an enum");
 
+                // Convert "str" to camel case and then lowercase
+                string modified = Strings.ToCamelCase(str + "").ToLowerInvariant();
+
                 // Parse the enum
                 foreach (string name in Enum.GetNames(typeof(T))) {
-                    if (name.ToLowerInvariant() == str.ToLowerInvariant()) {
-                        return (T)Enum.Parse(typeof(T), str, true);
+                    if (name.ToLowerInvariant() == modified) {
+                        return (T) Enum.Parse(typeof(T), modified, true);
                     }
                 }
 
