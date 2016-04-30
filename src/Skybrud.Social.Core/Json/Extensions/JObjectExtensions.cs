@@ -11,38 +11,39 @@ namespace Skybrud.Social.Json.Extensions {
     public static class JObjectExtension {
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>propertyName</code>.
+        /// Gets an object from a property with the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static Newtonsoft.Json.Linq.JObject GetObject(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="JObject"/>, or <code>null</code> if not found.</returns>
+        public static JObject GetObject(this JObject obj, string path) {
             if (obj == null) return null;
-            return obj.GetValue(propertyName) as Newtonsoft.Json.Linq.JObject;
+            return obj.SelectToken(path) as JObject;
         }
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>propertyName</code>. If an object is found, it is
-        /// parsed to the type of <code>T</code>.
+        /// Gets an object from a property with the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        public static T GetObject<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName) {
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
+        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        public static T GetObject<T>(this JObject obj, string path) {
             if (obj == null) return default(T);
-            Newtonsoft.Json.Linq.JObject child = obj.GetValue(propertyName) as Newtonsoft.Json.Linq.JObject;
+            JObject child = obj.SelectToken(path) as JObject;
             return child == null ? default(T) : child.ToObject<T>();
         }
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>propertyName</code>. If an object is found, the
-        /// object is parsed using the specified delegate <code>func</code>.
+        /// Gets an object from a property with the specified <code>path</code>.
         /// </summary>
-        /// <param name="obj">The parent object of the property.</param>
-        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="obj">The parent object.</param>
+        /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="func">The delegate (callback method) used for parsing the object.</param>
-        public static T GetObject<T>(this Newtonsoft.Json.Linq.JObject obj, string propertyName, Func<Newtonsoft.Json.Linq.JObject, T> func) {
-            return obj == null ? default(T) : func(obj.GetValue(propertyName) as Newtonsoft.Json.Linq.JObject);
+        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        public static T GetObject<T>(this JObject obj, string path, Func<JObject, T> func) {
+            return obj == null ? default(T) : func(obj.SelectToken(path) as JObject);
         }
-
+        
         /// <summary>
         /// Gets a string from a property with the specified <code>propertyName</code>.
         /// </summary>

@@ -1,14 +1,27 @@
-﻿// ReSharper disable UseObjectOrCollectionInitializer
-
+﻿using Newtonsoft.Json;
+using Skybrud.Social.Json.Extensions;
+// ReSharper disable UseObjectOrCollectionInitializer
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using Skybrud.Social.Json.Extensions.JObject;
 
 namespace UnitTestProject1.Json {
 
     [TestClass]
     public class JObjectTests {
+
+        [TestMethod]
+        public void GetObject() {
+
+            JObject obj = JObject.Parse("{\"root\":{\"nothing\":null,\"obj\":{\"value\":\"1234\"}}}");
+
+            Assert.AreEqual(null, obj.GetObject("nope"), "#1");
+            Assert.AreEqual(null, obj.GetObject("root.nothing"), "#2");
+            Assert.IsNotNull(obj.GetObject("root.obj"), "#3");
+            Assert.AreEqual("1234", obj.GetObject<TestObject>("root.obj").Value, "#4");
+            Assert.AreEqual("1234", obj.GetObject("root.obj", TestObject.Parse).Value, "#5");
+
+        }
         
         [TestMethod]
         public void HasValue() {
@@ -179,6 +192,14 @@ namespace UnitTestProject1.Json {
             Assert.AreEqual(0, obj.GetArray("property2").Count);
             Assert.AreEqual(3, obj.GetArray("property3").Count);
 
+        }
+        
+        public class TestObject {
+            [JsonProperty("value")]
+            public string Value { get; set; }
+            public static TestObject Parse(JObject obj) {
+                return obj == null ? null : new TestObject { Value = obj.GetString("value") };
+            }
         }
     
     }
