@@ -3,7 +3,7 @@ Skybrud.Social
 
 Skybrud.Social in general is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.
 
-**Notice** As of `v1.0`, this repository / package will just contain the core functionality, and not the implementation for the individual services. Each supported service will now have it's own repository and package. You can find a list of [supported services](#services) further down this page.
+**Notice** As of `v1.0`, this repository and the corresponding package (`Skybrud.Social.Core`) will just contain the core functionality, and not the implementation for the individual services. Each supported service will now have it's own repository and package. You can find a list of [supported services](#services) further down this page.
 
 
 
@@ -11,14 +11,21 @@ Skybrud.Social in general is a framework in .NET for integration with various so
 
 ### Installation
 
+To install the core library of Skybrud.Social, simply pick one of the three methods below:
+
 1. [**NuGet Package**][NuGetPackage]  
-Install this NuGet package in your Visual Studio project. Makes updating easy.
-
+   Install this NuGet package in your Visual Studio project. Makes updating easy.
 2. [**ZIP file**][GitHubRelease]  
-Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.dll` to the bin directory of your project.
+   Grab a ZIP file of the latest release; unzip and move `Skybrud.Social.Core.dll` to the bin directory of your project.
+3. [**Builds**][DropboxFolder]  
+   I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.Core.dll` to the bin directory of your project.
 
-2. [**Builds**][DropboxFolder]  
-I may occasional upload a build to Dropbox. These are builds in between releases, and are not tested at the same level as releases. As above, move `Skybrud.Social.dll` to the bin directory of your project.
+
+This will just install the core/base functionality. If you're looking for the implementation for a given service - eg. [Facebook][RepoFacebook] or [Twitter][RepoTwitter], you will have to install a package for each service individually. For more information, have a look at the list of [supported services](#services).
+
+**v0.9.x?**  
+For legacy reasons, you can still install the old `Skybrud.Social` NuGet package. As of `v1.0` it's really just a dummy package, but with dependencies for `Skybrud.Social.Core` as well as `Skybrud.Social.Facebook`, `Skybrud.Social.Twitter`, `Skybrud.Social.Instagram`, `Skybrud.Social.Google`, `Skybrud.Social.BitBucket`, `Skybrud.Social.GitHub` and `Skybrud.Social.Vimeo`, which were all supported natively in `v0.9.x`.
+
 
 
 
@@ -34,7 +41,7 @@ I may occasional upload a build to Dropbox. These are builds in between releases
 
 ### Changelog
 
-The [**releases page**](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, and each there will be some information for each release on the most significant changes.
+The [**releases page**](https://github.com/abjerner/Skybrud.Social/releases) lists all releases since v0.1.1, where there will be some information for each release on the most significant changes.
 
 
 
@@ -49,6 +56,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 
 
 ### Services
+
 * [Skybrud.Social.**BitBucket**][RepoBitBucket]
 * [Skybrud.Social.**Facebook**][RepoFacebook]
 * [Skybrud.Social.**GitHub**][RepoGitHub]
