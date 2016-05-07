@@ -14,9 +14,9 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
-        public static Newtonsoft.Json.Linq.JObject GetObject(this JArray array, int index) {
+        public static JObject GetObject(this JArray array, int index) {
             if (array == null) return null;
-            return array[index] as Newtonsoft.Json.Linq.JObject;
+            return array[index] as JObject;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="index">The index of the item.</param>
         public static T GetObject<T>(this JArray array, int index) {
             if (array == null) return default(T);
-            Newtonsoft.Json.Linq.JObject child = array[0] as Newtonsoft.Json.Linq.JObject;
+            JObject child = array[0] as JObject;
             return child == null ? default(T) : child.ToObject<T>();
         }
 
@@ -38,8 +38,8 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
         /// <param name="func">The delegate (callback method) used for parsing the object.</param>
-        public static T GetObject<T>(this JArray array, int index, Func<Newtonsoft.Json.Linq.JObject, T> func) {
-            return array == null ? default(T) : func(array[index] as Newtonsoft.Json.Linq.JObject);
+        public static T GetObject<T>(this JArray array, int index, Func<JObject, T> func) {
+            return array == null ? default(T) : func(array[index] as JObject);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
         /// <param name="func">The delegate (callback method) used for parsing each item in the array.</param>
-        public static T[] GetArray<T>(this JArray array, int index, Func<Newtonsoft.Json.Linq.JObject, T> func) {
+        public static T[] GetArray<T>(this JArray array, int index, Func<JObject, T> func) {
 
             if (array == null) return null;
 
@@ -121,7 +121,7 @@ namespace Skybrud.Social.Json.Extensions {
             if (property == null) return null;
 
             return (
-                from Newtonsoft.Json.Linq.JObject child in property
+                from JObject child in property
                 select func(child)
             ).ToArray();
 
