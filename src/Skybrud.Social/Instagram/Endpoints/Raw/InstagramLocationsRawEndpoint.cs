@@ -34,7 +34,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets information about a location with the specified <code>locationId</code>.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
-        public SocialHttpResponse GetLocation(int locationId) {
+        public SocialHttpResponse GetLocation(long locationId) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId);
         }
 
@@ -61,7 +61,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// Gets a list of recent media from a location with the specified <code>locationId</code>.
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
-        public SocialHttpResponse GetRecentMedia(int locationId) {
+        public SocialHttpResponse GetRecentMedia(long locationId) {
             return GetRecentMedia(locationId, null);
         }
 
@@ -70,7 +70,7 @@ namespace Skybrud.Social.Instagram.Endpoints.Raw {
         /// </summary>
         /// <param name="locationId">The ID of the location.</param>
         /// <param name="options">The options for the search.</param>
-        public SocialHttpResponse GetRecentMedia(int locationId, InstagramLocationRecentMediaOptions options) {
+        public SocialHttpResponse GetRecentMedia(long locationId, InstagramLocationRecentMediaOptions options) {
             return Client.DoAuthenticatedGetRequest("https://api.instagram.com/v1/locations/" + locationId + "/media/recent", options);
         }
 
