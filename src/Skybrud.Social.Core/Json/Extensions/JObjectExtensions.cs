@@ -32,7 +32,7 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>path</code>.
+        /// Gets an object from a token matching the specified <code>path</code>.
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
@@ -43,7 +43,7 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>path</code>.
+        /// Gets an object from a token matching the specified <code>path</code>.
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.Json.Extensions {
         }
 
         /// <summary>
-        /// Gets an object from a property with the specified <code>path</code>.
+        /// Gets an object from a token matching the specified <code>path</code>.
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
