@@ -24,6 +24,13 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
+        /// Gets the current UNIX timestamp (amount of seconds since the start of the Unix Epoch).
+        /// </summary>
+        public static long CurrentUnixTimestamp {
+            get { return SocialUtils.Time.GetUnixTimeFromDateTime(DateTime.Now); }
+        }
+
+        /// <summary>
         /// Gets the current date.
         /// </summary>
         public static SocialDateTime Today {
@@ -142,7 +149,7 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
-        /// Gets the UNIX timestamp for this <see cref="SocialDateTime"/>.
+        /// Gets the UNIX timestamp (amount of seconds since the start of the Unix Epoch) for this <see cref="SocialDateTime"/>.
         /// </summary>
         public long UnixTimestamp {
             get { return SocialUtils.Time.GetUnixTimeFromDateTime(DateTime); }
