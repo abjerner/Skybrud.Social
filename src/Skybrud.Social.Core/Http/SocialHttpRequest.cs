@@ -15,6 +15,7 @@ namespace Skybrud.Social.Http {
         private SocialHeaderCollection _headers = new SocialHeaderCollection();
         private SocialQueryString _queryString = new SocialQueryString();
         private SocialPostData _postData = new SocialPostData();
+        private CookieContainer _cookies = new CookieContainer();
 
         #endregion
 
@@ -83,6 +84,14 @@ namespace Skybrud.Social.Http {
         /// this property will be ignored.
         /// </summary>
         public bool IsMultipart { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="CookieContainer"/> to be used for the request.
+        /// </summary>
+        public CookieContainer Cookies {
+            get { return _cookies; }
+            set { _cookies = value; }
+        }
 
         #region HTTP Headers
 
@@ -202,6 +211,7 @@ namespace Skybrud.Social.Http {
             request.Referer = Referer;
             request.UserAgent = UserAgent;
             request.Timeout = (int) Timeout.TotalMilliseconds;
+            request.CookieContainer = Cookies;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
 
             // Add the request body (if a POST request)
