@@ -43,9 +43,32 @@ namespace Skybrud.Social.Http {
             get { return _data.Values; }
         }
 
+        /// <summary>
+        /// Gets or sets the string value of the item with the specified <code>key</code>code>.
+        /// </summary>
+        /// <param name="key">The key of the item.</param>
+        /// <returns>Returns the <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
+        public string this[string key] {
+            get {
+                ISocialPostValue value;
+                return _data.TryGetValue(key, out value) ? value.ToString() : null;
+            }
+            set { _data[key] = new SocialPostValue(key, value); }
+        }
+
         #endregion
 
         #region Member methods
+
+        /// <summary>
+        /// Returns whether the POST data contains an entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns <code>true</code> if the POST data contains an entry with the specified <code>key</code>,
+        /// otherwise <code>false</code>.</returns>
+        public bool ContainsKey(string key) {
+            return _data.ContainsKey(key);
+        }
 
         /// <summary>
         /// Adds an entry with the specified <code>key</code> and <code>value</code>.
@@ -84,6 +107,35 @@ namespace Skybrud.Social.Http {
         /// <param name="filename">The filename of the file.</param>
         public void AddFile(string key, string path, string contentType, string filename) {
             _data.Add(key, new SocialPostFileValue(key, path, contentType, filename));
+        }
+
+        /// <summary>
+        /// Sets the value of the entry with specified <code>key</code>. If an entry with <code>key</code> already
+        /// exists, it will be overwritten.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="value">The value of the entry.</param>
+        public void Set(string key, string value) {
+            _data[key] = new SocialPostValue(key, value);
+        }
+
+        /// <summary>
+        /// Removes the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        public void Remove(string key) {
+            _data.Remove(key);
+        }
+
+        /// <summary>
+        /// Gets whether the value with the specified key is an instance of <see cref="SocialPostFileValue"/>.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>Returns <code>true</code> if the item with the specified <code>key</code> is an instance of
+        /// <see cref="SocialPostFileValue"/>, otherwise <code>false</code>.</returns>
+        public bool IsFile(string key) {
+            ISocialPostValue value;
+            return _data.TryGetValue(key, out value) && value is SocialPostFileValue;
         }
 
         internal static void Write(Stream stream, string str) {

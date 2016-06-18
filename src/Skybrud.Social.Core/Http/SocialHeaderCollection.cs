@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
+using System.Globalization;
 using System.Net;
 
 namespace Skybrud.Social.Http {
@@ -65,6 +67,13 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
+        /// Gets the collection of header names (keys) in the collection.
+        /// </summary>
+        public NameObjectCollectionBase.KeysCollection Keys {
+            get { return Headers.Keys; }
+        }
+
+        /// <summary>
         /// Gets or set the header with the specified <code>key</code>.
         /// </summary>
         /// <param name="key">The key of the header.</param>
@@ -90,6 +99,19 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public SocialHeaderCollection(WebHeaderCollection headers) {
             Headers = headers ?? new WebHeaderCollection();
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Adds a new header with the specified <code>name</code> and <code>value</code>.
+        /// </summary>
+        /// <param name="name">The name of the header.</param>
+        /// <param name="value">The value of the header.</param>
+        public void Add(string name, object value) {
+            Headers.Add(name, String.Format(CultureInfo.InvariantCulture, "{0}", value));
         }
 
         #endregion
