@@ -96,7 +96,69 @@ namespace Skybrud.Social.Http {
             return _nvc.Get(key) != null || _nvc.AllKeys.Contains(key);
         }
 
-        // TODO: Determine which methods from NameValueCollection that also should be exposed in this class
+        /// <summary>
+        /// Gets the <see cref="System.String"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
+        public string GetString(string key) {
+            return _nvc[key];
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Int32"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
+        public int GetInt32(string key) {
+            return GetValue<int>(key);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Int64"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
+        public long GetInt64(string key) {
+            return GetValue<long>(key);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Boolean"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
+        public bool GetBoolean(string key) {
+            return GetValue<bool>(key);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Double"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
+        public double GetDouble(string key) {
+            return GetValue<double>(key);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Single"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
+        public float GetFloat(string key) {
+            return GetValue<float>(key);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="T"/> value of the entry with the specified <code>key</code>.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <returns>Returns the <see cref="T"/> value of the entry, or the default value of <code>T</code> if not found.</returns>
+        private T GetValue<T>(string key) {
+            string value = _nvc[key];
+            return String.IsNullOrWhiteSpace(value) ? default(T) : (T) Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+        }
 
         #endregion
 
