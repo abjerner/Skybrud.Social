@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Social.Http {
@@ -106,6 +107,27 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return SocialUtils.Json.ParseJsonArray(json, func);
+        }
+
+        /// <summary>
+        /// Parses the specified <code>xml</code> into an instance of <see cref="XElement"/>.
+        /// </summary>
+        /// <param name="xml">The XML to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="XElement"/>.</returns>
+        protected static XElement ParseXml(string xml) {
+            return XElement.Parse(xml);
+        }
+
+        /// <summary>
+        /// Parses the specified <code>xml</code> into an instance of <see cref="XElement"/>, which is then converted
+        /// into an instance of <see cref="T"/> using the specified <code>callback</code> function.
+        /// </summary>
+        /// <typeparam name="T">The type of the instance to be returned.</typeparam>
+        /// <param name="xml">The XML to be parsed.</param>
+        /// <param name="callback">The callback function used for converted the parsed <see cref="XElement"/>.</param>
+        /// <returns>Returns an instance of <see cref="T"/> representing the specified <code>xml</code>.</returns>
+        protected static T ParseXml<T>(string xml, Func<XElement, T> callback) {
+            return callback(XElement.Parse(xml));
         }
 
         #endregion
