@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\EnumParseException.cs" />
     <Compile Include="Json\Converters\DateTimeUnixTimeConverter.cs" />
     <Compile Include="Json\Converters\SocialDateTimeConverter.cs" />
     <Compile Include="Json\Converters\SocialDateTimeUnixTimeConverter.cs" />
