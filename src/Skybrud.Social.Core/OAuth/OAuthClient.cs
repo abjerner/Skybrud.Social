@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using Skybrud.Social.Exceptions;
@@ -230,10 +228,10 @@ namespace Skybrud.Social.OAuth {
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
         /// <returns>Returns the generated signature value.</returns>
-        public virtual string GenerateSignatureValue(string method, string url, NameValueCollection queryString, NameValueCollection body) {
+        public virtual string GenerateSignatureValue(SocialHttpMethod method, string url, NameValueCollection queryString, NameValueCollection body) {
             return String.Format(
                 "{0}&{1}&{2}",
-                method,
+                method.ToString().ToUpper(),
                 Uri.EscapeDataString(url.Split('#')[0].Split('?')[0]),
                 Uri.EscapeDataString(GenerateParameterString(queryString, body))
             );
@@ -247,7 +245,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
         /// <returns>Returns the generated signature.</returns>
-        public virtual string GenerateSignature(string method, string url, NameValueCollection queryString, NameValueCollection body) {
+        public virtual string GenerateSignature(SocialHttpMethod method, string url, NameValueCollection queryString, NameValueCollection body) {
             HMACSHA1 hasher = new HMACSHA1(new ASCIIEncoding().GetBytes(GenerateSignatureKey()));
             return Convert.ToBase64String(hasher.ComputeHash(new ASCIIEncoding().GetBytes(GenerateSignatureValue(method, url, queryString, body))));
         }
@@ -337,7 +335,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="query">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query) {
-            return DoHttpRequest("GET", url, query, null);
+            return DoHttpRequest(SocialHttpMethod.Get, url, query, null);
         }
 
         /// <summary>
@@ -347,7 +345,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="query">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query) {
-            return DoHttpRequest("GET", url, query == null ? null : query.NameValueCollection, null);
+            return DoHttpRequest(SocialHttpMethod.Get, url, query == null ? null : query.NameValueCollection, null);
         }
 
         /// <summary>
@@ -358,7 +356,7 @@ namespace Skybrud.Social.OAuth {
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, IGetOptions options) {
             NameValueCollection nvc = (options == null ? null : options.GetQueryString().NameValueCollection);
-            return DoHttpRequest("GET", url, nvc, null);
+            return DoHttpRequest(SocialHttpMethod.Get, url, nvc, null);
         }
 
         /// <summary>
@@ -369,18 +367,29 @@ namespace Skybrud.Social.OAuth {
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IPostOptions options) {
 
-            SocialQueryString query = (options == null ? null : options.GetQueryString());
-            SocialPostData postData = (options == null ? null : options.GetPostData());
+            // Initialize the request
+            SocialHttpRequest request = new SocialHttpRequest {
+                Url = url,
+                Method = SocialHttpMethod.Post,
+                QueryString = options == null ? null : options.GetQueryString(),
+                PostData = options == null ? null : options.GetPostData(),
+                IsMultipart = options != null && options.IsMultipart
+            };
 
-            NameValueCollection nvcQuery = (query == null ? null : query.NameValueCollection);
-            NameValueCollection nvcPostData = (postData == null ? null : postData.ToNameValueCollection());
+            // Generate the signature
+            string signature = GenerateSignature(request);
 
-            // TODO: Converting the POST data to a NameValueCollection will not support multipart data
+            // Generate the header
+            string header = GenerateHeaderString(signature);
 
-            return DoHttpRequest("POST", url, nvcQuery, nvcPostData);
+            // Add the authorization header
+            request.Headers.Add("Authorization", header);
+
+            // Make the call to the URL
+            return request.GetResponse();
 
         }
-
+        
         /// <summary>
         /// Makes a signed POST request to the specified <code>url</code>.
         /// </summary>
@@ -394,9 +403,7 @@ namespace Skybrud.Social.OAuth {
             if (queryString == null) queryString = new NameValueCollection();
             if (postData == null) postData = new NameValueCollection();
 
-            // TODO: Converting the POST data to a NameValueCollection will not support multipart data
-
-            return DoHttpRequest("POST", url, queryString, postData);
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, postData);
 
         }
 
@@ -408,7 +415,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="queryString">The query string.</param>
         /// <param name="postData">The POST data.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public virtual SocialHttpResponse DoHttpRequest(string method, string url, NameValueCollection queryString, NameValueCollection postData) {
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, NameValueCollection queryString, NameValueCollection postData) {
 
             // Check if NULL
             if (queryString == null) queryString = new NameValueCollection();
@@ -421,7 +428,9 @@ namespace Skybrud.Social.OAuth {
             }
 
             // Initialize the request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+            SocialHttpRequest request = new SocialHttpRequest {
+                Url = url
+            };
 
             // Generate the signature
             string signature = GenerateSignature(method, url, queryString, postData);
@@ -430,32 +439,27 @@ namespace Skybrud.Social.OAuth {
             string header = GenerateHeaderString(signature);
 
             // Add the authorization header
-            request.Headers.Add("Authorization", header);
+            request.Headers.Headers.Add("Authorization", header);
 
             // Set the method
             request.Method = method;
 
             // Add the request body (if a POST request)
-            if (method == "POST" && postData.Count > 0) {
-                string dataString = SocialUtils.Misc.NameValueCollectionToQueryString(postData);
-                //throw new Exception(dataString);
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = dataString.Length;
-                using (Stream stream = request.GetRequestStream()) {
-                    stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
-                }
-            }
+            //if (method == SocialHttpMethod.Post && postData.Count > 0) {
+            //    string dataString = SocialUtils.Misc.NameValueCollectionToQueryString(postData);
+            //    //throw new Exception(dataString);
+            //    request.ContentType = "application/x-www-form-urlencoded";
+            //    request.ContentLength = dataString.Length;
+            //    using (Stream stream = request.GetRequestStream()) {
+            //        stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
+            //    }
+            //}
 
             // Make sure we reset the client (timestamp and nonce)
             if (AutoReset) Reset();
 
-            // Get the response
-            try {
-                return SocialHttpResponse.GetFromWebResponse((HttpWebResponse) request.GetResponse());
-            } catch (WebException ex) {
-                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                return SocialHttpResponse.GetFromWebResponse((HttpWebResponse) ex.Response);
-            }
+            // Make the call to the URL
+            return request.GetResponse();
 
         }
 
@@ -466,7 +470,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public virtual SocialHttpResponse DoHttpRequest(string method, string url, SocialQueryString queryString) {
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, SocialQueryString queryString) {
             NameValueCollection query = queryString == null ? null : queryString.NameValueCollection;
             return DoHttpRequest(method, url, query, null);
         }
@@ -478,9 +482,34 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public virtual SocialHttpResponse DoHttpRequest(string method, string url, IGetOptions options) {
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IGetOptions options) {
             SocialQueryString queryString = options == null ? null : options.GetQueryString();
             return DoHttpRequest(method, url, queryString);
+        }
+
+        /// <summary>
+        ///  Helper method for generating the OAuth signature for an instance of <see cref="SocialHttpRequest"/>.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="SocialHttpRequest"/> the signature should be based on.</param>
+        /// <returns>Returns the generated OAuth signature.</returns>
+        private string GenerateSignature(SocialHttpRequest request) {
+
+            if (request == null) throw new ArgumentNullException("request");
+            if (String.IsNullOrWhiteSpace(request.Url)) throw new PropertyNotSetException("request.Url");
+
+            // Convert the query string to an instance of "NameValueCollection"
+            NameValueCollection query = request.QueryString == null ? null : request.QueryString.NameValueCollection;
+
+            // Generate a new "NameValueCollection" with the POST data
+            NameValueCollection data = new NameValueCollection();
+            if (request.PostData != null) {
+                foreach (string key in request.PostData.Keys.Where(key => !request.PostData.IsFile(key))) {
+                    data.Add(key, request.PostData[key]);
+                }
+            }
+
+            return GenerateSignature(request.Method, request.Url, query, data);
+
         }
 
         #endregion
