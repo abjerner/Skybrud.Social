@@ -31,6 +31,13 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
+        /// Gets an instance of <see cref="SocialDateTime"/> representing the start of the Unix Epoch (AKA <code>0</code> seconds).
+        /// </summary>
+        public static SocialDateTime Zero {
+            get { return FromUnixTimestamp(0); }
+        }
+
+        /// <summary>
         /// Gets the current date.
         /// </summary>
         public static SocialDateTime Today {
@@ -196,6 +203,27 @@ namespace Skybrud.Social.Time {
         /// </summary>
         public int DaysInMonth {
             get { return DateTime.DaysInMonth(Year, Month); }
+        }
+
+        /// <summary>
+        /// Gets whether the Unix timestamp of this <see cref="SocialDateTime"/> is <code>0</code>.
+        /// </summary>
+        public bool IsZero {
+            get { return UnixTimestamp == 0; }
+        }
+
+        /// <summary>
+        /// Gets whether the Unix timestamp of this <see cref="SocialDateTime"/> is less than <code>0</code>.
+        /// </summary>
+        public bool IsNegative {
+            get { return UnixTimestamp < 0; }
+        }
+
+        /// <summary>
+        /// Gets whether the Unix timestamp of this <see cref="SocialDateTime"/> is greater than <code>0</code>.
+        /// </summary>
+        public bool IsPositive {
+            get { return UnixTimestamp > 0; }
         }
 
         #endregion
@@ -740,6 +768,17 @@ namespace Skybrud.Social.Time {
         /// and time represented by value.</returns>
         public TimeSpan Subtract(DateTime value) {
             return DateTime.Subtract(value);
+        }
+
+        /// <summary>
+        /// Subtracts the specified date and time from this instance.
+        /// </summary>
+        /// <param name="value">The date and time value to subtract.</param>
+        /// <returns>A time interval that is equal to the date and time represented by this instance minus the date
+        /// and time represented by value.</returns>
+        public TimeSpan Subtract(SocialDateTime value) {
+            if (value == null) throw new ArgumentNullException(null);
+            return DateTime.Subtract(value.DateTime);
         }
 
         /// <summary>
