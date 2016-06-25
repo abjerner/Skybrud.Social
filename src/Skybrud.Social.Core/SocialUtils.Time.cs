@@ -160,6 +160,78 @@ namespace Skybrud.Social {
                 return GetFirstDayOfWeek(date, startOfWeek).AddDays(7).AddSeconds(-1);
             }
 
+            /// <summary>
+            /// Gets the first day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="date">A date in the month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetFirstWeekdayOfMonth(DateTime date, DayOfWeek dayOfWeek) {
+                return GetFirstWeekdayOfMonth(date.Year, date.Month, dayOfWeek);
+            }
+
+            /// <summary>
+            /// Gets the first day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="year">The year.</param>
+            /// <param name="month">The month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetFirstWeekdayOfMonth(int year, SocialDateMonth month, DayOfWeek dayOfWeek) {
+                return GetFirstWeekdayOfMonth(year, (int)month, dayOfWeek);
+            }
+
+            /// <summary>
+            /// Gets the first day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="year">The year.</param>
+            /// <param name="month">The month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetFirstWeekdayOfMonth(int year, int month, DayOfWeek dayOfWeek) {
+                DateTime dt = new DateTime(year, month, 1);
+                while (dt.DayOfWeek != dayOfWeek) {
+                    dt = dt.AddDays(1);
+                }
+                return dt;
+            }
+
+            /// <summary>
+            /// Gets the last day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="date">A date in the month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetLastWeekdayOfMonth(DateTime date, DayOfWeek dayOfWeek) {
+                return GetLastWeekdayOfMonth(date.Year, date.Month, dayOfWeek);
+            }
+
+            /// <summary>
+            /// Gets the last day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="year">The year.</param>
+            /// <param name="month">The month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetLastWeekdayOfMonth(int year, SocialDateMonth month, DayOfWeek dayOfWeek) {
+                return GetLastWeekdayOfMonth(year, (int) month, dayOfWeek);
+            }
+
+            /// <summary>
+            /// Gets the last day of the month that matches <code>dayOfWeek</code>.
+            /// </summary>
+            /// <param name="year">The year.</param>
+            /// <param name="month">The month.</param>
+            /// <param name="dayOfWeek">The weekday to match.</param>
+            /// <returns>Returns an instance of <see cref="DateTime"/> representing the day.</returns>
+            public static DateTime GetLastWeekdayOfMonth(int year, int month, DayOfWeek dayOfWeek) {
+                DateTime dt = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+                while (dt.DayOfWeek != dayOfWeek) {
+                    dt = dt.AddDays(-1);
+                }
+                return dt;
+            }
+
             #region Days
 
             /// <summary>
