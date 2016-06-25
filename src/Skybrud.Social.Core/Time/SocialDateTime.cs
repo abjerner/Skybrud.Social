@@ -11,7 +11,7 @@ namespace Skybrud.Social.Time {
     /// Class wrapping an instance of <see cref="DateTime"/> (as an alternative to using <see cref="Nullable{DateTime}"/>).
     /// </summary>
     [JsonConverter(typeof(SocialDateTimeConverter))]
-    public class SocialDateTime {
+    public class SocialDateTime : IComparable, IComparable<SocialDateTime>, IComparable<DateTime> {
 
         #region Properties
 
