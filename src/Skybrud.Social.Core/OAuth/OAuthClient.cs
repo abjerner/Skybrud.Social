@@ -344,7 +344,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL to call.</param>
         /// <param name="query">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query) {
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialHttpQueryString query) {
             return DoHttpRequest(SocialHttpMethod.Get, url, query == null ? null : query.NameValueCollection, null);
         }
 
@@ -470,7 +470,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, SocialQueryString queryString) {
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, SocialHttpQueryString queryString) {
             NameValueCollection query = queryString == null ? null : queryString.NameValueCollection;
             return DoHttpRequest(method, url, query, null);
         }
@@ -483,7 +483,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IGetOptions options) {
-            SocialQueryString queryString = options == null ? null : options.GetQueryString();
+            SocialHttpQueryString queryString = options == null ? null : options.GetQueryString();
             return DoHttpRequest(method, url, queryString);
         }
 

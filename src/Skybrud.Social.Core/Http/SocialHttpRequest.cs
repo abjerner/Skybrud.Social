@@ -13,7 +13,7 @@ namespace Skybrud.Social.Http {
         #region Private fields
 
         private SocialHeaderCollection _headers = new SocialHeaderCollection();
-        private SocialQueryString _queryString = new SocialQueryString();
+        private SocialHttpQueryString _queryString = new SocialHttpQueryString();
         private SocialPostData _postData = new SocialPostData();
         private CookieContainer _cookies = new CookieContainer();
 
@@ -64,9 +64,9 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the query string of the request.
         /// </summary>
-        public SocialQueryString QueryString {
+        public SocialHttpQueryString QueryString {
             get { return _queryString; }
-            set { _queryString = value ?? new SocialQueryString(); }
+            set { _queryString = value ?? new SocialHttpQueryString(); }
         }
 
         /// <summary>

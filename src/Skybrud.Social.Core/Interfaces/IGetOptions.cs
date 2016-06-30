@@ -10,9 +10,9 @@ namespace Skybrud.Social.Interfaces {
         #region Methods
 
         /// <summary>
-        /// Gets an instance of <see cref="SocialQueryString"/> representing the GET parameters.
+        /// Gets an instance of <see cref="SocialHttpQueryString"/> representing the GET parameters.
         /// </summary>
-        SocialQueryString GetQueryString();
+        SocialHttpQueryString GetQueryString();
 
         #endregion
 

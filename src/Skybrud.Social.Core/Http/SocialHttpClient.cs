@@ -18,7 +18,7 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-            return DoHttpGetRequest(url, default(SocialQueryString));
+            return DoHttpGetRequest(url, default(SocialHttpQueryString));
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-             return DoHttpGetRequest(url, (SocialQueryString) query);
+             return DoHttpGetRequest(url, (SocialHttpQueryString) query);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Skybrud.Social.Http {
         /// <param name="url">The URL of the request.</param>
         /// <param name="query">The query string of the request.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialQueryString query) {
+        public virtual SocialHttpResponse DoHttpGetRequest(string url, SocialHttpQueryString query) {
 
             // Some input validation
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
@@ -92,7 +92,7 @@ namespace Skybrud.Social.Http {
         /// <param name="query">The query string of the request.</param>
         /// <param name="postData">The POST data of the request.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-        public virtual SocialHttpResponse DoHttpPostRequest(string url, SocialQueryString query, SocialPostData postData) {
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, SocialHttpQueryString query, SocialPostData postData) {
             
             // Some input validation
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
@@ -121,7 +121,7 @@ namespace Skybrud.Social.Http {
         /// <param name="postData">The POST data of the request.</param>
         /// <param name="isMultipart">Indicates the request should be encoded as <code>multipart/form-data</code>.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-        public virtual SocialHttpResponse DoHttpPostRequest(string url, SocialQueryString query, SocialPostData postData, bool isMultipart) {
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, SocialHttpQueryString query, SocialPostData postData, bool isMultipart) {
 
             // Some input validation
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");

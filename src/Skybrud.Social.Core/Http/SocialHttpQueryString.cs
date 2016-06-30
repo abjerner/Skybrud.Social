@@ -8,7 +8,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// A wrapper class extending the functionality of <see cref="NameValueCollection"/>.
     /// </summary>
-    public class SocialQueryString {
+    public class SocialHttpQueryString {
 
         #region Private fields
 
@@ -46,13 +46,13 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Initializes a new instance without any entries.
         /// </summary>
-        public SocialQueryString() { }
+        public SocialHttpQueryString() { }
 
         /// <summary>
         /// Initializes a new instance based on the specified <code>query</code>.
         /// </summary>
         /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
-        public SocialQueryString(NameValueCollection query) {
+        public SocialHttpQueryString(NameValueCollection query) {
             _nvc = query ?? new NameValueCollection();
         }
 
@@ -168,9 +168,9 @@ namespace Skybrud.Social.Http {
         /// Initializes a new instance based on the specified <code>query</code>.
         /// </summary>
         /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
-        /// <returns>An instance of <see cref="SocialQueryString"/> based on the specified <code>query</code>.</returns>
-        public static implicit operator SocialQueryString(NameValueCollection query) {
-            return query == null ? null : new SocialQueryString(query);
+        /// <returns>An instance of <see cref="SocialHttpQueryString"/> based on the specified <code>query</code>.</returns>
+        public static implicit operator SocialHttpQueryString(NameValueCollection query) {
+            return query == null ? null : new SocialHttpQueryString(query);
         }
 
         #endregion
