@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Skybrud.Social.Exceptions;
-using Skybrud.Social.Time;
 
 namespace Skybrud.Social.Xml.Extensions {
     
@@ -32,8 +30,8 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <typeparam name="T"></typeparam>
         /// <param name="element">The instance of <see cref="XElement"/> holding the attribute.</param>
         /// <param name="name">An instance of <see cref="XName"/> identifying the attribute.</param>
-        /// <returns>Returns an instance of <see cref="T"/> represnting the attribute value, or the default value of
-        /// <see cref="T"/> if not found.</returns>
+        /// <returns>Returns an instance of <code>T</code> represnting the attribute value, or the default value of
+        /// <code>T</code> if not found.</returns>
         public static T GetAttributeValue<T>(this XElement element, XName name) {
             XAttribute child = element == null ? null : element.Attribute(name);
             return child == null ? default(T) : (T) Convert.ChangeType(child.Value, typeof(T), CultureInfo.InvariantCulture);
@@ -122,9 +120,9 @@ namespace Skybrud.Social.Xml.Extensions {
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="T"/> based on the value of the attribute matching the specified
+        /// Gets an instance of <code>T</code> based on the value of the attribute matching the specified
         /// <code>name</code>. An exception of the type <see cref="EnumParseException"/> will be thrown if the
-        /// attribute value doesn't match any of the values of <see cref="T"/>.
+        /// attribute value doesn't match any of the values of <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="element">The parent <see cref="XElement"/>.</param>
@@ -136,15 +134,15 @@ namespace Skybrud.Social.Xml.Extensions {
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="T"/> based on the value of the attribute matching the specified
+        /// Gets an instance of <code>T</code> based on the value of the attribute matching the specified
         /// <code>name</code>. If the value cant be parsed, <code>fallback</code> will be returned instead.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="element">The parent <see cref="XElement"/>.</param>
         /// <param name="name">An instance of <see cref="XName"/> identifying the attribute.</param>
         /// <param name="fallback">A fallback used if the attribute value doesn't match any of the values of
-        /// <see cref="T"/>.</param>
-        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        /// <code>T</code>.</param>
+        /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetAttributeAsEnum<T>(this XElement element, XName name, T fallback) where T : struct {
             XAttribute child = element == null ? null : element.Attribute(name);
             return child == null ? fallback : SocialUtils.Enums.ParseEnum(child.Value, fallback);
@@ -210,18 +208,70 @@ namespace Skybrud.Social.Xml.Extensions {
         /// Gets the value of the first child element with the specified <see cref="XName"/>.
         /// </summary>
         /// <param name="element">The parent <see cref="XElement"/>.</param>
+        /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
+        /// <returns>Returns an instance of <code>T</code> represnting the attribute value, or the default value of
+        /// <code>T</code> if not found.</returns>
+        public static T GetElementValue<T>(this XElement element, XName name) {
+            XElement child = element == null ? null : element.Element(name);
+            return child == null ? default(T) : (T)Convert.ChangeType(child.Value, typeof(T), CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Gets the value of the first child element with the specified <see cref="XName"/>.
+        /// </summary>
+        /// <param name="element">The parent <see cref="XElement"/>.</param>
         /// <param name="name">The <see cref="XName"/> to match.</param>
         /// <param name="callback">A callback function for parsing the element.</param>
         /// <returns>Returns the value as parsed by the specified <code>callback</code>.</returns>
         public static T GetElementValue<T>(this XElement element, XName name, Func<string, T> callback) {
             XElement child = element == null ? null : element.Element(name);
-            return callback(child == null ? null : child.Value);
+            return callback(child == null || String.IsNullOrWhiteSpace(child.Value) ? null : child.Value);
+        }
+
+        public static int GetElementValueAsInt32(this XElement element, XName name) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(int) : Int32.Parse(xChild.Value);
+        }
+
+        public static T GetElementValueAsInt32<T>(this XElement element, XName name, Func<int, T> callback) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return callback(xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(int) : Int32.Parse(xChild.Value));
+        }
+
+        public static long GetElementValueAsInt64(this XElement element, XName name) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(long) : Int64.Parse(xChild.Value);
+        }
+
+        public static T GetElementValueAsInt64<T>(this XElement element, XName name, Func<long, T> callback) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return callback(xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(long) : Int64.Parse(xChild.Value));
+        }
+
+        public static float GetElementValueAsFloat(this XElement element, XName name) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(float) : Single.Parse(xChild.Value);
+        }
+
+        public static T GetElementValueAsFloat<T>(this XElement element, XName name, Func<float, T> callback) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return callback(xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(float) : Single.Parse(xChild.Value));
+        }
+
+        public static double GetElementValueAsDouble(this XElement element, XName name) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(double) : Double.Parse(xChild.Value);
+        }
+
+        public static T GetElementValueAsDouble<T>(this XElement element, XName name, Func<double, T> callback) {
+            XElement xChild = element == null ? null : element.Element(name);
+            return callback(xChild == null || String.IsNullOrWhiteSpace(xChild.Value) ? default(double) : Double.Parse(xChild.Value));
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="T"/> based on the value of the element matching the specified
+        /// Gets an instance of <code>T</code> based on the value of the element matching the specified
         /// <code>name</code>. An exception of the type <see cref="EnumParseException"/> will be thrown if the
-        /// element value doesn't match any of the values of <see cref="T"/>.
+        /// element value doesn't match any of the values of <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="element">The parent <see cref="XElement"/>.</param>
@@ -233,15 +283,15 @@ namespace Skybrud.Social.Xml.Extensions {
         }
 
         /// <summary>
-        /// Gets an instance of <see cref="T"/> based on the value of the element matching the specified
+        /// Gets an instance of <code>T</code> based on the value of the element matching the specified
         /// <code>name</code>. If the value cant be parsed, <code>fallback</code> will be returned instead.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="element">The parent <see cref="XElement"/>.</param>
         /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
         /// <param name="fallback">A fallback used if the element value doesn't match any of the values of
-        /// <see cref="T"/>.</param>
-        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        /// <code>T</code>.</param>
+        /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetElementValueAsEnum<T>(this XElement element, XName name, T fallback) where T : struct {
             XElement child = element == null ? null : element.Element(name);
             return child == null ? fallback : SocialUtils.Enums.ParseEnum(child.Value, fallback);
@@ -264,7 +314,7 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <param name="element">The parent <see cref="XElement"/>.</param>
         /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
         /// <param name="callback">A callback function for parsing each element.</param>
-        /// <returns>Returns an array of <see cref="T"/>.</returns>
+        /// <returns>Returns an array of <code>T</code>.</returns>
         public static T[] GetElements<T>(this XElement element, XName name, Func<XElement, T> callback) {
             return element.Elements(name).Select(callback).ToArray();
         }

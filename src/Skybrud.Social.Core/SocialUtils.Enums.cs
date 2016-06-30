@@ -14,7 +14,7 @@ namespace Skybrud.Social {
             /// Gets an array of all values of the specified enum class <code>T</code>.
             /// </summary>
             /// <typeparam name="T">The type of the enum class.</typeparam>
-            /// <returns>Returns an array of <see cref="T"/>.</returns>
+            /// <returns>Returns an array of <code>T</code>.</returns>
             public static T[] GetEnumValues<T>() where T : struct {
                 return (T[]) Enum.GetValues(typeof(T));
             }
@@ -26,8 +26,8 @@ namespace Skybrud.Social {
             /// <param name="str">The string to be parsed.</param>
             /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
             /// <exception cref="ArgumentNullException">If <code>str</code> is <code>null</code> (or white space).</exception>
-            /// <exception cref="ArgumentException">If <see cref="T"/> is not an enum class.</exception>
-            /// <exception cref="EnumParseException">If <code>str</code> doesn't match any of the values of <see cref="T"/>.</exception>
+            /// <exception cref="ArgumentException">If <code>T</code> is not an enum class.</exception>
+            /// <exception cref="EnumParseException">If <code>str</code> doesn't match any of the values of <code>T</code>.</exception>
             public static T ParseEnum<T>(string str) where T : struct {
 
                 // Check whether the specified string is NULL (or white space)
@@ -59,7 +59,7 @@ namespace Skybrud.Social {
             /// <param name="str">The string to be parsed.</param>
             /// <param name="fallback">The fallback if the enum could not be parsed.</param>
             /// <returns>Returns an enum of type <code>T</code> from the specified <code>str</code>.</returns>
-            /// <exception cref="ArgumentException">If <see cref="T"/> is not an enum class.</exception>
+            /// <exception cref="ArgumentException">If <code>T</code> is not an enum class.</exception>
             public static T ParseEnum<T>(string str, T fallback) where T : struct {
 
                 // Check whether the type of T is an enum

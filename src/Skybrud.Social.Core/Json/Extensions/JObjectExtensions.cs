@@ -47,7 +47,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        /// <returns>Returns an instance of <code>T</code>, or the default value of <code>T</code> if not found.</returns>
         public static T GetObject<T>(this JObject obj, string path) {
             if (obj == null) return default(T);
             JObject child = obj.SelectToken(path) as JObject;
@@ -60,7 +60,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="func">The delegate (callback method) used for parsing the object.</param>
-        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        /// <returns>Returns an instance of <code>T</code>, or the default value of <code>T</code> if not found.</returns>
         public static T GetObject<T>(this JObject obj, string path, Func<JObject, T> func) {
             return obj == null ? default(T) : func(obj.SelectToken(path) as JObject);
         }
@@ -83,7 +83,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="obj">The parent object.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="callback">The callback used for converting the string value.</param>
-        /// <returns>Returns an instance of <see cref="T"/>, or <code>null</code>.</returns>
+        /// <returns>Returns an instance of <code>T</code>, or <code>null</code>.</returns>
         public static T GetString<T>(this JObject obj, string path, Func<string, T> callback) {
             if (obj == null) return default(T);
             JToken token = obj.SelectToken(path);
@@ -242,7 +242,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <typeparam name="T">The type of the enum.</typeparam>
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetEnum<T>(this JObject obj, string path) where T : struct {
             return SocialUtils.Enums.ParseEnum<T>(GetString(obj, path));
         }
@@ -351,7 +351,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// <returns>Returns an array of <code>T</code>. If the a matching token isn't found, an empty array will
         /// still be returned.</returns>
         public static T[] GetArrayItems<T>(this JObject obj, string path) {
 
@@ -373,7 +373,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="callback">A callback function used for parsing or converting the token value.</param>
-        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// <returns>Returns an array of <code>T</code>. If the a matching token isn't found, an empty array will
         /// still be returned.</returns>
         public static T[] GetArrayItems<T>(this JObject obj, string path, Func<JToken, T> callback) {
 
@@ -395,7 +395,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="obj">The instance of <see cref="JObject"/>.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="callback">A callback function used for parsing or converting the token value.</param>
-        /// <returns>Returns an array of <see cref="T"/>. If the a matching token isn't found, an empty array will
+        /// <returns>Returns an array of <code>T</code>. If the a matching token isn't found, an empty array will
         /// still be returned.</returns>
         public static T[] GetArrayItems<T>(this JObject obj, string path, Func<JObject, T> callback) {
 

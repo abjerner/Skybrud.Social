@@ -26,7 +26,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
-        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        /// <returns>Returns an instance of <code>T</code>, or the default value of <code>T</code> if not found.</returns>
         public static T GetObject<T>(this JArray array, int index) {
             if (array == null) return default(T);
             JObject child = array[0] as JObject;
@@ -40,7 +40,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
         /// <param name="func">The delegate (callback method) used for parsing the object.</param>
-        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetObject<T>(this JArray array, int index, Func<JObject, T> func) {
             return func(array == null ? null : array[index] as JObject);
         }
@@ -62,7 +62,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// </summary>
         /// <param name="array">The parent array.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
-        /// <returns>Returns an instance of <see cref="T"/>, or the default value of <see cref="T"/> if not found.</returns>
+        /// <returns>Returns an instance of <code>T</code>, or the default value of <code>T</code> if not found.</returns>
         public static T GetObject<T>(this JArray array, string path) {
             if (array == null) return default(T);
             JObject child = array.SelectToken(path) as JObject;
@@ -76,7 +76,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="func">The delegate (callback method) used for parsing the object.</param>
-        /// <returns>Returns an instance of <see cref="T"/>.</returns>
+        /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetObject<T>(this JArray array, string path, Func<JObject, T> func) {
             return func(array == null ? null : array.SelectToken(path) as JObject);
         }
@@ -218,7 +218,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="index">The index of the item.</param>
         /// <param name="func">The delegate (callback method) used for parsing each item in the array.</param>
-        /// <returns>Returns an array of <see cref="T"/>.</returns>
+        /// <returns>Returns an array of <code>T</code>.</returns>
         public static T[] GetArray<T>(this JArray array, int index, Func<JObject, T> func) {
 
             if (array == null) return null;
@@ -250,7 +250,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="array">The parent array.</param>
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <param name="func">The delegate (callback method) used for parsing each item in the array.</param>
-        /// <returns>Returns an array of <see cref="T"/>.</returns>
+        /// <returns>Returns an array of <code>T</code>.</returns>
         public static T[] GetArray<T>(this JArray array, string path, Func<JObject, T> func) {
 
             if (array == null) return null;
