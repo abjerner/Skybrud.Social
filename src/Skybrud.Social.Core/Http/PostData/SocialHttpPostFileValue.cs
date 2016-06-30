@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http.PostData {
 
     /// <summary>
     /// Class representing a HTTP POST value based on a local file.
     /// </summary>
-    public class SocialPostFileValue : ISocialPostValue {
+    public class SocialHttpPostFileValue : IHttpPostValue {
 
         #region Properties
 
@@ -38,7 +39,7 @@ namespace Skybrud.Social.Http.PostData {
         /// </summary>
         /// <param name="name">The name of the value.</param>
         /// <param name="path">The path to the file.</param>
-        public SocialPostFileValue(string name, string path) : this(name, path, null, null) { }
+        public SocialHttpPostFileValue(string name, string path) : this(name, path, null, null) { }
 
         /// <summary>
         /// Initializes a new instance from the specified <code>name</code>, <code>path</code>,
@@ -48,7 +49,7 @@ namespace Skybrud.Social.Http.PostData {
         /// <param name="path">The path to the file.</param>
         /// <param name="contentType">The content type of the file.</param>
         /// <param name="filename">The name of the file.</param>
-        public SocialPostFileValue(string name, string path, string contentType, string filename) {
+        public SocialHttpPostFileValue(string name, string path, string contentType, string filename) {
         
             Name = name;
             Data = File.ReadAllBytes(path);
@@ -88,16 +89,16 @@ namespace Skybrud.Social.Http.PostData {
         /// <param name="isLast">Whether the value is the last in the request body.</param>
         public void WriteToMultipartStream(Stream stream, string boundary, string newLine, bool isLast) {
 
-            SocialPostData.Write(stream, "--" + boundary + newLine);
-            SocialPostData.Write(stream, "Content-Disposition: form-data; name=\"" + Name + "\"; filename=\"" + FileName + "\"" + newLine);
-            SocialPostData.Write(stream, "Content-Type: " + ContentType + newLine);
-            SocialPostData.Write(stream, newLine);
+            SocialHttpPostData.Write(stream, "--" + boundary + newLine);
+            SocialHttpPostData.Write(stream, "Content-Disposition: form-data; name=\"" + Name + "\"; filename=\"" + FileName + "\"" + newLine);
+            SocialHttpPostData.Write(stream, "Content-Type: " + ContentType + newLine);
+            SocialHttpPostData.Write(stream, newLine);
 
             stream.Write(Data, 0, Data.Length);
 
-            SocialPostData.Write(stream, newLine);
-            SocialPostData.Write(stream, newLine);
-            SocialPostData.Write(stream, "--" + boundary + (isLast ? "--" : "") + newLine);
+            SocialHttpPostData.Write(stream, newLine);
+            SocialHttpPostData.Write(stream, newLine);
+            SocialHttpPostData.Write(stream, "--" + boundary + (isLast ? "--" : "") + newLine);
 
         }
 

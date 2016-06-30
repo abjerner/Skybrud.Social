@@ -6,21 +6,27 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Skybrud.Social.Http.PostData;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
 
     /// <summary>
     /// Class representing the POST data of a HTTP request.
     /// </summary>
-    public class SocialPostData {
+    public class SocialHttpPostData : IHttpPostData {
 
         #region Private fields
 
-        private readonly Dictionary<string, ISocialPostValue> _data = new Dictionary<string, ISocialPostValue>();
+        private readonly Dictionary<string, IHttpPostValue> _data;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets whether the request should be posted as multipart data.
+        /// </summary>
+        public bool IsMultipart { get; set; }
 
         /// <summary>
         /// Gets the amount of POST data entries.
@@ -32,14 +38,14 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets keys of all POST data entiries.
         /// </summary>
-        public Dictionary<string, ISocialPostValue>.KeyCollection Keys {
-            get { return _data.Keys; }
+        public string[] Keys {
+            get { return _data.Keys.ToArray(); }
         }
 
         /// <summary>
         /// Gets values of all POST data entiries.
         /// </summary>
-        public Dictionary<string, ISocialPostValue>.ValueCollection Values {
+        public Dictionary<string, IHttpPostValue>.ValueCollection Values {
             get { return _data.Values; }
         }
 
@@ -50,10 +56,33 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns the <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
         public string this[string key] {
             get {
-                ISocialPostValue value;
+                IHttpPostValue value;
                 return _data.TryGetValue(key, out value) ? value.ToString() : null;
             }
-            set { _data[key] = new SocialPostValue(key, value); }
+            set { _data[key] = new SocialHttpPostValue(key, value); }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes an empty collection.
+        /// </summary>
+        public SocialHttpPostData() {
+            _data = new Dictionary<string, IHttpPostValue>();
+        }
+
+        /// <summary>
+        /// Initializes a new collection based on the specified <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <param name="nvc">An instance of <see cref="NameValueCollection"/> the collection should be based on.</param>
+        public SocialHttpPostData(NameValueCollection nvc) {
+            _data = new Dictionary<string, IHttpPostValue>();
+            if (nvc == null) return;
+            foreach (string key in nvc.Keys) {
+                Add(key, nvc[key]);
+            }
         }
 
         #endregion
@@ -76,7 +105,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         public void Add(string key, string value) {
-            _data.Add(key, new SocialPostValue(key, value));
+            _data.Add(key, new SocialHttpPostValue(key, value));
         }
         
         /// <summary>
@@ -85,7 +114,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         public void Add(string key, object value) {
-            _data.Add(key, new SocialPostValue(key, String.Format(CultureInfo.InvariantCulture, "{0}", value)));
+            _data.Add(key, new SocialHttpPostValue(key, String.Format(CultureInfo.InvariantCulture, "{0}", value)));
         }
 
         /// <summary>
@@ -94,7 +123,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
         public void AddFile(string key, string path) {
-            _data.Add(key, new SocialPostFileValue(key, path));
+            _data.Add(key, new SocialHttpPostFileValue(key, path));
         }
 
         /// <summary>
@@ -106,7 +135,7 @@ namespace Skybrud.Social.Http {
         /// <param name="contentType">The content type of the file.</param>
         /// <param name="filename">The filename of the file.</param>
         public void AddFile(string key, string path, string contentType, string filename) {
-            _data.Add(key, new SocialPostFileValue(key, path, contentType, filename));
+            _data.Add(key, new SocialHttpPostFileValue(key, path, contentType, filename));
         }
 
         /// <summary>
@@ -116,7 +145,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         public void Set(string key, string value) {
-            _data[key] = new SocialPostValue(key, value);
+            _data[key] = new SocialHttpPostValue(key, value);
         }
 
         /// <summary>
@@ -128,14 +157,14 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets whether the value with the specified key is an instance of <see cref="SocialPostFileValue"/>.
+        /// Gets whether the value with the specified key is an instance of <see cref="SocialHttpPostFileValue"/>.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>Returns <code>true</code> if the item with the specified <code>key</code> is an instance of
-        /// <see cref="SocialPostFileValue"/>, otherwise <code>false</code>.</returns>
+        /// <see cref="SocialHttpPostFileValue"/>, otherwise <code>false</code>.</returns>
         public bool IsFile(string key) {
-            ISocialPostValue value;
-            return _data.TryGetValue(key, out value) && value is SocialPostFileValue;
+            IHttpPostValue value;
+            return _data.TryGetValue(key, out value) && value is SocialHttpPostFileValue;
         }
 
         internal static void Write(Stream stream, string str) {
@@ -150,7 +179,7 @@ namespace Skybrud.Social.Http {
         /// <param name="boundary">The multipart boundary.</param>
         public void WriteMultipartFormData(Stream stream, string boundary) {
             int i = 0;
-            foreach (ISocialPostValue value in _data.Values) {
+            foreach (IHttpPostValue value in _data.Values) {
                 value.WriteToMultipartStream(stream, boundary, "\n", i++ == _data.Count - 1);
             }
         }
@@ -183,9 +212,9 @@ namespace Skybrud.Social.Http {
         /// Initializes a new instance based on the specified <see cref="NameValueCollection"/>.
         /// </summary>
         /// <param name="nvc">An instance of <see cref="NameValueCollection"/> representing the POST data.</param>
-        /// <returns>Returns an instance of <see cref="SocialPostData"/> based on the specified <code>nvc</code>.</returns>
-        public static implicit operator SocialPostData(NameValueCollection nvc) {
-            SocialPostData data = new SocialPostData();
+        /// <returns>Returns an instance of <see cref="SocialHttpPostData"/> based on the specified <code>nvc</code>.</returns>
+        public static implicit operator SocialHttpPostData(NameValueCollection nvc) {
+            SocialHttpPostData data = new SocialHttpPostData();
             foreach (string key in nvc.Keys) {
                 data.Add(key, nvc[key]);
             }

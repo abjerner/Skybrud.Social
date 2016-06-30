@@ -1,11 +1,11 @@
 ﻿using System.IO;
 
-namespace Skybrud.Social.Http.PostData {
+namespace Skybrud.Social.Interfaces.Http {
 
     /// <summary>
     /// Class representing a value of a HTTP POST request body.
     /// </summary>
-    public interface ISocialPostValue {
+    public interface IHttpPostValue {
         
         /// <summary>
         /// Gets the name/key of the value.

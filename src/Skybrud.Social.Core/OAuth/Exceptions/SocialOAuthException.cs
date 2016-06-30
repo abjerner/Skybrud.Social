@@ -6,7 +6,7 @@ namespace Skybrud.Social.OAuth.Exceptions {
     /// <summary>
     /// Class representing an OAuth exception
     /// </summary>
-    public class OAuthException : Exception {
+    public class SocialOAuthException : Exception {
 
         #region Properties
 
@@ -24,7 +24,7 @@ namespace Skybrud.Social.OAuth.Exceptions {
         /// </summary>
         /// <param name="response">The underlying response.</param>
         /// <param name="message">The message.</param>
-        public OAuthException(SocialHttpResponse response, string message) : base(message) {
+        public SocialOAuthException(SocialHttpResponse response, string message) : base(message) {
             Response = response;
         }
 

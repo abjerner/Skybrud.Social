@@ -5,14 +5,14 @@ namespace Skybrud.Social.OAuth.Objects {
     /// <summary>
     /// Class representing the response body of a call to get an OAuth 1.0a refresh token.
     /// </summary>
-    public class OAuthRequestToken {
+    public class SocialOAuthRequestToken {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public OAuthClient Client { get; private set; }
+        public SocialOAuthClient Client { get; private set; }
 
         /// <summary>
         /// Gets the request token.
@@ -43,7 +43,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
-        protected OAuthRequestToken(OAuthClient client, NameValueCollection query) {
+        protected SocialOAuthRequestToken(SocialOAuthClient client, NameValueCollection query) {
             Client = client;
             Token = query["oauth_token"];
             TokenSecret = query["oauth_token_secret"];
@@ -60,13 +60,13 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="str">The query string.</param>
-        public static OAuthRequestToken Parse(OAuthClient client, string str) {
+        public static SocialOAuthRequestToken Parse(SocialOAuthClient client, string str) {
 
             // Convert the query string to a NameValueCollection
             NameValueCollection query = SocialUtils.Misc.ParseQueryString(str);
 
             // Initialize a new instance
-            return new OAuthRequestToken(client, query);
+            return new SocialOAuthRequestToken(client, query);
 
         }
 
@@ -75,8 +75,8 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string.</param>
-        public static OAuthRequestToken Parse(OAuthClient client, NameValueCollection query) {
-            return query == null ? null : new OAuthRequestToken(client, query);
+        public static SocialOAuthRequestToken Parse(SocialOAuthClient client, NameValueCollection query) {
+            return query == null ? null : new SocialOAuthRequestToken(client, query);
         }
 
         #endregion

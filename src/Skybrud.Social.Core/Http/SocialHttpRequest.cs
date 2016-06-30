@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
 
@@ -12,9 +13,9 @@ namespace Skybrud.Social.Http {
 
         #region Private fields
 
-        private SocialHeaderCollection _headers = new SocialHeaderCollection();
-        private SocialHttpQueryString _queryString = new SocialHttpQueryString();
-        private SocialPostData _postData = new SocialPostData();
+        private SocialHttpHeaderCollection _headers = new SocialHttpHeaderCollection();
+        private IHttpQueryString _queryString = new SocialHttpQueryString();
+        private IHttpPostData _postData = new SocialHttpPostData();
         private CookieContainer _cookies = new CookieContainer();
 
         #endregion
@@ -56,15 +57,15 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the collection of headers.
         /// </summary>
-        public SocialHeaderCollection Headers {
+        public SocialHttpHeaderCollection Headers {
             get { return _headers; }
-            set { _headers = value ?? new SocialHeaderCollection(); }
+            set { _headers = value ?? new SocialHttpHeaderCollection(); }
         }
 
         /// <summary>
         /// Gets or sets the query string of the request.
         /// </summary>
-        public SocialHttpQueryString QueryString {
+        public IHttpQueryString QueryString {
             get { return _queryString; }
             set { _queryString = value ?? new SocialHttpQueryString(); }
         }
@@ -72,18 +73,10 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the POST data of the request.
         /// </summary>
-        public SocialPostData PostData {
+        public IHttpPostData PostData {
             get { return _postData; }
-            set { _postData = value ?? new SocialPostData(); }
+            set { _postData = value ?? new SocialHttpPostData(); }
         }
-
-        /// <summary>
-        /// Gets or sets whether the content type of the HTTP POST request should be <code>multipart/form-data</code>.
-        /// If this property is <code>false</code> for a HTTP POST request, the content type
-        /// <code>application/x-www-form-urlencoded</code> will be used as default instead. If not a HTTP POST request,
-        /// this property will be ignored.
-        /// </summary>
-        public bool IsMultipart { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="CookieContainer"/> to be used for the request.
@@ -174,7 +167,7 @@ namespace Skybrud.Social.Http {
             Method = SocialHttpMethod.Get;
             Encoding = Encoding.UTF8;
             Timeout = TimeSpan.FromSeconds(100);
-            PostData = new SocialPostData();
+            PostData = new SocialHttpPostData();
         }
 
         #endregion
@@ -216,7 +209,7 @@ namespace Skybrud.Social.Http {
 
             // Add the request body (if a POST request)
             if (Method == SocialHttpMethod.Post) {
-                if (IsMultipart) {
+                if (PostData.IsMultipart) {
                     string boundary = Guid.NewGuid().ToString().Replace("-", "");
                     request.ContentType = "multipart/form-data; boundary=" + boundary;
                     using (Stream stream = request.GetRequestStream()) {

@@ -5,7 +5,7 @@ namespace Skybrud.Social.OAuth {
     /// <summary>
     /// Static class with utility methods for the OAuth implementation.
     /// </summary>
-    public static class OAuthUtils {
+    public static class SocialOAuthUtils {
 
         /// <summary>
         /// Generates a nonce (random value) used for creating the authorization header.

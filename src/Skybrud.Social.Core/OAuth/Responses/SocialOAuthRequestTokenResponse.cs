@@ -6,14 +6,14 @@ namespace Skybrud.Social.OAuth.Responses {
     /// <summary>
     /// Class representing the response of a call to get an OAuth 1.0a refresh token.
     /// </summary>
-    public class OAuthRequestTokenResponse : SocialResponse {
+    public class SocialOAuthRequestTokenResponse : SocialResponse {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the response body.
         /// </summary>
-        public OAuthRequestToken Body { get; private set; }
+        public SocialOAuthRequestToken Body { get; private set; }
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace Skybrud.Social.OAuth.Responses {
         /// </summary>
         /// <param name="response">The raw response.</param>
         /// <param name="body">The object representing the response body.</param>
-        protected OAuthRequestTokenResponse(SocialHttpResponse response, OAuthRequestToken body) : base(response) {
+        protected SocialOAuthRequestTokenResponse(SocialHttpResponse response, SocialOAuthRequestToken body) : base(response) {
             Body = body;
         }
 
@@ -37,9 +37,9 @@ namespace Skybrud.Social.OAuth.Responses {
         /// </summary>
         /// <param name="response">The raw response.</param>
         /// <param name="body">The object representing the response body.</param>
-        /// <returns>Returns an instance of <see cref="OAuthRequestTokenResponse"/>.</returns>
-        public static OAuthRequestTokenResponse ParseResponse(SocialHttpResponse response, OAuthRequestToken body) {
-            return response == null ? null : new OAuthRequestTokenResponse(response, body);
+        /// <returns>Returns an instance of <see cref="SocialOAuthRequestTokenResponse"/>.</returns>
+        public static SocialOAuthRequestTokenResponse ParseResponse(SocialHttpResponse response, SocialOAuthRequestToken body) {
+            return response == null ? null : new SocialOAuthRequestTokenResponse(response, body);
         }
 
         #endregion

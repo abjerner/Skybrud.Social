@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using Skybrud.Social.Interfaces;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social {
 

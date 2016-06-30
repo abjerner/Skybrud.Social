@@ -1,4 +1,6 @@
-﻿using Skybrud.Social.Http;
+﻿using System.Collections.Specialized;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social {
 
@@ -17,7 +19,7 @@ namespace Skybrud.Social {
             /// <param name="query">The query string of the request.</param>
             /// <param name="postData">The POST data of the request.</param>
             /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-            private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, SocialHttpQueryString query, SocialPostData postData) {
+            private static SocialHttpResponse DoHttpRequest(string url, SocialHttpMethod method, IHttpQueryString query, SocialHttpPostData postData) {
 
                 // Initialize the request
                 SocialHttpRequest request = new SocialHttpRequest {
@@ -47,8 +49,8 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <param name="query">The query string of the request.</param>
             /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-            public static SocialHttpResponse DoHttpGetRequest(string url, SocialHttpQueryString query) {
-                return DoHttpRequest(url, SocialHttpMethod.Get, query, null);
+            public static SocialHttpResponse DoHttpGetRequest(string url, NameValueCollection query) {
+                return DoHttpRequest(url, SocialHttpMethod.Get, new SocialHttpQueryString(query), null);
             }
 
             /// <summary>
@@ -56,10 +58,9 @@ namespace Skybrud.Social {
             /// </summary>
             /// <param name="url">The URL of the request.</param>
             /// <param name="query">The query string of the request.</param>
-            /// <param name="postData">The POST data of the request.</param>
             /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-            public static SocialHttpResponse DoHttpPostRequest(string url, SocialHttpQueryString query, SocialPostData postData) {
-                return DoHttpRequest(url, SocialHttpMethod.Post, query, postData);
+            public static SocialHttpResponse DoHttpGetRequest(string url, IHttpQueryString query) {
+                return DoHttpRequest(url, SocialHttpMethod.Get, query, null);
             }
 
             /// <summary>
@@ -68,7 +69,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <param name="postData">The POST data of the request.</param>
             /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
-            public static SocialHttpResponse DoHttpPostRequest(string url, SocialPostData postData) {
+            public static SocialHttpResponse DoHttpPostRequest(string url, SocialHttpPostData postData) {
                 return DoHttpRequest(url, SocialHttpMethod.Post, null, postData);
             }
 

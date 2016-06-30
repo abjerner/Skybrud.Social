@@ -9,7 +9,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Collection of HTTP headers.
     /// </summary>
-    public class SocialHeaderCollection {
+    public class SocialHttpHeaderCollection {
 
         #region Properties
 
@@ -91,14 +91,14 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates an empty collection of headers.
         /// </summary>
-        public SocialHeaderCollection() {
+        public SocialHttpHeaderCollection() {
             Headers = new WebHeaderCollection();
         }
 
         /// <summary>
         /// Creates a new instance based on the specified <code>headers</code>.
         /// </summary>
-        public SocialHeaderCollection(WebHeaderCollection headers) {
+        public SocialHttpHeaderCollection(WebHeaderCollection headers) {
             Headers = headers ?? new WebHeaderCollection();
         }
 
@@ -123,10 +123,10 @@ namespace Skybrud.Social.Http {
         /// Creates a new instance from the specified <code>headers</code>.
         /// </summary>
         /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
-        public static implicit operator SocialHeaderCollection(NameValueCollection headers) {
+        public static implicit operator SocialHttpHeaderCollection(NameValueCollection headers) {
 
-            // Initialize a new instance of SocialHeaderCollection
-            SocialHeaderCollection collection = new SocialHeaderCollection();
+            // Initialize a new instance of SocialHttpHeaderCollection
+            SocialHttpHeaderCollection collection = new SocialHttpHeaderCollection();
 
             // Copy all items
             if (headers != null) {
@@ -143,10 +143,10 @@ namespace Skybrud.Social.Http {
         /// Creates a new instance from the specified <code>headers</code>.
         /// </summary>
         /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
-        public static implicit operator SocialHeaderCollection(WebHeaderCollection headers) {
+        public static implicit operator SocialHttpHeaderCollection(WebHeaderCollection headers) {
 
-            // Initialize a new instance of SocialHeaderCollection
-            SocialHeaderCollection collection = new SocialHeaderCollection {
+            // Initialize a new instance of SocialHttpHeaderCollection
+            SocialHttpHeaderCollection collection = new SocialHttpHeaderCollection {
                 Headers = headers ?? new WebHeaderCollection()
             };
 

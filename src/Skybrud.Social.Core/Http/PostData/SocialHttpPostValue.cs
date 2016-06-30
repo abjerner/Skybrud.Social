@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http.PostData {
     
     /// <summary>
     /// Class representing a string HTTP POST value.
     /// </summary>
-    public class SocialPostValue : ISocialPostValue {
+    public class SocialHttpPostValue : IHttpPostValue {
 
         #region Properties
 
@@ -28,7 +29,7 @@ namespace Skybrud.Social.Http.PostData {
         /// </summary>
         /// <param name="name">The name/key of the value.</param>
         /// <param name="value">The value.</param>
-        public SocialPostValue(string name, string value) {
+        public SocialHttpPostValue(string name, string value) {
             Name = name;
             Value = value;
         }
@@ -44,14 +45,14 @@ namespace Skybrud.Social.Http.PostData {
         /// <param name="isLast">Whether the value is the last in the request body.</param>
         public void WriteToMultipartStream(Stream stream, string boundary, string newLine, bool isLast) {
 
-            SocialPostData.Write(stream, "--" + boundary + newLine);
-            SocialPostData.Write(stream, "Content-Disposition: form-data; name=\"" + Name + "\"" + newLine);
-            SocialPostData.Write(stream, newLine);
+            SocialHttpPostData.Write(stream, "--" + boundary + newLine);
+            SocialHttpPostData.Write(stream, "Content-Disposition: form-data; name=\"" + Name + "\"" + newLine);
+            SocialHttpPostData.Write(stream, newLine);
 
-            SocialPostData.Write(stream, Value);
+            SocialHttpPostData.Write(stream, Value);
 
-            SocialPostData.Write(stream, newLine);
-            SocialPostData.Write(stream, "--" + boundary + (isLast ? "--" : "") + newLine);
+            SocialHttpPostData.Write(stream, newLine);
+            SocialHttpPostData.Write(stream, "--" + boundary + (isLast ? "--" : "") + newLine);
 
         }
 

@@ -6,14 +6,14 @@ namespace Skybrud.Social.OAuth.Objects {
     /// <summary>
     /// Class representing the response body of a call to get an OAuth 1.0a access token.
     /// </summary>
-    public class OAuthAccessToken {
+    public class SocialOAuthAccessToken {
 
         #region Properties
 
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public OAuthClient Client { get; private set; }
+        public SocialOAuthClient Client { get; private set; }
 
         /// <summary>
         /// Gets the access token.
@@ -39,7 +39,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
-        protected OAuthAccessToken(OAuthClient client, NameValueCollection query) {
+        protected SocialOAuthAccessToken(SocialOAuthClient client, NameValueCollection query) {
 
             Client = client;
 
@@ -63,13 +63,13 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="str">The query string.</param>
-        public static OAuthAccessToken Parse(OAuthClient client, string str) {
+        public static SocialOAuthAccessToken Parse(SocialOAuthClient client, string str) {
 
             // Convert the query string to a NameValueCollection
             NameValueCollection query = SocialUtils.Misc.ParseQueryString(str);
 
             // Initialize a new instance
-            return new OAuthAccessToken(client, query);
+            return new SocialOAuthAccessToken(client, query);
 
         }
 
@@ -78,8 +78,8 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string.</param>
-        public static OAuthAccessToken Parse(OAuthClient client, NameValueCollection query) {
-            return query == null ? null : new OAuthAccessToken(client, query);
+        public static SocialOAuthAccessToken Parse(SocialOAuthClient client, NameValueCollection query) {
+            return query == null ? null : new SocialOAuthAccessToken(client, query);
         }
 
         #endregion

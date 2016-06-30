@@ -10,7 +10,7 @@ namespace Skybrud.Social.Http {
     /// </summary>
     public class SocialHttpResponse {
 
-        private SocialHeaderCollection _headers;
+        private SocialHttpHeaderCollection _headers;
         private byte[] _binary;
         private string _body;
 
@@ -57,8 +57,8 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a collections of headers returned by the server.
         /// </summary>
-        public SocialHeaderCollection Headers {
-            get { return _headers ?? (_headers = new SocialHeaderCollection(Response.Headers)); }
+        public SocialHttpHeaderCollection Headers {
+            get { return _headers ?? (_headers = new SocialHttpHeaderCollection(Response.Headers)); }
         }
 
         /// <summary>
