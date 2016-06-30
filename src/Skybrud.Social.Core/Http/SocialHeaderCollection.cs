@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 
 namespace Skybrud.Social.Http {
@@ -67,10 +68,10 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets the collection of header names (keys) in the collection.
+        /// Gets a <see cref="System.String"/> array representing the keys of the header collection.
         /// </summary>
-        public NameObjectCollectionBase.KeysCollection Keys {
-            get { return Headers.Keys; }
+        public string[] Keys {
+            get { return Headers.Keys.OfType<string>().ToArray(); }
         }
 
         /// <summary>

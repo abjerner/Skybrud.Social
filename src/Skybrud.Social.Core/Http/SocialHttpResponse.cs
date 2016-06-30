@@ -8,6 +8,7 @@ namespace Skybrud.Social.Http {
     /// </summary>
     public class SocialHttpResponse {
 
+        private SocialHeaderCollection _headers;
         private string _body;
 
         #region Properties
@@ -53,8 +54,8 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a collections of headers returned by the server.
         /// </summary>
-        public WebHeaderCollection Headers {
-            get { return Response.Headers; }
+        public SocialHeaderCollection Headers {
+            get { return _headers ?? (_headers = new SocialHeaderCollection(Response.Headers)); }
         }
 
         /// <summary>

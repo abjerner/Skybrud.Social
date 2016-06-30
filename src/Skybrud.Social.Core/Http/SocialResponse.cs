@@ -50,7 +50,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a collection of headers returned by the server.
         /// </summary>
-        public WebHeaderCollection Headers {
+        public SocialHeaderCollection Headers {
             get { return Response.Headers; }
         }
 
