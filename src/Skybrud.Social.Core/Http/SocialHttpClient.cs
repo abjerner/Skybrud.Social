@@ -232,11 +232,6 @@ namespace Skybrud.Social.Http {
             if (queryString == null) queryString = new SocialHttpQueryString();
             if (postData == null) postData = new SocialHttpPostData();
 
-            // Append the query string
-            if (queryString.Count > 0) {
-                url += (url.Contains("?") ? "&" : "?") + queryString;
-            }
-
             // Initialize the request
             SocialHttpRequest request = new SocialHttpRequest {
                 Method = method,
