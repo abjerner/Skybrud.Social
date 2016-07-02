@@ -82,7 +82,7 @@
     <Compile Include="OAuth\Responses\SocialOAuthRequestTokenResponse.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
-    <Compile Include="Location.cs" />
+    <Compile Include="SocialLocation.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialExtensions.cs" />

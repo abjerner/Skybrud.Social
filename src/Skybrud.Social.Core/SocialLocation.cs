@@ -5,7 +5,7 @@ namespace Skybrud.Social {
     /// <summary>
     /// Class representing a location identified by latitude and longitude.
     /// </summary>
-    public class Location : ILocation {
+    public class SocialLocation : ILocation {
 
         #region Properties
 
@@ -28,14 +28,14 @@ namespace Skybrud.Social {
         /// <summary>
         /// Initializes a location with default latitude and longitude.
         /// </summary>
-        public Location() { }
+        public SocialLocation() { }
 
         /// <summary>
         /// Initializes a location with the specified <code>latitude</code> and <code>longitude</code>.
         /// </summary>
         /// <param name="latitude">The latitude of the location.</param>
         /// <param name="longitude">The longitude of the location.</param>
-        public Location(double latitude, double longitude) {
+        public SocialLocation(double latitude, double longitude) {
             Latitude = latitude;
             Longitude = longitude;
         }
