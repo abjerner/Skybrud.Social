@@ -23,7 +23,12 @@ namespace Skybrud.Social.Instagram {
         /// <summary>
         /// To like and unlike items on a user’s behalf.
         /// </summary>
-        Likes = 4
+        Likes = 4,
+
+        /// <summary>
+        /// To read any public profile info and media on a user’s behalf.
+        /// </summary>
+        PublicContent = 4
     
     }
 
