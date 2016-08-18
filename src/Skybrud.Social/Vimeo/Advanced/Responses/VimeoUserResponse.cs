@@ -16,10 +16,6 @@ namespace Skybrud.Social.Vimeo.Advanced.Responses {
             VimeoUserResponse response = new VimeoUserResponse();
             response.ParseResponse(obj);
 
-            // Get the "videos" object
-            JsonObject videos = obj.GetObject("videos");
-            if (videos == null) return null;
-
             // More parsing
             response.Person = obj.GetObject("person", VimeoUser.Parse);
 
