@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" />
+    <Compile Include="SocialUtils.Security.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
