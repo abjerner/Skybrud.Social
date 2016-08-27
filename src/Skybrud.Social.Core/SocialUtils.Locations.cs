@@ -10,6 +10,23 @@ namespace Skybrud.Social {
         /// </summary>
         public static class Locations {
 
+            #region Constants
+
+            /// <summary>
+            /// Gets the equatorial radius of Earth (in meters).
+            /// 
+            /// Notice: When comparing with various online services, they seem to use 6378137 meters for the equatorial
+            /// radius of Earth, while 6378136.6 meters for the equatorial radius is more precise.
+            /// </summary>
+            /// <see>
+            ///     <cref>https://web.archive.org/web/20130826043456/http://asa.usno.navy.mil/SecK/2011/Astronomical_Constants_2011.txt</cref>
+            /// </see>
+            public const double EarthEquatorialRadiusMeters = 6378136.6;
+
+            #endregion
+
+            #region Static methods
+
             /// <summary>
             /// Calculates the distance in meters between two GPS locations.
             /// </summary>
@@ -30,7 +47,6 @@ namespace Skybrud.Social {
             /// <returns>Returns the distance in meters between the two locations.</returns>
             public static double GetDistance(double lat1, double lng1, double lat2, double lng2) {
 
-                // http://stackoverflow.com/a/3440123
                 double ee = (Math.PI * lat1 / 180);
                 double f = (Math.PI * lng1 / 180);
                 double g = (Math.PI * lat2 / 180);
@@ -38,9 +54,12 @@ namespace Skybrud.Social {
                 double i = (Math.Cos(ee) * Math.Cos(g) * Math.Cos(f) * Math.Cos(h) + Math.Cos(ee) * Math.Sin(f) * Math.Cos(g) * Math.Sin(h) + Math.Sin(ee) * Math.Sin(g));
                 double j = (Math.Acos(i));
 
-                return (6371 * j) * 1000d;
+                // Multiply with the equatorial radius of Earth
+                return (6378136.6 * j);
 
             }
+
+            #endregion
 
         }
 
