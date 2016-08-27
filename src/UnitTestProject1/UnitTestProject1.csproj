@@ -63,6 +63,8 @@
     <Compile Include="Time\SocialDateHelperTests.cs" />
     <Compile Include="Time\EasterDateTests.cs" />
     <Compile Include="Time\SocialDateTimeTests.cs" />
+    <Compile Include="Utils\Locations.cs" />
+    <Compile Include="Utils\Security.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
