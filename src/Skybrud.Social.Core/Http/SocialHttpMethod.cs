@@ -11,6 +11,11 @@
         Get,
 
         /// <summary>
+        /// Indicates a request should be made using the <code>HEAD</code> HTTP method.
+        /// </summary>
+        Head,
+
+        /// <summary>
         /// Indicates a request should be made using the <code>POST</code> HTTP method.
         /// </summary>
         Post,
@@ -19,6 +24,11 @@
         /// Indicates a request should be made using the <code>PUT</code> HTTP method.
         /// </summary>
         Put,
+
+        /// <summary>
+        /// Indicates a request should be made using the <code>PATCH</code> HTTP method.
+        /// </summary>
+        Patch,
 
         /// <summary>
         /// Indicates a request should be made using the <code>DELETE</code> HTTP method.
