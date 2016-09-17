@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace Skybrud.Social {
-    
+
     public static partial class SocialUtils {
 
         /// <summary>
@@ -13,23 +13,23 @@ namespace Skybrud.Social {
         /// </summary>
         public static class Security {
 
-			/// <summary>
-			/// Base64 encodes the specified <code>input</code> string.
-			/// </summary>
-			/// <param name="input">The input string to be encoded.</param>
-			/// <returns>Returns the Base64 encoded string.</returns>
-			public static string Base64Encode(string input) {
-				return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
-			}
+            /// <summary>
+            /// Base64 encodes the specified <code>input</code> string.
+            /// </summary>
+            /// <param name="input">The input string to be encoded.</param>
+            /// <returns>Returns the Base64 encoded string.</returns>
+            public static string Base64Encode(string input) {
+                return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
+            }
 
-			/// <summary>
-			/// Base64 decodes the specified <code>input</code> string.
-			/// </summary>
-			/// <param name="input">The input string to be decoded.</param>
-			/// <returns>Returns the Base64 decoded string.</returns>
-			public static string Base64Decode(string input) {
-				return Encoding.UTF8.GetString(Convert.FromBase64String(input));
-			}
+            /// <summary>
+            /// Base64 decodes the specified <code>input</code> string.
+            /// </summary>
+            /// <param name="input">The input string to be decoded.</param>
+            /// <returns>Returns the Base64 decoded string.</returns>
+            public static string Base64Decode(string input) {
+                return Encoding.UTF8.GetString(Convert.FromBase64String(input));
+            }
 
             /// <summary>
             /// Gets the MD5 hash of <code>input</code>, and returns that hash. The input string is converted
@@ -185,7 +185,7 @@ namespace Skybrud.Social {
             }
 
         }
-    
+
     }
 
 }
