@@ -41,7 +41,7 @@ namespace Skybrud.Social.Facebook.Endpoints.Raw {
         /// Gets information about the video matching the specified <code>options</code>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        public SocialHttpResponse GetPost(FacebookGetVideoOptions options) {
+        public SocialHttpResponse GetVideo(FacebookGetVideoOptions options) {
             if (options == null) throw new ArgumentNullException("options");
             return Client.DoAuthenticatedGetRequest("/" + options.Identifier, options);
         }

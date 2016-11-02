@@ -81,6 +81,11 @@ namespace Skybrud.Social.Facebook {
         /// </summary>
         public FacebookUsersEndpoint Users { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the videos endpoint.
+        /// </summary>
+        public FacebookVideosEndpoint Videos { get; private set; }
+
         #endregion
 
         #region Constructor(s)
@@ -99,6 +104,7 @@ namespace Skybrud.Social.Facebook {
             Photos = new FacebookPhotosEndpoint(this);
             Posts = new FacebookPostsEndpoint(this);
             Users = new FacebookUsersEndpoint(this);
+            Videos = new FacebookVideosEndpoint(this);
         }
 
         #endregion
