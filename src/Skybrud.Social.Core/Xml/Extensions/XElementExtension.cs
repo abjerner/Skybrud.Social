@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Skybrud.Social.Exceptions;
+using Skybrud.Essentials.Enums;
 
 namespace Skybrud.Social.Xml.Extensions {
     
@@ -121,7 +121,7 @@ namespace Skybrud.Social.Xml.Extensions {
 
         /// <summary>
         /// Gets an instance of <code>T</code> based on the value of the attribute matching the specified
-        /// <code>name</code>. An exception of the type <see cref="EnumParseException"/> will be thrown if the
+        /// <code>name</code>. An exception of the type <see cref="Exceptions.EnumParseException"/> will be thrown if the
         /// attribute value doesn't match any of the values of <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
@@ -130,7 +130,7 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <returns>Returns an instance of </returns>
         public static T GetAttributeAsEnum<T>(this XElement element, XName name) where T : struct {
             XAttribute child = element == null ? null : element.Attribute(name);
-            return child == null ? default(T) : SocialUtils.Enums.ParseEnum<T>(child.Value);
+            return child == null ? default(T) : EnumHelpers.ParseEnum<T>(child.Value);
         }
 
         /// <summary>
@@ -145,29 +145,7 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetAttributeAsEnum<T>(this XElement element, XName name, T fallback) where T : struct {
             XAttribute child = element == null ? null : element.Attribute(name);
-            return child == null ? fallback : SocialUtils.Enums.ParseEnum(child.Value, fallback);
-        }
-
-        /// <summary>
-        /// Gets the first <see cref="XElement"/> matching the specified <code>name</code>.
-        /// </summary>
-        /// <param name="element">The parent <see cref="XElement"/>.</param>
-        /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
-        /// <returns>Returns an instance of <see cref="XElement"/>, or <code>null</code> if <code>name</code> doesn't match any elements.</returns>
-        public static XElement GetElement(this XElement element, XName name) {
-            return element == null ? null : element.Element(name);
-        }
-
-        /// <summary>
-        /// Gets the first <see cref="XElement"/> matching the specified <code>name</code> and parses it using <code>callback</code>.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="element">The parent <see cref="XElement"/>.</param>
-        /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
-        /// <param name="callback">A callback function for parsing the element.</param>
-        /// <returns>Returns the value as parsed by the specified <code>callback</code>.</returns>
-        public static T GetElement<T>(this XElement element, XName name, Func<XElement, T> callback) {
-            return callback(element == null ? null : element.Element(name));
+            return child == null ? fallback : EnumHelpers.ParseEnum(child.Value, fallback);
         }
 
         /// <summary>
@@ -270,7 +248,7 @@ namespace Skybrud.Social.Xml.Extensions {
 
         /// <summary>
         /// Gets an instance of <code>T</code> based on the value of the element matching the specified
-        /// <code>name</code>. An exception of the type <see cref="EnumParseException"/> will be thrown if the
+        /// <code>name</code>. An exception of the type <see cref="Exceptions.EnumParseException"/> will be thrown if the
         /// element value doesn't match any of the values of <code>T</code>.
         /// </summary>
         /// <typeparam name="T">The type of the enum.</typeparam>
@@ -279,7 +257,7 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <returns>Returns an instance of </returns>
         public static T GetElementValueAsEnum<T>(this XElement element, XName name) where T : struct {
             XElement child = element == null ? null : element.Element(name);
-            return SocialUtils.Enums.ParseEnum<T>(child == null ? null : child.Value);
+            return EnumHelpers.ParseEnum<T>(child == null ? null : child.Value);
         }
 
         /// <summary>
@@ -294,29 +272,7 @@ namespace Skybrud.Social.Xml.Extensions {
         /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetElementValueAsEnum<T>(this XElement element, XName name, T fallback) where T : struct {
             XElement child = element == null ? null : element.Element(name);
-            return child == null ? fallback : SocialUtils.Enums.ParseEnum(child.Value, fallback);
-        }
-
-        /// <summary>
-        /// Gets an array of <see cref="XElement"/> matching the specified <code>name</code>.
-        /// </summary>
-        /// <param name="element">The parent <see cref="XElement"/>.</param>
-        /// <param name="name">An instance of <see cref="XName"/> identifying the elements.</param>
-        /// <returns>Returns an array of <see cref="XElement"/>.</returns>
-        public static XElement[] GetElements(this XElement element, XName name) {
-            return element.Elements(name).ToArray();
-        }
-
-        /// <summary>
-        /// Gets an array <see cref="XElement"/> matching the specified <code>name</code> and parses it using <code>callback</code>.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="element">The parent <see cref="XElement"/>.</param>
-        /// <param name="name">An instance of <see cref="XName"/> identifying the element.</param>
-        /// <param name="callback">A callback function for parsing each element.</param>
-        /// <returns>Returns an array of <code>T</code>.</returns>
-        public static T[] GetElements<T>(this XElement element, XName name, Func<XElement, T> callback) {
-            return element.Elements(name).Select(callback).ToArray();
+            return child == null ? fallback : EnumHelpers.ParseEnum(child.Value, fallback);
         }
 
     }

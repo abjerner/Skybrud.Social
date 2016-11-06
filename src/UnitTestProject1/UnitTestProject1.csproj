@@ -54,9 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Json\JObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings\SocialStringHelpersTests.cs" />
     <Compile Include="Time\National\UnitedStatesDateTests.cs" />
     <Compile Include="Time\National\DanishDateTests.cs" />
     <Compile Include="Time\National\CanadianDateTests.cs" />
@@ -64,7 +62,6 @@
     <Compile Include="Time\EasterDateTests.cs" />
     <Compile Include="Time\SocialDateTimeTests.cs" />
     <Compile Include="Utils\Locations.cs" />
-    <Compile Include="Utils\Security.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Enums;
 
 namespace Skybrud.Social.Json.Extensions {
     
@@ -244,7 +245,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="path">A <see cref="String"/> that contains a JPath expression.</param>
         /// <returns>Returns an instance of <code>T</code>.</returns>
         public static T GetEnum<T>(this JObject obj, string path) where T : struct {
-            return SocialUtils.Enums.ParseEnum<T>(GetString(obj, path));
+            return EnumHelpers.ParseEnum<T>(GetString(obj, path));
         }
 
         /// <summary>
@@ -256,7 +257,7 @@ namespace Skybrud.Social.Json.Extensions {
         /// <param name="fallback">The fallback value if the value in the JSON couldn't be parsed.</param>
         public static T GetEnum<T>(this JObject obj, string path, T fallback) where T : struct {
             string value = GetString(obj, path);
-            return String.IsNullOrWhiteSpace(value) ? fallback : SocialUtils.Enums.ParseEnum(value, fallback);
+            return String.IsNullOrWhiteSpace(value) ? fallback : EnumHelpers.ParseEnum(value, fallback);
         }
 
         /// <summary>

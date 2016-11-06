@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Skybrud.Essentials.Strings;
 using Skybrud.Social.Http.PostData;
 using Skybrud.Social.Interfaces.Http;
 
@@ -189,7 +190,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <returns>Returns the POST data as an URL encoded string.</returns>
         public override string ToString() {
-            return String.Join("&", _data.Select(pair => SocialUtils.Strings.UrlEncode(pair.Key) + "=" + SocialUtils.Strings.UrlEncode(pair.Value.ToString())));
+            return String.Join("&", _data.Select(pair => StringHelpers.UrlEncode(pair.Key) + "=" + StringHelpers.UrlEncode(pair.Value.ToString())));
         }
 
         /// <summary>

@@ -2,6 +2,8 @@ using System;
 using System.Net;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Json;
+using Skybrud.Essentials.Xml;
 
 namespace Skybrud.Social.Http {
     
@@ -76,7 +78,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
         protected static JObject ParseJsonObject(string json) {
-            return SocialUtils.Json.ParseJsonObject(json);
+            return JsonHelpers.ParseJsonObject(json);
         }
 
         /// <summary>
@@ -87,7 +89,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
-            return SocialUtils.Json.ParseJsonObject(json, func);
+            return JsonHelpers.ParseJsonObject(json, func);
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
         protected static JArray ParseJsonArray(string json) {
-            return SocialUtils.Json.ParseJsonArray(json);
+            return JsonHelpers.ParseJsonArray(json);
         }
 
         /// <summary>
@@ -106,7 +108,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
-            return SocialUtils.Json.ParseJsonArray(json, func);
+            return JsonHelpers.ParseJsonArray(json, func);
         }
 
         /// <summary>
@@ -114,8 +116,8 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="xml">The XML to be parsed.</param>
         /// <returns>Returns an instance of <see cref="XElement"/>.</returns>
-        protected static XElement ParseXml(string xml) {
-            return XElement.Parse(xml);
+        protected static XElement ParseXmlElement(string xml) {
+            return XmlHelpers.ParseXmlElement(xml);
         }
 
         /// <summary>
@@ -126,8 +128,8 @@ namespace Skybrud.Social.Http {
         /// <param name="xml">The XML to be parsed.</param>
         /// <param name="callback">The callback function used for converted the parsed <see cref="XElement"/>.</param>
         /// <returns>Returns an instance of <code>T</code> representing the specified <code>xml</code>.</returns>
-        protected static T ParseXml<T>(string xml, Func<XElement, T> callback) {
-            return callback(XElement.Parse(xml));
+        protected static T ParseXmlElement<T>(string xml, Func<XElement, T> callback) {
+            return XmlHelpers.ParseXmlElement(xml, callback);
         }
 
         #endregion

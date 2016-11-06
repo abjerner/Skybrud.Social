@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Skybrud.Essentials.Strings;
 
 namespace Skybrud.Social {
 
@@ -28,7 +29,7 @@ namespace Skybrud.Social {
             /// <param name="collection">The collection to convert.</param>
             /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
             public static string NameValueCollectionToQueryString(NameValueCollection collection) {
-                return String.Join("&", Array.ConvertAll(collection.AllKeys, key => Strings.UrlEncode(key) + "=" + Strings.UrlEncode(collection[key])));
+                return String.Join("&", Array.ConvertAll(collection.AllKeys, key => StringHelpers.UrlEncode(key) + "=" + StringHelpers.UrlEncode(collection[key])));
             }
 
             /// <summary>
@@ -41,7 +42,7 @@ namespace Skybrud.Social {
                 return String.Join("&", (
                     from string key in collection.Keys
                     where collection[key] != null || includeIfNull
-                    select Strings.UrlEncode(key) + "=" + Strings.UrlEncode(collection[key])
+                    select StringHelpers.UrlEncode(key) + "=" + StringHelpers.UrlEncode(collection[key])
                 ));
             }
 

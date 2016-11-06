@@ -93,11 +93,8 @@
     <Compile Include="Http\SocialHttpRequest.cs" />
     <Compile Include="Http\SocialHttpResponse.cs" />
     <Compile Include="SocialUtils.cs" />
-    <Compile Include="SocialUtils.Json.cs" />
     <Compile Include="SocialUtils.Locations.cs" />
-    <Compile Include="SocialUtils.Enums.cs" />
     <Compile Include="SocialUtils.Misc.cs" />
-    <Compile Include="SocialUtils.Strings.cs" />
     <Compile Include="SocialUtils.Http.cs" />
     <Compile Include="SocialUtils.Dates.cs" />
     <Compile Include="SocialUtils.Version.cs" />
@@ -111,7 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" />
-    <Compile Include="SocialUtils.Security.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
