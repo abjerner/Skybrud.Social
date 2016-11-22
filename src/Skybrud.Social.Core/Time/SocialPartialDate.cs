@@ -76,6 +76,26 @@ namespace Skybrud.Social.Time {
         }
 
         /// <summary>
+        /// Initializes a new instance from the specified <code>year</code>.
+        /// </summary>
+        /// <param name="year">The year of the date.</param>
+        public SocialPartialDate(int year) {
+            Year = Math.Max(0, year);
+            DateTime = new DateTime(Year == 0 ? 1 : Year, Month == 0 ? 1 : Month, Day == 0 ? 1 : Day);
+        }
+
+        /// <summary>
+        /// Initializes a new instance from the specified <code>year</code> and <code>month</code>.
+        /// </summary>
+        /// <param name="year">The year of the date.</param>
+        /// <param name="month">The month of the date.</param>
+        public SocialPartialDate(int year, int month) {
+            Year = Math.Max(0, year);
+            Month = Math.Max(0, month);
+            DateTime = new DateTime(Year == 0 ? 1 : Year, Month == 0 ? 1 : Month, Day == 0 ? 1 : Day);
+        }
+
+        /// <summary>
         /// Initializes a new instance from the specified <code>year</code>, <code>month</code> and <code>day</code>.
         /// </summary>
         /// <param name="year">The year of the date.</param>
@@ -106,16 +126,41 @@ namespace Skybrud.Social.Time {
         /// <code>yyyy-MM-dd</code>. If specified in any other format, an exception will be thrown.
         /// </summary>
         /// <param name="str">The string to be parsed.</param>
-        /// <returns>Returnns an instance of <see cref="SocialPartialDate"/>.</returns>
+        /// <returns>Returns an instance of <see cref="SocialPartialDate"/>.</returns>
         public static SocialPartialDate Parse(string str) {
             if (String.IsNullOrWhiteSpace(str)) return null;
-            Match match = Regex.Match(str, "^([0-9]{4})-([0-9]{2})-([0-9]{2})$");
-            if (!match.Success) throw new ArgumentException("Specified string is not a valid date", "str");
-            return new SocialPartialDate(
-                Int32.Parse(match.Groups[1].Value),
-                Int32.Parse(match.Groups[2].Value),
-                Int32.Parse(match.Groups[3].Value)
-            );
+            Match m1 = Regex.Match(str, "^([0-9]{4})$");
+            Match m2 = Regex.Match(str, "^([0-9]{4})-([0-9]{2})$");
+            Match m3 = Regex.Match(str, "^([0-9]{4})-([0-9]{2})-([0-9]{2})$");
+            if (m1.Success) return new SocialPartialDate(Int32.Parse(m1.Groups[1].Value));
+            if (m2.Success) return new SocialPartialDate(Int32.Parse(m2.Groups[1].Value), Int32.Parse(m2.Groups[2].Value));
+            if (m3.Success) return new SocialPartialDate(Int32.Parse(m3.Groups[1].Value), Int32.Parse(m3.Groups[2].Value), Int32.Parse(m3.Groups[3].Value));
+            throw new ArgumentException("Specified string is not a valid date", "str");
+        }
+
+        /// <summary>
+        /// Parses the specified <code>str</code>. If the string is either <code>null</code> or whitespace,
+        /// <code>null</code> will be returned. The method will parse dates specified in the format
+        /// <code>yyyy-MM-dd</code>. If specified in any other format, an exception will be thrown.
+        /// </summary>
+        /// <param name="str">The string to be parsed.</param>
+        /// <param name="date">The parsed date.</param>
+        /// <returns>Returns an instance of <see cref="SocialPartialDate"/>.</returns>
+        public static bool TryParse(string str, out SocialPartialDate date) {
+            
+            // Initialize "date"
+            date = null;
+            
+            // Match various formats
+            Match m1 = Regex.Match(str ?? "", "^([0-9]{4})$");
+            Match m2 = Regex.Match(str ?? "", "^([0-9]{4})-([0-9]{2})$");
+            Match m3 = Regex.Match(str ?? "", "^([0-9]{4})-([0-9]{2})-([0-9]{2})$");
+            if (m1.Success) date = new SocialPartialDate(Int32.Parse(m1.Groups[1].Value));
+            if (m2.Success) date = new SocialPartialDate(Int32.Parse(m2.Groups[1].Value), Int32.Parse(m2.Groups[2].Value));
+            if (m3.Success) date = new SocialPartialDate(Int32.Parse(m3.Groups[1].Value), Int32.Parse(m3.Groups[2].Value), Int32.Parse(m3.Groups[3].Value));
+
+            return date != null;
+
         }
 
         #endregion
