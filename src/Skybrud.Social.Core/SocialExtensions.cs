@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social {
 
@@ -8,15 +7,6 @@ namespace Skybrud.Social {
     /// Varois extension methods used throughout the Skybrud.Social implementation.
     /// </summary>
     public static class SocialExtensions {
-        
-        /// <summary>
-        /// Calculates the distance in meters between two GPS locations.
-        /// </summary>
-        /// <param name="loc1">The first location.</param>
-        /// <param name="loc2">The second location.</param>
-        public static double GetDistance(this ILocation loc1, ILocation loc2) {
-            return SocialUtils.Locations.GetDistance(loc1, loc2);
-        }
         
         /// <summary>
         /// Appends the specified <code>query</code> to <code>builder</code>.

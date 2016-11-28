@@ -1,4 +1,5 @@
 using System;
+using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.OAuth {
 
@@ -20,7 +21,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <returns>The current Unix timestamp as a string.</returns>
         public static string GetTimestamp() {
-            return SocialUtils.Time.GetCurrentUnixTimestamp() + "";
+            return TimeHelper.GetCurrentUnixTimestamp() + "";
         }
 
     }

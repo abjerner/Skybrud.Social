@@ -29,7 +29,7 @@ namespace Skybrud.Social {
             /// <param name="collection">The collection to convert.</param>
             /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
             public static string NameValueCollectionToQueryString(NameValueCollection collection) {
-                return String.Join("&", Array.ConvertAll(collection.AllKeys, key => StringHelpers.UrlEncode(key) + "=" + StringHelpers.UrlEncode(collection[key])));
+                return String.Join("&", Array.ConvertAll(collection.AllKeys, key => StringHelper.UrlEncode(key) + "=" + StringHelper.UrlEncode(collection[key])));
             }
 
             /// <summary>
@@ -42,7 +42,7 @@ namespace Skybrud.Social {
                 return String.Join("&", (
                     from string key in collection.Keys
                     where collection[key] != null || includeIfNull
-                    select StringHelpers.UrlEncode(key) + "=" + StringHelpers.UrlEncode(collection[key])
+                    select StringHelper.UrlEncode(key) + "=" + StringHelper.UrlEncode(collection[key])
                 ));
             }
 

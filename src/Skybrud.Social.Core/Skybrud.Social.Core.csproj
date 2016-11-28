@@ -40,8 +40,8 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Skybrud.Essentials, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Essentials.1.0.3\lib\net45\Skybrud.Essentials.dll</HintPath>
+    <Reference Include="Skybrud.Essentials, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.Essentials.1.0.4\lib\net45\Skybrud.Essentials.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -59,9 +59,6 @@
     <Compile Include="Http\SocialHttpQueryString.cs" />
     <Compile Include="Interfaces\Http\IHttpPostData.cs" />
     <Compile Include="Interfaces\Http\IHttpQueryString.cs" />
-    <Compile Include="Json\Converters\DateTimeUnixTimeConverter.cs" />
-    <Compile Include="Json\Converters\SocialDateTimeConverter.cs" />
-    <Compile Include="Json\Converters\SocialDateTimeUnixTimeConverter.cs" />
     <Compile Include="Properties\AssemblyInfoVersion.cs" />
     <Compile Include="Interfaces\Http\IHttpPostValue.cs" />
     <Compile Include="Http\PostData\SocialHttpPostFileValue.cs" />
@@ -80,26 +77,16 @@
     <Compile Include="OAuth\SocialOAuthUtils.cs" />
     <Compile Include="OAuth\Responses\SocialOAuthAccessTokenResponse.cs" />
     <Compile Include="OAuth\Responses\SocialOAuthRequestTokenResponse.cs" />
-    <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
-    <Compile Include="SocialLocation.cs" />
     <Compile Include="Properties\AssemblyInfoGenerated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocialExtensions.cs" />
     <Compile Include="Http\SocialHttpRequest.cs" />
     <Compile Include="Http\SocialHttpResponse.cs" />
     <Compile Include="SocialUtils.cs" />
-    <Compile Include="SocialUtils.Locations.cs" />
     <Compile Include="SocialUtils.Misc.cs" />
     <Compile Include="SocialUtils.Http.cs" />
-    <Compile Include="SocialUtils.Dates.cs" />
     <Compile Include="SocialUtils.Version.cs" />
-    <Compile Include="SocialUtils.Time.cs" />
-    <Compile Include="Time\SocialDateMonth.cs" />
-    <Compile Include="Time\SocialDateTime.cs" />
-    <Compile Include="Time\SocialDateWeek.cs" />
-    <Compile Include="Time\SocialDateYear.cs" />
-    <Compile Include="Time\SocialPartialDate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" />
