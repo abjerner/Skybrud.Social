@@ -1,5 +1,6 @@
 using Skybrud.Social.Http;
 using Skybrud.Social.Twitter.OAuth;
+using Skybrud.Social.Twitter.Options.Account;
 
 namespace Skybrud.Social.Twitter.Endpoints.Raw {
     
@@ -29,6 +30,13 @@ namespace Skybrud.Social.Twitter.Endpoints.Raw {
         /// </see>
         public SocialHttpResponse VerifyCredentials() {
             return Client.DoHttpGetRequest("https://api.twitter.com/1.1/account/verify_credentials.json");
+        }
+
+        /// <see>
+        ///     <cref>https://dev.twitter.com/rest/reference/get/account/verify_credentials</cref>
+        /// </see>
+        public SocialHttpResponse VerifyCredentials(TwitterVerifyCrendetialsOptions options) {
+            return Client.DoHttpGetRequest("https://api.twitter.com/1.1/account/verify_credentials.json", options);
         }
 
         #endregion

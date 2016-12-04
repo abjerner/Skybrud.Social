@@ -1,4 +1,5 @@
 using Skybrud.Social.Twitter.Endpoints.Raw;
+using Skybrud.Social.Twitter.Options.Account;
 using Skybrud.Social.Twitter.Responses;
 
 namespace Skybrud.Social.Twitter.Endpoints {
@@ -36,6 +37,13 @@ namespace Skybrud.Social.Twitter.Endpoints {
         /// </summary>
         public TwitterUserResponse VerifyCredentials() {
             return TwitterUserResponse.ParseResponse(Raw.VerifyCredentials());
+        }
+
+        /// <summary>
+        /// Verify and get information about the user authenticated user (requires an access token).
+        /// </summary>
+        public TwitterUserResponse VerifyCredentials(TwitterVerifyCrendetialsOptions options) {
+            return TwitterUserResponse.ParseResponse(Raw.VerifyCredentials(options));
         }
 
         #endregion

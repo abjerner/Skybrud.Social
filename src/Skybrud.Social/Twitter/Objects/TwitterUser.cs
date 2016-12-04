@@ -239,6 +239,15 @@ namespace Skybrud.Social.Twitter.Objects {
         /// </summary>
         public TwitterUserEntities Entities { get; private set; }
 
+        /// <summary>
+        /// Gets the email of the user. The email is only included in the response when using the
+        /// <code>verify_credentials</code> in the account endpoint with the right parameters.
+        /// </summary>
+        /// <see>
+        ///     <cref>https://dev.twitter.com/rest/reference/get/account/verify_credentials</cref>
+        /// </see>
+        public string Email { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -293,7 +302,8 @@ namespace Skybrud.Social.Twitter.Objects {
                 ProfileSidebarBorderColor = obj.GetString("profile_sidebar_border_color"),
                 ProfileSidebarFillColor = obj.GetString("profile_sidebar_fill_color"),
                 ProfileTextColor = obj.GetString("profile_text_color"),
-                ProfileUseBackgroundImage = obj.GetBoolean("profile_use_background_image")
+                ProfileUseBackgroundImage = obj.GetBoolean("profile_use_background_image"),
+                Email = obj.GetString("email")
             };
         }
 

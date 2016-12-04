@@ -511,6 +511,7 @@
     <Compile Include="Twitter\Endpoints\Raw\TwitterFavoritesRawEndpoint.cs" />
     <Compile Include="Twitter\Enums\TwitterListMode.cs" />
     <Compile Include="Twitter\Objects\Lists\TwitterList.cs" />
+    <Compile Include="Twitter\Options\Account\TwitterVerifyCrendetialsOptions.cs" />
     <Compile Include="Twitter\Options\Favorites\TwitterGetFavoritesOptions.cs" />
     <Compile Include="Twitter\Endpoints\Raw\TwitterSearchRawEndpoint.cs" />
     <Compile Include="Twitter\Endpoints\TwitterSearchEndpoint.cs" />
