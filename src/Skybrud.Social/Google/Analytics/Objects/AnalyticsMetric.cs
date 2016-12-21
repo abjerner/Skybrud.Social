@@ -479,16 +479,16 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Constructor
 
-        private AnalyticsMetric(string name) {
+        public AnalyticsMetric(string name) {
             Name = name;
         }
 
-        private AnalyticsMetric(string name, string groupName) {
+        public AnalyticsMetric(string name, string groupName) {
             Name = name;
             GroupName = groupName;
         }
 
-        private AnalyticsMetric(string name, string groupName, bool obsolete) {
+        public AnalyticsMetric(string name, string groupName, bool obsolete) {
             Name = name;
             GroupName = groupName;
             IsObsolete = obsolete;

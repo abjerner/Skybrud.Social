@@ -282,7 +282,7 @@ namespace Skybrud.Social.Google.Analytics.Objects {
 
         #region Constructor
 
-        private AnalyticsDimension(string name) {
+        public AnalyticsDimension(string name) {
             Name = name;
         }
 
