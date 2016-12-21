@@ -35,7 +35,7 @@ namespace Skybrud.Social.Google.Analytics {
         /// View and manage user permissions for Analytics accounts.
         /// </summary>
         public static readonly AnalyticsScope ManageUsers = new AnalyticsScope(
-            "https://www.googleapis.com/auth/analytics.readonly",
+            "https://www.googleapis.com/auth/analytics.manage.users",
             "View and manage user permissions for Analytics accounts."
         );
 
