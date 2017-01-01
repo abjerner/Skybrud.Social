@@ -151,6 +151,236 @@ namespace Skybrud.Social {
 
             #endregion
 
+            #region DoHttpPutRequest
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), default(IHttpPostData));
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, NameValueCollection queryString) {
+                return DoHttpRequest(SocialHttpMethod.Put, url, new SocialHttpQueryString(queryString), default(IHttpPostData));
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <param name="postData">The PUT data of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, NameValueCollection queryString, NameValueCollection postData) {
+                return DoHttpRequest(SocialHttpMethod.Put, url, new SocialHttpQueryString(queryString), new SocialHttpPostData(postData));
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="options">The options for the call to the specified <code>url</code>.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, IHttpGetOptions options) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (options == null) throw new ArgumentNullException("options");
+                return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), null);
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="options">The options for the call to the specified <code>url</code>.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, IHttpPostOptions options) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (options == null) throw new ArgumentNullException("options");
+                return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), options.GetPostData());
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The base URL of the request (no query string).</param>
+            /// <param name="queryString">The query string.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString) {
+                return DoHttpRequest(SocialHttpMethod.Put, url, queryString, null);
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The base URL of the request (no query string).</param>
+            /// <param name="postData">The PUT data.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, IHttpPostData postData) {
+                return DoHttpRequest(SocialHttpMethod.Put, url, null, postData);
+            }
+
+            /// <summary>
+            /// Makes a PUT request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <param name="postData">The PUT data of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Put, url, queryString, postData);
+            }
+
+            #endregion
+
+            #region DoHttpPatchRequest
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), default(IHttpPostData));
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, NameValueCollection queryString) {
+                return DoHttpRequest(SocialHttpMethod.Patch, url, new SocialHttpQueryString(queryString), default(IHttpPostData));
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <param name="postData">The PATCH data of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, NameValueCollection queryString, NameValueCollection postData) {
+                return DoHttpRequest(SocialHttpMethod.Patch, url, new SocialHttpQueryString(queryString), new SocialHttpPostData(postData));
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="options">The options for the call to the specified <code>url</code>.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpGetOptions options) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (options == null) throw new ArgumentNullException("options");
+                return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), null);
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="options">The options for the call to the specified <code>url</code>.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpPostOptions options) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (options == null) throw new ArgumentNullException("options");
+                return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), options.GetPostData());
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The base URL of the request (no query string).</param>
+            /// <param name="queryString">The query string.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString) {
+                return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, null);
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The base URL of the request (no query string).</param>
+            /// <param name="postData">The PATCH data.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpPostData postData) {
+                return DoHttpRequest(SocialHttpMethod.Patch, url, null, postData);
+            }
+
+            /// <summary>
+            /// Makes a PATCH request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <param name="postData">The PATCH data of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, postData);
+            }
+
+            #endregion
+
+            #region DoHttpDeleteRequest
+
+            /// <summary>
+            /// Makes a HTTP DELETE request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpDeleteRequest(string url) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Delete, url, default(IHttpQueryString));
+            }
+
+            /// <summary>
+            /// Makes a DELETE request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpDeleteRequest(string url, NameValueCollection queryString) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Delete, url, new SocialHttpQueryString(queryString));
+            }
+
+            /// <summary>
+            /// Makes a DELETE request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="options">The options for the call to the specified <code>url</code>.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpDeleteRequest(string url, IHttpGetOptions options) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (options == null) throw new ArgumentNullException("options");
+                return DoHttpRequest(SocialHttpMethod.Delete, url, options.GetQueryString());
+            }
+
+            /// <summary>
+            /// Makes a DELETE request to the specified <code>url</code>.
+            /// </summary>
+            /// <param name="url">The URL of the request.</param>
+            /// <param name="queryString">The query string of the request.</param>
+            /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+            public static SocialHttpResponse DoHttpDeleteRequest(string url, IHttpQueryString queryString) {
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                return DoHttpRequest(SocialHttpMethod.Delete, url, queryString);
+            }
+
+            #endregion
+
             #region DoHttpRequest
 
             /// <summary>
