@@ -68,6 +68,25 @@ namespace Skybrud.Social.Twitter.Objects {
             get { return CreatedAt; }
         }
 
+        /// <summary>
+        /// Gets a reference to the retweeted status message (if this status message is a retweet).
+        /// </summary>
+        public TwitterStatusMessage RetweetedStatus { get; private set; }
+
+        /// <summary>
+        /// Gets wether this status message is a retweet.
+        /// </summary>
+        public bool HasRetweetedStatus {
+            get { return RetweetedStatus != null; }
+        }
+
+        /// <summary>
+        /// Gets whether this status message is a retweet.
+        /// </summary>
+        public bool IsRetweet {
+            get { return RetweetedStatus != null; }
+        }
+
         #endregion
 
         #region Constructors
@@ -136,6 +155,8 @@ namespace Skybrud.Social.Twitter.Objects {
 
             msg.IsPossiblyOffensive = obj.GetBoolean("possibly_sensitive");
             msg.Language = obj.GetString("lang");
+
+            msg.RetweetedStatus = obj.GetObject("retweeted_status", Parse);
 
             return msg;
 
