@@ -78,7 +78,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
         protected static JObject ParseJsonObject(string json) {
-            return JsonHelpers.ParseJsonObject(json);
+            return JsonUtils.ParseJsonObject(json);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
-            return JsonHelpers.ParseJsonObject(json, func);
+            return JsonUtils.ParseJsonObject(json, func);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Skybrud.Social.Http {
         /// <param name="json">The JSON string to be parsed.</param>
         /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
         protected static JArray ParseJsonArray(string json) {
-            return JsonHelpers.ParseJsonArray(json);
+            return JsonUtils.ParseJsonArray(json);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Skybrud.Social.Http {
         /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
         /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
-            return JsonHelpers.ParseJsonArray(json, func);
+            return JsonUtils.ParseJsonArray(json, func);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Skybrud.Social.Http {
         /// <param name="xml">The XML to be parsed.</param>
         /// <returns>Returns an instance of <see cref="XElement"/>.</returns>
         protected static XElement ParseXmlElement(string xml) {
-            return XmlHelpers.ParseXmlElement(xml);
+            return XmlUtils.ParseXmlElement(xml);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Skybrud.Social.Http {
         /// <param name="callback">The callback function used for converted the parsed <see cref="XElement"/>.</param>
         /// <returns>Returns an instance of <code>T</code> representing the specified <code>xml</code>.</returns>
         protected static T ParseXmlElement<T>(string xml, Func<XElement, T> callback) {
-            return XmlHelpers.ParseXmlElement(xml, callback);
+            return XmlUtils.ParseXmlElement(xml, callback);
         }
 
         #endregion
