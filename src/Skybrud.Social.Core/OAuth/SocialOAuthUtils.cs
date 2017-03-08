@@ -11,7 +11,7 @@ namespace Skybrud.Social.OAuth {
         /// <summary>
         /// Generates a nonce (random value) used for creating the authorization header.
         /// </summary>
-        /// <returns>Returns a random value to be used for creating the authorization header.</returns>
+        /// <returns>A random value to be used for creating the authorization header.</returns>
         public static string GenerateNonce() {
             return Guid.NewGuid().ToString().Replace("-", "");
         }

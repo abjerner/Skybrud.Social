@@ -9,7 +9,7 @@ namespace Skybrud.Social {
     public static class SocialExtensions {
         
         /// <summary>
-        /// Appends the specified <code>query</code> to <code>builder</code>.
+        /// Appends the specified <paramref name="query"/> to <paramref name="builder"/>.
         /// </summary>
         /// <param name="builder">The URI builder.</param>
         /// <param name="query">The query string.</param>
@@ -21,7 +21,7 @@ namespace Skybrud.Social {
         }
 
         /// <summary>
-        /// Merges <code>builder</code> with the specified <code>query</code>.
+        /// Merges <paramref name="builder"/> with the specified <paramref name="query"/>.
         /// </summary>
         /// <param name="builder">The URI builder.</param>
         /// <param name="query">The query string.</param>
@@ -33,7 +33,7 @@ namespace Skybrud.Social {
         }
         
         /// <summary>
-        /// Merges the values of <code>query</code> into <code>subject</code>.
+        /// Merges the values of <paramref name="query"/> into <paramref name="subject"/>.
         /// </summary>
         /// <param name="subject">The subject.</param>
         /// <param name="query">The query with the new values.</param>

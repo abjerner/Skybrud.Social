@@ -39,7 +39,7 @@ namespace Skybrud.Social.OAuth.Objects {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <code>client</code> and <code>query</code>.
+        /// Initializes a new instance based on the specified <paramref name="client"/> and <paramref name="query"/>.
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>

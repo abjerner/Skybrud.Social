@@ -20,7 +20,7 @@ namespace Skybrud.Social.OAuth.Responses {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <code>response</code> and <code>body</code>.
+        /// Initializes a new instance from the specified <paramref name="response"/> and <paramref name="body"/>.
         /// </summary>
         /// <param name="response">The raw response.</param>
         /// <param name="body">The object representing the response body.</param>
@@ -33,11 +33,11 @@ namespace Skybrud.Social.OAuth.Responses {
         #region Static methods
 
         /// <summary>
-        /// Initializes a new instance from the specified <code>response</code> and <code>body</code>.
+        /// Initializes a new instance from the specified <paramref name="response"/> and <paramref name="body"/>.
         /// </summary>
         /// <param name="response">The raw response.</param>
         /// <param name="body">The object representing the response body.</param>
-        /// <returns>Returns an instance of <see cref="SocialOAuthAccessTokenResponse"/>.</returns>
+        /// <returns>An instance of <see cref="SocialOAuthAccessTokenResponse"/>.</returns>
         public static SocialOAuthAccessTokenResponse ParseResponse(SocialHttpResponse response, SocialOAuthAccessToken body) {
             return response == null ? null : new SocialOAuthAccessTokenResponse(response, body);
         }

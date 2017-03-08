@@ -109,7 +109,8 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Initializes a new OAuth client with the specified <code>consumerKey</code> and <code>consumerSecret</code>.
+        /// Initializes a new OAuth client with the specified <paramref name="consumerKey"/> and
+        /// <paramref name="consumerSecret"/>.
         /// </summary>
         /// <param name="consumerKey">The consumer key of your application.</param>
         /// <param name="consumerSecret">The consumer secret of your application.</param>
@@ -123,8 +124,8 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Initializes a new OAuth client with the specified <code>consumerKey</code>, <code>consumerSecret</code> and
-        /// <code>callback</code>.
+        /// Initializes a new OAuth client with the specified <paramref name="consumerKey"/>,
+        /// <paramref name="consumerKey"/> and <paramref name="callback"/>.
         /// </summary>
         /// <param name="consumerKey">The consumer key of your application.</param>
         /// <param name="consumerSecret">The consumer secret of your application.</param>
@@ -154,10 +155,10 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Generates the string for the authorization header based on the specified signature.
+        /// Generates the string for the authorization header based on the specified <paramref name="signature"/>.
         /// </summary>
         /// <param name="signature">The signature.</param>
-        /// <returns>Returns the generated header string.</returns>
+        /// <returns>The generated header string.</returns>
         public virtual string GenerateHeaderString(string signature) {
             string oauthHeaders = "OAuth realm=\"\",";
             if (!String.IsNullOrEmpty(Callback)) oauthHeaders += "oauth_callback=\"" + Uri.EscapeDataString(Callback) + "\",";
@@ -176,7 +177,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="queryString">Values representing the query string.</param>
         /// <param name="body">Values representing the POST body.</param>
-        /// <returns>Returns the generated parameter string.</returns>
+        /// <returns>The generated parameter string.</returns>
         public virtual string GenerateParameterString(NameValueCollection queryString, NameValueCollection body) {
 
             // The parameters must be alphabetically sorted
@@ -217,7 +218,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <param name="queryString">Values representing the query string.</param>
         /// <param name="body">Values representing the POST body.</param>
-        /// <returns>Returns the generated parameter string.</returns>
+        /// <returns>The generated parameter string.</returns>
         public virtual string GenerateParameterString(IHttpQueryString queryString, IHttpPostData body) {
 
             // The parameters must be alphabetically sorted
@@ -256,7 +257,7 @@ namespace Skybrud.Social.OAuth {
         /// <summary>
         /// Generates the key used for making the signature.
         /// </summary>
-        /// <returns>Returns the generated signature key.</returns>
+        /// <returns>The generated signature key.</returns>
         public virtual string GenerateSignatureKey() {
             return Uri.EscapeDataString(ConsumerSecret ?? "") + "&" + Uri.EscapeDataString(TokenSecret ?? "");
         }
@@ -268,7 +269,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
-        /// <returns>Returns the generated signature value.</returns>
+        /// <returns>The generated signature value.</returns>
         public virtual string GenerateSignatureValue(SocialHttpMethod method, string url, NameValueCollection queryString, NameValueCollection body) {
             return String.Format(
                 "{0}&{1}&{2}",
@@ -285,7 +286,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
-        /// <returns>Returns the generated signature value.</returns>
+        /// <returns>The generated signature value.</returns>
         public virtual string GenerateSignatureValue(SocialHttpMethod method, string url, IHttpQueryString queryString, IHttpPostData body) {
             return String.Format(
                 "{0}&{1}&{2}",
@@ -296,20 +297,20 @@ namespace Skybrud.Social.OAuth {
         }
 
         /// <summary>
-        /// Generate the signature.
+        /// Generates the signature.
         /// </summary>
         /// <param name="method">The method for the HTTP request.</param>
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
-        /// <returns>Returns the generated signature.</returns>
+        /// <returns>The generated signature.</returns>
         public virtual string GenerateSignature(SocialHttpMethod method, string url, NameValueCollection queryString, NameValueCollection body) {
             HMACSHA1 hasher = new HMACSHA1(new ASCIIEncoding().GetBytes(GenerateSignatureKey()));
             return Convert.ToBase64String(hasher.ComputeHash(new ASCIIEncoding().GetBytes(GenerateSignatureValue(method, url, queryString, body))));
         }
 
         /// <summary>
-        /// Generate the signature.
+        /// Generates the signature.
         /// </summary>
         /// <param name="method">The method for the HTTP request.</param>
         /// <param name="url">The URL of the request.</param>
@@ -326,7 +327,7 @@ namespace Skybrud.Social.OAuth {
         /// to the website of the provider for approving the application. If successful, the user will be redirected
         /// back to the specified callback URL where you then can exchange the request token for an access token.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="SocialOAuthRequestTokenResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="SocialOAuthRequestTokenResponse"/> representing the response.</returns>
         public virtual SocialOAuthRequestTokenResponse GetRequestToken() {
 
             // Make the call to the API/provider
@@ -340,7 +341,7 @@ namespace Skybrud.Social.OAuth {
 
         }
 
-        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         protected virtual SocialHttpResponse GetRequestTokenResponse() {
 
             // Some error checking
@@ -357,7 +358,7 @@ namespace Skybrud.Social.OAuth {
         /// using this method. This is the third and final step of the authorization process.
         /// </summary>
         /// <param name="verifier">The verification key received after the user has accepted the app.</param>
-        /// <returns>Returns an instance of <see cref="SocialOAuthAccessTokenResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="SocialOAuthAccessTokenResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://dev.twitter.com/docs/auth/3-legged-authorization</cref>
         /// </see>
@@ -374,7 +375,7 @@ namespace Skybrud.Social.OAuth {
 
         }
 
-        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         protected virtual SocialHttpResponse GetAccessTokenResponse(string verifier) {
 
             // Some error checking
@@ -394,7 +395,7 @@ namespace Skybrud.Social.OAuth {
         /// Helper method for generating the OAuth signature for an instance of <see cref="SocialHttpRequest"/>.
         /// </summary>
         /// <param name="request">The instance of <see cref="SocialHttpRequest"/> the signature should be based on.</param>
-        /// <returns>Returns the generated OAuth signature.</returns>
+        /// <returns>The generated OAuth signature.</returns>
         protected virtual string GenerateSignature(SocialHttpRequest request) {
             if (request == null) throw new ArgumentNullException("request");
             if (String.IsNullOrWhiteSpace(request.Url)) throw new PropertyNotSetException("request.Url");

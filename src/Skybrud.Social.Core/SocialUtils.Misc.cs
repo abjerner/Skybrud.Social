@@ -10,34 +10,36 @@ namespace Skybrud.Social {
     public static partial class SocialUtils {
 
         /// <summary>
-        /// Static class with miscellaneous helper methods.
+        /// Static class with miscellaneous utility methods.
         /// </summary>
         public static class Misc {
 
             /// <summary>
-            /// Parses a query string into an instance of <see cref="NameValueCollection"/> using <see cref="Encoding.UTF8"/> encoding.
+            /// Parses the specified <paramref name="query"/> into an instance of <see cref="NameValueCollection"/>
+            /// using <see cref="Encoding.UTF8"/> encoding.
             /// </summary>
             /// <param name="query">The query string to parse.</param>
-            /// <returns>A <see cref="NameValueCollection"/> of query parameters and values.</returns>
+            /// <returns>An instance of <see cref="NameValueCollection"/> with the query parameters and values.</returns>
             public static NameValueCollection ParseQueryString(string query) {
                 return HttpUtility.ParseQueryString(query);
             }
 
             /// <summary>
-            /// Converts the specified <code>collection</code> into a query string using the proper encoding.
+            /// Converts the specified <paramref name="collection"/> into a query string using the proper encoding.
             /// </summary>
             /// <param name="collection">The collection to convert.</param>
-            /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
+            /// <returns>A query string based on the specified <paramref name="collection"/>.</returns>
             public static string NameValueCollectionToQueryString(NameValueCollection collection) {
                 return String.Join("&", Array.ConvertAll(collection.AllKeys, key => StringHelper.UrlEncode(key) + "=" + StringHelper.UrlEncode(collection[key])));
             }
 
             /// <summary>
-            /// Converts the specified <code>collection</code> into a query string using the proper encoding.
+            /// Converts the specified <paramref name="collection"/> into a query string using the proper encoding.
             /// </summary>
             /// <param name="collection">The collection to convert.</param>
-            /// <param name="includeIfNull">Specifies whether items that are <code>null</code> should be included in the query string.</param>
-            /// <returns>Returns a query string based on the specified <code>collection</code>.</returns>
+            /// <param name="includeIfNull">Specifies whether items that are <code>null</code> should be included in
+            /// the query string.</param>
+            /// <returns>A query string based on the specified <paramref name="collection"/>.</returns>
             public static string NameValueCollectionToQueryString(NameValueCollection collection, bool includeIfNull) {
                 return String.Join("&", (
                     from string key in collection.Keys
