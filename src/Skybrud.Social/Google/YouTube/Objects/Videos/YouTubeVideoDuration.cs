@@ -1,8 +1,11 @@
 using System;
-using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace Skybrud.Social.Google.YouTube.Objects.Videos {
 
+    /// <summary>
+    /// Class representing the duration of a YouTube video.
+    /// </summary>
     /// <see>
     ///     <cref>https://developers.google.com/youtube/v3/docs/videos#contentDetails.duration</cref>
     /// </see>
@@ -10,47 +13,64 @@ namespace Skybrud.Social.Google.YouTube.Objects.Videos {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the raw string with the ISO 8601 duration.
+        /// </summary>
         public string Raw { get; private set; }
 
-        public int Minutes { get; private set; }
+        /// <summary>
+        /// Gets the days component of the video's duration.
+        /// </summary>
+        public int Days {
+            get { return Value.Days; }
+        }
 
-        public int Seconds { get; private set; }
+        /// <summary>
+        /// Gets the hours component of the video's duration.
+        /// </summary>
+        public int Hours {
+            get { return Value.Hours; }
+        }
 
+        /// <summary>
+        /// Gets the minutes component of the video's duration.
+        /// </summary>
+        public int Minutes {
+            get { return Value.Minutes; }
+        }
+
+        /// <summary>
+        /// Gets the seconds component of the video's duration.
+        /// </summary>
+        public int Seconds {
+            get { return Value.Seconds; }
+        }
+
+        /// <summary>
+        /// Gets an instance of <see cref="TimeSpan"/> representing the duration of the video.
+        /// </summary>
         public TimeSpan Value { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        private YouTubeVideoDuration(string raw, int minutes, int seconds) {
+        private YouTubeVideoDuration(string raw, TimeSpan duration) {
             Raw = raw;
-            Minutes = minutes;
-            Seconds = seconds;
-            Value = new TimeSpan(0, minutes, seconds);
+            Value = duration;
         }
 
         #endregion
 
         #region Static methods
 
-        public static YouTubeVideoDuration Parse(string raw) {
-            Match m1 = Regex.Match(raw ?? "", "^PT([0-9]+)M([0-9]+)S$");
-            Match m2 = Regex.Match(raw ?? "", "^PT([0-9]+)M$");
-            Match m3 = Regex.Match(raw ?? "", "^PT([0-9]+)S$");
-            if (m1.Success) {
-                int minutes = Int32.Parse(m1.Groups[1].Value);
-                int seconds = Int32.Parse(m1.Groups[2].Value);
-                return new YouTubeVideoDuration(raw, minutes, seconds);
-            }
-            if (m2.Success) {
-                int minutes = Int32.Parse(m2.Groups[1].Value);
-                return new YouTubeVideoDuration(raw, minutes, 0);
-            }
-            if (m3.Success) {
-                int seconds = Int32.Parse(m3.Groups[1].Value);
-                return new YouTubeVideoDuration(raw, 0, seconds);
-            }
-            return new YouTubeVideoDuration(raw, 0, 0);
+        /// <summary>
+        /// Parses the specified ISO 8601 duration <paramref name="value"/> into an instance of <see cref="YouTubeVideoDuration"/>.
+        /// </summary>
+        /// <param name="value">The raw ISO 8601 string.</param>
+        /// <returns>An instance of <see cref="YouTubeVideoDuration"/>.</returns>
+        public static YouTubeVideoDuration Parse(string value) {
+            return new YouTubeVideoDuration(value, XmlConvert.ToTimeSpan(value));
         }
 
         #endregion
