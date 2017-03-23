@@ -60,6 +60,11 @@ namespace Skybrud.Social.Facebook.Objects.Pages {
         public string DirectedBy { get; private set; }
 
         /// <summary>
+        /// Gets the number of users who like the page.
+        /// </summary>
+        public int FanCount { get; private set; }
+
+        /// <summary>
         /// Gets when the company was founded. Applicable to <code>Companies</code>.
         /// </summary>
         public string Founded { get; private set; }
@@ -215,6 +220,7 @@ namespace Skybrud.Social.Facebook.Objects.Pages {
                 Cover = obj.GetObject("cover", FacebookCoverPhoto.Parse),
                 Description = obj.GetString("description"),
                 DirectedBy = obj.GetString("directed_by"),
+                FanCount = obj.GetInt32("fan_count"),
                 Founded = obj.GetString("founded"),
                 GeneralInfo = obj.GetString("general_info"),
                 GeneralManager = obj.GetString("general_manager"),
