@@ -91,7 +91,7 @@ namespace Skybrud.Social.Facebook.Objects.Videos {
             CreatedTime = obj.GetDateTime("created_time");
             Description = obj.GetString("description");
             EmbedHtml = obj.GetString("embed_html");
-            Id = obj.GetString("description");
+            Id = obj.GetString("id");
             // backdated_time
             // content_tags
             // embeddable
