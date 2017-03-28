@@ -7,6 +7,7 @@ using System.Web;
 using Skybrud.Social.Facebook.Endpoints.Raw;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
+using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Facebook.OAuth {
 
@@ -42,7 +43,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         #endregion
 
         /// <summary>
-        /// Gets or sets the version of the Facebook Graph API to be used. Defaults to <code>v2.2</code>.
+        /// Gets or sets the version of the Facebook Graph API to be used. Defaults to <code>v2.3</code>.
         /// </summary>
         public string Version { get; set; }
 
@@ -133,7 +134,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// Initializes an OAuth client with empty information.
         /// </summary>
         public FacebookOAuthClient() {
-            Version = "v2.2";
+            Version = "v2.3";
             Accounts = new FacebookAccountsRawEndpoint(this);
             Apps = new FacebookAppsRawEndpoint(this);
             Debug = new FacebookDebugRawEndpoint(this);
@@ -225,7 +226,7 @@ namespace Skybrud.Social.Facebook.OAuth {
         /// <returns>Returns an authorization URL based on <code>state</code> and <code>scope</code>.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
             return String.Format(
-                "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
+                "https://www.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + "/dialog/oauth?client_id={0}&redirect_uri={1}&state={2}&scope={3}",
                 AppId,
                 RedirectUri,
                 state,
@@ -249,13 +250,16 @@ namespace Skybrud.Social.Facebook.OAuth {
             };
             
             // Make the call to the API
-            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + "/oauth/access_token", query);
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
-
-            // Get the access token
-            return response["access_token"];
+            if (contents.StartsWith("{")) {
+                JsonObject obj = JsonObject.ParseJson(contents);
+                return obj.GetString("access_token");
+            }
+                
+            NameValueCollection nvc = HttpUtility.ParseQueryString(contents);
+            return nvc["access_token"];
 
         }
 
@@ -275,15 +279,18 @@ namespace Skybrud.Social.Facebook.OAuth {
             };
 
             // Make the call to the API
-            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + "/oauth/access_token", query);
 
             // TODO: Add some validation
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            if (contents.StartsWith("{")) {
+                JsonObject obj = JsonObject.ParseJson(contents);
+                return obj.GetString("access_token");
+            }
 
-            // Get the access token
-            return response["access_token"];
+            NameValueCollection nvc = HttpUtility.ParseQueryString(contents);
+            return nvc["access_token"];
 
         }
 
@@ -300,13 +307,16 @@ namespace Skybrud.Social.Facebook.OAuth {
             };
 
             // Make the call to the API
-            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com/oauth/access_token", query);
+            string contents = SocialUtils.DoHttpGetRequestAndGetBodyAsString("https://graph.facebook.com" + (String.IsNullOrWhiteSpace(Version) ? "" : "/" + Version) + "/oauth/access_token", query);
 
             // Parse the contents
-            NameValueCollection response = HttpUtility.ParseQueryString(contents);
+            if (contents.StartsWith("{")) {
+                JsonObject obj = JsonObject.ParseJson(contents);
+                return obj.GetString("access_token");
+            }
 
-            // Get the access token
-            return response["access_token"];
+            NameValueCollection nvc = HttpUtility.ParseQueryString(contents);
+            return nvc["access_token"];
 
         }
 
