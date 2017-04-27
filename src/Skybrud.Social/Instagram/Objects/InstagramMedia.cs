@@ -4,7 +4,7 @@ using Skybrud.Social.Json;
 
 namespace Skybrud.Social.Instagram.Objects {
     
-    public abstract class InstagramMedia : SocialJsonObject, ISocialTimelineEntry {
+    public class InstagramMedia : SocialJsonObject, ISocialTimelineEntry {
 
         #region Properties
 
@@ -89,7 +89,7 @@ namespace Skybrud.Social.Instagram.Objects {
 
         #region Constructors
 
-        internal InstagramMedia(JsonObject obj) : base(obj) {
+        protected InstagramMedia(JsonObject obj) : base(obj) {
             // Hide default constructor
         }
 
@@ -134,25 +134,26 @@ namespace Skybrud.Social.Instagram.Objects {
                 media = new InstagramVideo(obj) {
                     Videos = obj.GetObject("videos", InstagramVideoSummary.Parse)
                 };
+            } else {
+                /* eg. "carousel" */
+                media = new InstagramMedia(obj);
             }
 
-            if (media != null) {
-                media.Id = obj.GetString("id");
-                media.Type = type;
-                media.Tags = obj.GetArray("tags").Cast<string>();
-                media.Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetInt64("created_time"));
-                media.Link = obj.GetString("link");
-                media.Filter = obj.GetString("filter");
-                media.CommentCount = comments.GetInt32("count");
-                media.Comments = comments.GetArray("data", InstagramComment.Parse);
-                media.LikeCount = likes.GetInt32("count");
-                media.Likes = likes.GetArray("data", InstagramUserSummary.Parse);
-                media.Images = obj.GetObject("images", InstagramImageSummary.Parse);
-                media.Caption = obj.GetObject("caption", InstagramComment.Parse);
-                media.User = obj.GetObject("user", InstagramUser.Parse);
-                media.Location = obj.GetObject("location", InstagramLocation.Parse);
-                media.UsersInPhoto = obj.GetArray("users_in_photo", InstagramTaggedUser.Parse);
-            }
+            media.Id = obj.GetString("id");
+            media.Type = type;
+            media.Tags = obj.GetArray("tags").Cast<string>();
+            media.Created = SocialUtils.GetDateTimeFromUnixTime(obj.GetInt64("created_time"));
+            media.Link = obj.GetString("link");
+            media.Filter = obj.GetString("filter");
+            media.CommentCount = comments.GetInt32("count");
+            media.Comments = comments.GetArray("data", InstagramComment.Parse);
+            media.LikeCount = likes.GetInt32("count");
+            media.Likes = likes.GetArray("data", InstagramUserSummary.Parse);
+            media.Images = obj.GetObject("images", InstagramImageSummary.Parse);
+            media.Caption = obj.GetObject("caption", InstagramComment.Parse);
+            media.User = obj.GetObject("user", InstagramUser.Parse);
+            media.Location = obj.GetObject("location", InstagramLocation.Parse);
+            media.UsersInPhoto = obj.GetArray("users_in_photo", InstagramTaggedUser.Parse);
 
             return media;
 
