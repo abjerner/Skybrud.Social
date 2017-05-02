@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
@@ -99,7 +102,7 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpGetOptions options) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             if (options == null) throw new ArgumentNullException("options");
-            return DoHttpRequest(SocialHttpMethod.Post, url, options.GetQueryString(), null);
+            return DoHttpRequest(SocialHttpMethod.Post, url, options.GetQueryString(), default(IHttpPostData));
         }
 
         /// <summary>
@@ -121,7 +124,7 @@ namespace Skybrud.Social.Http {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString) {
-            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, null);
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, default(IHttpPostData));
         }
 
         /// <summary>
@@ -144,6 +147,114 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             return DoHttpRequest(SocialHttpMethod.Post, url, queryString, postData);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="queryString">The query string of the request.</param>
+        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, string contentType, string body) {
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, contentType, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP POST request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Post, url, queryString, body, options);
         }
 
         #endregion
@@ -190,7 +301,7 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpGetOptions options) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             if (options == null) throw new ArgumentNullException("options");
-            return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), null);
+            return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), default(IHttpPostData));
         }
 
         /// <summary>
@@ -212,7 +323,7 @@ namespace Skybrud.Social.Http {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString) {
-            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, null);
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, default(IHttpPostData));
         }
 
         /// <summary>
@@ -235,6 +346,114 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             return DoHttpRequest(SocialHttpMethod.Put, url, queryString, postData);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="queryString">The query string of the request.</param>
+        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, string contentType, string body) {
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, contentType, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PUT request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Put, url, queryString, body, options);
         }
 
         #endregion
@@ -281,7 +500,7 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpGetOptions options) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             if (options == null) throw new ArgumentNullException("options");
-            return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), null);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), default(IHttpPostData));
         }
 
         /// <summary>
@@ -303,7 +522,7 @@ namespace Skybrud.Social.Http {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString) {
-            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, null);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, default(IHttpPostData));
         }
 
         /// <summary>
@@ -326,6 +545,114 @@ namespace Skybrud.Social.Http {
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
             return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, postData);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The URL of the request.</param>
+        /// <param name="queryString">The query string of the request.</param>
+        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, string contentType, string body) {
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, contentType, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, body);
+        }
+
+        /// <summary>
+        /// Makes a HTTP PATCH request based on the specified parameters.
+        /// </summary>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, body, options);
         }
 
         #endregion
@@ -398,7 +725,7 @@ namespace Skybrud.Social.Http {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, NameValueCollection queryString) {
-            return DoHttpRequest(method, url, new SocialHttpQueryString(queryString), null);
+            return DoHttpRequest(method, url, new SocialHttpQueryString(queryString), default(IHttpPostData));
         }
 
         /// <summary>
@@ -433,7 +760,7 @@ namespace Skybrud.Social.Http {
         /// <param name="queryString">The query string.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString) {
-            return DoHttpRequest(method, url, queryString, null);
+            return DoHttpRequest(method, url, queryString, default(IHttpPostData));
         }
 
         /// <summary>
@@ -475,6 +802,141 @@ namespace Skybrud.Social.Http {
             // Make the call to the URL
             return request.GetResponse();
 
+        }
+
+        /// <summary>
+        /// Makes a HTTP request to the underlying API based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, string contentType, string body) {
+
+            // Some input validation
+            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+            if (queryString == null) queryString = new SocialHttpQueryString();
+
+            // Initialize the request
+            SocialHttpRequest request = new SocialHttpRequest {
+                Method = method,
+                Url = url,
+                QueryString = queryString,
+                ContentType = contentType,
+                Body = body
+            };
+
+            PrepareHttpRequest(request);
+
+            // Make the call to the URL
+            return request.GetResponse();
+
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, null, "application/json", body.ToString(Formatting.None));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, null, "application/json", body.ToString(formatting));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, JToken body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, queryString, "application/json", body.ToString(Formatting.None));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="formatting">The formatting to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, JToken body, Formatting formatting) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, queryString, "application/json", body.ToString(formatting));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, null, "text/xml", body.ToString(SaveOptions.None));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, null, "text/xml", body.ToString(options));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, XNode body) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, queryString, "text/xml", body.ToString(SaveOptions.None));
+        }
+
+        /// <summary>
+        /// Makes a HTTP request based on the specified parameters.
+        /// </summary>
+        /// <param name="method">The HTTP method of the request.</param>
+        /// <param name="url">The base URL of the request (no query string).</param>
+        /// <param name="queryString">The query string.</param>
+        /// <param name="body">The body of the request.</param>
+        /// <param name="options">The options to be used when serializing <paramref name="body"/>.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, XNode body, SaveOptions options) {
+            if (body == null) throw new ArgumentNullException("body");
+            return DoHttpRequest(method, url, queryString, "text/xml", body.ToString(options));
         }
 
         #endregion

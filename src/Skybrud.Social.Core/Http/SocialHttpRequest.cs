@@ -91,6 +91,11 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public string ContentType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the body of the request.
+        /// </summary>
+        public string Body { get; set; }
+
         #region HTTP Headers
 
         /// <summary>
@@ -213,24 +218,52 @@ namespace Skybrud.Social.Http {
             if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
 
-            // Add the request body (if a POST request)
-            if (Method == SocialHttpMethod.Post) {
+            // Handle various POST scenarios
+            if (!String.IsNullOrWhiteSpace(Body)) {
+                
+                // Set the length of the request body
+                request.ContentLength = Body.Length;
+                
+                // Write the body to the request stream
+                using (Stream stream = request.GetRequestStream()) {
+                    stream.Write(Encoding.UTF8.GetBytes(Body), 0, Body.Length);
+                }
+            
+            } else if (PostData != null && PostData.Count > 0) {
+
                 if (PostData.IsMultipart) {
+
+                    // Declare the boundary to be used for the multipart data
                     string boundary = Guid.NewGuid().ToString().Replace("-", "");
+
+                    // Set the content type (including the boundary)
                     request.ContentType = "multipart/form-data; boundary=" + boundary;
+
+                    // Write the multipart body to the request stream
                     using (Stream stream = request.GetRequestStream()) {
                         PostData.WriteMultipartFormData(stream, boundary);
                     }
+
                 } else {
+                    
+                    // Convert the POST data to an URL encoded string
                     string dataString = PostData.ToString();
+                    
+                    // Set the content type
                     request.ContentType = "application/x-www-form-urlencoded";
+
+                    // Set the length of the request body
                     request.ContentLength = dataString.Length;
+
+                    // Write the body to the request stream
                     using (Stream stream = request.GetRequestStream()) {
                         stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
                     }
-                }
-            }
 
+                }
+                
+            }
+            
             // Call the callback
             if (callback != null) callback(request);
 
