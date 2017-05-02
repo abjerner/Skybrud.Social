@@ -86,6 +86,11 @@ namespace Skybrud.Social.Http {
             set { _cookies = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the content type of the request.
+        /// </summary>
+        public string ContentType { get; set; }
+
         #region HTTP Headers
 
         /// <summary>
@@ -205,6 +210,7 @@ namespace Skybrud.Social.Http {
             request.UserAgent = UserAgent;
             request.Timeout = (int) Timeout.TotalMilliseconds;
             request.CookieContainer = Cookies;
+            if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
 
             // Add the request body (if a POST request)
