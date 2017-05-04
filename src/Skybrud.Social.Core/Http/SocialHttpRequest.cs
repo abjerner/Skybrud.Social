@@ -228,8 +228,11 @@ namespace Skybrud.Social.Http {
                 using (Stream stream = request.GetRequestStream()) {
                     stream.Write(Encoding.UTF8.GetBytes(Body), 0, Body.Length);
                 }
-            
-            } else if (PostData != null && PostData.Count > 0) {
+
+            } else if (Method == SocialHttpMethod.Post || Method == SocialHttpMethod.Put || Method == SocialHttpMethod.Patch || Method == SocialHttpMethod.Delete) {
+
+                // Make sure we have a POST data instance
+                PostData = PostData ?? new SocialHttpPostData();
 
                 if (PostData.IsMultipart) {
 
