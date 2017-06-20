@@ -12,7 +12,7 @@ namespace Skybrud.Social.Http {
     /// this class) should be used to represent the object oriented (parsed) response wrapping an instance of
     /// <see cref="SocialHttpResponse"/> (raw response).
     /// </summary>
-    public class SocialResponse {
+    public class SocialResponse : IResponse {
 
         #region Properties
 
