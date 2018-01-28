@@ -181,7 +181,9 @@ namespace Skybrud.Social.Http {
         public SocialHttpRequest() {
             Method = SocialHttpMethod.Get;
             Encoding = Encoding.UTF8;
+#if NET_FRAMEWORK
             Timeout = TimeSpan.FromSeconds(100);
+#endif
             PostData = new SocialHttpPostData();
         }
 
