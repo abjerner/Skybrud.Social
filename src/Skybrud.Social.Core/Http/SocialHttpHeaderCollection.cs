@@ -71,7 +71,7 @@ namespace Skybrud.Social.Http {
         /// Gets a <see cref="System.String"/> array representing the keys of the header collection.
         /// </summary>
         public string[] Keys {
-            get { return Headers.Keys.OfType<string>().ToArray(); }
+            get { return Headers.AllKeys.OfType<string>().ToArray(); }
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Skybrud.Social.Http {
         /// <param name="name">The name of the header.</param>
         /// <param name="value">The value of the header.</param>
         public void Add(string name, object value) {
-            Headers.Add(name, String.Format(CultureInfo.InvariantCulture, "{0}", value));
+            Headers[name] = String.Format(CultureInfo.InvariantCulture, "{0}", value);
         }
 
         #endregion
@@ -122,27 +122,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Creates a new instance from the specified <code>headers</code>.
         /// </summary>
-        /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
-        public static implicit operator SocialHttpHeaderCollection(NameValueCollection headers) {
-
-            // Initialize a new instance of SocialHttpHeaderCollection
-            SocialHttpHeaderCollection collection = new SocialHttpHeaderCollection();
-
-            // Copy all items
-            if (headers != null) {
-                foreach (string key in headers.Keys) {
-                    collection.Headers.Add(key, headers[key]);
-                }
-            }
-
-            return collection;
-
-        }
-
-        /// <summary>
-        /// Creates a new instance from the specified <code>headers</code>.
-        /// </summary>
-        /// <param name="headers">The <see cref="NameValueCollection"/> representing the headers.</param>
+        /// <param name="headers">The <see cref="WebHeaderCollection"/> representing the headers.</param>
         public static implicit operator SocialHttpHeaderCollection(WebHeaderCollection headers) {
 
             // Initialize a new instance of SocialHttpHeaderCollection

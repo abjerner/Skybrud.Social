@@ -107,3 +107,4 @@ Backup*/
 UpgradeLog*.XML
 nuget/archive/*/*
 node_modules/
+src/.vs/

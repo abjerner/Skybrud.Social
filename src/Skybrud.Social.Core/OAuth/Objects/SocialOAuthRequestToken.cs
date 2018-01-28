@@ -1,4 +1,6 @@
 using System.Collections.Specialized;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.OAuth.Objects {
 
@@ -43,7 +45,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
-        protected SocialOAuthRequestToken(SocialOAuthClient client, NameValueCollection query) {
+        protected SocialOAuthRequestToken(SocialOAuthClient client, IHttpQueryString query) {
             Client = client;
             Token = query["oauth_token"];
             TokenSecret = query["oauth_token_secret"];
@@ -62,21 +64,12 @@ namespace Skybrud.Social.OAuth.Objects {
         /// <param name="str">The query string.</param>
         public static SocialOAuthRequestToken Parse(SocialOAuthClient client, string str) {
 
-            // Convert the query string to a NameValueCollection
-            NameValueCollection query = SocialUtils.Misc.ParseQueryString(str);
+            // Convert the query string to an IHttpQueryString
+            IHttpQueryString query = SocialHttpQueryString.ParseQueryString(str);
 
             // Initialize a new instance
             return new SocialOAuthRequestToken(client, query);
 
-        }
-
-        /// <summary>
-        /// Parses a query string received from the API.
-        /// </summary>
-        /// <param name="client">The parent OAuth client.</param>
-        /// <param name="query">The query string.</param>
-        public static SocialOAuthRequestToken Parse(SocialOAuthClient client, NameValueCollection query) {
-            return query == null ? null : new SocialOAuthRequestToken(client, query);
         }
 
         #endregion

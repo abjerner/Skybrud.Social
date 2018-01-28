@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
@@ -49,10 +50,14 @@ namespace Skybrud.Social.Http {
         /// </summary>
         public Encoding Encoding { get; set; }
 
+#if NET_FRAMEWORK
+
         /// <summary>
         /// Gets or sets the timeout of the request. Default is 100 seconds.
         /// </summary>
         public TimeSpan Timeout { get; set; }
+
+#endif
 
         /// <summary>
         /// Gets or sets the collection of headers.
@@ -211,26 +216,30 @@ namespace Skybrud.Social.Http {
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
             request.Accept = Accept;
-            request.Referer = Referer;
-            request.UserAgent = UserAgent;
-            request.Timeout = (int) Timeout.TotalMilliseconds;
+            if (!String.IsNullOrWhiteSpace(Referer)) request.Headers["Referer"] = Referer;
+            if (!String.IsNullOrWhiteSpace(UserAgent)) request.Headers["User-Agent"] = UserAgent;
             request.CookieContainer = Cookies;
             if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
-            if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
+            if (!String.IsNullOrWhiteSpace(Host)) request.Headers["Host"] = Host;
+
+#if NET_FRAMEWORK
+            request.Timeout = (int) Timeout.TotalMilliseconds;
+#endif
 
             // Handle various POST scenarios
             if (!String.IsNullOrWhiteSpace(Body)) {
-                
+
                 // Set the length of the request body
-                request.ContentLength = Body.Length;
+                request.Headers["Content-Length"] = Body.Length.ToString();
                 
                 // Write the body to the request stream
-                using (Stream stream = request.GetRequestStream()) {
+                Task<Stream> hest = request.GetRequestStreamAsync();
+                using (Stream stream = hest.Result) {
                     stream.Write(Encoding.UTF8.GetBytes(Body), 0, Body.Length);
                 }
 
             } else if (Method == SocialHttpMethod.Post || Method == SocialHttpMethod.Put || Method == SocialHttpMethod.Patch || Method == SocialHttpMethod.Delete) {
-
+                
                 // Make sure we have a POST data instance
                 PostData = PostData ?? new SocialHttpPostData();
 
@@ -243,7 +252,9 @@ namespace Skybrud.Social.Http {
                     request.ContentType = "multipart/form-data; boundary=" + boundary;
 
                     // Write the multipart body to the request stream
-                    using (Stream stream = request.GetRequestStream()) {
+                    Task<Stream> hest = request.GetRequestStreamAsync();
+                    hest.Wait();
+                    using (Stream stream = hest.Result) {
                         PostData.WriteMultipartFormData(stream, boundary);
                     }
 
@@ -256,10 +267,12 @@ namespace Skybrud.Social.Http {
                     request.ContentType = "application/x-www-form-urlencoded";
 
                     // Set the length of the request body
-                    request.ContentLength = dataString.Length;
+                    //request.ContentLength = dataString.Length;
 
                     // Write the body to the request stream
-                    using (Stream stream = request.GetRequestStream()) {
+                    Task<Stream> hest = request.GetRequestStreamAsync();
+                    hest.Wait();
+                    using (Stream stream = hest.Result) {
                         stream.Write(Encoding.UTF8.GetBytes(dataString), 0, dataString.Length);
                     }
 
@@ -272,7 +285,23 @@ namespace Skybrud.Social.Http {
 
             // Get the response
             try {
+
+                #if NET_STANDARD
+
+                Task<WebResponse> responseTask = request.GetResponseAsync();
+
+                responseTask.Wait();
+
+                return SocialHttpResponse.GetFromWebResponse(responseTask.Result as HttpWebResponse, this);
+
+                #endif
+
+                #if NET_FRAMEWORK
+                
                 return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse, this);
+
+                #endif
+
             } catch (WebException ex) {
                 if (ex.Status != WebExceptionStatus.ProtocolError) throw;
                 return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse, this);

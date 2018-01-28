@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NET_FRAMEWORK
+
+using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -80,3 +82,5 @@ namespace Skybrud.Social {
     }
 
 }
+
+#endif

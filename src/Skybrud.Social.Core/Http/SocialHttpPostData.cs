@@ -74,18 +74,6 @@ namespace Skybrud.Social.Http {
             _data = new Dictionary<string, IHttpPostValue>();
         }
 
-        /// <summary>
-        /// Initializes a new collection based on the specified <see cref="NameValueCollection"/>.
-        /// </summary>
-        /// <param name="nvc">An instance of <see cref="NameValueCollection"/> the collection should be based on.</param>
-        public SocialHttpPostData(NameValueCollection nvc) {
-            _data = new Dictionary<string, IHttpPostValue>();
-            if (nvc == null) return;
-            foreach (string key in nvc.Keys) {
-                Add(key, nvc[key]);
-            }
-        }
-
         #endregion
 
         #region Member methods
@@ -191,35 +179,6 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns the POST data as an URL encoded string.</returns>
         public override string ToString() {
             return String.Join("&", _data.Select(pair => StringUtils.UrlEncode(pair.Key) + "=" + StringUtils.UrlEncode(pair.Value.ToString())));
-        }
-
-        /// <summary>
-        /// Converts the POST data into an instance of <see cref="NameValueCollection"/>.
-        /// </summary>
-        /// <returns>Returns an instance of <see cref="NameValueCollection"/> representing the POST data.</returns>
-        public virtual NameValueCollection ToNameValueCollection() {
-            NameValueCollection nvc = new NameValueCollection();
-            foreach (var pair in _data) {
-                nvc.Add(pair.Key, String.Format(CultureInfo.InvariantCulture, "{0}", pair.Value));
-            }
-            return nvc;
-        }
-
-        #endregion
-
-        #region Operator overloading
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <see cref="NameValueCollection"/>.
-        /// </summary>
-        /// <param name="nvc">An instance of <see cref="NameValueCollection"/> representing the POST data.</param>
-        /// <returns>Returns an instance of <see cref="SocialHttpPostData"/> based on the specified <code>nvc</code>.</returns>
-        public static implicit operator SocialHttpPostData(NameValueCollection nvc) {
-            SocialHttpPostData data = new SocialHttpPostData();
-            foreach (string key in nvc.Keys) {
-                data.Add(key, nvc[key]);
-            }
-            return data;
         }
 
         #endregion

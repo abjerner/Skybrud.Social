@@ -13,24 +13,18 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 	    pkg: pkg,
-	    nugetpack: {
-	        legacy: {
-	            src: 'src/Skybrud.Social/Skybrud.Social.csproj',
-	            dest: 'releases/nuget/'
-	        },
-	        core: {
-	            src: 'src/Skybrud.Social.Core/Skybrud.Social.Core.csproj',
-	            dest: 'releases/nuget/'
-	        }
-	    },
 		zip: {
 		    release: {
 		        router: function (filepath) {
-		            return path.basename(filepath);
+					if (filepath.indexOf('/bin/Release/') >= 0) {
+						return filepath.split('/bin/Release/')[1];
+					} else {
+						return path.basename(filepath);
+					}
 		        },
 			    src: [
-					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.Core.dll',
-					'src/Skybrud.Social.Core/bin/Release/Skybrud.Social.Core.xml',
+					'src/Skybrud.Social.Core/bin/Release/*/*.dll',
+					'src/Skybrud.Social.Core/bin/Release/*/*.xml',
 					'src/Skybrud.Social.Core/LICENSE.txt'
 				],
 				dest: 'releases/github/Skybrud.Social.Core.v' + version + '.zip'
@@ -38,10 +32,9 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-nuget');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('release', ['nugetpack', 'zip']);
+	grunt.registerTask('release', ['zip']);
 
 	grunt.registerTask('default', ['release']);
 

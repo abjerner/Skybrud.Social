@@ -1,58 +1,52 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Linq;
+using Skybrud.Essentials.Strings;
 using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
 
     /// <summary>
-    /// A wrapper class extending the functionality of <see cref="NameValueCollection"/>.
+    /// Class representing a basic HTTP query string.
     /// </summary>
     public class SocialHttpQueryString : IHttpQueryString {
 
         #region Private fields
 
-        private readonly NameValueCollection _nvc;
+        private readonly Dictionary<string, string> _values;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the internal <see cref="NameValueCollection"/>.
-        /// </summary>
-        public NameValueCollection NameValueCollection {
-            get { return _nvc; }
-        }
-
-        /// <summary>
-        /// Gets the number of key/value pairs contained in the internal <see cref="NameValueCollection"/> instance.
+        /// Gets the number of key/value pairs contained in the internal dictionary instance.
         /// </summary>
         public int Count {
-            get { return _nvc.Count; }
+            get { return _values.Count; }
         }
 
         /// <summary>
-        /// Gets whether the internal <see cref="NameValueCollection"/> is empty.
+        /// Gets whether the internal dictionary is empty.
         /// </summary>
         public bool IsEmpty {
-            get { return _nvc.Count == 0; }
+            get { return _values.Count == 0; }
         }
 
         /// <summary>
         /// Gets an array of the keys of all items in the query string.
         /// </summary>
         public string[] Keys {
-            get { return _nvc.AllKeys; }
+            get { return _values.Keys.ToArray(); }
         }
 
         /// <summary>
         /// Gets an array of all items in the query string.
         /// </summary>
         public KeyValuePair<string, string>[] Items {
-            get { return (from string key in _nvc.Keys select new KeyValuePair<string, string>(key, _nvc[key])).ToArray(); }
+            get { return _values.ToArray(); }
         }
 
         /// <summary>
@@ -61,7 +55,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the item to match.</param>
         /// <returns>Returns the <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
         public string this[string key] {
-            get { return _nvc[key]; }
+            get { return _values[key]; }
         }
 
         /// <summary>
@@ -79,15 +73,15 @@ namespace Skybrud.Social.Http {
         /// Initializes a new instance without any entries.
         /// </summary>
         public SocialHttpQueryString() {
-            _nvc = new NameValueCollection();
+            _values = new Dictionary<string, string>();
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <code>query</code>.
+        /// Initializes a new instance based on the specified <paramref name="dictionary"/>.
         /// </summary>
-        /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
-        public SocialHttpQueryString(NameValueCollection query) {
-            _nvc = query ?? new NameValueCollection();
+        /// <param name="dictionary"></param>
+        public SocialHttpQueryString(Dictionary<string, string> dictionary) {
+            _values = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
         }
 
         #endregion
@@ -101,7 +95,7 @@ namespace Skybrud.Social.Http {
         /// <param name="value">The value of the entry.</param>
         public void Add(string key, object value) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
-            _nvc.Add(key, String.Format(CultureInfo.InvariantCulture, "{0}", value));
+            _values.Add(key, String.Format(CultureInfo.InvariantCulture, "{0}", value));
         }
 
         /// <summary>
@@ -111,7 +105,7 @@ namespace Skybrud.Social.Http {
         /// <param name="value">The value of the entry.</param>
         public void Set(string key, object value) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
-            _nvc[key] = String.Format(CultureInfo.InvariantCulture, "{0}", value);
+            _values[key] = String.Format(CultureInfo.InvariantCulture, "{0}", value);
         }
 
         /// <summary>
@@ -119,7 +113,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <returns>Returns the query string as an URL encoded string.</returns>
         public override string ToString() {
-            return SocialUtils.Misc.NameValueCollectionToQueryString(_nvc);
+            return String.Join("&", from pair in _values select StringUtils.UrlEncode(pair.Key) + "=" + StringHelper.UrlEncode(pair.Value));
         }
 
         /// <summary>
@@ -130,7 +124,7 @@ namespace Skybrud.Social.Http {
         /// <code>false</code>.</returns>
         public bool ContainsKey(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
-            return _nvc.Get(key) != null || _nvc.AllKeys.Contains(key);
+            return _values.ContainsKey(key);
         }
 
         /// <summary>
@@ -140,7 +134,7 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns the <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
         public string GetString(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
-            return _nvc[key];
+            return _values[key];
         }
 
         /// <summary>
@@ -195,21 +189,92 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns the <code>T</code> value of the entry, or the default value of <code>T</code> if not found.</returns>
         private T GetValue<T>(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
-            string value = _nvc[key];
+            string value = _values[key];
             return String.IsNullOrWhiteSpace(value) ? default(T) : (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
         }
 
         #endregion
 
-        #region Operator overloading
+        #region Static methods
 
         /// <summary>
-        /// Initializes a new instance based on the specified <code>query</code>.
+        /// Parses the specified query string into an instance of <see cref="SocialHttpQueryString"/>.
         /// </summary>
-        /// <param name="query">An instance of <see cref="NameValueCollection"/> that should make up the query string.</param>
-        /// <returns>An instance of <see cref="SocialHttpQueryString"/> based on the specified <code>query</code>.</returns>
-        public static implicit operator SocialHttpQueryString(NameValueCollection query) {
-            return query == null ? null : new SocialHttpQueryString(query);
+        /// <param name="str">The query string to parse.</param>
+        /// <returns>An instance of <see cref="SocialHttpQueryString"/>.</returns>
+        public static SocialHttpQueryString ParseQueryString(string str) {
+            return ParseQueryString(str, false);
+        }
+
+        /// <summary>
+        /// Parses the specified query string into an instance of <see cref="SocialHttpQueryString"/>.
+        /// </summary>
+        /// <param name="str">The query string to parse.</param>
+        /// <param name="urlencoded">Whether the query string is URL encoded</param>
+        /// <returns></returns>
+        /// <see>
+        ///     <cref>https://referencesource.microsoft.com/#System.Web/HttpValueCollection.cs,222f9a1bfd1f9a98,references</cref>
+        /// </see>
+        public static SocialHttpQueryString ParseQueryString(string str, bool urlencoded) {
+
+            // Return an empty instance if "str" is NULL or empty
+            if (String.IsNullOrWhiteSpace(str)) return new SocialHttpQueryString();
+
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            
+            int length = str.Length;
+
+            int i = 0;
+
+            while (i < length) {
+
+                int si = i;
+                int ti = -1;
+
+                while (i < length) {
+                    char ch = str[i];
+
+                    if (ch == '=') {
+                        if (ti < 0)
+                            ti = i;
+                    } else if (ch == '&') {
+                        break;
+                    }
+
+                    i++;
+                }
+
+                // extract the name / value pair
+                String name = null;
+                String value;
+
+                if (ti >= 0) {
+                    name = str.Substring(si, ti - si);
+                    value = str.Substring(ti + 1, i - ti - 1);
+                } else {
+                    value = str.Substring(si, i - si);
+                }
+
+                // TODO: Should we throw an exception if the key already exists? (I think Add might do it for us)
+
+                // add name / value pair to the collection
+                if (urlencoded) {
+                    values.Add(StringUtils.UrlDecode(name), StringUtils.UrlDecode(value));
+                } else {
+                    values.Add(name, value);
+                }
+
+                // trailing '&'
+                if (i == length - 1 && str[i] == '&') {
+                    values.Add(null, String.Empty);
+                }
+
+                i++;
+
+            }
+
+            return new SocialHttpQueryString(values);
+
         }
 
         #endregion

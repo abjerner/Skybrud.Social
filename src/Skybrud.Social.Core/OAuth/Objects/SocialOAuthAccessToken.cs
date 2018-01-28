@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Specialized;
+using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.OAuth.Objects {
 
@@ -28,7 +30,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// <summary>
         /// Gets a reference to the query string representing the response body.
         /// </summary>
-        public NameValueCollection Query { get; private set; }
+        public IHttpQueryString Query { get; private set; }
 
         #endregion
 
@@ -39,7 +41,7 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
-        protected SocialOAuthAccessToken(SocialOAuthClient client, NameValueCollection query) {
+        protected SocialOAuthAccessToken(SocialOAuthClient client, IHttpQueryString query) {
 
             Client = client;
 
@@ -65,21 +67,12 @@ namespace Skybrud.Social.OAuth.Objects {
         /// <param name="str">The query string.</param>
         public static SocialOAuthAccessToken Parse(SocialOAuthClient client, string str) {
 
-            // Convert the query string to a NameValueCollection
-            NameValueCollection query = SocialUtils.Misc.ParseQueryString(str);
+            // Convert the query string to an IHttpQueryString
+            IHttpQueryString query = SocialHttpQueryString.ParseQueryString(str);
 
             // Initialize a new instance
             return new SocialOAuthAccessToken(client, query);
 
-        }
-
-        /// <summary>
-        /// Parses a query string received from the API.
-        /// </summary>
-        /// <param name="client">The parent OAuth client.</param>
-        /// <param name="query">The query string.</param>
-        public static SocialOAuthAccessToken Parse(SocialOAuthClient client, NameValueCollection query) {
-            return query == null ? null : new SocialOAuthAccessToken(client, query);
         }
 
         #endregion

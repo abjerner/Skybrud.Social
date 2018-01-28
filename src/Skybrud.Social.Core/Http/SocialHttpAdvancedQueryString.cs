@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
-using System.Web;
+using Skybrud.Essentials.Strings;
 using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.Http {
@@ -97,7 +97,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <returns>Returns the query string as an URL encoded string.</returns>
         public override string ToString() {
-            return String.Join("&", from item in _query select HttpUtility.UrlEncode(item.Key) + "=" + HttpUtility.UrlEncode(item.Value));
+            return String.Join("&", from item in _query select StringUtils.UrlEncode(item.Key) + "=" + StringUtils.UrlEncode(item.Value));
         }
 
         /// <summary>
