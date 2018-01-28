@@ -6,7 +6,7 @@ using System.Text;
 using Skybrud.Essentials.Common;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
-using Skybrud.Social.OAuth.Objects;
+using Skybrud.Social.OAuth.Models;
 using Skybrud.Social.OAuth.Responses;
 
 namespace Skybrud.Social.OAuth {

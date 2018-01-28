@@ -1,6 +1,6 @@
 ﻿using System;
 using Skybrud.Social.Http;
-using Skybrud.Social.OAuth.Objects;
+using Skybrud.Social.OAuth.Models;
 
 namespace Skybrud.Social.OAuth.Responses {
     

@@ -1,12 +1,13 @@
+using System;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
 
-namespace Skybrud.Social.OAuth.Objects {
+namespace Skybrud.Social.OAuth.Models {
 
     /// <summary>
-    /// Class representing the response body of a call to get an OAuth 1.0a refresh token.
+    /// Class representing the response body of a call to get an OAuth 1.0a access token.
     /// </summary>
-    public class SocialOAuthRequestToken {
+    public class SocialOAuthAccessToken {
 
         #region Properties
 
@@ -16,24 +17,19 @@ namespace Skybrud.Social.OAuth.Objects {
         public SocialOAuthClient Client { get; private set; }
 
         /// <summary>
-        /// Gets the request token.
+        /// Gets the access token.
         /// </summary>
         public string Token { get; private set; }
 
         /// <summary>
-        /// Gets the request token secret.
+        /// Gets the access token secret.
         /// </summary>
         public string TokenSecret { get; private set; }
 
         /// <summary>
-        /// Is the callback confirmed?
+        /// Gets a reference to the query string representing the response body.
         /// </summary>
-        public bool IsCallbackConfirmed { get; private set; }
-
-        /// <summary>
-        /// Gets the authentication URL for this request token.
-        /// </summary>
-        public string AuthorizeUrl { get; private set; }
+        public IHttpQueryString Query { get; private set; }
 
         #endregion
 
@@ -44,12 +40,19 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="query">The query string as specified by the response body.</param>
-        protected SocialOAuthRequestToken(SocialOAuthClient client, IHttpQueryString query) {
+        protected SocialOAuthAccessToken(SocialOAuthClient client, IHttpQueryString query) {
+
             Client = client;
+
+            // Get the user ID
+            long userId;
+            Int64.TryParse(query["user_id"], out userId);
+
+            // Populate the properties
             Token = query["oauth_token"];
             TokenSecret = query["oauth_token_secret"];
-            IsCallbackConfirmed = query["oauth_callback_confirmed"] == "true";
-            AuthorizeUrl = client.AuthorizeUrl + "?oauth_token=" + query["oauth_token"];
+            Query = query;
+
         }
 
         #endregion
@@ -61,13 +64,13 @@ namespace Skybrud.Social.OAuth.Objects {
         /// </summary>
         /// <param name="client">The parent OAuth client.</param>
         /// <param name="str">The query string.</param>
-        public static SocialOAuthRequestToken Parse(SocialOAuthClient client, string str) {
+        public static SocialOAuthAccessToken Parse(SocialOAuthClient client, string str) {
 
             // Convert the query string to an IHttpQueryString
             IHttpQueryString query = SocialHttpQueryString.ParseQueryString(str);
 
             // Initialize a new instance
-            return new SocialOAuthRequestToken(client, query);
+            return new SocialOAuthAccessToken(client, query);
 
         }
 
