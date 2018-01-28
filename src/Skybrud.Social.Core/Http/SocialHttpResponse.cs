@@ -29,37 +29,27 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets the status code returned by the server.
         /// </summary>
-        public HttpStatusCode StatusCode {
-            get { return Response.StatusCode; }
-        }
+        public HttpStatusCode StatusCode => Response.StatusCode;
 
         /// <summary>
         /// Gets the status description returned by the server.
         /// </summary>
-        public string StatusDescription {
-            get { return Response.StatusDescription; }
-        }
+        public string StatusDescription => Response.StatusDescription;
 
         /// <summary>
         /// Gets the HTTP method of the request to the server.
         /// </summary>
-        public string Method {
-            get { return Response.Method; }
-        }
+        public string Method => Response.Method;
 
         /// <summary>
         /// Gets the content type of the request.
         /// </summary>
-        public string ContentType {
-            get { return Response.ContentType; }
-        }
+        public string ContentType => Response.ContentType;
 
         /// <summary>
         /// Gets a collections of headers returned by the server.
         /// </summary>
-        public SocialHttpHeaderCollection Headers {
-            get { return _headers ?? (_headers = new SocialHttpHeaderCollection(Response.Headers)); }
-        }
+        public SocialHttpHeaderCollection Headers => _headers ?? (_headers = new SocialHttpHeaderCollection(Response.Headers));
 
         /// <summary>
         /// Gets a reference to the <see cref="Encoding"/>. The underlying <see cref="HttpWebResponse"/> doesn't
@@ -177,10 +167,10 @@ namespace Skybrud.Social.Http {
         #region Static methods
 
         /// <summary>
-        /// Creates a new instance based on the specified <code>response</code>.
+        /// Creates a new instance based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="HttpWebResponse"/> to be parsed.</param>
-        /// <returns>Returns a new instance of <see cref="HttpWebResponse"/> based on the specified <code>response</code>.</returns>
+        /// <returns>A new instance of <see cref="HttpWebResponse"/> based on the specified <paramref name="response"/>.</returns>
         public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response) {
             return response == null ? null : new SocialHttpResponse(null, response);
         }
@@ -190,7 +180,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="response">The instance of <see cref="HttpWebResponse"/> to be parsed.</param>
         /// <param name="request">The instance of <see cref="HttpWebRequest"/> that resulted in the response.</param>
-        /// <returns>Returns a new instance of <see cref="HttpWebResponse"/> based on the specified <code>response</code>.</returns>
+        /// <returns>A new instance of <see cref="HttpWebResponse"/> based on the specified <paramref name="response"/>.</returns>
         public static SocialHttpResponse GetFromWebResponse(HttpWebResponse response, SocialHttpRequest request) {
             return response == null ? null : new SocialHttpResponse(request, response);
         }

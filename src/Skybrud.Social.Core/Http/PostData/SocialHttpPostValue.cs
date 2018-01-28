@@ -25,7 +25,7 @@ namespace Skybrud.Social.Http.PostData {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new HTTP POST value from the specified <code>name</code> and <code>value</code>.
+        /// Initializes a new HTTP POST value from the specified <paramref name="name"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="name">The name/key of the value.</param>
         /// <param name="value">The value.</param>
@@ -37,7 +37,7 @@ namespace Skybrud.Social.Http.PostData {
         #endregion
 
         /// <summary>
-        /// Writes the value to the specified <code>stream</code>.
+        /// Writes the value to the specified <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The stream the value should be written to.</param>
         /// <param name="boundary">The multipart boundary.</param>

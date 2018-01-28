@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Http;
+﻿using System;
+using Skybrud.Social.Http;
 using Skybrud.Social.OAuth.Objects;
 
 namespace Skybrud.Social.OAuth.Responses {
@@ -39,7 +40,8 @@ namespace Skybrud.Social.OAuth.Responses {
         /// <param name="body">The object representing the response body.</param>
         /// <returns>An instance of <see cref="SocialOAuthRequestTokenResponse"/>.</returns>
         public static SocialOAuthRequestTokenResponse ParseResponse(SocialHttpResponse response, SocialOAuthRequestToken body) {
-            return response == null ? null : new SocialOAuthRequestTokenResponse(response, body);
+            if (response == null) throw new ArgumentNullException(nameof(response));
+            return new SocialOAuthRequestTokenResponse(response, body);
         }
 
         #endregion

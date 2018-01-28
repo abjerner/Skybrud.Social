@@ -13,7 +13,7 @@ namespace Skybrud.Social.Interfaces.Http {
         string Name { get; }
 
         /// <summary>
-        /// Writes the value to the specified <code>stream</code>.
+        /// Writes the value to the specified <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The stream the value should be written to.</param>
         /// <param name="boundary">The multipart boundary.</param>

@@ -27,7 +27,7 @@ namespace Skybrud.Social {
             /// <returns>A string containing the informational version of the assembly.</returns>
             public static string GetInformationVersion() {
                 Assembly assembly = typeof(SocialUtils).Assembly;
-                return assembly.Location == null ? null : FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
+                return FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
             }
 
             /// <summary>
@@ -36,7 +36,7 @@ namespace Skybrud.Social {
             /// <returns>A string containing the file version of the assembly.</returns>
             public static string GetFileVersion() {
                 Assembly assembly = typeof(SocialUtils).Assembly;
-                return assembly.Location == null ? null : FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+                return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
             }
 
             /// <summary>

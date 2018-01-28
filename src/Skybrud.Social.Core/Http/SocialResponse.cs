@@ -24,37 +24,27 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets the status code returned by the server.
         /// </summary>
-        public HttpStatusCode StatusCode {
-            get { return Response.StatusCode; }
-        }
+        public HttpStatusCode StatusCode => Response.StatusCode;
 
         /// <summary>
         /// Gets the status description returned by the server.
         /// </summary>
-        public string StatusDescription {
-            get { return Response.StatusDescription; }
-        }
+        public string StatusDescription => Response.StatusDescription;
 
         /// <summary>
         /// Gets the HTTP method of the request to the server.
         /// </summary>
-        public string Method {
-            get { return Response.Method; }
-        }
+        public string Method => Response.Method;
 
         /// <summary>
         /// Gets the content type of the response.
         /// </summary>
-        public string ContentType {
-            get { return Response.ContentType; }
-        }
+        public string ContentType => Response.ContentType;
 
         /// <summary>
         /// Gets a collection of headers returned by the server.
         /// </summary>
-        public SocialHttpHeaderCollection Headers {
-            get { return Response.Headers; }
-        }
+        public SocialHttpHeaderCollection Headers => Response.Headers;
 
         #endregion
 
@@ -73,61 +63,61 @@ namespace Skybrud.Social.Http {
         #region Member methods
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <see cref="JObject"/>.
+        /// Parses the specified <paramref name="json"/> string into an instance of <see cref="JObject"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="JObject"/> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>An instance of <see cref="JObject"/> parsed from the specified <paramref name="json"/> string.</returns>
         protected static JObject ParseJsonObject(string json) {
             return JsonUtils.ParseJsonObject(json);
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <code>T</code>.
+        /// Parses the specified <paramref name="json"/> string into an instance of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to be returned.</typeparam>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
-        /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <typeparamref name="T"/>.</param>
+        /// <returns>An instance of <typeparamref name="T"/> parsed from the specified <paramref name="json"/> string.</returns>
         protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
             return JsonUtils.ParseJsonObject(json, func);
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an instance of <see cref="JArray"/>.
+        /// Parses the specified <paramref name="json"/> string into an instance of <see cref="JArray"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <code>json</code> string.</returns>
+        /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <paramref name="json"/> string.</returns>
         protected static JArray ParseJsonArray(string json) {
             return JsonUtils.ParseJsonArray(json);
         }
 
         /// <summary>
-        /// Parses the specified <code>json</code> string into an array of <code>T</code>.
+        /// Parses the specified <paramref name="json"/> string into an array of <typeparamref name="T"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <code>T</code>.</param>
-        /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        /// <param name="func">A callback function/method used for converting an instance of <see cref="JObject"/> into an instance of <typeparamref name="T"/>.</param>
+        /// <returns>An array of <typeparamref name="T"/> parsed from the specified <paramref name="json"/> string.</returns>
         protected static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
             return JsonUtils.ParseJsonArray(json, func);
         }
 
         /// <summary>
-        /// Parses the specified <code>xml</code> into an instance of <see cref="XElement"/>.
+        /// Parses the specified <paramref name="xml"/> into an instance of <see cref="XElement"/>.
         /// </summary>
         /// <param name="xml">The XML to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="XElement"/>.</returns>
+        /// <returns>An instance of <see cref="XElement"/>.</returns>
         protected static XElement ParseXmlElement(string xml) {
             return XmlUtils.ParseXmlElement(xml);
         }
 
         /// <summary>
-        /// Parses the specified <code>xml</code> into an instance of <see cref="XElement"/>, which is then converted
-        /// into an instance of <code>T</code> using the specified <code>callback</code> function.
+        /// Parses the specified <paramref name="xml"/> into an instance of <see cref="XElement"/>, which is then converted
+        /// into an instance of <typeparamref name="T"/> using the specified <paramref name="callback"/> function.
         /// </summary>
         /// <typeparam name="T">The type of the instance to be returned.</typeparam>
         /// <param name="xml">The XML to be parsed.</param>
-        /// <param name="callback">The callback function used for converted the parsed <see cref="XElement"/>.</param>
-        /// <returns>Returns an instance of <code>T</code> representing the specified <code>xml</code>.</returns>
+        /// <param name="callback">The callback function used for converting the parsed <see cref="XElement"/>.</param>
+        /// <returns>An instance of <typeparamref name="T"/> representing the specified <paramref name="xml"/>.</returns>
         protected static T ParseXmlElement<T>(string xml, Func<XElement, T> callback) {
             return XmlUtils.ParseXmlElement(xml, callback);
         }

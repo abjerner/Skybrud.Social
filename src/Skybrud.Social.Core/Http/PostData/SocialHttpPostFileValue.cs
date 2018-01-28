@@ -35,15 +35,15 @@ namespace Skybrud.Social.Http.PostData {
         #region Constructors
 
         /// <summary>
-        /// Initializea a new instance from the specified <code>name</code> and <code>path</code>.
+        /// Initializea a new instance from the specified <paramref name="name"/> and <paramref name="path"/>.
         /// </summary>
         /// <param name="name">The name of the value.</param>
         /// <param name="path">The path to the file.</param>
         public SocialHttpPostFileValue(string name, string path) : this(name, path, null, null) { }
 
         /// <summary>
-        /// Initializes a new instance from the specified <code>name</code>, <code>path</code>,
-        /// <code>contentType</code> and <code>filename</code>.
+        /// Initializes a new instance from the specified <paramref name="name"/>, <paramref name="path"/>,
+        /// <paramref name="contentType"/> and <paramref name="filename"/>.
         /// </summary>
         /// <param name="name">The name of the value.</param>
         /// <param name="path">The path to the file.</param>
@@ -58,7 +58,7 @@ namespace Skybrud.Social.Http.PostData {
 
             if (ContentType != null) return;
             
-            switch ((Path.GetExtension(path) ?? "").ToLower()) {
+            switch (Path.GetExtension(path).ToLower()) {
                 case ".jpg":
                 case ".jpeg":
                     ContentType = "image/jpeg";
@@ -81,7 +81,7 @@ namespace Skybrud.Social.Http.PostData {
         #region Member methods
 
         /// <summary>
-        /// Writes the value to the specified <code>stream</code>.
+        /// Writes the value to the specified <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The stream the value should be written to.</param>
         /// <param name="boundary">The multipart boundary.</param>

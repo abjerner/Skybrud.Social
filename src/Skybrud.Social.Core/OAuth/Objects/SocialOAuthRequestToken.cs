@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
 

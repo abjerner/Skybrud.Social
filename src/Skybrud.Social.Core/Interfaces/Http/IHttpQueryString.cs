@@ -31,10 +31,10 @@ namespace Skybrud.Social.Interfaces.Http {
         KeyValuePair<string, string>[] Items { get; }
 
         /// <summary>
-        /// Gets the value of the first item with the specified <code>key</code>.
+        /// Gets the value of the first item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item to match.</param>
-        /// <returns>Returns the <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
+        /// <returns>The <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
         string this[string key] { get; }
 
         /// <summary>
@@ -47,14 +47,14 @@ namespace Skybrud.Social.Interfaces.Http {
         #region Member methods
 
         /// <summary>
-        /// Adds an item with the specified <code>key</code> and <code>value</code>.
+        /// Adds an item with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the item.</param>
         /// <param name="value">The value of the item.</param>
         void Add(string key, object value);
 
         /// <summary>
-        /// Sets the <code>value</code> of an entry with the specified <code>key</code>. If one or more entries with
+        /// Sets the <paramref name="value"/> of an entry with the specified <paramref name="key"/>. If one or more entries with
         /// <code>key </code> already exist, these will be overwritten.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
@@ -64,57 +64,57 @@ namespace Skybrud.Social.Interfaces.Http {
         /// <summary>
         /// Gets a string representation of the query string.
         /// </summary>
-        /// <returns>Returns the query string as an URL encoded string.</returns>
+        /// <returns>The query string as an URL encoded string.</returns>
         string ToString();
 
         /// <summary>
-        /// Return whether the query string contains an entry with the specified <code>key</code>.
+        /// Return whether the query string contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns <code>true</code> if the query string contains the specified <code>key</code>, otherwise
+        /// <returns><code>true</code> if the query string contains the specified <paramref name="key"/>, otherwise
         /// <code>false</code>.</returns>
         bool ContainsKey(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.String"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.String"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
         string GetString(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.Int32"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Int32"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
         int GetInt32(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.Int64"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Int64"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
         long GetInt64(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.Boolean"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Boolean"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
         bool GetBoolean(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.Double"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Double"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
         double GetDouble(string key);
 
         /// <summary>
-        /// Gets the <see cref="System.Single"/> value of the entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Single"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
         float GetFloat(string key);
 
         #endregion

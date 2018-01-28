@@ -24,16 +24,12 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets the amount of items stored in the query string.
         /// </summary>
-        public int Count {
-            get { return _query.Count; }
-        }
+        public int Count => _query.Count;
 
         /// <summary>
         /// Gets whether the query string is empty.
         /// </summary>
-        public bool IsEmpty {
-            get { return _query.Count == 0; }
-        }
+        public bool IsEmpty => _query.Count == 0;
 
         /// <summary>
         /// Gets an array of the keys of all items in the query string.
@@ -45,49 +41,43 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets an array of all items in the query string.
         /// </summary>
-        public KeyValuePair<string, string>[] Items {
-            get { return _query.ToArray(); }
-        }
+        public KeyValuePair<string, string>[] Items => _query.ToArray();
 
         /// <summary>
-        /// Gets the value of the first item with the specified <code>key</code>.
+        /// Gets the value of the first item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item to match.</param>
         /// <returns>Returns the <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
-        public string this[string key] {
-            get { return GetString(key); }
-        }
+        public string this[string key] => GetString(key);
 
         /// <summary>
         /// Gets whether this implementation of <see cref="IHttpQueryString"/> supports duplicate keys.
         /// </summary>
-        public bool SupportsDuplicateKeys {
-            get { return true; }
-        }
+        public bool SupportsDuplicateKeys => true;
 
         #endregion
 
         #region Member methods
 
         /// <summary>
-        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// Adds an entry with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         public void Add(string key, object value) {
-            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
+            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             _query.Add(new KeyValuePair<string, string>(key, Convert.ToString(value, CultureInfo.InvariantCulture)));
 
         }
 
         /// <summary>
-        /// Sets the <code>value</code> of an entry with the specified <code>key</code>. If one or more entries with
-        /// <code>key </code> already exist, these will be overwritten.
+        /// Sets the <paramref name="value"/> of an entry with the specified <paramref name="key"/>. If one or more entries with
+        /// <paramref name="key"/> already exist, these will be overwritten.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         public void Set(string key, object value) {
-            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
+            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             _query = _query.Where(x => x.Key == key).ToList();
             _query.Add(new KeyValuePair<string, string>(key, Convert.ToString(value, CultureInfo.InvariantCulture)));
         }
@@ -95,85 +85,85 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a string representation of the query string.
         /// </summary>
-        /// <returns>Returns the query string as an URL encoded string.</returns>
+        /// <returns>The query string as an URL encoded string.</returns>
         public override string ToString() {
             return String.Join("&", from item in _query select StringUtils.UrlEncode(item.Key) + "=" + StringUtils.UrlEncode(item.Value));
         }
 
         /// <summary>
-        /// Return whether the query string contains an entry with the specified <code>key</code>.
+        /// Return whether the query string contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns <code>true</code> if the query string contains the specified <code>key</code>, otherwise
+        /// <returns><code>true</code> if the query string contains the specified <paramref name="key"/>, otherwise
         /// <code>false</code>.</returns>
         public bool ContainsKey(string key) {
-            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
+            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             return _query.FirstOrDefault(x => x.Key == key).Key != null;
         }
 
         /// <summary>
-        /// Gets the <see cref="System.String"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.String"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
         public string GetString(string key) {
             return GetValue<string>(key);
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Int32"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Int32"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
         public int GetInt32(string key) {
             return GetValue<int>(key);
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Int64"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Int64"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
         public long GetInt64(string key) {
             return GetValue<long>(key);
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Boolean"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Boolean"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
         public bool GetBoolean(string key) {
             return GetValue<bool>(key);
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Double"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Double"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
         public double GetDouble(string key) {
             return GetValue<double>(key);
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Single"/> value of the first entry with the specified <code>key</code>.
+        /// Gets the <see cref="System.Single"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
         public float GetFloat(string key) {
             return GetValue<float>(key);
         }
 
         /// <summary>
-        /// Gets the <code>T</code> value of the first entry first with the specified <code>key</code>.
+        /// Gets the <typeparamref name="T"/> value of the first entry first with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns the <code>T</code> value of the entry, or the default value of <code>T</code> if not found.</returns>
+        /// <returns>The <typeparamref name="T"/> value of the entry, or the default value of <typeparamref name="T"/> if not found.</returns>
         private T GetValue<T>(string key) {
 
             // Throw an exception if "key" is NULL
-            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
+            if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
 
             // Get the first entry with "key"
             KeyValuePair<string, string> pair = _query.FirstOrDefault(x => x.Key == key);

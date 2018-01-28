@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -23,8 +22,8 @@ namespace Skybrud.Social.Http {
         /// the <code>Accept-Charset</code> HTTP header.
         /// </summary>
         public string AcceptCharset {
-            get { return Headers["Accept-Charset"]; }
-            set { Headers["Accept-Charset"] = value; }
+            get => Headers["Accept-Charset"];
+            set => Headers["Accept-Charset"] = value;
         }
 
         /// <summary>
@@ -35,8 +34,8 @@ namespace Skybrud.Social.Http {
         ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
         /// </see>
         public string AcceptEncoding {
-            get { return Headers["Accept-Encoding"]; }
-            set { Headers["Accept-Encoding"] = value; }
+            get => Headers["Accept-Encoding"];
+            set => Headers["Accept-Encoding"] = value;
         }
 
         /// <summary>
@@ -47,8 +46,8 @@ namespace Skybrud.Social.Http {
         ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
         /// </see>
         public string AcceptLanguage {
-            get { return Headers["Accept-Language"]; }
-            set { Headers["Accept-Language"] = value; }
+            get => Headers["Accept-Language"];
+            set => Headers["Accept-Language"] = value;
         }
 
         /// <summary>
@@ -56,32 +55,28 @@ namespace Skybrud.Social.Http {
         /// <code>Authorization</code> HTTP header.
         /// </summary>
         public string Authorization {
-            get { return Headers["Authorization"]; }
-            set { Headers["Authorization"] = value; }
+            get => Headers["Authorization"];
+            set => Headers["Authorization"] = value;
         }
         
         /// <summary>
         /// Gets amount of headers added to the collection.
         /// </summary>
-        public int Count {
-            get { return Headers.Count; }
-        }
+        public int Count => Headers.Count;
 
         /// <summary>
         /// Gets a <see cref="System.String"/> array representing the keys of the header collection.
         /// </summary>
-        public string[] Keys {
-            get { return Headers.AllKeys.OfType<string>().ToArray(); }
-        }
+        public string[] Keys => Headers.AllKeys.ToArray();
 
         /// <summary>
-        /// Gets or set the header with the specified <code>key</code>.
+        /// Gets or set the header with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the header.</param>
         /// <returns>Returns the value of the header.</returns>
         public string this[string key] {
-            get { return Headers[key]; }
-            set { Headers[key] = value; }
+            get => Headers[key];
+            set => Headers[key] = value;
         }
 
         #endregion
@@ -96,7 +91,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Creates a new instance based on the specified <code>headers</code>.
+        /// Creates a new instance based on the specified <paramref name="headers"/>.
         /// </summary>
         public SocialHttpHeaderCollection(WebHeaderCollection headers) {
             Headers = headers ?? new WebHeaderCollection();
@@ -107,7 +102,7 @@ namespace Skybrud.Social.Http {
         #region Member methods
 
         /// <summary>
-        /// Adds a new header with the specified <code>name</code> and <code>value</code>.
+        /// Adds a new header with the specified <paramref name="name"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="name">The name of the header.</param>
         /// <param name="value">The value of the header.</param>
@@ -120,7 +115,7 @@ namespace Skybrud.Social.Http {
         #region Operator overloading
 
         /// <summary>
-        /// Creates a new instance from the specified <code>headers</code>.
+        /// Creates a new instance from the specified <paramref name="headers"/>.
         /// </summary>
         /// <param name="headers">The <see cref="WebHeaderCollection"/> representing the headers.</param>
         public static implicit operator SocialHttpHeaderCollection(WebHeaderCollection headers) {

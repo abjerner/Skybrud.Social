@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
 
@@ -20,7 +19,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpGetRequest(string url) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Get, url, default(IHttpQueryString));
             }
 
@@ -31,8 +30,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpGetRequest(string url, IHttpGetOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Get, url, options.GetQueryString());
             }
 
@@ -43,7 +42,7 @@ namespace Skybrud.Social {
             /// <param name="queryString">The query string of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpGetRequest(string url, IHttpQueryString queryString) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Get, url, queryString);
             }
 
@@ -57,7 +56,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPostRequest(string url) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Post, url, default(IHttpQueryString), default(IHttpPostData));
             }
 
@@ -68,8 +67,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPostRequest(string url, IHttpGetOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Post, url, options.GetQueryString(), null);
             }
 
@@ -80,8 +79,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPostRequest(string url, IHttpPostOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Post, url, options.GetQueryString(), options.GetPostData());
             }
 
@@ -113,7 +112,7 @@ namespace Skybrud.Social {
             /// <param name="postData">The POST data of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Post, url, queryString, postData);
             }
 
@@ -127,7 +126,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPutRequest(string url) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), default(IHttpPostData));
             }
 
@@ -138,8 +137,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPutRequest(string url, IHttpGetOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), null);
             }
 
@@ -150,8 +149,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPutRequest(string url, IHttpPostOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Put, url, options.GetQueryString(), options.GetPostData());
             }
 
@@ -183,7 +182,7 @@ namespace Skybrud.Social {
             /// <param name="postData">The PUT data of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Put, url, queryString, postData);
             }
 
@@ -197,7 +196,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPatchRequest(string url) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), default(IHttpPostData));
             }
 
@@ -208,8 +207,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpGetOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), null);
             }
 
@@ -220,8 +219,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpPostOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Patch, url, options.GetQueryString(), options.GetPostData());
             }
 
@@ -253,7 +252,7 @@ namespace Skybrud.Social {
             /// <param name="postData">The PATCH data of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, IHttpPostData postData) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Patch, url, queryString, postData);
             }
 
@@ -267,7 +266,7 @@ namespace Skybrud.Social {
             /// <param name="url">The URL of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpDeleteRequest(string url) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Delete, url, default(IHttpQueryString));
             }
 
@@ -278,8 +277,8 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the specified <paramref name="url"/>.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpDeleteRequest(string url, IHttpGetOptions options) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-                if (options == null) throw new ArgumentNullException("options");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+                if (options == null) throw new ArgumentNullException(nameof(options));
                 return DoHttpRequest(SocialHttpMethod.Delete, url, options.GetQueryString());
             }
 
@@ -290,7 +289,7 @@ namespace Skybrud.Social {
             /// <param name="queryString">The query string of the request.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
             public static SocialHttpResponse DoHttpDeleteRequest(string url, IHttpQueryString queryString) {
-                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
+                if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
                 return DoHttpRequest(SocialHttpMethod.Delete, url, queryString);
             }
 
@@ -365,7 +364,7 @@ namespace Skybrud.Social {
 
             }
 
-#endregion
+            #endregion
 
         }
 

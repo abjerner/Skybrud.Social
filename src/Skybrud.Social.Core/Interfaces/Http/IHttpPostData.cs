@@ -33,10 +33,10 @@ namespace Skybrud.Social.Interfaces.Http {
         Dictionary<string, IHttpPostValue>.ValueCollection Values { get; }
 
         /// <summary>
-        /// Gets or sets the string value of the item with the specified <code>key</code>code>.
+        /// Gets or sets the string value of the item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item.</param>
-        /// <returns>Returns the <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
         string this[string key] { get; set; }
 
         #endregion
@@ -44,37 +44,37 @@ namespace Skybrud.Social.Interfaces.Http {
         #region Member methods
 
         /// <summary>
-        /// Returns whether the POST data contains an entry with the specified <code>key</code>.
+        /// Returns whether the POST data contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns <code>true</code> if the POST data contains an entry with the specified <code>key</code>,
+        /// <returns><code>true</code> if the POST data contains an entry with the specified <paramref name="key"/>,
         /// otherwise <code>false</code>.</returns>
         bool ContainsKey(string key);
 
         /// <summary>
-        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// Adds an entry with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         void Add(string key, string value);
 
         /// <summary>
-        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// Adds an entry with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         void Add(string key, object value);
 
         /// <summary>
-        /// Adds a file entry with the specified <code>key</code> and <code>path</code>.
+        /// Adds a file entry with the specified <paramref name="key"/> and <paramref name="path"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
         void AddFile(string key, string path);
 
         /// <summary>
-        /// Adds a file entry with the specified <code>key</code>, <code>path</code>, <code>contentType</code> and
-        /// <code>filename</code>.
+        /// Adds a file entry with the specified <paramref name="key"/>, <paramref name="path"/>,
+        /// <paramref name="contentType"/> and <paramref name="filename"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
@@ -83,15 +83,15 @@ namespace Skybrud.Social.Interfaces.Http {
         void AddFile(string key, string path, string contentType, string filename);
 
         /// <summary>
-        /// Sets the value of the entry with specified <code>key</code>. If an entry with <code>key</code> already
-        /// exists, it will be overwritten.
+        /// Sets the value of the entry with specified <paramref name="key"/>. If an entry with <paramref name="key"/>
+        /// already exists, it will be overwritten.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
         void Set(string key, string value);
 
         /// <summary>
-        /// Removes the entry with the specified <code>key</code>.
+        /// Removes the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         void Remove(string key);
@@ -100,7 +100,7 @@ namespace Skybrud.Social.Interfaces.Http {
         /// Gets whether the value with the specified key is an instance of <see cref="SocialHttpPostFileValue"/>.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <returns>Returns <code>true</code> if the item with the specified <code>key</code> is an instance of
+        /// <returns><code>true</code> if the item with the specified <paramref name="key"/> is an instance of
         /// <see cref="SocialHttpPostFileValue"/>, otherwise <code>false</code>.</returns>
         bool IsFile(string key);
         

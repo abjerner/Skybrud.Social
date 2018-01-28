@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -32,26 +31,20 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets the amount of POST data entries.
         /// </summary>
-        public int Count {
-            get { return _data.Count; }
-        }
+        public int Count => _data.Count;
 
         /// <summary>
         /// Gets keys of all POST data entiries.
         /// </summary>
-        public string[] Keys {
-            get { return _data.Keys.ToArray(); }
-        }
+        public string[] Keys => _data.Keys.ToArray();
 
         /// <summary>
         /// Gets values of all POST data entiries.
         /// </summary>
-        public Dictionary<string, IHttpPostValue>.ValueCollection Values {
-            get { return _data.Values; }
-        }
+        public Dictionary<string, IHttpPostValue>.ValueCollection Values => _data.Values;
 
         /// <summary>
-        /// Gets or sets the string value of the item with the specified <code>key</code>code>.
+        /// Gets or sets the string value of the item with the specified <paramref name="key"/>code>.
         /// </summary>
         /// <param name="key">The key of the item.</param>
         /// <returns>Returns the <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
@@ -60,7 +53,7 @@ namespace Skybrud.Social.Http {
                 IHttpPostValue value;
                 return _data.TryGetValue(key, out value) ? value.ToString() : null;
             }
-            set { _data[key] = new SocialHttpPostValue(key, value); }
+            set => _data[key] = new SocialHttpPostValue(key, value);
         }
 
         #endregion
@@ -79,17 +72,17 @@ namespace Skybrud.Social.Http {
         #region Member methods
 
         /// <summary>
-        /// Returns whether the POST data contains an entry with the specified <code>key</code>.
+        /// Returns whether the POST data contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>Returns <code>true</code> if the POST data contains an entry with the specified <code>key</code>,
+        /// <returns><code>true</code> if the POST data contains an entry with the specified <paramref name="key"/>,
         /// otherwise <code>false</code>.</returns>
         public bool ContainsKey(string key) {
             return _data.ContainsKey(key);
         }
 
         /// <summary>
-        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// Adds an entry with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
@@ -98,7 +91,7 @@ namespace Skybrud.Social.Http {
         }
         
         /// <summary>
-        /// Adds an entry with the specified <code>key</code> and <code>value</code>.
+        /// Adds an entry with the specified <paramref name="key"/> and <paramref name="value"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="value">The value of the entry.</param>
@@ -107,7 +100,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Adds a file entry with the specified <code>key</code> and <code>path</code>.
+        /// Adds a file entry with the specified <paramref name="key"/> and <paramref name="path"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
@@ -116,8 +109,8 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Adds a file entry with the specified <code>key</code>, <code>path</code>, <code>contentType</code> and
-        /// <code>filename</code>.
+        /// Adds a file entry with the specified <paramref name="key"/>, <paramref name="path"/>,
+        /// <paramref name="contentType"/> and <code>filename</code>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
@@ -128,7 +121,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Sets the value of the entry with specified <code>key</code>. If an entry with <code>key</code> already
+        /// Sets the value of the entry with specified <paramref name="key"/>. If an entry with <paramref name="key"/> already
         /// exists, it will be overwritten.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
@@ -138,7 +131,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Removes the entry with the specified <code>key</code>.
+        /// Removes the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         public void Remove(string key) {
@@ -146,10 +139,11 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets whether the value with the specified key is an instance of <see cref="SocialHttpPostFileValue"/>.
+        /// Gets whether the value with the specified <paramref name="key"/> is an instance of
+        /// <see cref="SocialHttpPostFileValue"/>.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <returns>Returns <code>true</code> if the item with the specified <code>key</code> is an instance of
+        /// <returns><code>true</code> if the item with the specified <paramref name="key"/> is an instance of
         /// <see cref="SocialHttpPostFileValue"/>, otherwise <code>false</code>.</returns>
         public bool IsFile(string key) {
             IHttpPostValue value;
@@ -162,7 +156,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Writes the multipart POST data to the specified <code>stream</code>.
+        /// Writes the multipart POST data to the specified <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">The stream.</param>
         /// <param name="boundary">The multipart boundary.</param>

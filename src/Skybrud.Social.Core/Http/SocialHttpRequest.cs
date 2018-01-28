@@ -63,32 +63,32 @@ namespace Skybrud.Social.Http {
         /// Gets or sets the collection of headers.
         /// </summary>
         public SocialHttpHeaderCollection Headers {
-            get { return _headers; }
-            set { _headers = value ?? new SocialHttpHeaderCollection(); }
+            get => _headers;
+            set => _headers = value ?? new SocialHttpHeaderCollection();
         }
 
         /// <summary>
         /// Gets or sets the query string of the request.
         /// </summary>
         public IHttpQueryString QueryString {
-            get { return _queryString; }
-            set { _queryString = value ?? new SocialHttpQueryString(); }
+            get => _queryString;
+            set => _queryString = value ?? new SocialHttpQueryString();
         }
 
         /// <summary>
         /// Gets or sets the POST data of the request.
         /// </summary>
         public IHttpPostData PostData {
-            get { return _postData; }
-            set { _postData = value ?? new SocialHttpPostData(); }
+            get => _postData;
+            set => _postData = value ?? new SocialHttpPostData();
         }
 
         /// <summary>
         /// Gets or sets the <see cref="CookieContainer"/> to be used for the request.
         /// </summary>
         public CookieContainer Cookies {
-            get { return _cookies; }
-            set { _cookies = value; }
+            get => _cookies;
+            set => _cookies = value ?? new CookieContainer();
         }
 
         /// <summary>
@@ -118,8 +118,8 @@ namespace Skybrud.Social.Http {
         /// the <code>Accept-Charset</code> HTTP header.
         /// </summary>
         public string AcceptCharset {
-            get { return Headers.AcceptCharset; }
-            set { Headers.AcceptCharset = value; }
+            get => Headers.AcceptCharset;
+            set => Headers.AcceptCharset = value;
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace Skybrud.Social.Http {
         ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
         /// </see>
         public string AcceptEncoding {
-            get { return Headers.AcceptEncoding; }
-            set { Headers.AcceptEncoding = value; }
+            get => Headers.AcceptEncoding;
+            set => Headers.AcceptEncoding = value;
         }
 
         /// <summary>
@@ -142,8 +142,8 @@ namespace Skybrud.Social.Http {
         ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
         /// </see>
         public string AcceptLanguage {
-            get { return Headers.AcceptLanguage; }
-            set { Headers.AcceptLanguage = value; }
+            get => Headers.AcceptLanguage;
+            set => Headers.AcceptLanguage = value;
         }
 
         /// <summary>
@@ -151,8 +151,8 @@ namespace Skybrud.Social.Http {
         /// <code>Authorization</code> HTTP header.
         /// </summary>
         public string Authorization {
-            get { return Headers.Authorization; }
-            set { Headers.Authorization = value; }
+            get => Headers.Authorization;
+            set => Headers.Authorization = value;
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Executes the request and returns the corresponding response as an instance of <see cref="SocialHttpResponse"/>.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public SocialHttpResponse GetResponse() {
             return GetResponse(null);
         }
@@ -203,7 +203,7 @@ namespace Skybrud.Social.Http {
         /// Executes the request and returns the corresponding response as an instance of <see cref="SocialHttpResponse"/>.
         /// </summary>
         /// <param name="callback">Lets you specify a callback method for modifying the underlying <see cref="HttpWebRequest"/>.</param>
-        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public SocialHttpResponse GetResponse(Action<HttpWebRequest> callback) {
 
             // Build the URL
@@ -283,7 +283,7 @@ namespace Skybrud.Social.Http {
             }
             
             // Call the callback
-            if (callback != null) callback(request);
+            callback?.Invoke(request);
 
             // Get the response
             try {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -325,7 +324,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="request">The instance of <see cref="SocialHttpRequest"/> the signature should be based on.</param>
         /// <returns>The generated OAuth signature.</returns>
         protected virtual string GenerateSignature(SocialHttpRequest request) {
-            if (request == null) throw new ArgumentNullException("request");
+            if (request == null) throw new ArgumentNullException(nameof(request));
             if (String.IsNullOrWhiteSpace(request.Url)) throw new PropertyNotSetException("request.Url");
             return GenerateSignature(request.Method, request.Url, request.QueryString, request.PostData);
         }
@@ -334,8 +333,7 @@ namespace Skybrud.Social.OAuth {
         /// Adds the OAuth 1.0a authorization header to the request
         /// </summary>
         /// <param name="request"></param>
-        protected override void PrepareHttpRequest(SocialHttpRequest request)
-        {
+        protected override void PrepareHttpRequest(SocialHttpRequest request) {
 
             // Generate the signature
             string signature = GenerateSignature(request);

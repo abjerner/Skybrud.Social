@@ -20,7 +20,7 @@ namespace Skybrud.Social.OAuth.Exceptions {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <code>response</code> and <code>message</code>.
+        /// Initializes a new instance based on the specified <paramref name="response"/> and <paramref name="message"/>.
         /// </summary>
         /// <param name="response">The underlying response.</param>
         /// <param name="message">The message.</param>

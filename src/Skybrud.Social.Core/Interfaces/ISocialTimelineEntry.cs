@@ -1,4 +1,4 @@
-using System;
+using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.Interfaces {
 
@@ -10,7 +10,7 @@ namespace Skybrud.Social.Interfaces {
         /// <summary>
         /// Gets the date of the object that represents how the object can be sorted in a timeline.
         /// </summary>
-        DateTime SortDate { get; }
+        EssentialsDateTime SortDate { get; }
 
     }
 
