@@ -8,11 +8,11 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social</RootNamespace>
-    <Version>1.0.0-beta9</Version>
+    <Version>1.0.0</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2017</Copyright>
+    <Copyright>Copyright © 2018</Copyright>
     <Description>Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.</Description>
     <RepositoryUrl>https://github.com/abjerner/Skybrud.Social</RepositoryUrl>
   </PropertyGroup>

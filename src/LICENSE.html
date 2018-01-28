@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Skybrud.Social.Core</title>
+    <style>
+        body {
+            font: 16px/1.4em Arial, sans-serif;
+            background: #f1f1f1;
+            color: #333;
+            margin: 0;
+        }
+        h1 {
+            font-size: 30px;
+            line-height: 1.1em;
+            font-weight: normal;
+        }
+        h2 {
+            font-size: 24px;
+            line-height: 1.1em;
+            font-weight: normal;
+        }
+        .wrapper {
+            width: 650px;
+            margin: 0 auto;
+            padding: 40px 0;
+            position: relative;
+        }
+        .skybrudLogo a {
+            background: black url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAzCAYAAAD/06q7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMkNFRkFFOTYyMjQxMUUyOEFENDlGQTc2OTAzMzdCOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMkNFRkFFQTYyMjQxMUUyOEFENDlGQTc2OTAzMzdCOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAyQ0VGQUU3NjIyNDExRTI4QUQ0OUZBNzY5MDMzN0I4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAyQ0VGQUU4NjIyNDExRTI4QUQ0OUZBNzY5MDMzN0I4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+qgQCpAAABFpJREFUeNrsl1lsDWEUx+eOVmi01BKCilhapYKIEomlkorgoRL77qWJWMOD8CAE9WKLIJaQ1vIgkdiXkFgSJFqkoaFo+lB70Fav1NJS/zP5DyfXnbmj916uxEl+ud8338x/znzf+b5zri/z/AsjwBLAeJAFMkEPXi8DheAKOANqDXdrlI4vwKFskAsmhnjZMbAXXHIYb7ROk04zl9vtaSAPjDBCW28wEFSBkoCxsHRsh7Ip0tvwbu1AOngCytXMhKVjcq1zf1NEf2EuNSKiIzE0GY2jTncmxpvGhJQEq338aa3hr/sW7LYp/D3ayOd/6JjcBY7O7BjU2liQmmj1XcSynHTkmcQ4n6UhWqLpYlkmt6SjM72S4o3SmjrjYPkHN6FMJx2xnY/9loZohXAq01TnQ1Bn5AtXFVeFioEewXS0bSx5b2mJZl7/Vo46ptM016jlSYwzjXDNX/9TLwkf7DRLJk/OX2xVcbU1zfLgyoyWod5X5qRjW17/ZEtLNBcWVTrFY5nJYzzoLMmD9trbge1ghU46YrO7tfgRiy7OWDomc4rh5pQEpb++wS0Yrzjp2M+IRghnLB05h+SQKPCQd9zy0Ry2w9YxmW0lwT1ohMgDPlsbKR07l5UzwaUzt3gVWQ9Oqmth6+hsX8IE19xDPpLp3RDgTER0fDFXoDU0NBixZBLUW+h1MbmmxneBcfYOBhfASvYPg2Xq3hWshcIzzNAb0FZmKgj5IAe0A4VguRpLAa9Ad5AGHoEWDjqekRnyg8ncGUlBfO4CroP9YLO6/hSs5XbdAxaBD5FYsllgOMjn7pBdkqLuWcOXDwjy/G7QjOMXIxVDN8BUMBi0B6VgpLpnCcjhtRmBKw6KwJ1IBXUckFTuYz8etAqYej/7k8Blvrw0WrssjnGhi6vH4CzbEjsVbN8HC7nrSgMy/dtIORST51BMmSzZUtWvBzfBXfZHq3z0lct2VY09U9k9iaXHASZWewNIAfQcnPeQbqwZktO1mnxm/HTm+HTQjWPi7D4wVo3pfxqtwWq2O/EUl+dquEtPeZ2hLzyDbJNzqS2/3uDOOsF2GkgF5zxoVyrdI9ytnhySMmEb+01BHXio7sngl8q9w9xKXhcTzU9eHapTMyD97ZyJe7w2mEszFCx2qIE87WivDtWrQLXrlS7KIclhp7l0OtdJbCSrfrJLLpOxJl4dSlBrLUvWh+lA21cG8S2VKmSmDoGe/KhRdF4n5Xy+YyBn3tPB2DXg2gsGusHgrlXbtQ1/3/G3A4PcZD1doT6so9K0d/H/kzoiDlUrKpks01UJW82KQKqA2yxxm0fTIXnZIzAXrAODwDz1z6ElHTjFlCDB/THaS/aSZ9FxFZTa5C/yEDCGeemvx9BIFm/9YiWos1i4beUSRt2hvsxnm9h/HeT/93yeOxujXQ8VsG3X0uu5u+wS1uBBeZl/ElOZCqqi4dD/g/GfrKlz/uD7TniJoT8ZRL5/bsm+CzAA4ePgKOYIZ8oAAAAASUVORK5CYII=)
+                        0 -18px no-repeat;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 27px;
+            height: 32px;
+            border: 20px solid #000;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        ul a {
+            margin-left: 25px;
+            position: relative;
+        }
+        ul a:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 18px;
+            height: 18px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAzCAYAAAD/06q7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMkNFRkFFOTYyMjQxMUUyOEFENDlGQTc2OTAzMzdCOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMkNFRkFFQTYyMjQxMUUyOEFENDlGQTc2OTAzMzdCOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAyQ0VGQUU3NjIyNDExRTI4QUQ0OUZBNzY5MDMzN0I4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAyQ0VGQUU4NjIyNDExRTI4QUQ0OUZBNzY5MDMzN0I4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+qgQCpAAABFpJREFUeNrsl1lsDWEUx+eOVmi01BKCilhapYKIEomlkorgoRL77qWJWMOD8CAE9WKLIJaQ1vIgkdiXkFgSJFqkoaFo+lB70Fav1NJS/zP5DyfXnbmj916uxEl+ud8338x/znzf+b5zri/z/AsjwBLAeJAFMkEPXi8DheAKOANqDXdrlI4vwKFskAsmhnjZMbAXXHIYb7ROk04zl9vtaSAPjDBCW28wEFSBkoCxsHRsh7Ip0tvwbu1AOngCytXMhKVjcq1zf1NEf2EuNSKiIzE0GY2jTncmxpvGhJQEq338aa3hr/sW7LYp/D3ayOd/6JjcBY7O7BjU2liQmmj1XcSynHTkmcQ4n6UhWqLpYlkmt6SjM72S4o3SmjrjYPkHN6FMJx2xnY/9loZohXAq01TnQ1Bn5AtXFVeFioEewXS0bSx5b2mJZl7/Vo46ptM016jlSYwzjXDNX/9TLwkf7DRLJk/OX2xVcbU1zfLgyoyWod5X5qRjW17/ZEtLNBcWVTrFY5nJYzzoLMmD9trbge1ghU46YrO7tfgRiy7OWDomc4rh5pQEpb++wS0Yrzjp2M+IRghnLB05h+SQKPCQd9zy0Ry2w9YxmW0lwT1ohMgDPlsbKR07l5UzwaUzt3gVWQ9Oqmth6+hsX8IE19xDPpLp3RDgTER0fDFXoDU0NBixZBLUW+h1MbmmxneBcfYOBhfASvYPg2Xq3hWshcIzzNAb0FZmKgj5IAe0A4VguRpLAa9Ad5AGHoEWDjqekRnyg8ncGUlBfO4CroP9YLO6/hSs5XbdAxaBD5FYsllgOMjn7pBdkqLuWcOXDwjy/G7QjOMXIxVDN8BUMBi0B6VgpLpnCcjhtRmBKw6KwJ1IBXUckFTuYz8etAqYej/7k8Blvrw0WrssjnGhi6vH4CzbEjsVbN8HC7nrSgMy/dtIORST51BMmSzZUtWvBzfBXfZHq3z0lct2VY09U9k9iaXHASZWewNIAfQcnPeQbqwZktO1mnxm/HTm+HTQjWPi7D4wVo3pfxqtwWq2O/EUl+dquEtPeZ2hLzyDbJNzqS2/3uDOOsF2GkgF5zxoVyrdI9ytnhySMmEb+01BHXio7sngl8q9w9xKXhcTzU9eHapTMyD97ZyJe7w2mEszFCx2qIE87WivDtWrQLXrlS7KIclhp7l0OtdJbCSrfrJLLpOxJl4dSlBrLUvWh+lA21cG8S2VKmSmDoGe/KhRdF4n5Xy+YyBn3tPB2DXg2gsGusHgrlXbtQ1/3/G3A4PcZD1doT6so9K0d/H/kzoiDlUrKpks01UJW82KQKqA2yxxm0fTIXnZIzAXrAODwDz1z6ElHTjFlCDB/THaS/aSZ9FxFZTa5C/yEDCGeemvx9BIFm/9YiWos1i4beUSRt2hvsxnm9h/HeT/93yeOxujXQ8VsG3X0uu5u+wS1uBBeZl/ElOZCqqi4dD/g/GfrKlz/uD7TniJoT8ZRL5/bsm+CzAA4ePgKOYIZ8oAAAAASUVORK5CYII=);
+            background-position: -18px 0;
+        }
+        a {
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #000000;
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            -webkit-transition: all 300ms ease;
+            -moz-transition: all 300ms ease;
+            -o-transition: all 300ms ease;
+            -ms-transition: all 300ms ease;
+            transition: all 300ms ease;
+        }
+
+        a:hover {
+            color: #36b7e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Skybrud.Social.Core</h1>
+        <h2>The MIT License (MIT)</h2>
+        <div class="skybrudLogo"><a href="http://www.skybrud.dk/" target="_blank"></a></div>
+        <p>
+            Copyright &copy; 2018 <a href="https://twitter.com/abjerner" target="_blank">Anders Bjerner</a>
+        </p>
+        <p>
+            Permission is hereby granted, free of charge, to any person obtaining a copy of
+            this software and associated documentation files (the "Software"), to deal in
+            the Software without restriction, including without limitation the rights to
+            use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+            of the Software, and to permit persons to whom the Software is furnished to do
+            so, subject to the following conditions:
+        </p>
+        <p>
+            The above copyright notice and this permission notice shall be included in all
+            copies or substantial portions of the Software.
+        </p>
+        <p>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+            FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+            IN THE SOFTWARE.
+        </p>
+        <ul>
+            <li>
+                <a href="https://social.skybrud.dk/" target="_blank">See the documentation on <strong>social.skybrud.dk</strong></a>
+            </li>
+            <li>
+                <a href="https://github.com/abjerner/Skybrud.Social" target="_blank">See the project on <strong>GitHub</strong></a>
+            </li>
+            <li>
+                <a href="https://www.nuget.org/packages/Skybrud.Social.Core" target="_blank">Download from <strong>NuGet</strong></a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

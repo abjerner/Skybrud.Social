@@ -3,8 +3,8 @@
   "description": "Skybrud.Social is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.",
   "company": "Skybrud.dk a/s",
   "product": "Skybrud.Social",
-  "copyright": "Copyright © 2017",
+  "copyright": "Copyright © 2018",
   "version": "1.0.0.0",
-  "informationalVersion": "1.0.0-beta9",
-  "fileVersion": "0.0.1739.3"
+  "informationalVersion": "1.0.0",
+  "fileVersion": "0.0.2008.5"
 }

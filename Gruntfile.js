@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 			    src: [
 					'src/Skybrud.Social.Core/bin/Release/*/*.dll',
 					'src/Skybrud.Social.Core/bin/Release/*/*.xml',
-					'src/Skybrud.Social.Core/LICENSE.txt'
+					'src/LICENSE.html'
 				],
 				dest: 'releases/github/Skybrud.Social.Core.v' + version + '.zip'
 			}
