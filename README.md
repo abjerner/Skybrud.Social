@@ -57,7 +57,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 
 ### Services
 
-| Package                                       | NuGet                                                                                                                                        | .NET Standard | .NET Framework 4.5 | .NET Framework 4.5 |
+| Package                                       | NuGet                                                                                                                                        | .NET Standard 1.3 | .NET Framework 4.5 | .NET Framework 4.5 |
 |-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------|--------------------|
 | Skybrud.Social.Core                           | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Core.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)           | ✓ | ✓ | ✓ |
 | [Skybrud.Social.**BitBucket**][RepoBitBucket] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.BitBucket.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)      |   | ✓ |   |
