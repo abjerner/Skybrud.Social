@@ -57,26 +57,21 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 
 ### Services
 
-* [Skybrud.Social.**BitBucket**][RepoBitBucket]
-* [Skybrud.Social.**Facebook**][RepoFacebook]
-* [Skybrud.Social.**GitHub**][RepoGitHub]
-* [Skybrud.Social.**Google**][RepoGoogle] Analytics + YouTube
-* [Skybrud.Social.**Instagram**][RepoInstagram]
-* [Skybrud.Social.**LinkedIn**][RepoLinkedIn]
-* [Skybrud.Social.**Microsoft**][RepoMicrosoft] Windows Live
-* [Skybrud.Social.**Pinterest**][RepoPinterest]
-* [Skybrud.Social.**Slack**][RepoSlack]
-* [Skybrud.Social.**Twitter**][RepoTwitter]
-* [Skybrud.Social.**Vimeo**][RepoVimeo]
-* Skybrud.Social.**Yammer** *(coming soon)*
-* Skybrud.Social.**Spotify** *(coming soon)*
-
-
-
-
-
-
-
+| Package                                       | NuGet                                                                                                                                        | .NET Standard | .NET Framework 4.5 | .NET Framework 4.5 |
+|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------|--------------------|
+| Skybrud.Social.Core                           | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Core.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)           | ✓ | ✓ | ✓ |
+| [Skybrud.Social.**BitBucket**][RepoBitBucket] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.BitBucket.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)      |   | ✓ |   |
+| [Skybrud.Social.**Facebook**][RepoFacebook]   | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Facebook.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)       | ✓ | ✓ | ✓ |
+| [Skybrud.Social.**GitHub**][RepoGitHub]       | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)         |   | ✓ |   |
+| [Skybrud.Social.**Google**][RepoGoogle]       | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Google.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)         | ✓ | ✓ | ✓ |
+| [Skybrud.Social.**Instagram**][RepoInstagram] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Instagram.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)      | ✓ | ✓ | ✓ |
+| [Skybrud.Social.**LinkedIn**][RepoLinkedIn]   | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.LinkedIn.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)       |   | ✓ |   |
+| [Skybrud.Social.**Microsoft**][RepoMicrosoft] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Microsoft.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)      |   | ✓ |   |
+| [Skybrud.Social.**Pinterest**][RepoPinterest] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Pinterest.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)      |   | ✓ |   |
+| [Skybrud.Social.**Slack**][RepoSlack]         | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Slack.svg)](https://www.nuget.org/packages/Skybrud.Slack.Core)           |   | ✓ |   |
+| [Skybrud.Social.**Spotify**][RepoSpotify]     | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Spotify.svg)](https://www.nuget.org/packages/Skybrud.Social.Spotify)     |   | ✓ |   |
+| [Skybrud.Social.**Twitter**][RepoTwitter]     | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Twitter.svg)](https://www.nuget.org/packages/Skybrud.Social.Twitter)     | ✓ | ✓ | ✓ |
+| [Skybrud.Social.**Vimeo**][RepoVimeo]         | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Vimeo.svg)](https://www.nuget.org/packages/Skybrud.Social.Vimeo)         |   | ✓ |   |
 
 
 
@@ -90,13 +85,11 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 [WebsiteInstagram]: http://social.skybrud.dk/instagram/
 [WebsiteTwitter]: http://social.skybrud.dk/twitter/
 [WebsiteVimeo]: http://social.skybrud.dk/vimeo/
-
 [WebsiteLinkedIn]: http://social.skybrud.dk/linkedin/
 [WebsiteMicrosoft]: http://social.skybrud.dk/microsoft/
 [WebsitePinterest]: http://social.skybrud.dk/pinterest/
 [WebsiteSlack]: http://social.skybrud.dk/slack/
 [WebsiteSpotify]: http://social.skybrud.dk/spotify/
-[WebsiteYammer]: http://social.skybrud.dk/yammer/
 
 
 
@@ -112,10 +105,24 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 [RepoMicrosoft]: https://github.com/abjerner/Skybrud.Social.Microsoft
 [RepoPinterest]: https://github.com/abjerner/Skybrud.Social.Pinterest
 [RepoSlack]: https://github.com/abjerner/Skybrud.Social.Slack
+[RepoSpotify]: https://github.com/abjerner/Skybrud.Social.Spotify
 [RepoTwitter]: https://github.com/abjerner/Skybrud.Social.Twitter
 [RepoVimeo]: https://github.com/abjerner/Skybrud.Social.Vimeo
 
 
+[NuGetCore]: https://www.nuget.org/packages/Skybrud.Social.Core
+[NuGetBitBucket]: https://www.nuget.org/packages/Skybrud.Social.BitBucket
+[NuGetFacebook]: https://www.nuget.org/packages/Skybrud.Social.Facebook
+[NuGetGitHub]: https://www.nuget.org/packages/Skybrud.Social.GitHub
+[NuGetGoogle]: https://www.nuget.org/packages/Skybrud.Social.Google
+[NuGetInstagram]: https://www.nuget.org/packages/Skybrud.Social.Instagram
+[NuGetLinkedIn]: https://www.nuget.org/packages/Skybrud.Social.LinkedIn
+[NuGetMicrosoft]: https://www.nuget.org/packages/Skybrud.Social.Microsoft
+[NuGetPinterest]: https://www.nuget.org/packages/Skybrud.Social.Pinterest
+[NuGetSlack]: https://www.nuget.org/packages/Skybrud.Social.Slack
+[NuGetTwitter]: https://www.nuget.org/packages/Skybrud.Social.Twitter
+[NuGetVimeo]: https://www.nuget.org/packages/Skybrud.Social.Vimeo
+[NuGetSpotify]: https://www.nuget.org/packages/Skybrud.Social.Spotify
 
 
 
