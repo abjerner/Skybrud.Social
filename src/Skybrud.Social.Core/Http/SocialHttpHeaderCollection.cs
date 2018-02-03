@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -8,7 +10,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Collection of HTTP headers.
     /// </summary>
-    public class SocialHttpHeaderCollection {
+    public class SocialHttpHeaderCollection : IEnumerable<KeyValuePair<string, string>> {
 
         #region Properties
 
@@ -106,8 +108,34 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="name">The name of the header.</param>
         /// <param name="value">The value of the header.</param>
+        public void Add(string name, string value) {
+            Headers[name] = value;
+        }
+
+        /// <summary>
+        /// Adds a new header with the specified <paramref name="name"/> and <paramref name="value"/>.
+        /// </summary>
+        /// <param name="name">The name of the header.</param>
+        /// <param name="value">The value of the header.</param>
         public void Add(string name, object value) {
             Headers[name] = String.Format(CultureInfo.InvariantCulture, "{0}", value);
+        }
+
+        
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
+            return Headers.AllKeys.Select(x => new KeyValuePair<string, string>(x, Headers[x])).GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion

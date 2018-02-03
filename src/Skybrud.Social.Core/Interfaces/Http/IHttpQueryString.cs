@@ -6,7 +6,7 @@ namespace Skybrud.Social.Interfaces.Http {
     /// Interface describing a collection of items representing a query string. Depending on the implementation, the
     /// collection may support multiple items sharing the same key.
     /// </summary>
-    public interface IHttpQueryString {
+    public interface IHttpQueryString : IEnumerable<KeyValuePair<string, string>> {
 
         #region Properties
 

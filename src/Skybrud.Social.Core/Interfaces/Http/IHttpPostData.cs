@@ -8,7 +8,7 @@ namespace Skybrud.Social.Interfaces.Http {
     /// <summary>
     /// Interface decribing the request body of a HTTP POST request.
     /// </summary>
-    public interface IHttpPostData {
+    public interface IHttpPostData : IEnumerable<KeyValuePair<string, string>> {
 
         #region Properties
 

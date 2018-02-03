@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
@@ -171,6 +172,22 @@ namespace Skybrud.Social.Http {
             // If either the key or the value is NULL, we return the default value for "T"
             return pair.Key == null || pair.Value == null ? default(T) : (T) Convert.ChangeType(pair.Value, typeof(T), CultureInfo.InvariantCulture);
         
+        }
+        
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator(){
+            return _query.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion
