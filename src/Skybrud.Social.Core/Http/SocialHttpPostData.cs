@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -13,7 +14,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing the POST data of a HTTP request.
     /// </summary>
-    public class SocialHttpPostData : IHttpPostData {
+    public class SocialHttpPostData : IHttpPostData, IEnumerable<KeyValuePair<string, string>> {
 
         #region Private fields
 
@@ -173,6 +174,22 @@ namespace Skybrud.Social.Http {
         /// <returns>Returns the POST data as an URL encoded string.</returns>
         public override string ToString() {
             return String.Join("&", _data.Select(pair => StringUtils.UrlEncode(pair.Key) + "=" + StringUtils.UrlEncode(pair.Value.ToString())));
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
+            return _data.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())).GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion

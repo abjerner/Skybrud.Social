@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing a basic HTTP query string.
     /// </summary>
-    public class SocialHttpQueryString : IHttpQueryString {
+    public class SocialHttpQueryString : IHttpQueryString, IEnumerable<KeyValuePair<string, string>> {
 
         #region Private fields
 
@@ -178,6 +179,22 @@ namespace Skybrud.Social.Http {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             string value = _values[key];
             return String.IsNullOrWhiteSpace(value) ? default(T) : (T) Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
+            return _values.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion
