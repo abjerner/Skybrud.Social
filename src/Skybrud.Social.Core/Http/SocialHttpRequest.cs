@@ -218,22 +218,28 @@ namespace Skybrud.Social.Http {
             request.Credentials = Credentials;
             request.Headers = Headers.Headers;
             request.Accept = Accept;
-            if (!String.IsNullOrWhiteSpace(Referer)) request.Headers["Referer"] = Referer;
-            if (!String.IsNullOrWhiteSpace(UserAgent)) request.Headers["User-Agent"] = UserAgent;
             request.CookieContainer = Cookies;
             if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
-            if (!String.IsNullOrWhiteSpace(Host)) request.Headers["Host"] = Host;
 
 #if NET_FRAMEWORK
             request.Timeout = (int) Timeout.TotalMilliseconds;
+            if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
+            if (!String.IsNullOrWhiteSpace(UserAgent)) request.UserAgent = UserAgent;
+            if (!String.IsNullOrWhiteSpace(Referer)) request.Referer = Referer;
+#endif
+
+#if NET_STANDARD
+            if (!String.IsNullOrWhiteSpace(Host)) request.Headers["Host"] = Host;
+            if (!String.IsNullOrWhiteSpace(UserAgent)) request.Headers["User-Agent"] = UserAgent;
+            if (!String.IsNullOrWhiteSpace(Referer)) request.Headers["Referer"] = Referer;
 #endif
 
             // Handle various POST scenarios
             if (!String.IsNullOrWhiteSpace(Body)) {
 
                 // Set the length of the request body
-                request.Headers["Content-Length"] = Body.Length.ToString();
-                
+                SetRequestContentLength(request, Body.Length);
+
                 // Write the body to the request stream
                 Task<Stream> hest = request.GetRequestStreamAsync();
                 using (Stream stream = hest.Result) {
@@ -269,7 +275,7 @@ namespace Skybrud.Social.Http {
                     request.ContentType = "application/x-www-form-urlencoded";
 
                     // Set the length of the request body
-                    //request.ContentLength = dataString.Length;
+                    SetRequestContentLength(request, dataString.Length);
 
                     // Write the body to the request stream
                     Task<Stream> hest = request.GetRequestStreamAsync();
@@ -309,6 +315,15 @@ namespace Skybrud.Social.Http {
                 return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse, this);
             }
 
+        }
+
+        private void SetRequestContentLength(HttpWebRequest request, int contentLength) {
+#if NET_FRAMEWORK
+            request.ContentLength = contentLength;
+#endif
+#if NET_STANDARD
+            request.Headers["Content-Length"] = contentLength.ToString();
+#endif
         }
 
         #endregion
