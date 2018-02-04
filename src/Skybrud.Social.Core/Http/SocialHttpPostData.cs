@@ -14,7 +14,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing the POST data of a HTTP request.
     /// </summary>
-    public class SocialHttpPostData : IHttpPostData, IEnumerable<KeyValuePair<string, string>> {
+    public class SocialHttpPostData : IHttpPostData {
 
         #region Private fields
 
