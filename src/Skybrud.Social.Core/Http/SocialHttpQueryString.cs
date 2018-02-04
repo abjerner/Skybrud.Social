@@ -46,7 +46,10 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="key">The key of the item to match.</param>
         /// <returns>The <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
-        public string this[string key] => _values[key];
+        public string this[string key] {
+            get => _values[key];
+            set => _values[key] = value;
+        }
 
         /// <summary>
         /// Gets whether this implementation of <see cref="IHttpQueryString"/> supports duplicate keys.
