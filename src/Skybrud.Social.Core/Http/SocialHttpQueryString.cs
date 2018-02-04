@@ -11,7 +11,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing a basic HTTP query string.
     /// </summary>
-    public class SocialHttpQueryString : IHttpQueryString, IEnumerable<KeyValuePair<string, string>> {
+    public class SocialHttpQueryString : IHttpQueryString {
 
         #region Private fields
 
