@@ -57,7 +57,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 
 ### Services
 
-| Package                                       | NuGet                                                                                                                                        | .NET Standard 1.3 | .NET Framework 4.5 | .NET Framework 4.5 |
+| Package                                       | NuGet                                                                                                                                        | .NET Standard 1.3 | .NET Framework 4.5 | .NET Framework 4.6 |
 |-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------------------|--------------------|
 | Skybrud.Social.Core                           | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Core.svg)](https://www.nuget.org/packages/Skybrud.Social.Core)           | ✓ | ✓ | ✓ |
 | [Skybrud.Social.**BitBucket**][RepoBitBucket] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.BitBucket.svg)](https://www.nuget.org/packages/Skybrud.Social.BitBucket)      |   | ✓ |   |
@@ -66,6 +66,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 | [Skybrud.Social.**Google**][RepoGoogle]       | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Google.svg)](https://www.nuget.org/packages/Skybrud.Social.Google)         | ✓ | ✓ | ✓ |
 | [Skybrud.Social.**Instagram**][RepoInstagram] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Instagram.svg)](https://www.nuget.org/packages/Skybrud.Social.Instagram)      | ✓ | ✓ | ✓ |
 | [Skybrud.Social.**LinkedIn**][RepoLinkedIn]   | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.LinkedIn.svg)](https://www.nuget.org/packages/Skybrud.Social.LinkedIn)       |   | ✓ |   |
+| [Skybrud.Social.**Meetup**][RepoMeetup] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Meetup.svg)](https://www.nuget.org/packages/Skybrud.Social.Meetup)      | ✓ | ✓ | ✓ |
 | [Skybrud.Social.**Microsoft**][RepoMicrosoft] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Microsoft.svg)](https://www.nuget.org/packages/Skybrud.Social.Microsoft)      |   | ✓ |   |
 | [Skybrud.Social.**Pinterest**][RepoPinterest] | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Pinterest.svg)](https://www.nuget.org/packages/Skybrud.Social.Pinterest)      |   | ✓ |   |
 | [Skybrud.Social.**Slack**][RepoSlack]         | [![Install via NuGet](https://img.shields.io/nuget/v/Skybrud.Social.Slack.svg)](https://www.nuget.org/packages/Skybrud.Slack.Slack)           |   | ✓ |   |
@@ -102,6 +103,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 [RepoGoogle]: https://github.com/abjerner/Skybrud.Social.Google
 [RepoInstagram]: https://github.com/abjerner/Skybrud.Social.Instagram
 [RepoLinkedIn]: https://github.com/abjerner/Skybrud.Social.LinkedIn
+[RepoMeetup]: https://github.com/abjerner/Skybrud.Social.Meetup
 [RepoMicrosoft]: https://github.com/abjerner/Skybrud.Social.Microsoft
 [RepoPinterest]: https://github.com/abjerner/Skybrud.Social.Pinterest
 [RepoSlack]: https://github.com/abjerner/Skybrud.Social.Slack
@@ -117,6 +119,7 @@ Improving the code has higher priority than documentation, so I'm currently a bi
 [NuGetGoogle]: https://www.nuget.org/packages/Skybrud.Social.Google
 [NuGetInstagram]: https://www.nuget.org/packages/Skybrud.Social.Instagram
 [NuGetLinkedIn]: https://www.nuget.org/packages/Skybrud.Social.LinkedIn
+[NuGetMeetup]: https://www.nuget.org/packages/Skybrud.Social.Meetup
 [NuGetMicrosoft]: https://www.nuget.org/packages/Skybrud.Social.Microsoft
 [NuGetPinterest]: https://www.nuget.org/packages/Skybrud.Social.Pinterest
 [NuGetSlack]: https://www.nuget.org/packages/Skybrud.Social.Slack
