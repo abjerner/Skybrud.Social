@@ -51,7 +51,7 @@ namespace Skybrud.Social.Http {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified raw <code>response</code>.
+        /// Initializes a new instance based on the specified raw <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         protected SocialResponse(SocialHttpResponse response) {
