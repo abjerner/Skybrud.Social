@@ -47,7 +47,7 @@ namespace Skybrud.Social.Http {
         /// <param name="key">The key of the item to match.</param>
         /// <returns>The <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
         public string this[string key] {
-            get => _values[key];
+            get => GetString(key);
             set => _values[key] = value;
         }
 
@@ -125,7 +125,8 @@ namespace Skybrud.Social.Http {
         /// <returns>The <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
         public string GetString(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            return _values[key];
+            string value;
+            return _values.TryGetValue(key, out value) ? value : null;
         }
 
         /// <summary>
@@ -174,13 +175,14 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets the <code>T</code> value of the entry with the specified <paramref name="key"/>.
+        /// Gets the <typeparamref name="T"/> value of the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <code>T</code> value of the entry, or the default value of <code>T</code> if not found.</returns>
+        /// <returns>The <typeparamref name="T"/> value of the entry, or the default value of <typeparamref name="T"/> if not found.</returns>
         private T GetValue<T>(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
-            string value = _values[key];
+            string value;
+            if (!_values.TryGetValue(key, out value)) return default(T);
             return String.IsNullOrWhiteSpace(value) ? default(T) : (T) Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
         }
 
