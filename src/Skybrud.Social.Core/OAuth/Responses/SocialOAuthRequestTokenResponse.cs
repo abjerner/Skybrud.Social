@@ -14,7 +14,7 @@ namespace Skybrud.Social.OAuth.Responses {
         /// <summary>
         /// Gets a reference to the response body.
         /// </summary>
-        public SocialOAuthRequestToken Body { get; private set; }
+        public SocialOAuthRequestToken Body { get; protected set; }
 
         #endregion
 
