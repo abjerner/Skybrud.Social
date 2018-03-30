@@ -21,7 +21,7 @@ namespace Skybrud.Social.OAuth {
         /// </summary>
         /// <returns>The current Unix timestamp as a string.</returns>
         public static string GetTimestamp() {
-            return TimeUtils.GetCurrentUnixTimestamp() + "";
+            return TimeUtils.GetCurrentUnixTimestamp().ToString();
         }
 
     }

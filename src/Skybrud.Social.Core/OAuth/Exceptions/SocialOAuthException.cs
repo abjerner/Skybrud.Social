@@ -13,7 +13,7 @@ namespace Skybrud.Social.OAuth.Exceptions {
         /// <summary>
         /// Gets a reference to the underlying response.
         /// </summary>
-        public SocialHttpResponse Response { get; private set; }
+        public SocialHttpResponse Response { get; }
 
         #endregion
 

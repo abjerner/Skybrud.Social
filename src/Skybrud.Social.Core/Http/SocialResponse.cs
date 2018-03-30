@@ -19,7 +19,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a reference to the underlying raw response.
         /// </summary>
-        public SocialHttpResponse Response { get; private set; }
+        public SocialHttpResponse Response { get; }
 
         /// <summary>
         /// Gets the status code returned by the server.
