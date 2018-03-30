@@ -121,7 +121,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string of the request.</param>
-        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="contentType">The content type of the request - eg. <c>application/json</c>.</param>
         /// <param name="body">The body of the request.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, IHttpQueryString queryString, string contentType, string body) {
@@ -299,7 +299,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string of the request.</param>
-        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="contentType">The content type of the request - eg. <c>application/json</c>.</param>
         /// <param name="body">The body of the request.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, IHttpQueryString queryString, string contentType, string body) {
@@ -477,7 +477,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string of the request.</param>
-        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="contentType">The content type of the request - eg. <c>application/json</c>.</param>
         /// <param name="body">The body of the request.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, IHttpQueryString queryString, string contentType, string body) {
@@ -701,7 +701,7 @@ namespace Skybrud.Social.Http {
         /// <param name="method">The HTTP method of the request.</param>
         /// <param name="url">The base URL of the request (no query string).</param>
         /// <param name="queryString">The query string.</param>
-        /// <param name="contentType">The content type of the request - eg. <code>application/json</code>.</param>
+        /// <param name="contentType">The content type of the request - eg. <c>application/json</c>.</param>
         /// <param name="body">The body of the request.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpQueryString queryString, string contentType, string body) {

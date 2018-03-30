@@ -32,15 +32,15 @@ namespace Skybrud.Social.OAuth {
         public string ConsumerSecret { get; set; }
 
         /// <summary>
-        /// Gets or sets a unique/random value specifying the <code>oauth_nonce</code> parameter in the OAuth protocol.
-        /// Along with <code>oauth_timestamp</code>, it will make sure each request is only sent once to the OAuth
+        /// Gets or sets a unique/random value specifying the <c>oauth_nonce</c> parameter in the OAuth protocol.
+        /// Along with <c>oauth_timestamp</c>, it will make sure each request is only sent once to the OAuth
         /// server (provider).
         /// </summary>
         public string Nonce { get; set; }
 
         /// <summary>
-        /// Gets or sets the current UNIX timestamp specifying the <code>oauth_timestamp</code> in the OAuth protocol.
-        /// Along with <code>oauth_nonce</code>, it will make sure each request is only sent once to the OAuth server
+        /// Gets or sets the current UNIX timestamp specifying the <c>oauth_timestamp</c> in the OAuth protocol.
+        /// Along with <c>oauth_nonce</c>, it will make sure each request is only sent once to the OAuth server
         /// (provider).
         /// </summary>
         public string Timestamp { get; set; }
@@ -62,7 +62,7 @@ namespace Skybrud.Social.OAuth {
         public string Version { get; set; }
 
         /// <summary>
-        /// Gets or sets the callback URL. This property specified the <code>oauth_callback</code> parameter and is
+        /// Gets or sets the callback URL. This property specified the <c>oauth_callback</c> parameter and is
         /// used for 3-legged logins. You only need to specify this property for authentication - it is not necessary
         /// toset this property when just making calls to the API. 
         /// </summary>
@@ -88,8 +88,8 @@ namespace Skybrud.Social.OAuth {
         public string AccessTokenUrl { get; set; }
 
         /// <summary>
-        /// If <code>true</code>, new requests will automatically reset the <code>oauth_timestamp</code> and
-        /// <code>oauth_nonce</code> with new values. It should only be disabled for testing purposes.
+        /// If <c>true</c>, new requests will automatically reset the <c>oauth_timestamp</c> and
+        /// <c>oauth_nonce</c> with new values. It should only be disabled for testing purposes.
         /// </summary>
         public bool AutoReset { get; set; }
 
@@ -144,9 +144,9 @@ namespace Skybrud.Social.OAuth {
         #region Member methods
 
         /// <summary>
-        /// Updates the <code>oauth_timestamp</code> and <code>oauth_nonce</code> parameters with new values for
-        /// another request. If the <see cref="AutoReset"/> property is <code>true</code>, this method will be called
-        /// automatically before each request to the underlying API.
+        /// Updates the <c>oauth_timestamp</c> and <c>oauth_nonce</c> OAuth parameters with new values for another
+        /// request. If the <see cref="AutoReset"/> property is <c>true</c>, this method will be called automatically
+        /// before each request to the underlying API.
         /// </summary>
         public virtual void Reset() {
             Nonce = SocialOAuthUtils.GenerateNonce();
@@ -273,8 +273,8 @@ namespace Skybrud.Social.OAuth {
         protected virtual SocialHttpResponse GetRequestTokenResponse() {
 
             // Some error checking
-            if (String.IsNullOrWhiteSpace(RequestTokenUrl)) throw new PropertyNotSetException("RequestTokenUrl");
-            if (String.IsNullOrWhiteSpace(AuthorizeUrl)) throw new PropertyNotSetException("AuthorizeUrl");
+            if (String.IsNullOrWhiteSpace(RequestTokenUrl)) throw new PropertyNotSetException(nameof(RequestTokenUrl));
+            if (String.IsNullOrWhiteSpace(AuthorizeUrl)) throw new PropertyNotSetException(nameof(AuthorizeUrl));
 
             // Make the call to the API/provider
             return DoHttpPostRequest(RequestTokenUrl);
@@ -292,6 +292,9 @@ namespace Skybrud.Social.OAuth {
         /// </see>
         public virtual SocialOAuthAccessTokenResponse GetAccessToken(string verifier) {
 
+            // Some error checking
+            if (String.IsNullOrWhiteSpace(verifier)) throw new ArgumentNullException(nameof(verifier));
+
             // Make the call to the API/provider
             SocialHttpResponse response = GetAccessTokenResponse(verifier);
 
@@ -307,7 +310,7 @@ namespace Skybrud.Social.OAuth {
         protected virtual SocialHttpResponse GetAccessTokenResponse(string verifier) {
 
             // Some error checking
-            if (String.IsNullOrWhiteSpace(AccessTokenUrl)) throw new PropertyNotSetException("AccessTokenUrl");
+            if (String.IsNullOrWhiteSpace(AccessTokenUrl)) throw new PropertyNotSetException(nameof(AccessTokenUrl));
 
             // Initialize the POST data
             IHttpPostData postData = new SocialHttpPostData();
@@ -325,7 +328,7 @@ namespace Skybrud.Social.OAuth {
         /// <returns>The generated OAuth signature.</returns>
         protected virtual string GenerateSignature(SocialHttpRequest request) {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (String.IsNullOrWhiteSpace(request.Url)) throw new PropertyNotSetException("request.Url");
+            if (String.IsNullOrWhiteSpace(request.Url)) throw new PropertyNotSetException(nameof(request.Url));
             return GenerateSignature(request.Method, request.Url, request.QueryString, request.PostData);
         }
 

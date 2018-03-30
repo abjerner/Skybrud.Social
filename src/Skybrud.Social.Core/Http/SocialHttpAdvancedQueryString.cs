@@ -48,7 +48,7 @@ namespace Skybrud.Social.Http {
         /// Gets the value of the first item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item to match.</param>
-        /// <returns>Returns the <see cref="string"/> value of the item, or <code>NULL</code> if not found.</returns>
+        /// <returns>Returns the <see cref="string"/> value of the item, or <c>null</c> if not found.</returns>
         public string this[string key] => GetString(key);
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Skybrud.Social.Http {
         /// Return whether the query string contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns><code>true</code> if the query string contains the specified <paramref name="key"/>, otherwise
-        /// <code>false</code>.</returns>
+        /// <returns><c>true</c> if the query string contains the specified <paramref name="key"/>, otherwise
+        /// <c>false</c>.</returns>
         public bool ContainsKey(string key) {
             if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
             return _query.FirstOrDefault(x => x.Key == key).Key != null;
@@ -106,7 +106,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.String"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.String"/> value of the entry, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="System.String"/> value of the entry, or <c>null</c> if not found.</returns>
         public string GetString(string key) {
             return GetValue<string>(key);
         }
@@ -115,7 +115,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.Int32"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.Int32"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int32"/> value of the entry, or <c>0</c> if not found.</returns>
         public int GetInt32(string key) {
             return GetValue<int>(key);
         }
@@ -124,7 +124,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.Int64"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.Int64"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Int64"/> value of the entry, or <c>0</c> if not found.</returns>
         public long GetInt64(string key) {
             return GetValue<long>(key);
         }
@@ -133,7 +133,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.Boolean"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.Boolean"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Boolean"/> value of the entry, or <c>0</c> if not found.</returns>
         public bool GetBoolean(string key) {
             return GetValue<bool>(key);
         }
@@ -142,7 +142,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.Double"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.Double"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Double"/> value of the entry, or <c>0</c> if not found.</returns>
         public double GetDouble(string key) {
             return GetValue<double>(key);
         }
@@ -151,7 +151,7 @@ namespace Skybrud.Social.Http {
         /// Gets the <see cref="System.Single"/> value of the first entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns>The <see cref="System.Single"/> value of the entry, or <code>0</code> if not found.</returns>
+        /// <returns>The <see cref="System.Single"/> value of the entry, or <c>0</c> if not found.</returns>
         public float GetFloat(string key) {
             return GetValue<float>(key);
         }

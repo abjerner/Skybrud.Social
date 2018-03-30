@@ -36,7 +36,7 @@ namespace Skybrud.Social.Interfaces.Http {
         /// Gets or sets the string value of the item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item.</param>
-        /// <returns>The <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="String"/> value of the item, or <c>null</c> if not found.</returns>
         string this[string key] { get; set; }
 
         #endregion
@@ -47,8 +47,8 @@ namespace Skybrud.Social.Interfaces.Http {
         /// Returns whether the POST data contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns><code>true</code> if the POST data contains an entry with the specified <paramref name="key"/>,
-        /// otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if the POST data contains an entry with the specified <paramref name="key"/>,
+        /// otherwise <c>false</c>.</returns>
         bool ContainsKey(string key);
 
         /// <summary>
@@ -100,12 +100,12 @@ namespace Skybrud.Social.Interfaces.Http {
         /// Gets whether the value with the specified key is an instance of <see cref="SocialHttpPostFileValue"/>.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <returns><code>true</code> if the item with the specified <paramref name="key"/> is an instance of
-        /// <see cref="SocialHttpPostFileValue"/>, otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if the item with the specified <paramref name="key"/> is an instance of
+        /// <see cref="SocialHttpPostFileValue"/>, otherwise <c>false</c>.</returns>
         bool IsFile(string key);
         
         /// <summary>
-        /// Writes the multipart POST data to the specified <code>stream</code>.
+        /// Writes the multipart POST data to the specified <c>stream</c>.
         /// </summary>
         /// <param name="stream">The stream.</param>
         /// <param name="boundary">The multipart boundary.</param>

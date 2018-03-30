@@ -20,8 +20,8 @@ namespace Skybrud.Social.Http {
         public WebHeaderCollection Headers { get; private set; }
 
         /// <summary>
-        /// Gets or sets the character sets that are acceptable - eg. <code>utf8</code>. This property corresponds to
-        /// the <code>Accept-Charset</code> HTTP header.
+        /// Gets or sets the character sets that are acceptable - eg. <c>utf8</c>. This property corresponds to
+        /// the <c>Accept-Charset</c> HTTP header.
         /// </summary>
         public string AcceptCharset {
             get => Headers["Accept-Charset"];
@@ -29,8 +29,8 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets or sets the a list of acceptable encodings - eg. <code>gzip</code> or <code>gzip, deflate</code>. This
-        /// property corresponds to the <code>Accept-Encoding</code> HTTP header.
+        /// Gets or sets the a list of acceptable encodings - eg. <c>gzip</c> or <c>gzip, deflate</c>. This
+        /// property corresponds to the <c>Accept-Encoding</c> HTTP header.
         /// </summary>
         /// <see>
         ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
@@ -41,8 +41,8 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets or sets the accept language header of the request - eg. <code>en-US</code>, <code>en</code> or
-        /// <code>da</code>. This property corresponds to the <code>Accept-Language</code> HTTP header.
+        /// Gets or sets the accept language header of the request - eg. <c>en-US</c>, <c>en</c> or
+        /// <c>da</c>. This property corresponds to the <c>Accept-Language</c> HTTP header.
         /// </summary>
         /// <see>
         ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
@@ -54,7 +54,7 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Gets or sets the authentication credentials for HTTP authentication. This property corresponds to the
-        /// <code>Authorization</code> HTTP header.
+        /// <c>Authorization</c> HTTP header.
         /// </summary>
         public string Authorization {
             get => Headers["Authorization"];

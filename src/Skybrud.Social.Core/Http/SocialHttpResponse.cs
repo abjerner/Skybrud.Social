@@ -94,10 +94,9 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Attemps to detect the encoding of the response body. The result is currently only based on the
-        /// <code>Content-Type</code> HTTP header. If an encoding can't be detected, <code>UTF8</code> will be used as
-        /// fallback.
+        /// <c>Content-Type</c> HTTP header. If an encoding can't be detected, <c>UTF8</c> will be used as fallback.
         /// </summary>
-        /// <returns>Returns the <see cref="Encoding"/> of the response body.</returns>
+        /// <returns>The <see cref="Encoding"/> of the response body.</returns>
         private Encoding DetectResponseEncoding() {
 
             // Information in the header is seperated by ";"
@@ -127,7 +126,7 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Reads the response body from the response stream. The method will read the response body using an instance
-        /// of <see cref="BinaryReader"/> with a buffer size of <code>4096 bytes</code>.
+        /// of <see cref="BinaryReader"/> with a buffer size of <c>4096 bytes</c>.
         /// </summary>
         private void ReadResponseBody() {
 
@@ -176,7 +175,7 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Creates a new instance based on the specified <code>response</code>.
+        /// Creates a new instance based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="HttpWebResponse"/> to be parsed.</param>
         /// <param name="request">The instance of <see cref="HttpWebRequest"/> that resulted in the response.</param>

@@ -45,10 +45,10 @@ namespace Skybrud.Social.Http {
         public Dictionary<string, IHttpPostValue>.ValueCollection Values => _data.Values;
 
         /// <summary>
-        /// Gets or sets the string value of the item with the specified <paramref name="key"/>code>.
+        /// Gets or sets the string value of the item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item.</param>
-        /// <returns>Returns the <see cref="String"/> value of the item, or <code>null</code> if not found.</returns>
+        /// <returns>The <see cref="String"/> value of the item, or <c>null</c> if not found.</returns>
         public string this[string key] {
             get {
                 IHttpPostValue value;
@@ -76,8 +76,8 @@ namespace Skybrud.Social.Http {
         /// Returns whether the POST data contains an entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
-        /// <returns><code>true</code> if the POST data contains an entry with the specified <paramref name="key"/>,
-        /// otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if the POST data contains an entry with the specified <paramref name="key"/>,
+        /// otherwise <c>false</c>.</returns>
         public bool ContainsKey(string key) {
             return _data.ContainsKey(key);
         }
@@ -111,7 +111,7 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Adds a file entry with the specified <paramref name="key"/>, <paramref name="path"/>,
-        /// <paramref name="contentType"/> and <code>filename</code>.
+        /// <paramref name="contentType"/> and <paramref name="filename"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
         /// <param name="path">The path to the file of the entry.</param>
@@ -144,8 +144,8 @@ namespace Skybrud.Social.Http {
         /// <see cref="SocialHttpPostFileValue"/>.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <returns><code>true</code> if the item with the specified <paramref name="key"/> is an instance of
-        /// <see cref="SocialHttpPostFileValue"/>, otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if the item with the specified <paramref name="key"/> is an instance of
+        /// <see cref="SocialHttpPostFileValue"/>, otherwise <c>false</c>.</returns>
         public bool IsFile(string key) {
             IHttpPostValue value;
             return _data.TryGetValue(key, out value) && value is SocialHttpPostFileValue;

@@ -104,9 +104,9 @@ namespace Skybrud.Social.Http {
         #region HTTP Headers
 
         /// <summary>
-        /// Gets a or sets a list of content types that are acceptable for the response - eg. <code>text/html</code>,
-        /// <code>text/html,application/xhtml+xml</code> or <code>application/json</code>. This property corresponds to
-        /// the <code>Accept</code> HTTP header.
+        /// Gets a or sets a list of content types that are acceptable for the response - eg. <c>text/html</c>,
+        /// <c>text/html,application/xhtml+xml</c> or <c>application/json</c>. This property corresponds to the
+        /// <c>Accept</c> HTTP header.
         /// </summary>
         /// <see>
         ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
@@ -114,8 +114,8 @@ namespace Skybrud.Social.Http {
         public string Accept { get; set; }
         
         /// <summary>
-        /// Gets or sets the character sets that are acceptable - eg. <code>utf8</code>. This property corresponds to
-        /// the <code>Accept-Charset</code> HTTP header.
+        /// Gets or sets the character sets that are acceptable - eg. <c>utf8</c>. This property corresponds to
+        /// the <c>Accept-Charset</c> HTTP header.
         /// </summary>
         public string AcceptCharset {
             get => Headers.AcceptCharset;
@@ -123,8 +123,8 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets or sets the a list of acceptable encodings - eg. <code>gzip</code> or <code>gzip, deflate</code>. This
-        /// property corresponds to the <code>Accept-Encoding</code> HTTP header.
+        /// Gets or sets the a list of acceptable encodings - eg. <c>gzip</c> or <c>gzip, deflate</c>. This
+        /// property corresponds to the <c>Accept-Encoding</c> HTTP header.
         /// </summary>
         /// <see>
         ///     <cref>https://en.wikipedia.org/wiki/HTTP_compression</cref>
@@ -135,8 +135,8 @@ namespace Skybrud.Social.Http {
         }
 
         /// <summary>
-        /// Gets or sets the accept language header of the request - eg. <code>en-US</code>, <code>en</code> or
-        /// <code>da</code>. This property corresponds to the <code>Accept-Language</code> HTTP header.
+        /// Gets or sets the accept language header of the request - eg. <c>en-US</c>, <c>en</c> or <c>da</c>. This
+        /// property corresponds to the <c>Accept-Language</c> HTTP header.
         /// </summary>
         /// <see>
         ///     <cref>https://en.wikipedia.org/wiki/Content_negotiation</cref>
@@ -148,7 +148,7 @@ namespace Skybrud.Social.Http {
 
         /// <summary>
         /// Gets or sets the authentication credentials for HTTP authentication. This property corresponds to the
-        /// <code>Authorization</code> HTTP header.
+        /// <c>Authorization</c> HTTP header.
         /// </summary>
         public string Authorization {
             get => Headers.Authorization;
@@ -158,13 +158,13 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the address of the previous web page from which a link to the currently requested page was
         /// followed. (The word "referrer" has been misspelled in the RFC as well as in most implementations to the
-        /// point that it has become standard usage and is considered correct terminology).  This property corresponds
-        /// to the <code>Referer</code> HTTP header.
+        /// point that it has become standard usage and is considered correct terminology). This property corresponds
+        /// to the <c>Referer</c> HTTP header.
         /// </summary>
         public string Referer { get; set; }
 
         /// <summary>
-        /// Gets or sets a string representing the user agent. This property corresponds to the <code>User-Agent</code>
+        /// Gets or sets a string representing the user agent. This property corresponds to the <c>User-Agent</c>
         /// HTTP header.
         /// </summary>
         public string UserAgent { get; set; }

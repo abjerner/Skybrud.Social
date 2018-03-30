@@ -6,32 +6,32 @@
     public enum SocialHttpMethod {
 
         /// <summary>
-        /// Indicates a request should be made using the <code>GET</code> HTTP method.
+        /// Indicates a request should be made using the <c>GET</c> HTTP method.
         /// </summary>
         Get,
 
         /// <summary>
-        /// Indicates a request should be made using the <code>HEAD</code> HTTP method.
+        /// Indicates a request should be made using the <c>HEAD</c> HTTP method.
         /// </summary>
         Head,
 
         /// <summary>
-        /// Indicates a request should be made using the <code>POST</code> HTTP method.
+        /// Indicates a request should be made using the <c>POST</c> HTTP method.
         /// </summary>
         Post,
 
         /// <summary>
-        /// Indicates a request should be made using the <code>PUT</code> HTTP method.
+        /// Indicates a request should be made using the <c>PUT</c> HTTP method.
         /// </summary>
         Put,
 
         /// <summary>
-        /// Indicates a request should be made using the <code>PATCH</code> HTTP method.
+        /// Indicates a request should be made using the <c>PATCH</c> HTTP method.
         /// </summary>
         Patch,
 
         /// <summary>
-        /// Indicates a request should be made using the <code>DELETE</code> HTTP method.
+        /// Indicates a request should be made using the <c>DELETE</c> HTTP method.
         /// </summary>
         Delete
 
