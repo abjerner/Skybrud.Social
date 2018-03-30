@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social</RootNamespace>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
@@ -22,7 +22,6 @@
     <PackageLicenseUrl>https://github.com/abjerner/Skybrud.Social/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social</PackageProjectUrl>
     <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
