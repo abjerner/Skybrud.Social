@@ -91,6 +91,14 @@ namespace Skybrud.Social.Interfaces.Http {
         void Set(string key, string value);
 
         /// <summary>
+        /// Sets the value of the entry with specified <paramref name="key"/>. If an entry with <paramref name="key"/>
+        /// already exists, it will be overwritten.
+        /// </summary>
+        /// <param name="key">The key of the entry.</param>
+        /// <param name="value">The value of the entry.</param>
+        void Set(string key, object value);
+
+        /// <summary>
         /// Removes the entry with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the entry.</param>
