@@ -19,12 +19,12 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets a reference to the <see cref="SocialHttpRequest"/> that resulted in the response.
         /// </summary>
-        public SocialHttpRequest Request { get; private set; }
+        public SocialHttpRequest Request { get; }
 
         /// <summary>
         /// Gets a reference to the underlying <see cref="HttpWebResponse"/>.
         /// </summary>
-        public HttpWebResponse Response { get; private set; }
+        public HttpWebResponse Response { get; }
 
         /// <summary>
         /// Gets the status code returned by the server.

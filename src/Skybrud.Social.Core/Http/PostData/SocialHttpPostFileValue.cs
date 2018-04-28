@@ -13,22 +13,22 @@ namespace Skybrud.Social.Http.PostData {
         /// <summary>
         /// Gets the name/key of the value.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the content type of the file.
         /// </summary>
-        public string ContentType { get; private set; }
+        public string ContentType { get; }
 
         /// <summary>
         /// Gets the name of the file.
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileName { get; }
 
         /// <summary>
         /// Gets the data of the file.
         /// </summary>
-        public byte[] Data { get; private set; }
+        public byte[] Data { get; }
 
         #endregion
 

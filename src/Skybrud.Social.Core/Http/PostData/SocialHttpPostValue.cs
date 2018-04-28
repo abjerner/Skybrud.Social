@@ -13,7 +13,7 @@ namespace Skybrud.Social.Http.PostData {
         /// <summary>
         /// Gets the name/key of the value.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets or sets the value.

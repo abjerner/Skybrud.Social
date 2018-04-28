@@ -14,22 +14,22 @@ namespace Skybrud.Social.OAuth.Models {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public SocialOAuthClient Client { get; private set; }
+        public SocialOAuthClient Client { get; }
 
         /// <summary>
         /// Gets the access token.
         /// </summary>
-        public string Token { get; private set; }
+        public string Token { get; }
 
         /// <summary>
         /// Gets the access token secret.
         /// </summary>
-        public string TokenSecret { get; private set; }
+        public string TokenSecret { get; }
 
         /// <summary>
         /// Gets a reference to the query string representing the response body.
         /// </summary>
-        public IHttpQueryString Query { get; private set; }
+        public IHttpQueryString Query { get; }
 
         #endregion
 

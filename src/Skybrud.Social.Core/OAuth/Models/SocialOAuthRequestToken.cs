@@ -13,27 +13,27 @@ namespace Skybrud.Social.OAuth.Models {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public SocialOAuthClient Client { get; private set; }
+        public SocialOAuthClient Client { get; }
 
         /// <summary>
         /// Gets the request token.
         /// </summary>
-        public string Token { get; private set; }
+        public string Token { get; }
 
         /// <summary>
         /// Gets the request token secret.
         /// </summary>
-        public string TokenSecret { get; private set; }
+        public string TokenSecret { get; }
 
         /// <summary>
         /// Is the callback confirmed?
         /// </summary>
-        public bool IsCallbackConfirmed { get; private set; }
+        public bool IsCallbackConfirmed { get; }
 
         /// <summary>
         /// Gets the authentication URL for this request token.
         /// </summary>
-        public string AuthorizeUrl { get; private set; }
+        public string AuthorizeUrl { get; }
 
         #endregion
 

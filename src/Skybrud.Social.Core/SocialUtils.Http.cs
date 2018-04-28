@@ -315,7 +315,7 @@ namespace Skybrud.Social {
             /// <param name="options">The options for the call to the API.</param>
             /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
             public static SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, IHttpGetOptions options) {
-                IHttpQueryString queryString = options == null ? null : options.GetQueryString();
+                IHttpQueryString queryString = options?.GetQueryString();
                 return DoHttpRequest(method, url, queryString);
             }
 
