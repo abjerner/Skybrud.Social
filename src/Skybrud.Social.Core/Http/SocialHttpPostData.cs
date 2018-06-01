@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -67,6 +68,22 @@ namespace Skybrud.Social.Http {
         public SocialHttpPostData() {
             _data = new Dictionary<string, IHttpPostValue>();
         }
+
+#if NET_FRAMEWORK
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="collection">The collection the query string should be based.</param>
+        public SocialHttpPostData(NameValueCollection collection) {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            _data = new Dictionary<string, IHttpPostValue>();
+            foreach (string key in collection.AllKeys) {
+                _data.Add(key, new SocialHttpPostValue(key, collection[key]));
+            }
+        }
+
+#endif
 
         #endregion
 

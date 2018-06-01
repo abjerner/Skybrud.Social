@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using Skybrud.Essentials.Strings;
@@ -70,10 +71,26 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="dictionary"/>.
         /// </summary>
-        /// <param name="dictionary"></param>
+        /// <param name="dictionary">The dictionary the query string should be based.</param>
         public SocialHttpQueryString(Dictionary<string, string> dictionary) {
             _values = dictionary ?? throw new ArgumentNullException(nameof(dictionary));
         }
+
+#if NET_FRAMEWORK
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="collection">The collection the query string should be based.</param>
+        public SocialHttpQueryString(NameValueCollection collection) {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            _values = new Dictionary<string, string>();
+            foreach (string key in collection.AllKeys) {
+                _values.Add(key, collection[key]);
+            }
+        }
+
+#endif
 
         #endregion
 
@@ -219,7 +236,7 @@ namespace Skybrud.Social.Http {
         /// </summary>
         /// <param name="str">The query string to parse.</param>
         /// <param name="urlencoded">Whether the query string is URL encoded</param>
-        /// <returns></returns>
+        /// <returns>An instance of <see cref="SocialHttpQueryString"/> representing the parsed query string.</returns>
         /// <see>
         ///     <cref>https://referencesource.microsoft.com/#System.Web/HttpValueCollection.cs,222f9a1bfd1f9a98,references</cref>
         /// </see>
