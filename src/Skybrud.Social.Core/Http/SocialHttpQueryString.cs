@@ -304,6 +304,23 @@ namespace Skybrud.Social.Http {
 
         #endregion
 
+        #region Operator overloading
+
+#if NET_FRAMEWORK
+
+        /// <summary>
+        /// Initializes a new query string based on the specified <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="collection">The instance of <see cref="NameValueCollection"/> the query string should be based on.</param>
+        /// <returns>An instance of <see cref="SocialHttpQueryString"/> based on the specified <paramref name="collection"/>.</returns>
+        public static implicit operator SocialHttpQueryString(NameValueCollection collection) {
+            return collection == null ? null : new SocialHttpQueryString(collection);
+        }
+        
+#endif
+
+        #endregion
+
     }
 
 }

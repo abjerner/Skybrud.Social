@@ -16,7 +16,7 @@ namespace Skybrud.Social.OAuth {
     /// OAuth server (Service Provider). This includes the technical part with signatures, authorization headers and
     /// similar. The client can also be used for 3-legged logins.
     /// </summary>
-    public class SocialOAuthClient : SocialHttpClient {
+    public partial class SocialOAuthClient : SocialHttpClient {
 
         #region Properties
 

@@ -9,7 +9,7 @@ namespace Skybrud.Social {
         /// <summary>
         /// Static class with utility methods related to HTTP requests and responses.
         /// </summary>
-        public static class Http {
+        public static partial class Http {
 
             #region DoHttpGetRequest
 

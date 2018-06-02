@@ -221,6 +221,23 @@ namespace Skybrud.Social.Http {
 
         #endregion
 
+        #region Operator overloading
+
+#if NET_FRAMEWORK
+
+        /// <summary>
+        /// Initializes a new POST data collection based on the specified <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="collection">The instance of <see cref="NameValueCollection"/> the POST data should be based on.</param>
+        /// <returns>An instance of <see cref="SocialHttpPostData"/> based on the specified <paramref name="collection"/>.</returns>
+        public static implicit operator SocialHttpPostData(NameValueCollection collection) {
+            return collection == null ? null : new SocialHttpPostData(collection);
+        }
+
+#endif
+
+        #endregion
+
     }
 
 }

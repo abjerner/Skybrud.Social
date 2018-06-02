@@ -9,7 +9,7 @@ namespace Skybrud.Social.Http {
     /// <summary>
     /// Class representing a client for making HTTP requests.
     /// </summary>
-    public class SocialHttpClient : IHttpClient {
+    public partial class SocialHttpClient : IHttpClient {
 
         #region DoHttpGetRequest
 
@@ -136,7 +136,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, JToken body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Post, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, JToken body, Formatting formatting) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Post, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, XNode body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Post, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPostRequest(string url, XNode body, SaveOptions options) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Post, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Post, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -314,7 +314,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, JToken body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, JToken body, Formatting formatting) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, XNode body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPutRequest(string url, XNode body, SaveOptions options) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Put, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Put, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, JToken body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, JToken body, Formatting formatting) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -540,7 +540,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, XNode body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -552,7 +552,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpPatchRequest(string url, XNode body, SaveOptions options) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(SocialHttpMethod.Patch, url, null, body);
+            return DoHttpRequest(SocialHttpMethod.Patch, url, default(IHttpQueryString), body);
         }
 
         /// <summary>
@@ -735,7 +735,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, JToken body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(method, url, null, "application/json", body.ToString(Formatting.None));
+            return DoHttpRequest(method, url, default(IHttpQueryString), "application/json", body.ToString(Formatting.None));
         }
 
         /// <summary>
@@ -748,7 +748,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, JToken body, Formatting formatting) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(method, url, null, "application/json", body.ToString(formatting));
+            return DoHttpRequest(method, url, default(IHttpQueryString), "application/json", body.ToString(formatting));
         }
 
         /// <summary>
@@ -787,7 +787,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, XNode body) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(method, url, null, "text/xml", body.ToString(SaveOptions.None));
+            return DoHttpRequest(method, url, default(IHttpQueryString), "text/xml", body.ToString(SaveOptions.None));
         }
 
         /// <summary>
@@ -800,7 +800,7 @@ namespace Skybrud.Social.Http {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public virtual SocialHttpResponse DoHttpRequest(SocialHttpMethod method, string url, XNode body, SaveOptions options) {
             if (body == null) throw new ArgumentNullException(nameof(body));
-            return DoHttpRequest(method, url, null, "text/xml", body.ToString(options));
+            return DoHttpRequest(method, url, default(IHttpQueryString), "text/xml", body.ToString(options));
         }
 
         /// <summary>
