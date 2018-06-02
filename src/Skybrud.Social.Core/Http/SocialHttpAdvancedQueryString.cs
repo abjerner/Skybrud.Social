@@ -48,7 +48,7 @@ namespace Skybrud.Social.Http {
         /// Gets the value of the first item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the item to match.</param>
-        /// <returns>Returns the <see cref="string"/> value of the item, or <c>null</c> if not found.</returns>
+        /// <returns>The <see cref="string"/> value of the item, or <c>null</c> if not found.</returns>
         public string this[string key] => GetString(key);
 
         /// <summary>

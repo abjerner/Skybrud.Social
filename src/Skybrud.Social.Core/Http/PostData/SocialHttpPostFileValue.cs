@@ -105,7 +105,7 @@ namespace Skybrud.Social.Http.PostData {
         /// <summary>
         /// Gets a string representation of the value.
         /// </summary>
-        /// <returns>Returns the value as a string.</returns>
+        /// <returns>The value as a string.</returns>
         public override string ToString() {
             return FileName;
         }

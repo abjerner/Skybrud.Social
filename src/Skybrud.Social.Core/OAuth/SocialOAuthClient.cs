@@ -244,7 +244,7 @@ namespace Skybrud.Social.OAuth {
         /// <param name="url">The URL of the request.</param>
         /// <param name="queryString">The query string.</param>
         /// <param name="body">The POST data.</param>
-        /// <returns>Returns the generated signature.</returns>
+        /// <returns>The generated signature.</returns>
         public virtual string GenerateSignature(SocialHttpMethod method, string url, IHttpQueryString queryString, IHttpPostData body) {
             HMACSHA1 hasher = new HMACSHA1(new ASCIIEncoding().GetBytes(GenerateSignatureKey()));
             return Convert.ToBase64String(hasher.ComputeHash(new ASCIIEncoding().GetBytes(GenerateSignatureValue(method, url, queryString, body))));

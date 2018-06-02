@@ -86,7 +86,7 @@ namespace Skybrud.Social.Http {
         /// Parses the specified <paramref name="json"/> string into an instance of <see cref="JArray"/>.
         /// </summary>
         /// <param name="json">The JSON string to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="JArray"/> parsed from the specified <paramref name="json"/> string.</returns>
+        /// <returns>An instance of <see cref="JArray"/> parsed from the specified <paramref name="json"/> string.</returns>
         protected static JArray ParseJsonArray(string json) {
             return JsonUtils.ParseJsonArray(json);
         }

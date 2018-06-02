@@ -75,7 +75,7 @@ namespace Skybrud.Social.Http {
         /// Gets or set the header with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the header.</param>
-        /// <returns>Returns the value of the header.</returns>
+        /// <returns>The value of the header.</returns>
         public string this[string key] {
             get => Headers[key];
             set => Headers[key] = value;
