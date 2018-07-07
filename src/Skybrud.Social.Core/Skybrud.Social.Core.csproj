@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net45;net46;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;netstandard2.0;net45;net46;net47</TargetFrameworks>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <RunBuildTargets>true</RunBuildTargets>
   </PropertyGroup>
@@ -28,8 +28,12 @@
     <DefineConstants>NET_STANDARD</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>NET_STANDARD,DECOMPRESSION_METHODS</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net47'">
-    <DefineConstants>NET_FRAMEWORK</DefineConstants>
+    <DefineConstants>NET_FRAMEWORK,DECOMPRESSION_METHODS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,27 +44,15 @@
     <PackageReference Include="System.Net.Requests" Version="4.3.0" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.3|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.3\Skybrud.Social.Core.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>bin\Release\$(TargetFramework)\Skybrud.Social.Core.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
-    <DocumentationFile>bin\Release\net45\Skybrud.Social.Core.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
-    <DocumentationFile>bin\Release\net46\Skybrud.Social.Core.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net47|AnyCPU'">
-    <DocumentationFile>bin\Release\net47\Skybrud.Social.Core.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
-    <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2012-07-30 /projectPath=&quot;$(ProjectPath)&quot;" />
+  <Target Name="BastardPreBuildEvent" BeforeTargets="DispatchToInnerBuilds">
+    <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2012-07-30 /projectPath=&quot;$(SolutionDir)Skybrud.Social.Core\Skybrud.Social.Core.csproj&quot;" />
   </Target>
 
-  <Target Name="PostBuild" BeforeTargets="PostBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='net47|true'">
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
     <Exec Command="&quot;$(SolutionDir)build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
