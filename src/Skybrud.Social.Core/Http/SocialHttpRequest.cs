@@ -31,7 +31,7 @@ namespace Skybrud.Social.Http {
         /// <summary>
         /// Gets or sets the credentials (username and password) of the request.
         /// </summary>
-        public NetworkCredential Credentials { get; set; }
+        public ICredentials Credentials { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the request. The query string can either be specified directly in the URL, or
@@ -171,6 +171,35 @@ namespace Skybrud.Social.Http {
 
         #endregion
 
+#if NET_STANDARD2
+
+        /// <summary>
+        /// Gets or sets the type of decompression that is used.
+        /// </summary>
+        public DecompressionMethods AutomaticDecompression { get; set; }
+
+        /// <summary>
+        /// Gets or sets the media type of the request.
+        /// </summary>
+        public string MediaType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the <strong>Transfer-encoding</strong> HTTP header.
+        /// </summary>
+        public string TransferEncoding { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the <strong>Connection</strong> HTTP header.
+        /// </summary>
+        public string Connection { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the <strong>Expect</strong> HTTP header.
+        /// </summary>
+        public string Expect { get; set; }
+
+#endif
+
         #endregion
 
         #region Constructor
@@ -221,6 +250,8 @@ namespace Skybrud.Social.Http {
             request.CookieContainer = Cookies;
             if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
 
+            request.AllowReadStreamBuffering = true;
+
 #if NET_FRAMEWORK
             request.Timeout = (int) Timeout.TotalMilliseconds;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
@@ -228,10 +259,20 @@ namespace Skybrud.Social.Http {
             if (!String.IsNullOrWhiteSpace(Referer)) request.Referer = Referer;
 #endif
 
+#if NET_STANDARD2
+            request.AutomaticDecompression = AutomaticDecompression;
+            request.MediaType = MediaType;
+            request.TransferEncoding = TransferEncoding;
+            request.Connection = Connection;
+            request.Expect = Expect;
+#endif
+
 #if NET_STANDARD
             if (!String.IsNullOrWhiteSpace(Host)) request.Headers["Host"] = Host;
             if (!String.IsNullOrWhiteSpace(UserAgent)) request.Headers["User-Agent"] = UserAgent;
             if (!String.IsNullOrWhiteSpace(Referer)) request.Headers["Referer"] = Referer;
+
+
 #endif
 
             // Handle various POST scenarios
