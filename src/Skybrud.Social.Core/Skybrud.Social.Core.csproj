@@ -29,11 +29,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <DefineConstants>NET_STANDARD,DECOMPRESSION_METHODS</DefineConstants>
+    <DefineConstants>NET_STANDARD,NET_STANDARD2</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net47'">
-    <DefineConstants>NET_FRAMEWORK,DECOMPRESSION_METHODS</DefineConstants>
+    <DefineConstants>NET_FRAMEWORK,NET_STANDARD2</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
