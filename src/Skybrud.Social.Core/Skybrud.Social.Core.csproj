@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social</RootNamespace>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
@@ -48,11 +48,11 @@
     <DocumentationFile>bin\Release\$(TargetFramework)\Skybrud.Social.Core.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Target Name="BastardPreBuildEvent" BeforeTargets="DispatchToInnerBuilds">
+  <Target Name="BastardPreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
     <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2012-07-30 /projectPath=&quot;$(SolutionDir)Skybrud.Social.Core\Skybrud.Social.Core.csproj&quot;" />
   </Target>
 
-  <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
     <Exec Command="&quot;$(SolutionDir)build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
