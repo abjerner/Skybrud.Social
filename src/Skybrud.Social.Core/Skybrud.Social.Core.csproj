@@ -48,7 +48,7 @@
     <DocumentationFile>bin\Release\$(TargetFramework)\Skybrud.Social.Core.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Target Name="BastardPreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
+  <Target Name="PreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(RunBuildTargets)'=='true'">
     <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2012-07-30 /projectPath=&quot;$(SolutionDir)Skybrud.Social.Core\Skybrud.Social.Core.csproj&quot;" />
   </Target>
 
