@@ -250,8 +250,6 @@ namespace Skybrud.Social.Http {
             request.CookieContainer = Cookies;
             if (!String.IsNullOrWhiteSpace(ContentType)) request.ContentType = ContentType;
 
-            request.AllowReadStreamBuffering = true;
-
 #if NET_FRAMEWORK
             request.Timeout = (int) Timeout.TotalMilliseconds;
             if (!String.IsNullOrWhiteSpace(Host)) request.Host = Host;
