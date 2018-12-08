@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social</RootNamespace>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
