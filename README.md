@@ -1,4 +1,13 @@
-# Skybrud.Social [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) [![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.svg)](https://www.nuget.org/packages/Skybrud.Social) [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.svg)](https://www.nuget.org/packages/Skybrud.Social)
+> [!CAUTION]
+> Skybrud.Social is no longer in active development. You should instead look for individual packages with similar functionality - e.g. [Skybrud.Social.Facebook][RepoFacebook] or [Skybrud.Social.Instagram][RepoInstagram] for Facebook and Instagram respectively.
+>
+> For an updated list of all our Skybrud.Social packages, see our [documentation at **packages.limbo.works**](https://packages.limbo.works/lists/skybrud.social/).
+
+# Skybrud.Social
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.svg)](https://www.nuget.org/packages/Skybrud.Social)
+[![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.svg)](https://www.nuget.org/packages/Skybrud.Social)
 
 Skybrud.Social in general is a framework in .NET for integration with various social services like Twitter, Facebook and Instagram. The framework will handle all the technical parts and API communication so you don't have to.
 
