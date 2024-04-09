@@ -1,5 +1,5 @@
 > [!CAUTION]
-> Skybrud.Social is no longer in active development. You should instead look for individual packages with similar functionality - e.g. [Skybrud.Social.Facebook][RepoFacebook] or [Skybrud.Social.Instagram][RepoInstagram] for Facebook and Instagram respectively.
+> Skybrud.Social is no longer in active development. You should instead look for our individual Skybrud.Social packages with similar functionality - e.g. [Skybrud.Social.Facebook][RepoFacebook] or [Skybrud.Social.Instagram][RepoInstagram] for Facebook and Instagram respectively.
 >
 > For an updated list of all our Skybrud.Social packages, see our [documentation at **packages.limbo.works**](https://packages.limbo.works/lists/skybrud.social/).
 
